@@ -1,0 +1,475 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* UshahidiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* UshahidiAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		28860B770F44E54D00985440 /* Ushahidi.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 28860B760F44E54D00985440 /* Ushahidi.xcdatamodel */; };
+		28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28860BE40F44EE6400985440 /* CoreData.framework */; };
+		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
+		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		C9531E4B106A56C2006452BD /* IncidentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9531E4A106A56C2006452BD /* IncidentDetailViewController.m */; };
+		C9531E55106A5711006452BD /* IncidentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9531E54106A5711006452BD /* IncidentDetailView.xib */; };
+		C9531EDC106ABE4F006452BD /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9531EDB106ABE4F006452BD /* ReportViewController.m */; };
+		C95832371066965D0054FDC1 /* CategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C95832361066965D0054FDC1 /* CategoriesView.xib */; };
+		C958323D106696880054FDC1 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C958323C106696880054FDC1 /* CategoriesViewController.m */; };
+		C958339B1066AB630054FDC1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C958339A1066AB630054FDC1 /* QuartzCore.framework */; };
+		C95833DD1066B6050054FDC1 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = C95833D21066B6050054FDC1 /* NSObject+SBJSON.m */; };
+		C95833DE1066B6050054FDC1 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = C95833D41066B6050054FDC1 /* NSString+SBJSON.m */; };
+		C95833DF1066B6050054FDC1 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = C95833D61066B6050054FDC1 /* SBJSON.m */; };
+		C95833E01066B6050054FDC1 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = C95833D81066B6050054FDC1 /* SBJsonBase.m */; };
+		C95833E11066B6050054FDC1 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C95833DA1066B6050054FDC1 /* SBJsonParser.m */; };
+		C95833E21066B6050054FDC1 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C95833DC1066B6050054FDC1 /* SBJsonWriter.m */; };
+		C95833EF1066D52A0054FDC1 /* info_20.png in Resources */ = {isa = PBXBuildFile; fileRef = C95833EE1066D52A0054FDC1 /* info_20.png */; };
+		C95833F11066D5AB0054FDC1 /* update_20.png in Resources */ = {isa = PBXBuildFile; fileRef = C95833F01066D5AB0054FDC1 /* update_20.png */; };
+		C95833F31066D7760054FDC1 /* 20x-Folder.png in Resources */ = {isa = PBXBuildFile; fileRef = C95833F21066D7760054FDC1 /* 20x-Folder.png */; };
+		C95833F51066D7D10054FDC1 /* 20x-Gear.png in Resources */ = {isa = PBXBuildFile; fileRef = C95833F41066D7D10054FDC1 /* 20x-Gear.png */; };
+		C958340F1066DA640054FDC1 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C958340E1066DA640054FDC1 /* AboutView.xib */; };
+		C95834121066DACD0054FDC1 /* ushahidilogo.png in Resources */ = {isa = PBXBuildFile; fileRef = C95834111066DACD0054FDC1 /* ushahidilogo.png */; };
+		C95834151066DBA50054FDC1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95834141066DBA50054FDC1 /* AboutViewController.m */; };
+		C95834B91066E62F0054FDC1 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95834B81066E62F0054FDC1 /* SettingsViewController.m */; };
+		C9825CB21064DB8700BD549B /* IncidentMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9825CB11064DB8700BD549B /* IncidentMapView.xib */; };
+		C9825CB61064DBA200BD549B /* IncidentMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9825CB51064DBA200BD549B /* IncidentMapViewController.m */; };
+		C9825DCA1064E83700BD549B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9825DC91064E83700BD549B /* MapKit.framework */; };
+		C9DE152110677D360011C426 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DE152010677D360011C426 /* API.m */; };
+		C9DE17751067F53C0011C426 /* ushahidiicon.png in Resources */ = {isa = PBXBuildFile; fileRef = C9DE17741067F53C0011C426 /* ushahidiicon.png */; };
+		C9DE178C1067FD590011C426 /* logo_ushahidi-red.png in Resources */ = {isa = PBXBuildFile; fileRef = C9DE178B1067FD590011C426 /* logo_ushahidi-red.png */; };
+		C9E14F75107DF00F00EEF88E /* IncidentDescView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9E14F74107DF00F00EEF88E /* IncidentDescView.xib */; };
+		C9E14F7B107DF02C00EEF88E /* IncidentDescViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E14F7A107DF02C00EEF88E /* IncidentDescViewController.m */; };
+		C9E15048107E033D00EEF88E /* CategorySelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E15047107E033D00EEF88E /* CategorySelectTableViewController.m */; };
+		C9E150EA107E144C00EEF88E /* DatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9E150E9107E144C00EEF88E /* DatePickerView.xib */; };
+		C9E150ED107E149300EEF88E /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E150EC107E149300EEF88E /* DatePickerViewController.m */; };
+		C9E4431A107F3864002809AC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9E44319107F3864002809AC /* CoreLocation.framework */; };
+		C9E44338107F3FAD002809AC /* LocationPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E44337107F3FAD002809AC /* LocationPickerViewController.m */; };
+		C9E44345107F40ED002809AC /* LocationPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9E44344107F40ED002809AC /* LocationPickerView.xib */; };
+		C9F21D0210653A5400059042 /* IncidentAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F21D0110653A5400059042 /* IncidentAnnotation.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* UshahidiAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UshahidiAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* UshahidiAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UshahidiAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* Ushahidi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		28860B760F44E54D00985440 /* Ushahidi.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Ushahidi.xcdatamodel; sourceTree = "<group>"; };
+		28860BE40F44EE6400985440 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2899E55F0DE3E45000AC0155 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		28A0AAE50D9B0CCF005BE974 /* Ushahidi_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ushahidi_Prefix.pch; sourceTree = "<group>"; };
+		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Ushahidi-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ushahidi-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C9531E49106A56C2006452BD /* IncidentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentDetailViewController.h; sourceTree = "<group>"; };
+		C9531E4A106A56C2006452BD /* IncidentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentDetailViewController.m; sourceTree = "<group>"; };
+		C9531E54106A5711006452BD /* IncidentDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentDetailView.xib; sourceTree = "<group>"; };
+		C9531EDA106ABE4F006452BD /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
+		C9531EDB106ABE4F006452BD /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
+		C95832361066965D0054FDC1 /* CategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesView.xib; sourceTree = "<group>"; };
+		C958323B106696880054FDC1 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
+		C958323C106696880054FDC1 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
+		C958339A1066AB630054FDC1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C95833D01066B6050054FDC1 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		C95833D11066B6050054FDC1 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		C95833D21066B6050054FDC1 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		C95833D31066B6050054FDC1 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		C95833D41066B6050054FDC1 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		C95833D51066B6050054FDC1 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		C95833D61066B6050054FDC1 /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		C95833D71066B6050054FDC1 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		C95833D81066B6050054FDC1 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		C95833D91066B6050054FDC1 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		C95833DA1066B6050054FDC1 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		C95833DB1066B6050054FDC1 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		C95833DC1066B6050054FDC1 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		C95833EE1066D52A0054FDC1 /* info_20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_20.png; sourceTree = "<group>"; };
+		C95833F01066D5AB0054FDC1 /* update_20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update_20.png; sourceTree = "<group>"; };
+		C95833F21066D7760054FDC1 /* 20x-Folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20x-Folder.png"; sourceTree = "<group>"; };
+		C95833F41066D7D10054FDC1 /* 20x-Gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20x-Gear.png"; sourceTree = "<group>"; };
+		C958340E1066DA640054FDC1 /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		C95834111066DACD0054FDC1 /* ushahidilogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ushahidilogo.png; sourceTree = "<group>"; };
+		C95834131066DBA50054FDC1 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		C95834141066DBA50054FDC1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		C95834B71066E62F0054FDC1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		C95834B81066E62F0054FDC1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		C9825CB11064DB8700BD549B /* IncidentMapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentMapView.xib; sourceTree = "<group>"; };
+		C9825CB41064DBA200BD549B /* IncidentMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentMapViewController.h; sourceTree = "<group>"; };
+		C9825CB51064DBA200BD549B /* IncidentMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentMapViewController.m; sourceTree = "<group>"; };
+		C9825DC91064E83700BD549B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C9DE151F10677D360011C426 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
+		C9DE152010677D360011C426 /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
+		C9DE17741067F53C0011C426 /* ushahidiicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ushahidiicon.png; sourceTree = "<group>"; };
+		C9DE178B1067FD590011C426 /* logo_ushahidi-red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_ushahidi-red.png"; sourceTree = "<group>"; };
+		C9E14F74107DF00F00EEF88E /* IncidentDescView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentDescView.xib; sourceTree = "<group>"; };
+		C9E14F79107DF02C00EEF88E /* IncidentDescViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentDescViewController.h; sourceTree = "<group>"; };
+		C9E14F7A107DF02C00EEF88E /* IncidentDescViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentDescViewController.m; sourceTree = "<group>"; };
+		C9E15046107E033D00EEF88E /* CategorySelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySelectTableViewController.h; sourceTree = "<group>"; };
+		C9E15047107E033D00EEF88E /* CategorySelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategorySelectTableViewController.m; sourceTree = "<group>"; };
+		C9E150E9107E144C00EEF88E /* DatePickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerView.xib; sourceTree = "<group>"; };
+		C9E150EB107E149300EEF88E /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
+		C9E150EC107E149300EEF88E /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
+		C9E44319107F3864002809AC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C9E44336107F3FAD002809AC /* LocationPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationPickerViewController.h; sourceTree = "<group>"; };
+		C9E44337107F3FAD002809AC /* LocationPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationPickerViewController.m; sourceTree = "<group>"; };
+		C9E44344107F40ED002809AC /* LocationPickerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationPickerView.xib; sourceTree = "<group>"; };
+		C9F21D0010653A5400059042 /* IncidentAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentAnnotation.h; sourceTree = "<group>"; };
+		C9F21D0110653A5400059042 /* IncidentAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentAnnotation.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				28860BE50F44EE6400985440 /* CoreData.framework in Frameworks */,
+				C9825DCA1064E83700BD549B /* MapKit.framework in Frameworks */,
+				C958339B1066AB630054FDC1 /* QuartzCore.framework in Frameworks */,
+				C9E4431A107F3864002809AC /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C9E4438B107F471C002809AC /* API */,
+				C9E4438A107F46FE002809AC /* Incident Reporting */,
+				C9E44389107F46EF002809AC /* Incident Viewing */,
+				C95833CF1066B6050054FDC1 /* JSON */,
+				1D3623240D0F684500981E51 /* UshahidiAppDelegate.h */,
+				1D3623250D0F684500981E51 /* UshahidiAppDelegate.m */,
+				C958323B106696880054FDC1 /* CategoriesViewController.h */,
+				C958323C106696880054FDC1 /* CategoriesViewController.m */,
+				C95834131066DBA50054FDC1 /* AboutViewController.h */,
+				C95834141066DBA50054FDC1 /* AboutViewController.m */,
+				C95834B71066E62F0054FDC1 /* SettingsViewController.h */,
+				C95834B81066E62F0054FDC1 /* SettingsViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* Ushahidi.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				C9E44319107F3864002809AC /* CoreLocation.framework */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AAE50D9B0CCF005BE974 /* Ushahidi_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C9E44344107F40ED002809AC /* LocationPickerView.xib */,
+				C9E150E9107E144C00EEF88E /* DatePickerView.xib */,
+				C9E14F74107DF00F00EEF88E /* IncidentDescView.xib */,
+				C9531E54106A5711006452BD /* IncidentDetailView.xib */,
+				C9825CB11064DB8700BD549B /* IncidentMapView.xib */,
+				C95832361066965D0054FDC1 /* CategoriesView.xib */,
+				2899E55F0DE3E45000AC0155 /* RootViewController.xib */,
+				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
+				C9DE178B1067FD590011C426 /* logo_ushahidi-red.png */,
+				C9DE17741067F53C0011C426 /* ushahidiicon.png */,
+				C95834111066DACD0054FDC1 /* ushahidilogo.png */,
+				C958340E1066DA640054FDC1 /* AboutView.xib */,
+				C95833F41066D7D10054FDC1 /* 20x-Gear.png */,
+				C95833F21066D7760054FDC1 /* 20x-Folder.png */,
+				C95833F01066D5AB0054FDC1 /* update_20.png */,
+				C95833EE1066D52A0054FDC1 /* info_20.png */,
+				28860B760F44E54D00985440 /* Ushahidi.xcdatamodel */,
+				8D1107310486CEB800E47090 /* Ushahidi-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C958339A1066AB630054FDC1 /* QuartzCore.framework */,
+				C9825DC91064E83700BD549B /* MapKit.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+				28860BE40F44EE6400985440 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C95833CF1066B6050054FDC1 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				C95833D01066B6050054FDC1 /* JSON.h */,
+				C95833D11066B6050054FDC1 /* NSObject+SBJSON.h */,
+				C95833D21066B6050054FDC1 /* NSObject+SBJSON.m */,
+				C95833D31066B6050054FDC1 /* NSString+SBJSON.h */,
+				C95833D41066B6050054FDC1 /* NSString+SBJSON.m */,
+				C95833D51066B6050054FDC1 /* SBJSON.h */,
+				C95833D61066B6050054FDC1 /* SBJSON.m */,
+				C95833D71066B6050054FDC1 /* SBJsonBase.h */,
+				C95833D81066B6050054FDC1 /* SBJsonBase.m */,
+				C95833D91066B6050054FDC1 /* SBJsonParser.h */,
+				C95833DA1066B6050054FDC1 /* SBJsonParser.m */,
+				C95833DB1066B6050054FDC1 /* SBJsonWriter.h */,
+				C95833DC1066B6050054FDC1 /* SBJsonWriter.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		C9E44389107F46EF002809AC /* Incident Viewing */ = {
+			isa = PBXGroup;
+			children = (
+				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
+				28C286E00D94DF7D0034E888 /* RootViewController.m */,
+				C9825CB41064DBA200BD549B /* IncidentMapViewController.h */,
+				C9825CB51064DBA200BD549B /* IncidentMapViewController.m */,
+				C9F21D0010653A5400059042 /* IncidentAnnotation.h */,
+				C9F21D0110653A5400059042 /* IncidentAnnotation.m */,
+				C9531E49106A56C2006452BD /* IncidentDetailViewController.h */,
+				C9531E4A106A56C2006452BD /* IncidentDetailViewController.m */,
+			);
+			name = "Incident Viewing";
+			sourceTree = "<group>";
+		};
+		C9E4438A107F46FE002809AC /* Incident Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				C9531EDA106ABE4F006452BD /* ReportViewController.h */,
+				C9531EDB106ABE4F006452BD /* ReportViewController.m */,
+				C9E14F79107DF02C00EEF88E /* IncidentDescViewController.h */,
+				C9E14F7A107DF02C00EEF88E /* IncidentDescViewController.m */,
+				C9E15046107E033D00EEF88E /* CategorySelectTableViewController.h */,
+				C9E15047107E033D00EEF88E /* CategorySelectTableViewController.m */,
+				C9E150EB107E149300EEF88E /* DatePickerViewController.h */,
+				C9E150EC107E149300EEF88E /* DatePickerViewController.m */,
+				C9E44336107F3FAD002809AC /* LocationPickerViewController.h */,
+				C9E44337107F3FAD002809AC /* LocationPickerViewController.m */,
+			);
+			name = "Incident Reporting";
+			sourceTree = "<group>";
+		};
+		C9E4438B107F471C002809AC /* API */ = {
+			isa = PBXGroup;
+			children = (
+				C9DE151F10677D360011C426 /* API.h */,
+				C9DE152010677D360011C426 /* API.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* Ushahidi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ushahidi" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ushahidi;
+			productName = Ushahidi;
+			productReference = 1D6058910D05DD3D006BFB54 /* Ushahidi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* Ushahidi */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
+				2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */,
+				C9825CB21064DB8700BD549B /* IncidentMapView.xib in Resources */,
+				C95832371066965D0054FDC1 /* CategoriesView.xib in Resources */,
+				C95833EF1066D52A0054FDC1 /* info_20.png in Resources */,
+				C95833F11066D5AB0054FDC1 /* update_20.png in Resources */,
+				C95833F31066D7760054FDC1 /* 20x-Folder.png in Resources */,
+				C95833F51066D7D10054FDC1 /* 20x-Gear.png in Resources */,
+				C958340F1066DA640054FDC1 /* AboutView.xib in Resources */,
+				C95834121066DACD0054FDC1 /* ushahidilogo.png in Resources */,
+				C9DE17751067F53C0011C426 /* ushahidiicon.png in Resources */,
+				C9DE178C1067FD590011C426 /* logo_ushahidi-red.png in Resources */,
+				C9531E55106A5711006452BD /* IncidentDetailView.xib in Resources */,
+				C9E14F75107DF00F00EEF88E /* IncidentDescView.xib in Resources */,
+				C9E150EA107E144C00EEF88E /* DatePickerView.xib in Resources */,
+				C9E44345107F40ED002809AC /* LocationPickerView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* UshahidiAppDelegate.m in Sources */,
+				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
+				28860B770F44E54D00985440 /* Ushahidi.xcdatamodel in Sources */,
+				C9825CB61064DBA200BD549B /* IncidentMapViewController.m in Sources */,
+				C9F21D0210653A5400059042 /* IncidentAnnotation.m in Sources */,
+				C958323D106696880054FDC1 /* CategoriesViewController.m in Sources */,
+				C95833DD1066B6050054FDC1 /* NSObject+SBJSON.m in Sources */,
+				C95833DE1066B6050054FDC1 /* NSString+SBJSON.m in Sources */,
+				C95833DF1066B6050054FDC1 /* SBJSON.m in Sources */,
+				C95833E01066B6050054FDC1 /* SBJsonBase.m in Sources */,
+				C95833E11066B6050054FDC1 /* SBJsonParser.m in Sources */,
+				C95833E21066B6050054FDC1 /* SBJsonWriter.m in Sources */,
+				C95834151066DBA50054FDC1 /* AboutViewController.m in Sources */,
+				C95834B91066E62F0054FDC1 /* SettingsViewController.m in Sources */,
+				C9DE152110677D360011C426 /* API.m in Sources */,
+				C9531E4B106A56C2006452BD /* IncidentDetailViewController.m in Sources */,
+				C9531EDC106ABE4F006452BD /* ReportViewController.m in Sources */,
+				C9E14F7B107DF02C00EEF88E /* IncidentDescViewController.m in Sources */,
+				C9E15048107E033D00EEF88E /* CategorySelectTableViewController.m in Sources */,
+				C9E150ED107E149300EEF88E /* DatePickerViewController.m in Sources */,
+				C9E44338107F3FAD002809AC /* LocationPickerViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Ushahidi_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi-Info.plist";
+				PRODUCT_NAME = Ushahidi;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Ushahidi_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi-Info.plist";
+				PRODUCT_NAME = Ushahidi;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ushahidi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

@@ -17,6 +17,8 @@
 		2899E5600DE3E45000AC0155 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E55F0DE3E45000AC0155 /* RootViewController.xib */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		63B58939108527B40060DD48 /* splash_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B58937108527B40060DD48 /* splash_about.png */; };
+		63B5893A108527B40060DD48 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B58938108527B40060DD48 /* splash.png */; };
 		C9531E4B106A56C2006452BD /* IncidentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9531E4A106A56C2006452BD /* IncidentDetailViewController.m */; };
 		C9531E55106A5711006452BD /* IncidentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9531E54106A5711006452BD /* IncidentDetailView.xib */; };
 		C9531EDC106ABE4F006452BD /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9531EDB106ABE4F006452BD /* ReportViewController.m */; };
@@ -69,6 +71,8 @@
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		63B58937108527B40060DD48 /* splash_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_about.png; sourceTree = "<group>"; };
+		63B58938108527B40060DD48 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Ushahidi-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ushahidi-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C9531E49106A56C2006452BD /* IncidentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentDetailViewController.h; sourceTree = "<group>"; };
 		C9531E4A106A56C2006452BD /* IncidentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentDetailViewController.m; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63B58937108527B40060DD48 /* splash_about.png */,
+				63B58938108527B40060DD48 /* splash.png */,
 				C9E44344107F40ED002809AC /* LocationPickerView.xib */,
 				C9E150E9107E144C00EEF88E /* DatePickerView.xib */,
 				C9E14F74107DF00F00EEF88E /* IncidentDescView.xib */,
@@ -357,6 +363,8 @@
 				C9E14F75107DF00F00EEF88E /* IncidentDescView.xib in Resources */,
 				C9E150EA107E144C00EEF88E /* DatePickerView.xib in Resources */,
 				C9E44345107F40ED002809AC /* LocationPickerView.xib in Resources */,
+				63B58939108527B40060DD48 /* splash_about.png in Resources */,
+				63B5893A108527B40060DD48 /* splash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

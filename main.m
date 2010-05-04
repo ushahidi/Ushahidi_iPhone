@@ -1,9 +1,9 @@
 //
 //  main.m
-//  Ushahidi
+//  UshahidiProj
 //
-//  Created by Wilfred Mworia on 9/19/09.
-//  Copyright African Pixel 2009. All rights reserved.
+//  Created by iSoft Solutions on 23/02/10.
+//  Copyright iSoft Solutions 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

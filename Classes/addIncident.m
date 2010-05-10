@@ -142,7 +142,7 @@
 	arr = [[NSMutableArray alloc] init];
 	[arr addObject:@"Title:"];
 	[arr addObject:@"Date & Time:"];
-	[arr addObject:@"Categeories:"];
+	[arr addObject:@"Categories:"];
 	[arr addObject:@"Location:"];
 	[arr addObject:@"Photos:"];
 	[arr retain];

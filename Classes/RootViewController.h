@@ -1,21 +1,32 @@
-//
-//  RootViewController.h
-//  UshahidiProj
-//
-//  Created by iSoft Solutions on 23/02/10.
-//  Copyright iSoft Solutions 2010. All rights reserved.
-//
+/*****************************************************************************
+ ** Copyright (c) 2010 Ushahidi Inc
+ ** All rights reserved
+ ** Contact: team@ushahidi.com
+ ** Website: http://www.ushahidi.com
+ **
+ ** GNU Lesser General Public License Usage
+ ** This file may be used under the terms of the GNU Lesser
+ ** General Public License version 3 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.LGPL included in the
+ ** packaging of this file. Please review the following information to
+ ** ensure the GNU Lesser General Public License version 3 requirements
+ ** will be met: http://www.gnu.org/licenses/lgpl.html.
+ **
+ **
+ ** If you have questions regarding the use of this file, please contact
+ ** Ushahidi developers at team@ushahidi.com.
+ **
+ *****************************************************************************/
 
 
-@interface RootViewController : UIViewController {
-
-	IBOutlet UIView *v1;
+@interface RootViewController : UIViewController
+{
+@private
+	UIImageView* splashView;
+	UIView* obscuringView;
 }
 
-// Definitions of Methods of Implementation
-
--(IBAction)add_Incident:(id)sender;
--(IBAction)view_Incident:(id)sender;
--(IBAction)settings_Clicked:(id)sender;
+@property (nonatomic, retain, readwrite) IBOutlet UIImageView* splashView;
+@property (nonatomic, retain, readwrite) IBOutlet UIView* obscuringView;
 
 @end

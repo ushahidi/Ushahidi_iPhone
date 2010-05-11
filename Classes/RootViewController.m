@@ -23,41 +23,44 @@
 
 @implementation RootViewController
 
-- (void)viewDidLoad {
-	
+@synthesize splashView;
+@synthesize obscuringView;
+
+
+- (void) dealloc
+{
+    [super dealloc];
+}
+
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-	[self.view addSubview:v1];
-	[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(move) userInfo:nil repeats:NO];	
 }
 
-// Move the Splash Screen.
-
--(void) move
+- (void) viewWillAppear:(BOOL) animated
 {
-	[v1 removeFromSuperview];
+	[UIView beginAnimations:nil context:NULL];
+	{
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+		[UIView setAnimationDuration:1.0];
+        [UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(fadeAnimationDidStop:finished:context:)];
+		self.obscuringView.alpha = 1.0;
+	}
+	[UIView commitAnimations];	
 }
 
-// Methods Implementation goes here.
 
--(IBAction) add_Incident:(id)sender
-{
-	TabbarController *tabbar=[[TabbarController alloc] init];
-	[self.navigationController pushViewController:tabbar animated:YES];
-	tabbar.selectedIndex = 1;
-}
-
--(IBAction) view_Incident:(id)sender
+- (void) fadeAnimationDidStop:(NSString*) animationID finished:(NSNumber*) finished context:(void*) context
 {
 	TabbarController *tabbar=[[TabbarController alloc] init];
-	[self.navigationController pushViewController:tabbar animated:YES];
+	[self.navigationController pushViewController:tabbar animated:NO];
+	
+	[self.obscuringView removeFromSuperview];
+	[self.splashView removeFromSuperview];
 }
 
--(IBAction)settings_Clicked:(id)sender
-{
-	TabbarController *tabbar=[[TabbarController alloc] init];
-	[self.navigationController pushViewController:tabbar animated:YES];
-	tabbar.selectedIndex = 2;
-}
 
 
 // Memory Management
@@ -73,11 +76,6 @@
 	// Release anything that can be recreated in viewDidLoad or on demand.
 	// e.g. self.myOutlet = nil;
 }
-
-- (void)dealloc {
-    [super dealloc];
-}
-
 
 @end
 

@@ -12,12 +12,12 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="34"/>
-			<integer value="17"/>
-			<integer value="12"/>
 			<integer value="23"/>
+			<integer value="18"/>
+			<integer value="12"/>
 			<integer value="11"/>
 			<integer value="21"/>
+			<integer value="34"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -127,12 +127,6 @@
 						<string key="IBUITitle">Incidents</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
-					</object>
-					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="372891965">
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIStyle">1</int>
-						<reference key="IBUINavigationItem" ref="583687517"/>
-						<int key="IBUISystemItemIdentifier">9</int>
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
@@ -358,14 +352,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">action:</string>
-						<reference key="source" ref="372891965"/>
-						<reference key="destination" ref="580405253"/>
-					</object>
-					<int key="connectionID">49</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">nextPrevious:</string>
 						<reference key="source" ref="882580268"/>
 						<reference key="destination" ref="652899661"/>
@@ -496,7 +482,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="408009208"/>
-							<reference ref="372891965"/>
 						</object>
 						<reference key="parent" ref="580405253"/>
 					</object>
@@ -581,11 +566,6 @@
 						<reference key="parent" ref="995128150"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">48</int>
-						<reference key="object" ref="372891965"/>
-						<reference key="parent" ref="583687517"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">51</int>
 						<reference key="object" ref="1048389692"/>
 						<object class="NSMutableArray" key="children">
@@ -657,7 +637,6 @@
 					<string>34.IBPluginDependency</string>
 					<string>4.CustomClassName</string>
 					<string>4.IBPluginDependency</string>
-					<string>48.IBPluginDependency</string>
 					<string>50.IBPluginDependency</string>
 					<string>58.CustomClassName</string>
 					<string>58.IBEditorWindowLastContentRect</string>
@@ -704,7 +683,6 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>AppDelegate_iPhone</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>MapViewController</string>
@@ -991,11 +969,13 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addIncidentViewController</string>
+							<string>mapView</string>
 							<string>viewIncidentViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>AddIncidentViewController</string>
+							<string>MKMapView</string>
 							<string>ViewIncidentViewController</string>
 						</object>
 					</object>
@@ -1004,6 +984,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addIncidentViewController</string>
+							<string>mapView</string>
 							<string>viewIncidentViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1011,6 +992,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">addIncidentViewController</string>
 								<string key="candidateClassName">AddIncidentViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">mapView</string>
+								<string key="candidateClassName">MKMapView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">viewIncidentViewController</string>

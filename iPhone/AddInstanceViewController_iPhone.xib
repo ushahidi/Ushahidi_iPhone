@@ -53,7 +53,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUINavigationItem" id="15821200">
 								<reference key="IBUINavigationBar" ref="97658935"/>
-								<string key="IBUITitle">Add Incident</string>
+								<string key="IBUITitle">Add Instance</string>
 								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="484280496">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<int key="IBUIStyle">1</int>

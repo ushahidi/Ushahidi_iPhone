@@ -10,6 +10,7 @@
 #import "WebViewController.h"
 #import "MapViewController.h"
 #import "TableCellFactory.h"
+#import "SubtitleTableCell.h"
 
 typedef enum {
 	TableSectionTitle,
@@ -54,7 +55,7 @@ typedef enum {
 															 delegate:self 
 													cancelButtonTitle: @"Cancel" 
 											   destructiveButtonTitle:nil
-													otherButtonTitles:@"Email Incident", @"Tweet Incident", @"Report Incident", nil];
+													otherButtonTitles:@"Share this Incident", @"Rate this Incident", @"Comment on Incident", nil];
 	[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
 	[actionSheet showInView:[self view]];
 	[actionSheet release];
@@ -130,6 +131,24 @@ typedef enum {
 		[cell setText:[self getIncidentDescription]];
 		return cell;
 	}
+	else if (indexPath.section == TableSectionNews) {
+		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView identifier:@"NewsCell"];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
+		if (indexPath.row == 0) {
+			[cell setText:@"Safer sex drives HIV rates down"];
+			[cell setDescription:@"http://www.nation.co.ke/News/world/Safer%20sex%20drives%20HIV%20rates%20down/-/1068/957250/-/h2mji1z/-/index.html"];
+		}
+		else if (indexPath.row == 1) {
+			[cell setText:@"Bangkok tourists warned not to feed elephants"];
+			[cell setDescription:@"http://www.nation.co.ke/News/world/Tourists%20warned%20not%20to%20feed%20elephants/-/1068/957258/-/x6yek8z/-/index.html"];
+		}
+		else if (indexPath.row == 2) {
+			[cell setText:@"BP fits new cap to seal oil well"];
+			[cell setDescription:@"http://www.nation.co.ke/News/world/BP%20fits%20new%20cap%20to%20seal%20oil%20well/-/1068/957248/-/11d2xowz/-/index.html"];
+		}
+		return cell;
+	}
 	else {
 		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView identifier:@"UITableViewCell"];
 		cell.accessoryType = UITableViewCellAccessoryNone;
@@ -153,19 +172,6 @@ typedef enum {
 		}
 		else if (indexPath.section == TableSectionPhotos) {
 			cell.textLabel.text = @"No Incident Photos";
-		}
-		else if (indexPath.section == TableSectionNews) {
-			if (indexPath.row == 0) {
-				cell.textLabel.text = @"http://www.ushahidi.com";
-			}
-			else if (indexPath.row == 1) {
-				cell.textLabel.text = @"http://swift.ushahidi.com";
-			}
-			else if (indexPath.row == 2) {
-				cell.textLabel.text = @"http://crowdmap.com";
-			}
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		}
 		return cell;	
 	}
@@ -214,7 +220,7 @@ typedef enum {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	UITableViewCell *cell = [theTableView cellForRowAtIndexPath:indexPath];
 	if (indexPath.section == TableSectionNews) {
-		self.webViewController.website = cell.textLabel.text;
+		self.webViewController.website = cell.detailTextLabel.text;
 		[self.navigationController pushViewController:self.webViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionLocation) {

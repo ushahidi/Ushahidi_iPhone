@@ -1,9 +1,9 @@
 //
 //  main.m
-//  Ushahidi_iPhone
+//  UshahidiProj
 //
-//  Created by Dale Zak on 10-08-09.
-//  Copyright Ushahidi 2010. All rights reserved.
+//  Created by iSoft Solutions on 23/02/10.
+//  Copyright iSoft Solutions 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

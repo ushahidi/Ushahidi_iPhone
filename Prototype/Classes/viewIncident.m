@@ -274,8 +274,7 @@
 	// Configure the cell.
 	cell.incImage.hidden = FALSE;
 	NSMutableDictionary *dict;
-	if(other)
-	{
+	if (other) {
 		dict = [app.arrCategory objectAtIndex:indexPath.row];
 	}
 	else
@@ -284,23 +283,33 @@
 	}
 	
 	NSMutableDictionary *dict1 = [dict objectForKey:@"incident"];	
-	NSString *str = [dict1 objectForKey:@"incidenttitle"];
-	cell.incName.text = str;
-	cell.locationName.text = [@"Location: " stringByAppendingString:[dict1 objectForKey:@"locationname"]];
-	[df setDateFormat:@"yyyy-MM-dd hh:mm"];
-	NSDate *t1 = [df dateFromString:[dict1 objectForKey:@"incidentdate"]];
-	[df setDateFormat:@"MM/dd/YYYY hh:mm"];
-	cell.date1.text = [@"Date: " stringByAppendingString:[df stringFromDate:t1]];
-	NSString *ts = [dict1 objectForKey:@"incidentverified"];
-	if([ts isEqualToString:@"1"])
-	{
-		cell.verified.text = @"Verified";
-		[cell.verified setTextColor:[UIColor greenColor]];
-	}
-	else
-	{
-		cell.verified.text = @"Not Verified";
-		[cell.verified setTextColor:[UIColor redColor]];
+	if (dict1 != nil) {
+		NSString *str = [dict1 objectForKey:@"incidenttitle"];
+		cell.incName.text = str;
+		NSString *locationName = [dict1 objectForKey:@"locationname"];
+		if (locationName != nil) {
+			cell.locationName.text = [@"Location: " stringByAppendingString:locationName];	
+		}
+		else {
+			cell.locationName.text = @"No Location";
+		}
+		[df setDateFormat:@"yyyy-MM-dd hh:mm"];
+		NSDate *t1 = [df dateFromString:[dict1 objectForKey:@"incidentdate"]];
+		if (t1 != nil) {
+			[df setDateFormat:@"MM/dd/YYYY hh:mm"];
+			cell.date1.text = [@"Date: " stringByAppendingString:[df stringFromDate:t1]];
+		}
+		NSString *ts = [dict1 objectForKey:@"incidentverified"];
+		if([ts isEqualToString:@"1"])
+		{
+			cell.verified.text = @"Verified";
+			[cell.verified setTextColor:[UIColor greenColor]];
+		}
+		else
+		{
+			cell.verified.text = @"Not Verified";
+			[cell.verified setTextColor:[UIColor redColor]];
+		}	
 	}
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; 
     return cell;

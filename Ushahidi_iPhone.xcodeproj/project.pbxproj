@@ -1,0 +1,573 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2860E38A111B897F00E27156 /* AppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2860E388111B897F00E27156 /* AppDelegate_iPhone.m */; };
+		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		28EEBFDD1118E19E00187D67 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EEBFDC1118E19E00187D67 /* CoreData.framework */; };
+		3E98EA5C1210ABC200C35F36 /* InstancesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EA5B1210ABC200C35F36 /* InstancesViewController.m */; };
+		3E98EA621210ABD600C35F36 /* IncidentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EA611210ABD600C35F36 /* IncidentsViewController.m */; };
+		3E98EA671210ABF400C35F36 /* AddInstanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EA661210ABF400C35F36 /* AddInstanceViewController.m */; };
+		3E98EA6A1210AC0E00C35F36 /* AddIncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EA691210AC0E00C35F36 /* AddIncidentViewController.m */; };
+		3E98EA6D1210AC1A00C35F36 /* ViewIncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EA6C1210AC1A00C35F36 /* ViewIncidentViewController.m */; };
+		3E98EA731210AC3200C35F36 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EA721210AC3200C35F36 /* WebViewController.m */; };
+		3E98EAD91210B26800C35F36 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EAD81210B26800C35F36 /* TableViewController.m */; };
+		3E98EB8A1210B77400C35F36 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EB851210B77400C35F36 /* Default.png */; };
+		3E98EB8B1210B77400C35F36 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EB861210B77400C35F36 /* icon.png */; };
+		3E98EB8C1210B77400C35F36 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EB871210B77400C35F36 /* location.png */; };
+		3E98EB8D1210B77400C35F36 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EB881210B77400C35F36 /* selected.png */; };
+		3E98EB8E1210B77400C35F36 /* unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EB891210B77400C35F36 /* unselected.png */; };
+		3E98EC8D1210BF6A00C35F36 /* SearchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EC8C1210BF6A00C35F36 /* SearchTableCell.m */; };
+		3E98ED571210C8CF00C35F36 /* TextViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98ED561210C8CF00C35F36 /* TextViewTableCell.m */; };
+		3E98ED5C1210C8D700C35F36 /* TextFieldTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98ED5B1210C8D700C35F36 /* TextFieldTableCell.m */; };
+		3E98ED611210C8DE00C35F36 /* BooleanTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98ED601210C8DE00C35F36 /* BooleanTableCell.m */; };
+		3E98EDB11211A27400C35F36 /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EDB01211A27400C35F36 /* no_image.png */; };
+		3E98EDBA1211A35400C35F36 /* logo_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EDB81211A35400C35F36 /* logo_image.png */; };
+		3E98EDBB1211A35400C35F36 /* logo_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EDB91211A35400C35F36 /* logo_text.png */; };
+		3E98EDC21211A39300C35F36 /* SubtitleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EDC11211A39300C35F36 /* SubtitleTableCell.m */; };
+		3E98EE351211B33F00C35F36 /* AddIncidentViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE2D1211B33F00C35F36 /* AddIncidentViewController_iPhone.xib */; };
+		3E98EE361211B33F00C35F36 /* AddInstanceViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE2E1211B33F00C35F36 /* AddInstanceViewController_iPhone.xib */; };
+		3E98EE381211B33F00C35F36 /* IncidentsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE301211B33F00C35F36 /* IncidentsViewController_iPhone.xib */; };
+		3E98EE391211B33F00C35F36 /* InstancesViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE311211B33F00C35F36 /* InstancesViewController_iPhone.xib */; };
+		3E98EE3A1211B33F00C35F36 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE321211B33F00C35F36 /* MainWindow_iPhone.xib */; };
+		3E98EE3B1211B33F00C35F36 /* ViewIncidentViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE331211B33F00C35F36 /* ViewIncidentViewController_iPhone.xib */; };
+		3E98EE3C1211B33F00C35F36 /* WebViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE341211B33F00C35F36 /* WebViewController_iPhone.xib */; };
+		3E98EE751211B3E300C35F36 /* AddIncidentViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE6B1211B3E300C35F36 /* AddIncidentViewController_iPad.xib */; };
+		3E98EE761211B3E300C35F36 /* AddInstanceViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE6C1211B3E300C35F36 /* AddInstanceViewController_iPad.xib */; };
+		3E98EE771211B3E300C35F36 /* AppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EE6E1211B3E300C35F36 /* AppDelegate_iPad.m */; };
+		3E98EE791211B3E300C35F36 /* IncidentsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE701211B3E300C35F36 /* IncidentsViewController_iPad.xib */; };
+		3E98EE7A1211B3E300C35F36 /* InstancesViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE711211B3E300C35F36 /* InstancesViewController_iPad.xib */; };
+		3E98EE7B1211B3E300C35F36 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE721211B3E300C35F36 /* MainWindow_iPad.xib */; };
+		3E98EE7C1211B3E300C35F36 /* ViewIncidentViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE731211B3E300C35F36 /* ViewIncidentViewController_iPad.xib */; };
+		3E98EE7D1211B3E300C35F36 /* WebViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98EE741211B3E300C35F36 /* WebViewController_iPad.xib */; };
+		3E98EEFB1211B86A00C35F36 /* TableCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EEFA1211B86A00C35F36 /* TableCellFactory.m */; };
+		3E98EF131211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF111211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodel */; };
+		3E98EF141211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF121211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodeld */; };
+		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
+		3E98EF1B1211BCA300C35F36 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF1A1211BCA300C35F36 /* AppDelegate.m */; };
+		3E98F0381211D04100C35F36 /* navbar_arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98F0361211D04100C35F36 /* navbar_arrow_down.png */; };
+		3E98F0391211D04100C35F36 /* navbar_arrow_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98F0371211D04100C35F36 /* navbar_arrow_up.png */; };
+		3E98F0711211D25200C35F36 /* CheckBoxTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F0701211D25200C35F36 /* CheckBoxTableCell.m */; };
+		3E98F0A61211D3D300C35F36 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98F0A51211D3D300C35F36 /* blank.png */; };
+		3E98F2BC1211E39F00C35F36 /* toolbar_arrow_next.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98F2BA1211E39F00C35F36 /* toolbar_arrow_next.png */; };
+		3E98F2BD1211E39F00C35F36 /* toolbar_arrow_previous.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E98F2BB1211E39F00C35F36 /* toolbar_arrow_previous.png */; };
+		3E98F3A31211EC0300C35F36 /* MapTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F3A21211EC0300C35F36 /* MapTableCell.m */; };
+		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
+		3E98F3CC1211EDBA00C35F36 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F3CB1211EDBA00C35F36 /* MapViewController.m */; };
+		3E98F3DF1211EDE500C35F36 /* MapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98F3DE1211EDE500C35F36 /* MapViewController_iPhone.xib */; };
+		3E98F3E61211EE8400C35F36 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E98F3E51211EE8400C35F36 /* MapViewController_iPad.xib */; };
+		3E98F66312121D6E00C35F36 /* TextTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F66212121D6E00C35F36 /* TextTableCell.m */; };
+		3E98F7AA12122F6800C35F36 /* ImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F7A912122F6800C35F36 /* ImagePickerController.m */; };
+		3E98F96012124BA000C35F36 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F95F12124BA000C35F36 /* Device.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* Ushahidi_iPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi_iPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2860E387111B897F00E27156 /* AppDelegate_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate_iPhone.h; sourceTree = "<group>"; };
+		2860E388111B897F00E27156 /* AppDelegate_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate_iPhone.m; sourceTree = "<group>"; };
+		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28EEBFDC1118E19E00187D67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		32CA4F630368D1EE00C91783 /* Ushahidi_iPhone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ushahidi_iPhone_Prefix.pch; sourceTree = "<group>"; };
+		3E98EA5A1210ABC200C35F36 /* InstancesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstancesViewController.h; sourceTree = "<group>"; };
+		3E98EA5B1210ABC200C35F36 /* InstancesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstancesViewController.m; sourceTree = "<group>"; };
+		3E98EA601210ABD600C35F36 /* IncidentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentsViewController.h; sourceTree = "<group>"; };
+		3E98EA611210ABD600C35F36 /* IncidentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentsViewController.m; sourceTree = "<group>"; };
+		3E98EA651210ABF400C35F36 /* AddInstanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddInstanceViewController.h; sourceTree = "<group>"; };
+		3E98EA661210ABF400C35F36 /* AddInstanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddInstanceViewController.m; sourceTree = "<group>"; };
+		3E98EA681210AC0E00C35F36 /* AddIncidentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddIncidentViewController.h; sourceTree = "<group>"; };
+		3E98EA691210AC0E00C35F36 /* AddIncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddIncidentViewController.m; sourceTree = "<group>"; };
+		3E98EA6B1210AC1A00C35F36 /* ViewIncidentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewIncidentViewController.h; sourceTree = "<group>"; };
+		3E98EA6C1210AC1A00C35F36 /* ViewIncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewIncidentViewController.m; sourceTree = "<group>"; };
+		3E98EA711210AC3200C35F36 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		3E98EA721210AC3200C35F36 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		3E98EAD71210B26800C35F36 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		3E98EAD81210B26800C35F36 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		3E98EB851210B77400C35F36 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3E98EB861210B77400C35F36 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		3E98EB871210B77400C35F36 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		3E98EB881210B77400C35F36 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
+		3E98EB891210B77400C35F36 /* unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unselected.png; sourceTree = "<group>"; };
+		3E98EC8B1210BF6A00C35F36 /* SearchTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableCell.h; sourceTree = "<group>"; };
+		3E98EC8C1210BF6A00C35F36 /* SearchTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableCell.m; sourceTree = "<group>"; };
+		3E98ED551210C8CF00C35F36 /* TextViewTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewTableCell.h; sourceTree = "<group>"; };
+		3E98ED561210C8CF00C35F36 /* TextViewTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewTableCell.m; sourceTree = "<group>"; };
+		3E98ED5A1210C8D700C35F36 /* TextFieldTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldTableCell.h; sourceTree = "<group>"; };
+		3E98ED5B1210C8D700C35F36 /* TextFieldTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldTableCell.m; sourceTree = "<group>"; };
+		3E98ED5F1210C8DE00C35F36 /* BooleanTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooleanTableCell.h; sourceTree = "<group>"; };
+		3E98ED601210C8DE00C35F36 /* BooleanTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooleanTableCell.m; sourceTree = "<group>"; };
+		3E98EDB01211A27400C35F36 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
+		3E98EDB81211A35400C35F36 /* logo_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_image.png; sourceTree = "<group>"; };
+		3E98EDB91211A35400C35F36 /* logo_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_text.png; sourceTree = "<group>"; };
+		3E98EDC01211A39300C35F36 /* SubtitleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubtitleTableCell.h; sourceTree = "<group>"; };
+		3E98EDC11211A39300C35F36 /* SubtitleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubtitleTableCell.m; sourceTree = "<group>"; };
+		3E98EE2D1211B33F00C35F36 /* AddIncidentViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddIncidentViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E98EE2E1211B33F00C35F36 /* AddInstanceViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddInstanceViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E98EE301211B33F00C35F36 /* IncidentsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentsViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E98EE311211B33F00C35F36 /* InstancesViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstancesViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E98EE321211B33F00C35F36 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		3E98EE331211B33F00C35F36 /* ViewIncidentViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewIncidentViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E98EE341211B33F00C35F36 /* WebViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E98EE6B1211B3E300C35F36 /* AddIncidentViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddIncidentViewController_iPad.xib; sourceTree = "<group>"; };
+		3E98EE6C1211B3E300C35F36 /* AddInstanceViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddInstanceViewController_iPad.xib; sourceTree = "<group>"; };
+		3E98EE6D1211B3E300C35F36 /* AppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate_iPad.h; sourceTree = "<group>"; };
+		3E98EE6E1211B3E300C35F36 /* AppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate_iPad.m; sourceTree = "<group>"; };
+		3E98EE701211B3E300C35F36 /* IncidentsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentsViewController_iPad.xib; sourceTree = "<group>"; };
+		3E98EE711211B3E300C35F36 /* InstancesViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstancesViewController_iPad.xib; sourceTree = "<group>"; };
+		3E98EE721211B3E300C35F36 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
+		3E98EE731211B3E300C35F36 /* ViewIncidentViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewIncidentViewController_iPad.xib; sourceTree = "<group>"; };
+		3E98EE741211B3E300C35F36 /* WebViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController_iPad.xib; sourceTree = "<group>"; };
+		3E98EEF91211B86A00C35F36 /* TableCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCellFactory.h; sourceTree = "<group>"; };
+		3E98EEFA1211B86A00C35F36 /* TableCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableCellFactory.m; sourceTree = "<group>"; };
+		3E98EF111211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Ushahidi_iPhone.xcdatamodel; sourceTree = "<group>"; };
+		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3E98EF191211BCA300C35F36 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3E98EF1A1211BCA300C35F36 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3E98F0361211D04100C35F36 /* navbar_arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar_arrow_down.png; sourceTree = "<group>"; };
+		3E98F0371211D04100C35F36 /* navbar_arrow_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar_arrow_up.png; sourceTree = "<group>"; };
+		3E98F06F1211D25200C35F36 /* CheckBoxTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxTableCell.h; sourceTree = "<group>"; };
+		3E98F0701211D25200C35F36 /* CheckBoxTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxTableCell.m; sourceTree = "<group>"; };
+		3E98F0A51211D3D300C35F36 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
+		3E98F2BA1211E39F00C35F36 /* toolbar_arrow_next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_arrow_next.png; sourceTree = "<group>"; };
+		3E98F2BB1211E39F00C35F36 /* toolbar_arrow_previous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_arrow_previous.png; sourceTree = "<group>"; };
+		3E98F3A11211EC0300C35F36 /* MapTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapTableCell.h; sourceTree = "<group>"; };
+		3E98F3A21211EC0300C35F36 /* MapTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTableCell.m; sourceTree = "<group>"; };
+		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3E98F3CA1211EDB900C35F36 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		3E98F3CB1211EDBA00C35F36 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		3E98F3DE1211EDE500C35F36 /* MapViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E98F3E51211EE8400C35F36 /* MapViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController_iPad.xib; sourceTree = "<group>"; };
+		3E98F66112121D6E00C35F36 /* TextTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextTableCell.h; sourceTree = "<group>"; };
+		3E98F66212121D6E00C35F36 /* TextTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextTableCell.m; sourceTree = "<group>"; };
+		3E98F7A812122F6800C35F36 /* ImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerController.h; sourceTree = "<group>"; };
+		3E98F7A912122F6800C35F36 /* ImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerController.m; sourceTree = "<group>"; };
+		3E98F95E12124BA000C35F36 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		3E98F95F12124BA000C35F36 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				28EEBFDD1118E19E00187D67 /* CoreData.framework in Frameworks */,
+				3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* Ushahidi_iPhone.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2860E386111B897F00E27156 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				2860E387111B897F00E27156 /* AppDelegate_iPhone.h */,
+				2860E388111B897F00E27156 /* AppDelegate_iPhone.m */,
+				3E98EE321211B33F00C35F36 /* MainWindow_iPhone.xib */,
+				3E98EE311211B33F00C35F36 /* InstancesViewController_iPhone.xib */,
+				3E98EE2E1211B33F00C35F36 /* AddInstanceViewController_iPhone.xib */,
+				3E98EE301211B33F00C35F36 /* IncidentsViewController_iPhone.xib */,
+				3E98EE2D1211B33F00C35F36 /* AddIncidentViewController_iPhone.xib */,
+				3E98EE331211B33F00C35F36 /* ViewIncidentViewController_iPhone.xib */,
+				3E98EE341211B33F00C35F36 /* WebViewController_iPhone.xib */,
+				3E98F3DE1211EDE500C35F36 /* MapViewController_iPhone.xib */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				3ED1046512125524009781F5 /* Libraries */,
+				3E98F799121227FA00C35F36 /* Views */,
+				3E98E9E112109DA800C35F36 /* Images */,
+				3E98E9E612109DD100C35F36 /* Categories */,
+				3E98EA7A1210ACA700C35F36 /* Cells */,
+				3E98E9DC12109D9B00C35F36 /* Models */,
+				3E98E9CA12109D6300C35F36 /* Controllers */,
+				2860E386111B897F00E27156 /* iPhone */,
+				29B97317FDCFA39411CA2CEA /* iPad */,
+				3E98EEFC1211B87D00C35F36 /* Common */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3E98EF171211BC9800C35F36 /* main.m */,
+				32CA4F630368D1EE00C91783 /* Ushahidi_iPhone_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				3E98EE6D1211B3E300C35F36 /* AppDelegate_iPad.h */,
+				3E98EE6E1211B3E300C35F36 /* AppDelegate_iPad.m */,
+				3E98EE721211B3E300C35F36 /* MainWindow_iPad.xib */,
+				3E98EE711211B3E300C35F36 /* InstancesViewController_iPad.xib */,
+				3E98EE6B1211B3E300C35F36 /* AddIncidentViewController_iPad.xib */,
+				3E98EE701211B3E300C35F36 /* IncidentsViewController_iPad.xib */,
+				3E98EE6C1211B3E300C35F36 /* AddInstanceViewController_iPad.xib */,
+				3E98EE731211B3E300C35F36 /* ViewIncidentViewController_iPad.xib */,
+				3E98EE741211B3E300C35F36 /* WebViewController_iPad.xib */,
+				3E98F3E51211EE8400C35F36 /* MapViewController_iPad.xib */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				28EEBFDC1118E19E00187D67 /* CoreData.framework */,
+				3E98F3A41211EC6300C35F36 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3E98E9CA12109D6300C35F36 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3E98EA5A1210ABC200C35F36 /* InstancesViewController.h */,
+				3E98EA5B1210ABC200C35F36 /* InstancesViewController.m */,
+				3E98EA651210ABF400C35F36 /* AddInstanceViewController.h */,
+				3E98EA661210ABF400C35F36 /* AddInstanceViewController.m */,
+				3E98EA601210ABD600C35F36 /* IncidentsViewController.h */,
+				3E98EA611210ABD600C35F36 /* IncidentsViewController.m */,
+				3E98EA681210AC0E00C35F36 /* AddIncidentViewController.h */,
+				3E98EA691210AC0E00C35F36 /* AddIncidentViewController.m */,
+				3E98EA6B1210AC1A00C35F36 /* ViewIncidentViewController.h */,
+				3E98EA6C1210AC1A00C35F36 /* ViewIncidentViewController.m */,
+				3E98EA711210AC3200C35F36 /* WebViewController.h */,
+				3E98EA721210AC3200C35F36 /* WebViewController.m */,
+				3E98F3CA1211EDB900C35F36 /* MapViewController.h */,
+				3E98F3CB1211EDBA00C35F36 /* MapViewController.m */,
+				3E98F7A812122F6800C35F36 /* ImagePickerController.h */,
+				3E98F7A912122F6800C35F36 /* ImagePickerController.m */,
+				3E98EAD71210B26800C35F36 /* TableViewController.h */,
+				3E98EAD81210B26800C35F36 /* TableViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3E98E9DC12109D9B00C35F36 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3E98EF111211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodel */,
+				3E98EF121211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3E98E9E112109DA800C35F36 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3E98F2BA1211E39F00C35F36 /* toolbar_arrow_next.png */,
+				3E98F2BB1211E39F00C35F36 /* toolbar_arrow_previous.png */,
+				3E98F0A51211D3D300C35F36 /* blank.png */,
+				3E98F0361211D04100C35F36 /* navbar_arrow_down.png */,
+				3E98F0371211D04100C35F36 /* navbar_arrow_up.png */,
+				3E98EDB81211A35400C35F36 /* logo_image.png */,
+				3E98EDB91211A35400C35F36 /* logo_text.png */,
+				3E98EDB01211A27400C35F36 /* no_image.png */,
+				3E98EB851210B77400C35F36 /* Default.png */,
+				3E98EB861210B77400C35F36 /* icon.png */,
+				3E98EB871210B77400C35F36 /* location.png */,
+				3E98EB881210B77400C35F36 /* selected.png */,
+				3E98EB891210B77400C35F36 /* unselected.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		3E98E9E612109DD100C35F36 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		3E98EA7A1210ACA700C35F36 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3E98EEF91211B86A00C35F36 /* TableCellFactory.h */,
+				3E98EEFA1211B86A00C35F36 /* TableCellFactory.m */,
+				3E98F66112121D6E00C35F36 /* TextTableCell.h */,
+				3E98F66212121D6E00C35F36 /* TextTableCell.m */,
+				3E98EDC01211A39300C35F36 /* SubtitleTableCell.h */,
+				3E98EDC11211A39300C35F36 /* SubtitleTableCell.m */,
+				3E98ED551210C8CF00C35F36 /* TextViewTableCell.h */,
+				3E98ED561210C8CF00C35F36 /* TextViewTableCell.m */,
+				3E98ED5A1210C8D700C35F36 /* TextFieldTableCell.h */,
+				3E98ED5B1210C8D700C35F36 /* TextFieldTableCell.m */,
+				3E98ED5F1210C8DE00C35F36 /* BooleanTableCell.h */,
+				3E98ED601210C8DE00C35F36 /* BooleanTableCell.m */,
+				3E98F06F1211D25200C35F36 /* CheckBoxTableCell.h */,
+				3E98F0701211D25200C35F36 /* CheckBoxTableCell.m */,
+				3E98EC8B1210BF6A00C35F36 /* SearchTableCell.h */,
+				3E98EC8C1210BF6A00C35F36 /* SearchTableCell.m */,
+				3E98F3A11211EC0300C35F36 /* MapTableCell.h */,
+				3E98F3A21211EC0300C35F36 /* MapTableCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3E98EEFC1211B87D00C35F36 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3E98EF191211BCA300C35F36 /* AppDelegate.h */,
+				3E98EF1A1211BCA300C35F36 /* AppDelegate.m */,
+				3E98F95E12124BA000C35F36 /* Device.h */,
+				3E98F95F12124BA000C35F36 /* Device.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3E98F799121227FA00C35F36 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3ED1046512125524009781F5 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* Ushahidi_iPhone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ushahidi_iPhone" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ushahidi_iPhone;
+			productName = Ushahidi_iPhone;
+			productReference = 1D6058910D05DD3D006BFB54 /* Ushahidi_iPhone.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi_iPhone" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* Ushahidi_iPhone */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E98EB8A1210B77400C35F36 /* Default.png in Resources */,
+				3E98EB8B1210B77400C35F36 /* icon.png in Resources */,
+				3E98EB8C1210B77400C35F36 /* location.png in Resources */,
+				3E98EB8D1210B77400C35F36 /* selected.png in Resources */,
+				3E98EB8E1210B77400C35F36 /* unselected.png in Resources */,
+				3E98EDB11211A27400C35F36 /* no_image.png in Resources */,
+				3E98EDBA1211A35400C35F36 /* logo_image.png in Resources */,
+				3E98EDBB1211A35400C35F36 /* logo_text.png in Resources */,
+				3E98EE351211B33F00C35F36 /* AddIncidentViewController_iPhone.xib in Resources */,
+				3E98EE361211B33F00C35F36 /* AddInstanceViewController_iPhone.xib in Resources */,
+				3E98EE381211B33F00C35F36 /* IncidentsViewController_iPhone.xib in Resources */,
+				3E98EE391211B33F00C35F36 /* InstancesViewController_iPhone.xib in Resources */,
+				3E98EE3A1211B33F00C35F36 /* MainWindow_iPhone.xib in Resources */,
+				3E98EE3B1211B33F00C35F36 /* ViewIncidentViewController_iPhone.xib in Resources */,
+				3E98EE3C1211B33F00C35F36 /* WebViewController_iPhone.xib in Resources */,
+				3E98EE751211B3E300C35F36 /* AddIncidentViewController_iPad.xib in Resources */,
+				3E98EE761211B3E300C35F36 /* AddInstanceViewController_iPad.xib in Resources */,
+				3E98EE791211B3E300C35F36 /* IncidentsViewController_iPad.xib in Resources */,
+				3E98EE7A1211B3E300C35F36 /* InstancesViewController_iPad.xib in Resources */,
+				3E98EE7B1211B3E300C35F36 /* MainWindow_iPad.xib in Resources */,
+				3E98EE7C1211B3E300C35F36 /* ViewIncidentViewController_iPad.xib in Resources */,
+				3E98EE7D1211B3E300C35F36 /* WebViewController_iPad.xib in Resources */,
+				3E98F0381211D04100C35F36 /* navbar_arrow_down.png in Resources */,
+				3E98F0391211D04100C35F36 /* navbar_arrow_up.png in Resources */,
+				3E98F0A61211D3D300C35F36 /* blank.png in Resources */,
+				3E98F2BC1211E39F00C35F36 /* toolbar_arrow_next.png in Resources */,
+				3E98F2BD1211E39F00C35F36 /* toolbar_arrow_previous.png in Resources */,
+				3E98F3DF1211EDE500C35F36 /* MapViewController_iPhone.xib in Resources */,
+				3E98F3E61211EE8400C35F36 /* MapViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2860E38A111B897F00E27156 /* AppDelegate_iPhone.m in Sources */,
+				3E98EA5C1210ABC200C35F36 /* InstancesViewController.m in Sources */,
+				3E98EA621210ABD600C35F36 /* IncidentsViewController.m in Sources */,
+				3E98EA671210ABF400C35F36 /* AddInstanceViewController.m in Sources */,
+				3E98EA6A1210AC0E00C35F36 /* AddIncidentViewController.m in Sources */,
+				3E98EA6D1210AC1A00C35F36 /* ViewIncidentViewController.m in Sources */,
+				3E98EA731210AC3200C35F36 /* WebViewController.m in Sources */,
+				3E98EAD91210B26800C35F36 /* TableViewController.m in Sources */,
+				3E98EC8D1210BF6A00C35F36 /* SearchTableCell.m in Sources */,
+				3E98ED571210C8CF00C35F36 /* TextViewTableCell.m in Sources */,
+				3E98ED5C1210C8D700C35F36 /* TextFieldTableCell.m in Sources */,
+				3E98ED611210C8DE00C35F36 /* BooleanTableCell.m in Sources */,
+				3E98EDC21211A39300C35F36 /* SubtitleTableCell.m in Sources */,
+				3E98EE771211B3E300C35F36 /* AppDelegate_iPad.m in Sources */,
+				3E98EEFB1211B86A00C35F36 /* TableCellFactory.m in Sources */,
+				3E98EF131211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodel in Sources */,
+				3E98EF141211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodeld in Sources */,
+				3E98EF181211BC9800C35F36 /* main.m in Sources */,
+				3E98EF1B1211BCA300C35F36 /* AppDelegate.m in Sources */,
+				3E98F0711211D25200C35F36 /* CheckBoxTableCell.m in Sources */,
+				3E98F3A31211EC0300C35F36 /* MapTableCell.m in Sources */,
+				3E98F3CC1211EDBA00C35F36 /* MapViewController.m in Sources */,
+				3E98F66312121D6E00C35F36 /* TextTableCell.m in Sources */,
+				3E98F7AA12122F6800C35F36 /* ImagePickerController.m in Sources */,
+				3E98F96012124BA000C35F36 /* Device.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
+				PRODUCT_NAME = Ushahidi_iPhone;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
+				PRODUCT_NAME = Ushahidi_iPhone;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "DEBUG=1";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ushahidi_iPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi_iPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3E98EF121211BC6500C35F36 /* Ushahidi_iPhone.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+			);
+			path = Ushahidi_iPhone.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

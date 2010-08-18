@@ -97,8 +97,9 @@ typedef enum {
     [super viewDidLoad];
 	[self showSearchBar:NO animated:NO];
 }
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	return YES;
 }
 
 - (void)didReceiveMemoryWarning {

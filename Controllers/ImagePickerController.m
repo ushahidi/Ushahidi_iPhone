@@ -52,6 +52,10 @@
 	[super dealloc];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	return YES;
+}
+
 #pragma mark -
 #pragma mark Internal
 

@@ -8,6 +8,13 @@
 
 #import "TextViewTableCell.h"
 
+@interface TextViewTableCell ()
+
+@property (nonatomic, assign) id<TextViewTableCellDelegate>	delegate;
+
+@end
+
+
 @implementation TextViewTableCell
 
 @synthesize delegate, textView, indexPath, limit;

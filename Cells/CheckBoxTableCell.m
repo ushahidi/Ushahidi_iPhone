@@ -8,7 +8,9 @@
 
 #import "CheckBoxTableCell.h"
 
-@interface CheckBoxTableCell (Internal)
+@interface CheckBoxTableCell ()
+
+@property (nonatomic, assign) id<CheckBoxTableCellDelegate>	delegate;
 
 - (void) setButtonImage:(UIImage *)image;
 - (void) buttonClicked:(id)sender;

@@ -63,7 +63,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return [TableCellFactory getDefaultTableCellForTable:theTableView identifier:@"UITableViewCell"];
+	return [TableCellFactory getDefaultTableCellForTable:theTableView];
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

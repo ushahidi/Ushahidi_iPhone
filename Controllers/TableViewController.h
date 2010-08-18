@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
+	
+@public
 	UITableView *tableView;
 }
 

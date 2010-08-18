@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface WebViewController : UIViewController<UIActionSheetDelegate> {
+	
+@public
 	UIWebView *webView;
 	UIBarButtonItem *refreshButton;
 	UIBarButtonItem *backButton;

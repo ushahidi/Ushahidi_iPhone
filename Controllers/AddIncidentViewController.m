@@ -106,26 +106,26 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionCategory) {
-		CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellWithDelegate:self table:theTableView identifier:@"CheckBoxTableCell"];
+		CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellWithDelegate:self table:theTableView];
 		[cell setTitle:[NSString stringWithFormat:@"Category %d", indexPath.row]];
 		[cell setChecked:NO];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionDescription) {
-		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellWithDelegate:self table:theTableView identifier:@"TextViewTableCell"];
+		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellWithDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setPlaceholder:@"Enter description"];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
-		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView identifier:@"UITableViewCell"];
+		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		cell.textLabel.text = @"Add New Incident Photo";
 		return cell;
 	}
 	else {
-		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView identifier:@"TextFieldTableCell"];
+		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		if (indexPath.section == TableSectionTitle) {
 			[cell setPlaceholder:@"Enter title"];

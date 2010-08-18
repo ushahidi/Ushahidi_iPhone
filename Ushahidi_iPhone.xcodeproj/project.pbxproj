@@ -66,6 +66,11 @@
 		3E98F66312121D6E00C35F36 /* TextTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F66212121D6E00C35F36 /* TextTableCell.m */; };
 		3E98F7AA12122F6800C35F36 /* ImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F7A912122F6800C35F36 /* ImagePickerController.m */; };
 		3E98F96012124BA000C35F36 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98F95F12124BA000C35F36 /* Device.m */; };
+		3ED04FFF12132DC1000CFFA6 /* ImageTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED04FFE12132DC1000CFFA6 /* ImageTableCell.m */; };
+		3ED050AB121334F0000CFFA6 /* demo_incident_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3ED050AA121334F0000CFFA6 /* demo_incident_image.jpg */; };
+		3ED050FF12133763000CFFA6 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED050FE12133763000CFFA6 /* ImageViewController.m */; };
+		3ED051051213379B000CFFA6 /* ImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED051041213379B000CFFA6 /* ImageViewController_iPhone.xib */; };
+		3ED05109121337A7000CFFA6 /* ImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ED05108121337A7000CFFA6 /* ImageViewController_iPad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +156,14 @@
 		3E98F7A912122F6800C35F36 /* ImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerController.m; sourceTree = "<group>"; };
 		3E98F95E12124BA000C35F36 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
 		3E98F95F12124BA000C35F36 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		3ED04FFD12132DC1000CFFA6 /* ImageTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableCell.h; sourceTree = "<group>"; };
+		3ED04FFE12132DC1000CFFA6 /* ImageTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableCell.m; sourceTree = "<group>"; };
+		3ED050AA121334F0000CFFA6 /* demo_incident_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = demo_incident_image.jpg; sourceTree = "<group>"; };
+		3ED050FD12133763000CFFA6 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		3ED050FE12133763000CFFA6 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		3ED051041213379B000CFFA6 /* ImageViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController_iPhone.xib; sourceTree = "<group>"; };
+		3ED05108121337A7000CFFA6 /* ImageViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController_iPad.xib; sourceTree = "<group>"; };
+		3ED0518012134786000CFFA6 /* Ushahidi_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ushahidi_iPhone-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +203,7 @@
 				3E98EE331211B33F00C35F36 /* ViewIncidentViewController_iPhone.xib */,
 				3E98EE341211B33F00C35F36 /* WebViewController_iPhone.xib */,
 				3E98F3DE1211EDE500C35F36 /* MapViewController_iPhone.xib */,
+				3ED051041213379B000CFFA6 /* ImageViewController_iPhone.xib */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -236,6 +250,7 @@
 				3E98EE731211B3E300C35F36 /* ViewIncidentViewController_iPad.xib */,
 				3E98EE741211B3E300C35F36 /* WebViewController_iPad.xib */,
 				3E98F3E51211EE8400C35F36 /* MapViewController_iPad.xib */,
+				3ED05108121337A7000CFFA6 /* ImageViewController_iPad.xib */,
 			);
 			path = iPad;
 			sourceTree = "<group>";
@@ -271,6 +286,8 @@
 				3E98F3CB1211EDBA00C35F36 /* MapViewController.m */,
 				3E98F7A812122F6800C35F36 /* ImagePickerController.h */,
 				3E98F7A912122F6800C35F36 /* ImagePickerController.m */,
+				3ED050FD12133763000CFFA6 /* ImageViewController.h */,
+				3ED050FE12133763000CFFA6 /* ImageViewController.m */,
 				3E98EAD71210B26800C35F36 /* TableViewController.h */,
 				3E98EAD81210B26800C35F36 /* TableViewController.m */,
 			);
@@ -289,6 +306,7 @@
 		3E98E9E112109DA800C35F36 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3ED050AA121334F0000CFFA6 /* demo_incident_image.jpg */,
 				3E98F2BA1211E39F00C35F36 /* toolbar_arrow_next.png */,
 				3E98F2BB1211E39F00C35F36 /* toolbar_arrow_previous.png */,
 				3E98F0A51211D3D300C35F36 /* blank.png */,
@@ -334,6 +352,8 @@
 				3E98EC8C1210BF6A00C35F36 /* SearchTableCell.m */,
 				3E98F3A11211EC0300C35F36 /* MapTableCell.h */,
 				3E98F3A21211EC0300C35F36 /* MapTableCell.m */,
+				3ED04FFD12132DC1000CFFA6 /* ImageTableCell.h */,
+				3ED04FFE12132DC1000CFFA6 /* ImageTableCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -341,6 +361,7 @@
 		3E98EEFC1211B87D00C35F36 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3ED0518012134786000CFFA6 /* Ushahidi_iPhone-Info.plist */,
 				3E98EF191211BCA300C35F36 /* AppDelegate.h */,
 				3E98EF1A1211BCA300C35F36 /* AppDelegate.m */,
 				3E98F95E12124BA000C35F36 /* Device.h */,
@@ -434,6 +455,9 @@
 				3E98F2BD1211E39F00C35F36 /* toolbar_arrow_previous.png in Resources */,
 				3E98F3DF1211EDE500C35F36 /* MapViewController_iPhone.xib in Resources */,
 				3E98F3E61211EE8400C35F36 /* MapViewController_iPad.xib in Resources */,
+				3ED050AB121334F0000CFFA6 /* demo_incident_image.jpg in Resources */,
+				3ED051051213379B000CFFA6 /* ImageViewController_iPhone.xib in Resources */,
+				3ED05109121337A7000CFFA6 /* ImageViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +493,8 @@
 				3E98F66312121D6E00C35F36 /* TextTableCell.m in Sources */,
 				3E98F7AA12122F6800C35F36 /* ImagePickerController.m in Sources */,
 				3E98F96012124BA000C35F36 /* Device.m in Sources */,
+				3ED04FFF12132DC1000CFFA6 /* ImageTableCell.m in Sources */,
+				3ED050FF12133763000CFFA6 /* ImageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,11 +528,71 @@
 			};
 			name = Release;
 		};
+		3ED0518E121348D6000CFFA6 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dale Zak";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D138047B-A190-43B0-AF7E-5E0002550727";
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Ad Hoc";
+		};
+		3ED0518F121348D6000CFFA6 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
+				PRODUCT_NAME = Ushahidi_iPhone;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad Hoc";
+		};
+		3ED05190121348DB000CFFA6 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dale Zak";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F9914F51-CCFD-407C-BA79-4C4F230E35D4";
+				SDKROOT = iphoneos4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "App Store";
+		};
+		3ED05191121348DB000CFFA6 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
+				PRODUCT_NAME = Ushahidi_iPhone;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "App Store";
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (89V8WPXURA)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "DEBUG=1";
@@ -514,6 +600,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "23651937-5649-4D5C-806D-4FEC51CEDC86";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -523,13 +610,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (89V8WPXURA)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "23651937-5649-4D5C-806D-4FEC51CEDC86";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -543,6 +631,8 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				3ED0518F121348D6000CFFA6 /* Ad Hoc */,
+				3ED05191121348DB000CFFA6 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -552,6 +642,8 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				3ED0518E121348D6000CFFA6 /* Ad Hoc */,
+				3ED05190121348DB000CFFA6 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -8,6 +8,13 @@
 
 #import "TextFieldTableCell.h"
 
+@interface TextFieldTableCell ()
+
+@property (nonatomic, assign) id<TextFieldTableCellDelegate> delegate;
+
+@end
+
+
 @implementation TextFieldTableCell
 
 @synthesize delegate, textField, indexPath;

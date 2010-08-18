@@ -11,12 +11,15 @@
 @protocol BooleanTableCellDelegate;
 
 @interface BooleanTableCell : UITableViewCell {
-	id<BooleanTableCellDelegate> delegate;
+
+@public
 	NSIndexPath *indexPath;
 	UISegmentedControl *segmentControl;
+	
+@private 	
+	id<BooleanTableCellDelegate> delegate;
 }
 
-@property (nonatomic, assign) id<BooleanTableCellDelegate> delegate;
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
 

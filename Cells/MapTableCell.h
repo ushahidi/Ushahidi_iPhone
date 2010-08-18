@@ -13,15 +13,23 @@
 
 @protocol MapTableCellDelegate;
 
-@interface MapTableCell : NSObject {
-	id<MapTableCellDelegate> delegate;
+@interface MapTableCell : UITableViewCell<MKMapViewDelegate> {
+
+@public
 	NSIndexPath	*indexPath;
+	MKMapView *mapView;
+	
+@private
+	id<MapTableCellDelegate> delegate;
 }
 
-@property (nonatomic, assign) id<MapTableCellDelegate> delegate;
 @property (nonatomic, retain) NSIndexPath *indexPath; 
+@property (nonatomic, retain) MKMapView *mapView;
 
 - (id)initWithDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (void) setMapType:(MKMapType)mapType;
+- (void) setScrollable:(BOOL)scrollable;
+- (void) setZoomable:(BOOL)zoomable;
 
 @end
 

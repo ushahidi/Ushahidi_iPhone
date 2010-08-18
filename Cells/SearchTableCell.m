@@ -8,6 +8,13 @@
 
 #import "SearchTableCell.h"
 
+@interface SearchTableCell ()
+
+@property (nonatomic, assign) id<SearchTableCellDelegate> delegate;
+
+@end
+
+
 @implementation SearchTableCell
 
 @synthesize delegate, indexPath, searchBar;

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface SubtitleTableCell : UITableViewCell {
+	
+@public
 	NSIndexPath *indexPath;
 	UIImage *defaultImage;
 }

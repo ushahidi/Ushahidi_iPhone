@@ -18,6 +18,8 @@
 @interface AddIncidentViewController : TableViewController<TextFieldTableCellDelegate, 
 															TextViewTableCellDelegate, 
 															CheckBoxTableCellDelegate>  {
+																
+@public
 	MapViewController *mapViewController;
 	ImagePickerController *imagePickerController;
 	UIBarButtonItem *cancelButton;
@@ -27,7 +29,7 @@
 @property(nonatomic, retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property(nonatomic, retain) ImagePickerController *imagePickerController;
+@property(nonatomic, retain) IBOutlet ImagePickerController *imagePickerController;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;

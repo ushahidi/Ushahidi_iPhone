@@ -10,6 +10,12 @@
 
 #define kPadding 20
 
+@interface TextTableCell ()
+
+@property (nonatomic, assign) id<TextTableCellDelegate>	delegate;
+
+@end
+
 @implementation TextTableCell
 
 @synthesize delegate, indexPath; 

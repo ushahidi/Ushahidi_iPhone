@@ -17,6 +17,8 @@
 @class ViewIncidentViewController;
 
 @interface IncidentsViewController : TableViewController<SearchTableCellDelegate, UIActionSheetDelegate, MKMapViewDelegate>  {
+	
+@public
 	AddIncidentViewController *addIncidentViewController;
 	ViewIncidentViewController *viewIncidentViewController;
 	MKMapView *mapView;

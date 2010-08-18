@@ -11,13 +11,16 @@
 @protocol CheckBoxTableCellDelegate;
 
 @interface CheckBoxTableCell : UITableViewCell {
-	id<CheckBoxTableCellDelegate> delegate;
+
+@public
 	NSIndexPath	*indexPath;
 	UIImage *checkedImage;
 	UIImage *uncheckedImage;
+
+@private
+	id<CheckBoxTableCellDelegate> delegate;
 }
 
-@property (nonatomic, assign) id<CheckBoxTableCellDelegate>	delegate;
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UIImage *checkedImage;
 @property (nonatomic, retain) UIImage *uncheckedImage;

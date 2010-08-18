@@ -8,6 +8,13 @@
 
 #import "BooleanTableCell.h"
 
+@interface BooleanTableCell ()
+
+@property (nonatomic, assign) id<BooleanTableCellDelegate> delegate;
+
+@end
+
+
 @implementation BooleanTableCell
 
 typedef enum {

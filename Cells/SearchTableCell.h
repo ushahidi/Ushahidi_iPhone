@@ -11,12 +11,14 @@
 @protocol SearchTableCellDelegate;
 
 @interface SearchTableCell : UITableViewCell<UISearchBarDelegate> {
-	id<SearchTableCellDelegate>	delegate;
+
+@public
 	NSIndexPath	*indexPath;
 	UISearchBar *searchBar;
+@private
+	id<SearchTableCellDelegate>	delegate;
 }
 
-@property (nonatomic, assign) id<SearchTableCellDelegate> delegate;
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UISearchBar *searchBar;
 

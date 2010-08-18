@@ -9,15 +9,16 @@
 #import "ViewIncidentViewController.h"
 #import "WebViewController.h"
 #import "MapViewController.h"
+#import "ImageViewController.h"
 #import "TableCellFactory.h"
 #import "SubtitleTableCell.h"
+#import "ImageTableCell.h"
 
 typedef enum {
 	TableSectionTitle,
 	TableSectionCategory,
 	TableSectionLocation,
-	TableSectionDate,
-	TableSectionTime,
+	TableSectionDateTime,
 	TableSectionDescription,
 	TableSectionPhotos,
 	TableSectionNews
@@ -36,7 +37,7 @@ typedef enum {
 
 @implementation ViewIncidentViewController
 
-@synthesize webViewController, mapViewController, nextPrevious;
+@synthesize webViewController, mapViewController, imageViewController, nextPrevious;
 
 - (NSString *) getIncidentDescription {
 	return [NSString stringWithFormat:@"%@%@%@%@%@", 
@@ -107,6 +108,7 @@ typedef enum {
 - (void)dealloc {
 	[webViewController release];
 	[mapViewController release];
+	[imageViewController release];
 	[nextPrevious release];
     [super dealloc];
 }
@@ -115,24 +117,27 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 8;
+	return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	if (section == TableSectionNews) {
 		return 3;
 	}
+	if (section == TableSectionLocation) {
+		return 2;
+	}
 	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDescription) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellFWithDelegate:self table:theTableView identifier:@"TextTableCell"];
+		TextTableCell *cell = [TableCellFactory getTextTableCellWithDelegate:self table:theTableView];
 		[cell setText:[self getIncidentDescription]];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionNews) {
-		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView identifier:@"NewsCell"];
+		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		if (indexPath.row == 0) {
@@ -149,8 +154,18 @@ typedef enum {
 		}
 		return cell;
 	}
+	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
+		MapTableCell *cell = [TableCellFactory getMapTableCellWithDelegate:self table:theTableView];
+		[cell setScrollable:NO];
+		[cell setZoomable:NO];
+		return cell;
+	}
+	else if (indexPath.section == TableSectionPhotos) {
+		ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:[UIImage imageNamed:@"demo_incident_image.jpg"] table:theTableView];
+		return cell;
+	}
 	else {
-		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView identifier:@"UITableViewCell"];
+		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (indexPath.section == TableSectionTitle) {
@@ -164,14 +179,8 @@ typedef enum {
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		}
-		else if (indexPath.section == TableSectionDate) {
-			cell.textLabel.text = @"Feb 3 2010";
-		}
-		else if (indexPath.section == TableSectionTime) {
-			cell.textLabel.text = @"7:34pm";
-		}
-		else if (indexPath.section == TableSectionPhotos) {
-			cell.textLabel.text = @"No Incident Photos";
+		else if (indexPath.section == TableSectionDateTime) {
+			cell.textLabel.text = @"February 3rd 2010, 7:34pm";
 		}
 		return cell;	
 	}
@@ -187,11 +196,8 @@ typedef enum {
 	if (section == TableSectionLocation) {
 		return @"Location";
 	}
-	if (section == TableSectionDate) {
+	if (section == TableSectionDateTime) {
 		return @"Date";
-	}
-	if (section == TableSectionTime) {
-		return @"Time";
 	}
 	if (section == TableSectionDescription) {
 		return @"Description";
@@ -212,6 +218,15 @@ typedef enum {
 		CGSize tableCellSize = [TextTableCell getCellSizeForText:[self getIncidentDescription] forWidth:width];
 		return tableCellSize.height;
 	}
+	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
+		return 120;
+	}
+	else if (indexPath.section == TableSectionPhotos) {
+		return 200;
+	}
+	else if (indexPath.section == TableSectionNews) {
+		return 55;
+	}
 	return 45;
 }
 
@@ -223,9 +238,13 @@ typedef enum {
 		self.webViewController.website = cell.detailTextLabel.text;
 		[self.navigationController pushViewController:self.webViewController animated:YES];
 	}
-	else if (indexPath.section == TableSectionLocation) {
+	else if (indexPath.section == TableSectionLocation && indexPath.row == 0) {
 		self.mapViewController.address = cell.textLabel.text;
 		[self.navigationController pushViewController:self.mapViewController animated:YES];
+	}
+	else if (indexPath.section == TableSectionPhotos) {
+		self.imageViewController.image = [((ImageTableCell *)cell) getImage];
+		[self.navigationController pushViewController:self.imageViewController animated:YES];
 	}
 }
 

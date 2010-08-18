@@ -14,12 +14,14 @@
 @class AddInstanceViewController;
 
 @interface InstancesViewController : TableViewController<SearchTableCellDelegate> {
+	
+@public
 	IncidentsViewController *incidentsViewController;
 	AddInstanceViewController *addInstanceViewController;
 }
 
-@property(nonatomic,retain) IBOutlet IncidentsViewController *incidentsViewController;
-@property(nonatomic,retain) IBOutlet AddInstanceViewController *addInstanceViewController;
+@property(nonatomic, retain) IBOutlet IncidentsViewController *incidentsViewController;
+@property(nonatomic, retain) IBOutlet AddInstanceViewController *addInstanceViewController;
 
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;

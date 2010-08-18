@@ -11,11 +11,14 @@
 @protocol TextTableCellDelegate;
 
 @interface TextTableCell : UITableViewCell {
-	id<TextTableCellDelegate> delegate;
+
+@public
 	NSIndexPath *indexPath;
+
+@private
+	id<TextTableCellDelegate> delegate;	
 }
 
-@property (nonatomic, assign) id<TextTableCellDelegate>	delegate;
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 
 - (id)initWithDelegate:(id<TextTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;

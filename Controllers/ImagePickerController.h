@@ -12,6 +12,7 @@
 											UIImagePickerControllerDelegate,
 											UIActionSheetDelegate,
 											UIPopoverControllerDelegate> {
+@public
 	UIViewController *viewController;
 	UIPopoverController *popoverController;
 }

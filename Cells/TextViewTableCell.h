@@ -11,13 +11,16 @@
 @protocol TextViewTableCellDelegate;
 
 @interface TextViewTableCell : UITableViewCell<UITextViewDelegate> {
-	id<TextViewTableCellDelegate> delegate;
+	
+@public
 	UITextView *textView;
 	NSIndexPath *indexPath;
 	NSInteger limit;
+	
+@private
+	id<TextViewTableCellDelegate> delegate;
 }
 
-@property (nonatomic, assign) id<TextViewTableCellDelegate>	delegate;
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, assign) NSIndexPath *indexPath;
 @property (nonatomic, assign) NSInteger limit;

@@ -12,6 +12,8 @@
 #import <MapKit/MKAnnotation.h>
 
 @interface MapViewController : UIViewController<MKMapViewDelegate, UISearchBarDelegate> {
+	
+@public
 	MKMapView *mapView;
 	UISearchBar *searchBar;
 	UISegmentedControl *mapType;

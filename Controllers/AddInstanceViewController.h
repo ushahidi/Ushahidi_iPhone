@@ -11,12 +11,14 @@
 #import "TextFieldTableCell.h"
 
 @interface AddInstanceViewController : TableViewController<TextFieldTableCellDelegate> {
+	
+@public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
 }
 
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *cancelButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *doneButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;

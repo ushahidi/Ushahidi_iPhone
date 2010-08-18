@@ -126,12 +126,12 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionSearch) {
-		SearchTableCell *cell = [TableCellFactory getSearchTableCellWithDelegate:self table:theTableView identifier:@"SearchTableCell"];
+		SearchTableCell *cell = [TableCellFactory getSearchTableCellWithDelegate:self table:theTableView];
 		[cell setPlaceholder:@"Search incidents..."];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionIncidents) {
-		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView identifier:@"SubtitleTableCell"];
+		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		[cell setText:[NSString stringWithFormat:@"Demo Report %d", indexPath.row]];

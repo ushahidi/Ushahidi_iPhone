@@ -11,12 +11,15 @@
 @protocol TextFieldTableCellDelegate;
 
 @interface TextFieldTableCell : UITableViewCell<UITextFieldDelegate> {
-	id<TextFieldTableCellDelegate> delegate;
+
+@public
 	UITextField	*textField;
 	NSIndexPath *indexPath;
+	
+@private
+	id<TextFieldTableCellDelegate> delegate;
 }
 
-@property (nonatomic, assign) id<TextFieldTableCellDelegate> delegate;
 @property (nonatomic, retain) UITextField *textField;
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 

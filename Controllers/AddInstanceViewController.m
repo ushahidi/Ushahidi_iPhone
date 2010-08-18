@@ -91,7 +91,7 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView identifier:@"TextFieldTableCell"];
+	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView];
 	cell.indexPath = indexPath;
 	[cell setPlaceholder:@"Enter Ushahidi URL"];
 	[cell showKeyboard];
@@ -103,7 +103,14 @@ typedef enum {
 
 - (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
 	if (section == TableSectionURL) {
-		return @"URL";
+		return @"Ushahidi URL";
+	}
+	return nil;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	if (section == TableSectionURL) {
+		return @"Enter the URL for an Ushahidi deployment. For example, http://demo.ushahidi.com";
 	}
 	return nil;
 }

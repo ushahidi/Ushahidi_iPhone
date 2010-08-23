@@ -36,8 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.loadingView = [[LoadingViewController alloc] initWithController:self];
+	self.alertView = [[AlertView alloc] initWithController:self];
 	self.inputView = [[InputView alloc] initWithDelegate:self];
-	self.alertView = [[AlertView alloc] initWithDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -95,6 +95,9 @@
 		3E862C231222D288001DE141 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862C221222D288001DE141 /* BaseViewController.m */; };
 		3E862CA51222D604001DE141 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862CA41222D604001DE141 /* AlertView.m */; };
 		3E862CAA1222D60F001DE141 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862CA91222D60F001DE141 /* InputView.m */; };
+		3E862CD71222D8DB001DE141 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862CD61222D8DB001DE141 /* SplashViewController.m */; };
+		3E862CD91222D8F0001DE141 /* SplashViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862CD81222D8F0001DE141 /* SplashViewController_iPhone.xib */; };
+		3E862CDD1222D8FC001DE141 /* SplashViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862CDC1222D8FC001DE141 /* SplashViewController_iPad.xib */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -238,6 +241,10 @@
 		3E862CA41222D604001DE141 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		3E862CA81222D60F001DE141 /* InputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
 		3E862CA91222D60F001DE141 /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
+		3E862CD51222D8DB001DE141 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
+		3E862CD61222D8DB001DE141 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
+		3E862CD81222D8F0001DE141 /* SplashViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E862CDC1222D8FC001DE141 /* SplashViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController_iPad.xib; sourceTree = "<group>"; };
 		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -392,6 +399,8 @@
 				3E862BDD1222D081001DE141 /* LoadingViewController.m */,
 				3E862A0A1222BCD0001DE141 /* TableViewController.h */,
 				3E862A0B1222BCD0001DE141 /* TableViewController.m */,
+				3E862CD51222D8DB001DE141 /* SplashViewController.h */,
+				3E862CD61222D8DB001DE141 /* SplashViewController.m */,
 				3E8629FC1222BCD0001DE141 /* AddIncidentViewController.h */,
 				3E8629FD1222BCD0001DE141 /* AddIncidentViewController.m */,
 				3E8629FE1222BCD0001DE141 /* AddInstanceViewController.h */,
@@ -453,6 +462,10 @@
 		3E862A3D1222BCF2001DE141 /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
+				3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */,
+				3E862A6D1222BD1D001DE141 /* MainWindow_iPhone.xib */,
+				3E862CD81222D8F0001DE141 /* SplashViewController_iPhone.xib */,
+				3E862CDC1222D8FC001DE141 /* SplashViewController_iPad.xib */,
 				3E862A621222BD1D001DE141 /* AddIncidentViewController_iPad.xib */,
 				3E862A631222BD1D001DE141 /* AddIncidentViewController_iPhone.xib */,
 				3E862A641222BD1D001DE141 /* AddInstanceViewController_iPad.xib */,
@@ -463,8 +476,6 @@
 				3E862A691222BD1D001DE141 /* IncidentsViewController_iPhone.xib */,
 				3E862A6A1222BD1D001DE141 /* InstancesViewController_iPad.xib */,
 				3E862A6B1222BD1D001DE141 /* InstancesViewController_iPhone.xib */,
-				3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */,
-				3E862A6D1222BD1D001DE141 /* MainWindow_iPhone.xib */,
 				3E862A6E1222BD1D001DE141 /* MapViewController_iPad.xib */,
 				3E862A6F1222BD1D001DE141 /* MapViewController_iPhone.xib */,
 				3E862A701222BD1D001DE141 /* ViewIncidentViewController_iPad.xib */,
@@ -624,6 +635,8 @@
 				3E862BE31222D092001DE141 /* LoadingViewController_iPhone.xib in Resources */,
 				3E862BE41222D092001DE141 /* LoadingViewController_iPad.xib in Resources */,
 				3E862BEC1222D0A1001DE141 /* loading_background.png in Resources */,
+				3E862CD91222D8F0001DE141 /* SplashViewController_iPhone.xib in Resources */,
+				3E862CDD1222D8FC001DE141 /* SplashViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +692,7 @@
 				3E862C231222D288001DE141 /* BaseViewController.m in Sources */,
 				3E862CA51222D604001DE141 /* AlertView.m in Sources */,
 				3E862CAA1222D60F001DE141 /* InputView.m in Sources */,
+				3E862CD71222D8DB001DE141 /* SplashViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

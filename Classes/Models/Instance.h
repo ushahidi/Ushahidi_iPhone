@@ -18,37 +18,21 @@
  **
  *****************************************************************************/
 
-#import "BaseViewController.h"
-#import "LoadingViewController.h"
+#import <Foundation/Foundation.h>
 
-@interface BaseViewController ()
+@interface Instance : NSObject {
 
-@end
-
-@implementation BaseViewController
-
-@synthesize loadingView, inputView, alertView;
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	self.loadingView = [[LoadingViewController alloc] initWithController:self];
-	self.alertView = [[AlertView alloc] initWithController:self];
-	self.inputView = [[InputView alloc] initWithDelegate:self];
+@public
+	NSString *name;
+	NSString *url;
+	UIImage *logo;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
+@property(nonatomic,retain) NSString *name;
+@property(nonatomic,retain) NSString *url;
+@property(nonatomic,retain) UIImage *logo;
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
-- (void)dealloc {
-	[loadingView release];
-	[inputView release];
-	[alertView release];
-    [super dealloc];
-}
+- (id)initWithName:(NSString *)name url:(NSString *)url logo:(UIImage *)logo;
+- (BOOL) matchesString:(NSString *)string;
 
 @end

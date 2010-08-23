@@ -24,16 +24,14 @@
 #import "SubtitleTableCell.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
+#import "LoadingViewController.h"
+#import "AlertView.h"
+#import "InputView.h"
 
 typedef enum {
-	TableSectionSearch,
-	TableSectionIncidents
-} TableSection;
-
-typedef enum {
-	ViewTypeReports,
-	ViewTypeMap
-} ViewType;
+	ViewModeReports,
+	ViewModeMap
+} ViewMode;
 
 @interface IncidentsViewController ()
 
@@ -58,37 +56,62 @@ typedef enum {
 }
 
 - (IBAction) add:(id)sender {
-	DLog(@"add");
+	DLog(@"");
 	[self presentModalViewController:self.addIncidentViewController animated:YES];
 }
 
 - (IBAction) refresh:(id)sender {
-	DLog(@"refresh");
+	DLog(@"");
+	[self.loadingView showWithMessage:@"Loading..."];
+	[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
+}
+
+- (IBAction) search:(id)sender {
+	DLog(@"");
+	[self toggleSearchBar:self.searchBar animated:YES];
 }
 
 - (IBAction) toggleReportsAndMap:(id)sender {
-	DLog(@"toggleReportsAndMap");
+	DLog(@"");
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
-	if (segmentControl.selectedSegmentIndex == ViewTypeReports) {
+	if (segmentControl.selectedSegmentIndex == ViewModeReports) {
 		self.tableView.hidden = NO;
 		self.mapView.hidden = YES;
+		self.searchButton.enabled = YES;
 	}
-	else if (segmentControl.selectedSegmentIndex == ViewTypeMap) {
+	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
 		self.tableView.hidden = YES;
 		self.mapView.hidden = NO;
+		self.searchButton.enabled = NO;
+		if (self.searchBar.frame.origin.y == 0) {
+			[self toggleSearchBar:self.searchBar animated:NO];
+		}
 	}
-	
 }
 
 #pragma mark -
 #pragma mark UIViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	self.tableView.backgroundColor = [UIColor ushahidiTan];
+	[self toggleSearchBar:self.searchBar animated:NO];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	if (self.navigationController.topViewController == self) {
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self]];
+		[self.filteredRows removeAllObjects];
+		[self.filteredRows addObjectsFromArray:self.allRows];
+		[self.tableView reloadData];	
+	}
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	[self.tableView flashScrollIndicators];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -99,9 +122,6 @@ typedef enum {
 	[super viewDidDisappear:animated];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
@@ -125,33 +145,20 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 2;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	if (section == TableSectionSearch) {
-		return 1;
-	}
-	if (section == TableSectionIncidents) {
-		return 20;
-	}
-	return 0;}
+	return 20;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionSearch) {
-		SearchTableCell *cell = [TableCellFactory getSearchTableCellWithDelegate:self table:theTableView];
-		[cell setPlaceholder:@"Search incidents..."];
-		return cell;
-	}
-	else if (indexPath.section == TableSectionIncidents) {
-		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		[cell setText:[NSString stringWithFormat:@"Demo Report %d", indexPath.row]];
-		[cell setDescription:@"Mumbai Pune Bypass Rd, Haiti - May 26 2010"];
-		return cell;
-	}
-	return nil;
+	SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.selectionStyle = UITableViewCellSelectionStyleGray;
+	[cell setText:[NSString stringWithFormat:@"Demo Report %d", indexPath.row]];
+	[cell setDescription:@"Mumbai Pune Bypass Rd, Haiti - May 26 2010"];
+	return cell;
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -171,12 +178,21 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark UISearchCellDelegate
+#pragma mark UISearchBarDelegate
 
-- (void) searchCellChanged:(SearchTableCell *)cell searchText:(NSString *)text {
-	DLog(@"searchCellChanged: %@", text);
-}
+- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
+	DLog(@"searchText: %@", searchText);
+	//TODO filter incidents by search text
+	[self.tableView reloadData];	
+	[self.tableView flashScrollIndicators];
+}   
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
+	//TODO filter incidents by search text
+	[self.tableView reloadData];	
+	[self.tableView flashScrollIndicators];
+	[theSearchBar resignFirstResponder];
+}   
 #pragma mark -
 #pragma mark MKMapViewDelegate
 
@@ -190,6 +206,26 @@ typedef enum {
 
 - (void)mapViewDidFailLoadingMap:(MKMapView *)theMapView withError:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
+}
+
+#pragma mark -
+#pragma mark UshahidiDelegate
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)theIncidents error:(NSError *)error {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+	}
+	else {
+		DLog(@"incidents: %@", theIncidents);
+		[self.loadingView hide];
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:theIncidents];
+		[self.filteredRows removeAllObjects];
+		[self.filteredRows addObjectsFromArray:self.allRows];
+		[self.tableView reloadData];
+		[self.tableView flashScrollIndicators];
+	}
 }
 
 @end

@@ -34,4 +34,8 @@
 	AlertView *alertView;
 }
 
+@property(nonatomic, retain) LoadingViewController *loadingView;
+@property(nonatomic, retain) InputView *inputView;
+@property(nonatomic, retain) AlertView *alertView;
+
 @end

@@ -19,6 +19,9 @@
  *****************************************************************************/
 
 #import "MapViewController.h"
+#import "LoadingViewController.h"
+#import "AlertView.h"
+#import "InputView.h"
 
 typedef enum {
 	MapTypeNormal,

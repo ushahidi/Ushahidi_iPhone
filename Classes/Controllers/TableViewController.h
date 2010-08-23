@@ -24,9 +24,15 @@
 @interface TableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource> {
 	
 @public
-	UITableView *tableView;
+	IBOutlet UITableView *tableView;
+	
+@protected
+	NSMutableArray *allRows;
+	NSMutableArray *filteredRows;
 }
 
-@property(nonatomic,retain) IBOutlet UITableView *tableView;
+@property(nonatomic,retain) UITableView *tableView;
+@property(nonatomic,retain) NSMutableArray *allRows;
+@property(nonatomic,retain) NSMutableArray *filteredRows;
 
 @end

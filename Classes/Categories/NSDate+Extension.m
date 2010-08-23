@@ -18,37 +18,16 @@
  **
  *****************************************************************************/
 
-#import "BaseViewController.h"
-#import "LoadingViewController.h"
+#import "NSDate+Extension.h"
 
-@interface BaseViewController ()
+@implementation NSDate (Extension)
 
-@end
-
-@implementation BaseViewController
-
-@synthesize loadingView, inputView, alertView;
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	self.loadingView = [[LoadingViewController alloc] initWithController:self];
-	self.alertView = [[AlertView alloc] initWithController:self];
-	self.inputView = [[InputView alloc] initWithDelegate:self];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
-- (void)dealloc {
-	[loadingView release];
-	[inputView release];
-	[alertView release];
-    [super dealloc];
+- (NSString *) dateToString {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"cccc, MMMM d, yyyy"];
+	NSString *dueDate = [formatter stringFromDate:self];
+	[formatter release];	
+	return dueDate;
 }
 
 @end

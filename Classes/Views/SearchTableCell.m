@@ -82,7 +82,7 @@
 }   
 
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
-	[self notifyDelegate];
+	//[self notifyDelegate];
 }   
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {

@@ -18,34 +18,50 @@
  **
  *****************************************************************************/
 
-#import "Category.h"
+#import "Instance.h"
 
-@interface Category ()
-
-// Internal private declarations go here
+@interface Instance ()
 
 @end
 
-@implementation Category
+@implementation Instance
 
-@synthesize title, description;
+@synthesize name, url, logo;
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
-	[encoder encodeObject:self.title forKey:@"title"];
-	[encoder encodeObject:self.description forKey:@"description"];
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
+- (id)initWithName:(NSString *)theName url:(NSString *)theUrl logo:(UIImage *)theLogo {
 	if (self = [super init]){
-		self.title = [decoder decodeObjectForKey:@"title"];
-		self.description = [decoder decodeObjectForKey:@"description"];
+		self.name = theName;
+		self.url = theUrl;
+		self.logo = theLogo;
 	}
 	return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:self.name forKey:@"name"];
+	[encoder encodeObject:self.url forKey:@"url"];
+	[encoder encodeObject:self.logo forKey:@"logo"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super init]){
+		self.name = [decoder decodeObjectForKey:@"name"];
+		self.url = [decoder decodeObjectForKey:@"url"];
+		self.logo = [decoder decodeObjectForKey:@"logo"];
+	}
+	return self;
+}
+
+- (BOOL) matchesString:(NSString *)string {
+	return	(string == nil || [string length] == 0) ||
+			[self.name rangeOfString:string].location != NSNotFound ||
+			[self.url rangeOfString:string].location != NSNotFound;
+}
+
 - (void)dealloc {
-	[title release];
-	[description release];
+	[name release];
+	[url release];
+	[logo release];
     [super dealloc];
 }
 

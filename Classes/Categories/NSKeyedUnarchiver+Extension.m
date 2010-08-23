@@ -18,37 +18,14 @@
  **
  *****************************************************************************/
 
-#import "BaseViewController.h"
-#import "LoadingViewController.h"
+#import "NSKeyedUnarchiver+Extension.h"
 
-@interface BaseViewController ()
+@implementation NSKeyedUnarchiver (Extension)
 
-@end
-
-@implementation BaseViewController
-
-@synthesize loadingView, inputView, alertView;
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	self.loadingView = [[LoadingViewController alloc] initWithController:self];
-	self.alertView = [[AlertView alloc] initWithController:self];
-	self.inputView = [[InputView alloc] initWithDelegate:self];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
-- (void)dealloc {
-	[loadingView release];
-	[inputView release];
-	[alertView release];
-    [super dealloc];
++ (id) unarchiveObjectWithKey:(NSString *)key {
+	NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+	return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
 }
 
 @end

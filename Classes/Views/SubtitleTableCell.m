@@ -56,6 +56,10 @@
 	}
 }
 
+- (NSString *) getText {
+	return self.textLabel.text;
+}
+
 - (void) setDescription:(NSString *)description {
 	if (description == nil || [description isEqualToString:@""]) {
 		self.detailTextLabel.text = @"";	
@@ -63,6 +67,10 @@
 	else {
 		self.detailTextLabel.text = description;
 	}
+}
+
+- (NSString *) getDescription {
+	return self.detailTextLabel.text;
 }
 
 - (void) setImage:(UIImage *)theImage {

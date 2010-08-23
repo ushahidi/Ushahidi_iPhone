@@ -20,29 +20,17 @@
 
 #import <UIKit/UIKit.h>
 #import "TableViewController.h"
-#import "TextTableCell.h"
-#import "MapTableCell.h"
-#import "Ushahidi.h"
 
-@class WebViewController;
-@class MapViewController;
-@class ImageViewController;
+@interface TableSearchViewController : TableViewController<UISearchBarDelegate> {
 
-@interface ViewIncidentViewController : TableViewController<UshahidiDelegate, UIWebViewDelegate, UIActionSheetDelegate, TextTableCellDelegate, MapTableCellDelegate> {
-	
 @public
-	WebViewController *webViewController;
-	MapViewController *mapViewController;
-	ImageViewController *imageViewController;
-	UISegmentedControl *nextPrevious;
+	IBOutlet UISearchBar *searchBar;
+	IBOutlet UIBarButtonItem *searchButton;
 }
 
-@property(nonatomic,retain) IBOutlet WebViewController *webViewController;
-@property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
-@property(nonatomic,retain) IBOutlet ImageViewController *imageViewController;
-@property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;
+@property(nonatomic,retain) UISearchBar *searchBar;
+@property(nonatomic,retain) UIBarButtonItem *searchButton;
 
-- (IBAction) action:(id)sender;
-- (IBAction) nextPrevious:(id)sender;
+- (void) toggleSearchBar:(UISearchBar *)theSearchBar animated:(BOOL)animated;
 
 @end

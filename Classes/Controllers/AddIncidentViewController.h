@@ -24,10 +24,12 @@
 #import "TextViewTableCell.h"
 #import "CheckBoxTableCell.h"
 #import "ImagePickerController.h"
+#import "Ushahidi.h"
 
 @class MapViewController;
 
-@interface AddIncidentViewController : TableViewController<TextFieldTableCellDelegate, 
+@interface AddIncidentViewController : TableViewController<UshahidiDelegate, 
+															TextFieldTableCellDelegate, 
 															TextViewTableCellDelegate, 
 															CheckBoxTableCellDelegate>  {
 																
@@ -36,6 +38,11 @@
 	ImagePickerController *imagePickerController;
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
+																
+@private
+	NSMutableArray *categories;
+	NSMutableArray *countries;
+	NSMutableArray *locations;
 }
 
 @property(nonatomic, retain) IBOutlet MapViewController *mapViewController;

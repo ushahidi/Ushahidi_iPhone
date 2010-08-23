@@ -22,6 +22,9 @@
 #import "MapViewController.h"
 #import "TableCellFactory.h"
 #import "Device.h"
+#import "LoadingViewController.h"
+#import "AlertView.h"
+#import "InputView.h"
 
 #define kCancel @"Cancel"
 #define kTakePhoto @"Take Photo"
@@ -40,11 +43,16 @@ typedef enum {
 
 @interface AddIncidentViewController ()
 
+@property(nonatomic, retain) NSMutableArray *categories;
+@property(nonatomic, retain) NSMutableArray *countries;
+@property(nonatomic, retain) NSMutableArray *locations;
+
 @end
 
 @implementation AddIncidentViewController
 
 @synthesize mapViewController, cancelButton, doneButton, imagePickerController;
+@synthesize categories, countries, locations;
 
 #pragma mark -
 #pragma mark Handlers
@@ -99,6 +107,9 @@ typedef enum {
 	[cancelButton release];
 	[doneButton release];
 	[imagePickerController release];
+	[categories release];
+	[countries release];
+	[locations release];
     [super dealloc];
 }
 
@@ -111,7 +122,7 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	if (section == TableSectionCategory) {
-		return 5;
+		return [self.categories count];
 	}
 	return 1;
 }
@@ -236,6 +247,45 @@ typedef enum {
 
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
+}
+
+#pragma mark -
+#pragma mark UshahidiDelegate
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)theCountries error:(NSError *)error {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+	}
+	else {
+		DLog(@"countries: %@", theCountries);
+		[self.countries removeAllObjects];
+		[self.countries addObjectsFromArray:theCountries];
+	}
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)theLocations error:(NSError *)error {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+	}
+	else {
+		DLog(@"locations: %@", theLocations);
+		[self.locations removeAllObjects];
+		[self.locations addObjectsFromArray:theLocations];
+	}
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+	}
+	else {
+		DLog(@"categories: %@", categories);
+		[self.categories removeAllObjects];
+		[self.categories addObjectsFromArray:theCategories];
+	}
 }
 
 @end

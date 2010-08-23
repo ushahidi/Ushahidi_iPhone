@@ -32,7 +32,9 @@
 
 - (id)initWithDefaultImage:(UIImage *)defaultImage reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setText:(NSString *)text;
+- (NSString *) getText;
 - (void) setDescription:(NSString *)description;
+- (NSString *) getDescription;
 - (void) setImage:(UIImage *)image;
 
 @end

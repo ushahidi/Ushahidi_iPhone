@@ -25,6 +25,9 @@
 #import "TableCellFactory.h"
 #import "SubtitleTableCell.h"
 #import "ImageTableCell.h"
+#import "LoadingViewController.h"
+#import "AlertView.h"
+#import "InputView.h"
 
 typedef enum {
 	TableSectionTitle,

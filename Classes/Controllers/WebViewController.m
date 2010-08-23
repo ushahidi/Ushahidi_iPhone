@@ -19,6 +19,9 @@
  *****************************************************************************/
 
 #import "WebViewController.h"
+#import "LoadingViewController.h"
+#import "AlertView.h"
+#import "InputView.h"
 
 #define kCancel	@"Cancel"
 #define kOpenInSafari @"Open in Safari"

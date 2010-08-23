@@ -20,6 +20,9 @@
 
 #import "AddInstanceViewController.h"
 #import "TableCellFactory.h"
+#import "LoadingViewController.h"
+#import "AlertView.h"
+#import "InputView.h"
 
 typedef enum {
 	TableSectionURL,

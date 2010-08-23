@@ -24,11 +24,10 @@
 #import "SubtitleTableCell.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
-
-typedef enum {
-	TableSectionSearch,
-	TableSectionInstances
-} TableSection;
+#import "LoadingViewController.h"
+#import "AlertView.h"
+#import "InputView.h"
+#import "Instance.h"
 
 @interface InstancesViewController ()
 
@@ -38,27 +37,52 @@ typedef enum {
 
 @synthesize incidentsViewController, addInstanceViewController;
 
+- (void) filterRowsWithSearchText:(NSString *)searchText {
+
+}
+
 #pragma mark -
 #pragma mark Handlers
 
 - (IBAction) add:(id)sender {
-	DLog(@"add");
+	DLog(@"");
 	[self presentModalViewController:self.addInstanceViewController animated:YES];
 }
 	 
 - (IBAction) refresh:(id)sender {
-	DLog(@"refresh");
+	DLog(@"");
+	[self.loadingView showWithMessage:@"Loading..."];
+	[[Ushahidi sharedUshahidi] getInstancesWithDelegate:self];
+}
+
+- (IBAction) search:(id)sender {
+	DLog(@"");
+	[self toggleSearchBar:self.searchBar animated:YES];
 }
 
 #pragma mark -
 #pragma mark UIViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	self.tableView.backgroundColor = [UIColor ushahidiTan];
+	[self toggleSearchBar:self.searchBar animated:NO];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	if (self.navigationController.topViewController == self) {
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getInstancesWithDelegate:self]];
+		[self.filteredRows removeAllObjects];
+		[self.filteredRows addObjectsFromArray:self.allRows];
+		[self.tableView reloadData];
+	}
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	[self.tableView flashScrollIndicators];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -69,9 +93,6 @@ typedef enum {
 	[super viewDidDisappear:animated];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
 }
@@ -87,6 +108,7 @@ typedef enum {
 - (void)dealloc {
 	[addInstanceViewController release];
 	[incidentsViewController release];
+	[searchBar release];
     [super dealloc];
 }
 
@@ -94,38 +116,36 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 2;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	if (section == TableSectionSearch) {
-		return 1;
-	}
-	if (section == TableSectionInstances) {
-		return 20;
-	}
-	return 0;
+	return [self.filteredRows count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionSearch) {
-		SearchTableCell *cell = [TableCellFactory getSearchTableCellWithDelegate:self table:theTableView];
-		[cell setPlaceholder:@"Search instances..."];
-		return cell;
+	SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"logo_image.png"] table:theTableView];
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.selectionStyle = UITableViewCellSelectionStyleGray;
+	
+	Instance *instance = [self.filteredRows objectAtIndex:indexPath.row];
+	if (instance != nil) {
+		[cell setText:instance.name];
+		[cell setDescription:instance.url];	
+		[cell setImage:instance.logo];
 	}
-	else if (indexPath.section == TableSectionInstances) {
-		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"logo_image.png"] table:theTableView];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		[cell setText:@"Ushahidi Demo"];
-		[cell setDescription:@"http://demo.ushahidi.com"];
-		return cell;
+	else {
+		[cell setText:nil];
+		[cell setDescription:nil];	
+		[cell setImage:nil];
 	}
-	return nil;
+	return cell;
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
+	SubtitleTableCell *cell = (SubtitleTableCell *)[theTableView cellForRowAtIndexPath:indexPath];
+	[[Ushahidi sharedUshahidi] loadForDomain:[cell getDescription]];
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
 }
 
@@ -134,10 +154,49 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark UISearchCellDelegate
+#pragma mark UshahidiDelegate
 
-- (void) searchCellChanged:(SearchTableCell *)cell searchText:(NSString *)text {
-	DLog(@"searchCellChanged: %@", text);
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi instances:(NSArray *)theInstances error:(NSError *)error {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+	}
+	else {
+		DLog(@"instances: %@", theInstances);
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:theInstances];
+		[self.filteredRows removeAllObjects];
+		[self.filteredRows addObjectsFromArray:self.allRows];
+		[self.tableView reloadData];	
+		[self.tableView flashScrollIndicators];
+	}
 }
+
+#pragma mark -
+#pragma mark UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
+	DLog(@"searchText: %@", searchText);
+	[self.filteredRows removeAllObjects];
+	for (Instance *instance in self.allRows) {
+		if ([instance matchesString:searchText]) {
+			[self.filteredRows addObject:instance];
+		}
+	}
+	[self.tableView reloadData];	
+	[self.tableView flashScrollIndicators];
+}   
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
+	[self.filteredRows removeAllObjects];
+	for (Instance *instance in self.allRows) {
+		if ([instance matchesString:theSearchBar.text]) {
+			[self.filteredRows addObject:instance];
+		}
+	}
+	[self.tableView reloadData];	
+	[self.tableView flashScrollIndicators];
+	[theSearchBar resignFirstResponder];
+}   
 
 @end

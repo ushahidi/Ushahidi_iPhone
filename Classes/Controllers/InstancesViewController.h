@@ -19,23 +19,24 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
-#import "SearchTableCell.h"
+#import "TableSearchViewController.h"
+#import "Ushahidi.h"
 
 @class IncidentsViewController;
 @class AddInstanceViewController;
 
-@interface InstancesViewController : TableViewController<SearchTableCellDelegate> {
+@interface InstancesViewController : TableSearchViewController<UshahidiDelegate> {
 	
 @public
-	IncidentsViewController *incidentsViewController;
-	AddInstanceViewController *addInstanceViewController;
+	IBOutlet IncidentsViewController *incidentsViewController;
+	IBOutlet AddInstanceViewController *addInstanceViewController;
 }
 
-@property(nonatomic, retain) IBOutlet IncidentsViewController *incidentsViewController;
-@property(nonatomic, retain) IBOutlet AddInstanceViewController *addInstanceViewController;
+@property(nonatomic, retain) IncidentsViewController *incidentsViewController;
+@property(nonatomic, retain) AddInstanceViewController *addInstanceViewController;
 
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;
+- (IBAction) search:(id)sender;
 
 @end

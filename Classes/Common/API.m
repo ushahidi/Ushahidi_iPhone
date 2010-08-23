@@ -48,6 +48,10 @@
 #pragma mark -
 #pragma mark API Keys
 
++ (BOOL) isApiKeyUrl:(NSString *)url {
+	return [url rangeOfString:@"task=apikeys"].location != NSNotFound;
+}
+
 - (NSString *) getGoogleApiKey {
 	return [NSString stringWithFormat:@"http://%@/api?task=apikeys&by=google&resp=json", self.domain];
 }
@@ -63,6 +67,10 @@
 #pragma mark -
 #pragma mark Categories
 
++ (BOOL) isCategoriesUrl:(NSString *)url {
+	return [url rangeOfString:@"task=categories"].location != NSNotFound;
+}
+
 - (NSString *) getCategories {
 	return [NSString stringWithFormat:@"http://%@/api?task=categories&resp=json", self.domain];
 }
@@ -74,24 +82,32 @@
 #pragma mark -
 #pragma mark Countries
 
++ (BOOL) isCountriesUrl:(NSString *)url {
+	return [url rangeOfString:@"task=countries"].location != NSNotFound;
+}
+
 - (NSString *) getCountries {
 	return [NSString stringWithFormat:@"http://%@/api?task=countries&resp=json", self.domain];
 }
 
 - (NSString *) getCountryByID:(NSString *)countryID {
-	return [NSString stringWithFormat:@"http://%@/api?task=countries&by=%@&resp=json", self.domain, countryID];
+	return [NSString stringWithFormat:@"http://%@/api?task=country&by=%@&resp=json", self.domain, countryID];
 }
 
 - (NSString *) getCountryByISO:(NSString *)countryISO {
-	return [NSString stringWithFormat:@"http://%@/api?task=countries&by=countryiso&iso=%@&resp=json", self.domain, countryISO];
+	return [NSString stringWithFormat:@"http://%@/api?task=country&by=countryiso&iso=%@&resp=json", self.domain, countryISO];
 }
 
 - (NSString *) getCountryByName:(NSString *)countryName {
-	return [NSString stringWithFormat:@"http://%@/api?task=countries&by=countryname&name=%@&resp=json", self.domain, countryName];
+	return [NSString stringWithFormat:@"http://%@/api?task=country&by=countryname&name=%@&resp=json", self.domain, countryName];
 }
 
 #pragma mark -
 #pragma mark Locations
+
++ (BOOL) isLocationsUrl:(NSString *)url {
+	return [url rangeOfString:@"task=locations"].location != NSNotFound;
+}
 
 - (NSString *) getLocations {
 	return [NSString stringWithFormat:@"http://%@/api?task=locations&resp=json", self.domain];
@@ -108,8 +124,12 @@
 #pragma mark -
 #pragma mark Incidents
 
++ (BOOL) isIncidentsUrl:(NSString *)url {
+	return [url rangeOfString:@"task=incidents"].location != NSNotFound;
+}
+
 - (NSString *) getIncidents {
-	return [NSString stringWithFormat:@"http://%@/api?task=incidents&resp=json", self.domain];
+	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=all&resp=json", self.domain];
 }
 
 - (NSString *) getIncidentsByCategoryID:(NSString *)categoryID {

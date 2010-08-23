@@ -20,6 +20,7 @@
 
 #import "AppDelegate.h"
 #import "Settings.h"
+#import "Ushahidi.h"
 
 @implementation AppDelegate
 
@@ -46,6 +47,7 @@
         } 
     }
 	[[Settings sharedSettings] save];
+	[[Ushahidi sharedUshahidi] save];
 }
 
 #pragma mark -

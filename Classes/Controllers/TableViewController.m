@@ -27,7 +27,7 @@
 
 @implementation TableViewController
 
-@synthesize tableView;
+@synthesize tableView, allRows, filteredRows;
 
 #pragma mark -
 #pragma mark UIViewController
@@ -44,6 +44,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.allRows = [[NSMutableArray alloc] initWithCapacity:0];
+	self.filteredRows = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -59,8 +61,10 @@
 }
 
 - (void)dealloc {
+	[allRows release];
+	[filteredRows release];
 	[tableView release];
-    [super dealloc];
+	[super dealloc];
 }
 
 #pragma mark -
@@ -71,7 +75,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	return 0;
+	return [self.filteredRows count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -79,6 +83,7 @@
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
 }
 
 @end

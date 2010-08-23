@@ -130,7 +130,7 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)theTableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	cell.backgroundColor = (indexPath.row % 2) ? [UIColor ushahidiTan] : [UIColor ushahidiBrown];
+	cell.backgroundColor = (indexPath.row % 2) ? [UIColor ushahidiLiteBrown] : [UIColor ushahidiDarkBrown];
 }
 
 #pragma mark -

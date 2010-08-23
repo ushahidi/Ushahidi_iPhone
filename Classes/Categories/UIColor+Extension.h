@@ -22,7 +22,8 @@
 
 @interface UIColor (Extension) 
 
-+ (id)ushahidiBrown;
++ (id)ushahidiDarkBrown;
++ (id)ushahidiLiteBrown;
 + (id)ushahidiTan;
 
 + (id)aliceBlue;

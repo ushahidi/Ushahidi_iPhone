@@ -24,7 +24,8 @@
 
 @implementation UIColor (Extension)
 
-+ (id)ushahidiBrown                                     {vendColor(237, 231, 209);}
++ (id)ushahidiDarkBrown                                 {vendColor(237, 231, 209);}
++ (id)ushahidiLiteBrown									{vendColor(243, 237, 221);}
 + (id)ushahidiTan										{vendColor(246, 246, 238);}
 
 + (id)aliceBlue                                         {vendColor(240, 248, 255);}

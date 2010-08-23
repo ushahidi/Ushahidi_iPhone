@@ -140,6 +140,9 @@ typedef enum {
 	if (section == TableSectionLocation) {
 		return 2;
 	}
+	if (section == TableSectionPhotos) {
+		return 2;
+	}
 	return 1;
 }
 

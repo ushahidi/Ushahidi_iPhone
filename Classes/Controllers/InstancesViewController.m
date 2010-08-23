@@ -23,6 +23,7 @@
 #import "AddInstanceViewController.h"
 #import "SubtitleTableCell.h"
 #import "TableCellFactory.h"
+#import "UIColor+Extension.h"
 
 typedef enum {
 	TableSectionSearch,
@@ -129,7 +130,7 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)theTableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	cell.backgroundColor = (indexPath.row % 2) ? [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1] : [UIColor clearColor];
+	cell.backgroundColor = (indexPath.row % 2) ? [UIColor ushahidiTan] : [UIColor ushahidiBrown];
 }
 
 #pragma mark -

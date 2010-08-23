@@ -334,6 +334,8 @@
 		3E8629D41222BC16001DE141 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3E862A2A1222BCE5001DE141 /* TableCellFactory.h */,
+				3E862A2B1222BCE5001DE141 /* TableCellFactory.m */,
 				3E862A1E1222BCE5001DE141 /* BooleanTableCell.h */,
 				3E862A1F1222BCE5001DE141 /* BooleanTableCell.m */,
 				3E862A201222BCE5001DE141 /* CheckBoxTableCell.h */,
@@ -346,8 +348,6 @@
 				3E862A271222BCE5001DE141 /* SearchTableCell.m */,
 				3E862A281222BCE5001DE141 /* SubtitleTableCell.h */,
 				3E862A291222BCE5001DE141 /* SubtitleTableCell.m */,
-				3E862A2A1222BCE5001DE141 /* TableCellFactory.h */,
-				3E862A2B1222BCE5001DE141 /* TableCellFactory.m */,
 				3E862A2C1222BCE5001DE141 /* TextFieldTableCell.h */,
 				3E862A2D1222BCE5001DE141 /* TextFieldTableCell.m */,
 				3E862A2E1222BCE5001DE141 /* TextTableCell.h */,

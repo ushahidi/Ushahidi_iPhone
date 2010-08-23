@@ -26,7 +26,7 @@ typedef enum {
 	MapTypeHybrid
 } MapType;
 
-@interface MapViewController (Internal)
+@interface MapViewController ()
 
 - (void) showSearchBar:(BOOL)show animated:(BOOL)animated;
 

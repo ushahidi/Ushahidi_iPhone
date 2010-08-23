@@ -29,7 +29,7 @@ typedef enum {
 	TableSectionInstances
 } TableSection;
 
-@interface InstancesViewController (Internal)
+@interface InstancesViewController ()
 
 @end
 

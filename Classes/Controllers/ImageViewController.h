@@ -19,8 +19,9 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ImageViewController : UIViewController {
+@interface ImageViewController : BaseViewController {
 	
 @public
 	UIImageView *imageView;

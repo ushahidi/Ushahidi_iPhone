@@ -21,7 +21,7 @@
 #import "TableViewController.h"
 #import "TableCellFactory.h"
 
-@interface TableViewController (Internal)
+@interface TableViewController ()
 
 @end
 

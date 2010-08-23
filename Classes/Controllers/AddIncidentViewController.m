@@ -38,7 +38,7 @@ typedef enum {
 	TableSectionNews
 } TableSection;
 
-@interface AddIncidentViewController (Internal)
+@interface AddIncidentViewController ()
 
 @end
 

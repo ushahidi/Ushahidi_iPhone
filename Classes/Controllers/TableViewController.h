@@ -19,8 +19,9 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface TableViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
+@interface TableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource> {
 	
 @public
 	UITableView *tableView;

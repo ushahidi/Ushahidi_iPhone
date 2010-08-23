@@ -34,7 +34,7 @@ typedef enum {
 	ViewTypeMap
 } ViewType;
 
-@interface IncidentsViewController (Internal)
+@interface IncidentsViewController ()
 
 @end
 

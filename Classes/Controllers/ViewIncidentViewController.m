@@ -41,7 +41,7 @@ typedef enum {
 	NavBarPrevious
 } NavBar;
 
-@interface ViewIncidentViewController (Internal)
+@interface ViewIncidentViewController ()
 
 - (NSString *) getIncidentDescription;
 

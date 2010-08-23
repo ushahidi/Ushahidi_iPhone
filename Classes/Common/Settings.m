@@ -18,25 +18,35 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "Settings.h"
+#import "SynthesizeSingleton.h"
 
-@interface WebViewController : BaseViewController<UIActionSheetDelegate> {
-	
-@public
-	UIWebView *webView;
-	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *backButton;
-	UIBarButtonItem *forwardButton;
-	NSString *website;
+@interface Settings ()
+
+@end
+
+@implementation Settings
+
+SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
+
+@synthesize email;
+
+- (id) init {
+	if ((self = [super init])) {
+		self.email = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
+	}
+	return self;
 }
 
-@property(nonatomic,retain) IBOutlet UIWebView *webView;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *backButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *forwardButton;
-@property(nonatomic,retain) NSString *website;
+- (void)dealloc {
+	[email release];
+	[super dealloc];
+}
 
-- (IBAction) action:(id)sender;
+- (void) save {
+	DLog(@"");
+	[[NSUserDefaults standardUserDefaults] setObject:self.email forKey:@"email"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 @end

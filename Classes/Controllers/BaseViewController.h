@@ -19,24 +19,13 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
 
-@interface WebViewController : BaseViewController<UIActionSheetDelegate> {
-	
-@public
-	UIWebView *webView;
-	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *backButton;
-	UIBarButtonItem *forwardButton;
-	NSString *website;
+@class LoadingViewController;
+
+@interface BaseViewController : UIViewController {
+
+@protected
+	LoadingViewController *loadingView;
 }
-
-@property(nonatomic,retain) IBOutlet UIWebView *webView;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *backButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *forwardButton;
-@property(nonatomic,retain) NSString *website;
-
-- (IBAction) action:(id)sender;
 
 @end

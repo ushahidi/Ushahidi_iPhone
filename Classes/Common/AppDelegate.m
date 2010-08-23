@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "AppDelegate.h"
+#import "Settings.h"
 
 @implementation AppDelegate
 
@@ -44,6 +45,7 @@
             abort();
         } 
     }
+	[[Settings sharedSettings] save];
 }
 
 #pragma mark -
@@ -141,11 +143,11 @@
 #pragma mark -
 #pragma mark Memory management
 
+/*
+ Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
+ */
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
 	DLog(@"");
-    /*
-     Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
-     */
 }
 
 - (void)dealloc {

@@ -26,7 +26,7 @@ typedef enum {
 	TableSectionLoading
 } TableSection;
 
-@interface AddInstanceViewController (Internal)
+@interface AddInstanceViewController ()
 
 @end
 

@@ -19,11 +19,12 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
 
-@interface MapViewController : UIViewController<MKMapViewDelegate, UISearchBarDelegate> {
+@interface MapViewController : BaseViewController<MKMapViewDelegate, UISearchBarDelegate> {
 	
 @public
 	MKMapView *mapView;

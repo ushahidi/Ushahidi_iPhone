@@ -20,6 +20,10 @@
 
 #import "ImageViewController.h"
 
+@interface ImageViewController ()
+
+@end
+
 @implementation ImageViewController
 
 @synthesize imageView, image;

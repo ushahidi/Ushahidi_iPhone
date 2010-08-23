@@ -18,25 +18,35 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "LoadingViewController.h"
 
-@interface WebViewController : BaseViewController<UIActionSheetDelegate> {
-	
-@public
-	UIWebView *webView;
-	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *backButton;
-	UIBarButtonItem *forwardButton;
-	NSString *website;
+@interface BaseViewController ()
+
+@property(nonatomic, retain) LoadingViewController *loadingView;
+
+@end
+
+@implementation BaseViewController
+
+@synthesize loadingView;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	self.loadingView = [[LoadingViewController alloc] initWithController:self];
 }
 
-@property(nonatomic,retain) IBOutlet UIWebView *webView;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *backButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *forwardButton;
-@property(nonatomic,retain) NSString *website;
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 
-- (IBAction) action:(id)sender;
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
+
+- (void)dealloc {
+	[loadingView release];
+    [super dealloc];
+}
 
 @end

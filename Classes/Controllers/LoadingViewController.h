@@ -19,24 +19,29 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
 
-@interface WebViewController : BaseViewController<UIActionSheetDelegate> {
-	
+@interface LoadingViewController : UIViewController {
+
 @public
-	UIWebView *webView;
-	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *backButton;
-	UIBarButtonItem *forwardButton;
-	NSString *website;
+	IBOutlet UIActivityIndicatorView		*activityIndicator;
+	IBOutlet UIImageView					*activityIndicatorBackground;
+	IBOutlet UILabel						*activityIndicatorLabel;
+	
+@private
+	UIViewController			*controller;
 }
 
-@property(nonatomic,retain) IBOutlet UIWebView *webView;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *backButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *forwardButton;
-@property(nonatomic,retain) NSString *website;
+@property (nonatomic, retain) UILabel					*activityIndicatorLabel;
+@property (nonatomic, retain) UIActivityIndicatorView	*activityIndicator;
+@property (nonatomic, retain) UIImageView				*activityIndicatorBackground;
 
-- (IBAction) action:(id)sender;
+- (id) initWithController:(UIViewController *)controller;
+
+- (void) show;
+- (void) showAfterDelay:(NSTimeInterval)delay;
+- (void) showWithMessage:(NSString *)message;
+- (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay;
+- (void) hide;
+- (void) hideAfterDelay:(NSTimeInterval)delay;
 
 @end

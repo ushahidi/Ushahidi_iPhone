@@ -25,7 +25,7 @@
 #define kTakePhoto @"Take Photo"
 #define kFromLibrary @"From Library"
 
-@interface ImagePickerController (Internal)
+@interface ImagePickerController ()
 
 - (void) showImagePicker:(UIImagePickerControllerSourceType)sourceType;
 

@@ -18,25 +18,18 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import <Foundation/Foundation.h>
 
-@interface WebViewController : BaseViewController<UIActionSheetDelegate> {
-	
+@interface Settings : NSObject {
+
 @public
-	UIWebView *webView;
-	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *backButton;
-	UIBarButtonItem *forwardButton;
-	NSString *website;
+	NSString *email;
 }
 
-@property(nonatomic,retain) IBOutlet UIWebView *webView;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *backButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *forwardButton;
-@property(nonatomic,retain) NSString *website;
+@property(nonatomic, retain) NSString *email;
 
-- (IBAction) action:(id)sender;
++ (Settings *) sharedSettings;
+
+- (void) save;
 
 @end

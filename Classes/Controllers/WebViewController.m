@@ -23,6 +23,10 @@
 #define kCancel	@"Cancel"
 #define kOpenInSafari @"Open in Safari"
 
+@interface WebViewController ()
+
+@end
+
 @implementation WebViewController
 
 @synthesize webView, refreshButton, backButton, forwardButton, website;

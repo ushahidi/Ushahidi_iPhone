@@ -23,8 +23,6 @@
 		3E862A171222BCD0001DE141 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A0B1222BCD0001DE141 /* TableViewController.m */; };
 		3E862A181222BCD0001DE141 /* ViewIncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A0D1222BCD0001DE141 /* ViewIncidentViewController.m */; };
 		3E862A191222BCD0001DE141 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A0F1222BCD0001DE141 /* WebViewController.m */; };
-		3E862A1C1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A1A1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodel */; };
-		3E862A1D1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A1B1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodeld */; };
 		3E862A321222BCE5001DE141 /* BooleanTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A1F1222BCE5001DE141 /* BooleanTableCell.m */; };
 		3E862A331222BCE5001DE141 /* CheckBoxTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A211222BCE5001DE141 /* CheckBoxTableCell.m */; };
 		3E862A341222BCE5001DE141 /* ImageTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A231222BCE5001DE141 /* ImageTableCell.m */; };
@@ -141,7 +139,6 @@
 		3E862A0D1222BCD0001DE141 /* ViewIncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewIncidentViewController.m; sourceTree = "<group>"; };
 		3E862A0E1222BCD0001DE141 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		3E862A0F1222BCD0001DE141 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		3E862A1A1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Ushahidi_iPhone.xcdatamodel; sourceTree = "<group>"; };
 		3E862A1E1222BCE5001DE141 /* BooleanTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BooleanTableCell.h; sourceTree = "<group>"; };
 		3E862A1F1222BCE5001DE141 /* BooleanTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BooleanTableCell.m; sourceTree = "<group>"; };
 		3E862A201222BCE5001DE141 /* CheckBoxTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxTableCell.h; sourceTree = "<group>"; };
@@ -383,8 +380,6 @@
 		3E8629D31222BC12001DE141 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3E862A1A1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodel */,
-				3E862A1B1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodeld */,
 				3E862B271222C66E001DE141 /* Category.h */,
 				3E862B281222C66E001DE141 /* Category.m */,
 				3E86305D12231498001DE141 /* Instance.h */,
@@ -700,8 +695,6 @@
 				3E862A171222BCD0001DE141 /* TableViewController.m in Sources */,
 				3E862A181222BCD0001DE141 /* ViewIncidentViewController.m in Sources */,
 				3E862A191222BCD0001DE141 /* WebViewController.m in Sources */,
-				3E862A1C1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodel in Sources */,
-				3E862A1D1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodeld in Sources */,
 				3E862A321222BCE5001DE141 /* BooleanTableCell.m in Sources */,
 				3E862A331222BCE5001DE141 /* CheckBoxTableCell.m in Sources */,
 				3E862A341222BCE5001DE141 /* ImageTableCell.m in Sources */,
@@ -895,17 +888,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3E862A1B1222BCDD001DE141 /* Ushahidi_iPhone.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-			);
-			path = Ushahidi_iPhone.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }

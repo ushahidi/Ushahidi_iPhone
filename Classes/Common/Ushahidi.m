@@ -23,6 +23,7 @@
 #import "NSKeyedArchiver+Extension.h"
 #import "NSKeyedUnarchiver+Extension.h"
 #import "API.h"
+#import "JSON.h"
 #import "Instance.h"
 
 @interface Ushahidi ()
@@ -279,34 +280,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"header: %@", [request responseHeaders]);
 	DLog(@"response:%@", [request responseString]);
 	id<UshahidiDelegate> delegate = [self.delegates objectForKey:requestURL];
+	NSDictionary *json = [[request responseString] JSONValue];
+	NSError *error = nil;
+	if (json == nil) {
+		error = [NSError errorWithDomain:self.domain code:500 userInfo:nil];
+	}
 	if ([API isApiKeyUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:apiKey:error:);
 		if (delegate != NULL && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self apiKey:nil error:nil];
+			[delegate downloadedFromUshahidi:self apiKey:nil error:error];
 		}
 	}
 	else if ([API isCountriesUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:countries:error:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self countries:[self.countries allValues] error:nil];
+			[delegate downloadedFromUshahidi:self countries:[self.countries allValues] error:error];
 		}
 	}
 	else if ([API isCategoriesUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:categories:error:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self categories:[self.categories allValues] error:nil];
+			[delegate downloadedFromUshahidi:self categories:[self.categories allValues] error:error];
 		}
 	}
 	else if ([API isLocationsUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:locations:error:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self locations:[self.locations allValues] error:nil];
+			[delegate downloadedFromUshahidi:self locations:[self.locations allValues] error:error];
 		}
 	}
 	else if ([API isIncidentsUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:incidents:error:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self incidents:[self.incidents allValues] error:nil];
+			[delegate downloadedFromUshahidi:self incidents:[self.incidents allValues] error:error];
 		}
 	}
 }

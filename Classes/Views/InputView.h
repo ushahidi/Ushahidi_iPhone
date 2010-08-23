@@ -18,20 +18,27 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "InputView.h"
-#import "AlertView.h"
+#import <Foundation/Foundation.h>
 
-@class LoadingViewController;
-@class InputView;
-@class AlertView;
+@protocol InputViewDelegate;
 
-@interface BaseViewController : UIViewController<InputViewDelegate, UIAlertViewDelegate> {
+@interface InputView : NSObject<UIAlertViewDelegate, UITextFieldDelegate> {
 
-@protected
-	LoadingViewController *loadingView;
-	InputView *inputView;
-	AlertView *alertView;
+@private
+	id<InputViewDelegate>	delegate;
+	NSString				*input;
 }
+
+- (id) initWithDelegate:(id<InputViewDelegate>)delegate;
+- (void) showWithTitle:(NSString *)title placeholder:(NSString *)placeholder;
+
+@end 
+
+@protocol InputViewDelegate <NSObject>
+
+@optional
+
+- (void) inputReturned:(InputView *)inputView input:(NSString *)input;
+- (void) inputCancelled:(InputView *)inputView;
 
 @end

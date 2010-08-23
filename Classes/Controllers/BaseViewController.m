@@ -24,16 +24,20 @@
 @interface BaseViewController ()
 
 @property(nonatomic, retain) LoadingViewController *loadingView;
+@property(nonatomic, retain) InputView *inputView;
+@property(nonatomic, retain) AlertView *alertView;
 
 @end
 
 @implementation BaseViewController
 
-@synthesize loadingView;
+@synthesize loadingView, inputView, alertView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.loadingView = [[LoadingViewController alloc] initWithController:self];
+	self.inputView = [[InputView alloc] initWithDelegate:self];
+	self.alertView = [[AlertView alloc] initWithDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +50,8 @@
 
 - (void)dealloc {
 	[loadingView release];
+	[inputView release];
+	[alertView release];
     [super dealloc];
 }
 

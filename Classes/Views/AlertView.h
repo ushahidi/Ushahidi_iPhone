@@ -18,20 +18,16 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "InputView.h"
-#import "AlertView.h"
+#import <Foundation/Foundation.h>
 
-@class LoadingViewController;
-@class InputView;
-@class AlertView;
+@interface AlertView : NSObject {
 
-@interface BaseViewController : UIViewController<InputViewDelegate, UIAlertViewDelegate> {
-
-@protected
-	LoadingViewController *loadingView;
-	InputView *inputView;
-	AlertView *alertView;
+@private
+	UIViewController *controller;
 }
+
+- (id) initWithController:(UIViewController *)controller;
+- (void) showWithTitle:(NSString *)title andMessage:(NSString *)message;
+- (BOOL) showTipOnceOnly:(NSString *)tip;
 
 @end

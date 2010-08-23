@@ -86,6 +86,7 @@
 		3E862AF51222C138001DE141 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E862AF41222C138001DE141 /* libz.1.2.3.dylib */; };
 		3E862AFC1222C154001DE141 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AFB1222C154001DE141 /* Reachability.m */; };
 		3E862B0A1222C177001DE141 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E862B091222C177001DE141 /* CFNetwork.framework */; };
+		3E862B1D1222C3C6001DE141 /* Ushahidi_iPhone-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E862B1C1222C3C6001DE141 /* Ushahidi_iPhone-Info.plist */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -213,6 +214,7 @@
 		3E862AFA1222C154001DE141 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3E862AFB1222C154001DE141 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3E862B091222C177001DE141 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		3E862B1C1222C3C6001DE141 /* Ushahidi_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ushahidi_iPhone-Info.plist"; sourceTree = "<group>"; };
 		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -264,6 +266,7 @@
 			children = (
 				3E98EF171211BC9800C35F36 /* main.m */,
 				32CA4F630368D1EE00C91783 /* Ushahidi_iPhone_Prefix.pch */,
+				3E862B1C1222C3C6001DE141 /* Ushahidi_iPhone-Info.plist */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				3E862A831222BD1D001DE141 /* ViewIncidentViewController_iPhone.xib in Resources */,
 				3E862A841222BD1D001DE141 /* WebViewController_iPad.xib in Resources */,
 				3E862A851222BD1D001DE141 /* WebViewController_iPhone.xib in Resources */,
+				3E862B1D1222C3C6001DE141 /* Ushahidi_iPhone-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

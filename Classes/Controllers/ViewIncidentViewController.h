@@ -23,24 +23,33 @@
 #import "TextTableCell.h"
 #import "MapTableCell.h"
 #import "Ushahidi.h"
+#import "Photo.h"
 
 @class WebViewController;
 @class MapViewController;
 @class ImageViewController;
+@class Incident;
 
-@interface ViewIncidentViewController : TableViewController<UshahidiDelegate, UIWebViewDelegate, UIActionSheetDelegate, TextTableCellDelegate, MapTableCellDelegate> {
+@interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
+															UIWebViewDelegate, 
+															UIActionSheetDelegate, 
+															TextTableCellDelegate, 
+															MapTableCellDelegate,
+															PhotoDelegate> {
 	
 @public
 	WebViewController *webViewController;
 	MapViewController *mapViewController;
 	ImageViewController *imageViewController;
 	UISegmentedControl *nextPrevious;
+	Incident *incident;
 }
 
 @property(nonatomic,retain) IBOutlet WebViewController *webViewController;
 @property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic,retain) IBOutlet ImageViewController *imageViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;
+@property(nonatomic,retain) Incident *incident;
 
 - (IBAction) action:(id)sender;
 - (IBAction) nextPrevious:(id)sender;

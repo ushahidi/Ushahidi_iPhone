@@ -28,6 +28,9 @@
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
+#import "Incident.h"
+#import "Photo.h"
+#import "Location.h"
 
 typedef enum {
 	TableSectionTitle,
@@ -46,22 +49,11 @@ typedef enum {
 
 @interface ViewIncidentViewController ()
 
-- (NSString *) getIncidentDescription;
-
 @end
 
 @implementation ViewIncidentViewController
 
-@synthesize webViewController, mapViewController, imageViewController, nextPrevious;
-
-- (NSString *) getIncidentDescription {
-	return [NSString stringWithFormat:@"%@%@%@%@%@", 
-			@"I am writing to inform you that the following homeless family members need help urgently in the Carrefour-Feuilles neighbourhood.\n\n",
-			@"Their homes got destroyed by the killer earthquake of January 12, 2010, and they haven't received any assistance yet!\n\n", 
-			@"I haven't been able to reach them yet, in order to provide them with your phone numbers.\n\n", 
-			@"They all gather together, day and night, in the neighbourhood of Barrière-Jour, Avenue N prolongée, two blocks over the Hotel Le Prince.\n\n", 
-			@"The situation there is awful. Some of them have babies that are very vulnerable with them."];
-}
+@synthesize webViewController, mapViewController, imageViewController, nextPrevious, incident;
 
 #pragma mark -
 #pragma mark Handlers
@@ -91,6 +83,7 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	self.title = self.incident.title;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -126,6 +119,7 @@ typedef enum {
 	[mapViewController release];
 	[imageViewController release];
 	[nextPrevious release];
+	[incident release];
     [super dealloc];
 }
 
@@ -138,12 +132,12 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	if (section == TableSectionNews) {
-		return 3;
-	}
-	if (section == TableSectionLocation) {
-		return 2;
+		return [self.incident.news count] + 1;
 	}
 	if (section == TableSectionPhotos) {
+		return [self.incident.photos count] + 1;
+	}
+	if (section == TableSectionLocation) {
 		return 2;
 	}
 	return 1;
@@ -152,54 +146,66 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDescription) {
 		TextTableCell *cell = [TableCellFactory getTextTableCellWithDelegate:self table:theTableView];
-		[cell setText:[self getIncidentDescription]];
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		[cell setText:self.incident.description];
 		return cell;
 	}
-	else if (indexPath.section == TableSectionNews) {
+	else if (indexPath.section == TableSectionNews && indexPath.row > 0) {
 		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		if (indexPath.row == 0) {
-			[cell setText:@"Safer sex drives HIV rates down"];
-			[cell setDescription:@"http://www.nation.co.ke/News/world/Safer%20sex%20drives%20HIV%20rates%20down/-/1068/957250/-/h2mji1z/-/index.html"];
-		}
-		else if (indexPath.row == 1) {
-			[cell setText:@"Bangkok tourists warned not to feed elephants"];
-			[cell setDescription:@"http://www.nation.co.ke/News/world/Tourists%20warned%20not%20to%20feed%20elephants/-/1068/957258/-/x6yek8z/-/index.html"];
-		}
-		else if (indexPath.row == 2) {
-			[cell setText:@"BP fits new cap to seal oil well"];
-			[cell setDescription:@"http://www.nation.co.ke/News/world/BP%20fits%20new%20cap%20to%20seal%20oil%20well/-/1068/957248/-/11d2xowz/-/index.html"];
-		}
 		return cell;
 	}
 	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
 		MapTableCell *cell = [TableCellFactory getMapTableCellWithDelegate:self table:theTableView];
 		[cell setScrollable:NO];
 		[cell setZoomable:NO];
+		[cell removeAllPins];
+		[cell addPinWithTitle:self.incident.locationName 
+					 latitude:self.incident.locationLatitude 
+					longitude:self.incident.locationLongitude 
+						index:0];
+		[cell resizeRegionToFitAllPins:NO];
 		return cell;
 	}
-	else if (indexPath.section == TableSectionPhotos) {
-		ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:[UIImage imageNamed:@"demo_incident_image.jpg"] table:theTableView];
-		return cell;
+	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
+		ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
+		cell.indexPath = indexPath;
+		Photo *photo = [self.incident.photos objectAtIndex:indexPath.row];
+		if (photo != nil) {
+			[cell setImage:photo.image];
+		}
+		return cell;	
 	}
 	else {
 		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		if (indexPath.section == TableSectionTitle) {
-			cell.textLabel.text = @"Food/Water/Supplies Needed";
+			cell.textLabel.text = self.incident.title;
 		}
 		else if (indexPath.section == TableSectionCategory) {
-			cell.textLabel.text = @"Family, Food, Help";
+			//TODO load categoriess
+			cell.textLabel.text = @"";
 		}
 		else if (indexPath.section == TableSectionLocation) {
-			cell.textLabel.text = @"Barrière-Jour, Avenue N prolongée, Carrefour-Feuilles";
+			cell.textLabel.text = self.incident.locationName;
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;	
+		}
+		else if (indexPath.section == TableSectionDateTime) {
+			cell.textLabel.text = [self.incident getDateString];
+		}
+		else if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
+			cell.textLabel.text = @"Add Photo";
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		}
-		else if (indexPath.section == TableSectionDateTime) {
-			cell.textLabel.text = @"February 3rd 2010, 7:34pm";
+		else if (indexPath.section == TableSectionNews && indexPath.row == 0) {
+			cell.textLabel.text = @"Add News Article";
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		}
 		return cell;	
 	}
@@ -232,18 +238,17 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDescription) {
-		//TODO find better way to calculate cell content width for UITableViewStyleGrouped 
 		CGFloat width = theTableView.contentSize.width - 20;
-		CGSize tableCellSize = [TextTableCell getCellSizeForText:[self getIncidentDescription] forWidth:width];
-		return tableCellSize.height;
+		CGSize tableCellSize = [TextTableCell getCellSizeForText:self.incident.description forWidth:width];
+		return tableCellSize.height + 10;
 	}
 	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
 		return 120;
 	}
-	else if (indexPath.section == TableSectionPhotos) {
+	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
 		return 200;
 	}
-	else if (indexPath.section == TableSectionNews) {
+	else if (indexPath.section == TableSectionNews && indexPath.row > 0) {
 		return 55;
 	}
 	return 45;
@@ -253,7 +258,7 @@ typedef enum {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	UITableViewCell *cell = [theTableView cellForRowAtIndexPath:indexPath];
-	if (indexPath.section == TableSectionNews) {
+	if (indexPath.section == TableSectionNews && indexPath.row > 0) {
 		self.webViewController.website = cell.detailTextLabel.text;
 		[self.navigationController pushViewController:self.webViewController animated:YES];
 	}
@@ -261,17 +266,27 @@ typedef enum {
 		self.mapViewController.address = cell.textLabel.text;
 		[self.navigationController pushViewController:self.mapViewController animated:YES];
 	}
-	else if (indexPath.section == TableSectionPhotos) {
+	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
 		self.imageViewController.image = [((ImageTableCell *)cell) getImage];
 		[self.navigationController pushViewController:self.imageViewController animated:YES];
 	}
 }
 
+#pragma mark -
 #pragma mark UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
 	DLog(@"titleAtIndex: %@", titleAtIndex);
+}
+
+#pragma mark -
+#pragma mark PhotoDelegate
+
+- (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath {
+	DLog(@"section:%d row:%d", indexPath.section, indexPath.row);
+	ImageTableCell *cell = (ImageTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+	[cell setImage:photo.image];
 }
 
 @end

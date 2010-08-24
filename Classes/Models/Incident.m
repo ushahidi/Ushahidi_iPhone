@@ -21,10 +21,37 @@
 #import "Incident.h"
 #import "Location.h"
 #import "NSDate+Extension.h"
+#import "NSDictionary+Extension.h"
 
 @implementation Incident
 
 @synthesize identifier, title, description, date, active, verified, news, photos, categories, location;
+@synthesize locationID, locationName, locationLatitude, locationLongitude;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media {
+	if (self = [super init]) {
+		if (dictionary != nil) {
+			DLog(@"dictionary: %@", dictionary);
+			self.identifier = [dictionary stringForKey:@"incidentid"];
+			self.title = [dictionary stringForKey:@"incidenttitle"];
+			self.description = [dictionary stringForKey:@"incidentdescription"];
+			self.active = [dictionary boolForKey:@"incidentactive"];
+			self.verified = [dictionary boolForKey:@"incidentverified"];
+			NSString *dateString = [dictionary objectForKey:@"incidentdate"];
+			if (dateString != nil) {
+				self.date = [NSDate dateFromString:dateString];
+			}
+			self.locationID = [dictionary stringForKey:@"locationid"];
+			self.locationName = [dictionary stringForKey:@"locationname"];
+			self.locationLatitude = [dictionary stringForKey:@"locationlatitude"];
+			self.locationLongitude = [dictionary stringForKey:@"locationlongitude"];
+		}
+		if (media != nil) {
+			DLog(@"media: %@", media);
+		}
+	}
+	return self;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.identifier forKey:@"identifier"];
@@ -37,6 +64,11 @@
 	[encoder encodeObject:self.news forKey:@"news"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
 	[encoder encodeObject:self.categories forKey:@"categories"];
+	
+	[encoder encodeObject:self.locationID forKey:@"locationID"];
+	[encoder encodeObject:self.locationName forKey:@"locationName"];
+	[encoder encodeObject:self.locationLatitude forKey:@"locationLatitude"];
+	[encoder encodeObject:self.locationLongitude forKey:@"locationLongitude"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -57,14 +89,20 @@
 		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
 		if (self.categories == nil) self.categories = [NSArray array];
+		
+		self.locationID = [decoder decodeObjectForKey:@"locationID"];
+		self.locationName = [decoder decodeObjectForKey:@"locationName"];
+		self.locationLatitude = [decoder decodeObjectForKey:@"locationLatitude"];
+		self.locationLongitude = [decoder decodeObjectForKey:@"locationLongitude"];
 	}
 	return self;
 }
 
 - (BOOL) matchesString:(NSString *)string {
+	NSString *lowercaseString = [string lowercaseString];
 	return	(string == nil || [string length] == 0) ||
-			[self.title rangeOfString:string].location != NSNotFound ||
-			[self.description rangeOfString:string].location != NSNotFound;
+			[[self.title lowercaseString] rangeOfString:lowercaseString].location != NSNotFound ||
+			[[self.description lowercaseString] rangeOfString:lowercaseString].location != NSNotFound;
 }
 
 - (NSString *) getDateString {
@@ -80,7 +118,11 @@
 	[news release];
 	[photos release];
 	[categories release];
-    [super dealloc];
+	[locationID release];
+	[locationName release];
+	[locationLatitude release];
+	[locationLongitude release];
+	[super dealloc];
 }
 
 @end

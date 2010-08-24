@@ -23,11 +23,12 @@
 @interface Country : NSObject {
 
 @public
+	NSString *identifier;
 	NSString *name;
 	NSString *iso;	
 	NSString *capital;	
 }
-
+@property(nonatomic,retain)	NSString *identifier;
 @property(nonatomic,retain) NSString *name;
 @property(nonatomic,retain) NSString *iso;
 @property(nonatomic,retain) NSString *capital;

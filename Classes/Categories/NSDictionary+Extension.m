@@ -18,11 +18,38 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "NSDictionary+Extension.h"
 
-@interface NSDate (Extension) 
+@implementation NSDictionary (Extension)
 
-- (NSString *) dateToString;
-+ (NSDate *) dateFromString:(NSString *)string;
+- (NSString *) stringForKey:(NSString *)key {
+	NSObject *object = [self objectForKey:key];
+	if (object != nil && [object isKindOfClass:[NSString class]]) {
+		return (NSString *)object;
+	}
+	return @"";
+}
+
+- (NSInteger) intForKey:(NSString *)key {
+	NSObject *object = [self objectForKey:key];
+	if (object != nil) {
+		if ([object isKindOfClass:[NSString class]]) {
+			return [((NSString *)object) intValue];
+		}
+		return (NSInteger)object;
+	}
+	return 0;
+}
+
+- (BOOL) boolForKey:(NSString *)key {
+	NSObject *object = [self objectForKey:key];
+	if (object != nil) {
+		if ([object isKindOfClass:[NSString class]]) {
+			return [((NSString *)object) boolValue];
+		}
+		return ((NSInteger)object) == 1;
+	}
+	return NO;
+}
 
 @end

@@ -25,9 +25,17 @@
 - (NSString *) dateToString {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"cccc, MMMM d, yyyy"];
-	NSString *dueDate = [formatter stringFromDate:self];
+	NSString *dateString = [formatter stringFromDate:self];
 	[formatter release];	
-	return dueDate;
+	return dateString;
+}
+
++ (NSDate *) dateFromString:(NSString *)string {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	NSDate *date = [formatter dateFromString:string];
+	[formatter release];	
+	return date;
 }
 
 @end

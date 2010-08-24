@@ -74,10 +74,15 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+
 	[self.categories removeAllObjects];
 	[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesWithDelegate:self]];
+
 	[self.locations removeAllObjects];
 	[self.locations addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsWithDelegate:self]];
+	
+//	[self.countries removeAllObjects];
+//	[self.countries addObjectsFromArray:[[Ushahidi sharedUshahidi] getCountriesWithDelegate:self]];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -322,7 +327,7 @@ typedef enum {
 			}
 			[cell resizeRegionToFitAllPins:YES];
 		}
-	}
+	 }
 }
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error {

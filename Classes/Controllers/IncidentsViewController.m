@@ -27,6 +27,8 @@
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
+#import "Incident.h"
+#import "Instance.h"
 
 typedef enum {
 	ViewModeReports,
@@ -39,7 +41,7 @@ typedef enum {
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController, mapView;
+@synthesize addIncidentViewController, viewIncidentViewController, mapView, instance;
 
 #pragma mark -
 #pragma mark Handlers
@@ -107,6 +109,9 @@ typedef enum {
 		[self.filteredRows addObjectsFromArray:self.allRows];
 		[self.tableView reloadData];	
 	}
+	if (self.instance != nil) {
+		self.title = self.instance.name;
+	}
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -138,6 +143,7 @@ typedef enum {
 	[addIncidentViewController release];
 	[viewIncidentViewController release];
 	[mapView release];
+	[instance release];
     [super dealloc];
 }
 
@@ -149,20 +155,28 @@ typedef enum {
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	return 20;
+	return [self.filteredRows count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	cell.selectionStyle = UITableViewCellSelectionStyleGray;
-	[cell setText:[NSString stringWithFormat:@"Demo Report %d", indexPath.row]];
-	[cell setDescription:@"Mumbai Pune Bypass Rd, Haiti - May 26 2010"];
+	Incident *incident = [self.filteredRows objectAtIndex:indexPath.row];
+	if (incident != nil) {
+		[cell setText:incident.title];
+		[cell setDescription:incident.description];
+	}
+	else {
+		[cell setText:nil];
+		[cell setDescription:nil];	
+	}
 	return cell;
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
+	self.viewIncidentViewController.incident = [self.filteredRows objectAtIndex:indexPath.row];
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];
 }
 
@@ -182,13 +196,24 @@ typedef enum {
 
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
 	DLog(@"searchText: %@", searchText);
-	//TODO filter incidents by search text
+	[self.filteredRows removeAllObjects];
+	for (Incident *incident in self.allRows) {
+		if ([incident matchesString:searchText]) {
+			[self.filteredRows addObject:incident];
+		}
+	}
 	[self.tableView reloadData];	
 	[self.tableView flashScrollIndicators];
 }   
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
-	//TODO filter incidents by search text
+	DLog(@"searchText: %@", theSearchBar.text);
+	[self.filteredRows removeAllObjects];
+	for (Incident *incident in self.allRows) {
+		if ([incident matchesString:theSearchBar.text]) {
+			[self.filteredRows addObject:incident];
+		}
+	}
 	[self.tableView reloadData];	
 	[self.tableView flashScrollIndicators];
 	[theSearchBar resignFirstResponder];
@@ -217,7 +242,7 @@ typedef enum {
 		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
 	else {
-		DLog(@"incidents: %@", theIncidents);
+		DLog(@"incidents: %d", [theIncidents count]);
 		[self.loadingView hide];
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:theIncidents];

@@ -12,13 +12,13 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="18"/>
-			<integer value="34"/>
-			<integer value="12"/>
-			<integer value="21"/>
 			<integer value="71"/>
+			<integer value="34"/>
 			<integer value="8"/>
 			<integer value="23"/>
+			<integer value="18"/>
+			<integer value="21"/>
+			<integer value="12"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -150,7 +150,7 @@
 					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Incidents</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="408009208">
-						<string key="IBUITitle">Incidents</string>
+						<string key="IBUITitle">Back</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -196,7 +196,7 @@
 					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Incident</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="599071056">
-						<string key="IBUITitle">Incident</string>
+						<string key="IBUITitle">Back</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>

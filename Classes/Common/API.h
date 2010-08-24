@@ -60,4 +60,9 @@
 - (NSString *) getGeoGraphicMidPoint;
 - (NSString *) getServerVersion;
 
+- (NSString *) getPostReport;
+- (NSString *) getPostNews;
+- (NSString *) getPostVideo;
+- (NSString *) getPostPhoto;
+
 @end

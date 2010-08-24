@@ -27,6 +27,8 @@
 #import "Instance.h"
 #import "Category.h"
 #import "Location.h"
+#import "Country.h"
+#import "Incident.h"
 
 @interface Ushahidi ()
 
@@ -135,11 +137,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return [self.categories allValues];
 }
 
-- (void) getCategoryByID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate {
+- (Category *) getCategoryByID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ category:%@", delegate, categoryID);
 	NSString *requestURL = [self.api getCategoryByID:categoryID];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
+	return [self.categories objectForKey:categoryID];
 }
 
 #pragma mark -
@@ -153,25 +156,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return [self.countries allValues];
 }
 
-- (void) getCountryByID:(NSString *)countryId withDelegate:(id<UshahidiDelegate>)delegate {
+- (Country *) getCountryByID:(NSString *)countryId withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ countryId:%@", delegate, countryId);
 	NSString *requestURL = [self.api getCountryByID:countryId];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
+	return [self.countries objectForKey:countryId];
 }
 
-- (void) getCountryByISO:(NSString *)countryISO withDelegate:(id<UshahidiDelegate>)delegate {
+- (Country *) getCountryByISO:(NSString *)countryISO withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ countryISO:%@", delegate, countryISO);
 	NSString *requestURL = [self.api getCountryByISO:countryISO];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
+	for (Country *country in [self.countries allValues]) {
+		if ([country.iso isEqualToString:countryISO]) {
+			return country;
+		}
+	}
+	return nil;
 }
 
-- (void) getCountryByName:(NSString *)countryName withDelegate:(id<UshahidiDelegate>)delegate {
+- (Country *) getCountryByName:(NSString *)countryName withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ countryName:%@", delegate, countryName);
 	NSString *requestURL = [self.api getCountryByName:countryName];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
+	for (Country *country in [self.countries allValues]) {
+		if ([country.name isEqualToString:countryName]) {
+			return country;
+		}
+	}
+	return nil;
 }
 
 #pragma mark -
@@ -185,11 +201,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return [self.locations allValues];
 }
 
-- (void) getLocationByID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate {
+- (Location *) getLocationByID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ locationID:%@", delegate, locationID);
 	NSString *requestURL = [self.api getLocationByID:locationID];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
+	return [self.locations objectForKey:locationID];
 }
 
 - (NSArray *) getLocationsByCountryID:(NSString *)countryID withDelegate:(id<UshahidiDelegate>)delegate {
@@ -211,11 +228,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return [self.locations allValues];
 }
 
-- (void) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate {
+- (NSInteger) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
 	NSString *requestURL = [self.api getIncidentCount];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
+	return [self.incidents count];
 }
 
 - (void) getGeoGraphicMidPointWithDelegate:(id<UshahidiDelegate>)delegate {
@@ -299,6 +317,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		}
 	}
 	else if ([API isCountriesUrl:requestURL]) {
+		NSArray *countriesArray = [payload objectForKey:@"countries"]; 
+		DLog(@"countries: %@ %@", [countriesArray class], countriesArray);
+		for (NSDictionary *countryDictionary in countriesArray) {
+			Country *country = [[Country alloc] initWithDictionary:[countryDictionary objectForKey:@"country"]];
+			if (country.identifier != nil && [self.countries objectForKey:country.identifier] == nil) {
+				[self.countries setObject:country forKey:country.identifier];
+			}
+			[country release];
+		}
 		SEL selector = @selector(downloadedFromUshahidi:countries:error:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self countries:[self.countries allValues] error:error];
@@ -309,7 +336,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		DLog(@"categories: %@ %@", [categoriesArray class], categoriesArray);
 		for (NSDictionary *categoryDictionary in categoriesArray) {
 			Category *category = [[Category alloc] initWithDictionary:[categoryDictionary objectForKey:@"category"]];
-			if ([self.categories objectForKey:category.identifier] == nil) {
+			if (category.identifier != nil && [self.categories objectForKey:category.identifier] == nil) {
 				[self.categories setObject:category forKey:category.identifier];
 			}
 			[category release];
@@ -324,7 +351,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		DLog(@"locations: %@ %@", [locationsArray class], locationsArray);
 		for (NSDictionary *locationDictionary in locationsArray) {
 			Location *location = [[Location alloc] initWithDictionary:[locationDictionary objectForKey:@"location"]];
-			if ([self.locations objectForKey:location.identifier] == nil) {
+			if (location.identifier != nil && [self.locations objectForKey:location.identifier] == nil) {
 				[self.locations setObject:location forKey:location.identifier];
 			}
 			[location release];
@@ -335,6 +362,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		}
 	}
 	else if ([API isIncidentsUrl:requestURL]) {
+		NSArray *incidentsArray = [payload objectForKey:@"incidents"]; 
+		DLog(@"incidents: %@ %@", [incidentsArray class], incidentsArray);
+		for (NSDictionary *incidentDictionary in incidentsArray) {
+			DLog(@"incident: %@", [incidentDictionary objectForKey:@"incident"]);
+			Incident *incident = [[Incident alloc] initWithDictionary:[incidentDictionary objectForKey:@"incident"] 
+													  mediaDictionary:[incidentDictionary objectForKey:@"media"]];
+			if (incident.identifier != nil && [self.incidents objectForKey:incident.identifier] == nil) {
+				[self.incidents setObject:incident forKey:incident.identifier];
+			}
+			[incident release];
+		}
 		SEL selector = @selector(downloadedFromUshahidi:incidents:error:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self incidents:[self.incidents allValues] error:error];

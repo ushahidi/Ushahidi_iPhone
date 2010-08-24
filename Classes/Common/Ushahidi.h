@@ -25,6 +25,10 @@
 @protocol UshahidiDelegate;
 
 @class API;
+@class Incident;
+@class Location;
+@class Category;
+@class Country;
 
 @interface Ushahidi : NSObject<ASIHTTPRequestDelegate> {
 
@@ -50,19 +54,19 @@
 - (NSArray *) getInstancesWithDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getCategoriesWithDelegate:(id<UshahidiDelegate>)delegate;
-- (void) getCategoryByID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate;
+- (Category *) getCategoryByID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getCountriesWithDelegate:(id<UshahidiDelegate>)delegate;
-- (void) getCountryByID:(NSString *)countryId withDelegate:(id<UshahidiDelegate>)delegate;
-- (void) getCountryByISO:(NSString *)countryISO withDelegate:(id<UshahidiDelegate>)delegate;
-- (void) getCountryByName:(NSString *)countryName withDelegate:(id<UshahidiDelegate>)delegate;
+- (Country *) getCountryByID:(NSString *)countryId withDelegate:(id<UshahidiDelegate>)delegate;
+- (Country *) getCountryByISO:(NSString *)countryISO withDelegate:(id<UshahidiDelegate>)delegate;
+- (Country *) getCountryByName:(NSString *)countryName withDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getLocationsWithDelegate:(id<UshahidiDelegate>)delegate;
-- (void) getLocationByID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate;
+- (Location *) getLocationByID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getLocationsByCountryID:(NSString *)countryID withDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getIncidentsWithDelegate:(id<UshahidiDelegate>)delegate;
-- (void) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate;
+- (NSInteger) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate;
 - (void) getGeoGraphicMidPointWithDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getIncidentsByCategoryID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getIncidentsByCategoryName:(NSString *)categoryName withDelegate:(id<UshahidiDelegate>)delegate;

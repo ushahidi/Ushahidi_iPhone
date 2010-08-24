@@ -20,18 +20,33 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol PhotoDelegate;
+
 @interface Photo : NSObject {
 
 @public
 	NSString *url;
 	UIImage *image;	
 	UIImage *thumbnail;
+	NSIndexPath *indexPath;
+	
+@private 	
+	id<PhotoDelegate> delegate;
 }
 
 @property(nonatomic,retain) NSString *url;
 @property(nonatomic,retain) UIImage *image;
 @property(nonatomic,retain) UIImage *thumbnail;
+@property(nonatomic,retain) NSIndexPath *indexPath;
 
-- (void) downloadImage;
+- (void) downloadWithDelegate:(id<PhotoDelegate>)delegate;
+
+@end
+
+@protocol PhotoDelegate <NSObject>
+
+@optional
+
+- (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath;
 
 @end

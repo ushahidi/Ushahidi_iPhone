@@ -167,4 +167,24 @@
 	return [NSString stringWithFormat:@"http://%@/api?task=version&resp=json", self.domain];
 }
 
+#pragma mark -
+#pragma mark Posts
+
+- (NSString *) getPostReport {
+	return [NSString stringWithFormat:@"http://%@/api?task=report&resp=json", self.domain];
+}
+
+- (NSString *) getPostNews {
+	return [NSString stringWithFormat:@"http://%@/api?task=tagnews&resp=json", self.domain];
+}
+
+- (NSString *) getPostVideo {
+	return [NSString stringWithFormat:@"http://%@/api?task=tagvideo&resp=json", self.domain];
+}
+
+- (NSString *) getPostPhoto {
+	return [NSString stringWithFormat:@"http://%@/api?task=tagphoto&resp=json", self.domain];
+}
+
+
 @end

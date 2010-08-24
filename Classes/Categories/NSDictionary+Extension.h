@@ -20,9 +20,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDate (Extension) 
+@interface NSDictionary (Extension)
 
-- (NSString *) dateToString;
-+ (NSDate *) dateFromString:(NSString *)string;
+- (NSString *) stringForKey:(NSString *)key;
+- (NSInteger) intForKey:(NSString *)key;
+- (BOOL) boolForKey:(NSString *)key;
 
 @end

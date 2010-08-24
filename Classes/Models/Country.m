@@ -22,9 +22,23 @@
 
 @implementation Country
 
-@synthesize name, iso, capital;
+@synthesize identifier, name, iso, capital;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+	if (self = [super init]) {
+		DLog(@"dictionary: %@", dictionary);
+		if (dictionary != nil) {
+			self.identifier = [dictionary objectForKey:@"id"];
+			self.name = [dictionary objectForKey:@"name"];
+			self.iso = [dictionary objectForKey:@"iso"];
+			self.capital =  [dictionary objectForKey:@"capital"];
+		}
+	}
+	return self;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:self.identifier forKey:@"identifier"];
 	[encoder encodeObject:self.name forKey:@"name"];
 	[encoder encodeObject:self.iso forKey:@"iso"];
 	[encoder encodeObject:self.iso forKey:@"capital"];
@@ -32,6 +46,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if (self = [super init]){
+		self.identifier = [decoder decodeObjectForKey:@"identifier"];
 		self.name = [decoder decodeObjectForKey:@"name"];
 		self.iso = [decoder decodeObjectForKey:@"iso"];
 		self.iso = [decoder decodeObjectForKey:@"capital"];
@@ -40,6 +55,7 @@
 }
 
 - (void)dealloc {
+	[identifier release];
 	[name release];
 	[iso release];
 	[capital release];

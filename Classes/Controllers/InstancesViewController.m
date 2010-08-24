@@ -144,8 +144,9 @@
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-	SubtitleTableCell *cell = (SubtitleTableCell *)[theTableView cellForRowAtIndexPath:indexPath];
-	[[Ushahidi sharedUshahidi] loadForDomain:[cell getDescription]];
+	Instance *instance = [self.filteredRows objectAtIndex:indexPath.row];
+	[[Ushahidi sharedUshahidi] loadForDomain:instance.url];
+	self.incidentsViewController.instance = instance;
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
 }
 
@@ -188,6 +189,7 @@
 }   
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
+	DLog(@"searchText: %@", theSearchBar.text);
 	[self.filteredRows removeAllObjects];
 	for (Instance *instance in self.allRows) {
 		if ([instance matchesString:theSearchBar.text]) {

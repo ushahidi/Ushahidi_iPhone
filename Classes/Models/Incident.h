@@ -29,24 +29,42 @@
 	NSString *title;
 	NSString *description;
 	NSDate *date;
+	
 	BOOL active;
 	BOOL verified;
-	Location *location;
+	
 	NSArray *news;
 	NSArray *photos;
 	NSArray *categories;
+	
+	Location *location;
+	
+	NSString *locationID;
+	NSString *locationName;
+	NSString *locationLatitude;
+	NSString *locationLongitude;
 }
 
 @property(nonatomic,retain) NSString *identifier;
 @property(nonatomic,retain) NSString *title;
 @property(nonatomic,retain) NSString *description;
 @property(nonatomic,retain) NSDate *date;
+
 @property(nonatomic,assign) BOOL active;
 @property(nonatomic,assign) BOOL verified;
-@property(nonatomic,retain) Location *location;
+
 @property(nonatomic,retain) NSArray *news;
 @property(nonatomic,retain) NSArray *photos;
 @property(nonatomic,retain) NSArray *categories;
+
+@property(nonatomic,retain) Location *location;
+
+@property(nonatomic,retain) NSString *locationID;
+@property(nonatomic,retain) NSString *locationName;
+@property(nonatomic,retain) NSString *locationLatitude;
+@property(nonatomic,retain) NSString *locationLongitude;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media;
 
 - (BOOL) matchesString:(NSString *)string;
 - (NSString *) getDateString;

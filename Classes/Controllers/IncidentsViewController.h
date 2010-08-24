@@ -27,6 +27,7 @@
 
 @class AddIncidentViewController;
 @class ViewIncidentViewController;
+@class Instance;
 
 @interface IncidentsViewController : TableSearchViewController<UshahidiDelegate, UIActionSheetDelegate, MKMapViewDelegate>  {
 	
@@ -34,11 +35,13 @@
 	AddIncidentViewController *addIncidentViewController;
 	ViewIncidentViewController *viewIncidentViewController;
 	MKMapView *mapView;
+	Instance *instance;
 }
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
 @property(nonatomic,retain) IBOutlet ViewIncidentViewController *viewIncidentViewController;
 @property(nonatomic,retain) IBOutlet MKMapView *mapView;
+@property(nonatomic,retain) Instance *instance;
 
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;

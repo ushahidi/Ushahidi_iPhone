@@ -23,7 +23,10 @@
 
 @interface Photo ()
 
+@property (nonatomic, assign) id<PhotoDelegate> delegate;
+
 - (void) downloadImageInBackground:(NSString *)urlString;
+- (void) notifyDelegate;
 
 @end
 
@@ -32,7 +35,7 @@
 NSInteger const kMaxWidth = 64;
 NSInteger const kMaxHeight = 64;
 
-@synthesize url, image, thumbnail;
+@synthesize delegate, url, image, thumbnail, indexPath;
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.url forKey:@"url"];
@@ -50,13 +53,15 @@ NSInteger const kMaxHeight = 64;
 }
 
 - (void)dealloc {
+	delegate = nil;
 	[url release];
 	[image release];
 	[thumbnail release];
+	[indexPath release];
     [super dealloc];
 }
-
-- (void) downloadImage {
+- (void) downloadWithDelegate:(id<PhotoDelegate>)theDelegate {
+	self.delegate = theDelegate;
 	if (self.url != nil) {
 		[self performSelectorInBackground:@selector(downloadImageInBackground:) withObject:self.url];
 	}
@@ -79,6 +84,13 @@ NSInteger const kMaxHeight = 64;
 	}
 	@finally {
 		[pool release];
+	}
+}
+
+- (void) notifyDelegate {
+	SEL selector = @selector(photoDownloaded:indexPath:);
+	if (self.delegate != nil && [self.delegate respondsToSelector:selector]) {
+		[self.delegate photoDownloaded:self indexPath:self.indexPath];
 	}
 }
 

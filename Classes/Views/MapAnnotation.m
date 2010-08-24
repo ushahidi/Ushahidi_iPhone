@@ -18,14 +18,26 @@
  **
  *****************************************************************************/
 
-#import "MyAnnotation.h"
+#import "MapAnnotation.h"
 
+@implementation MapAnnotation
 
-@implementation MyAnnotation
+@synthesize coordinate, title, index;
 
-@synthesize coordinate, title;
+- (id) initWithTitle:(NSString *)theTitle coordinate:(CLLocationCoordinate2D)theCoordinate index:(NSInteger)theIndex {
+	if (self = [super init]) {
+		self.title = theTitle;
+		self.coordinate = theCoordinate;
+		self.index = theIndex;
+	}
+    return self;
+}
 
--(void)dealloc {
+- (NSString *)subtitle {
+    return [NSString stringWithFormat:@"%f, %f",coordinate.latitude, coordinate.longitude];
+}
+
+- (void)dealloc {
 	[title release];
 	[super dealloc];
 }

@@ -23,11 +23,17 @@
 @interface Category : NSObject {
 
 @public
+	NSString *identifier;
 	NSString *title;
 	NSString *description;
+	UIColor *color;
 }
 
+@property(nonatomic,retain) NSString *identifier;
 @property(nonatomic,retain) NSString *title;
 @property(nonatomic,retain) NSString *description;
+@property(nonatomic,retain) UIColor *color;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

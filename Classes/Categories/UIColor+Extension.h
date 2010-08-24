@@ -22,6 +22,8 @@
 
 @interface UIColor (Extension) 
 
++ (id) colorWithHexString:(NSString *)string;
+
 + (id)ushahidiDarkBrown;
 + (id)ushahidiLiteBrown;
 + (id)ushahidiTan;

@@ -20,6 +20,7 @@
 
 #import "Incident.h"
 #import "Location.h"
+#import "NSDate+Extension.h"
 
 @implementation Incident
 
@@ -32,10 +33,10 @@
 	[encoder encodeObject:self.date forKey:@"date"];
 	[encoder encodeBool:self.active forKey:@"active"];
 	[encoder encodeBool:self.verified forKey:@"verified"];
+	[encoder encodeObject:self.location forKey:@"location"];
 	[encoder encodeObject:self.news forKey:@"news"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
 	[encoder encodeObject:self.categories forKey:@"categories"];
-	[encoder encodeObject:self.location forKey:@"location"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -46,15 +47,28 @@
 		self.date = [decoder decodeObjectForKey:@"date"];
 		self.active = [decoder decodeBoolForKey:@"active"];
 		self.verified = [decoder decodeBoolForKey:@"verified"];
+		self.location = [decoder decodeObjectForKey:@"location"];
+		
 		self.news = [decoder decodeObjectForKey:@"news"];
 		if (self.news == nil) self.news = [NSArray array];
+		
 		self.photos = [decoder decodeObjectForKey:@"photos"];
 		if (self.photos == nil) self.photos = [NSArray array];
+		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
 		if (self.categories == nil) self.categories = [NSArray array];
-		self.location = [decoder decodeObjectForKey:@"location"];
 	}
 	return self;
+}
+
+- (BOOL) matchesString:(NSString *)string {
+	return	(string == nil || [string length] == 0) ||
+			[self.title rangeOfString:string].location != NSNotFound ||
+			[self.description rangeOfString:string].location != NSNotFound;
+}
+
+- (NSString *) getDateString {
+	return self.date != nil ? [self.date dateToString] : nil;
 }
 
 - (void)dealloc {
@@ -62,10 +76,10 @@
 	[title release];
 	[description release];
 	[date release];
+	[location release];
 	[news release];
 	[photos release];
 	[categories release];
-	[location release];
     [super dealloc];
 }
 

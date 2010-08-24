@@ -152,7 +152,7 @@
 											identifier:(NSString *)cellIdentifier {
 	BooleanTableCell *cell = (BooleanTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[BooleanTableCell alloc] initWithDelegate:self reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[BooleanTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }
@@ -170,7 +170,7 @@
 											  identifier:(NSString *)cellIdentifier {
 	CheckBoxTableCell *cell = (CheckBoxTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[CheckBoxTableCell alloc] initWithDelegate:self reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[CheckBoxTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 		cell.checkedImage = [UIImage imageNamed:@"selected.png"];
 		cell.uncheckedImage = [UIImage imageNamed:@"unselected.png"];
 	}
@@ -208,7 +208,7 @@
 									identifier:(NSString *)cellIdentifier {
 	MapTableCell *cell = (MapTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[MapTableCell alloc] initWithDelegate:self reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[MapTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }

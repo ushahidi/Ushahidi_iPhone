@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "Category.h"
+#import "UIColor+Extension.h"
 
 @interface Category ()
 
@@ -28,24 +29,43 @@
 
 @implementation Category
 
-@synthesize title, description;
+@synthesize identifier, title, description, color;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+	if (self = [super init]) {
+		DLog(@"dictionary: %@", dictionary);
+		if (dictionary != nil) {
+			self.identifier = [dictionary objectForKey:@"id"];
+			self.title = [dictionary objectForKey:@"title"];
+			self.description = [dictionary objectForKey:@"description"];
+			self.color = [UIColor colorWithHexString:[dictionary objectForKey:@"color"]];
+		}
+	}
+	return self;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:self.identifier forKey:@"identifier"];
 	[encoder encodeObject:self.title forKey:@"title"];
 	[encoder encodeObject:self.description forKey:@"description"];
+	[encoder encodeObject:self.color forKey:@"color"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if (self = [super init]){
+		self.identifier = [decoder decodeObjectForKey:@"identifier"];
 		self.title = [decoder decodeObjectForKey:@"title"];
 		self.description = [decoder decodeObjectForKey:@"description"];
+		self.color = [decoder decodeObjectForKey:@"color"];
 	}
 	return self;
 }
 
 - (void)dealloc {
+	[identifier release];
 	[title release];
 	[description release];
+	[color release];
     [super dealloc];
 }
 

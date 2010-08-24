@@ -25,6 +25,8 @@
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
+#import "Category.h"
+#import "Location.h"
 
 #define kCancel @"Cancel"
 #define kTakePhoto @"Take Photo"
@@ -32,11 +34,11 @@
 
 typedef enum {
 	TableSectionTitle,
+	TableSectionDescription,
 	TableSectionCategory,
 	TableSectionLocation,
 	TableSectionDate,
 	TableSectionTime,
-	TableSectionDescription,
 	TableSectionPhotos,
 	TableSectionNews
 } TableSection;
@@ -72,10 +74,15 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	[self.categories removeAllObjects];
+	[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesWithDelegate:self]];
+	[self.locations removeAllObjects];
+	[self.locations addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsWithDelegate:self]];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	[self.tableView flashScrollIndicators];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -89,6 +96,9 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
+	self.categories = [[NSMutableArray alloc] initWithCapacity:0];
+	self.countries = [[NSMutableArray alloc] initWithCapacity:0];
+	self.locations = [[NSMutableArray alloc] initWithCapacity:0];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return YES;
@@ -124,13 +134,25 @@ typedef enum {
 	if (section == TableSectionCategory) {
 		return [self.categories count];
 	}
+	if (section == TableSectionLocation) {
+		return 2;
+	}
 	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionCategory) {
 		CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellWithDelegate:self table:theTableView];
-		[cell setTitle:[NSString stringWithFormat:@"Category %d", indexPath.row]];
+		Category *category = [self.categories objectAtIndex:indexPath.row];
+		if (category != nil) {
+			[cell setTitle:category.title];	
+			[cell setDescription:category.description];
+			[cell setTextColor:category.color];
+		}
+		else {
+			[cell setTitle:nil];
+			[cell setDescription:nil];
+		}
 		[cell setChecked:NO];
 		return cell;
 	}
@@ -145,6 +167,20 @@ typedef enum {
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		cell.textLabel.text = @"Add New Incident Photo";
+		return cell;
+	}
+	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
+		MapTableCell *cell = [TableCellFactory getMapTableCellWithDelegate:self table:theTableView];
+		[cell setScrollable:YES];
+		[cell setZoomable:YES];
+		[cell setAnimatesDrop:YES];
+		[cell removeAllPins];
+		NSInteger index = 0;
+		for (Location *location in self.locations) {
+			[cell addPinWithTitle:location.name latitude:location.latitude longitude:location.longitude index:index];
+			index++;
+		}
+		[cell resizeRegionToFitAllPins:YES];
 		return cell;
 	}
 	else {
@@ -200,6 +236,9 @@ typedef enum {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDescription) {
 		return 120;
+	}
+	if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
+		return 260;
 	}
 	return 45;
 }
@@ -273,6 +312,16 @@ typedef enum {
 		DLog(@"locations: %@", theLocations);
 		[self.locations removeAllObjects];
 		[self.locations addObjectsFromArray:theLocations];
+		MapTableCell *cell = (MapTableCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:TableSectionLocation]];
+		if (cell != nil) {
+			[cell removeAllPins];
+			NSInteger index = 0;
+			for (Location *location in theLocations) {
+				[cell addPinWithTitle:location.name latitude:location.latitude longitude:location.longitude index:index];
+				index++;
+			}
+			[cell resizeRegionToFitAllPins:YES];
+		}
 	}
 }
 
@@ -285,6 +334,23 @@ typedef enum {
 		DLog(@"categories: %@", categories);
 		[self.categories removeAllObjects];
 		[self.categories addObjectsFromArray:theCategories];
+		[self.tableView reloadData];
+	}
+}
+
+#pragma mark -
+#pragma mark MapTableCellDelegate
+
+- (void) mapTableCell:(MapTableCell *)mapTableCell pinSelectedAtIndex:(NSInteger)index {
+	DLog(@"index:%d", index);
+	Location *location = [self.locations objectAtIndex:index];
+	if (location != nil) {
+		DLog(@"location:%@ latitude:%@ longitude:%@", location.name, location.latitude, location.longitude);
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:TableSectionLocation];
+		TextFieldTableCell *cell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+		if (cell != nil) {
+			[cell setMessage:location.name];	
+		}
 	}
 }
 

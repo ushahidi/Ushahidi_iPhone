@@ -31,10 +31,10 @@
 	NSDate *date;
 	BOOL active;
 	BOOL verified;
+	Location *location;
 	NSArray *news;
 	NSArray *photos;
 	NSArray *categories;
-	Location *location;
 }
 
 @property(nonatomic,retain) NSString *identifier;
@@ -43,9 +43,12 @@
 @property(nonatomic,retain) NSDate *date;
 @property(nonatomic,assign) BOOL active;
 @property(nonatomic,assign) BOOL verified;
+@property(nonatomic,retain) Location *location;
 @property(nonatomic,retain) NSArray *news;
 @property(nonatomic,retain) NSArray *photos;
 @property(nonatomic,retain) NSArray *categories;
-@property(nonatomic,retain) Location *location;
+
+- (BOOL) matchesString:(NSString *)string;
+- (NSString *) getDateString;
 
 @end

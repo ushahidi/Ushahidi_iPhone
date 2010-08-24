@@ -25,6 +25,8 @@
 #import "API.h"
 #import "JSON.h"
 #import "Instance.h"
+#import "Category.h"
+#import "Location.h"
 
 @interface Ushahidi ()
 
@@ -281,9 +283,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"response:%@", [request responseString]);
 	id<UshahidiDelegate> delegate = [self.delegates objectForKey:requestURL];
 	NSDictionary *json = [[request responseString] JSONValue];
+	NSDictionary *payload = nil;
 	NSError *error = nil;
 	if (json == nil) {
 		error = [NSError errorWithDomain:self.domain code:500 userInfo:nil];
+	}
+	else {
+		payload = [json	objectForKey:@"payload"];
+		DLog(@"payload: %@ %@", [payload class], payload);
 	}
 	if ([API isApiKeyUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:apiKey:error:);
@@ -298,12 +305,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		}
 	}
 	else if ([API isCategoriesUrl:requestURL]) {
+		NSArray *categoriesArray = [payload objectForKey:@"categories"]; 
+		DLog(@"categories: %@ %@", [categoriesArray class], categoriesArray);
+		for (NSDictionary *categoryDictionary in categoriesArray) {
+			Category *category = [[Category alloc] initWithDictionary:[categoryDictionary objectForKey:@"category"]];
+			if ([self.categories objectForKey:category.identifier] == nil) {
+				[self.categories setObject:category forKey:category.identifier];
+			}
+			[category release];
+		}
 		SEL selector = @selector(downloadedFromUshahidi:categories:error:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self categories:[self.categories allValues] error:error];
 		}
 	}
 	else if ([API isLocationsUrl:requestURL]) {
+		NSArray *locationsArray = [payload objectForKey:@"locations"]; 
+		DLog(@"locations: %@ %@", [locationsArray class], locationsArray);
+		for (NSDictionary *locationDictionary in locationsArray) {
+			Location *location = [[Location alloc] initWithDictionary:[locationDictionary objectForKey:@"location"]];
+			if ([self.locations objectForKey:location.identifier] == nil) {
+				[self.locations setObject:location forKey:location.identifier];
+			}
+			[location release];
+		}
 		SEL selector = @selector(downloadedFromUshahidi:locations:error:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self locations:[self.locations allValues] error:error];

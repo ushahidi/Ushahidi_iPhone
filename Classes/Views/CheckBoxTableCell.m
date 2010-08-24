@@ -39,7 +39,7 @@ typedef enum {
 } Checked;
 
 - (id)initWithDelegate:(id<CheckBoxTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)identifier {
-	if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier]) {
+	if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier]) {
 		self.delegate = theDelegate;
 		UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 35, 35)];
 		button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -93,6 +93,21 @@ typedef enum {
 	}
 	else {
 		self.textLabel.text = title;
+	}
+}
+
+- (void) setTextColor:(UIColor *)color {
+	if (color != nil) {
+		self.textLabel.textColor = color;
+	}
+}
+
+- (void) setDescription:(NSString *)description {
+	if (description == nil || [description isEqualToString:@""]) {
+		self.detailTextLabel.text = nil;
+	}
+	else {
+		self.detailTextLabel.text = description;
 	}
 }
 

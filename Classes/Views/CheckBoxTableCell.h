@@ -41,6 +41,8 @@
 - (void) setChecked:(BOOL)checked;
 - (BOOL) getChecked;
 - (void) setTitle:(NSString *)title;
+- (void) setDescription:(NSString *)description;
+- (void) setTextColor:(UIColor *)color;
 
 @end
 

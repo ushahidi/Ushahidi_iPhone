@@ -23,6 +23,7 @@
 #import "TextFieldTableCell.h"
 #import "TextViewTableCell.h"
 #import "CheckBoxTableCell.h"
+#import "MapTableCell.h"
 #import "ImagePickerController.h"
 #import "Ushahidi.h"
 
@@ -31,7 +32,8 @@
 @interface AddIncidentViewController : TableViewController<UshahidiDelegate, 
 															TextFieldTableCellDelegate, 
 															TextViewTableCellDelegate, 
-															CheckBoxTableCellDelegate>  {
+															CheckBoxTableCellDelegate,
+															MapTableCellDelegate>  {
 																
 @public
 	MapViewController *mapViewController;

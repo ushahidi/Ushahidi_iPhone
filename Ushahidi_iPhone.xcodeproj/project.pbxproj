@@ -113,6 +113,7 @@
 		3E86344D12243A0C001DE141 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344812243A0C001DE141 /* UIImage+Alpha.m */; };
 		3E86344E12243A0C001DE141 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344A12243A0C001DE141 /* UIImage+Resize.m */; };
 		3E86344F12243A0C001DE141 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344C12243A0C001DE141 /* UIImage+RoundedCorner.m */; };
+		3E8635E112244A54001DE141 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8635E012244A54001DE141 /* MapAnnotation.m */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -292,6 +293,8 @@
 		3E86344A12243A0C001DE141 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		3E86344B12243A0C001DE141 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		3E86344C12243A0C001DE141 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		3E8635DF12244A54001DE141 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
+		3E8635E012244A54001DE141 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -443,6 +446,8 @@
 				3E862A231222BCE5001DE141 /* ImageTableCell.m */,
 				3E862A241222BCE5001DE141 /* MapTableCell.h */,
 				3E862A251222BCE5001DE141 /* MapTableCell.m */,
+				3E8635DF12244A54001DE141 /* MapAnnotation.h */,
+				3E8635E012244A54001DE141 /* MapAnnotation.m */,
 				3E862A261222BCE5001DE141 /* SearchTableCell.h */,
 				3E862A271222BCE5001DE141 /* SearchTableCell.m */,
 				3E862A281222BCE5001DE141 /* SubtitleTableCell.h */,
@@ -786,6 +791,7 @@
 				3E86344D12243A0C001DE141 /* UIImage+Alpha.m in Sources */,
 				3E86344E12243A0C001DE141 /* UIImage+Resize.m in Sources */,
 				3E86344F12243A0C001DE141 /* UIImage+RoundedCorner.m in Sources */,
+				3E8635E112244A54001DE141 /* MapAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

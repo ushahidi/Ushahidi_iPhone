@@ -23,15 +23,19 @@
 @interface Location : NSObject {
 
 @public 
+	NSString *identifier;
 	NSString *name;
 	NSString *countryID;
-	CGFloat latitude;
-	CGFloat longitude;
+	NSString *latitude;
+	NSString *longitude;
 }
 
+@property(nonatomic,retain)	NSString *identifier;
 @property(nonatomic,retain) NSString *name;
 @property(nonatomic,retain) NSString *countryID;
-@property(nonatomic,assign) CGFloat latitude;
-@property(nonatomic,assign) CGFloat longitude;
+@property(nonatomic,retain) NSString *latitude;
+@property(nonatomic,retain) NSString *longitude;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

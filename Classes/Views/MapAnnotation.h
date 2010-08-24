@@ -18,16 +18,22 @@
  **
  *****************************************************************************/
 
-#import "MyAnnotation.h"
+#import <Foundation/Foundation.h>
+#import <MapKit/MKAnnotation.h>
 
-
-@implementation MyAnnotation
-
-@synthesize coordinate, title;
-
--(void)dealloc {
-	[title release];
-	[super dealloc];
+@interface MapAnnotation : NSObject <MKAnnotation> {
+	
+@public
+	CLLocationCoordinate2D coordinate;
+	NSString *title;
+	NSInteger index;
 }
+
+@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, assign) NSInteger index;
+
+- (id) initWithTitle:(NSString *)title coordinate:(CLLocationCoordinate2D)coordinate index:(NSInteger)index;
+- (NSString *)subtitle;
 
 @end

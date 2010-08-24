@@ -18,16 +18,32 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "Country.h"
 
-@interface Category : NSObject {
+@implementation Country
 
-@public
-	NSString *title;
-	NSString *description;
+@synthesize name, iso, capital;
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:self.name forKey:@"name"];
+	[encoder encodeObject:self.iso forKey:@"iso"];
+	[encoder encodeObject:self.iso forKey:@"capital"];
 }
 
-@property(nonatomic,retain) NSString *title;
-@property(nonatomic,retain) NSString *description;
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super init]){
+		self.name = [decoder decodeObjectForKey:@"name"];
+		self.iso = [decoder decodeObjectForKey:@"iso"];
+		self.iso = [decoder decodeObjectForKey:@"capital"];
+	}
+	return self;
+}
+
+- (void)dealloc {
+	[name release];
+	[iso release];
+	[capital release];
+    [super dealloc];
+}
 
 @end

@@ -18,16 +18,29 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "News.h"
 
-@interface Category : NSObject {
+@implementation News
 
-@public
-	NSString *title;
-	NSString *description;
+@synthesize title, url;
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:self.title forKey:@"title"];
+	[encoder encodeObject:self.url forKey:@"url"];
 }
 
-@property(nonatomic,retain) NSString *title;
-@property(nonatomic,retain) NSString *description;
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super init]) {
+		self.title = [decoder decodeObjectForKey:@"title"];
+		self.url = [decoder decodeObjectForKey:@"url"];
+	}
+	return self;
+}
+
+- (void)dealloc {
+	[title release];
+	[url release];
+    [super dealloc];
+}
 
 @end

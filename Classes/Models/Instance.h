@@ -33,6 +33,7 @@
 @property(nonatomic,retain) UIImage *logo;
 
 - (id)initWithName:(NSString *)name url:(NSString *)url logo:(UIImage *)logo;
+
 - (BOOL) matchesString:(NSString *)string;
 
 @end

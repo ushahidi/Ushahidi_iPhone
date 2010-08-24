@@ -20,14 +20,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Category : NSObject {
+@interface News : NSObject {
 
 @public
 	NSString *title;
-	NSString *description;
+	NSString *url;	
 }
 
 @property(nonatomic,retain) NSString *title;
-@property(nonatomic,retain) NSString *description;
+@property(nonatomic,retain) NSString *url;
 
 @end

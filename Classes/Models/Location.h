@@ -20,14 +20,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Category : NSObject {
+@interface Location : NSObject {
 
-@public
-	NSString *title;
-	NSString *description;
+@public 
+	NSString *name;
+	NSString *countryID;
+	CGFloat latitude;
+	CGFloat longitude;
 }
 
-@property(nonatomic,retain) NSString *title;
-@property(nonatomic,retain) NSString *description;
+@property(nonatomic,retain) NSString *name;
+@property(nonatomic,retain) NSString *countryID;
+@property(nonatomic,assign) CGFloat latitude;
+@property(nonatomic,assign) CGFloat longitude;
 
 @end

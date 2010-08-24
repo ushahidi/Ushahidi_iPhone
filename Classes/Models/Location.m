@@ -18,16 +18,33 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "Location.h"
 
-@interface Category : NSObject {
+@implementation Location
 
-@public
-	NSString *title;
-	NSString *description;
+@synthesize name, countryID, latitude, longitude;
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:self.name forKey:@"name"];
+	[encoder encodeObject:self.countryID forKey:@"countryID"];
+	[encoder encodeInt:self.latitude forKey:@"latitude"];
+	[encoder encodeInt:self.longitude forKey:@"longitude"];
 }
 
-@property(nonatomic,retain) NSString *title;
-@property(nonatomic,retain) NSString *description;
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super init]){
+		self.name = [decoder decodeObjectForKey:@"name"];
+		self.countryID = [decoder decodeObjectForKey:@"countryID"];
+		self.latitude = [decoder decodeIntForKey:@"latitude"];
+		self.longitude = [decoder decodeIntForKey:@"longitude"];
+	}
+	return self;
+}
+
+- (void)dealloc {
+	[name release];
+	[countryID release];
+    [super dealloc];
+}
 
 @end

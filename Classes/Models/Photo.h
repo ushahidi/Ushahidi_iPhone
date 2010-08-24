@@ -20,14 +20,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Category : NSObject {
+@interface Photo : NSObject {
 
 @public
-	NSString *title;
-	NSString *description;
+	NSString *url;
+	UIImage *image;	
+	UIImage *thumbnail;
 }
 
-@property(nonatomic,retain) NSString *title;
-@property(nonatomic,retain) NSString *description;
+@property(nonatomic,retain) NSString *url;
+@property(nonatomic,retain) UIImage *image;
+@property(nonatomic,retain) UIImage *thumbnail;
+
+- (void) downloadImage;
 
 @end

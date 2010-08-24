@@ -104,6 +104,15 @@
 		3E862E851222F2D1001DE141 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E821222F2D1001DE141 /* NSDate+Extension.m */; };
 		3E86305F12231498001DE141 /* Instance.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86305E12231498001DE141 /* Instance.m */; };
 		3E86329B12232AF4001DE141 /* TableSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86329A12232AF4001DE141 /* TableSearchViewController.m */; };
+		3E86337D12243205001DE141 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86337C12243205001DE141 /* Country.m */; };
+		3E86338412243248001DE141 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86338312243248001DE141 /* Location.m */; };
+		3E86338712243255001DE141 /* Incident.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86338612243255001DE141 /* Incident.m */; };
+		3E8633D81224362A001DE141 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8633D71224362A001DE141 /* News.m */; };
+		3E8633DD12243647001DE141 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8633DC12243647001DE141 /* Photo.m */; };
+		3E8634071224384D001DE141 /* photo_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8634061224384D001DE141 /* photo_placeholder.png */; };
+		3E86344D12243A0C001DE141 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344812243A0C001DE141 /* UIImage+Alpha.m */; };
+		3E86344E12243A0C001DE141 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344A12243A0C001DE141 /* UIImage+Resize.m */; };
+		3E86344F12243A0C001DE141 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344C12243A0C001DE141 /* UIImage+RoundedCorner.m */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -266,6 +275,23 @@
 		3E86305E12231498001DE141 /* Instance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instance.m; sourceTree = "<group>"; };
 		3E86329912232AF4001DE141 /* TableSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSearchViewController.h; sourceTree = "<group>"; };
 		3E86329A12232AF4001DE141 /* TableSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableSearchViewController.m; sourceTree = "<group>"; };
+		3E86337B12243205001DE141 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
+		3E86337C12243205001DE141 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		3E86338212243248001DE141 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		3E86338312243248001DE141 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		3E86338512243255001DE141 /* Incident.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incident.h; sourceTree = "<group>"; };
+		3E86338612243255001DE141 /* Incident.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incident.m; sourceTree = "<group>"; };
+		3E8633D61224362A001DE141 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
+		3E8633D71224362A001DE141 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
+		3E8633DB12243647001DE141 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		3E8633DC12243647001DE141 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		3E8634061224384D001DE141 /* photo_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_placeholder.png; sourceTree = "<group>"; };
+		3E86344712243A0C001DE141 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		3E86344812243A0C001DE141 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		3E86344912243A0C001DE141 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		3E86344A12243A0C001DE141 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		3E86344B12243A0C001DE141 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		3E86344C12243A0C001DE141 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -367,6 +393,12 @@
 			children = (
 				3E862DCC1222E1A1001DE141 /* UIColor+Extension.h */,
 				3E862DCD1222E1A1001DE141 /* UIColor+Extension.m */,
+				3E86344712243A0C001DE141 /* UIImage+Alpha.h */,
+				3E86344812243A0C001DE141 /* UIImage+Alpha.m */,
+				3E86344912243A0C001DE141 /* UIImage+Resize.h */,
+				3E86344A12243A0C001DE141 /* UIImage+Resize.m */,
+				3E86344B12243A0C001DE141 /* UIImage+RoundedCorner.h */,
+				3E86344C12243A0C001DE141 /* UIImage+RoundedCorner.m */,
 				3E862E7D1222F2D1001DE141 /* NSKeyedArchiver+Extension.h */,
 				3E862E7E1222F2D1001DE141 /* NSKeyedArchiver+Extension.m */,
 				3E862E7F1222F2D1001DE141 /* NSKeyedUnarchiver+Extension.h */,
@@ -380,10 +412,20 @@
 		3E8629D31222BC12001DE141 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3E862B271222C66E001DE141 /* Category.h */,
-				3E862B281222C66E001DE141 /* Category.m */,
 				3E86305D12231498001DE141 /* Instance.h */,
 				3E86305E12231498001DE141 /* Instance.m */,
+				3E86338512243255001DE141 /* Incident.h */,
+				3E86338612243255001DE141 /* Incident.m */,
+				3E862B271222C66E001DE141 /* Category.h */,
+				3E862B281222C66E001DE141 /* Category.m */,
+				3E86337B12243205001DE141 /* Country.h */,
+				3E86337C12243205001DE141 /* Country.m */,
+				3E86338212243248001DE141 /* Location.h */,
+				3E86338312243248001DE141 /* Location.m */,
+				3E8633D61224362A001DE141 /* News.h */,
+				3E8633D71224362A001DE141 /* News.m */,
+				3E8633DB12243647001DE141 /* Photo.h */,
+				3E8633DC12243647001DE141 /* Photo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -475,6 +517,7 @@
 		3E862A3C1222BCE9001DE141 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3E8634061224384D001DE141 /* photo_placeholder.png */,
 				3E862BEB1222D0A1001DE141 /* loading_background.png */,
 				3E862A421222BD09001DE141 /* blank.png */,
 				3E862A431222BD09001DE141 /* Default.png */,
@@ -672,6 +715,7 @@
 				3E862BEC1222D0A1001DE141 /* loading_background.png in Resources */,
 				3E862CD91222D8F0001DE141 /* SplashViewController_iPhone.xib in Resources */,
 				3E862CDD1222D8FC001DE141 /* SplashViewController_iPad.xib in Resources */,
+				3E8634071224384D001DE141 /* photo_placeholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,6 +778,14 @@
 				3E862E851222F2D1001DE141 /* NSDate+Extension.m in Sources */,
 				3E86305F12231498001DE141 /* Instance.m in Sources */,
 				3E86329B12232AF4001DE141 /* TableSearchViewController.m in Sources */,
+				3E86337D12243205001DE141 /* Country.m in Sources */,
+				3E86338412243248001DE141 /* Location.m in Sources */,
+				3E86338712243255001DE141 /* Incident.m in Sources */,
+				3E8633D81224362A001DE141 /* News.m in Sources */,
+				3E8633DD12243647001DE141 /* Photo.m in Sources */,
+				3E86344D12243A0C001DE141 /* UIImage+Alpha.m in Sources */,
+				3E86344E12243A0C001DE141 /* UIImage+Resize.m in Sources */,
+				3E86344F12243A0C001DE141 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

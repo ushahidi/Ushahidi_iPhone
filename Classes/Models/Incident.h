@@ -20,14 +20,32 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Category : NSObject {
+@class Location;
 
-@public
+@interface Incident : NSObject {
+
+@public 
+	NSString *identifier;
 	NSString *title;
 	NSString *description;
+	NSDate *date;
+	BOOL active;
+	BOOL verified;
+	NSArray *news;
+	NSArray *photos;
+	NSArray *categories;
+	Location *location;
 }
 
+@property(nonatomic,retain) NSString *identifier;
 @property(nonatomic,retain) NSString *title;
 @property(nonatomic,retain) NSString *description;
+@property(nonatomic,retain) NSDate *date;
+@property(nonatomic,assign) BOOL active;
+@property(nonatomic,assign) BOOL verified;
+@property(nonatomic,retain) NSArray *news;
+@property(nonatomic,retain) NSArray *photos;
+@property(nonatomic,retain) NSArray *categories;
+@property(nonatomic,retain) Location *location;
 
 @end

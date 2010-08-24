@@ -20,14 +20,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Category : NSObject {
+@interface Country : NSObject {
 
 @public
-	NSString *title;
-	NSString *description;
+	NSString *name;
+	NSString *iso;	
+	NSString *capital;	
 }
 
-@property(nonatomic,retain) NSString *title;
-@property(nonatomic,retain) NSString *description;
+@property(nonatomic,retain) NSString *name;
+@property(nonatomic,retain) NSString *iso;
+@property(nonatomic,retain) NSString *capital;
 
 @end

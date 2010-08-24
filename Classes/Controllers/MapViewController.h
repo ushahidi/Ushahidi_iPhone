@@ -30,13 +30,17 @@
 	MKMapView *mapView;
 	UISearchBar *searchBar;
 	UISegmentedControl *mapType;
-	NSString *address;
+	NSString *locationName;
+	NSString *locationLatitude;
+	NSString *locationLongitude;
 }
 
 @property(nonatomic, retain) IBOutlet MKMapView *mapView;
 @property(nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property(nonatomic, retain) IBOutlet UISegmentedControl *mapType;
-@property(nonatomic, retain) NSString *address;
+@property(nonatomic, retain) NSString *locationName;
+@property(nonatomic, retain) NSString *locationLatitude;
+@property(nonatomic, retain) NSString *locationLongitude;
 
 - (IBAction) search:(id)sender;
 - (IBAction) findLocation:(id)sender;

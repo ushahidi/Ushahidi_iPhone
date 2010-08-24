@@ -115,6 +115,7 @@
 		3E86344F12243A0C001DE141 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344C12243A0C001DE141 /* UIImage+RoundedCorner.m */; };
 		3E8635E112244A54001DE141 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8635E012244A54001DE141 /* MapAnnotation.m */; };
 		3E8637E612246A64001DE141 /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8637E512246A64001DE141 /* NSDictionary+Extension.m */; };
+		3E8638C412247BAC001DE141 /* MKMapView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8638C312247BAC001DE141 /* MKMapView+Extension.m */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -298,6 +299,8 @@
 		3E8635E012244A54001DE141 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
 		3E8637E412246A64001DE141 /* NSDictionary+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extension.h"; sourceTree = "<group>"; };
 		3E8637E512246A64001DE141 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
+		3E8638C212247BAC001DE141 /* MKMapView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Extension.h"; sourceTree = "<group>"; };
+		3E8638C312247BAC001DE141 /* MKMapView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Extension.m"; sourceTree = "<group>"; };
 		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -413,6 +416,8 @@
 				3E862E821222F2D1001DE141 /* NSDate+Extension.m */,
 				3E8637E412246A64001DE141 /* NSDictionary+Extension.h */,
 				3E8637E512246A64001DE141 /* NSDictionary+Extension.m */,
+				3E8638C212247BAC001DE141 /* MKMapView+Extension.h */,
+				3E8638C312247BAC001DE141 /* MKMapView+Extension.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -798,6 +803,7 @@
 				3E86344F12243A0C001DE141 /* UIImage+RoundedCorner.m in Sources */,
 				3E8635E112244A54001DE141 /* MapAnnotation.m in Sources */,
 				3E8637E612246A64001DE141 /* NSDictionary+Extension.m in Sources */,
+				3E8638C412247BAC001DE141 /* MKMapView+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

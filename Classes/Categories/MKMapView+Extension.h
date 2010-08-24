@@ -23,38 +23,10 @@
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
 
-@protocol MapTableCellDelegate;
+@interface MKMapView (Extension)
 
-@interface MapTableCell : UITableViewCell<MKMapViewDelegate> {
-
-@public
-	NSIndexPath	*indexPath;
-	MKMapView *mapView;
-	BOOL animatesDrop;
-	
-@private
-	id<MapTableCellDelegate> delegate;
-}
-
-@property (nonatomic, retain) NSIndexPath *indexPath; 
-@property (nonatomic, retain) MKMapView *mapView;
-@property (nonatomic, assign) BOOL animatesDrop;
-
-- (id)initWithDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
-- (void) setMapType:(MKMapType)mapType;
-- (void) setScrollable:(BOOL)scrollable;
-- (void) setZoomable:(BOOL)zoomable;
-
-- (void) removeAllPins;
 - (void) addPinWithTitle:(NSString *)title latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) removeAllPins;
 - (void) resizeRegionToFitAllPins:(BOOL)animated;
-
-@end
-
-@protocol MapTableCellDelegate <NSObject>
-
-@optional
-
-- (void) mapTableCell:(MapTableCell *)mapTableCell pinSelectedAtIndex:(NSInteger)index;
 
 @end

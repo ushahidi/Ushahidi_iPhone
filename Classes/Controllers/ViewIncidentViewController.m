@@ -164,8 +164,7 @@ typedef enum {
 		[cell removeAllPins];
 		[cell addPinWithTitle:self.incident.locationName 
 					 latitude:self.incident.locationLatitude 
-					longitude:self.incident.locationLongitude 
-						index:0];
+					longitude:self.incident.locationLongitude];
 		[cell resizeRegionToFitAllPins:NO];
 		return cell;
 	}
@@ -263,7 +262,9 @@ typedef enum {
 		[self.navigationController pushViewController:self.webViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionLocation && indexPath.row == 0) {
-		self.mapViewController.address = cell.textLabel.text;
+		self.mapViewController.locationName = self.incident.locationName;
+		self.mapViewController.locationLatitude = self.incident.locationLatitude;
+		self.mapViewController.locationLongitude = self.incident.locationLongitude;
 		[self.navigationController pushViewController:self.mapViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {

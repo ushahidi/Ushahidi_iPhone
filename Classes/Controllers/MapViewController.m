@@ -22,6 +22,7 @@
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
+#import "MKMapView+Extension.h"
 
 typedef enum {
 	MapTypeNormal,
@@ -37,7 +38,7 @@ typedef enum {
 
 @implementation MapViewController
 
-@synthesize mapView, searchBar, mapType, address;
+@synthesize mapView, searchBar, mapType, locationName, locationLatitude, locationLongitude;
 
 #pragma mark -
 #pragma mark Internal
@@ -88,8 +89,8 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	if (self.address != nil) {
-		self.title = self.address;
+	if (self.locationName != nil) {
+		self.title = self.locationName;
 	}
 	else {
 		self.title = @"Map";
@@ -98,6 +99,9 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	[self.mapView removeAllPins];
+	[self.mapView addPinWithTitle:self.locationName latitude:self.locationLatitude longitude:self.locationLongitude];
+	[self.mapView resizeRegionToFitAllPins:YES];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -126,7 +130,9 @@ typedef enum {
 }
 
 - (void)dealloc {
-	[address release];
+	[locationName release];
+	[locationLatitude release];
+	[locationLongitude release];
 	[mapView release];
 	[mapType release];
 	[searchBar release];
@@ -146,6 +152,13 @@ typedef enum {
 
 - (void)mapViewDidFailLoadingMap:(MKMapView *)theMapView withError:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
+}
+
+- (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
+	MKPinAnnotationView *annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
+	annotationView.animatesDrop = YES;
+	annotationView.canShowCallout = YES;
+	return annotationView;
 }
 
 #pragma mark -

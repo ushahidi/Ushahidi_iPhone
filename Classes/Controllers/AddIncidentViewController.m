@@ -180,10 +180,8 @@ typedef enum {
 		[cell setZoomable:YES];
 		[cell setAnimatesDrop:YES];
 		[cell removeAllPins];
-		NSInteger index = 0;
 		for (Location *location in self.locations) {
-			[cell addPinWithTitle:location.name latitude:location.latitude longitude:location.longitude index:index];
-			index++;
+			[cell addPinWithTitle:location.name latitude:location.latitude longitude:location.longitude];
 		}
 		[cell resizeRegionToFitAllPins:YES];
 		return cell;
@@ -320,10 +318,8 @@ typedef enum {
 		MapTableCell *cell = (MapTableCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:TableSectionLocation]];
 		if (cell != nil) {
 			[cell removeAllPins];
-			NSInteger index = 0;
 			for (Location *location in theLocations) {
-				[cell addPinWithTitle:location.name latitude:location.latitude longitude:location.longitude index:index];
-				index++;
+				[cell addPinWithTitle:location.name latitude:location.latitude longitude:location.longitude];
 			}
 			[cell resizeRegionToFitAllPins:YES];
 		}

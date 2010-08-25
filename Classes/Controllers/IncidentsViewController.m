@@ -177,6 +177,7 @@ typedef enum {
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	self.viewIncidentViewController.incident = [self.filteredRows objectAtIndex:indexPath.row];
+	self.viewIncidentViewController.incidents = self.filteredRows;
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];
 }
 

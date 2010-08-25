@@ -43,8 +43,8 @@ typedef enum {
 } TableSection;
 
 typedef enum {
-	NavBarNext,
-	NavBarPrevious
+	NavBarPrevious,
+	NavBarNext
 } NavBar;
 
 @interface ViewIncidentViewController ()
@@ -53,7 +53,7 @@ typedef enum {
 
 @implementation ViewIncidentViewController
 
-@synthesize webViewController, mapViewController, imageViewController, nextPrevious, incident;
+@synthesize webViewController, mapViewController, imageViewController, nextPrevious, incident, incidents;
 
 #pragma mark -
 #pragma mark Handlers
@@ -70,12 +70,21 @@ typedef enum {
 }
 
 - (IBAction) nextPrevious:(id)sender {
+	NSInteger index = [self.incidents indexOfObject:self.incident];
 	if (self.nextPrevious.selectedSegmentIndex == NavBarNext) {
 		DLog(@"Next");
+		self.incident = [self.incidents objectAtIndex:index + 1];
 	}
 	else if (self.nextPrevious.selectedSegmentIndex == NavBarPrevious) {
 		DLog(@"Previous");
+		self.incident = [self.incidents objectAtIndex:index - 1];
 	}
+	self.title = self.incident.title;
+	NSInteger newIndex = [self.incidents indexOfObject:self.incident];
+	[self.nextPrevious setEnabled:(newIndex > 0) forSegmentAtIndex:NavBarPrevious];
+	[self.nextPrevious setEnabled:(newIndex + 1 < [self.incidents count]) forSegmentAtIndex:NavBarNext];
+	[self.tableView reloadData];
+	[self.tableView flashScrollIndicators];
 }
 
 #pragma mark -
@@ -84,6 +93,9 @@ typedef enum {
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.title = self.incident.title;
+	NSInteger index = [self.incidents indexOfObject:self.incident];
+	[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
+	[self.nextPrevious setEnabled:index + 1 < [self.incidents count] forSegmentAtIndex:NavBarNext];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

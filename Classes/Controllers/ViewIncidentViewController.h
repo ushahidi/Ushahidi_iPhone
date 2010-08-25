@@ -43,6 +43,7 @@
 	ImageViewController *imageViewController;
 	UISegmentedControl *nextPrevious;
 	Incident *incident;
+	NSArray *incidents;
 }
 
 @property(nonatomic,retain) IBOutlet WebViewController *webViewController;
@@ -50,6 +51,7 @@
 @property(nonatomic,retain) IBOutlet ImageViewController *imageViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;
 @property(nonatomic,retain) Incident *incident;
+@property(nonatomic,retain) NSArray *incidents;
 
 - (IBAction) action:(id)sender;
 - (IBAction) nextPrevious:(id)sender;

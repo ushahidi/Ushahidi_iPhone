@@ -163,7 +163,7 @@ typedef enum {
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	Incident *incident = [self.filteredRows objectAtIndex:indexPath.row];
-	if (incident != nil) {
+	if (incident != nil && [incident isKindOfClass:[Incident class]]) {
 		[cell setText:incident.title];
 		[cell setDescription:incident.description];
 	}

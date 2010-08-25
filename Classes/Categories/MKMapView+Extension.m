@@ -38,28 +38,47 @@
 }
 
 - (void) resizeRegionToFitAllPins:(BOOL)animated {
-	CLLocationCoordinate2D topLeftCoordinate;
-    topLeftCoordinate.latitude = -90;
-    topLeftCoordinate.longitude = 180;
-    
-    CLLocationCoordinate2D bottomRightCoordinate;
-    bottomRightCoordinate.latitude = 90;
-    bottomRightCoordinate.longitude = -180;
-    
-    for (NSObject<MKAnnotation> *annotation in self.annotations) {
-        topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude);
-        topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude);
-        bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude);
-        bottomRightCoordinate.latitude = fmin(bottomRightCoordinate.latitude, annotation.coordinate.latitude);
-    }
-    
-    MKCoordinateRegion region;
-    region.center.latitude = topLeftCoordinate.latitude - (topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 0.5;
-    region.center.longitude = topLeftCoordinate.longitude + (bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 0.5;
-    region.span.latitudeDelta = fabs(topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 1.1; 
-	region.span.longitudeDelta = fabs(bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 1.1; 
-	
-    [self setRegion:[self regionThatFits:region] animated:animated];
+	if ([self.annotations count] == 1) {
+		MKCoordinateSpan span;
+		span.latitudeDelta = 0.005;
+		span.longitudeDelta = 0.005;
+		
+		NSObject<MKAnnotation> *annotation = [self.annotations objectAtIndex:0];
+		
+		CLLocationCoordinate2D coordinate;
+		coordinate.latitude = annotation.coordinate.latitude;
+		coordinate.longitude = annotation.coordinate.longitude;
+		
+		MKCoordinateRegion region;
+		region.span = span;
+		region.center = coordinate;
+		
+		[self setRegion:region animated:animated];	
+	}
+	else if ([self.annotations count] > 1){
+		CLLocationCoordinate2D topLeftCoordinate;
+		topLeftCoordinate.latitude = -90;
+		topLeftCoordinate.longitude = 180;
+		
+		CLLocationCoordinate2D bottomRightCoordinate;
+		bottomRightCoordinate.latitude = 90;
+		bottomRightCoordinate.longitude = -180;
+		
+		for (NSObject<MKAnnotation> *annotation in self.annotations) {
+			topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude);
+			topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude);
+			bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude);
+			bottomRightCoordinate.latitude = fmin(bottomRightCoordinate.latitude, annotation.coordinate.latitude);
+		}
+		
+		MKCoordinateRegion region;
+		region.center.latitude = topLeftCoordinate.latitude - (topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 0.5;
+		region.center.longitude = topLeftCoordinate.longitude + (bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 0.5;
+		region.span.latitudeDelta = fabs(topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 1.1; 
+		region.span.longitudeDelta = fabs(bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 1.1; 
+		
+		[self setRegion:[self regionThatFits:region] animated:animated];	
+	}
 }
 
 @end

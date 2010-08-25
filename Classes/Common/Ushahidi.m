@@ -298,7 +298,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"request:%@", requestURL);
 	DLog(@"status:%@", [request responseStatusMessage]);
 	DLog(@"header: %@", [request responseHeaders]);
-	DLog(@"response:%@", [request responseString]);
 	id<UshahidiDelegate> delegate = [self.delegates objectForKey:requestURL];
 	NSDictionary *json = [[request responseString] JSONValue];
 	NSDictionary *payload = nil;

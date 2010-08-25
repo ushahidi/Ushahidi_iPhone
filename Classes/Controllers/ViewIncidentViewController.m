@@ -242,7 +242,7 @@ typedef enum {
 		return tableCellSize.height + 10;
 	}
 	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
-		return 120;
+		return 140;
 	}
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
 		return 200;

@@ -23,13 +23,13 @@
 @interface TextViewTableCell ()
 
 @property (nonatomic, assign) id<TextViewTableCellDelegate>	delegate;
-
+@property (nonatomic, retain) NSString *placeholder_;
 @end
 
 
 @implementation TextViewTableCell
 
-@synthesize delegate, textView, indexPath, limit;
+@synthesize delegate, textView, indexPath, limit, placeholder_;
 
 - (id)initWithDelegate:(id<TextViewTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
@@ -56,6 +56,7 @@
 	delegate = nil;
 	[textView release];
 	[indexPath release];
+	[placeholder_ release];
     [super dealloc];
 }
 
@@ -68,10 +69,16 @@
 }
 
 - (void) setPlaceholder:(NSString *)placeholder {
-	//TODO implement UITextView placeholder
+	self.placeholder_ = placeholder;
+	self.textView.text = placeholder;
+	self.textView.textColor = [UIColor lightGrayColor];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)theTextView {
+	if ([self.textView.text isEqualToString:self.placeholder_]) {
+		self.textView.text = @"";
+		self.textView.textColor = [UIColor blackColor];
+	}
 	[theTextView becomeFirstResponder];
 	SEL selector = @selector(textViewFocussed:indexPath:);
 	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
@@ -80,6 +87,10 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)theTextView {
+	if ([self.textView.text isEqualToString:@""]) {
+		self.textView.text = self.placeholder_;
+		self.textView.textColor = [UIColor lightGrayColor];
+	}
 	[theTextView resignFirstResponder];
 	SEL selector = @selector(textViewReturned:indexPath:text:);
 	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
@@ -113,11 +124,21 @@
 }
 
 - (void) setText:(NSString *)theText {
-	self.textView.text = theText;
+	if (theText != nil && [theText length] > 0) {
+		self.textView.text = theText;
+		self.textView.textColor = [UIColor blackColor];
+	}
+	else {
+		self.textView.text = self.placeholder_;
+		self.textView.textColor = [UIColor lightGrayColor];
+	}
 }
 
 - (NSString *) getText {
-	return self.textView.text;
+	if ([self.textView.text isEqualToString:self.placeholder_] == NO) {
+		return self.textView.text;
+	} 
+	return nil;
 }
 
 @end

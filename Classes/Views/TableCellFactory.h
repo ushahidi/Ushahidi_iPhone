@@ -30,6 +30,7 @@
 @class CheckBoxTableCell;
 @class ImageTableCell;
 @class MapTableCell;
+@class DateTableCell;
 
 @protocol TextTableCellDelegate;
 @protocol SearchTableCellDelegate;
@@ -38,6 +39,7 @@
 @protocol BooleanTableCellDelegate;
 @protocol CheckBoxTableCellDelegate;
 @protocol MapTableCellDelegate;
+@protocol DateTableCellDelegate;
 
 @interface TableCellFactory : NSObject {
 
@@ -117,5 +119,12 @@
 + (MapTableCell *) getMapTableCellWithDelegate:(id<MapTableCellDelegate>)delegate
 										 table:(UITableView *)tableView
 									identifier:(NSString *)cellIdentifier;
+
++ (DateTableCell *) getDateTableCellWithDelegate:(id<DateTableCellDelegate>)delegate
+										   table:(UITableView *)tableView;
+
++ (DateTableCell *) getDateTableCellWithDelegate:(id<DateTableCellDelegate>)delegate
+										   table:(UITableView *)tableView
+									  identifier:(NSString *)cellIdentifier;
 
 @end

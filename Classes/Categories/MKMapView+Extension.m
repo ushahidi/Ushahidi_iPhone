@@ -23,12 +23,12 @@
 
 @implementation MKMapView (Extension)
 
-- (void) addPinWithTitle:(NSString *)title latitude:(NSString *)latitude longitude:(NSString *)longitude {
+- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude {
 	CLLocationCoordinate2D coordinate;
 	coordinate.latitude = [latitude floatValue];
 	coordinate.longitude = [longitude floatValue];
 	NSInteger index = [self.annotations count];
-	MapAnnotation *mapAnnotation = [[MapAnnotation alloc] initWithTitle:title coordinate:coordinate index:index];
+	MapAnnotation *mapAnnotation = [[MapAnnotation alloc] initWithTitle:title subtitle:subtitle coordinate:coordinate index:index];
 	[self addAnnotation:mapAnnotation];
 	[mapAnnotation release];
 }
@@ -39,21 +39,13 @@
 
 - (void) resizeRegionToFitAllPins:(BOOL)animated {
 	if ([self.annotations count] == 1) {
-		MKCoordinateSpan span;
-		span.latitudeDelta = 0.005;
-		span.longitudeDelta = 0.005;
-		
 		NSObject<MKAnnotation> *annotation = [self.annotations objectAtIndex:0];
 		
 		CLLocationCoordinate2D coordinate;
 		coordinate.latitude = annotation.coordinate.latitude;
 		coordinate.longitude = annotation.coordinate.longitude;
 		
-		MKCoordinateRegion region;
-		region.span = span;
-		region.center = coordinate;
-		
-		[self setRegion:region animated:animated];	
+		[self setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.05f, 0.05f)) animated:animated];	
 	}
 	else if ([self.annotations count] > 1){
 		CLLocationCoordinate2D topLeftCoordinate;

@@ -31,6 +31,7 @@
 	NSIndexPath	*indexPath;
 	MKMapView *mapView;
 	BOOL animatesDrop;
+	BOOL showRightCallout;
 	
 @private
 	id<MapTableCellDelegate> delegate;
@@ -39,14 +40,16 @@
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) MKMapView *mapView;
 @property (nonatomic, assign) BOOL animatesDrop;
+@property (nonatomic, assign) BOOL showRightCallout;
 
 - (id)initWithDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setMapType:(MKMapType)mapType;
 - (void) setScrollable:(BOOL)scrollable;
 - (void) setZoomable:(BOOL)zoomable;
 
+- (NSInteger) numberOfPins;
 - (void) removeAllPins;
-- (void) addPinWithTitle:(NSString *)title latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
 - (void) resizeRegionToFitAllPins:(BOOL)animated;
 
 @end

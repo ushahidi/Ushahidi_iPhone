@@ -30,6 +30,14 @@
 	return dateString;
 }
 
+- (NSString *) timeToString {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"HH:mm:ss a"];
+	NSString *dateString = [formatter stringFromDate:self];
+	[formatter release];	
+	return dateString;
+}
+
 + (NSDate *) dateFromString:(NSString *)string {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];

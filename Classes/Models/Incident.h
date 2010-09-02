@@ -21,6 +21,9 @@
 #import <Foundation/Foundation.h>
 
 @class Location;
+@class Photo;
+@class News;
+@class Category;
 
 @interface Incident : NSObject {
 
@@ -65,8 +68,15 @@
 @property(nonatomic,retain) NSString *locationLongitude;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media;
+- (id)initWithDefaultValues;
 
 - (BOOL) matchesString:(NSString *)string;
 - (NSString *) getDateString;
+
+- (void) addPhoto:(Photo *)photo;
+- (void) addNews:(News *)news;
+- (void) addCategory:(Category *)category;
+- (void) removeCategory:(Category *)category;
+- (BOOL) hasCategory:(Category *)category;
 
 @end

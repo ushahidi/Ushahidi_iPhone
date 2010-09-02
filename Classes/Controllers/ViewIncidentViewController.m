@@ -90,40 +90,16 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
+- (void)viewWasPushed {
+	DLog(@"XXXXXXXXXXXXXXXXXXXXXXXXX");
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.title = self.incident.title;
 	NSInteger index = [self.incidents indexOfObject:self.incident];
 	[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:index + 1 < [self.incidents count] forSegmentAtIndex:NavBarNext];
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 - (void)dealloc {
@@ -175,6 +151,7 @@ typedef enum {
 		[cell setZoomable:NO];
 		[cell removeAllPins];
 		[cell addPinWithTitle:self.incident.locationName 
+					 subtitle:[NSString stringWithFormat:@"%f,%f", incident.locationLatitude, incident.locationLongitude]
 					 latitude:self.incident.locationLatitude 
 					longitude:self.incident.locationLongitude];
 		[cell resizeRegionToFitAllPins:NO];

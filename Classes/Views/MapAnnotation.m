@@ -22,23 +22,21 @@
 
 @implementation MapAnnotation
 
-@synthesize coordinate, title, index;
+@synthesize coordinate, title, subtitle, index;
 
-- (id) initWithTitle:(NSString *)theTitle coordinate:(CLLocationCoordinate2D)theCoordinate index:(NSInteger)theIndex {
+- (id) initWithTitle:(NSString *)theTitle subtitle:(NSString *)theSubtitle coordinate:(CLLocationCoordinate2D)theCoordinate index:(NSInteger)theIndex {
 	if (self = [super init]) {
 		self.title = theTitle;
+		self.subtitle = theSubtitle;
 		self.coordinate = theCoordinate;
 		self.index = theIndex;
 	}
     return self;
 }
 
-- (NSString *)subtitle {
-    return [NSString stringWithFormat:@"%f, %f",coordinate.latitude, coordinate.longitude];
-}
-
 - (void)dealloc {
 	[title release];
+	[subtitle release];
 	[super dealloc];
 }
 

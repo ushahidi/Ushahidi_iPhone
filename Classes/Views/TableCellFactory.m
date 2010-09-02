@@ -28,6 +28,7 @@
 #import "CheckBoxTableCell.h"
 #import "ImageTableCell.h"
 #import "MapTableCell.h"
+#import "DateTableCell.h"
 
 @implementation TableCellFactory
 
@@ -209,6 +210,24 @@
 	MapTableCell *cell = (MapTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
 		cell = [[[MapTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+	}
+	return cell;
+}
+
+#pragma mark -
+#pragma mark MapTableCell
+
++ (DateTableCell *) getDateTableCellWithDelegate:(id<DateTableCellDelegate>)delegate
+										  table:(UITableView *)tableView {
+	return [TableCellFactory getDateTableCellWithDelegate:delegate table:tableView identifier:@"DateTableCell"];
+}
+
++ (DateTableCell *) getDateTableCellWithDelegate:(id<DateTableCellDelegate>)delegate
+										  table:(UITableView *)tableView
+									 identifier:(NSString *)cellIdentifier {
+	DateTableCell *cell = (DateTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (cell == nil) {
+		cell = [[[DateTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }

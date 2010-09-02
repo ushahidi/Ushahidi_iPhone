@@ -26,14 +26,15 @@
 @public
 	CLLocationCoordinate2D coordinate;
 	NSString *title;
+	NSString *subtitle;
 	NSInteger index;
 }
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, assign) NSInteger index;
 
-- (id) initWithTitle:(NSString *)title coordinate:(CLLocationCoordinate2D)coordinate index:(NSInteger)index;
-- (NSString *)subtitle;
+- (id) initWithTitle:(NSString *)title subtitle:(NSString *)subtitle coordinate:(CLLocationCoordinate2D)coordinate index:(NSInteger)index;
 
 @end

@@ -43,6 +43,7 @@
 @property(nonatomic, retain) NSMutableDictionary *delegates;
 
 - (void) startAsynchronousRequest:(NSString *)url;
+- (void) notifyDelegate:(id<UshahidiDelegate>)delegate;
 
 @end
 
@@ -81,7 +82,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[categories release];
 	[locations release];
 	[incidents release];
-	[self.delegates release];
+	[delegates release];
 	[super dealloc];
 }
 
@@ -108,6 +109,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"domain: %@", self.domain);
 }
 
+- (void)addIncident:(Incident *)incident {
+	[self.incidents setObject:incident forKey:incident.identifier];
+	//TODO upload incident to server
+}
+
 #pragma mark -
 #pragma mark Categories
 
@@ -123,7 +129,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 															logo:[UIImage imageNamed:@"logo_image.png"]] 
 						   forKey:@"http://swineflu.ushahidi.com"];
 	}
+	[self performSelector:@selector(notifyDelegate:) withObject:delegate afterDelay:1.0];
 	return [self.instances allValues];
+}
+
+- (void) notifyDelegate:(id<UshahidiDelegate>)delegate {
+	SEL selector = @selector(downloadedFromUshahidi:instances:error:);
+	if (delegate != NULL && [delegate respondsToSelector:selector]) {
+		[delegate downloadedFromUshahidi:self instances:[self.instances allValues] error:nil];
+	}
 }
 
 #pragma mark -

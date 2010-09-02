@@ -23,6 +23,7 @@
 @interface NSDate (Extension) 
 
 - (NSString *) dateToString;
+- (NSString *) timeToString;
 + (NSDate *) dateFromString:(NSString *)string;
 
 @end

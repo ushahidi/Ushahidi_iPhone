@@ -31,6 +31,7 @@
 	
 @private
 	id<TextViewTableCellDelegate> delegate;
+	NSString *placeholder_;
 }
 
 @property (nonatomic, retain) UITextView *textView;

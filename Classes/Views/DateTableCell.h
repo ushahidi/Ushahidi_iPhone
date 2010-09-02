@@ -18,15 +18,33 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
-#import <MapKit/MKAnnotation.h>
+#import <UIKit/UIKit.h>
 
-@interface MKMapView (Extension)
+@protocol DateTableCellDelegate;
 
-- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
-- (void) removeAllPins;
-- (void) resizeRegionToFitAllPins:(BOOL)animated;
+@interface DateTableCell : UITableViewCell {
+
+@public
+	id<DateTableCellDelegate>	delegate;
+	NSIndexPath					*indexPath;
+	NSDate						*date;
+}
+
+@property (nonatomic, assign)			id<DateTableCellDelegate>	delegate;
+@property (nonatomic, retain)			NSIndexPath					*indexPath; 
+@property (nonatomic, retain, readonly) NSDate						*date;
+
+- (id)initWithDelegate:(id<DateTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (void) setDate:(NSDate *)date timeFormat:(BOOL)timeFormat;
+- (void) setFont:(UIFont *)font;
+- (void) setPlaceholder:(NSString *)placeholder;
+
+@end
+
+@protocol DateTableCellDelegate <NSObject>
+
+@optional
+
+- (void) dateTableCellClicked:(DateTableCell *)cell date:(NSDate *)date indexPath:(NSIndexPath *)indexPath;
 
 @end

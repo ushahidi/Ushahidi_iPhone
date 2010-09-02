@@ -19,14 +19,9 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
-#import <MapKit/MKAnnotation.h>
 
-@interface MKMapView (Extension)
+@interface NavigationController : UINavigationController {
 
-- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
-- (void) removeAllPins;
-- (void) resizeRegionToFitAllPins:(BOOL)animated;
+}
 
 @end

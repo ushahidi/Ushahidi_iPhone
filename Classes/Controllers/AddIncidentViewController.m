@@ -27,6 +27,7 @@
 #import "InputView.h"
 #import "Category.h"
 #import "Location.h"
+#import "Incident.h"
 
 #define kCancel @"Cancel"
 #define kTakePhoto @"Take Photo"
@@ -38,34 +39,41 @@ typedef enum {
 	TableSectionCategory,
 	TableSectionLocation,
 	TableSectionDate,
-	TableSectionTime,
 	TableSectionPhotos,
 	TableSectionNews
 } TableSection;
+
+typedef enum {
+	TableSectionDateRowDate,
+	TableSectionDateRowTime
+} TableSectionDateRow;
 
 @interface AddIncidentViewController ()
 
 @property(nonatomic, retain) NSMutableArray *categories;
 @property(nonatomic, retain) NSMutableArray *countries;
 @property(nonatomic, retain) NSMutableArray *locations;
-
+@property(nonatomic, retain) DatePicker *datePicker;
+@property(nonatomic, retain) Incident *incident;
 @end
 
 @implementation AddIncidentViewController
 
-@synthesize mapViewController, cancelButton, doneButton, imagePickerController;
-@synthesize categories, countries, locations;
+@synthesize mapViewController, cancelButton, doneButton, imagePickerController, datePicker;
+@synthesize categories, countries, locations, incident;
 
 #pragma mark -
 #pragma mark Handlers
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
+	[incident release];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction) done:(id)sender {
 	DLog(@"done");
+	[[Ushahidi sharedUshahidi] addIncident:self.incident];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -75,6 +83,8 @@ typedef enum {
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 
+	self.incident = [[Incident alloc] initWithDefaultValues];
+	
 	[self.categories removeAllObjects];
 	[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesWithDelegate:self]];
 
@@ -85,36 +95,13 @@ typedef enum {
 //	[self.countries addObjectsFromArray:[[Ushahidi sharedUshahidi] getCountriesWithDelegate:self]];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	[self.tableView flashScrollIndicators];
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
+	self.datePicker = [[DatePicker alloc] initWithDelegate:self forController:self];
 	self.categories = [[NSMutableArray alloc] initWithCapacity:0];
 	self.countries = [[NSMutableArray alloc] initWithCapacity:0];
 	self.locations = [[NSMutableArray alloc] initWithCapacity:0];
-}
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 - (void)dealloc {
@@ -125,6 +112,7 @@ typedef enum {
 	[categories release];
 	[countries release];
 	[locations release];
+	[incident release];
     [super dealloc];
 }
 
@@ -132,7 +120,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 8;
+	return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -142,29 +130,35 @@ typedef enum {
 	if (section == TableSectionLocation) {
 		return 2;
 	}
+	if (section == TableSectionDate) {
+		return 2;
+	}
 	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionCategory) {
 		CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellWithDelegate:self table:theTableView];
+		cell.indexPath = indexPath;
 		Category *category = [self.categories objectAtIndex:indexPath.row];
 		if (category != nil) {
 			[cell setTitle:category.title];	
 			[cell setDescription:category.description];
 			[cell setTextColor:category.color];
+			[cell setChecked:[self.incident hasCategory:category]];
 		}
 		else {
 			[cell setTitle:nil];
 			[cell setDescription:nil];
+			[cell setChecked:NO];
 		}
-		[cell setChecked:NO];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionDescription) {
 		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellWithDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setPlaceholder:@"Enter description"];
+		[cell setText:self.incident.description];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
@@ -179,11 +173,28 @@ typedef enum {
 		[cell setScrollable:YES];
 		[cell setZoomable:YES];
 		[cell setAnimatesDrop:YES];
-		[cell removeAllPins];
-		for (Location *location in self.locations) {
-			[cell addPinWithTitle:location.name latitude:location.latitude longitude:location.longitude];
+		[cell setShowRightCallout:YES];
+		if ([cell numberOfPins] == 0) {
+			[cell removeAllPins];
+			for (Location *location in self.locations) {
+				NSString *subtitle = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
+				[cell addPinWithTitle:location.name subtitle:subtitle latitude:location.latitude longitude:location.longitude];
+			}
+			[cell resizeRegionToFitAllPins:YES];	
 		}
-		[cell resizeRegionToFitAllPins:YES];
+		return cell;
+	}
+	else if (indexPath.section == TableSectionDate) {
+		DateTableCell *cell = [TableCellFactory getDateTableCellWithDelegate:self table:theTableView];
+		cell.indexPath = indexPath;
+		if (indexPath.row == TableSectionDateRowDate) {
+			[cell setPlaceholder:@"Enter date"];
+			[cell setDate:self.incident.date timeFormat:NO];	
+		}
+		else if (indexPath.row == TableSectionDateRowTime){
+			[cell setPlaceholder:@"Enter time"];
+			[cell setDate:self.incident.date timeFormat:YES];
+		}
 		return cell;
 	}
 	else {
@@ -191,15 +202,16 @@ typedef enum {
 		cell.indexPath = indexPath;
 		if (indexPath.section == TableSectionTitle) {
 			[cell setPlaceholder:@"Enter title"];
-		}
-		else if (indexPath.section == TableSectionDate) {
-			[cell setPlaceholder:@"Enter date"];
-		}
-		else if (indexPath.section == TableSectionTime) {
-			[cell setPlaceholder:@"Enter time"];
+			[cell setText:self.incident.title];
 		}
 		else if (indexPath.section == TableSectionLocation) {
-			[cell setPlaceholder:@"Enter location"];
+			[cell setPlaceholder:@"Select location"];
+			if (self.incident.location != nil) {
+				[cell setText:self.incident.location.name];
+			}
+			else {
+				[cell setText:@""];
+			}
 		}
 		else if (indexPath.section == TableSectionNews) {
 			[cell setPlaceholder:@"Add news"];
@@ -220,9 +232,6 @@ typedef enum {
 	}
 	if (section == TableSectionDate) {
 		return @"Date";
-	}
-	if (section == TableSectionTime) {
-		return @"Time";
 	}
 	if (section == TableSectionDescription) {
 		return @"Description";
@@ -258,7 +267,14 @@ typedef enum {
 #pragma mark CheckBoxTableCellDelegate
 
 - (void) checkBoxTableCellChanged:(CheckBoxTableCell *)cell index:(NSIndexPath *)indexPath checked:(BOOL)checked {
-	DLog(@"checkBoxTableCellChanged:CheckBoxTableCell index:[%d, %d] checked:%d", indexPath.section, indexPath.row, checked)
+	Category *category = [self.categories objectAtIndex:indexPath.row];
+	DLog(@"checkBoxTableCellChanged:%@ index:[%d, %d] checked:%d", category.title, indexPath.section, indexPath.row, checked)
+	if (checked) {
+		[self.incident addCategory:category];
+	}
+	else {
+		[self.incident removeCategory:category];
+	}
 }
 
 #pragma mark -
@@ -266,14 +282,21 @@ typedef enum {
 
 - (void) textFieldFocussed:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath {
 	DLog(@"indexPath:[%d, %d]", indexPath.section, indexPath.row);
+	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
 }
 
 - (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
+	if (indexPath.section == TableSectionTitle) {
+		self.incident.title = text;
+	}
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-		DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
+	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
+	if (indexPath.section == TableSectionTitle) {
+		self.incident.title = text;
+	}
 }
 
 #pragma mark -
@@ -281,14 +304,17 @@ typedef enum {
 
 - (void) textViewFocussed:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath {
 	DLog(@"indexPath:[%d, %d]", indexPath.section, indexPath.row);
+	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
 }
 
 - (void) textViewChanged:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
+	self.incident.description = text;
 }
 
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
+	self.incident.description = text;
 }
 
 #pragma mark -
@@ -319,7 +345,8 @@ typedef enum {
 		if (cell != nil) {
 			[cell removeAllPins];
 			for (Location *location in theLocations) {
-				[cell addPinWithTitle:location.name latitude:location.latitude longitude:location.longitude];
+				NSString *subtitle = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
+				[cell addPinWithTitle:location.name subtitle:subtitle latitude:location.latitude longitude:location.longitude];
 			}
 			[cell resizeRegionToFitAllPins:YES];
 		}
@@ -346,13 +373,36 @@ typedef enum {
 	DLog(@"index:%d", index);
 	Location *location = [self.locations objectAtIndex:index];
 	if (location != nil) {
+		self.incident.location = location;
 		DLog(@"location:%@ latitude:%@ longitude:%@", location.name, location.latitude, location.longitude);
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:TableSectionLocation];
 		TextFieldTableCell *cell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 		if (cell != nil) {
-			[cell setMessage:location.name];	
+			[cell setText:location.name];	
 		}
 	}
+}
+
+#pragma mark -
+#pragma mark DateTableCellDelegate
+
+- (void) dateTableCellClicked:(DateTableCell *)cell date:(NSDate *)date indexPath:(NSIndexPath *)indexPath {
+	DLog(@"%@", date);
+	if (indexPath.row == TableSectionDateRowDate) {
+		[self.datePicker showWithDate:date mode:UIDatePickerModeDate indexPath:indexPath];
+	}
+	else if (indexPath.row == TableSectionDateRowTime) {
+		[self.datePicker showWithDate:date mode:UIDatePickerModeTime indexPath:indexPath];
+	}
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark -
+#pragma mark DatePickerDelegate
+
+- (void) datePickerReturned:(DatePicker *)theDatePicker date:(NSDate *)date indexPath:(NSIndexPath *)indexPath {
+	self.incident.date = date;
+	[self.tableView reloadData];
 }
 
 @end

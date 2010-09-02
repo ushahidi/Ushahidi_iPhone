@@ -18,15 +18,17 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
-#import <MapKit/MKAnnotation.h>
+#import "NavigationController.h"
 
-@interface MKMapView (Extension)
+@implementation NavigationController
 
-- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
-- (void) removeAllPins;
-- (void) resizeRegionToFitAllPins:(BOOL)animated;
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	DLog(@"%@", viewController);
+	[super pushViewController:viewController animated:animated];
+	SEL viewWasPushed = @selector(viewWasPushed);
+	if ([viewController respondsToSelector:viewWasPushed]) {
+		[viewController performSelector:viewWasPushed withObject:nil];
+	}
+}
 
 @end

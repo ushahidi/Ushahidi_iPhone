@@ -32,7 +32,7 @@
 
 @implementation MapTableCell
 
-@synthesize delegate, indexPath, mapView, animatesDrop;
+@synthesize delegate, indexPath, mapView, animatesDrop, showRightCallout;
 
 #pragma mark -
 #pragma mark Public
@@ -49,12 +49,16 @@
 	self.mapView.zoomEnabled = zoomable;
 }
 
+- (NSInteger) numberOfPins {
+	[[self.mapView annotations] count];
+}
+
 - (void) removeAllPins {
 	[self.mapView removeAllPins];
 }
 
-- (void) addPinWithTitle:(NSString *)title latitude:(NSString *)latitude longitude:(NSString *)longitude {
-	[self.mapView addPinWithTitle:title latitude:latitude longitude:longitude];
+- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude {
+	[self.mapView addPinWithTitle:title subtitle:subtitle latitude:latitude longitude:longitude];
 }
 
 - (void) resizeRegionToFitAllPins:(BOOL)animated {
@@ -72,6 +76,8 @@
 		self.mapView.mapType = MKMapTypeStandard;
 		self.mapView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		[self.contentView addSubview:self.mapView];
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
+		self.accessoryType = UITableViewCellAccessoryNone;
 	}
     return self;
 }
@@ -102,11 +108,17 @@
 	MKPinAnnotationView *annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
 	annotationView.animatesDrop = self.animatesDrop;
 	annotationView.canShowCallout = YES;
-	
-	UIButton *annotationButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-	[annotationButton addTarget:self action:@selector(annotationClicked:) forControlEvents:UIControlEventTouchUpInside];
-	annotationView.rightCalloutAccessoryView = annotationButton;
-	
+	if ([annotation class] == MKUserLocation.class) {
+		annotationView.pinColor = MKPinAnnotationColorGreen;
+	}
+	else {
+		annotationView.pinColor = MKPinAnnotationColorRed;
+		if (self.showRightCallout) {
+			UIButton *annotationButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+			[annotationButton addTarget:self action:@selector(annotationClicked:) forControlEvents:UIControlEventTouchUpInside];
+			annotationView.rightCalloutAccessoryView = annotationButton;	
+		}
+	}
 	return annotationView;
 }
 

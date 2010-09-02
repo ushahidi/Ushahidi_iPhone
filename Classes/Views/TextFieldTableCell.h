@@ -39,8 +39,8 @@
 
 - (void) setPlaceholder:(NSString *)placeholder;
 - (void) setIsPassword:(BOOL)isPassword;
-- (void) setMessage:(NSString *)message;
-- (NSString *) getMessage;
+- (void) setText:(NSString *)text;
+- (NSString *) getText;
 - (void) showKeyboard;
 - (void) hideKeyboard;
 

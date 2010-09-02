@@ -21,7 +21,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface TableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource> {
+@interface TableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate> {
 	
 @public
 	IBOutlet UITableView *tableView;
@@ -34,5 +34,10 @@
 @property(nonatomic,retain) UITableView *tableView;
 @property(nonatomic,retain) NSMutableArray *allRows;
 @property(nonatomic,retain) NSMutableArray *filteredRows;
+
+- (id) rowAtIndexPath:(NSIndexPath *)indexPath;
+- (id) rowAtIndex:(NSInteger)index;
+
+- (id) filteredRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

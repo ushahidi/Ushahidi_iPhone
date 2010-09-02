@@ -36,14 +36,6 @@
 	self.inputView = [[InputView alloc] initWithDelegate:self];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
 - (void)dealloc {
 	[loadingView release];
 	[inputView release];

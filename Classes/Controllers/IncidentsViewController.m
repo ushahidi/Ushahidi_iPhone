@@ -29,6 +29,8 @@
 #import "InputView.h"
 #import "Incident.h"
 #import "Instance.h"
+#import "MKMapView+Extension.h"
+#import "MapAnnotation.h"
 
 typedef enum {
 	ViewModeReports,
@@ -88,6 +90,12 @@ typedef enum {
 		if (self.searchBar.frame.origin.y == 0) {
 			[self toggleSearchBar:self.searchBar animated:NO];
 		}
+		[self.mapView removeAllPins];
+		self.mapView.showsUserLocation = YES;
+		for (Incident *incident in self.allRows) {
+			[self.mapView addPinWithTitle:incident.title subtitle:[incident getDateString] latitude:incident.locationLatitude longitude:incident.locationLongitude];
+		}
+		[self.mapView resizeRegionToFitAllPins:YES];
 	}
 }
 
@@ -100,43 +108,19 @@ typedef enum {
 	[self toggleSearchBar:self.searchBar animated:NO];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWasPushed {
+	DLog(@"");
+	[self.allRows removeAllObjects];
+	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self]];
+	[self.filteredRows removeAllObjects];
+	[self.filteredRows addObjectsFromArray:self.allRows];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	if (self.navigationController.topViewController == self) {
-		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self]];
-		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:self.allRows];
-		[self.tableView reloadData];	
-	}
 	if (self.instance != nil) {
 		self.title = self.instance.name;
 	}
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	[self.tableView flashScrollIndicators];
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 - (void)dealloc {
@@ -160,16 +144,18 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	cell.selectionStyle = UITableViewCellSelectionStyleGray;
-	Incident *incident = [self.filteredRows objectAtIndex:indexPath.row];
+	Incident *incident = [self filteredRowAtIndexPath:indexPath];
 	if (incident != nil && [incident isKindOfClass:[Incident class]]) {
 		[cell setText:incident.title];
 		[cell setDescription:incident.description];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	else {
 		[cell setText:nil];
 		[cell setDescription:nil];	
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	return cell;
 }
@@ -252,6 +238,34 @@ typedef enum {
 		[self.tableView reloadData];
 		[self.tableView flashScrollIndicators];
 	}
+}
+
+#pragma mark -
+#pragma mark MKMapView
+
+- (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
+	MKPinAnnotationView *annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
+	annotationView.animatesDrop = YES;
+	annotationView.canShowCallout = YES;
+	if ([annotation class] == MKUserLocation.class) {
+		annotationView.pinColor = MKPinAnnotationColorGreen;
+	}
+	else {
+		annotationView.pinColor = MKPinAnnotationColorRed;
+		UIButton *annotationButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+		[annotationButton addTarget:self action:@selector(annotationClicked:) forControlEvents:UIControlEventTouchUpInside];
+		annotationView.rightCalloutAccessoryView = annotationButton;
+	}
+	return annotationView;
+}
+
+- (void) annotationClicked:(UIButton *)button {
+	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[[button superview] superview];
+	MapAnnotation *mapAnnotation = (MapAnnotation *)annotationView.annotation;
+	DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
+	self.viewIncidentViewController.incident = [self rowAtIndex:mapAnnotation.index];
+	self.viewIncidentViewController.incidents = self.allRows;
+	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];	
 }
 
 @end

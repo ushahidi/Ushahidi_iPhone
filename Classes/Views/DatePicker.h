@@ -18,15 +18,32 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
-#import <MapKit/MKAnnotation.h>
+#import <UIKit/UIKit.h>
 
-@interface MKMapView (Extension)
+@protocol DatePickerDelegate;
 
-- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
-- (void) removeAllPins;
-- (void) resizeRegionToFitAllPins:(BOOL)animated;
+@interface DatePicker : NSObject<UIPickerViewDelegate, UIActionSheetDelegate> {
+
+@public 
+	NSDate *date;
+
+@private
+	UIViewController *controller;
+	id<DatePickerDelegate>	delegate;
+	NSIndexPath *indexPath;
+}
+
+@property (nonatomic, retain) NSDate *date;
+
+- (id) initWithDelegate:(id<DatePickerDelegate>)theDelegate forController:(UIViewController *)theController;
+- (void) showWithDate:(NSDate *)date mode:(UIDatePickerMode)datePickerMode indexPath:(NSIndexPath *)indexPath;
+@end
+
+@protocol DatePickerDelegate <NSObject>
+
+@optional
+
+- (void) datePickerReturned:(DatePicker *)datePicker date:(NSDate *)date indexPath:(NSIndexPath *)indexPath;
+- (void) datePickerCancelled:(DatePicker *)datePicker;
 
 @end

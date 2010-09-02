@@ -112,11 +112,11 @@
 	self.textField.secureTextEntry = isPassword;
 }
 
-- (void) setMessage:(NSString *)message {
-	self.textField.text = message;
+- (void) setText:(NSString *)text {
+	self.textField.text = text;
 }
 
-- (NSString *) getMessage {
+- (NSString *) getText {
 	return self.textField.text;
 }
 

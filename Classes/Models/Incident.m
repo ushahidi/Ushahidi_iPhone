@@ -20,6 +20,9 @@
 
 #import "Incident.h"
 #import "Location.h"
+#import "Photo.h"
+#import "Category.h"
+#import "News.h"
 #import "NSDate+Extension.h"
 #import "NSDictionary+Extension.h"
 
@@ -27,6 +30,15 @@
 
 @synthesize identifier, title, description, date, active, verified, news, photos, categories, location;
 @synthesize locationID, locationName, locationLatitude, locationLongitude;
+
+- (id)initWithDefaultValues {
+	if (self = [super init]) {
+		self.news = [[NSMutableArray alloc] initWithCapacity:0];
+		self.photos = [[NSMutableArray alloc] initWithCapacity:0];
+		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
+	}
+	return self;
+}
 
 - (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media {
 	if (self = [super init]) {
@@ -107,6 +119,38 @@
 
 - (NSString *) getDateString {
 	return self.date != nil ? [self.date dateToString] : nil;
+}
+
+- (void) addPhoto:(Photo *)photo {
+	NSMutableArray *mutablePhotos = [NSMutableArray arrayWithArray:self.photos];
+	[mutablePhotos addObject:photo];
+	self.photos = mutablePhotos;
+}
+
+- (void) addNews:(News *)theNews {
+	NSMutableArray *mutableNews = [NSMutableArray arrayWithArray:self.news];
+	[mutableNews addObject:theNews];
+	self.news = mutableNews;
+}
+
+- (void) addCategory:(Category *)category {
+	DLog(@"%@", category.title);
+	NSMutableArray *mutableCategories = [NSMutableArray arrayWithArray:self.categories];
+	[mutableCategories addObject:category];
+	self.categories = mutableCategories;
+}
+
+- (void) removeCategory:(Category *)category {
+	DLog(@"%@", category.title);
+	if ([self.categories containsObject:category]) {
+		NSMutableArray *mutableCategories = [NSMutableArray arrayWithArray:self.categories];
+		[mutableCategories removeObject:category];
+		self.categories = mutableCategories;	
+	}
+}
+
+- (BOOL) hasCategory:(Category *)category {
+	return [self.categories containsObject:category];
 }
 
 - (void)dealloc {

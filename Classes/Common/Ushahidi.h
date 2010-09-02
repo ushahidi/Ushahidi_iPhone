@@ -51,6 +51,8 @@
 - (void) save;
 - (void) loadForDomain:(NSString *)domain;
 
+- (void)addIncident:(Incident *)incident;
+
 - (NSArray *) getInstancesWithDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getCategoriesWithDelegate:(id<UshahidiDelegate>)delegate;

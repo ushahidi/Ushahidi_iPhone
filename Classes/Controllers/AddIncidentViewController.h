@@ -23,17 +23,22 @@
 #import "TextFieldTableCell.h"
 #import "TextViewTableCell.h"
 #import "CheckBoxTableCell.h"
+#import "DateTableCell.h"
 #import "MapTableCell.h"
 #import "ImagePickerController.h"
 #import "Ushahidi.h"
+#import "DatePicker.h"
 
 @class MapViewController;
+@class Incident;
 
 @interface AddIncidentViewController : TableViewController<UshahidiDelegate, 
 															TextFieldTableCellDelegate, 
 															TextViewTableCellDelegate, 
 															CheckBoxTableCellDelegate,
-															MapTableCellDelegate>  {
+															DateTableCellDelegate,
+															MapTableCellDelegate,
+															DatePickerDelegate>  {
 																
 @public
 	MapViewController *mapViewController;
@@ -45,6 +50,8 @@
 	NSMutableArray *categories;
 	NSMutableArray *countries;
 	NSMutableArray *locations;
+	DatePicker *datePicker;
+	Incident *incident;
 }
 
 @property(nonatomic, retain) IBOutlet MapViewController *mapViewController;

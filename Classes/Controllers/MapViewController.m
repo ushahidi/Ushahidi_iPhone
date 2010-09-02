@@ -87,6 +87,10 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
+- (void) viewDidLoad {
+	[super viewDidLoad];
+	[self showSearchBar:NO animated:NO];
+}
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.locationName != nil) {
@@ -100,33 +104,9 @@ typedef enum {
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self.mapView removeAllPins];
-	[self.mapView addPinWithTitle:self.locationName latitude:self.locationLatitude longitude:self.locationLongitude];
+	NSString *subtitle = [NSString stringWithFormat:@"%f,%f", self.locationLatitude, self.locationLongitude];
+	[self.mapView addPinWithTitle:self.locationName subtitle:subtitle latitude:self.locationLatitude longitude:self.locationLongitude];
 	[self.mapView resizeRegionToFitAllPins:YES];
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	[self showSearchBar:NO animated:NO];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 - (void)dealloc {

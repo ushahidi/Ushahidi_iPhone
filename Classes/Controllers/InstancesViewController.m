@@ -64,45 +64,17 @@
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+	[super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiTan];
 	[self toggleSearchBar:self.searchBar animated:NO];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	if (self.navigationController.topViewController == self) {
-		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getInstancesWithDelegate:self]];
-		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:self.allRows];
-		[self.tableView reloadData];
-	}
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	[self.tableView flashScrollIndicators];
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
+- (void)viewWasPushed {
+	DLog(@"");
+	[self.allRows removeAllObjects];
+	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getInstancesWithDelegate:self]];
+	[self.filteredRows removeAllObjects];
+	[self.filteredRows addObjectsFromArray:self.allRows];
 }
 
 - (void)dealloc {
@@ -125,19 +97,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"logo_image.png"] table:theTableView];
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	cell.selectionStyle = UITableViewCellSelectionStyleGray;
-	
-	Instance *instance = [self.filteredRows objectAtIndex:indexPath.row];
+	Instance *instance = [self filteredRowAtIndexPath:indexPath];
 	if (instance != nil) {
 		[cell setText:instance.name];
 		[cell setDescription:instance.url];	
 		[cell setImage:instance.logo];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	else {
 		[cell setText:nil];
 		[cell setDescription:nil];	
 		[cell setImage:nil];
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	return cell;
 }
@@ -158,6 +131,7 @@
 #pragma mark UshahidiDelegate
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi instances:(NSArray *)theInstances error:(NSError *)error {
+	[self.loadingView hide];
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
@@ -199,6 +173,6 @@
 	[self.tableView reloadData];	
 	[self.tableView flashScrollIndicators];
 	[theSearchBar resignFirstResponder];
-}   
+}  
 
 @end

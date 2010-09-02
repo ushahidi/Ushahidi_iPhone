@@ -29,7 +29,9 @@
 @class ViewIncidentViewController;
 @class Instance;
 
-@interface IncidentsViewController : TableSearchViewController<UshahidiDelegate, UIActionSheetDelegate, MKMapViewDelegate>  {
+@interface IncidentsViewController : TableSearchViewController<UshahidiDelegate, 
+															   UIActionSheetDelegate, 
+															   MKMapViewDelegate>  {
 	
 @public
 	AddIncidentViewController *addIncidentViewController;

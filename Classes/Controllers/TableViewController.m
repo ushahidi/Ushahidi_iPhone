@@ -25,13 +25,15 @@
 @interface TableViewController ()
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
-- (void) keyboardChanged:(NSNotification *)notification;
+- (void) keyboardWillShow:(NSNotification *) notification;
+- (void) keyboardWillHide:(NSNotification *) notification;
+- (void) resizeWithKeyboardFrame:(CGRect)rect duration:(NSTimeInterval)duration;
 
 @end
 
 @implementation TableViewController
 
-@synthesize tableView, allRows, filteredRows;
+@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor;
 
 - (id) rowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([self.allRows count] > indexPath.row) {
@@ -59,9 +61,8 @@
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[self.tableView reloadData];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChanged:) name:UIKeyboardWillHideNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	DLog(@"%@", self.nibName);
 }
 
@@ -74,10 +75,7 @@
 - (void) viewWillDisappear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	DLog(@"%@", self.nibName);
-	UIView *firstResponder = [self.view findFirstResponder];
-	if (firstResponder != nil) {
-		[firstResponder resignFirstResponder];
-	}
+	[self.view endEditing:YES];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
@@ -113,6 +111,8 @@
 	[allRows release];
 	[filteredRows release];
 	[tableView release];
+	[oddRowColor release];
+	[evenRowColor release];
 	[super dealloc];
 }
 
@@ -131,35 +131,54 @@
 	return [TableCellFactory getDefaultTableCellForTable:theTableView];
 }
 
+- (void)tableView:(UITableView *)theTableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.row % 2) {
+		if (self.oddRowColor != nil) {
+			cell.backgroundColor = self.oddRowColor;
+		}
+	}
+	else {
+		if (self.evenRowColor != nil) {
+			cell.backgroundColor = self.evenRowColor;
+		}
+	}
+}
+
 #pragma mark -
 #pragma mark Keyboard
 
--(void) keyboardChanged:(NSNotification *) notification {
-	if (self.navigationController.topViewController == self) {
-		DLog(@"nib:%@ notification:%@", self.nibName, notification);
-		NSTimeInterval duration = 0.3;
-		[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
-		
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationBeginsFromCurrentState:YES];
-		[UIView setAnimationDuration:duration];
-		
-		CGRect keyboardFrameBegin;
-		[[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrameBegin];
-		
-		CGRect keyboardFrameEnd;
-		[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrameEnd];
-		
-		CGRect tableViewFrame  = self.tableView.frame;
-		if (keyboardFrameBegin.origin.y > keyboardFrameEnd.origin.y) {
-			tableViewFrame.size.height -= keyboardFrameEnd.size.height;
-		}
-		else {
-			tableViewFrame.size.height += keyboardFrameEnd.size.height;
-		}
-		self.tableView.frame = tableViewFrame;
-		[UIView commitAnimations];	
+-(void) keyboardWillShow:(NSNotification *) notification {
+	DLog(@"notification:%@", notification);
+	NSTimeInterval duration = 0.3;
+	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
+	
+	CGRect frame = CGRectMake(0, 0, 0, 0);
+	[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&frame];
+	[self resizeWithKeyboardFrame:frame duration:duration];
+}
+
+-(void) keyboardWillHide:(NSNotification *) notification {
+	DLog(@"notification:%@", notification);
+	NSTimeInterval duration = 0.3;
+	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
+	[self resizeWithKeyboardFrame:CGRectMake(0, 0, 0, 0) duration:duration];
+}
+
+- (void) resizeWithKeyboardFrame:(CGRect)frame duration:(NSTimeInterval)duration {
+	[UIView beginAnimations:nil context:nil];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:duration];
+	
+	CGRect tableViewFrame  = self.tableView.frame;
+	CGFloat heightDifference = self.view.frame.size.height - (tableViewFrame.origin.y + tableViewFrame.size.height);
+	if (frame.size.height > 0) {
+		tableViewFrame.size.height -= frame.size.height - heightDifference;
 	}
+	else {
+		tableViewFrame.size.height += frame.size.height + heightDifference;
+	}
+	self.tableView.frame = tableViewFrame;
+	[UIView commitAnimations];
 }
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath {

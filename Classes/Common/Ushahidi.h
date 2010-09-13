@@ -82,11 +82,11 @@
 
 @optional
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi apiKey:(NSString *)apiKey error:(NSError *)error;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi instances:(NSArray *)instances error:(NSError *)error;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories error:(NSError *)error;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)countries error:(NSError *)error;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents error:(NSError *)error;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi apiKey:(NSString *)apiKey error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi instances:(NSArray *)instances error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)countries error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents error:(NSError *)error hasChanges:(BOOL)hasChanges;
 
 @end

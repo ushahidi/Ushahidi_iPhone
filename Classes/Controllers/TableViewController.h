@@ -29,15 +29,18 @@
 @protected
 	NSMutableArray *allRows;
 	NSMutableArray *filteredRows;
+	UIColor *oddRowColor;
+	UIColor *evenRowColor;
 }
 
 @property(nonatomic,retain) UITableView *tableView;
 @property(nonatomic,retain) NSMutableArray *allRows;
 @property(nonatomic,retain) NSMutableArray *filteredRows;
+@property(nonatomic,retain) UIColor *oddRowColor;
+@property(nonatomic,retain) UIColor *evenRowColor;
 
 - (id) rowAtIndexPath:(NSIndexPath *)indexPath;
 - (id) rowAtIndex:(NSInteger)index;
-
 - (id) filteredRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

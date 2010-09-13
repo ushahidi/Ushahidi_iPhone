@@ -40,14 +40,22 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.name forKey:@"name"];
 	[encoder encodeObject:self.url forKey:@"url"];
-	[encoder encodeObject:self.logo forKey:@"logo"];
+	if (self.logo != nil) {
+		[encoder encodeObject:UIImagePNGRepresentation(self.logo) forKey:@"logo"];
+	} 
+	else {
+		[encoder encodeObject:nil forKey:@"logo"];
+	}
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if (self = [super init]){
 		self.name = [decoder decodeObjectForKey:@"name"];
 		self.url = [decoder decodeObjectForKey:@"url"];
-		self.logo = [decoder decodeObjectForKey:@"logo"];
+		NSData *data = [decoder decodeObjectForKey:@"logo"];
+		if (data != nil) {
+			self.logo = [UIImage imageWithData:data];
+		}
 	}
 	return self;
 }

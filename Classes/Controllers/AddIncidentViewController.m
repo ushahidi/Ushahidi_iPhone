@@ -320,24 +320,27 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)theCountries error:(NSError *)error {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)theCountries error:(NSError *)error hasChanges:(BOOL)hasChanges{
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
-	else {
+	else if(hasChanges) {
 		DLog(@"countries: %@", theCountries);
 		[self.countries removeAllObjects];
 		[self.countries addObjectsFromArray:theCountries];
 	}
+	else {
+		DLog(@"No Changes");
+	}
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)theLocations error:(NSError *)error {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)theLocations error:(NSError *)error hasChanges:(BOOL)hasChanges{
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
-	else {
+	else if(hasChanges) {
 		DLog(@"locations: %@", theLocations);
 		[self.locations removeAllObjects];
 		[self.locations addObjectsFromArray:theLocations];
@@ -350,19 +353,25 @@ typedef enum {
 			}
 			[cell resizeRegionToFitAllPins:YES];
 		}
-	 }
+	}
+	else {
+		DLog(@"No Changes");
+	}
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
-	else {
+	else if (hasChanges){
 		DLog(@"categories: %@", categories);
 		[self.categories removeAllObjects];
 		[self.categories addObjectsFromArray:theCategories];
 		[self.tableView reloadData];
+	}
+	else {
+		DLog(@"No Changes");
 	}
 }
 

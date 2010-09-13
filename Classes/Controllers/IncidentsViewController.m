@@ -106,20 +106,22 @@ typedef enum {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiTan];
 	[self toggleSearchBar:self.searchBar animated:NO];
-}
-
-- (void)viewWasPushed {
-	DLog(@"");
-	[self.allRows removeAllObjects];
-	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self]];
-	[self.filteredRows removeAllObjects];
-	[self.filteredRows addObjectsFromArray:self.allRows];
+	self.oddRowColor = [UIColor ushahidiLiteBrown];
+	self.evenRowColor = [UIColor ushahidiDarkBrown];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.instance != nil) {
 		self.title = self.instance.name;
+	}
+	if (self.wasPushed) {
+		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:incidents];
+		[self.filteredRows removeAllObjects];
+		[self.filteredRows addObjectsFromArray:incidents];
+		DLog(@"Re-Adding Rows");
 	}
 }
 
@@ -145,15 +147,17 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
 	Incident *incident = [self filteredRowAtIndexPath:indexPath];
-	if (incident != nil && [incident isKindOfClass:[Incident class]]) {
+	if (incident != nil) {
 		[cell setText:incident.title];
 		[cell setDescription:incident.description];
+		[cell setImage:[UIImage imageNamed:@"no_image.png"]];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	else {
 		[cell setText:nil];
 		[cell setDescription:nil];	
+		[cell setImage:nil];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
@@ -165,10 +169,6 @@ typedef enum {
 	self.viewIncidentViewController.incident = [self.filteredRows objectAtIndex:indexPath.row];
 	self.viewIncidentViewController.incidents = self.filteredRows;
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];
-}
-
-- (void)tableView:(UITableView *)theTableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	cell.backgroundColor = (indexPath.row % 2) ? [UIColor ushahidiLiteBrown] : [UIColor ushahidiDarkBrown];
 }
 
 #pragma mark UIActionSheetDelegate
@@ -189,6 +189,7 @@ typedef enum {
 			[self.filteredRows addObject:incident];
 		}
 	}
+	DLog(@"Re-Adding Rows");
 	[self.tableView reloadData];	
 	[self.tableView flashScrollIndicators];
 }   
@@ -201,6 +202,7 @@ typedef enum {
 			[self.filteredRows addObject:incident];
 		}
 	}
+	DLog(@"Re-Adding Rows");
 	[self.tableView reloadData];	
 	[self.tableView flashScrollIndicators];
 	[theSearchBar resignFirstResponder];
@@ -223,12 +225,12 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)theIncidents error:(NSError *)error {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)theIncidents error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
-	else {
+	else if(hasChanges) {
 		DLog(@"incidents: %d", [theIncidents count]);
 		[self.loadingView hide];
 		[self.allRows removeAllObjects];
@@ -237,6 +239,10 @@ typedef enum {
 		[self.filteredRows addObjectsFromArray:self.allRows];
 		[self.tableView reloadData];
 		[self.tableView flashScrollIndicators];
+		DLog(@"Re-Adding Rows");
+	}
+	else {
+		DLog(@"No Changes");
 	}
 }
 

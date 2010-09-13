@@ -39,15 +39,31 @@ NSInteger const kMaxHeight = 64;
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.url forKey:@"url"];
-	[encoder encodeObject:self.image forKey:@"image"];
-	[encoder encodeObject:self.thumbnail forKey:@"thumbnail"];
+	if (self.image != nil) {
+		[encoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"image"];
+	} 
+	else {
+		[encoder encodeObject:nil forKey:@"image"];
+	}
+	if (self.thumbnail != nil) {
+		[encoder encodeObject:UIImagePNGRepresentation(self.thumbnail) forKey:@"thumbnail"];
+	} 
+	else {
+		[encoder encodeObject:nil forKey:@"thumbnail"];
+	}
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if (self = [super init]) {
 		self.url = [decoder decodeObjectForKey:@"url"];
-		self.image = [decoder decodeObjectForKey:@"image"];
-		self.thumbnail = [decoder decodeObjectForKey:@"thumbnail"];
+		NSData *imageData = [decoder decodeObjectForKey:@"image"];
+		if (imageData != nil) {
+			self.image = [UIImage imageWithData:imageData];
+		}
+		NSData *thumbnailData = [decoder decodeObjectForKey:@"thumbnail"];
+		if (thumbnailData != nil) {
+			self.thumbnail = [UIImage imageWithData:thumbnailData];
+		}
 	}
 	return self;
 }

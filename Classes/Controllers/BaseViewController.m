@@ -27,7 +27,7 @@
 
 @implementation BaseViewController
 
-@synthesize loadingView, inputView, alertView;
+@synthesize loadingView, inputView, alertView, wasPushed;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,6 +41,21 @@
 	[inputView release];
 	[alertView release];
     [super dealloc];
+}
+
+- (void)viewWillBePushed {
+	DLog(@"nib: %@", self.nibName);
+	self.wasPushed = YES;
+}
+
+- (void)viewWasPushed {
+	DLog(@"nib: %@", self.nibName);
+	self.wasPushed = YES;
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	self.wasPushed = NO;
 }
 
 @end

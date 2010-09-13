@@ -23,6 +23,10 @@
 @implementation NavigationController
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	SEL viewWillBePushed = @selector(viewWillBePushed);
+	if ([viewController respondsToSelector:viewWillBePushed]) {
+		[viewController performSelector:viewWillBePushed withObject:nil];
+	}
 	DLog(@"%@", viewController);
 	[super pushViewController:viewController animated:animated];
 	SEL viewWasPushed = @selector(viewWasPushed);

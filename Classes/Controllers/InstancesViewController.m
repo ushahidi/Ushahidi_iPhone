@@ -37,10 +37,6 @@
 
 @synthesize incidentsViewController, addInstanceViewController;
 
-- (void) filterRowsWithSearchText:(NSString *)searchText {
-
-}
-
 #pragma mark -
 #pragma mark Handlers
 
@@ -67,14 +63,20 @@
 	[super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiTan];
 	[self toggleSearchBar:self.searchBar animated:NO];
+	self.oddRowColor = [UIColor ushahidiLiteBrown];
+	self.evenRowColor = [UIColor ushahidiDarkBrown];
 }
 
-- (void)viewWasPushed {
-	DLog(@"");
-	[self.allRows removeAllObjects];
-	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getInstancesWithDelegate:self]];
-	[self.filteredRows removeAllObjects];
-	[self.filteredRows addObjectsFromArray:self.allRows];
+- (void) viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	if (self.wasPushed) {
+		NSArray *instances = [[Ushahidi sharedUshahidi] getInstancesWithDelegate:self];
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:instances];
+		[self.filteredRows removeAllObjects];
+		[self.filteredRows addObjectsFromArray:instances];
+	}
+	[self.tableView reloadData];
 }
 
 - (void)dealloc {
@@ -123,27 +125,27 @@
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
 }
 
-- (void)tableView:(UITableView *)theTableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-	cell.backgroundColor = (indexPath.row % 2) ? [UIColor ushahidiLiteBrown] : [UIColor ushahidiDarkBrown];
-}
-
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi instances:(NSArray *)theInstances error:(NSError *)error {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi instances:(NSArray *)theInstances error:(NSError *)error hasChanges:(BOOL)hasChanges {
+	DLog(@"");
 	[self.loadingView hide];
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
-	else {
+	else if (hasChanges) {
 		DLog(@"instances: %@", theInstances);
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:theInstances];
 		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:self.allRows];
+		[self.filteredRows addObjectsFromArray:theInstances];
 		[self.tableView reloadData];	
 		[self.tableView flashScrollIndicators];
+	}
+	else {
+		DLog(@"No Changes");
 	}
 }
 

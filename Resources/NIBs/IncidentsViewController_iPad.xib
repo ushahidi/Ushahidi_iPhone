@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="3"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -78,7 +78,7 @@
 							<object class="IBUISegmentedControl" id="142044992">
 								<reference key="NSNextResponder" ref="437497502"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{135, 8}, {500, 30}}</string>
+								<string key="NSFrame">{{130, 8}, {500, 30}}</string>
 								<reference key="NSSuperview" ref="437497502"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -147,7 +147,7 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="437497502"/>
-								<int key="IBUISystemItemIdentifier">4</int>
+								<int key="IBUISystemItemIdentifier">7</int>
 							</object>
 						</object>
 					</object>
@@ -262,9 +262,9 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="437497502"/>
 							<reference ref="188202051"/>
 							<reference ref="531427618"/>
+							<reference ref="437497502"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -433,12 +433,14 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>doneButton</string>
+							<string>imagePickerController</string>
 							<string>mapViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
+							<string>ImagePickerController</string>
 							<string>MapViewController</string>
 						</object>
 					</object>
@@ -448,6 +450,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>doneButton</string>
+							<string>imagePickerController</string>
 							<string>mapViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -461,6 +464,10 @@
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">imagePickerController</string>
+								<string key="candidateClassName">ImagePickerController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">mapViewController</string>
 								<string key="candidateClassName">MapViewController</string>
 							</object>
@@ -468,12 +475,28 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Controllers/AddIncidentViewController.h</string>
+						<string key="minorKey">Classes/Controllers/AddIncidentViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">BaseViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Controllers/BaseViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ImagePickerController</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Controllers/ImagePickerController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">ImageViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">BaseViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">imageView</string>
 						<string key="NS.object.0">UIImageView</string>
@@ -487,12 +510,12 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Controllers/ImageViewController.h</string>
+						<string key="minorKey">Classes/Controllers/ImageViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">IncidentsViewController</string>
-					<string key="superclassName">TableViewController</string>
+					<string key="superclassName">TableSearchViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -500,10 +523,12 @@
 							<string>action:</string>
 							<string>add:</string>
 							<string>refresh:</string>
+							<string>search:</string>
 							<string>toggleReportsAndMap:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -517,6 +542,7 @@
 							<string>action:</string>
 							<string>add:</string>
 							<string>refresh:</string>
+							<string>search:</string>
 							<string>toggleReportsAndMap:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -531,6 +557,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">refresh:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">search:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -580,12 +610,19 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Controllers/IncidentsViewController.h</string>
+						<string key="minorKey">Classes/Controllers/IncidentsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MKMapView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Categories/MKMapView+Extension.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">MapViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">BaseViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -666,12 +703,66 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Controllers/MapViewController.h</string>
+						<string key="minorKey">Classes/Controllers/MapViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Libraries/JSON/NSObject+SBJSON.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Libraries/JSON/SBJsonWriter.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TableSearchViewController</string>
+					<string key="superclassName">TableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>searchBar</string>
+							<string>searchButton</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UISearchBar</string>
+							<string>UIBarButtonItem</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>searchBar</string>
+							<string>searchButton</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">searchBar</string>
+								<string key="candidateClassName">UISearchBar</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">searchButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Controllers/TableSearchViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">TableViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">BaseViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">tableView</string>
 						<string key="NS.object.0">UITableView</string>
@@ -685,7 +776,14 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Controllers/TableViewController.h</string>
+						<string key="minorKey">Classes/Controllers/TableViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Categories/UIView+Extension.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -771,12 +869,12 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Controllers/ViewIncidentViewController.h</string>
+						<string key="minorKey">Classes/Controllers/ViewIncidentViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">WebViewController</string>
-					<string key="superclassName">UIViewController</string>
+					<string key="superclassName">BaseViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<string key="NS.key.0">action:</string>
 						<string key="NS.object.0">id</string>
@@ -836,7 +934,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Controllers/WebViewController.h</string>
+						<string key="minorKey">Classes/Controllers/WebViewController.h</string>
 					</object>
 				</object>
 			</object>
@@ -1098,7 +1196,7 @@
 			<integer value="3100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../Ushahidi_iPhone.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../../Ushahidi_iPhone.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">117</string>
 	</data>

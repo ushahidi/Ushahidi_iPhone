@@ -68,11 +68,13 @@ typedef enum {
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
 	[incident release];
+	[self.view endEditing:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction) done:(id)sender {
 	DLog(@"done");
+	[self.view endEditing:YES];
 	[[Ushahidi sharedUshahidi] addIncident:self.incident];
 	[self dismissModalViewControllerAnimated:YES];
 }

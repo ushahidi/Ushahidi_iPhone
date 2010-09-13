@@ -42,11 +42,13 @@ typedef enum {
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
+	[self.view endEditing:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction) done:(id)sender {
 	DLog(@"done");
+	[self.view endEditing:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -56,6 +58,7 @@ typedef enum {
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.doneButton.enabled = NO;
+	[self.tableView reloadData];
 }
 
 - (void)dealloc {
@@ -82,10 +85,6 @@ typedef enum {
 	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView];
 	cell.indexPath = indexPath;
 	[cell setPlaceholder:@"Enter Ushahidi URL"];
-	[cell showKeyboard];
-	if (indexPath.section == TableSectionURL) {
-		
-	}
 	return cell;
 }
 

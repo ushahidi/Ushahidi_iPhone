@@ -31,16 +31,18 @@
 - (void) toggleSearchBar:(UISearchBar *)theSearchBar animated:(BOOL)animated {
 	if (animated) {
 		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationBeginsFromCurrentState:NO];
 		[UIView setAnimationDuration:0.3];	
 	}
 	CGRect searchBarFrame = theSearchBar.frame;
 	CGRect tableViewFrame = self.tableView.frame;
 	if (searchBarFrame.origin.y < 0) {
 		DLog(@"Show");
+		theSearchBar.showsCancelButton = YES;
 		searchBarFrame.origin.y += searchBarFrame.size.height;
 		tableViewFrame.origin.y = searchBarFrame.size.height;
 		tableViewFrame.size.height -= searchBarFrame.size.height;
-		[theSearchBar becomeFirstResponder];
+		[theSearchBar performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.35];
 	}
 	else {
 		DLog(@"Hide");
@@ -48,7 +50,7 @@
 		tableViewFrame.origin.y = 0;
 		tableViewFrame.size.height += searchBarFrame.size.height;
 		[theSearchBar setText:@""];
-		[theSearchBar resignFirstResponder];
+		[theSearchBar performSelector:@selector(resignFirstResponder) withObject:nil afterDelay:0.35];
 	}
 	theSearchBar.frame = searchBarFrame;
 	self.tableView.frame = tableViewFrame;

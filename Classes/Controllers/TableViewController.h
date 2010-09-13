@@ -31,6 +31,7 @@
 	NSMutableArray *filteredRows;
 	UIColor *oddRowColor;
 	UIColor *evenRowColor;
+	CGFloat toolbarHeight;
 }
 
 @property(nonatomic,retain) UITableView *tableView;

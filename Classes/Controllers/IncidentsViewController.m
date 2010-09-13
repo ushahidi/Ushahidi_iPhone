@@ -125,6 +125,11 @@ typedef enum {
 	}
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	[self.view endEditing:YES];
+}
+
 - (void)dealloc {
 	[addIncidentViewController release];
 	[viewIncidentViewController release];

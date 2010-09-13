@@ -79,6 +79,11 @@
 	[self.tableView reloadData];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	[self.view endEditing:YES];
+}
+
 - (void)dealloc {
 	[addInstanceViewController release];
 	[incidentsViewController release];

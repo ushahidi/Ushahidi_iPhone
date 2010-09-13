@@ -24,16 +24,18 @@
 
 @interface TableViewController ()
 
+@property(nonatomic,assign) CGFloat toolbarHeight;
+
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
-- (void) keyboardWillShow:(NSNotification *) notification;
-- (void) keyboardWillHide:(NSNotification *) notification;
-- (void) resizeWithKeyboardFrame:(CGRect)rect duration:(NSTimeInterval)duration;
+- (void) keyboardWillShow:(NSNotification *)notification;
+- (void) keyboardWillHide:(NSNotification *)notification;
+- (void) resizeTableToFrame:(CGRect)rect duration:(NSTimeInterval)duration;
 
 @end
 
 @implementation TableViewController
 
-@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor;
+@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight;
 
 - (id) rowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([self.allRows count] > indexPath.row) {
@@ -147,37 +149,55 @@
 #pragma mark -
 #pragma mark Keyboard
 
--(void) keyboardWillShow:(NSNotification *) notification {
+-(void) keyboardWillShow:(NSNotification *)notification {
 	DLog(@"notification:%@", notification);
 	NSTimeInterval duration = 0.3;
 	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
 	
-	CGRect frame = CGRectMake(0, 0, 0, 0);
-	[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&frame];
-	[self resizeWithKeyboardFrame:frame duration:duration];
-}
-
--(void) keyboardWillHide:(NSNotification *) notification {
-	DLog(@"notification:%@", notification);
-	NSTimeInterval duration = 0.3;
-	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
-	[self resizeWithKeyboardFrame:CGRectMake(0, 0, 0, 0) duration:duration];
-}
-
-- (void) resizeWithKeyboardFrame:(CGRect)frame duration:(NSTimeInterval)duration {
-	[UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:duration];
+	CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
+	[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
 	
-	CGRect tableViewFrame  = self.tableView.frame;
-	CGFloat heightDifference = self.view.frame.size.height - (tableViewFrame.origin.y + tableViewFrame.size.height);
-	if (frame.size.height > 0) {
-		tableViewFrame.size.height -= frame.size.height - heightDifference;
+	CGRect tableFrame = self.tableView.frame;
+	if ([UIDevice currentDevice].orientation == UIInterfaceOrientationPortrait ||
+		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
+		tableFrame.size.height -= keyboardFrame.size.height;	
 	}
 	else {
-		tableViewFrame.size.height += frame.size.height + heightDifference;
+		tableFrame.size.height -= keyboardFrame.size.width;
 	}
-	self.tableView.frame = tableViewFrame;
+	
+	self.toolbarHeight = self.view.frame.size.height - (self.tableView.frame.origin.y + self.tableView.frame.size.height);
+	tableFrame.size.height += self.toolbarHeight;
+	
+	[self resizeTableToFrame:tableFrame duration:duration];
+}
+
+-(void) keyboardWillHide:(NSNotification *)notification {
+	DLog(@"notification:%@", notification);
+	NSTimeInterval duration = 0.3;
+	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
+	
+	CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
+	[[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
+	
+	CGRect tableFrame = self.tableView.frame;
+	if ([UIDevice currentDevice].orientation == UIInterfaceOrientationPortrait ||
+		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
+		tableFrame.size.height += keyboardFrame.size.height;	
+	}
+	else {
+		tableFrame.size.height += keyboardFrame.size.width;
+	}
+	tableFrame.size.height -= self.toolbarHeight;
+	
+	[self resizeTableToFrame:tableFrame duration:duration];
+}
+
+- (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration {
+	[UIView beginAnimations:nil context:nil];
+    [UIView setAnimationBeginsFromCurrentState:NO];
+    [UIView setAnimationDuration:duration];
+	self.tableView.frame = frame;
 	[UIView commitAnimations];
 }
 

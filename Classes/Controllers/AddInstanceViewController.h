@@ -27,6 +27,10 @@
 @public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
+	
+@private
+	NSString *name;
+	NSString *url;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;

@@ -25,6 +25,7 @@
 @protocol UshahidiDelegate;
 
 @class API;
+@class Instance;
 @class Incident;
 @class Location;
 @class Category;
@@ -51,7 +52,10 @@
 - (void) save;
 - (void) loadForDomain:(NSString *)domain;
 
-- (void)addIncident:(Incident *)incident;
+- (BOOL)addInstance:(Instance *)instance;
+- (BOOL)addInstanceByName:(NSString *)name andUrl:(NSString *)url;
+
+- (BOOL)addIncident:(Incident *)incident;
 
 - (NSArray *) getInstancesWithDelegate:(id<UshahidiDelegate>)delegate;
 

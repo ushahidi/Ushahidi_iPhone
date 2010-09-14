@@ -70,7 +70,7 @@
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	DLog(@"willBePushed: %d", self.willBePushed);
-	if (self.willBePushed) {
+	if (self.willBePushed || self.modalViewController != nil) {
 		NSArray *instances = [[Ushahidi sharedUshahidi] getInstancesWithDelegate:self];
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:instances];
@@ -154,6 +154,7 @@
 	else {
 		DLog(@"No Changes");
 	}
+	[self.loadingView hide];
 }
 
 #pragma mark -

@@ -109,9 +109,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"domain: %@", self.domain);
 }
 
-- (void)addIncident:(Incident *)incident {
-	[self.incidents setObject:incident forKey:incident.identifier];
-	//TODO upload incident to server
+- (BOOL)addInstance:(Instance *)instance {
+	if (instance != nil) {
+		[self.instances setObject:instance forKey:instance.url];
+		return YES;
+	}
+	return NO;
+}
+
+- (BOOL)addInstanceByName:(NSString *)name andUrl:(NSString *)url {
+	if (name != nil && [name length] > 0 && url != nil && [url length] > 0) {
+		Instance *instance = [[Instance alloc] initWithName:name 
+														url:url
+													   logo:[UIImage imageNamed:@"logo_image.png"]];
+		[self.instances setObject:instance forKey:url];
+		return YES;
+	}
+	return NO;
+}
+
+- (BOOL)addIncident:(Incident *)incident {
+	if (incident != nil) {
+		[self.incidents setObject:incident forKey:incident.identifier];
+		return YES;
+	}
+	return NO;
 }
 
 #pragma mark -
@@ -124,18 +146,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 															 url:@"http://demo.ushahidi.com"
 															logo:[UIImage imageNamed:@"logo_image.png"]] 
 						   forKey:@"http://demo.ushahidi.com"];
-		[self.instances setObject:[[Instance alloc] initWithName:@"Swine Flu Ushahidi" 
-															 url:@"http://swineflu.ushahidi.com"
-															logo:[UIImage imageNamed:@"logo_image.png"]] 
-						   forKey:@"http://swineflu.ushahidi.com"];
 	}
-	[self performSelector:@selector(notifyDelegate:) withObject:delegate afterDelay:1.0];
+	[self performSelector:@selector(notifyDelegate:) withObject:delegate afterDelay:2.0];
 	return [self.instances allValues];
 }
 
 - (void) notifyDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"");
-	SEL selector = @selector(downloadedFromUshahidi:instances:error:);
+	SEL selector = @selector(downloadedFromUshahidi:instances:error:hasChanges:);
 	if (delegate != NULL && [delegate respondsToSelector:selector]) {
 		[delegate downloadedFromUshahidi:self instances:[self.instances allValues] error:nil hasChanges:NO];
 	}

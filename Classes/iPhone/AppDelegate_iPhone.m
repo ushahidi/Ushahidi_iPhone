@@ -20,6 +20,7 @@
 
 #import "AppDelegate_iPhone.h"
 #import "Settings.h"
+#import "Ushahidi.h"
 
 @implementation AppDelegate_iPhone
 
@@ -40,6 +41,7 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
 	DLog(@"");
 	[[Settings sharedSettings] save];
+	[[Ushahidi sharedUshahidi] save];
 }
 
 /*

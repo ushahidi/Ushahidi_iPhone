@@ -322,7 +322,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 	else {
 		payload = [json	objectForKey:@"payload"];
-		DLog(@"payload: %@ %@", [payload class], payload);
+		//DLog(@"payload: %@ %@", [payload class], payload);
 	}
 	if ([API isApiKeyUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:apiKey:error:hasChanges:);
@@ -332,7 +332,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 	else if ([API isCountriesUrl:requestURL]) {
 		NSArray *countriesArray = [payload objectForKey:@"countries"]; 
-		DLog(@"countries: %@ %@", [countriesArray class], countriesArray);
+		//DLog(@"countries: %@ %@", [countriesArray class], countriesArray);
 		BOOL hasChanges = NO;
 		for (NSDictionary *countryDictionary in countriesArray) {
 			Country *country = [[Country alloc] initWithDictionary:[countryDictionary objectForKey:@"country"]];
@@ -342,6 +342,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			}
 			[country release];
 		}
+		if (hasChanges) {
+			DLog(@"Has New Countries");
+		}
 		SEL selector = @selector(downloadedFromUshahidi:countries:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self countries:[self.countries allValues] error:error hasChanges:hasChanges];
@@ -349,7 +352,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 	else if ([API isCategoriesUrl:requestURL]) {
 		NSArray *categoriesArray = [payload objectForKey:@"categories"]; 
-		DLog(@"categories: %@ %@", [categoriesArray class], categoriesArray);
+		//DLog(@"categories: %@ %@", [categoriesArray class], categoriesArray);
 		BOOL hasChanges = NO;
 		for (NSDictionary *categoryDictionary in categoriesArray) {
 			Category *category = [[Category alloc] initWithDictionary:[categoryDictionary objectForKey:@"category"]];
@@ -359,6 +362,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			}
 			[category release];
 		}
+		if (hasChanges) {
+			DLog(@"Has New Categories");
+		}
 		SEL selector = @selector(downloadedFromUshahidi:categories:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self categories:[self.categories allValues] error:error hasChanges:hasChanges];
@@ -366,7 +372,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 	else if ([API isLocationsUrl:requestURL]) {
 		NSArray *locationsArray = [payload objectForKey:@"locations"]; 
-		DLog(@"locations: %@ %@", [locationsArray class], locationsArray);
+		//DLog(@"locations: %@ %@", [locationsArray class], locationsArray);
 		BOOL hasChanges = NO;
 		for (NSDictionary *locationDictionary in locationsArray) {
 			Location *location = [[Location alloc] initWithDictionary:[locationDictionary objectForKey:@"location"]];
@@ -376,6 +382,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			}
 			[location release];
 		}
+		if (hasChanges) {
+			DLog(@"Has New Locations");
+		}
 		SEL selector = @selector(downloadedFromUshahidi:locations:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self locations:[self.locations allValues] error:error hasChanges:hasChanges];
@@ -383,10 +392,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 	else if ([API isIncidentsUrl:requestURL]) {
 		NSArray *incidentsArray = [payload objectForKey:@"incidents"]; 
-		DLog(@"incidents: %@ %@", [incidentsArray class], incidentsArray);
+		//DLog(@"incidents: %@ %@", [incidentsArray class], incidentsArray);
 		BOOL hasChanges = NO;
 		for (NSDictionary *incidentDictionary in incidentsArray) {
-			DLog(@"incident: %@", [incidentDictionary objectForKey:@"incident"]);
 			Incident *incident = [[Incident alloc] initWithDictionary:[incidentDictionary objectForKey:@"incident"] 
 													  mediaDictionary:[incidentDictionary objectForKey:@"media"]];
 			if (incident.identifier != nil && [self.incidents objectForKey:incident.identifier] == nil) {
@@ -394,6 +402,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				hasChanges = YES;
 			}
 			[incident release];
+		}
+		if (hasChanges) {
+			DLog(@"Has New Incidents");
 		}
 		SEL selector = @selector(downloadedFromUshahidi:incidents:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {

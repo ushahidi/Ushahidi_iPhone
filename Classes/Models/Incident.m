@@ -43,7 +43,7 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media {
 	if (self = [super init]) {
 		if (dictionary != nil) {
-			DLog(@"dictionary: %@", dictionary);
+			//DLog(@"dictionary: %@", dictionary);
 			self.identifier = [dictionary stringForKey:@"incidentid"];
 			self.title = [dictionary stringForKey:@"incidenttitle"];
 			self.description = [dictionary stringForKey:@"incidentdescription"];
@@ -59,7 +59,7 @@
 			self.locationLongitude = [dictionary stringForKey:@"locationlongitude"];
 		}
 		if (media != nil) {
-			DLog(@"media: %@", media);
+			//DLog(@"media: %@", media);
 		}
 	}
 	return self;

@@ -90,16 +90,13 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
-- (void)viewWasPushed {
-	DLog(@"XXXXXXXXXXXXXXXXXXXXXXXXX");
-}
-
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.title = self.incident.title;
 	NSInteger index = [self.incidents indexOfObject:self.incident];
 	[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:index + 1 < [self.incidents count] forSegmentAtIndex:NavBarNext];
+	[self.tableView reloadData];
 }
 
 - (void)dealloc {

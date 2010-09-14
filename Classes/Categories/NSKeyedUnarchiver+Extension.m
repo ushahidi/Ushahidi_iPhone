@@ -25,6 +25,7 @@
 + (id) unarchiveObjectWithKey:(NSString *)key {
 	NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+	DLog(@"Un-archiving %@", key);
 	return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
 }
 

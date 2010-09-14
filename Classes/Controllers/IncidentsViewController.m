@@ -115,13 +115,14 @@ typedef enum {
 	if (self.instance != nil) {
 		self.title = self.instance.name;
 	}
-	if (self.wasPushed) {
+	DLog(@"willBePushed: %d", self.willBePushed);
+	if (self.willBePushed) {
 		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:incidents];
 		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:incidents];
-		DLog(@"Re-Adding Rows");
+		DLog(@"Re-Adding Rows: %d", [incidents count]);
 	}
 }
 

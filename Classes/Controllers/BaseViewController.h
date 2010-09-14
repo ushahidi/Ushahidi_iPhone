@@ -32,12 +32,14 @@
 	LoadingViewController *loadingView;
 	InputView *inputView;
 	AlertView *alertView;
+	BOOL willBePushed;
 	BOOL wasPushed;
 }
 
 @property(nonatomic, retain) LoadingViewController *loadingView;
 @property(nonatomic, retain) InputView *inputView;
 @property(nonatomic, retain) AlertView *alertView;
+@property(nonatomic, assign) BOOL willBePushed;
 @property(nonatomic, assign) BOOL wasPushed;
 
 - (void)viewWasPushed;

@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSKeyedArchiver (Extras)
+@interface NSKeyedArchiver (Extension)
 
 + (void) archiveObject:(id)object forKey:(NSString *)key;
 

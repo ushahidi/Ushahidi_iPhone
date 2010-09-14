@@ -27,7 +27,7 @@
 
 @implementation BaseViewController
 
-@synthesize loadingView, inputView, alertView, wasPushed;
+@synthesize loadingView, inputView, alertView, willBePushed, wasPushed;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,7 +45,7 @@
 
 - (void)viewWillBePushed {
 	DLog(@"nib: %@", self.nibName);
-	self.wasPushed = YES;
+	self.willBePushed = YES;
 }
 
 - (void)viewWasPushed {
@@ -53,9 +53,24 @@
 	self.wasPushed = YES;
 }
 
-- (void) viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
+- (void) viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	self.willBePushed = NO;
 	self.wasPushed = NO;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+	DLog(@"%@", self.nibName);
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	DLog(@"%@", self.nibName);
 }
 
 @end

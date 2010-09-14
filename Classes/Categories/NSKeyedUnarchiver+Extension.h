@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSKeyedUnarchiver (Extras)
+@interface NSKeyedUnarchiver (Extension)
 
 + (id) unarchiveObjectWithKey:(NSString *)key;
 

@@ -20,12 +20,12 @@
 
 #import "NSKeyedArchiver+Extension.h"
 
-
 @implementation NSKeyedArchiver (Extension)
 
 + (void) archiveObject:(id)object forKey:(NSString *)key {
 	NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+	DLog(@"Archiving %@", key);
 	[NSKeyedArchiver archiveRootObject:object toFile:filePath];
 }
 

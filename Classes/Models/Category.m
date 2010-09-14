@@ -33,7 +33,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
-		DLog(@"dictionary: %@", dictionary);
+		//DLog(@"dictionary: %@", dictionary);
 		if (dictionary != nil) {
 			self.identifier = [dictionary objectForKey:@"id"];
 			self.title = [dictionary objectForKey:@"title"];

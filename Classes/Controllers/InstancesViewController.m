@@ -69,12 +69,14 @@
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	if (self.wasPushed) {
+	DLog(@"willBePushed: %d", self.willBePushed);
+	if (self.willBePushed) {
 		NSArray *instances = [[Ushahidi sharedUshahidi] getInstancesWithDelegate:self];
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:instances];
 		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:instances];
+		DLog(@"Re-Adding Rows: %d", [instances count]);
 	}
 	[self.tableView reloadData];
 }

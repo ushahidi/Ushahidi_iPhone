@@ -27,12 +27,17 @@
 	if ([viewController respondsToSelector:viewWillBePushed]) {
 		[viewController performSelector:viewWillBePushed withObject:nil];
 	}
-	DLog(@"%@", viewController);
+	DLog(@"%@", [viewController nibName]);
 	[super pushViewController:viewController animated:animated];
 	SEL viewWasPushed = @selector(viewWasPushed);
 	if ([viewController respondsToSelector:viewWasPushed]) {
 		[viewController performSelector:viewWasPushed withObject:nil];
 	}
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
+	DLog(@"%@", [self nibName]);
+	return [super popViewControllerAnimated:animated];
 }
 
 @end

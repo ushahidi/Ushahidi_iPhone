@@ -75,7 +75,7 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillAppear:animated];
+	[super viewWillDisappear:animated];
 	DLog(@"%@", self.nibName);
 	[self.view endEditing:YES];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
@@ -83,7 +83,7 @@
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
-	[super viewDidAppear:animated];
+	[super viewDidDisappear:animated];
 	DLog(@"%@", self.nibName);
 }
 
@@ -92,20 +92,6 @@
 	DLog(@"%@", self.nibName);
 	self.allRows = [[NSMutableArray alloc] initWithCapacity:0];
 	self.filteredRows = [[NSMutableArray alloc] initWithCapacity:0];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-	DLog(@"%@", self.nibName);
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-	DLog(@"%@", self.nibName);
 }
 
 - (void)dealloc {

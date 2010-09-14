@@ -46,7 +46,7 @@
     return self;
 }
 
-- (void) showWithDate:(NSDate *)theDate mode:(UIDatePickerMode)datePickerMode indexPath:(NSIndexPath *)theIndexPath{
+- (void) showWithDate:(NSDate *)theDate mode:(UIDatePickerMode)datePickerMode indexPath:(NSIndexPath *)theIndexPath {
 	self.indexPath = theIndexPath;
 	self.date = theDate != nil  && [theDate timeIntervalSince1970] > 0 ? theDate : [NSDate date];
 	
@@ -69,7 +69,7 @@
 	
 	CGRect actionSheetRect = actionSheet.frame;
 	actionSheetRect.origin.y -= datePicker.frame.size.height;
-	actionSheetRect.size.height = 300;
+	actionSheetRect.size.height += datePicker.frame.size.height;
 	actionSheet.frame = actionSheetRect;
 	
 	CGRect datePickerRect = datePicker.frame;

@@ -145,7 +145,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[self.instances setObject:[[Instance alloc] initWithName:@"Demo Ushahidi" 
 															 url:@"http://demo.ushahidi.com"
 															logo:[UIImage imageNamed:@"logo_image.png"]] 
-						   forKey:@"http://demo.ushahidi.com"];
+														  forKey:@"http://demo.ushahidi.com"];
 	}
 	[self performSelector:@selector(notifyDelegate:) withObject:delegate afterDelay:2.0];
 	return [self.instances allValues];
@@ -413,6 +413,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		//DLog(@"incidents: %@ %@", [incidentsArray class], incidentsArray);
 		BOOL hasChanges = NO;
 		for (NSDictionary *incidentDictionary in incidentsArray) {
+			DLog(@"incident: %@ %@", [incidentDictionary class], incidentDictionary);
 			Incident *incident = [[Incident alloc] initWithDictionary:[incidentDictionary objectForKey:@"incident"] 
 													  mediaDictionary:[incidentDictionary objectForKey:@"media"]];
 			if (incident.identifier != nil && [self.incidents objectForKey:incident.identifier] == nil) {

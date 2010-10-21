@@ -21,7 +21,10 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface TableViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate> {
+@interface TableViewController : BaseViewController<UITableViewDelegate, 
+													UITableViewDataSource, 
+													UINavigationControllerDelegate, 
+													UISearchBarDelegate> {
 	
 @public
 	IBOutlet UITableView *tableView;
@@ -32,6 +35,9 @@
 	UIColor *oddRowColor;
 	UIColor *evenRowColor;
 	CGFloat toolbarHeight;
+	
+@private
+	BOOL shouldBeginEditing;
 }
 
 @property(nonatomic,retain) UITableView *tableView;
@@ -40,8 +46,15 @@
 @property(nonatomic,retain) UIColor *oddRowColor;
 @property(nonatomic,retain) UIColor *evenRowColor;
 
+- (void) hideSearchBar;
+- (void) showSearchBar;
+- (void) showSearchBarWithPlaceholder:(NSString *)placeholder;
+- (NSString *) getSearchText;
+
 - (id) rowAtIndexPath:(NSIndexPath *)indexPath;
 - (id) rowAtIndex:(NSInteger)index;
 - (id) filteredRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void) filterRows;
+- (void) filterRows:(BOOL)reloadTable;
 
 @end

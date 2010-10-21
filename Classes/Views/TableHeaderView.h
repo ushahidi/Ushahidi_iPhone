@@ -18,30 +18,16 @@
  **
  *****************************************************************************/
 
-#import "News.h"
+#import <Foundation/Foundation.h>
 
-@implementation News
+@interface TableHeaderView : UIView {
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super initWithDictionary:dictionary]) {
-	
-	}
-	return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
-	[super encodeWithCoder:encoder];
-}
++ (id)headerForTable:(UITableView *)tableView text:(NSString *)text;
++ (id)headerForTable:(UITableView *)tableView text:(NSString *)text textColor:(UIColor *)textColor backgroundColor:(UIColor *)backgroundColor;
 
-- (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super initWithCoder:decoder]) {
-	
-	}
-	return self;
-}
-
-- (void)dealloc {
-	[super dealloc];
-}
+- (id)initForTable:(UITableView *)tableView text:(NSString *)text textColor:(UIColor *)textColor backgroundColor:(UIColor *)backgroundColor;
+- (void) setText:(NSString *)text;
 
 @end

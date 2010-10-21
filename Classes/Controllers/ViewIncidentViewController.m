@@ -31,6 +31,8 @@
 #import "Incident.h"
 #import "Photo.h"
 #import "Location.h"
+#import "UIColor+Extension.h"
+#import "TableHeaderView.h"
 
 typedef enum {
 	TableSectionTitle,
@@ -117,10 +119,10 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	if (section == TableSectionNews) {
-		return [self.incident.news count] + 1;
+		return [self.incident.news count];
 	}
 	if (section == TableSectionPhotos) {
-		return [self.incident.photos count] + 1;
+		return [self.incident.photos count];
 	}
 	if (section == TableSectionLocation) {
 		return 2;
@@ -136,7 +138,7 @@ typedef enum {
 		[cell setText:self.incident.description];
 		return cell;
 	}
-	else if (indexPath.section == TableSectionNews && indexPath.row > 0) {
+	else if (indexPath.section == TableSectionNews) {
 		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -154,14 +156,23 @@ typedef enum {
 		[cell resizeRegionToFitAllPins:NO];
 		return cell;
 	}
-	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
+	else if (indexPath.section == TableSectionPhotos) {
 		ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
 		cell.indexPath = indexPath;
 		Photo *photo = [self.incident.photos objectAtIndex:indexPath.row];
 		if (photo != nil) {
-			[cell setImage:photo.image];
+			if (photo.image != nil) {
+				[cell setImage:photo.image];
+			}
+			else {
+				[cell setImage:nil];
+				[photo downloadWithDelegate:self];
+			}
 		}
-		return cell;	
+		else {
+			[cell setImage:nil];
+		}
+		return cell;
 	}
 	else {
 		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView];
@@ -182,41 +193,42 @@ typedef enum {
 		else if (indexPath.section == TableSectionDateTime) {
 			cell.textLabel.text = [self.incident getDateString];
 		}
-		else if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
-			cell.textLabel.text = @"Add Photo";
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		}
-		else if (indexPath.section == TableSectionNews && indexPath.row == 0) {
-			cell.textLabel.text = @"Add News Article";
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		}
+//		else if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
+//			cell.textLabel.text = @"Add Photo";
+//			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+//		}
+//		else if (indexPath.section == TableSectionNews && indexPath.row == 0) {
+//			cell.textLabel.text = @"Add News Article";
+//			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+//		}
 		return cell;	
 	}
+	return nil;
 }
 
-- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
 	if (section == TableSectionTitle) {
-		return @"Title";
+		return [TableHeaderView headerForTable:theTableView text:@"Title" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
 	}
 	if (section == TableSectionCategory) {
-		return @"Category";
+		return [TableHeaderView headerForTable:theTableView text:@"Category" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
 	}
 	if (section == TableSectionLocation) {
-		return @"Location";
+		return [TableHeaderView headerForTable:theTableView text:@"Location" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
 	}
 	if (section == TableSectionDateTime) {
-		return @"Date";
+		return [TableHeaderView headerForTable:theTableView text:@"Date" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
 	}
 	if (section == TableSectionDescription) {
-		return @"Description";
+		return [TableHeaderView headerForTable:theTableView text:@"Description" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
 	}
 	if (section == TableSectionPhotos) {
-		return @"Photos";
+		return [TableHeaderView headerForTable:theTableView text:@"Photos" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
 	}
 	if (section == TableSectionNews) {
-		return @"News";
+		return [TableHeaderView headerForTable:theTableView text:@"News" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
 	}
 	return nil;
 }
@@ -230,10 +242,10 @@ typedef enum {
 	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
 		return 140;
 	}
-	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
+	else if (indexPath.section == TableSectionPhotos) {
 		return 200;
 	}
-	else if (indexPath.section == TableSectionNews && indexPath.row > 0) {
+	else if (indexPath.section == TableSectionNews) {
 		return 55;
 	}
 	return 45;
@@ -253,7 +265,7 @@ typedef enum {
 		self.mapViewController.locationLongitude = self.incident.locationLongitude;
 		[self.navigationController pushViewController:self.mapViewController animated:YES];
 	}
-	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
+	else if (indexPath.section == TableSectionPhotos) {
 		self.imageViewController.image = [((ImageTableCell *)cell) getImage];
 		[self.navigationController pushViewController:self.imageViewController animated:YES];
 	}
@@ -273,7 +285,9 @@ typedef enum {
 - (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath {
 	DLog(@"section:%d row:%d", indexPath.section, indexPath.row);
 	ImageTableCell *cell = (ImageTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-	[cell setImage:photo.image];
+	if (cell != nil) {
+		[cell setImage:photo.image];
+	}
 }
 
 @end

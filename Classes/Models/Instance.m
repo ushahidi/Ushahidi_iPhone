@@ -63,8 +63,8 @@
 - (BOOL) matchesString:(NSString *)string {
 	NSString *lowercaseString = [string lowercaseString];
 	return	(string == nil || [string length] == 0) ||
-			[[self.name lowercaseString] rangeOfString:lowercaseString].location != NSNotFound ||
-			[[self.url lowercaseString] rangeOfString:lowercaseString].location != NSNotFound;
+			[[self.name lowercaseString] hasPrefix:lowercaseString] ||
+			[[self.url lowercaseString] hasPrefix:lowercaseString];
 }
 
 - (void)dealloc {

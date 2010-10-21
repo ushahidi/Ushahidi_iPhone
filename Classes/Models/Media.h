@@ -18,30 +18,22 @@
  **
  *****************************************************************************/
 
-#import "News.h"
+#import <Foundation/Foundation.h>
 
-@implementation News
+@interface Media : NSObject {
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super initWithDictionary:dictionary]) {
-	
-	}
-	return self;
+@public
+	NSString *identifier; 
+	NSString *title;
+	NSString *url;		
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
-	[super encodeWithCoder:encoder];
-}
+@property(nonatomic,retain) NSString *identifier;
+@property(nonatomic,retain) NSString *title;
+@property(nonatomic,retain) NSString *url;
 
-- (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super initWithCoder:decoder]) {
-	
-	}
-	return self;
-}
-
-- (void)dealloc {
-	[super dealloc];
-}
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (void)encodeWithCoder:(NSCoder *)encoder;
+- (id)initWithCoder:(NSCoder *)decoder;
 
 @end

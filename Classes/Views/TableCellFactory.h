@@ -31,6 +31,8 @@
 @class ImageTableCell;
 @class MapTableCell;
 @class DateTableCell;
+@class InstanceTableCell;
+@class IncidentTableCell;
 
 @protocol TextTableCellDelegate;
 @protocol SearchTableCellDelegate;
@@ -44,6 +46,16 @@
 @interface TableCellFactory : NSObject {
 
 }
+
++ (InstanceTableCell *) getInstanceTableCellForTable:(UITableView *)tableView;
+
++ (InstanceTableCell *) getInstanceTableCellForTable:(UITableView *)tableView
+										  identifier:(NSString *)cellIdentifier;
+
++ (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView;
+
++ (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView
+										  identifier:(NSString *)cellIdentifier;
 
 + (UITableViewCell *) getDefaultTableCellForTable:(UITableView *)tableView;
 

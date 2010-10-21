@@ -18,13 +18,13 @@
  **
  *****************************************************************************/
 
-#import "News.h"
+#import "Sound.h"
 
-@implementation News
+@implementation Sound
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super initWithDictionary:dictionary]) {
-	
+		
 	}
 	return self;
 }
@@ -35,7 +35,7 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if (self = [super initWithCoder:decoder]) {
-	
+		
 	}
 	return self;
 }

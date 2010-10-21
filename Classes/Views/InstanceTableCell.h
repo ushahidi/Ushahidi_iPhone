@@ -18,30 +18,26 @@
  **
  *****************************************************************************/
 
-#import "News.h"
+#import <UIKit/UIKit.h>
 
-@implementation News
+@interface InstanceTableCell : UITableViewCell {
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super initWithDictionary:dictionary]) {
-	
-	}
-	return self;
+@public
+	IBOutlet UILabel *titleLabel;
+	IBOutlet UILabel *urlLabel;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
-	[super encodeWithCoder:encoder];
-}
+@property (nonatomic, retain) UILabel *titleLabel;
+@property (nonatomic, retain) UILabel *urlLabel;
 
-- (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super initWithCoder:decoder]) {
-	
-	}
-	return self;
-}
+- (void) setTitle:(NSString *)title;
+- (NSString *) getTitle;
 
-- (void)dealloc {
-	[super dealloc];
-}
+- (void) setURL:(NSString *)url;
+- (NSString *) getURL;
+
++ (CGFloat) getCellHeight;
+
+- (void) setSelectedColor:(UIColor *)color;
 
 @end

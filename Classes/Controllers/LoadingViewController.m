@@ -82,6 +82,10 @@
 	}
 }
 
+- (BOOL) isShowing {
+	return self.view.superview != nil;
+}
+
 - (void) hide {
 	[self hideAfterDelay:0.0];
 }

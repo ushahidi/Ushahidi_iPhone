@@ -18,19 +18,40 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "Media.h"
+#import "NSDictionary+Extension.h"
 
-@interface TableSearchViewController : TableViewController<UISearchBarDelegate> {
+@implementation Media
 
-@public
-	IBOutlet UISearchBar *searchBar;
-	IBOutlet UIBarButtonItem *searchButton;
+@synthesize identifier, title, url;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+	if (self = [super init]) {
+		self.identifier = [dictionary stringForKey:@"mediaid"];
+		self.title = [dictionary stringForKey:@"mediatitle"];
+		self.url = [dictionary stringForKey:@"medialink"];
+	}
+	return self;
 }
 
-@property(nonatomic,retain) UISearchBar *searchBar;
-@property(nonatomic,retain) UIBarButtonItem *searchButton;
+- (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:self.title forKey:@"title"];
+	[encoder encodeObject:self.url forKey:@"url"];
+}
 
-- (void) toggleSearchBar:(UISearchBar *)theSearchBar animated:(BOOL)animated;
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super init]) {
+		self.title = [decoder decodeObjectForKey:@"title"];
+		self.url = [decoder decodeObjectForKey:@"url"];
+	}
+	return self;
+}
+
+- (void)dealloc {
+	[identifier release];
+	[title release];
+	[url release];
+    [super dealloc];
+}
 
 @end

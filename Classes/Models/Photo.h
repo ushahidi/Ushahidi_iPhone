@@ -19,22 +19,22 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "Media.h"
 
 @protocol PhotoDelegate;
 
-@interface Photo : NSObject {
+@interface Photo : Media {
 
 @public
-	NSString *url;
 	UIImage *image;	
 	UIImage *thumbnail;
 	NSIndexPath *indexPath;
 	
 @private 	
 	id<PhotoDelegate> delegate;
+	BOOL downloading;
 }
 
-@property(nonatomic,retain) NSString *url;
 @property(nonatomic,retain) UIImage *image;
 @property(nonatomic,retain) UIImage *thumbnail;
 @property(nonatomic,retain) NSIndexPath *indexPath;

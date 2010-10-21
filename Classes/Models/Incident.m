@@ -23,18 +23,30 @@
 #import "Photo.h"
 #import "Category.h"
 #import "News.h"
+#import "Sound.h"
+#import "Video.h"
 #import "NSDate+Extension.h"
 #import "NSDictionary+Extension.h"
 
 @implementation Incident
 
-@synthesize identifier, title, description, date, active, verified, news, photos, categories, location;
+typedef enum {
+	MediaTypeUnkown,
+	MediaTypePhoto,
+	MediaTypeVideo,
+	MediaTypeSound,
+	MediaTypeNews
+} MediaType;
+
+@synthesize identifier, title, description, date, active, verified, news, photos, sounds, videos, categories, location;
 @synthesize locationID, locationName, locationLatitude, locationLongitude;
 
 - (id)initWithDefaultValues {
 	if (self = [super init]) {
 		self.news = [[NSMutableArray alloc] initWithCapacity:0];
 		self.photos = [[NSMutableArray alloc] initWithCapacity:0];
+		self.sounds = [[NSMutableArray alloc] initWithCapacity:0];
+		self.videos = [[NSMutableArray alloc] initWithCapacity:0];
 		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
 	}
 	return self;
@@ -42,6 +54,11 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media {
 	if (self = [super init]) {
+		self.news = [[NSMutableArray alloc] initWithCapacity:0];
+		self.photos = [[NSMutableArray alloc] initWithCapacity:0];
+		self.sounds = [[NSMutableArray alloc] initWithCapacity:0];
+		self.videos = [[NSMutableArray alloc] initWithCapacity:0];
+		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
 		if (dictionary != nil) {
 			//DLog(@"dictionary: %@", dictionary);
 			self.identifier = [dictionary stringForKey:@"incidentid"];
@@ -59,7 +76,23 @@
 			self.locationLongitude = [dictionary stringForKey:@"locationlongitude"];
 		}
 		if (media != nil) {
-			//DLog(@"media: %@", media);
+			DLog(@"media: %@", media);
+			for (NSDictionary *mediaDictionary in media) {
+				NSInteger mediatype = [mediaDictionary intForKey:@"mediatype"];
+				if (mediatype == MediaTypePhoto) {
+					[self addPhoto:[[Photo alloc] initWithDictionary:mediaDictionary]];
+				}
+				else if (mediatype == MediaTypeVideo) {
+					[self addVideo:[[Video alloc] initWithDictionary:mediaDictionary]];
+				}
+				else if (mediatype == MediaTypeSound) {
+					[self addSound:[[Sound alloc] initWithDictionary:mediaDictionary]];
+				}
+				else if (mediatype == MediaTypeNews) {
+					[self addNews:[[News alloc] initWithDictionary:mediaDictionary]];
+				}	
+			}
+			
 		}
 	}
 	return self;
@@ -113,8 +146,8 @@
 - (BOOL) matchesString:(NSString *)string {
 	NSString *lowercaseString = [string lowercaseString];
 	return	(string == nil || [string length] == 0) ||
-			[[self.title lowercaseString] rangeOfString:lowercaseString].location != NSNotFound ||
-			[[self.description lowercaseString] rangeOfString:lowercaseString].location != NSNotFound;
+			[[self.title lowercaseString] hasPrefix:lowercaseString] ||
+			[[self.locationName lowercaseString] rangeOfString:lowercaseString].location != NSNotFound;
 }
 
 - (NSString *) getDateString {
@@ -122,35 +155,63 @@
 }
 
 - (void) addPhoto:(Photo *)photo {
-	NSMutableArray *mutablePhotos = [NSMutableArray arrayWithArray:self.photos];
-	[mutablePhotos addObject:photo];
-	self.photos = mutablePhotos;
+	[self.photos addObject:photo];
 }
 
 - (void) addNews:(News *)theNews {
-	NSMutableArray *mutableNews = [NSMutableArray arrayWithArray:self.news];
-	[mutableNews addObject:theNews];
-	self.news = mutableNews;
+	[self.news addObject:theNews];
+}
+
+- (void) addSound:(Sound *)sound {
+	[self.sounds addObject:sound];
+}
+
+- (void) addVideo:(Video *)video {
+	[self.videos addObject:video];
 }
 
 - (void) addCategory:(Category *)category {
 	DLog(@"%@", category.title);
-	NSMutableArray *mutableCategories = [NSMutableArray arrayWithArray:self.categories];
-	[mutableCategories addObject:category];
-	self.categories = mutableCategories;
+	[self.categories addObject:category];
 }
 
 - (void) removeCategory:(Category *)category {
 	DLog(@"%@", category.title);
 	if ([self.categories containsObject:category]) {
-		NSMutableArray *mutableCategories = [NSMutableArray arrayWithArray:self.categories];
-		[mutableCategories removeObject:category];
-		self.categories = mutableCategories;	
+		[self.categories removeObject:category];
 	}
 }
 
 - (BOOL) hasCategory:(Category *)category {
 	return [self.categories containsObject:category];
+}
+
+- (NSString *) getCategoryNames {
+	NSMutableString *categoryNames = [NSMutableString stringWithCapacity:0];
+	for (Category *category in self.categories) {
+		if ([categoryNames length] > 0) {
+			[categoryNames appendFormat:@","];
+		}
+		[categoryNames appendFormat:@"%@", category.title];
+	}
+	return categoryNames;
+}
+
+- (Photo *) getFirstPhoto; {
+	for (Photo *photo in self.photos) {
+		return photo;
+	} 
+	return nil;
+}
+
+- (NSString *) getLocationDescription {
+	if (self.location != nil) {
+		return self.location.name;
+	}
+	if (self.locationName != nil) {
+		return self.locationName;
+	}
+	return nil;
 }
 
 - (void)dealloc {
@@ -161,6 +222,8 @@
 	[location release];
 	[news release];
 	[photos release];
+	[sounds release];
+	[videos release];
 	[categories release];
 	[locationID release];
 	[locationName release];

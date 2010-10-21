@@ -19,23 +19,40 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
-#import "Ushahidi.h"
 
-@class IncidentsViewController;
-@class AddInstanceViewController;
+@interface IncidentTableCell : UITableViewCell {
 
-@interface InstancesViewController : TableViewController<UshahidiDelegate> {
-	
 @public
-	IBOutlet IncidentsViewController *incidentsViewController;
-	IBOutlet AddInstanceViewController *addInstanceViewController;
+	IBOutlet UILabel *titleLabel;
+	IBOutlet UILabel *locationLabel;
+	IBOutlet UILabel *categoryLabel;
+	IBOutlet UILabel *dateLabel;
+	IBOutlet UIImageView *imageView;
 }
 
-@property(nonatomic, retain) IncidentsViewController *incidentsViewController;
-@property(nonatomic, retain) AddInstanceViewController *addInstanceViewController;
+@property (nonatomic, retain) UILabel *titleLabel;
+@property (nonatomic, retain) UILabel *locationLabel;
+@property (nonatomic, retain) UILabel *categoryLabel;
+@property (nonatomic, retain) UILabel *dateLabel;
+@property (nonatomic, retain) UIImageView *imageView;
 
-- (IBAction) add:(id)sender;
-- (IBAction) refresh:(id)sender;
+- (void) setTitle:(NSString *)title;
+- (NSString *) getTitle;
+
+- (void) setLocation:(NSString *)location;
+- (NSString *) getLocation;
+
+- (void) setCategory:(NSString *)category;
+- (NSString *) getCategory;
+
+- (void) setDate:(NSString *)date;
+- (NSString *) getDate;
+
+- (void) setImage:(UIImage *)image;
+- (UIImage *) getImage;
+
+- (void) setSelectedColor:(UIColor *)color;
+
++ (CGFloat) getCellHeight;
 
 @end

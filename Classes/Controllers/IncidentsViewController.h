@@ -22,16 +22,18 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
-#import "TableSearchViewController.h"
+#import "TableViewController.h"
 #import "Ushahidi.h"
+#import "Photo.h"
 
 @class AddIncidentViewController;
 @class ViewIncidentViewController;
 @class Instance;
 
-@interface IncidentsViewController : TableSearchViewController<UshahidiDelegate, 
-															   UIActionSheetDelegate, 
-															   MKMapViewDelegate>  {
+@interface IncidentsViewController : TableViewController<UshahidiDelegate, 
+														 UIActionSheetDelegate, 
+														 MKMapViewDelegate, 
+														 PhotoDelegate>  {
 	
 @public
 	AddIncidentViewController *addIncidentViewController;
@@ -48,7 +50,6 @@
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;
 - (IBAction) action:(id)sender;
-- (IBAction) search:(id)sender;
 - (IBAction) toggleReportsAndMap:(id)sender;
 
 @end

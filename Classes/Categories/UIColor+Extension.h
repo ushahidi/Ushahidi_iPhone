@@ -24,9 +24,13 @@
 
 + (id) colorWithHexString:(NSString *)string;
 
++ (id)ushahidiDarkGray;
++ (id)ushahidiLiteGray;
 + (id)ushahidiDarkBrown;
 + (id)ushahidiLiteBrown;
-+ (id)ushahidiTan;
++ (id)ushahidiDarkTan;
++ (id)ushahidiLiteTan;
++ (id)ushahidiRed;
 
 + (id)aliceBlue;
 + (id)alizarin;

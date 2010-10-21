@@ -21,13 +21,14 @@
 #import "InstancesViewController.h"
 #import "IncidentsViewController.h"
 #import "AddInstanceViewController.h"
-#import "SubtitleTableCell.h"
+#import "InstanceTableCell.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
 #import "Instance.h"
+#import "Messages.h"
 
 @interface InstancesViewController ()
 
@@ -51,20 +52,15 @@
 	[[Ushahidi sharedUshahidi] getInstancesWithDelegate:self];
 }
 
-- (IBAction) search:(id)sender {
-	DLog(@"");
-	[self toggleSearchBar:self.searchBar animated:YES];
-}
-
 #pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.tableView.backgroundColor = [UIColor ushahidiTan];
-	[self toggleSearchBar:self.searchBar animated:NO];
-	self.oddRowColor = [UIColor ushahidiLiteBrown];
-	self.evenRowColor = [UIColor ushahidiDarkBrown];
+	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
+	self.oddRowColor = [UIColor ushahidiDarkTan];
+	self.evenRowColor = [UIColor ushahidiLiteBrown];
+	[self showSearchBarWithPlaceholder:[Messages searchInstances]];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -89,7 +85,6 @@
 - (void)dealloc {
 	[addInstanceViewController release];
 	[incidentsViewController release];
-	[searchBar release];
     [super dealloc];
 }
 
@@ -104,20 +99,22 @@
 	return [self.filteredRows count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return [InstanceTableCell getCellHeight];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"logo_image.png"] table:theTableView];
+	InstanceTableCell *cell = [TableCellFactory getInstanceTableCellForTable:theTableView];
 	Instance *instance = [self filteredRowAtIndexPath:indexPath];
 	if (instance != nil) {
-		[cell setText:instance.name];
-		[cell setDescription:instance.url];	
-		[cell setImage:instance.logo];
+		[cell setTitle:instance.name];
+		[cell setURL:instance.url];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	else {
-		[cell setText:nil];
-		[cell setDescription:nil];	
-		[cell setImage:nil];
+		[cell setTitle:nil];
+		[cell setURL:nil];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
@@ -160,29 +157,18 @@
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
-- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
-	DLog(@"searchText: %@", searchText);
+- (void) filterRows:(BOOL)reloadTable {
 	[self.filteredRows removeAllObjects];
+	NSString *searchText = [self getSearchText];
 	for (Instance *instance in self.allRows) {
 		if ([instance matchesString:searchText]) {
 			[self.filteredRows addObject:instance];
 		}
 	}
-	[self.tableView reloadData];	
-	[self.tableView flashScrollIndicators];
-}   
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
-	DLog(@"searchText: %@", theSearchBar.text);
-	[self.filteredRows removeAllObjects];
-	for (Instance *instance in self.allRows) {
-		if ([instance matchesString:theSearchBar.text]) {
-			[self.filteredRows addObject:instance];
-		}
+	if (reloadTable) {
+		[self.tableView reloadData];	
+		[self.tableView flashScrollIndicators];
 	}
-	[self.tableView reloadData];	
-	[self.tableView flashScrollIndicators];
-	[theSearchBar resignFirstResponder];
-}  
+}
 
 @end

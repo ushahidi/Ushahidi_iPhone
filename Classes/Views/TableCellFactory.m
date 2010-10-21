@@ -29,8 +29,61 @@
 #import "ImageTableCell.h"
 #import "MapTableCell.h"
 #import "DateTableCell.h"
+#import "InstanceTableCell.h"
+#import "IncidentTableCell.h"
+#import "UIColor+Extension.h"
+
+@interface TableCellFactory ()
+
++ (UITableViewCell *) getTableViewCellFromNib:(NSString *)nibName;
+
+@end
 
 @implementation TableCellFactory
+
++ (UITableViewCell *) getTableViewCellFromNib:(NSString *)nibName {
+	NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
+	for (id currentObject in topLevelObjects) {
+		if ([currentObject isKindOfClass:[UITableViewCell class]]) {
+			return (UITableViewCell *)currentObject;
+		}
+	}
+	return nil;
+}
+
+#pragma mark -
+#pragma mark InstanceTableCell
+
++ (InstanceTableCell *) getInstanceTableCellForTable:(UITableView *)tableView {
+	return [TableCellFactory getInstanceTableCellForTable:tableView identifier:@"InstanceTableCell"];
+}
+
++ (InstanceTableCell *) getInstanceTableCellForTable:(UITableView *)tableView
+										  identifier:(NSString *)cellIdentifier {
+	InstanceTableCell *cell = (InstanceTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (cell == nil) {
+		cell = (InstanceTableCell *)[TableCellFactory getTableViewCellFromNib:@"InstanceTableCell"];
+		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
+	}
+	return cell;
+}
+
+#pragma mark -
+#pragma mark IncidentTableCell
+
++ (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView {
+	return [TableCellFactory getIncidentTableCellForTable:tableView identifier:@"IncidentTableCell"];
+}
+
++ (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView
+										  identifier:(NSString *)cellIdentifier {
+	IncidentTableCell *cell = (IncidentTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (cell == nil) {
+		cell = (IncidentTableCell *)[TableCellFactory getTableViewCellFromNib:@"IncidentTableCell"];
+		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
+	}
+	return cell;
+}
 
 #pragma mark -
 #pragma mark UITableViewCell

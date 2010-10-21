@@ -24,6 +24,7 @@
 @interface Photo ()
 
 @property (nonatomic, assign) id<PhotoDelegate> delegate;
+@property (nonatomic, assign) BOOL downloading;
 
 - (void) downloadImageInBackground:(NSString *)urlString;
 - (void) notifyDelegate;
@@ -32,13 +33,20 @@
 
 @implementation Photo
 
-NSInteger const kMaxWidth = 64;
-NSInteger const kMaxHeight = 64;
+NSInteger const kMaxWidth = 80;
+NSInteger const kMaxHeight = 80;
 
-@synthesize delegate, url, image, thumbnail, indexPath;
+@synthesize delegate, image, thumbnail, indexPath, downloading;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+	if (self = [super initWithDictionary:dictionary]) {
+		
+	}
+	return self;
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-	[encoder encodeObject:self.url forKey:@"url"];
+	[super encodeWithCoder:encoder];
 	if (self.image != nil) {
 		[encoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"image"];
 	} 
@@ -54,8 +62,7 @@ NSInteger const kMaxHeight = 64;
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super init]) {
-		self.url = [decoder decodeObjectForKey:@"url"];
+	if (self = [super initWithCoder:decoder]) {
 		NSData *imageData = [decoder decodeObjectForKey:@"image"];
 		if (imageData != nil) {
 			self.image = [UIImage imageWithData:imageData];
@@ -70,15 +77,16 @@ NSInteger const kMaxHeight = 64;
 
 - (void)dealloc {
 	delegate = nil;
-	[url release];
 	[image release];
 	[thumbnail release];
 	[indexPath release];
     [super dealloc];
 }
+
 - (void) downloadWithDelegate:(id<PhotoDelegate>)theDelegate {
 	self.delegate = theDelegate;
-	if (self.url != nil) {
+	if (self.url != nil && self.downloading == NO) {
+		self.downloading = YES;
 		[self performSelectorInBackground:@selector(downloadImageInBackground:) withObject:self.url];
 	}
 }
@@ -86,19 +94,25 @@ NSInteger const kMaxHeight = 64;
 - (void) downloadImageInBackground:(NSString *)urlString {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	@try {
-		NSURL *imageURL = [NSURL URLWithString:urlString];
+		DLog(@"Downloading Photo: %@", urlString);
+		//TODO get full photo url
+		NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://demo.ushahidi.com/media/uploads/%@", urlString]];
 		NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-		self.image = [[UIImage alloc] initWithData:imageData];
-		CGSize size;
-		if (self.image.size.width > self.image.size.height) {
-			size = CGSizeMake(kMaxWidth, kMaxWidth * self.image.size.height / self.image.size.width);
+		if (imageData != nil) {
+			self.image = [[UIImage alloc] initWithData:imageData];
+			CGSize thumbnailSize = CGSizeMake(kMaxWidth, kMaxHeight);
+			if (self.image.size.width > self.image.size.height) {
+				thumbnailSize = CGSizeMake(kMaxWidth, kMaxWidth * self.image.size.height / self.image.size.width);
+			}
+			else {
+				thumbnailSize = CGSizeMake(kMaxHeight * self.image.size.width / self.image.size.height, kMaxHeight);
+			}
+			self.thumbnail = [self.image resizedImage:thumbnailSize interpolationQuality:kCGInterpolationMedium];
+			[self performSelectorOnMainThread:@selector(notifyDelegate) withObject:nil waitUntilDone:YES];
 		}
-		else {
-			size = CGSizeMake(kMaxHeight * self.image.size.width / self.image.size.height, kMaxHeight);
-		}
-		self.thumbnail = [self.image resizedImage:size interpolationQuality:kCGInterpolationMedium];
 	}
 	@finally {
+		self.downloading = NO;
 		[pool release];
 	}
 }

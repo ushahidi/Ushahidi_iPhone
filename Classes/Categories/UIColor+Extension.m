@@ -59,9 +59,13 @@
 						   alpha:1.0f];  
 }
 
-+ (id)ushahidiDarkBrown                                 {vendColor(237, 231, 209);}
-+ (id)ushahidiLiteBrown									{vendColor(243, 237, 221);}
-+ (id)ushahidiTan										{vendColor(246, 246, 238);}
++ (id)ushahidiDarkGray									{vendColor(120, 105, 94);} //#78695e 
++ (id)ushahidiLiteGray									{vendColor(204, 204, 204);} //#cccccc
++ (id)ushahidiDarkBrown                                 {vendColor(215, 200, 150);} //#d7c896
++ (id)ushahidiLiteBrown									{vendColor(237, 230, 208);} //#ede6d0
++ (id)ushahidiDarkTan									{vendColor(242, 237, 220);} //#f2eddc 
++ (id)ushahidiLiteTan									{vendColor(246, 246, 238);} //#f6f6ee
++ (id)ushahidiRed										{vendColor(137, 31, 2);} //#891f02
 
 + (id)aliceBlue                                         {vendColor(240, 248, 255);}
 + (id)alizarin                                          {vendColor(227, 38, 54);}

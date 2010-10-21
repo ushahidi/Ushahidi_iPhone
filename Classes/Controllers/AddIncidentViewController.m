@@ -340,7 +340,7 @@ typedef enum {
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)theLocations error:(NSError *)error hasChanges:(BOOL)hasChanges{
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+		//[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
 	else if(hasChanges) {
 		DLog(@"locations: %@", theLocations);
@@ -364,7 +364,7 @@ typedef enum {
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+		//[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
 	else if (hasChanges){
 		DLog(@"categories: %@", categories);

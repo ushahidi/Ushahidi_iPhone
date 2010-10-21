@@ -21,7 +21,7 @@
 #import "IncidentsViewController.h"
 #import "AddIncidentViewController.h"
 #import "ViewIncidentViewController.h"
-#import "SubtitleTableCell.h"
+#import "IncidentTableCell.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
 #import "LoadingViewController.h"
@@ -31,6 +31,7 @@
 #import "Instance.h"
 #import "MKMapView+Extension.h"
 #import "MapAnnotation.h"
+#import "Messages.h"
 
 typedef enum {
 	ViewModeReports,
@@ -70,26 +71,16 @@ typedef enum {
 	[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
 }
 
-- (IBAction) search:(id)sender {
-	DLog(@"");
-	[self toggleSearchBar:self.searchBar animated:YES];
-}
-
 - (IBAction) toggleReportsAndMap:(id)sender {
 	DLog(@"");
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
 	if (segmentControl.selectedSegmentIndex == ViewModeReports) {
 		self.tableView.hidden = NO;
 		self.mapView.hidden = YES;
-		self.searchButton.enabled = YES;
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
 		self.tableView.hidden = YES;
 		self.mapView.hidden = NO;
-		self.searchButton.enabled = NO;
-		if (self.searchBar.frame.origin.y == 0) {
-			[self toggleSearchBar:self.searchBar animated:NO];
-		}
 		[self.mapView removeAllPins];
 		self.mapView.showsUserLocation = YES;
 		for (Incident *incident in self.allRows) {
@@ -104,10 +95,10 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.tableView.backgroundColor = [UIColor ushahidiTan];
-	[self toggleSearchBar:self.searchBar animated:NO];
-	self.oddRowColor = [UIColor ushahidiLiteBrown];
-	self.evenRowColor = [UIColor ushahidiDarkBrown];
+	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
+	self.oddRowColor = [UIColor ushahidiDarkTan];
+	self.evenRowColor = [UIColor ushahidiLiteBrown];
+	[self showSearchBarWithPlaceholder:[Messages searchIncidents]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -150,19 +141,39 @@ typedef enum {
 	return [self.filteredRows count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return [IncidentTableCell getCellHeight];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
+	IncidentTableCell *cell = [TableCellFactory getIncidentTableCellForTable:theTableView];
 	Incident *incident = [self filteredRowAtIndexPath:indexPath];
 	if (incident != nil) {
-		[cell setText:incident.title];
-		[cell setDescription:incident.description];
-		[cell setImage:[UIImage imageNamed:@"no_image.png"]];
+		[cell setTitle:incident.title];
+		[cell setLocation:[incident getLocationDescription]];
+		[cell setCategory:[incident getCategoryNames]];
+		[cell setDate:[incident getDateString]];
+		Photo *photo = [incident getFirstPhoto];
+		if (photo != nil) {
+			if (photo.thumbnail != nil) {
+				[cell setImage:photo.thumbnail];
+			}
+			else {
+				[cell setImage:nil];
+				[photo downloadWithDelegate:self];
+			}
+		}
+		else {
+			[cell setImage:nil];
+		}
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	else {
-		[cell setText:nil];
-		[cell setDescription:nil];	
+		[cell setTitle:nil];
+		[cell setLocation:nil];
+		[cell setCategory:nil];
+		[cell setDate:nil];
 		[cell setImage:nil];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -187,32 +198,21 @@ typedef enum {
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
-- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
-	DLog(@"searchText: %@", searchText);
+- (void) filterRows:(BOOL)reloadTable {
 	[self.filteredRows removeAllObjects];
+	NSString *searchText = [self getSearchText];
 	for (Incident *incident in self.allRows) {
 		if ([incident matchesString:searchText]) {
 			[self.filteredRows addObject:incident];
 		}
 	}
 	DLog(@"Re-Adding Rows");
-	[self.tableView reloadData];	
-	[self.tableView flashScrollIndicators];
-}   
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
-	DLog(@"searchText: %@", theSearchBar.text);
-	[self.filteredRows removeAllObjects];
-	for (Incident *incident in self.allRows) {
-		if ([incident matchesString:theSearchBar.text]) {
-			[self.filteredRows addObject:incident];
-		}
+	if (reloadTable) {
+		[self.tableView reloadData];	
+		[self.tableView flashScrollIndicators];
 	}
-	DLog(@"Re-Adding Rows");
-	[self.tableView reloadData];	
-	[self.tableView flashScrollIndicators];
-	[theSearchBar resignFirstResponder];
-}   
+} 
+
 #pragma mark -
 #pragma mark MKMapViewDelegate
 
@@ -234,7 +234,10 @@ typedef enum {
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)theIncidents error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+		if ([self.loadingView isShowing]) {
+			[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+		}
+		[self.loadingView hide];
 	}
 	else if(hasChanges) {
 		DLog(@"incidents: %d", [theIncidents count]);
@@ -245,9 +248,11 @@ typedef enum {
 		[self.filteredRows addObjectsFromArray:self.allRows];
 		[self.tableView reloadData];
 		[self.tableView flashScrollIndicators];
+		[self.loadingView hide];
 		DLog(@"Re-Adding Rows");
 	}
 	else {
+		[self.loadingView hide];
 		DLog(@"No Changes");
 	}
 }
@@ -278,6 +283,17 @@ typedef enum {
 	self.viewIncidentViewController.incident = [self rowAtIndex:mapAnnotation.index];
 	self.viewIncidentViewController.incidents = self.allRows;
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];	
+}
+
+#pragma mark -
+#pragma mark PhotoDelegate
+
+- (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath {
+	DLog(@"photoDownloaded: %@", photo.url);
+	IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+	if (cell != nil && photo != nil && photo.thumbnail != nil) {
+		[cell setImage:photo.thumbnail];
+	}
 }
 
 @end

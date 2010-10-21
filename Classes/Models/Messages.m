@@ -18,30 +18,28 @@
  **
  *****************************************************************************/
 
-#import "News.h"
+#import "Messages.h"
 
-@implementation News
+@implementation Messages
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super initWithDictionary:dictionary]) {
-	
-	}
-	return self;
++ (NSString *) noLocationSpecified {
+	return NSLocalizedString(@"No Location Specified", @"No Location Specified");
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder {
-	[super encodeWithCoder:encoder];
++ (NSString *) noCategorySpecified {
+	return NSLocalizedString(@"No Category Specified", @"No Category Specified");
 }
 
-- (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super initWithCoder:decoder]) {
-	
-	}
-	return self;
++ (NSString *) noDateSpecified {
+	return NSLocalizedString(@"No Date Specified", @"No Date Specified");
 }
 
-- (void)dealloc {
-	[super dealloc];
++ (NSString *) searchInstances {
+	return NSLocalizedString(@"Search instances...", @"Search instances...");
+}
+
++ (NSString *) searchIncidents {
+	return NSLocalizedString(@"Search incidents...", @"Search incidents...");
 }
 
 @end

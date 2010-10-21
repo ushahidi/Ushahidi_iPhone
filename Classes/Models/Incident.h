@@ -23,6 +23,8 @@
 @class Location;
 @class Photo;
 @class News;
+@class Sound;
+@class Video;
 @class Category;
 
 @interface Incident : NSObject {
@@ -36,9 +38,11 @@
 	BOOL active;
 	BOOL verified;
 	
-	NSArray *news;
-	NSArray *photos;
-	NSArray *categories;
+	NSMutableArray *news;
+	NSMutableArray *photos;
+	NSMutableArray *sounds;
+	NSMutableArray *videos;
+	NSMutableArray *categories;
 	
 	Location *location;
 	
@@ -56,9 +60,11 @@
 @property(nonatomic,assign) BOOL active;
 @property(nonatomic,assign) BOOL verified;
 
-@property(nonatomic,retain) NSArray *news;
-@property(nonatomic,retain) NSArray *photos;
-@property(nonatomic,retain) NSArray *categories;
+@property(nonatomic,retain) NSMutableArray *news;
+@property(nonatomic,retain) NSMutableArray *photos;
+@property(nonatomic,retain) NSMutableArray *sounds;
+@property(nonatomic,retain) NSMutableArray *videos;
+@property(nonatomic,retain) NSMutableArray *categories;
 
 @property(nonatomic,retain) Location *location;
 
@@ -75,8 +81,15 @@
 
 - (void) addPhoto:(Photo *)photo;
 - (void) addNews:(News *)news;
+- (void) addSound:(Sound *)sound;
+- (void) addVideo:(Video *)video;
 - (void) addCategory:(Category *)category;
 - (void) removeCategory:(Category *)category;
 - (BOOL) hasCategory:(Category *)category;
+- (NSString *) getCategoryNames;
+
+- (Photo *) getFirstPhoto;
+
+- (NSString *) getLocationDescription;
 
 @end

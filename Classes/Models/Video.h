@@ -18,30 +18,11 @@
  **
  *****************************************************************************/
 
-#import "News.h"
+#import <Foundation/Foundation.h>
+#import "Media.h"
 
-@implementation News
+@interface Video : Media {
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super initWithDictionary:dictionary]) {
-	
-	}
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder {
-	[super encodeWithCoder:encoder];
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super initWithCoder:decoder]) {
-	
-	}
-	return self;
-}
-
-- (void)dealloc {
-	[super dealloc];
 }
 
 @end

@@ -19,15 +19,10 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "Media.h"
 
-@interface News : NSObject {
+@interface News : Media {
 
-@public
-	NSString *title;
-	NSString *url;	
 }
-
-@property(nonatomic,retain) NSString *title;
-@property(nonatomic,retain) NSString *url;
 
 @end

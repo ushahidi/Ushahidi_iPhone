@@ -25,6 +25,7 @@
 @interface TableViewController ()
 
 @property(nonatomic,assign) CGFloat toolbarHeight;
+@property(nonatomic,assign) BOOL shouldBeginEditing;
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
 - (void) keyboardWillShow:(NSNotification *)notification;
@@ -35,7 +36,47 @@
 
 @implementation TableViewController
 
-@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight;
+@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight, shouldBeginEditing;
+
+- (void) hideSearchBar {
+	if (self.tableView.tableHeaderView != nil) {
+		[self.tableView.tableHeaderView release];
+		self.tableView.tableHeaderView = nil;
+	}
+}
+
+- (void) showSearchBar {
+	[self showSearchBarWithPlaceholder:nil];
+}
+
+- (void) showSearchBarWithPlaceholder:(NSString *)placeholder {
+	UISearchBar *searchBar = [[UISearchBar alloc] init];
+	searchBar.delegate = self;
+	searchBar.keyboardType = UIKeyboardTypeDefault;
+	searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
+	searchBar.barStyle = UIBarStyleBlack;
+	searchBar.placeholder = placeholder;
+	[searchBar sizeToFit];
+	[self.tableView setTableHeaderView:searchBar];
+	[searchBar release];
+}
+
+- (NSString *) getSearchText {
+	UISearchBar *searchBar = (UISearchBar*)self.tableView.tableHeaderView;
+	if (searchBar != nil) {
+		return searchBar.text;
+	}
+	return nil;
+}
+
+
+- (void) filterRows {
+	[self filterRows:YES];
+}
+
+- (void) filterRows:(BOOL)reloadTable {
+	//Do nothing in parent class
+}
 
 - (id) rowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([self.allRows count] > indexPath.row) {
@@ -92,6 +133,7 @@
 	DLog(@"%@", self.nibName);
 	self.allRows = [[NSMutableArray alloc] initWithCapacity:0];
 	self.filteredRows = [[NSMutableArray alloc] initWithCapacity:0];
+	self.shouldBeginEditing = YES;
 }
 
 - (void)dealloc {
@@ -190,6 +232,38 @@
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath {
 	DLog(@"scrollToIndexPath: [%d, %d]", indexPath.section, indexPath.row);
 	[self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];	
+}
+
+#pragma mark -
+#pragma mark UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+	[searchBar resignFirstResponder];
+}   
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+	[searchBar resignFirstResponder];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+	[searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+	[searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+	if(![searchBar isFirstResponder]) {
+		self.shouldBeginEditing = NO;
+	}
+	[self filterRows:YES];
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar {
+    BOOL boolToReturn = self.shouldBeginEditing;
+    self.shouldBeginEditing = YES;
+    return boolToReturn;
 }
 
 @end

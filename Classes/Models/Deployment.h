@@ -18,25 +18,22 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "TableViewController.h"
-#import "TextFieldTableCell.h"
+#import <Foundation/Foundation.h>
 
-@interface AddInstanceViewController : TableViewController<TextFieldTableCellDelegate> {
-	
+@interface Deployment : NSObject {
+
 @public
-	UIBarButtonItem *cancelButton;
-	UIBarButtonItem *doneButton;
-	
-@private
 	NSString *name;
 	NSString *url;
+	UIImage *logo;
 }
 
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property(nonatomic,retain) NSString *name;
+@property(nonatomic,retain) NSString *url;
+@property(nonatomic,retain) UIImage *logo;
 
-- (IBAction) cancel:(id)sender;
-- (IBAction) done:(id)sender;
+- (id)initWithName:(NSString *)name url:(NSString *)url logo:(UIImage *)logo;
+
+- (BOOL) matchesString:(NSString *)string;
 
 @end

@@ -20,22 +20,23 @@
 
 #import <UIKit/UIKit.h>
 #import "TableViewController.h"
-#import "Ushahidi.h"
+#import "TextFieldTableCell.h"
 
-@class IncidentsViewController;
-@class AddInstanceViewController;
-
-@interface InstancesViewController : TableViewController<UshahidiDelegate> {
+@interface AddDeploymentViewController : TableViewController<TextFieldTableCellDelegate> {
 	
 @public
-	IBOutlet IncidentsViewController *incidentsViewController;
-	IBOutlet AddInstanceViewController *addInstanceViewController;
+	UIBarButtonItem *cancelButton;
+	UIBarButtonItem *doneButton;
+	
+@private
+	NSString *name;
+	NSString *url;
 }
 
-@property(nonatomic, retain) IncidentsViewController *incidentsViewController;
-@property(nonatomic, retain) AddInstanceViewController *addInstanceViewController;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 
-- (IBAction) add:(id)sender;
-- (IBAction) refresh:(id)sender;
+- (IBAction) cancel:(id)sender;
+- (IBAction) done:(id)sender;
 
 @end

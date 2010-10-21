@@ -29,7 +29,7 @@
 #import "ImageTableCell.h"
 #import "MapTableCell.h"
 #import "DateTableCell.h"
-#import "InstanceTableCell.h"
+#import "DeploymentTableCell.h"
 #import "IncidentTableCell.h"
 #import "UIColor+Extension.h"
 
@@ -52,17 +52,17 @@
 }
 
 #pragma mark -
-#pragma mark InstanceTableCell
+#pragma mark DeploymentTableCell
 
-+ (InstanceTableCell *) getInstanceTableCellForTable:(UITableView *)tableView {
-	return [TableCellFactory getInstanceTableCellForTable:tableView identifier:@"InstanceTableCell"];
++ (DeploymentTableCell *) getDeploymentTableCellForTable:(UITableView *)tableView {
+	return [TableCellFactory getDeploymentTableCellForTable:tableView identifier:@"DeploymentTableCell"];
 }
 
-+ (InstanceTableCell *) getInstanceTableCellForTable:(UITableView *)tableView
++ (DeploymentTableCell *) getDeploymentTableCellForTable:(UITableView *)tableView
 										  identifier:(NSString *)cellIdentifier {
-	InstanceTableCell *cell = (InstanceTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	DeploymentTableCell *cell = (DeploymentTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = (InstanceTableCell *)[TableCellFactory getTableViewCellFromNib:@"InstanceTableCell"];
+		cell = (DeploymentTableCell *)[TableCellFactory getTableViewCellFromNib:@"DeploymentTableCell"];
 		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
 	}
 	return cell;

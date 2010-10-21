@@ -34,8 +34,8 @@
 	return NSLocalizedString(@"No Date Specified", @"No Date Specified");
 }
 
-+ (NSString *) searchInstances {
-	return NSLocalizedString(@"Search instances...", @"Search instances...");
++ (NSString *) searchServers {
+	return NSLocalizedString(@"Search deployments...", @"Search deployments...");
 }
 
 + (NSString *) searchIncidents {

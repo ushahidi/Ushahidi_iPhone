@@ -50,7 +50,7 @@
 }
 
 - (NSInteger) numberOfPins {
-	[[self.mapView annotations] count];
+	return [[self.mapView annotations] count];
 }
 
 - (void) removeAllPins {

@@ -163,7 +163,7 @@
 #pragma mark -
 #pragma mark System
 
-- (NSString *) getServerVersion {
+- (NSString *) getDeploymentVersion {
 	return [NSString stringWithFormat:@"http://%@/api?task=version&resp=json", self.domain];
 }
 

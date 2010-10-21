@@ -18,38 +18,38 @@
  **
  *****************************************************************************/
 
-#import "InstancesViewController.h"
+#import "DeploymentsViewController.h"
 #import "IncidentsViewController.h"
-#import "AddInstanceViewController.h"
-#import "InstanceTableCell.h"
+#import "AddDeploymentViewController.h"
+#import "DeploymentTableCell.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
-#import "Instance.h"
+#import "Deployment.h"
 #import "Messages.h"
 
-@interface InstancesViewController ()
+@interface DeploymentsViewController ()
 
 @end
 
-@implementation InstancesViewController
+@implementation DeploymentsViewController
 
-@synthesize incidentsViewController, addInstanceViewController;
+@synthesize incidentsViewController, addDeploymentViewController;
 
 #pragma mark -
 #pragma mark Handlers
 
 - (IBAction) add:(id)sender {
 	DLog(@"");
-	[self presentModalViewController:self.addInstanceViewController animated:YES];
+	[self presentModalViewController:self.addDeploymentViewController animated:YES];
 }
 	 
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
 	[self.loadingView showWithMessage:@"Loading..."];
-	[[Ushahidi sharedUshahidi] getInstancesWithDelegate:self];
+	[[Ushahidi sharedUshahidi] getDeploymentsWithDelegate:self];
 }
 
 #pragma mark -
@@ -60,19 +60,19 @@
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiDarkTan];
 	self.evenRowColor = [UIColor ushahidiLiteBrown];
-	[self showSearchBarWithPlaceholder:[Messages searchInstances]];
+	[self showSearchBarWithPlaceholder:[Messages searchServers]];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.willBePushed || self.modalViewController != nil) {
-		NSArray *instances = [[Ushahidi sharedUshahidi] getInstancesWithDelegate:self];
+		NSArray *deployments = [[Ushahidi sharedUshahidi] getDeploymentsWithDelegate:self];
 		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:instances];
+		[self.allRows addObjectsFromArray:deployments];
 		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:instances];
-		DLog(@"Re-Adding Rows: %d", [instances count]);
+		[self.filteredRows addObjectsFromArray:deployments];
+		DLog(@"Re-Adding Rows: %d", [deployments count]);
 	}
 	[self.tableView reloadData];
 }
@@ -83,7 +83,7 @@
 }
 
 - (void)dealloc {
-	[addInstanceViewController release];
+	[addDeploymentViewController release];
 	[incidentsViewController release];
     [super dealloc];
 }
@@ -100,15 +100,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return [InstanceTableCell getCellHeight];
+	return [DeploymentTableCell getCellHeight];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	InstanceTableCell *cell = [TableCellFactory getInstanceTableCellForTable:theTableView];
-	Instance *instance = [self filteredRowAtIndexPath:indexPath];
-	if (instance != nil) {
-		[cell setTitle:instance.name];
-		[cell setURL:instance.url];
+	DeploymentTableCell *cell = [TableCellFactory getDeploymentTableCellForTable:theTableView];
+	Deployment *deployment = [self filteredRowAtIndexPath:indexPath];
+	if (deployment != nil) {
+		[cell setTitle:deployment.name];
+		[cell setURL:deployment.url];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
@@ -123,16 +123,16 @@
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-	Instance *instance = [self.filteredRows objectAtIndex:indexPath.row];
-	[[Ushahidi sharedUshahidi] loadForDomain:instance.url];
-	self.incidentsViewController.instance = instance;
+	Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
+	[[Ushahidi sharedUshahidi] loadForDomain:deployment.url];
+	self.incidentsViewController.deployment = deployment;
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
 }
 
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi instances:(NSArray *)theInstances error:(NSError *)error hasChanges:(BOOL)hasChanges {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi deployments:(NSArray *)theDeployments error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	DLog(@"");
 	[self.loadingView hide];
 	if (error != nil) {
@@ -140,11 +140,11 @@
 		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
 	else if (hasChanges) {
-		DLog(@"instances: %@", theInstances);
+		DLog(@"deployments: %@", theDeployments);
 		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:theInstances];
+		[self.allRows addObjectsFromArray:theDeployments];
 		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:theInstances];
+		[self.filteredRows addObjectsFromArray:theDeployments];
 		[self.tableView reloadData];	
 		[self.tableView flashScrollIndicators];
 	}
@@ -160,9 +160,9 @@
 - (void) filterRows:(BOOL)reloadTable {
 	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
-	for (Instance *instance in self.allRows) {
-		if ([instance matchesString:searchText]) {
-			[self.filteredRows addObject:instance];
+	for (Deployment *deployment in self.allRows) {
+		if ([deployment matchesString:searchText]) {
+			[self.filteredRows addObject:deployment];
 		}
 	}
 	if (reloadTable) {

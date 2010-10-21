@@ -24,7 +24,7 @@
 #import "NSKeyedUnarchiver+Extension.h"
 #import "API.h"
 #import "JSON.h"
-#import "Instance.h"
+#import "Deployment.h"
 #import "Category.h"
 #import "Location.h"
 #import "Country.h"
@@ -35,7 +35,7 @@
 @property(nonatomic, retain) API *api;
 @property(nonatomic, retain) NSString *domain;
 
-@property(nonatomic, retain) NSMutableDictionary *instances;
+@property(nonatomic, retain) NSMutableDictionary *deployments;
 @property(nonatomic, retain) NSMutableDictionary *countries;
 @property(nonatomic, retain) NSMutableDictionary *categories;
 @property(nonatomic, retain) NSMutableDictionary *locations;
@@ -49,14 +49,14 @@
 
 @implementation Ushahidi
 
-@synthesize domain, api, delegates, instances, countries, categories, locations, incidents;
+@synthesize domain, api, delegates, deployments, countries, categories, locations, incidents;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (id) init {
 	if ((self = [super init])) {
-		self.instances = [NSKeyedUnarchiver unarchiveObjectWithKey:@"instances"];
-		if (self.instances == nil) self.instances = [[NSMutableDictionary alloc] init];
+		self.deployments = [NSKeyedUnarchiver unarchiveObjectWithKey:@"deployments"];
+		if (self.deployments == nil) self.deployments = [[NSMutableDictionary alloc] init];
 		
 		self.countries = [NSKeyedUnarchiver unarchiveObjectWithKey:@"countries"];
 		if (self.countries == nil) self.countries = [[NSMutableDictionary alloc] init];
@@ -77,7 +77,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (void)dealloc {
 	[domain release];
-	[instances release];
+	[deployments release];
 	[countries release];
 	[categories release];
 	[locations release];
@@ -88,7 +88,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (void) save {
 	DLog(@"");
-	[NSKeyedArchiver archiveObject:self.instances forKey:@"instances"];
+	[NSKeyedArchiver archiveObject:self.deployments forKey:@"deployments"];
 	[NSKeyedArchiver archiveObject:self.countries forKey:@"countries"];
 	[NSKeyedArchiver archiveObject:self.categories forKey:@"categories"];
 	[NSKeyedArchiver archiveObject:self.locations forKey:@"locations"];
@@ -109,20 +109,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"domain: %@", self.domain);
 }
 
-- (BOOL)addInstance:(Instance *)instance {
-	if (instance != nil) {
-		[self.instances setObject:instance forKey:instance.url];
+- (BOOL)addDeployment:(Deployment *)deployment {
+	if (deployment != nil) {
+		[self.deployments setObject:deployment forKey:deployment.url];
 		return YES;
 	}
 	return NO;
 }
 
-- (BOOL)addInstanceByName:(NSString *)name andUrl:(NSString *)url {
+- (BOOL)addDeploymentByName:(NSString *)name andUrl:(NSString *)url {
 	if (name != nil && [name length] > 0 && url != nil && [url length] > 0) {
-		Instance *instance = [[Instance alloc] initWithName:name 
-														url:url
-													   logo:[UIImage imageNamed:@"logo_image.png"]];
-		[self.instances setObject:instance forKey:url];
+		Deployment *deployment = [[Deployment alloc] initWithName:name 
+															  url:url
+															 logo:[UIImage imageNamed:@"logo_image.png"]];
+		[self.deployments setObject:deployment forKey:url];
 		return YES;
 	}
 	return NO;
@@ -139,23 +139,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Categories
 
-- (NSArray *) getInstancesWithDelegate:(id<UshahidiDelegate>)delegate {
+- (NSArray *) getDeploymentsWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
-	if ([self.instances count] == 0) {
-		[self.instances setObject:[[Instance alloc] initWithName:@"Demo Ushahidi" 
-															 url:@"http://demo.ushahidi.com"
-															logo:[UIImage imageNamed:@"logo_image.png"]] 
-														  forKey:@"http://demo.ushahidi.com"];
+	if ([self.deployments count] == 0) {
+		[self.deployments setObject:[[Deployment alloc] initWithName:@"Demo Ushahidi" 
+																 url:@"http://demo.ushahidi.com"
+																logo:[UIImage imageNamed:@"logo_image.png"]] 
+															  forKey:@"http://demo.ushahidi.com"];
 	}
 	[self performSelector:@selector(notifyDelegate:) withObject:delegate afterDelay:2.0];
-	return [self.instances allValues];
+	return [self.deployments allValues];
 }
 
 - (void) notifyDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"");
-	SEL selector = @selector(downloadedFromUshahidi:instances:error:hasChanges:);
+	SEL selector = @selector(downloadedFromUshahidi:deployments:error:hasChanges:);
 	if (delegate != NULL && [delegate respondsToSelector:selector]) {
-		[delegate downloadedFromUshahidi:self instances:[self.instances allValues] error:nil hasChanges:NO];
+		[delegate downloadedFromUshahidi:self deployments:[self.deployments allValues] error:nil hasChanges:NO];
 	}
 }
 

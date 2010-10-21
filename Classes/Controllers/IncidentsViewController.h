@@ -28,7 +28,7 @@
 
 @class AddIncidentViewController;
 @class ViewIncidentViewController;
-@class Instance;
+@class Deployment;
 
 @interface IncidentsViewController : TableViewController<UshahidiDelegate, 
 														 UIActionSheetDelegate, 
@@ -39,13 +39,13 @@
 	AddIncidentViewController *addIncidentViewController;
 	ViewIncidentViewController *viewIncidentViewController;
 	MKMapView *mapView;
-	Instance *instance;
+	Deployment *deployment;
 }
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
 @property(nonatomic,retain) IBOutlet ViewIncidentViewController *viewIncidentViewController;
 @property(nonatomic,retain) IBOutlet MKMapView *mapView;
-@property(nonatomic,retain) Instance *instance;
+@property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;

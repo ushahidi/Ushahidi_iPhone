@@ -18,7 +18,7 @@
  **
  *****************************************************************************/
 
-#import "AddInstanceViewController.h"
+#import "AddDeploymentViewController.h"
 #import "TableCellFactory.h"
 #import "LoadingViewController.h"
 #import "AlertView.h"
@@ -30,7 +30,7 @@ typedef enum {
 	TableSectionURL
 } TableSection;
 
-@interface AddInstanceViewController ()
+@interface AddDeploymentViewController ()
 
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *url;
@@ -40,7 +40,7 @@ typedef enum {
 
 @end
 
-@implementation AddInstanceViewController
+@implementation AddDeploymentViewController
 
 @synthesize cancelButton, doneButton, name, url;
 
@@ -72,14 +72,14 @@ typedef enum {
 - (IBAction) done:(id)sender {
 	DLog(@"done");
 	[self.view endEditing:YES];
-	[self.loadingView showWithMessage:@"Adding Instance..."];
-	if ([[Ushahidi sharedUshahidi] addInstanceByName:self.name andUrl:self.url]) {
-		[self.loadingView showWithMessage:@"Instance Added!"];
+	[self.loadingView showWithMessage:@"Adding Server..."];
+	if ([[Ushahidi sharedUshahidi] addDeploymentByName:self.name andUrl:self.url]) {
+		[self.loadingView showWithMessage:@"Server Added!"];
 		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:2.0];
 	}
 	else {
 		[self.loadingView hide];
-		[self.alertView showWithTitle:@"Error" andMessage:@"There was a problem adding instance."];
+		[self.alertView showWithTitle:@"Error" andMessage:@"There was a problem adding deployment."];
 	}
 	
 }

@@ -27,7 +27,7 @@
 + (NSString *) noLocationSpecified;
 + (NSString *) noCategorySpecified;
 + (NSString *) noDateSpecified;
-+ (NSString *) searchInstances;
++ (NSString *) searchServers;
 + (NSString *) searchIncidents;
 
 @end

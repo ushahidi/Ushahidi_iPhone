@@ -531,12 +531,10 @@
 							<string>action:</string>
 							<string>add:</string>
 							<string>refresh:</string>
-							<string>search:</string>
 							<string>toggleReportsAndMap:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -550,7 +548,6 @@
 							<string>action:</string>
 							<string>add:</string>
 							<string>refresh:</string>
-							<string>search:</string>
 							<string>toggleReportsAndMap:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -565,10 +562,6 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">refresh:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">search:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

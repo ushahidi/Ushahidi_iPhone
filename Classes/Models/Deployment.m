@@ -18,13 +18,13 @@
  **
  *****************************************************************************/
 
-#import "Instance.h"
+#import "Deployment.h"
 
-@interface Instance ()
+@interface Deployment ()
 
 @end
 
-@implementation Instance
+@implementation Deployment
 
 @synthesize name, url, logo;
 

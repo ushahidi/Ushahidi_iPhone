@@ -31,7 +31,7 @@
 @class ImageTableCell;
 @class MapTableCell;
 @class DateTableCell;
-@class InstanceTableCell;
+@class DeploymentTableCell;
 @class IncidentTableCell;
 
 @protocol TextTableCellDelegate;
@@ -47,9 +47,9 @@
 
 }
 
-+ (InstanceTableCell *) getInstanceTableCellForTable:(UITableView *)tableView;
++ (DeploymentTableCell *) getDeploymentTableCellForTable:(UITableView *)tableView;
 
-+ (InstanceTableCell *) getInstanceTableCellForTable:(UITableView *)tableView
++ (DeploymentTableCell *) getDeploymentTableCellForTable:(UITableView *)tableView
 										  identifier:(NSString *)cellIdentifier;
 
 + (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView;

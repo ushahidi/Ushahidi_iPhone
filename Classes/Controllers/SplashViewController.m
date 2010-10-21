@@ -19,23 +19,23 @@
  *****************************************************************************/
 
 #import "SplashViewController.h"
-#import "InstancesViewController.h"
+#import "DeploymentsViewController.h"
 
 @interface SplashViewController ()
 
-- (void) pushInstanceViewController;
+- (void) pushServerViewController;
 
 @end
 
 @implementation SplashViewController
 
-@synthesize instancesViewController;
+@synthesize deploymentsViewController;
 
 #pragma mark -
 #pragma mark private
 
-- (void) pushInstanceViewController {
-	[self.navigationController pushViewController:self.instancesViewController animated:YES];
+- (void) pushServerViewController {
+	[self.navigationController pushViewController:self.deploymentsViewController animated:YES];
 }
 
 #pragma mark -
@@ -48,7 +48,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self performSelector:@selector(pushInstanceViewController) withObject:nil afterDelay:0.5];
+	[self performSelector:@selector(pushServerViewController) withObject:nil afterDelay:0.5];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -75,7 +75,7 @@
 }
 
 - (void)dealloc {
-	[instancesViewController release];
+	[deploymentsViewController release];
     [super dealloc];
 }
 

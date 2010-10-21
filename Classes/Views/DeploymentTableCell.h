@@ -20,7 +20,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InstanceTableCell : UITableViewCell {
+@interface DeploymentTableCell : UITableViewCell {
 
 @public
 	IBOutlet UILabel *titleLabel;

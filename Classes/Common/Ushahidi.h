@@ -25,7 +25,7 @@
 @protocol UshahidiDelegate;
 
 @class API;
-@class Instance;
+@class Deployment;
 @class Incident;
 @class Location;
 @class Category;
@@ -39,7 +39,7 @@
 	API *api;
 	NSString *domain;
 
-	NSMutableDictionary *instances;
+	NSMutableDictionary *deployments;
 	NSMutableDictionary *countries;
 	NSMutableDictionary *categories;
 	NSMutableDictionary *locations;
@@ -52,12 +52,12 @@
 - (void) save;
 - (void) loadForDomain:(NSString *)domain;
 
-- (BOOL)addInstance:(Instance *)instance;
-- (BOOL)addInstanceByName:(NSString *)name andUrl:(NSString *)url;
+- (BOOL)addDeployment:(Deployment *)deployment;
+- (BOOL)addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
 
 - (BOOL)addIncident:(Incident *)incident;
 
-- (NSArray *) getInstancesWithDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getDeploymentsWithDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getCategoriesWithDelegate:(id<UshahidiDelegate>)delegate;
 - (Category *) getCategoryByID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate;
@@ -87,7 +87,7 @@
 @optional
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi apiKey:(NSString *)apiKey error:(NSError *)error hasChanges:(BOOL)hasChanges;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi instances:(NSArray *)instances error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi deployments:(NSArray *)deployments error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)countries error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;

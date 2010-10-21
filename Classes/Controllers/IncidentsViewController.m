@@ -28,7 +28,7 @@
 #import "AlertView.h"
 #import "InputView.h"
 #import "Incident.h"
-#import "Instance.h"
+#import "Deployment.h"
 #import "MKMapView+Extension.h"
 #import "MapAnnotation.h"
 #import "Messages.h"
@@ -44,7 +44,7 @@ typedef enum {
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController, mapView, instance;
+@synthesize addIncidentViewController, viewIncidentViewController, mapView, deployment;
 
 #pragma mark -
 #pragma mark Handlers
@@ -103,8 +103,8 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	if (self.instance != nil) {
-		self.title = self.instance.name;
+	if (self.deployment != nil) {
+		self.title = self.deployment.name;
 	}
 	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.willBePushed) {
@@ -126,7 +126,7 @@ typedef enum {
 	[addIncidentViewController release];
 	[viewIncidentViewController release];
 	[mapView release];
-	[instance release];
+	[deployment release];
     [super dealloc];
 }
 

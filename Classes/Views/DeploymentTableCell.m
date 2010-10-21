@@ -18,13 +18,13 @@
  **
  *****************************************************************************/
 
-#import "InstanceTableCell.h"
+#import "DeploymentTableCell.h"
 
-@interface InstanceTableCell()
+@interface DeploymentTableCell()
 
 @end
 
-@implementation InstanceTableCell
+@implementation DeploymentTableCell
 
 @synthesize titleLabel, urlLabel;
 

@@ -18,22 +18,24 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "Ushahidi.h"
 
-@interface Instance : NSObject {
+@class IncidentsViewController;
+@class AddDeploymentViewController;
 
+@interface DeploymentsViewController : TableViewController<UshahidiDelegate> {
+	
 @public
-	NSString *name;
-	NSString *url;
-	UIImage *logo;
+	IBOutlet IncidentsViewController *incidentsViewController;
+	IBOutlet AddDeploymentViewController *addDeploymentViewController;
 }
 
-@property(nonatomic,retain) NSString *name;
-@property(nonatomic,retain) NSString *url;
-@property(nonatomic,retain) UIImage *logo;
+@property(nonatomic, retain) IncidentsViewController *incidentsViewController;
+@property(nonatomic, retain) AddDeploymentViewController *addDeploymentViewController;
 
-- (id)initWithName:(NSString *)name url:(NSString *)url logo:(UIImage *)logo;
-
-- (BOOL) matchesString:(NSString *)string;
+- (IBAction) add:(id)sender;
+- (IBAction) refresh:(id)sender;
 
 @end

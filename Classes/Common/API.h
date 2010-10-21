@@ -58,7 +58,7 @@
 
 - (NSString *) getIncidentCount;
 - (NSString *) getGeoGraphicMidPoint;
-- (NSString *) getServerVersion;
+- (NSString *) getDeploymentVersion;
 
 - (NSString *) getPostReport;
 - (NSString *) getPostNews;

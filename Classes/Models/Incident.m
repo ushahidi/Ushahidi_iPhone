@@ -38,7 +38,7 @@ typedef enum {
 	MediaTypeNews
 } MediaType;
 
-@synthesize identifier, title, description, date, active, verified, news, photos, sounds, videos, categories, location;
+@synthesize identifier, title, description, date, active, verified, marked, news, photos, sounds, videos, categories, location;
 @synthesize locationID, locationName, locationLatitude, locationLongitude;
 
 - (id)initWithDefaultValues {
@@ -105,6 +105,7 @@ typedef enum {
 	[encoder encodeObject:self.date forKey:@"date"];
 	[encoder encodeBool:self.active forKey:@"active"];
 	[encoder encodeBool:self.verified forKey:@"verified"];
+	[encoder encodeBool:self.marked forKey:@"marked"];
 	[encoder encodeObject:self.location forKey:@"location"];
 	[encoder encodeObject:self.news forKey:@"news"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
@@ -124,6 +125,7 @@ typedef enum {
 		self.date = [decoder decodeObjectForKey:@"date"];
 		self.active = [decoder decodeBoolForKey:@"active"];
 		self.verified = [decoder decodeBoolForKey:@"verified"];
+		self.marked = [decoder decodeBoolForKey:@"marked"];
 		self.location = [decoder decodeObjectForKey:@"location"];
 		
 		self.news = [decoder decodeObjectForKey:@"news"];

@@ -37,6 +37,7 @@
 	
 	BOOL active;
 	BOOL verified;
+	BOOL marked;
 	
 	NSMutableArray *news;
 	NSMutableArray *photos;
@@ -59,6 +60,7 @@
 
 @property(nonatomic,assign) BOOL active;
 @property(nonatomic,assign) BOOL verified;
+@property(nonatomic,assign) BOOL marked;
 
 @property(nonatomic,retain) NSMutableArray *news;
 @property(nonatomic,retain) NSMutableArray *photos;

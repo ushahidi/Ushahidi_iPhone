@@ -11,9 +11,9 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28EEBFDD1118E19E00187D67 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EEBFDC1118E19E00187D67 /* CoreData.framework */; };
-		3E119AC1126F64AB00C3DCBB /* InstanceTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E119AC0126F64AB00C3DCBB /* InstanceTableCell.xib */; };
+		3E119AC1126F64AB00C3DCBB /* DeploymentTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E119AC0126F64AB00C3DCBB /* DeploymentTableCell.xib */; };
 		3E119AC8126F64BA00C3DCBB /* IncidentTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E119AC7126F64BA00C3DCBB /* IncidentTableCell.xib */; };
-		3E119AD9126F7E6200C3DCBB /* InstanceTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119AD8126F7E6200C3DCBB /* InstanceTableCell.m */; };
+		3E119AD9126F7E6200C3DCBB /* DeploymentTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */; };
 		3E119ADE126F7E7600C3DCBB /* IncidentTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */; };
 		3E119B8B126F9B5A00C3DCBB /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119B8A126F9B5A00C3DCBB /* Messages.m */; };
 		3E119D56126FAE5800C3DCBB /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D55126FAE5800C3DCBB /* Media.m */; };
@@ -23,11 +23,11 @@
 		3E8629FA1222BCC4001DE141 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3E8629FB1222BCC4001DE141 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3E862A101222BCD0001DE141 /* AddIncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* AddIncidentViewController.m */; };
-		3E862A111222BCD0001DE141 /* AddInstanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FF1222BCD0001DE141 /* AddInstanceViewController.m */; };
+		3E862A111222BCD0001DE141 /* AddDeploymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FF1222BCD0001DE141 /* AddDeploymentViewController.m */; };
 		3E862A121222BCD0001DE141 /* ImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A011222BCD0001DE141 /* ImagePickerController.m */; };
 		3E862A131222BCD0001DE141 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A031222BCD0001DE141 /* ImageViewController.m */; };
 		3E862A141222BCD0001DE141 /* IncidentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A051222BCD0001DE141 /* IncidentsViewController.m */; };
-		3E862A151222BCD0001DE141 /* InstancesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A071222BCD0001DE141 /* InstancesViewController.m */; };
+		3E862A151222BCD0001DE141 /* DeploymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A071222BCD0001DE141 /* DeploymentsViewController.m */; };
 		3E862A161222BCD0001DE141 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A091222BCD0001DE141 /* MapViewController.m */; };
 		3E862A171222BCD0001DE141 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A0B1222BCD0001DE141 /* TableViewController.m */; };
 		3E862A181222BCD0001DE141 /* ViewIncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A0D1222BCD0001DE141 /* ViewIncidentViewController.m */; };
@@ -58,14 +58,14 @@
 		3E862A5D1222BD09001DE141 /* unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A4F1222BD09001DE141 /* unselected.png */; };
 		3E862A741222BD1D001DE141 /* AddIncidentViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A621222BD1D001DE141 /* AddIncidentViewController_iPad.xib */; };
 		3E862A751222BD1D001DE141 /* AddIncidentViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A631222BD1D001DE141 /* AddIncidentViewController_iPhone.xib */; };
-		3E862A761222BD1D001DE141 /* AddInstanceViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A641222BD1D001DE141 /* AddInstanceViewController_iPad.xib */; };
-		3E862A771222BD1D001DE141 /* AddInstanceViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A651222BD1D001DE141 /* AddInstanceViewController_iPhone.xib */; };
+		3E862A761222BD1D001DE141 /* AddDeploymentViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A641222BD1D001DE141 /* AddDeploymentViewController_iPad.xib */; };
+		3E862A771222BD1D001DE141 /* AddDeploymentViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A651222BD1D001DE141 /* AddDeploymentViewController_iPhone.xib */; };
 		3E862A781222BD1D001DE141 /* ImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A661222BD1D001DE141 /* ImageViewController_iPad.xib */; };
 		3E862A791222BD1D001DE141 /* ImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A671222BD1D001DE141 /* ImageViewController_iPhone.xib */; };
 		3E862A7A1222BD1D001DE141 /* IncidentsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A681222BD1D001DE141 /* IncidentsViewController_iPad.xib */; };
 		3E862A7B1222BD1D001DE141 /* IncidentsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A691222BD1D001DE141 /* IncidentsViewController_iPhone.xib */; };
-		3E862A7C1222BD1D001DE141 /* InstancesViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6A1222BD1D001DE141 /* InstancesViewController_iPad.xib */; };
-		3E862A7D1222BD1D001DE141 /* InstancesViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6B1222BD1D001DE141 /* InstancesViewController_iPhone.xib */; };
+		3E862A7C1222BD1D001DE141 /* DeploymentsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6A1222BD1D001DE141 /* DeploymentsViewController_iPad.xib */; };
+		3E862A7D1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6B1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib */; };
 		3E862A7E1222BD1D001DE141 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */; };
 		3E862A7F1222BD1D001DE141 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6D1222BD1D001DE141 /* MainWindow_iPhone.xib */; };
 		3E862A801222BD1D001DE141 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6E1222BD1D001DE141 /* MapViewController_iPad.xib */; };
@@ -111,7 +111,7 @@
 		3E862E831222F2D1001DE141 /* NSKeyedArchiver+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E7E1222F2D1001DE141 /* NSKeyedArchiver+Extension.m */; };
 		3E862E841222F2D1001DE141 /* NSKeyedUnarchiver+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E801222F2D1001DE141 /* NSKeyedUnarchiver+Extension.m */; };
 		3E862E851222F2D1001DE141 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E821222F2D1001DE141 /* NSDate+Extension.m */; };
-		3E86305F12231498001DE141 /* Instance.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86305E12231498001DE141 /* Instance.m */; };
+		3E86305F12231498001DE141 /* Deployment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86305E12231498001DE141 /* Deployment.m */; };
 		3E86337D12243205001DE141 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86337C12243205001DE141 /* Country.m */; };
 		3E86338412243248001DE141 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86338312243248001DE141 /* Location.m */; };
 		3E86338712243255001DE141 /* Incident.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86338612243255001DE141 /* Incident.m */; };
@@ -139,10 +139,10 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28EEBFDC1118E19E00187D67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* Ushahidi_iPhone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ushahidi_iPhone_Prefix.pch; sourceTree = "<group>"; };
-		3E119AC0126F64AB00C3DCBB /* InstanceTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstanceTableCell.xib; sourceTree = "<group>"; };
+		3E119AC0126F64AB00C3DCBB /* DeploymentTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentTableCell.xib; sourceTree = "<group>"; };
 		3E119AC7126F64BA00C3DCBB /* IncidentTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTableCell.xib; sourceTree = "<group>"; };
-		3E119AD7126F7E6200C3DCBB /* InstanceTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstanceTableCell.h; sourceTree = "<group>"; };
-		3E119AD8126F7E6200C3DCBB /* InstanceTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstanceTableCell.m; sourceTree = "<group>"; };
+		3E119AD7126F7E6200C3DCBB /* DeploymentTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeploymentTableCell.h; sourceTree = "<group>"; };
+		3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeploymentTableCell.m; sourceTree = "<group>"; };
 		3E119ADC126F7E7600C3DCBB /* IncidentTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentTableCell.h; sourceTree = "<group>"; };
 		3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentTableCell.m; sourceTree = "<group>"; };
 		3E119B89126F9B5A00C3DCBB /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
@@ -161,16 +161,16 @@
 		3E8629F91222BCC4001DE141 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		3E8629FC1222BCD0001DE141 /* AddIncidentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddIncidentViewController.h; sourceTree = "<group>"; };
 		3E8629FD1222BCD0001DE141 /* AddIncidentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddIncidentViewController.m; sourceTree = "<group>"; };
-		3E8629FE1222BCD0001DE141 /* AddInstanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddInstanceViewController.h; sourceTree = "<group>"; };
-		3E8629FF1222BCD0001DE141 /* AddInstanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddInstanceViewController.m; sourceTree = "<group>"; };
+		3E8629FE1222BCD0001DE141 /* AddDeploymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeploymentViewController.h; sourceTree = "<group>"; };
+		3E8629FF1222BCD0001DE141 /* AddDeploymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeploymentViewController.m; sourceTree = "<group>"; };
 		3E862A001222BCD0001DE141 /* ImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerController.h; sourceTree = "<group>"; };
 		3E862A011222BCD0001DE141 /* ImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerController.m; sourceTree = "<group>"; };
 		3E862A021222BCD0001DE141 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		3E862A031222BCD0001DE141 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		3E862A041222BCD0001DE141 /* IncidentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentsViewController.h; sourceTree = "<group>"; };
 		3E862A051222BCD0001DE141 /* IncidentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentsViewController.m; sourceTree = "<group>"; };
-		3E862A061222BCD0001DE141 /* InstancesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstancesViewController.h; sourceTree = "<group>"; };
-		3E862A071222BCD0001DE141 /* InstancesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstancesViewController.m; sourceTree = "<group>"; };
+		3E862A061222BCD0001DE141 /* DeploymentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeploymentsViewController.h; sourceTree = "<group>"; };
+		3E862A071222BCD0001DE141 /* DeploymentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeploymentsViewController.m; sourceTree = "<group>"; };
 		3E862A081222BCD0001DE141 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		3E862A091222BCD0001DE141 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		3E862A0A1222BCD0001DE141 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
@@ -215,14 +215,14 @@
 		3E862A4F1222BD09001DE141 /* unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unselected.png; sourceTree = "<group>"; };
 		3E862A621222BD1D001DE141 /* AddIncidentViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddIncidentViewController_iPad.xib; sourceTree = "<group>"; };
 		3E862A631222BD1D001DE141 /* AddIncidentViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddIncidentViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E862A641222BD1D001DE141 /* AddInstanceViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddInstanceViewController_iPad.xib; sourceTree = "<group>"; };
-		3E862A651222BD1D001DE141 /* AddInstanceViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddInstanceViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E862A641222BD1D001DE141 /* AddDeploymentViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDeploymentViewController_iPad.xib; sourceTree = "<group>"; };
+		3E862A651222BD1D001DE141 /* AddDeploymentViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddDeploymentViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E862A661222BD1D001DE141 /* ImageViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController_iPad.xib; sourceTree = "<group>"; };
 		3E862A671222BD1D001DE141 /* ImageViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E862A681222BD1D001DE141 /* IncidentsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentsViewController_iPad.xib; sourceTree = "<group>"; };
 		3E862A691222BD1D001DE141 /* IncidentsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E862A6A1222BD1D001DE141 /* InstancesViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstancesViewController_iPad.xib; sourceTree = "<group>"; };
-		3E862A6B1222BD1D001DE141 /* InstancesViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstancesViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E862A6A1222BD1D001DE141 /* DeploymentsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentsViewController_iPad.xib; sourceTree = "<group>"; };
+		3E862A6B1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentsViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		3E862A6D1222BD1D001DE141 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
 		3E862A6E1222BD1D001DE141 /* MapViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController_iPad.xib; sourceTree = "<group>"; };
@@ -302,8 +302,8 @@
 		3E862E801222F2D1001DE141 /* NSKeyedUnarchiver+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSKeyedUnarchiver+Extension.m"; sourceTree = "<group>"; };
 		3E862E811222F2D1001DE141 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
 		3E862E821222F2D1001DE141 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
-		3E86305D12231498001DE141 /* Instance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instance.h; sourceTree = "<group>"; };
-		3E86305E12231498001DE141 /* Instance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instance.m; sourceTree = "<group>"; };
+		3E86305D12231498001DE141 /* Deployment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deployment.h; sourceTree = "<group>"; };
+		3E86305E12231498001DE141 /* Deployment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deployment.m; sourceTree = "<group>"; };
 		3E86337B12243205001DE141 /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
 		3E86337C12243205001DE141 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
 		3E86338212243248001DE141 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
@@ -461,8 +461,8 @@
 		3E8629D31222BC12001DE141 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3E86305D12231498001DE141 /* Instance.h */,
-				3E86305E12231498001DE141 /* Instance.m */,
+				3E86305D12231498001DE141 /* Deployment.h */,
+				3E86305E12231498001DE141 /* Deployment.m */,
 				3E86338512243255001DE141 /* Incident.h */,
 				3E86338612243255001DE141 /* Incident.m */,
 				3E862B271222C66E001DE141 /* Category.h */,
@@ -522,8 +522,8 @@
 				3E862CA91222D60F001DE141 /* InputView.m */,
 				3E4AF91B1270AA370017AED4 /* TableHeaderView.h */,
 				3E4AF91C1270AA370017AED4 /* TableHeaderView.m */,
-				3E119AD7126F7E6200C3DCBB /* InstanceTableCell.h */,
-				3E119AD8126F7E6200C3DCBB /* InstanceTableCell.m */,
+				3E119AD7126F7E6200C3DCBB /* DeploymentTableCell.h */,
+				3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */,
 				3E119ADC126F7E7600C3DCBB /* IncidentTableCell.h */,
 				3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */,
 			);
@@ -543,12 +543,12 @@
 				3E862BDD1222D081001DE141 /* LoadingViewController.m */,
 				3E862CD51222D8DB001DE141 /* SplashViewController.h */,
 				3E862CD61222D8DB001DE141 /* SplashViewController.m */,
-				3E862A061222BCD0001DE141 /* InstancesViewController.h */,
-				3E862A071222BCD0001DE141 /* InstancesViewController.m */,
+				3E862A061222BCD0001DE141 /* DeploymentsViewController.h */,
+				3E862A071222BCD0001DE141 /* DeploymentsViewController.m */,
 				3E862A041222BCD0001DE141 /* IncidentsViewController.h */,
 				3E862A051222BCD0001DE141 /* IncidentsViewController.m */,
-				3E8629FE1222BCD0001DE141 /* AddInstanceViewController.h */,
-				3E8629FF1222BCD0001DE141 /* AddInstanceViewController.m */,
+				3E8629FE1222BCD0001DE141 /* AddDeploymentViewController.h */,
+				3E8629FF1222BCD0001DE141 /* AddDeploymentViewController.m */,
 				3E8629FC1222BCD0001DE141 /* AddIncidentViewController.h */,
 				3E8629FD1222BCD0001DE141 /* AddIncidentViewController.m */,
 				3E862A0C1222BCD0001DE141 /* ViewIncidentViewController.h */,
@@ -615,14 +615,14 @@
 				3E862CDC1222D8FC001DE141 /* SplashViewController_iPad.xib */,
 				3E862A621222BD1D001DE141 /* AddIncidentViewController_iPad.xib */,
 				3E862A631222BD1D001DE141 /* AddIncidentViewController_iPhone.xib */,
-				3E862A641222BD1D001DE141 /* AddInstanceViewController_iPad.xib */,
-				3E862A651222BD1D001DE141 /* AddInstanceViewController_iPhone.xib */,
+				3E862A641222BD1D001DE141 /* AddDeploymentViewController_iPad.xib */,
+				3E862A651222BD1D001DE141 /* AddDeploymentViewController_iPhone.xib */,
 				3E862A661222BD1D001DE141 /* ImageViewController_iPad.xib */,
 				3E862A671222BD1D001DE141 /* ImageViewController_iPhone.xib */,
 				3E862A681222BD1D001DE141 /* IncidentsViewController_iPad.xib */,
 				3E862A691222BD1D001DE141 /* IncidentsViewController_iPhone.xib */,
-				3E862A6A1222BD1D001DE141 /* InstancesViewController_iPad.xib */,
-				3E862A6B1222BD1D001DE141 /* InstancesViewController_iPhone.xib */,
+				3E862A6A1222BD1D001DE141 /* DeploymentsViewController_iPad.xib */,
+				3E862A6B1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib */,
 				3E862A6E1222BD1D001DE141 /* MapViewController_iPad.xib */,
 				3E862A6F1222BD1D001DE141 /* MapViewController_iPhone.xib */,
 				3E862A701222BD1D001DE141 /* ViewIncidentViewController_iPad.xib */,
@@ -631,7 +631,7 @@
 				3E862A731222BD1D001DE141 /* WebViewController_iPhone.xib */,
 				3E862BE11222D092001DE141 /* LoadingViewController_iPhone.xib */,
 				3E862BE21222D092001DE141 /* LoadingViewController_iPad.xib */,
-				3E119AC0126F64AB00C3DCBB /* InstanceTableCell.xib */,
+				3E119AC0126F64AB00C3DCBB /* DeploymentTableCell.xib */,
 				3E119AC7126F64BA00C3DCBB /* IncidentTableCell.xib */,
 			);
 			path = NIBs;
@@ -765,14 +765,14 @@
 				3E862A5D1222BD09001DE141 /* unselected.png in Resources */,
 				3E862A741222BD1D001DE141 /* AddIncidentViewController_iPad.xib in Resources */,
 				3E862A751222BD1D001DE141 /* AddIncidentViewController_iPhone.xib in Resources */,
-				3E862A761222BD1D001DE141 /* AddInstanceViewController_iPad.xib in Resources */,
-				3E862A771222BD1D001DE141 /* AddInstanceViewController_iPhone.xib in Resources */,
+				3E862A761222BD1D001DE141 /* AddDeploymentViewController_iPad.xib in Resources */,
+				3E862A771222BD1D001DE141 /* AddDeploymentViewController_iPhone.xib in Resources */,
 				3E862A781222BD1D001DE141 /* ImageViewController_iPad.xib in Resources */,
 				3E862A791222BD1D001DE141 /* ImageViewController_iPhone.xib in Resources */,
 				3E862A7A1222BD1D001DE141 /* IncidentsViewController_iPad.xib in Resources */,
 				3E862A7B1222BD1D001DE141 /* IncidentsViewController_iPhone.xib in Resources */,
-				3E862A7C1222BD1D001DE141 /* InstancesViewController_iPad.xib in Resources */,
-				3E862A7D1222BD1D001DE141 /* InstancesViewController_iPhone.xib in Resources */,
+				3E862A7C1222BD1D001DE141 /* DeploymentsViewController_iPad.xib in Resources */,
+				3E862A7D1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib in Resources */,
 				3E862A7E1222BD1D001DE141 /* MainWindow_iPad.xib in Resources */,
 				3E862A7F1222BD1D001DE141 /* MainWindow_iPhone.xib in Resources */,
 				3E862A801222BD1D001DE141 /* MapViewController_iPad.xib in Resources */,
@@ -787,7 +787,7 @@
 				3E862CD91222D8F0001DE141 /* SplashViewController_iPhone.xib in Resources */,
 				3E862CDD1222D8FC001DE141 /* SplashViewController_iPad.xib in Resources */,
 				3E8634071224384D001DE141 /* photo_placeholder.png in Resources */,
-				3E119AC1126F64AB00C3DCBB /* InstanceTableCell.xib in Resources */,
+				3E119AC1126F64AB00C3DCBB /* DeploymentTableCell.xib in Resources */,
 				3E119AC8126F64BA00C3DCBB /* IncidentTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -803,11 +803,11 @@
 				3E8629FA1222BCC4001DE141 /* AppDelegate.m in Sources */,
 				3E8629FB1222BCC4001DE141 /* Device.m in Sources */,
 				3E862A101222BCD0001DE141 /* AddIncidentViewController.m in Sources */,
-				3E862A111222BCD0001DE141 /* AddInstanceViewController.m in Sources */,
+				3E862A111222BCD0001DE141 /* AddDeploymentViewController.m in Sources */,
 				3E862A121222BCD0001DE141 /* ImagePickerController.m in Sources */,
 				3E862A131222BCD0001DE141 /* ImageViewController.m in Sources */,
 				3E862A141222BCD0001DE141 /* IncidentsViewController.m in Sources */,
-				3E862A151222BCD0001DE141 /* InstancesViewController.m in Sources */,
+				3E862A151222BCD0001DE141 /* DeploymentsViewController.m in Sources */,
 				3E862A161222BCD0001DE141 /* MapViewController.m in Sources */,
 				3E862A171222BCD0001DE141 /* TableViewController.m in Sources */,
 				3E862A181222BCD0001DE141 /* ViewIncidentViewController.m in Sources */,
@@ -849,7 +849,7 @@
 				3E862E831222F2D1001DE141 /* NSKeyedArchiver+Extension.m in Sources */,
 				3E862E841222F2D1001DE141 /* NSKeyedUnarchiver+Extension.m in Sources */,
 				3E862E851222F2D1001DE141 /* NSDate+Extension.m in Sources */,
-				3E86305F12231498001DE141 /* Instance.m in Sources */,
+				3E86305F12231498001DE141 /* Deployment.m in Sources */,
 				3E86337D12243205001DE141 /* Country.m in Sources */,
 				3E86338412243248001DE141 /* Location.m in Sources */,
 				3E86338712243255001DE141 /* Incident.m in Sources */,
@@ -865,7 +865,7 @@
 				3ECB55D2122F5BEE000AAC56 /* DateTableCell.m in Sources */,
 				3ECB55ED122F5E33000AAC56 /* DatePicker.m in Sources */,
 				3ECB579F122F809C000AAC56 /* UIView+Extension.m in Sources */,
-				3E119AD9126F7E6200C3DCBB /* InstanceTableCell.m in Sources */,
+				3E119AD9126F7E6200C3DCBB /* DeploymentTableCell.m in Sources */,
 				3E119ADE126F7E7600C3DCBB /* IncidentTableCell.m in Sources */,
 				3E119B8B126F9B5A00C3DCBB /* Messages.m in Sources */,
 				3E119D56126FAE5800C3DCBB /* Media.m in Sources */,

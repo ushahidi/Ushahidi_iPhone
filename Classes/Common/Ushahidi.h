@@ -24,7 +24,6 @@
 
 @protocol UshahidiDelegate;
 
-@class API;
 @class Deployment;
 @class Incident;
 @class Location;
@@ -34,24 +33,18 @@
 @interface Ushahidi : NSObject<ASIHTTPRequestDelegate> {
 
 @public
+	Deployment *deployment;
 	
 @private
-	API *api;
-	NSString *domain;
-
 	NSMutableDictionary *deployments;
-	NSMutableDictionary *countries;
-	NSMutableDictionary *categories;
-	NSMutableDictionary *locations;
-	NSMutableDictionary *incidents;
 	NSMutableDictionary *delegates;
-	NSMutableArray *pending;
 }
+
+@property(nonatomic, retain) Deployment *deployment;
 
 + (Ushahidi *) sharedUshahidi;
 
 - (void) save;
-- (void) loadForDomain:(NSString *)domain;
 
 - (BOOL)addDeployment:(Deployment *)deployment;
 - (BOOL)addDeploymentByName:(NSString *)name andUrl:(NSString *)url;

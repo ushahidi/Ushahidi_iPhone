@@ -112,7 +112,6 @@
 		3E862CD91222D8F0001DE141 /* SplashViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862CD81222D8F0001DE141 /* SplashViewController_iPhone.xib */; };
 		3E862CDD1222D8FC001DE141 /* SplashViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862CDC1222D8FC001DE141 /* SplashViewController_iPad.xib */; };
 		3E862DCE1222E1A1001DE141 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862DCD1222E1A1001DE141 /* UIColor+Extension.m */; };
-		3E862E561222E954001DE141 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E551222E954001DE141 /* API.m */; };
 		3E862E781222F178001DE141 /* Ushahidi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E771222F178001DE141 /* Ushahidi.m */; };
 		3E862E831222F2D1001DE141 /* NSKeyedArchiver+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E7E1222F2D1001DE141 /* NSKeyedArchiver+Extension.m */; };
 		3E862E841222F2D1001DE141 /* NSKeyedUnarchiver+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E801222F2D1001DE141 /* NSKeyedUnarchiver+Extension.m */; };
@@ -305,8 +304,6 @@
 		3E862CDC1222D8FC001DE141 /* SplashViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController_iPad.xib; sourceTree = "<group>"; };
 		3E862DCC1222E1A1001DE141 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
 		3E862DCD1222E1A1001DE141 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
-		3E862E541222E954001DE141 /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
-		3E862E551222E954001DE141 /* API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
 		3E862E761222F178001DE141 /* Ushahidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ushahidi.h; sourceTree = "<group>"; };
 		3E862E771222F178001DE141 /* Ushahidi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ushahidi.m; sourceTree = "<group>"; };
 		3E862E7D1222F2D1001DE141 /* NSKeyedArchiver+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSKeyedArchiver+Extension.h"; sourceTree = "<group>"; };
@@ -592,8 +589,6 @@
 				3E862BC21222CFE0001DE141 /* Settings.m */,
 				3E862E761222F178001DE141 /* Ushahidi.h */,
 				3E862E771222F178001DE141 /* Ushahidi.m */,
-				3E862E541222E954001DE141 /* API.h */,
-				3E862E551222E954001DE141 /* API.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -869,7 +864,6 @@
 				3E862CAA1222D60F001DE141 /* InputView.m in Sources */,
 				3E862CD71222D8DB001DE141 /* SplashViewController.m in Sources */,
 				3E862DCE1222E1A1001DE141 /* UIColor+Extension.m in Sources */,
-				3E862E561222E954001DE141 /* API.m in Sources */,
 				3E862E781222F178001DE141 /* Ushahidi.m in Sources */,
 				3E862E831222F2D1001DE141 /* NSKeyedArchiver+Extension.m in Sources */,
 				3E862E841222F2D1001DE141 /* NSKeyedUnarchiver+Extension.m in Sources */,

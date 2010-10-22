@@ -26,13 +26,26 @@
 
 @implementation Deployment
 
-@synthesize name, url, logo;
+@synthesize name, url, domain, countries, categories, locations, incidents, pending;
 
-- (id)initWithName:(NSString *)theName url:(NSString *)theUrl logo:(UIImage *)theLogo {
+- (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
 		self.name = theName;
 		self.url = theUrl;
-		self.logo = theLogo;
+		if ([theUrl hasPrefix:@"http://"]) {
+			self.domain = [theUrl stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+		}
+		else if ([theUrl hasPrefix:@"https://"]) {
+			self.domain = [theUrl stringByReplacingOccurrencesOfString:@"https://" withString:@""];
+		}
+		else {
+			self.domain = theUrl;
+		} 
+		self.countries = [[NSMutableDictionary alloc] init];
+		self.categories = [[NSMutableDictionary alloc] init];
+		self.locations = [[NSMutableDictionary alloc] init];
+		self.incidents = [[NSMutableDictionary alloc] init];
+		self.pending = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -40,22 +53,34 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.name forKey:@"name"];
 	[encoder encodeObject:self.url forKey:@"url"];
-	if (self.logo != nil) {
-		[encoder encodeObject:UIImagePNGRepresentation(self.logo) forKey:@"logo"];
-	} 
-	else {
-		[encoder encodeObject:nil forKey:@"logo"];
-	}
+	[encoder encodeObject:self.domain forKey:@"domain"];
+	[encoder encodeObject:self.countries forKey:@"countries"];
+	[encoder encodeObject:self.categories forKey:@"categories"];
+	[encoder encodeObject:self.locations forKey:@"locations"];
+	[encoder encodeObject:self.incidents forKey:@"incidents"];
+	[encoder encodeObject:self.pending forKey:@"pending"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if (self = [super init]){
 		self.name = [decoder decodeObjectForKey:@"name"];
 		self.url = [decoder decodeObjectForKey:@"url"];
-		NSData *data = [decoder decodeObjectForKey:@"logo"];
-		if (data != nil) {
-			self.logo = [UIImage imageWithData:data];
-		}
+		self.domain = [decoder decodeObjectForKey:@"domain"];
+		
+		self.countries = [decoder decodeObjectForKey:@"countries"];
+		if (self.countries == nil) self.countries = [[NSMutableDictionary alloc] init];
+		
+		self.categories = [decoder decodeObjectForKey:@"categories"];
+		if (self.categories == nil) self.categories = [[NSMutableDictionary alloc] init];
+		
+		self.locations = [decoder decodeObjectForKey:@"locations"];
+		if (self.locations == nil) self.locations = [[NSMutableDictionary alloc] init];
+		
+		self.incidents = [decoder decodeObjectForKey:@"incidents"];
+		if (self.incidents == nil) self.incidents = [[NSMutableDictionary alloc] init];
+		
+		self.pending = [decoder decodeObjectForKey:@"pending"];
+		if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -70,8 +95,154 @@
 - (void)dealloc {
 	[name release];
 	[url release];
-	[logo release];
+	[domain release];
+	[countries release];
+	[categories release];
+	[locations release];
+	[incidents release];
+	[pending release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark API Keys
+
++ (BOOL) isApiKeyUrl:(NSString *)url {
+	return [url rangeOfString:@"task=apikeys"].location != NSNotFound;
+}
+
+- (NSString *) getGoogleApiKey {
+	return [NSString stringWithFormat:@"http://%@/api?task=apikeys&by=google&resp=json", self.domain];
+}
+
+- (NSString *) getYahooApiKey {
+	return [NSString stringWithFormat:@"http://%@/api?task=apikeys&by=yahoo&resp=json", self.domain];
+}
+
+- (NSString *) getMicrosoftApiKey {
+	return [NSString stringWithFormat:@"http://%@/api?task=apikeys&by=microsoft&resp=json", self.domain];
+}
+
+#pragma mark -
+#pragma mark Categories
+
++ (BOOL) isCategoriesUrl:(NSString *)url {
+	return [url rangeOfString:@"task=categories"].location != NSNotFound;
+}
+
+- (NSString *) getCategories {
+	return [NSString stringWithFormat:@"http://%@/api?task=categories&resp=json", self.domain];
+}
+
+- (NSString *) getCategoryByID:(NSString *)categoryID {
+	return [NSString stringWithFormat:@"http://%@/api?task=categories&by=%@&resp=json", self.domain, categoryID];
+}
+
+#pragma mark -
+#pragma mark Countries
+
++ (BOOL) isCountriesUrl:(NSString *)url {
+	return [url rangeOfString:@"task=countries"].location != NSNotFound;
+}
+
+- (NSString *) getCountries {
+	return [NSString stringWithFormat:@"http://%@/api?task=countries&resp=json", self.domain];
+}
+
+- (NSString *) getCountryByID:(NSString *)countryID {
+	return [NSString stringWithFormat:@"http://%@/api?task=country&by=%@&resp=json", self.domain, countryID];
+}
+
+- (NSString *) getCountryByISO:(NSString *)countryISO {
+	return [NSString stringWithFormat:@"http://%@/api?task=country&by=countryiso&iso=%@&resp=json", self.domain, countryISO];
+}
+
+- (NSString *) getCountryByName:(NSString *)countryName {
+	return [NSString stringWithFormat:@"http://%@/api?task=country&by=countryname&name=%@&resp=json", self.domain, countryName];
+}
+
+#pragma mark -
+#pragma mark Locations
+
++ (BOOL) isLocationsUrl:(NSString *)url {
+	return [url rangeOfString:@"task=locations"].location != NSNotFound;
+}
+
+- (NSString *) getLocations {
+	return [NSString stringWithFormat:@"http://%@/api?task=locations&resp=json", self.domain];
+}
+
+- (NSString *) getLocationByID:(NSString *)locationID {
+	return [NSString stringWithFormat:@"http://%@/api?task=location&by=locid&id=%@&resp=json", self.domain, locationID];
+}
+
+- (NSString *) getLocationsByCountryID:(NSString *)countryID {
+	return [NSString stringWithFormat:@"http://%@/api?task=location&by=country&id=%@&resp=json", self.domain, countryID];
+}
+
+#pragma mark -
+#pragma mark Incidents
+
++ (BOOL) isIncidentsUrl:(NSString *)url {
+	return [url rangeOfString:@"task=incidents"].location != NSNotFound;
+}
+
+- (NSString *) getIncidents {
+	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=all&resp=json", self.domain];
+}
+
+- (NSString *) getIncidentsByCategoryID:(NSString *)categoryID {
+	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=catid&id=%@&resp=json", self.domain, categoryID];
+}
+
+- (NSString *) getIncidentsByCategoryName:(NSString *)categoryName {
+	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=catname&name=%@&resp=json", self.domain, categoryName];
+}
+
+- (NSString *) getIncidentsByLocationID:(NSString *)locationID {
+	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=locid&id=%@&resp=json", self.domain, locationID];
+}
+
+- (NSString *) getIncidentsByLocationName:(NSString *)locationName {
+	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=locname&name=%@&resp=json", self.domain, locationName];
+}
+
+- (NSString *) getIncidentsBySinceID:(NSString *)sinceID {
+	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=sinceid&id=%@&resp=json", self.domain, sinceID];
+}
+
+- (NSString *) getIncidentCount {
+	return [NSString stringWithFormat:@"http://%@/api?task=incidentcount&resp=json", self.domain];
+}
+
+- (NSString *) getGeoGraphicMidPoint {
+	return [NSString stringWithFormat:@"http://%@/api?task=geographicmidpoint&resp=json", self.domain];
+}
+
+#pragma mark -
+#pragma mark System
+
+- (NSString *) getDeploymentVersion {
+	return [NSString stringWithFormat:@"http://%@/api?task=version&resp=json", self.domain];
+}
+
+#pragma mark -
+#pragma mark Posts
+
+- (NSString *) getPostReport {
+	return [NSString stringWithFormat:@"http://%@/api?task=report&resp=json", self.domain];
+}
+
+- (NSString *) getPostNews {
+	return [NSString stringWithFormat:@"http://%@/api?task=tagnews&resp=json", self.domain];
+}
+
+- (NSString *) getPostVideo {
+	return [NSString stringWithFormat:@"http://%@/api?task=tagvideo&resp=json", self.domain];
+}
+
+- (NSString *) getPostPhoto {
+	return [NSString stringWithFormat:@"http://%@/api?task=tagphoto&resp=json", self.domain];
 }
 
 @end

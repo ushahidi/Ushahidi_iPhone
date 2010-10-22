@@ -138,7 +138,7 @@
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
-	[[Ushahidi sharedUshahidi] loadForDomain:deployment.url];
+	[[Ushahidi sharedUshahidi] setDeployment:deployment];
 	self.incidentsViewController.deployment = deployment;
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
 }

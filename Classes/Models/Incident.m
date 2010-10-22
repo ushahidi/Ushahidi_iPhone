@@ -99,7 +99,6 @@ typedef enum {
 	[encoder encodeBool:self.active forKey:@"active"];
 	[encoder encodeBool:self.verified forKey:@"verified"];
 	[encoder encodeBool:self.pending forKey:@"pending"];
-	[encoder encodeObject:self.location forKey:@"location"];
 	[encoder encodeObject:self.news forKey:@"news"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
 	[encoder encodeObject:self.categories forKey:@"categories"];

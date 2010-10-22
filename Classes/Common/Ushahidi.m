@@ -29,6 +29,8 @@
 #import "Location.h"
 #import "Country.h"
 #import "Incident.h"
+#import "Photo.h"
+#import "Settings.h"
 
 @interface Ushahidi ()
 
@@ -40,6 +42,7 @@
 @property(nonatomic, retain) NSMutableDictionary *categories;
 @property(nonatomic, retain) NSMutableDictionary *locations;
 @property(nonatomic, retain) NSMutableDictionary *incidents;
+@property(nonatomic, retain) NSMutableArray *pending;
 @property(nonatomic, retain) NSMutableDictionary *delegates;
 
 - (void) startAsynchronousRequest:(NSString *)url;
@@ -49,7 +52,7 @@
 
 @implementation Ushahidi
 
-@synthesize domain, api, delegates, deployments, countries, categories, locations, incidents;
+@synthesize domain, api, delegates, deployments, countries, categories, locations, incidents, pending;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
@@ -69,6 +72,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		
 		self.incidents = [NSKeyedUnarchiver unarchiveObjectWithKey:@"incidents"];
 		if (self.incidents == nil) self.incidents = [[NSMutableDictionary alloc] init];
+		
+		self.pending = [NSKeyedUnarchiver unarchiveObjectWithKey:@"pending"];
+		if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 		
 		self.delegates = [[NSMutableDictionary alloc] init];
 	}
@@ -93,6 +99,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[NSKeyedArchiver archiveObject:self.categories forKey:@"categories"];
 	[NSKeyedArchiver archiveObject:self.locations forKey:@"locations"];
 	[NSKeyedArchiver archiveObject:self.incidents forKey:@"incidents"];
+	[NSKeyedArchiver archiveObject:self.pending forKey:@"pending"];
 }
 
 - (void) loadForDomain:(NSString *)theDomain {
@@ -130,8 +137,49 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (BOOL)addIncident:(Incident *)incident {
 	if (incident != nil) {
-		[self.incidents setObject:incident forKey:incident.identifier];
+		[self.pending addObject:incident];
+		//[self.incidents setObject:incident forKey:incident.identifier];
+		return [self uploadIncident:incident];
+	}
+	return NO;
+}
+
+- (BOOL) uploadIncident:(Incident *)incident {
+	@try {
+		NSString *postUrl = [self.api getPostReport];
+		DLog(@"POST: %@", postUrl);
+		ASIFormDataRequest *post = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:postUrl]];
+		[post setDelegate:self];
+		[post setShouldRedirect:YES];
+		[post setPostValue:@"report" forKey:@"task"];
+		[post setPostValue:@"json" forKey:@"resp"];
+		[post setPostValue:[incident title] forKey:@"incident_title"];
+		[post setPostValue:[incident description] forKey:@"incident_description"];
+		[post setPostValue:[incident dateDayMonthYear] forKey:@"incident_date"];
+		[post setPostValue:[incident dateHour] forKey:@"incident_hour"];
+		[post setPostValue:[incident dateMinute] forKey:@"incident_minute"];
+		[post setPostValue:[incident dateAmPm] forKey:@"incident_ampm"];
+		[post setPostValue:[incident categoryNames] forKey:@"incident_category"];
+		[post setPostValue:[incident location] forKey:@"location_name"];
+		[post setPostValue:[incident latitude] forKey:@"latitude"];
+		[post setPostValue:[incident longitude] forKey:@"longitude"];
+		[post setPostValue:[[Settings sharedSettings] firstName] forKey:@"person_first"];
+		[post setPostValue:[[Settings sharedSettings] lastName] forKey:@"person_last"];
+		[post setPostValue:[[Settings sharedSettings] email] forKey:@"person_email"];
+		
+		DLog(@"dateDayMonthYear: %@", [incident dateDayMonthYear]);
+		DLog(@"dateHour: %@", [incident dateHour]);
+		DLog(@"dateMinute: %@", [incident dateMinute]);
+		DLog(@"dateAmPm: %@", [incident dateAmPm]);
+		
+		for(Photo *photo in incident.photos) {
+			[post addData:[photo getData] forKey:@"incident_photo[]"];
+		}
+		[post startAsynchronous];
 		return YES;
+	}
+	@catch (NSException *e) {
+		DLog(@"%@", e);
 	}
 	return NO;
 }
@@ -342,7 +390,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		payload = [json	objectForKey:@"payload"];
 		//DLog(@"payload: %@ %@", [payload class], payload);
 	}
-	if ([API isApiKeyUrl:requestURL]) {
+	if ([request isKindOfClass:[ASIFormDataRequest class]]) {
+		DLog(@"#################### POST ####################");
+		DLog(@"response: %@", [request responseString]);
+	}
+	else if ([API isApiKeyUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:apiKey:error:hasChanges:);
 		if (delegate != NULL && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self apiKey:nil error:error hasChanges:YES];

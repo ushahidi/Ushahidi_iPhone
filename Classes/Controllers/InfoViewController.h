@@ -18,24 +18,19 @@
  **
  *****************************************************************************/
 
-#import "NSDate+Extension.h"
+#import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "TextFieldTableCell.h"
 
-@implementation NSDate (Extension)
-
-- (NSString *) dateToString:(NSString *)dateFormat {
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:dateFormat];
-	NSString *dateString = [formatter stringFromDate:self];
-	[formatter release];	
-	return dateString;
+@interface InfoViewController : TableViewController<TextFieldTableCellDelegate> {
+	
+@private
+	NSString *email;
+	NSString *firstName;
+	NSString *lastName;
 }
 
-+ (NSDate *) dateFromString:(NSString *)string {
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-	NSDate *date = [formatter dateFromString:string];
-	[formatter release];	
-	return date;
-}
+- (IBAction) cancel:(id)sender;
+- (IBAction) done:(id)sender;
 
 @end

@@ -29,5 +29,6 @@
 
 - (id)initForTable:(UITableView *)tableView text:(NSString *)text textColor:(UIColor *)textColor backgroundColor:(UIColor *)backgroundColor;
 - (void) setText:(NSString *)text;
++ (CGFloat) getViewHeight;
 
 @end

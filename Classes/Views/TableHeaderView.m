@@ -37,12 +37,13 @@
 		self.opaque = YES;
 		
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-		label.backgroundColor = [UIColor clearColor];
+		label.backgroundColor = theBackgroundColor;
 		label.opaque = YES;
 		label.textColor = theTextColor;
-		label.font = [UIFont boldSystemFontOfSize:14];
+		label.font = [UIFont boldSystemFontOfSize:16];
 		label.frame = CGRectMake(10.0, 0.0, theFrame.size.width - 10.0, theFrame.size.height);
 		label.text = theText;
+		label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 		
 		[self addSubview:label];
 		[label release];
@@ -59,6 +60,10 @@
 	if (label != nil && [label isKindOfClass:[UILabel class]]) {
 		[label setText:text];
 	}
+}
+
++ (CGFloat) getViewHeight {
+	return 28;
 }
 
 @end

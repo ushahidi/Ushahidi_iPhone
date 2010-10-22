@@ -24,6 +24,13 @@
 
 }
 
++ (NSString *) title;
++ (NSString *) category;
++ (NSString *) location;
++ (NSString *) date;
++ (NSString *) description;
++ (NSString *) photos;
++ (NSString *) news;
 + (NSString *) noLocationSpecified;
 + (NSString *) noCategorySpecified;
 + (NSString *) noDateSpecified;

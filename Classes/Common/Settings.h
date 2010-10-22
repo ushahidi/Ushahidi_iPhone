@@ -24,9 +24,13 @@
 
 @public
 	NSString *email;
+	NSString *firstName;
+	NSString *lastName;
 }
 
 @property(nonatomic, retain) NSString *email;
+@property(nonatomic, retain) NSString *firstName;
+@property(nonatomic, retain) NSString *lastName;
 
 + (Settings *) sharedSettings;
 

@@ -40,6 +40,7 @@
 @property(nonatomic,retain) NSIndexPath *indexPath;
 
 - (void) downloadWithDelegate:(id<PhotoDelegate>)delegate;
+- (NSData *) getData;
 
 @end
 

@@ -43,7 +43,7 @@
 	if (theDate != nil) {
 		[theDate retain];
 		date = theDate;
-		self.textLabel.text = timeFormat ? [theDate timeToString] : [theDate dateToString];
+		self.textLabel.text = timeFormat ? [theDate dateToString:@"HH:mm:ss a"] : [theDate dateToString:@"cccc, MMMM d, yyyy"];
 		self.textLabel.textColor = [UIColor blackColor];
 		self.textLabel.textAlignment = UITextAlignmentLeft;
 	}

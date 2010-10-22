@@ -19,7 +19,13 @@
 		3E119D56126FAE5800C3DCBB /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D55126FAE5800C3DCBB /* Media.m */; };
 		3E119D70126FAF0B00C3DCBB /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D6F126FAF0B00C3DCBB /* Sound.m */; };
 		3E119D73126FAF1300C3DCBB /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D72126FAF1300C3DCBB /* Video.m */; };
+		3E4A006F1271F26C0017AED4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
+		3E4A00701271F26C0017AED4 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006D1271F26C0017AED4 /* radar.png */; };
+		3E4A00711271F26C0017AED4 /* reports.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006E1271F26C0017AED4 /* reports.png */; };
 		3E4AF91D1270AA370017AED4 /* TableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AF91C1270AA370017AED4 /* TableHeaderView.m */; };
+		3E4AFF4E1271E1DF0017AED4 /* InfoViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFF4D1271E1DF0017AED4 /* InfoViewController_iPhone.xib */; };
+		3E4AFF521271E1EB0017AED4 /* InfoViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFF511271E1EB0017AED4 /* InfoViewController_iPad.xib */; };
+		3E4AFF5F1271E21E0017AED4 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* InfoViewController.m */; };
 		3E8629FA1222BCC4001DE141 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3E8629FB1222BCC4001DE141 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3E862A101222BCD0001DE141 /* AddIncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* AddIncidentViewController.m */; };
@@ -153,8 +159,15 @@
 		3E119D6F126FAF0B00C3DCBB /* Sound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sound.m; sourceTree = "<group>"; };
 		3E119D71126FAF1300C3DCBB /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
 		3E119D72126FAF1300C3DCBB /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
+		3E4A006C1271F26C0017AED4 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
+		3E4A006D1271F26C0017AED4 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
+		3E4A006E1271F26C0017AED4 /* reports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reports.png; sourceTree = "<group>"; };
 		3E4AF91B1270AA370017AED4 /* TableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeaderView.h; sourceTree = "<group>"; };
 		3E4AF91C1270AA370017AED4 /* TableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeaderView.m; sourceTree = "<group>"; };
+		3E4AFF4D1271E1DF0017AED4 /* InfoViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E4AFF511271E1EB0017AED4 /* InfoViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController_iPad.xib; sourceTree = "<group>"; };
+		3E4AFF5D1271E21E0017AED4 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		3E4AFF5E1271E21E0017AED4 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		3E8629F61222BCC4001DE141 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3E8629F71222BCC4001DE141 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3E8629F81222BCC4001DE141 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -543,6 +556,8 @@
 				3E862BDD1222D081001DE141 /* LoadingViewController.m */,
 				3E862CD51222D8DB001DE141 /* SplashViewController.h */,
 				3E862CD61222D8DB001DE141 /* SplashViewController.m */,
+				3E4AFF5D1271E21E0017AED4 /* InfoViewController.h */,
+				3E4AFF5E1271E21E0017AED4 /* InfoViewController.m */,
 				3E862A061222BCD0001DE141 /* DeploymentsViewController.h */,
 				3E862A071222BCD0001DE141 /* DeploymentsViewController.m */,
 				3E862A041222BCD0001DE141 /* IncidentsViewController.h */,
@@ -586,6 +601,9 @@
 		3E862A3C1222BCE9001DE141 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3E4A006C1271F26C0017AED4 /* map.png */,
+				3E4A006D1271F26C0017AED4 /* radar.png */,
+				3E4A006E1271F26C0017AED4 /* reports.png */,
 				3E8634061224384D001DE141 /* photo_placeholder.png */,
 				3E862BEB1222D0A1001DE141 /* loading_background.png */,
 				3E862A421222BD09001DE141 /* blank.png */,
@@ -613,6 +631,8 @@
 				3E862A6D1222BD1D001DE141 /* MainWindow_iPhone.xib */,
 				3E862CD81222D8F0001DE141 /* SplashViewController_iPhone.xib */,
 				3E862CDC1222D8FC001DE141 /* SplashViewController_iPad.xib */,
+				3E4AFF4D1271E1DF0017AED4 /* InfoViewController_iPhone.xib */,
+				3E4AFF511271E1EB0017AED4 /* InfoViewController_iPad.xib */,
 				3E862A621222BD1D001DE141 /* AddIncidentViewController_iPad.xib */,
 				3E862A631222BD1D001DE141 /* AddIncidentViewController_iPhone.xib */,
 				3E862A641222BD1D001DE141 /* AddDeploymentViewController_iPad.xib */,
@@ -789,6 +809,11 @@
 				3E8634071224384D001DE141 /* photo_placeholder.png in Resources */,
 				3E119AC1126F64AB00C3DCBB /* DeploymentTableCell.xib in Resources */,
 				3E119AC8126F64BA00C3DCBB /* IncidentTableCell.xib in Resources */,
+				3E4AFF4E1271E1DF0017AED4 /* InfoViewController_iPhone.xib in Resources */,
+				3E4AFF521271E1EB0017AED4 /* InfoViewController_iPad.xib in Resources */,
+				3E4A006F1271F26C0017AED4 /* map.png in Resources */,
+				3E4A00701271F26C0017AED4 /* radar.png in Resources */,
+				3E4A00711271F26C0017AED4 /* reports.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -872,6 +897,7 @@
 				3E119D70126FAF0B00C3DCBB /* Sound.m in Sources */,
 				3E119D73126FAF1300C3DCBB /* Video.m in Sources */,
 				3E4AF91D1270AA370017AED4 /* TableHeaderView.m in Sources */,
+				3E4AFF5F1271E21E0017AED4 /* InfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

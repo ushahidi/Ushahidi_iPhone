@@ -33,6 +33,7 @@
 #import "Location.h"
 #import "UIColor+Extension.h"
 #import "TableHeaderView.h"
+#import "Messages.h"
 
 typedef enum {
 	TableSectionTitle,
@@ -50,6 +51,8 @@ typedef enum {
 } NavBar;
 
 @interface ViewIncidentViewController ()
+
+- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText;
 
 @end
 
@@ -81,7 +84,7 @@ typedef enum {
 		DLog(@"Previous");
 		self.incident = [self.incidents objectAtIndex:index - 1];
 	}
-	self.title = self.incident.title;
+	self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.incidents count]];
 	NSInteger newIndex = [self.incidents indexOfObject:self.incident];
 	[self.nextPrevious setEnabled:(newIndex > 0) forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:(newIndex + 1 < [self.incidents count]) forSegmentAtIndex:NavBarNext];
@@ -92,10 +95,18 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
+
+- (void) viewDidLoad {
+	[super viewDidLoad];
+	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
+	self.oddRowColor = [UIColor ushahidiLiteTan];
+	self.evenRowColor = [UIColor ushahidiLiteTan];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	self.title = self.incident.title;
 	NSInteger index = [self.incidents indexOfObject:self.incident];
+	self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.incidents count]];
 	[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:index + 1 < [self.incidents count] forSegmentAtIndex:NavBarNext];
 	[self.tableView reloadData];
@@ -131,14 +142,7 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionDescription) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellWithDelegate:self table:theTableView];
-		cell.accessoryType = UITableViewCellAccessoryNone;
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-		[cell setText:self.incident.description];
-		return cell;
-	}
-	else if (indexPath.section == TableSectionNews) {
+	if (indexPath.section == TableSectionNews) {
 		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -148,11 +152,12 @@ typedef enum {
 		MapTableCell *cell = [TableCellFactory getMapTableCellWithDelegate:self table:theTableView];
 		[cell setScrollable:NO];
 		[cell setZoomable:NO];
+		//TODO prevent map from re-adding pin
 		[cell removeAllPins];
-		[cell addPinWithTitle:self.incident.locationName 
-					 subtitle:[NSString stringWithFormat:@"%f,%f", incident.locationLatitude, incident.locationLongitude]
-					 latitude:self.incident.locationLatitude 
-					longitude:self.incident.locationLongitude];
+		[cell addPinWithTitle:self.incident.location 
+					 subtitle:[NSString stringWithFormat:@"%@,%@", self.incident.latitude, self.incident.longitude]
+					 latitude:self.incident.latitude 
+					longitude:self.incident.longitude];
 		[cell resizeRegionToFitAllPins:NO];
 		return cell;
 	}
@@ -175,34 +180,27 @@ typedef enum {
 		return cell;
 	}
 	else {
-		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView];
+		TextTableCell *cell = [TableCellFactory getTextTableCellWithDelegate:self table:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		cell.indexPath = indexPath;
 		if (indexPath.section == TableSectionTitle) {
 			cell.textLabel.text = self.incident.title;
 		}
+		if (indexPath.section == TableSectionDescription) {
+			cell.textLabel.text = self.incident.description;
+		}
 		else if (indexPath.section == TableSectionCategory) {
-			//TODO load categoriess
-			cell.textLabel.text = @"";
+			cell.textLabel.text = [self.incident categoryNames];
 		}
 		else if (indexPath.section == TableSectionLocation) {
-			cell.textLabel.text = self.incident.locationName;
+			cell.textLabel.text = self.incident.location;
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;	
 		}
 		else if (indexPath.section == TableSectionDateTime) {
-			cell.textLabel.text = [self.incident getDateString];
+			cell.textLabel.text = [self.incident dateString];
 		}
-//		else if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
-//			cell.textLabel.text = @"Add Photo";
-//			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//			cell.selectionStyle = UITableViewCellSelectionStyleGray;
-//		}
-//		else if (indexPath.section == TableSectionNews && indexPath.row == 0) {
-//			cell.textLabel.text = @"Add News Article";
-//			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//			cell.selectionStyle = UITableViewCellSelectionStyleGray;
-//		}
 		return cell;	
 	}
 	return nil;
@@ -210,36 +208,39 @@ typedef enum {
 
 - (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
 	if (section == TableSectionTitle) {
-		return [TableHeaderView headerForTable:theTableView text:@"Title" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
+		return [self headerForTable:theTableView text:[Messages title]];
 	}
 	if (section == TableSectionCategory) {
-		return [TableHeaderView headerForTable:theTableView text:@"Category" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
+		return [self headerForTable:theTableView text:[Messages category]];
 	}
 	if (section == TableSectionLocation) {
-		return [TableHeaderView headerForTable:theTableView text:@"Location" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
+		return [self headerForTable:theTableView text:[Messages location]];
 	}
 	if (section == TableSectionDateTime) {
-		return [TableHeaderView headerForTable:theTableView text:@"Date" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
+		return [self headerForTable:theTableView text:[Messages date]];
 	}
 	if (section == TableSectionDescription) {
-		return [TableHeaderView headerForTable:theTableView text:@"Description" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
+		return [self headerForTable:theTableView text:[Messages description]];
 	}
 	if (section == TableSectionPhotos) {
-		return [TableHeaderView headerForTable:theTableView text:@"Photos" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
+		return [self headerForTable:theTableView text:[Messages photos]];
 	}
 	if (section == TableSectionNews) {
-		return [TableHeaderView headerForTable:theTableView text:@"News" textColor:[UIColor ushahidiDarkGray] backgroundColor:[UIColor ushahidiDarkTan]];
+		return [self headerForTable:theTableView text:[Messages news]];
 	}
 	return nil;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return [TableHeaderView getViewHeight];
+}
+
+- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText {
+	return [TableHeaderView headerForTable:theTableView text:theText textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiDarkTan]];
+}
+
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionDescription) {
-		CGFloat width = theTableView.contentSize.width - 20;
-		CGSize tableCellSize = [TextTableCell getCellSizeForText:self.incident.description forWidth:width];
-		return tableCellSize.height + 10;
-	}
-	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
+	if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
 		return 140;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
@@ -247,6 +248,21 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionNews) {
 		return 55;
+	}
+	else if (indexPath.section == TableSectionTitle) {
+		return [TextTableCell getCellSizeForText:self.incident.title forWidth:theTableView.contentSize.width].height;
+	}
+	else if (indexPath.section == TableSectionDescription) {
+		return [TextTableCell getCellSizeForText:self.incident.description forWidth:theTableView.contentSize.width].height;
+	}
+	else if (indexPath.section == TableSectionLocation) {
+		return [TextTableCell getCellSizeForText:self.incident.location forWidth:theTableView.contentSize.width].height;
+	}
+	else if (indexPath.section == TableSectionCategory) {
+		return [TextTableCell getCellSizeForText:[self.incident categoryNames] forWidth:theTableView.contentSize.width].height;
+	}
+	else if (indexPath.section == TableSectionDateTime) {
+		return [TextTableCell getCellSizeForText:[self.incident dateString] forWidth:theTableView.contentSize.width].height;
 	}
 	return 45;
 }
@@ -259,10 +275,10 @@ typedef enum {
 		self.webViewController.website = cell.detailTextLabel.text;
 		[self.navigationController pushViewController:self.webViewController animated:YES];
 	}
-	else if (indexPath.section == TableSectionLocation && indexPath.row == 0) {
-		self.mapViewController.locationName = self.incident.locationName;
-		self.mapViewController.locationLatitude = self.incident.locationLatitude;
-		self.mapViewController.locationLongitude = self.incident.locationLongitude;
+	else if (indexPath.section == TableSectionLocation) {
+		self.mapViewController.locationName = self.incident.location;
+		self.mapViewController.locationLatitude = self.incident.latitude;
+		self.mapViewController.locationLongitude = self.incident.longitude;
 		[self.navigationController pushViewController:self.mapViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionPhotos) {

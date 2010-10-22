@@ -24,6 +24,7 @@
 #import "AlertView.h"
 #import "InputView.h"
 #import "Ushahidi.h"
+#import "UIColor+Extension.h"
 
 typedef enum {
 	TableSectionName,
@@ -80,12 +81,16 @@ typedef enum {
 	else {
 		[self.loadingView hide];
 		[self.alertView showWithTitle:@"Error" andMessage:@"There was a problem adding deployment."];
-	}
-	
+	}	
 }
 
 #pragma mark -
 #pragma mark UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
+}
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];

@@ -28,6 +28,7 @@
 
 @class AddIncidentViewController;
 @class ViewIncidentViewController;
+@class MapViewController;
 @class Deployment;
 
 @interface IncidentsViewController : TableViewController<UshahidiDelegate, 
@@ -38,18 +39,21 @@
 @public
 	AddIncidentViewController *addIncidentViewController;
 	ViewIncidentViewController *viewIncidentViewController;
+	MapViewController *mapViewController;
 	MKMapView *mapView;
 	Deployment *deployment;
 }
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
 @property(nonatomic,retain) IBOutlet ViewIncidentViewController *viewIncidentViewController;
+@property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic,retain) IBOutlet MKMapView *mapView;
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;
 - (IBAction) action:(id)sender;
+- (IBAction) map:(id)sender;
 - (IBAction) toggleReportsAndMap:(id)sender;
 
 @end

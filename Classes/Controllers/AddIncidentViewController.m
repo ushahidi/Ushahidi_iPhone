@@ -28,6 +28,7 @@
 #import "Category.h"
 #import "Location.h"
 #import "Incident.h"
+#import "Messages.h"
 
 #define kCancel @"Cancel"
 #define kTakePhoto @"Take Photo"
@@ -75,8 +76,12 @@ typedef enum {
 - (IBAction) done:(id)sender {
 	DLog(@"done");
 	[self.view endEditing:YES];
-	[[Ushahidi sharedUshahidi] addIncident:self.incident];
-	[self dismissModalViewControllerAnimated:YES];
+	if([[Ushahidi sharedUshahidi] addIncident:self.incident]) {
+		[self dismissModalViewControllerAnimated:YES];
+	}
+	else {
+		DLog(@"Unable to add incident");
+	}
 }
 
 #pragma mark -
@@ -86,6 +91,7 @@ typedef enum {
 	[super viewWillAppear:animated];
 
 	self.incident = [[Incident alloc] initWithDefaultValues];
+	self.incident.pending = YES;
 	
 	[self.categories removeAllObjects];
 	[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesWithDelegate:self]];
@@ -209,7 +215,7 @@ typedef enum {
 		else if (indexPath.section == TableSectionLocation) {
 			[cell setPlaceholder:@"Select location"];
 			if (self.incident.location != nil) {
-				[cell setText:self.incident.location.name];
+				[cell setText:self.incident.location];
 			}
 			else {
 				[cell setText:@""];
@@ -224,25 +230,25 @@ typedef enum {
 
 - (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
 	if (section == TableSectionTitle) {
-		return @"Title";
+		return [Messages title];
 	}
 	if (section == TableSectionCategory) {
-		return @"Category";
+		return [Messages category];
 	}
 	if (section == TableSectionLocation) {
-		return @"Location";
+		return [Messages location];
 	}
 	if (section == TableSectionDate) {
-		return @"Date";
+		return [Messages date];
 	}
 	if (section == TableSectionDescription) {
-		return @"Description";
+		return [Messages description];
 	}
 	if (section == TableSectionPhotos) {
-		return @"Photos";
+		return [Messages photos];
 	}
 	if (section == TableSectionNews) {
-		return @"News";
+		return [Messages news];
 	}
 	return nil;
 }
@@ -325,7 +331,7 @@ typedef enum {
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)theCountries error:(NSError *)error hasChanges:(BOOL)hasChanges{
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+		//[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
 	else if(hasChanges) {
 		DLog(@"countries: %@", theCountries);
@@ -384,7 +390,9 @@ typedef enum {
 	DLog(@"index:%d", index);
 	Location *location = [self.locations objectAtIndex:index];
 	if (location != nil) {
-		self.incident.location = location;
+		self.incident.location = location.name;
+		self.incident.latitude = location.latitude;
+		self.incident.longitude = location.longitude;
 		DLog(@"location:%@ latitude:%@ longitude:%@", location.name, location.latitude, location.longitude);
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:TableSectionLocation];
 		TextFieldTableCell *cell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];

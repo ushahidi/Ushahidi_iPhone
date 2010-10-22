@@ -21,6 +21,7 @@
 #import "IncidentsViewController.h"
 #import "AddIncidentViewController.h"
 #import "ViewIncidentViewController.h"
+#import "MapViewController.h"
 #import "IncidentTableCell.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
@@ -44,7 +45,13 @@ typedef enum {
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController, mapView, deployment;
+@synthesize addIncidentViewController, viewIncidentViewController, mapViewController, mapView, deployment;
+
+typedef enum {
+	TableSectionPending,
+	TableSectionIncidents,
+	TableSectionDownload
+} TableSection;
 
 #pragma mark -
 #pragma mark Handlers
@@ -71,6 +78,12 @@ typedef enum {
 	[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
 }
 
+- (IBAction) map:(id)sender {
+	DLog(@"");
+	self.mapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:self.mapViewController animated:YES];
+}
+
 - (IBAction) toggleReportsAndMap:(id)sender {
 	DLog(@"");
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
@@ -84,7 +97,7 @@ typedef enum {
 		[self.mapView removeAllPins];
 		self.mapView.showsUserLocation = YES;
 		for (Incident *incident in self.allRows) {
-			[self.mapView addPinWithTitle:incident.title subtitle:[incident getDateString] latitude:incident.locationLatitude longitude:incident.locationLongitude];
+			[self.mapView addPinWithTitle:incident.title subtitle:[incident dateString] latitude:incident.latitude longitude:incident.longitude];
 		}
 		[self.mapView resizeRegionToFitAllPins:YES];
 	}
@@ -150,9 +163,9 @@ typedef enum {
 	Incident *incident = [self filteredRowAtIndexPath:indexPath];
 	if (incident != nil) {
 		[cell setTitle:incident.title];
-		[cell setLocation:[incident getLocationDescription]];
-		[cell setCategory:[incident getCategoryNames]];
-		[cell setDate:[incident getDateString]];
+		[cell setLocation:incident.location];
+		[cell setCategory:[incident categoryNames]];
+		[cell setDate:[incident dateString]];
 		Photo *photo = [incident getFirstPhoto];
 		if (photo != nil) {
 			if (photo.thumbnail != nil) {

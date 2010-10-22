@@ -20,7 +20,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class Location;
 @class Photo;
 @class News;
 @class Sound;
@@ -34,33 +33,32 @@
 	NSString *title;
 	NSString *description;
 	NSDate *date;
+	NSString *location;
+	NSString *latitude;
+	NSString *longitude;
 	
 	BOOL active;
 	BOOL verified;
-	BOOL marked;
+	BOOL pending;
 	
 	NSMutableArray *news;
 	NSMutableArray *photos;
 	NSMutableArray *sounds;
 	NSMutableArray *videos;
 	NSMutableArray *categories;
-	
-	Location *location;
-	
-	NSString *locationID;
-	NSString *locationName;
-	NSString *locationLatitude;
-	NSString *locationLongitude;
 }
 
 @property(nonatomic,retain) NSString *identifier;
 @property(nonatomic,retain) NSString *title;
 @property(nonatomic,retain) NSString *description;
 @property(nonatomic,retain) NSDate *date;
+@property(nonatomic,retain) NSString *location;
+@property(nonatomic,retain) NSString *latitude;
+@property(nonatomic,retain) NSString *longitude;
 
 @property(nonatomic,assign) BOOL active;
 @property(nonatomic,assign) BOOL verified;
-@property(nonatomic,assign) BOOL marked;
+@property(nonatomic,assign) BOOL pending;
 
 @property(nonatomic,retain) NSMutableArray *news;
 @property(nonatomic,retain) NSMutableArray *photos;
@@ -68,18 +66,15 @@
 @property(nonatomic,retain) NSMutableArray *videos;
 @property(nonatomic,retain) NSMutableArray *categories;
 
-@property(nonatomic,retain) Location *location;
-
-@property(nonatomic,retain) NSString *locationID;
-@property(nonatomic,retain) NSString *locationName;
-@property(nonatomic,retain) NSString *locationLatitude;
-@property(nonatomic,retain) NSString *locationLongitude;
-
 - (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media;
 - (id)initWithDefaultValues;
 
 - (BOOL) matchesString:(NSString *)string;
-- (NSString *) getDateString;
+- (NSString *) dateString;
+- (NSString *) dateDayMonthYear;
+- (NSString *) dateHour;
+- (NSString *) dateMinute;
+- (NSString *) dateAmPm;
 
 - (void) addPhoto:(Photo *)photo;
 - (void) addNews:(News *)news;
@@ -88,10 +83,8 @@
 - (void) addCategory:(Category *)category;
 - (void) removeCategory:(Category *)category;
 - (BOOL) hasCategory:(Category *)category;
-- (NSString *) getCategoryNames;
+- (NSString *) categoryNames;
 
 - (Photo *) getFirstPhoto;
-
-- (NSString *) getLocationDescription;
 
 @end

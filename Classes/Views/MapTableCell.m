@@ -71,7 +71,7 @@
 - (id)initWithDelegate:(id<MapTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.delegate = theDelegate;
-        self.mapView = [[MKMapView alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 10)];
+        self.mapView = [[MKMapView alloc] initWithFrame:self.contentView.frame];
 		self.mapView.delegate = self;
 		self.mapView.mapType = MKMapTypeStandard;
 		self.mapView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);

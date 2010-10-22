@@ -29,11 +29,13 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
-@synthesize email;
+@synthesize email, firstName, lastName;
 
 - (id) init {
 	if ((self = [super init])) {
 		self.email = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
+		self.firstName = [[NSUserDefaults standardUserDefaults] stringForKey:@"firstName"];
+		self.lastName = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastName"];
 	}
 	return self;
 }
@@ -46,6 +48,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 - (void) save {
 	DLog(@"");
 	[[NSUserDefaults standardUserDefaults] setObject:self.email forKey:@"email"];
+	[[NSUserDefaults standardUserDefaults] setObject:self.firstName forKey:@"firstName"];
+	[[NSUserDefaults standardUserDefaults] setObject:self.lastName forKey:@"lastName"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

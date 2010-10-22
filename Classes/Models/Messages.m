@@ -22,6 +22,34 @@
 
 @implementation Messages
 
++ (NSString *) title {
+	return NSLocalizedString(@"Title", @"Title");
+}
+
++ (NSString *) category {
+	return NSLocalizedString(@"Category", @"Category");
+}
+
++ (NSString *) location {
+	return NSLocalizedString(@"Location", @"Location");
+}
+
++ (NSString *) date {
+	return NSLocalizedString(@"Date", @"Date");
+}
+
++ (NSString *) description {
+	return NSLocalizedString(@"Description", @"Description");
+}
+
++ (NSString *) photos {
+	return NSLocalizedString(@"Photos", @"Photos");
+}
+
++ (NSString *) news {
+	return NSLocalizedString(@"News", @"News");
+}
+
 + (NSString *) noLocationSpecified {
 	return NSLocalizedString(@"No Location Specified", @"No Location Specified");
 }
@@ -41,5 +69,5 @@
 + (NSString *) searchIncidents {
 	return NSLocalizedString(@"Search incidents...", @"Search incidents...");
 }
-
+	
 @end

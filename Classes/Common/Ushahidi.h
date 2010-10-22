@@ -45,6 +45,7 @@
 	NSMutableDictionary *locations;
 	NSMutableDictionary *incidents;
 	NSMutableDictionary *delegates;
+	NSMutableArray *pending;
 }
 
 + (Ushahidi *) sharedUshahidi;
@@ -56,6 +57,7 @@
 - (BOOL)addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
 
 - (BOOL)addIncident:(Incident *)incident;
+- (BOOL)uploadIncident:(Incident *)incident;
 
 - (NSArray *) getDeploymentsWithDelegate:(id<UshahidiDelegate>)delegate;
 
@@ -92,5 +94,6 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)countries error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
 
 @end

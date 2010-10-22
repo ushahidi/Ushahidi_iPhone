@@ -38,8 +38,7 @@ typedef enum {
 	MediaTypeNews
 } MediaType;
 
-@synthesize identifier, title, description, date, active, verified, marked, news, photos, sounds, videos, categories, location;
-@synthesize locationID, locationName, locationLatitude, locationLongitude;
+@synthesize identifier, title, description, date, active, verified, pending, news, photos, sounds, videos, categories, location, latitude, longitude;
 
 - (id)initWithDefaultValues {
 	if (self = [super init]) {
@@ -53,12 +52,7 @@ typedef enum {
 }
 
 - (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media {
-	if (self = [super init]) {
-		self.news = [[NSMutableArray alloc] initWithCapacity:0];
-		self.photos = [[NSMutableArray alloc] initWithCapacity:0];
-		self.sounds = [[NSMutableArray alloc] initWithCapacity:0];
-		self.videos = [[NSMutableArray alloc] initWithCapacity:0];
-		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
+	if (self = [self initWithDefaultValues]) {
 		if (dictionary != nil) {
 			//DLog(@"dictionary: %@", dictionary);
 			self.identifier = [dictionary stringForKey:@"incidentid"];
@@ -70,10 +64,9 @@ typedef enum {
 			if (dateString != nil) {
 				self.date = [NSDate dateFromString:dateString];
 			}
-			self.locationID = [dictionary stringForKey:@"locationid"];
-			self.locationName = [dictionary stringForKey:@"locationname"];
-			self.locationLatitude = [dictionary stringForKey:@"locationlatitude"];
-			self.locationLongitude = [dictionary stringForKey:@"locationlongitude"];
+			self.location = [dictionary stringForKey:@"locationname"];
+			self.latitude = [dictionary stringForKey:@"locationlatitude"];
+			self.longitude = [dictionary stringForKey:@"locationlongitude"];
 		}
 		if (media != nil) {
 			DLog(@"media: %@", media);
@@ -105,16 +98,14 @@ typedef enum {
 	[encoder encodeObject:self.date forKey:@"date"];
 	[encoder encodeBool:self.active forKey:@"active"];
 	[encoder encodeBool:self.verified forKey:@"verified"];
-	[encoder encodeBool:self.marked forKey:@"marked"];
+	[encoder encodeBool:self.pending forKey:@"pending"];
 	[encoder encodeObject:self.location forKey:@"location"];
 	[encoder encodeObject:self.news forKey:@"news"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
 	[encoder encodeObject:self.categories forKey:@"categories"];
-	
-	[encoder encodeObject:self.locationID forKey:@"locationID"];
-	[encoder encodeObject:self.locationName forKey:@"locationName"];
-	[encoder encodeObject:self.locationLatitude forKey:@"locationLatitude"];
-	[encoder encodeObject:self.locationLongitude forKey:@"locationLongitude"];
+	[encoder encodeObject:self.location forKey:@"location"];
+	[encoder encodeObject:self.latitude forKey:@"latitude"];
+	[encoder encodeObject:self.longitude forKey:@"longitude"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -125,8 +116,10 @@ typedef enum {
 		self.date = [decoder decodeObjectForKey:@"date"];
 		self.active = [decoder decodeBoolForKey:@"active"];
 		self.verified = [decoder decodeBoolForKey:@"verified"];
-		self.marked = [decoder decodeBoolForKey:@"marked"];
+		self.pending = [decoder decodeBoolForKey:@"pending"];
 		self.location = [decoder decodeObjectForKey:@"location"];
+		self.latitude = [decoder decodeObjectForKey:@"latitude"];
+		self.longitude = [decoder decodeObjectForKey:@"longitude"];
 		
 		self.news = [decoder decodeObjectForKey:@"news"];
 		if (self.news == nil) self.news = [NSArray array];
@@ -136,11 +129,6 @@ typedef enum {
 		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
 		if (self.categories == nil) self.categories = [NSArray array];
-		
-		self.locationID = [decoder decodeObjectForKey:@"locationID"];
-		self.locationName = [decoder decodeObjectForKey:@"locationName"];
-		self.locationLatitude = [decoder decodeObjectForKey:@"locationLatitude"];
-		self.locationLongitude = [decoder decodeObjectForKey:@"locationLongitude"];
 	}
 	return self;
 }
@@ -148,12 +136,27 @@ typedef enum {
 - (BOOL) matchesString:(NSString *)string {
 	NSString *lowercaseString = [string lowercaseString];
 	return	(string == nil || [string length] == 0) ||
-			[[self.title lowercaseString] hasPrefix:lowercaseString] ||
-			[[self.locationName lowercaseString] rangeOfString:lowercaseString].location != NSNotFound;
+			[[self.title lowercaseString] hasPrefix:lowercaseString];
 }
 
-- (NSString *) getDateString {
-	return self.date != nil ? [self.date dateToString] : nil;
+- (NSString *) dateString {
+	return self.date != nil ? [self.date dateToString:@"cccc, MMMM d, yyyy"] : nil;
+}
+
+- (NSString *) dateDayMonthYear {
+	return self.date != nil ? [self.date dateToString:@"MM/dd/yyyy"] : nil;
+}
+
+- (NSString *) dateHour {
+	return self.date != nil ? [self.date dateToString:@"HH"] : nil;
+}
+
+- (NSString *) dateMinute {
+	return self.date != nil ? [self.date dateToString:@"mm"] : nil;
+}
+
+- (NSString *) dateAmPm {
+	return self.date != nil ? [[self.date dateToString:@"a"] lowercaseString] : nil;
 }
 
 - (void) addPhoto:(Photo *)photo {
@@ -188,7 +191,7 @@ typedef enum {
 	return [self.categories containsObject:category];
 }
 
-- (NSString *) getCategoryNames {
+- (NSString *) categoryNames {
 	NSMutableString *categoryNames = [NSMutableString stringWithCapacity:0];
 	for (Category *category in self.categories) {
 		if ([categoryNames length] > 0) {
@@ -206,31 +209,19 @@ typedef enum {
 	return nil;
 }
 
-- (NSString *) getLocationDescription {
-	if (self.location != nil) {
-		return self.location.name;
-	}
-	if (self.locationName != nil) {
-		return self.locationName;
-	}
-	return nil;
-}
-
 - (void)dealloc {
 	[identifier release];
 	[title release];
 	[description release];
 	[date release];
 	[location release];
+	[latitude release];
+	[longitude release];
 	[news release];
 	[photos release];
 	[sounds release];
 	[videos release];
 	[categories release];
-	[locationID release];
-	[locationName release];
-	[locationLatitude release];
-	[locationLongitude release];
 	[super dealloc];
 }
 

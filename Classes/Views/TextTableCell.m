@@ -26,6 +26,8 @@
 
 @property (nonatomic, assign) id<TextTableCellDelegate>	delegate;
 
++ (UIFont *) getLabelFont;
+
 @end
 
 @implementation TextTableCell
@@ -37,7 +39,7 @@
 		self.delegate = theDelegate;
 		self.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 		self.textLabel.numberOfLines = 0; 
-		self.textLabel.font = [UIFont boldSystemFontOfSize:18];
+		self.textLabel.font = [TextTableCell getLabelFont];
 	}
     return self;
 }
@@ -61,8 +63,12 @@
 }
 
 + (CGSize)getCellSizeForText:(NSString *)theText forWidth:(CGFloat)width {
-	CGSize rect = [theText sizeWithFont:[UIFont boldSystemFontOfSize:18] constrainedToSize:CGSizeMake(width, 9999) lineBreakMode:UILineBreakModeWordWrap]; 
-	return CGSizeMake(rect.width, rect.height + kPadding + kPadding);
+	CGSize size = [theText sizeWithFont:[TextTableCell getLabelFont] constrainedToSize:CGSizeMake(width, 9999) lineBreakMode:UILineBreakModeWordWrap]; 
+	return CGSizeMake(size.width, size.height + kPadding);
+}
+
++ (UIFont *) getLabelFont {
+	return [UIFont systemFontOfSize:16];
 }
 
 - (void)dealloc {

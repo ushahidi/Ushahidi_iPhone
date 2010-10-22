@@ -21,6 +21,7 @@
 #import "DeploymentsViewController.h"
 #import "IncidentsViewController.h"
 #import "AddDeploymentViewController.h"
+#import "InfoViewController.h"
 #import "DeploymentTableCell.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
@@ -36,7 +37,7 @@
 
 @implementation DeploymentsViewController
 
-@synthesize incidentsViewController, addDeploymentViewController;
+@synthesize incidentsViewController, addDeploymentViewController, infoViewController;
 
 #pragma mark -
 #pragma mark Handlers
@@ -52,6 +53,12 @@
 	[[Ushahidi sharedUshahidi] getDeploymentsWithDelegate:self];
 }
 
+- (void) info:(id)sender {
+	DLog(@"info");
+	self.infoViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:self.infoViewController animated:YES];
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -61,6 +68,12 @@
 	self.oddRowColor = [UIColor ushahidiDarkTan];
 	self.evenRowColor = [UIColor ushahidiLiteBrown];
 	[self showSearchBarWithPlaceholder:[Messages searchServers]];
+	
+	UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [infoButton addTarget:self action:@selector(info:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+    self.navigationItem.leftBarButtonItem = infoBarButton;
+    [infoBarButton release];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -85,6 +98,7 @@
 - (void)dealloc {
 	[addDeploymentViewController release];
 	[incidentsViewController release];
+	[infoViewController release];
     [super dealloc];
 }
 

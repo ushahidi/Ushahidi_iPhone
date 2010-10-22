@@ -24,16 +24,19 @@
 
 @class IncidentsViewController;
 @class AddDeploymentViewController;
+@class InfoViewController;
 
 @interface DeploymentsViewController : TableViewController<UshahidiDelegate> {
 	
 @public
 	IBOutlet IncidentsViewController *incidentsViewController;
 	IBOutlet AddDeploymentViewController *addDeploymentViewController;
+	IBOutlet InfoViewController *infoViewController;
 }
 
 @property(nonatomic, retain) IncidentsViewController *incidentsViewController;
 @property(nonatomic, retain) AddDeploymentViewController *addDeploymentViewController;
+@property(nonatomic, retain) InfoViewController *infoViewController;
 
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;

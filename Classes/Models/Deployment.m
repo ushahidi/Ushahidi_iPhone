@@ -26,7 +26,7 @@
 
 @implementation Deployment
 
-@synthesize name, url, domain, countries, categories, locations, incidents, pending;
+@synthesize name, url, domain, countries, categories, locations, incidents;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
@@ -45,7 +45,6 @@
 		self.categories = [[NSMutableDictionary alloc] init];
 		self.locations = [[NSMutableDictionary alloc] init];
 		self.incidents = [[NSMutableDictionary alloc] init];
-		self.pending = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -58,7 +57,6 @@
 	[encoder encodeObject:self.categories forKey:@"categories"];
 	[encoder encodeObject:self.locations forKey:@"locations"];
 	[encoder encodeObject:self.incidents forKey:@"incidents"];
-	[encoder encodeObject:self.pending forKey:@"pending"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -78,9 +76,6 @@
 		
 		self.incidents = [decoder decodeObjectForKey:@"incidents"];
 		if (self.incidents == nil) self.incidents = [[NSMutableDictionary alloc] init];
-		
-		self.pending = [decoder decodeObjectForKey:@"pending"];
-		if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -100,7 +95,6 @@
 	[categories release];
 	[locations release];
 	[incidents release];
-	[pending release];
     [super dealloc];
 }
 

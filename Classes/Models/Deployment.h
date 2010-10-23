@@ -31,7 +31,6 @@
 	NSMutableDictionary *categories;
 	NSMutableDictionary *locations;
 	NSMutableDictionary *incidents;
-	NSMutableArray *pending;
 }
 
 @property(nonatomic,retain) NSString *name;
@@ -42,7 +41,6 @@
 @property(nonatomic, retain) NSMutableDictionary *categories;
 @property(nonatomic, retain) NSMutableDictionary *locations;
 @property(nonatomic, retain) NSMutableDictionary *incidents;
-@property(nonatomic, retain) NSMutableArray *pending;
 
 - (id)initWithName:(NSString *)name url:(NSString *)url;
 - (BOOL) matchesString:(NSString *)string;

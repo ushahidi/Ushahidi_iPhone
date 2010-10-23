@@ -49,8 +49,9 @@
 - (BOOL)addDeployment:(Deployment *)deployment;
 - (BOOL)addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
 
-- (BOOL)addIncident:(Incident *)incident;
-- (BOOL)uploadIncident:(Incident *)incident;
+- (BOOL)addIncident:(Incident *)incident withDelegate:(id<UshahidiDelegate>)delegate;
+- (BOOL)uploadIncident:(Incident *)incident withDelegate:(id<UshahidiDelegate>)delegate;
+- (void)uploadIncidents:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getDeploymentsWithDelegate:(id<UshahidiDelegate>)delegate;
 
@@ -66,6 +67,7 @@
 - (Location *) getLocationByID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getLocationsByCountryID:(NSString *)countryID withDelegate:(id<UshahidiDelegate>)delegate;
 
+- (NSArray *) getIncidents;
 - (NSArray *) getIncidentsWithDelegate:(id<UshahidiDelegate>)delegate;
 - (NSInteger) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate;
 - (void) getGeoGraphicMidPointWithDelegate:(id<UshahidiDelegate>)delegate;
@@ -87,6 +89,6 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)countries error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents error:(NSError *)error hasChanges:(BOOL)hasChanges;
-- (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
+- (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error;
 
 @end

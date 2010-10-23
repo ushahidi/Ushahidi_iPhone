@@ -76,7 +76,7 @@ typedef enum {
 - (IBAction) done:(id)sender {
 	DLog(@"done");
 	[self.view endEditing:YES];
-	if([[Ushahidi sharedUshahidi] addIncident:self.incident]) {
+	if([[Ushahidi sharedUshahidi] addIncident:self.incident withDelegate:self]) {
 		[self dismissModalViewControllerAnimated:YES];
 	}
 	else {
@@ -380,6 +380,18 @@ typedef enum {
 	}
 	else {
 		DLog(@"No Changes");
+	}
+}
+
+- (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)theIncident error:(NSError *)error {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+	}
+	else if (theIncident != nil){
+		DLog(@"Incident: %@", theIncident.title);
+	}
+	else {
+		DLog(@"Incident is NULL");
 	}
 }
 

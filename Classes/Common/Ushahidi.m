@@ -22,6 +22,7 @@
 #import "SynthesizeSingleton.h"
 #import "NSKeyedArchiver+Extension.h"
 #import "NSKeyedUnarchiver+Extension.h"
+#import "NSString+Extension.h"
 #import "JSON.h"
 #import "Deployment.h"
 #import "Category.h"
@@ -36,7 +37,7 @@
 @property(nonatomic, retain) NSMutableDictionary *deployments;
 @property(nonatomic, retain) NSMutableDictionary *delegates;
 
-- (void) startAsynchronousRequest:(NSString *)url;
+- (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url;
 - (void) notifyDelegate:(id<UshahidiDelegate>)delegate;
 
 @end
@@ -68,6 +69,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[NSKeyedArchiver archiveObject:self.deployments forKey:@"deployments"];
 }
 
+#pragma mark -
+#pragma mark Deployments
+
 - (BOOL)addDeployment:(Deployment *)theDeployment {
 	if (theDeployment != nil) {
 		[self.deployments setObject:theDeployment forKey:theDeployment.url];
@@ -86,21 +90,28 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return NO;
 }
 
-- (BOOL)addIncident:(Incident *)incident {
+#pragma mark -
+#pragma mark Add/Upload Incidents
+
+- (BOOL)addIncident:(Incident *)incident withDelegate:(id<UshahidiDelegate>)delegate {
 	if (incident != nil) {
-		//[self.pending addObject:incident];
-		//[self.incidents setObject:incident forKey:incident.identifier];
-		return [self uploadIncident:incident];
+		if (incident.identifier == nil) {
+			incident.identifier = [NSString getUUID];
+		}
+		[self.deployment.incidents setObject:incident forKey:incident.identifier];
+		return [self uploadIncident:incident withDelegate:delegate];
 	}
 	return NO;
 }
 
-- (BOOL) uploadIncident:(Incident *)incident {
+- (BOOL) uploadIncident:(Incident *)incident withDelegate:(id<UshahidiDelegate>)delegate {
 	@try {
 		NSString *postUrl = [self.deployment getPostReport];
+		[self.delegates setObject:delegate forKey:postUrl];
 		DLog(@"POST: %@", postUrl);
 		ASIFormDataRequest *post = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:postUrl]];
 		[post setDelegate:self];
+		[post setUserInfo:[NSDictionary dictionaryWithObject:incident.identifier forKey:@"incident"]];
 		[post setShouldRedirect:YES];
 		[post setPostValue:@"report" forKey:@"task"];
 		[post setPostValue:@"json" forKey:@"resp"];
@@ -117,12 +128,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post setPostValue:[[Settings sharedSettings] firstName] forKey:@"person_first"];
 		[post setPostValue:[[Settings sharedSettings] lastName] forKey:@"person_last"];
 		[post setPostValue:[[Settings sharedSettings] email] forKey:@"person_email"];
-		
-		DLog(@"dateDayMonthYear: %@", [incident dateDayMonthYear]);
-		DLog(@"dateHour: %@", [incident dateHour]);
-		DLog(@"dateMinute: %@", [incident dateMinute]);
-		DLog(@"dateAmPm: %@", [incident dateAmPm]);
-		
 		for(Photo *photo in incident.photos) {
 			[post addData:[photo getData] forKey:@"incident_photo[]"];
 		}
@@ -133,6 +138,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		DLog(@"%@", e);
 	}
 	return NO;
+}
+
+- (void) uploadIncidents:(id<UshahidiDelegate>)delegate {
+	for(Incident *incident in self.deployment.incidents) {
+		if (incident.pending) {
+			[self uploadIncident:incident withDelegate:delegate];
+		}
+	}
 }
 
 #pragma mark -
@@ -258,6 +271,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[self startAsynchronousRequest:requestURL];
 }
 
+- (NSArray *) getIncidents {
+	return [self.deployment.incidents allValues];
+}
+
 - (NSArray *) getIncidentsWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
 	NSString *requestURL = [self.deployment getIncidents];
@@ -316,12 +333,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark ASIHTTPRequest
 
-- (void) startAsynchronousRequest:(NSString *)url {
+- (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url {
 	DLog(@"url: %@", url);
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
 	[request setDelegate:self];
 	[request setShouldRedirect:YES];
 	[request startAsynchronous];
+	return request;
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
@@ -343,6 +361,28 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	if ([request isKindOfClass:[ASIFormDataRequest class]]) {
 		DLog(@"#################### POST ####################");
 		DLog(@"response: %@", [request responseString]);
+		Incident *incident = nil;
+		if ([request userInfo] != nil) {
+			NSString *identifer = [[request userInfo] objectForKey:@"incident"];
+			if (identifer != nil) {
+				incident = [self.deployment.incidents objectForKey:identifer];
+				if ([@"true" isEqualToString:[payload objectForKey:@"success"]]) {
+					incident.pending = NO;
+					incident.errors = nil;
+					DLog(@"Setting Pending=NO for Incident: %@", incident.title);
+				}
+				else {
+					NSDictionary *messages = [json objectForKey:@"error"];
+					if (messages != nil) {
+						incident.errors = [messages objectForKey:@"message"];
+					}
+				}
+			}
+		}
+		SEL selector = @selector(uploadedToUshahidi:incident:error:);
+		if (delegate != NULL && [delegate respondsToSelector:selector]) {
+			[delegate uploadedToUshahidi:self incident:incident error:error];
+		}
 	}
 	else if ([Deployment isApiKeyUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:apiKey:error:hasChanges:);

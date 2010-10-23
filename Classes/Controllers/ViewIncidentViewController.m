@@ -36,6 +36,7 @@
 #import "Messages.h"
 
 typedef enum {
+	TableSectionErrors,
 	TableSectionTitle,
 	TableSectionCategory,
 	TableSectionLocation,
@@ -125,10 +126,13 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 7;
+	return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
+	if (section == TableSectionErrors) {
+		return self.incident.errors != nil ? 1 : 0;
+	}
 	if (section == TableSectionNews) {
 		return [self.incident.news count];
 	}
@@ -158,7 +162,7 @@ typedef enum {
 					 subtitle:[NSString stringWithFormat:@"%@,%@", self.incident.latitude, self.incident.longitude]
 					 latitude:self.incident.latitude 
 					longitude:self.incident.longitude];
-		[cell resizeRegionToFitAllPins:NO];
+		[cell resizeRegionToFitAllPins:NO];	
 		return cell;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
@@ -201,12 +205,20 @@ typedef enum {
 		else if (indexPath.section == TableSectionDateTime) {
 			cell.textLabel.text = [self.incident dateString];
 		}
+		else if (indexPath.section == TableSectionErrors) {
+			cell.textLabel.text = [self.incident errors];
+		}
 		return cell;	
 	}
 	return nil;
 }
 
 - (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
+	if (section == TableSectionErrors) {
+		return self.incident.errors != nil 
+			? [self headerForTable:theTableView text:[Messages errors]]
+			: nil;
+	}
 	if (section == TableSectionTitle) {
 		return [self headerForTable:theTableView text:[Messages title]];
 	}
@@ -263,6 +275,11 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionDateTime) {
 		return [TextTableCell getCellSizeForText:[self.incident dateString] forWidth:theTableView.contentSize.width].height;
+	}
+	else if (indexPath.section == TableSectionErrors) {
+		return self.incident.errors != nil 
+			? [TextTableCell getCellSizeForText:self.incident.errors forWidth:theTableView.contentSize.width].height
+			: 0;
 	}
 	return 45;
 }

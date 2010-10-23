@@ -20,22 +20,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Messages : NSObject {
+@interface NSString (Extension) 
 
-}
-
-+ (NSString *) errors;
-+ (NSString *) title;
-+ (NSString *) category;
-+ (NSString *) location;
-+ (NSString *) date;
-+ (NSString *) description;
-+ (NSString *) photos;
-+ (NSString *) news;
-+ (NSString *) noLocationSpecified;
-+ (NSString *) noCategorySpecified;
-+ (NSString *) noDateSpecified;
-+ (NSString *) searchServers;
-+ (NSString *) searchIncidents;
++ (NSString *)getUUID;
 
 @end

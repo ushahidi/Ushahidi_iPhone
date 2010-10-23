@@ -38,7 +38,7 @@ typedef enum {
 	MediaTypeNews
 } MediaType;
 
-@synthesize identifier, title, description, date, active, verified, pending, news, photos, sounds, videos, categories, location, latitude, longitude;
+@synthesize identifier, title, description, date, active, verified, pending, news, photos, sounds, videos, categories, location, latitude, longitude, errors;
 
 - (id)initWithDefaultValues {
 	if (self = [super init]) {
@@ -221,6 +221,7 @@ typedef enum {
 	[sounds release];
 	[videos release];
 	[categories release];
+	[errors release];
 	[super dealloc];
 }
 

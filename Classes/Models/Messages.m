@@ -22,6 +22,10 @@
 
 @implementation Messages
 
++ (NSString *) errors {
+	return NSLocalizedString(@"Errors", @"Errors");
+}
+
 + (NSString *) title {
 	return NSLocalizedString(@"Title", @"Title");
 }

@@ -46,6 +46,8 @@
 	NSMutableArray *sounds;
 	NSMutableArray *videos;
 	NSMutableArray *categories;
+	
+	NSString *errors;
 }
 
 @property(nonatomic,retain) NSString *identifier;
@@ -65,6 +67,8 @@
 @property(nonatomic,retain) NSMutableArray *sounds;
 @property(nonatomic,retain) NSMutableArray *videos;
 @property(nonatomic,retain) NSMutableArray *categories;
+
+@property(nonatomic,retain) NSString *errors;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media;
 - (id)initWithDefaultValues;

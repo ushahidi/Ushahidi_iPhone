@@ -22,6 +22,7 @@
 		3E4A006F1271F26C0017AED4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
 		3E4A00701271F26C0017AED4 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006D1271F26C0017AED4 /* radar.png */; };
 		3E4A00711271F26C0017AED4 /* reports.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006E1271F26C0017AED4 /* reports.png */; };
+		3E4A022712720E280017AED4 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3E4AF91D1270AA370017AED4 /* TableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AF91C1270AA370017AED4 /* TableHeaderView.m */; };
 		3E4AFF4E1271E1DF0017AED4 /* InfoViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFF4D1271E1DF0017AED4 /* InfoViewController_iPhone.xib */; };
 		3E4AFF521271E1EB0017AED4 /* InfoViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFF511271E1EB0017AED4 /* InfoViewController_iPad.xib */; };
@@ -161,6 +162,8 @@
 		3E4A006C1271F26C0017AED4 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		3E4A006D1271F26C0017AED4 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
 		3E4A006E1271F26C0017AED4 /* reports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reports.png; sourceTree = "<group>"; };
+		3E4A022512720E280017AED4 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		3E4A022612720E280017AED4 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		3E4AF91B1270AA370017AED4 /* TableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeaderView.h; sourceTree = "<group>"; };
 		3E4AF91C1270AA370017AED4 /* TableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeaderView.m; sourceTree = "<group>"; };
 		3E4AFF4D1271E1DF0017AED4 /* InfoViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -464,6 +467,8 @@
 				3E8637E512246A64001DE141 /* NSDictionary+Extension.m */,
 				3E8638C212247BAC001DE141 /* MKMapView+Extension.h */,
 				3E8638C312247BAC001DE141 /* MKMapView+Extension.m */,
+				3E4A022512720E280017AED4 /* NSString+Extension.h */,
+				3E4A022612720E280017AED4 /* NSString+Extension.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -892,6 +897,7 @@
 				3E119D73126FAF1300C3DCBB /* Video.m in Sources */,
 				3E4AF91D1270AA370017AED4 /* TableHeaderView.m in Sources */,
 				3E4AFF5F1271E21E0017AED4 /* InfoViewController.m in Sources */,
+				3E4A022712720E280017AED4 /* NSString+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

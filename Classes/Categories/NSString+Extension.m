@@ -18,24 +18,15 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "NSString+Extension.h"
 
-@interface Messages : NSObject {
+@implementation NSString (Extension)
 
++ (NSString *)getUUID {
+	CFUUIDRef theUUID = CFUUIDCreate(NULL);
+	CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+	CFRelease(theUUID);
+	return [(NSString *)string autorelease];
 }
-
-+ (NSString *) errors;
-+ (NSString *) title;
-+ (NSString *) category;
-+ (NSString *) location;
-+ (NSString *) date;
-+ (NSString *) description;
-+ (NSString *) photos;
-+ (NSString *) news;
-+ (NSString *) noLocationSpecified;
-+ (NSString *) noCategorySpecified;
-+ (NSString *) noDateSpecified;
-+ (NSString *) searchServers;
-+ (NSString *) searchIncidents;
 
 @end

@@ -42,6 +42,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
 - (void)dealloc {
 	[email release];
+	[firstName release];
+	[lastName release];
 	[super dealloc];
 }
 

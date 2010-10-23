@@ -128,6 +128,15 @@ typedef enum {
 		[self.filteredRows addObjectsFromArray:incidents];
 		DLog(@"Re-Adding Rows: %d", [incidents count]);
 	}
+	else if (self.modalViewController != nil) {
+		DLog(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidents];
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:incidents];
+		[self.filteredRows removeAllObjects];
+		[self.filteredRows addObjectsFromArray:incidents];
+		DLog(@"Re-Adding Rows: %d", [incidents count]);
+	}
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -267,6 +276,18 @@ typedef enum {
 	else {
 		[self.loadingView hide];
 		DLog(@"No Changes");
+	}
+}
+
+- (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+	}
+	else if (incident != nil){
+		DLog(@"Incident: %@", incident.title);
+	}
+	else {
+		DLog(@"Incident is NULL");
 	}
 }
 

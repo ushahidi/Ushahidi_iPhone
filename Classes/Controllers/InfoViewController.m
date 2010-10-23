@@ -44,6 +44,9 @@ typedef enum {
 
 @synthesize email, firstName, lastName;
 
+#pragma mark -
+#pragma mark Handlers
+
 - (IBAction) cancel:(id)sender {
 	[self.view endEditing:YES];
 	[self dismissModalViewControllerAnimated:YES];
@@ -58,6 +61,9 @@ typedef enum {
 	[self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark -
+#pragma mark UIView
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
@@ -68,6 +74,7 @@ typedef enum {
 	self.email = [[Settings sharedSettings] email];
 	self.firstName = [[Settings sharedSettings] firstName];
 	self.lastName = [[Settings sharedSettings] lastName];
+	[self.tableView reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -80,7 +87,10 @@ typedef enum {
 	[lastName release];
     [super dealloc];
 }
-			
+
+#pragma mark -
+#pragma mark UITableView
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
 	return 3;
 }
@@ -107,19 +117,6 @@ typedef enum {
 	return cell;	
 }
 
-//- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
-//	if (section == TableSectionEmail) {
-//		return @"Email";
-//	}
-//	if (section == TableSectionFirstName) {
-//		return @"First Name";
-//	}
-//	if (section == TableSectionLastName) {
-//		return @"Last Name";
-//	}	
-//	return nil;
-//}
-
 - (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
 	if (section == TableSectionEmail) {
 		return [self headerForTable:theTableView text:@"Email"];
@@ -140,19 +137,6 @@ typedef enum {
 - (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText {
 	return [TableHeaderView headerForTable:theTableView text:theText textColor:[UIColor ushahidiRed] backgroundColor:[UIColor clearColor]];
 }
-
-//- (NSString *)tableView:(UITableView *)theTableView titleForFooterInSection:(NSInteger)section {
-//	if (section == TableSectionEmail) {
-//		return @"Enter your email address";
-//	}
-//	if (section == TableSectionFirstName) {
-//		return @"Enter your first name";
-//	}
-//	if (section == TableSectionLastName) {
-//		return @"Enter your last name";
-//	}
-//	return nil;
-//}
 
 #pragma mark -
 #pragma mark TextFieldTableCellDelegate

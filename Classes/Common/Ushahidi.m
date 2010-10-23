@@ -90,6 +90,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return NO;
 }
 
+- (Deployment *) getDeploymentWithUrl:(NSString *)url {
+	return [self.deployments objectForKey:url];
+}
+
 #pragma mark -
 #pragma mark Add/Upload Incidents
 

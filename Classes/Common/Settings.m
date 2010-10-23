@@ -29,13 +29,14 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
-@synthesize email, firstName, lastName;
+@synthesize email, firstName, lastName, lastDeployment;
 
 - (id) init {
 	if ((self = [super init])) {
 		self.email = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
 		self.firstName = [[NSUserDefaults standardUserDefaults] stringForKey:@"firstName"];
 		self.lastName = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastName"];
+		self.lastDeployment = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastDeployment"];
 	}
 	return self;
 }
@@ -44,6 +45,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[email release];
 	[firstName release];
 	[lastName release];
+	[lastDeployment release];
 	[super dealloc];
 }
 
@@ -52,6 +54,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[[NSUserDefaults standardUserDefaults] setObject:self.email forKey:@"email"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.firstName forKey:@"firstName"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.lastName forKey:@"lastName"];
+	[[NSUserDefaults standardUserDefaults] setObject:self.lastDeployment forKey:@"lastDeployment"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

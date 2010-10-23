@@ -26,11 +26,13 @@
 	NSString *email;
 	NSString *firstName;
 	NSString *lastName;
+	NSString *lastDeployment;
 }
 
 @property(nonatomic, retain) NSString *email;
 @property(nonatomic, retain) NSString *firstName;
 @property(nonatomic, retain) NSString *lastName;
+@property(nonatomic, retain) NSString *lastDeployment;
 
 + (Settings *) sharedSettings;
 

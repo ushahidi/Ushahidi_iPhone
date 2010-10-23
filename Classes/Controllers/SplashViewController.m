@@ -20,22 +20,35 @@
 
 #import "SplashViewController.h"
 #import "DeploymentsViewController.h"
+#import "IncidentsViewController.h"
+#import "Settings.h"
 
 @interface SplashViewController ()
 
-- (void) pushServerViewController;
+- (void) pushNextViewController;
 
 @end
 
 @implementation SplashViewController
 
-@synthesize deploymentsViewController;
+@synthesize deploymentsViewController, incidentsViewController;
 
 #pragma mark -
 #pragma mark private
 
-- (void) pushServerViewController {
-	[self.navigationController pushViewController:self.deploymentsViewController animated:YES];
+- (void) pushNextViewController {
+	NSString *lastDeployment = [[Settings sharedSettings] lastDeployment];
+	if (lastDeployment != nil) {
+		DLog(@"XXXXXXXXXXXXXX Last Deployment: %@", lastDeployment);
+		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
+		[[Ushahidi sharedUshahidi] setDeployment:deployment];
+		self.incidentsViewController.deployment = deployment;
+		[self.navigationController pushViewController:self.deploymentsViewController animated:NO];
+		[self.navigationController pushViewController:self.incidentsViewController animated:YES];
+	}
+	else {
+		[self.navigationController pushViewController:self.deploymentsViewController animated:YES];
+	}	
 }
 
 #pragma mark -
@@ -48,7 +61,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self performSelector:@selector(pushServerViewController) withObject:nil afterDelay:0.5];
+	[self performSelector:@selector(pushNextViewController) withObject:nil afterDelay:0.5];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -21,13 +21,16 @@
 #import <UIKit/UIKit.h>
 
 @class DeploymentsViewController;
+@class IncidentsViewController;
 
 @interface SplashViewController : UIViewController {
 	
 @public
 	IBOutlet DeploymentsViewController *deploymentsViewController;
+	IBOutlet IncidentsViewController *incidentsViewController;
 }
 
 @property(nonatomic, retain) DeploymentsViewController *deploymentsViewController;
+@property(nonatomic, retain) IncidentsViewController *incidentsViewController;
 
 @end

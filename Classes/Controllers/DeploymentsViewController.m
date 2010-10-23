@@ -30,6 +30,7 @@
 #import "InputView.h"
 #import "Deployment.h"
 #import "Messages.h"
+#import "Settings.h"
 
 @interface DeploymentsViewController ()
 
@@ -87,6 +88,10 @@
 		[self.filteredRows addObjectsFromArray:deployments];
 		DLog(@"Re-Adding Rows: %d", [deployments count]);
 	}
+	if (animated) {
+		[[Settings sharedSettings] setLastDeployment:nil];
+		[[Settings sharedSettings] save];
+	}
 	[self.tableView reloadData];
 }
 
@@ -139,6 +144,8 @@
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
 	[[Ushahidi sharedUshahidi] setDeployment:deployment];
+	[[Settings sharedSettings] setLastDeployment:deployment.url];
+	[[Settings sharedSettings] save];
 	self.incidentsViewController.deployment = deployment;
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
 }

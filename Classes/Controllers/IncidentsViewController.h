@@ -42,12 +42,14 @@
 	MapViewController *mapViewController;
 	MKMapView *mapView;
 	Deployment *deployment;
+	UISegmentedControl *sortOrder;
 }
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
 @property(nonatomic,retain) IBOutlet ViewIncidentViewController *viewIncidentViewController;
 @property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic,retain) IBOutlet MKMapView *mapView;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *sortOrder;
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) add:(id)sender;
@@ -55,5 +57,6 @@
 - (IBAction) action:(id)sender;
 - (IBAction) map:(id)sender;
 - (IBAction) toggleReportsAndMap:(id)sender;
+- (IBAction) sortOrder:(id)sender;
 
 @end

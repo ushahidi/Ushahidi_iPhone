@@ -46,13 +46,18 @@ typedef enum {
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController, mapViewController, mapView, deployment;
+@synthesize addIncidentViewController, viewIncidentViewController, mapViewController, mapView, deployment, sortOrder;
 
 typedef enum {
 	TableSectionPending,
 	TableSectionIncidents,
 	TableSectionDownload
 } TableSection;
+
+typedef enum {
+	SortByDate,
+	SortByTitle
+} SortBy;
 
 #pragma mark -
 #pragma mark Handlers
@@ -80,6 +85,17 @@ typedef enum {
 	if ([[Settings sharedSettings] downloadMaps]) {
 		[[Ushahidi sharedUshahidi] downloadIncidentMaps];	
 	}
+}
+
+- (IBAction) sortOrder:(id)sender {
+	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
+	if (segmentControl.selectedSegmentIndex == SortByDate) {
+		DLog(@"SortByDate");
+	}
+	else if (segmentControl.selectedSegmentIndex == SortByTitle) {
+		DLog(@"SortByTitle");
+	}
+	[self filterRows:YES];
 }
 
 - (IBAction) map:(id)sender {
@@ -127,7 +143,12 @@ typedef enum {
 	if (self.willBePushed) {
 		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
 		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:incidents];
+		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
+			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
+		}
+		else {
+			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
+		}
 		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:incidents];
 		DLog(@"Adding Rows: %d", [incidents count]);
@@ -136,7 +157,12 @@ typedef enum {
 		DLog(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidents];
 		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:incidents];
+		if (self.sortOrder == SortByDate) {
+			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
+		}
+		else {
+			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
+		}
 		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:incidents];
 		DLog(@"Re-Adding Rows: %d", [incidents count]);
@@ -153,6 +179,7 @@ typedef enum {
 	[viewIncidentViewController release];
 	[mapView release];
 	[deployment release];
+	[sortOrder release];
     [super dealloc];
 }
 
@@ -227,7 +254,10 @@ typedef enum {
 - (void) filterRows:(BOOL)reloadTable {
 	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
-	for (Incident *incident in self.allRows) {
+	NSArray *incidents = (self.sortOrder.selectedSegmentIndex == SortByDate)
+		? [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)]
+		: [self.allRows sortedArrayUsingSelector:@selector(compareByTitle:)];
+	for (Incident *incident in incidents) {
 		if ([incident matchesString:searchText]) {
 			[self.filteredRows addObject:incident];
 		}
@@ -269,7 +299,12 @@ typedef enum {
 		DLog(@"incidents: %d", [theIncidents count]);
 		[self.loadingView hide];
 		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:theIncidents];
+		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
+			[self.allRows addObjectsFromArray:[theIncidents sortedArrayUsingSelector:@selector(compareByDate:)]];
+		}
+		else {
+			[self.allRows addObjectsFromArray:[theIncidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
+		}
 		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:self.allRows];
 		[self.tableView reloadData];

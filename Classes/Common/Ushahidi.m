@@ -329,7 +329,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (NSArray *) getIncidents {
-	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
+	return [self.deployment.incidents allValues];
 }
 
 - (NSArray *) getIncidentsWithDelegate:(id<UshahidiDelegate>)delegate {
@@ -353,7 +353,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidentsByCategoryID:categoryID];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
+	return [self.deployment.incidents allValues];
 }
 
 - (NSArray *) getIncidentsByCategoryName:(NSString *)categoryName withDelegate:(id<UshahidiDelegate>)delegate {
@@ -361,7 +361,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidentsByCategoryName:categoryName];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
+	return [self.deployment.incidents allValues];
 }
 
 - (NSArray *) getIncidentsByLocationID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate {
@@ -376,7 +376,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidentsByLocationName:locationName];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
+	return [self.deployment.incidents allValues];
 }
 
 - (NSArray *) getIncidentsBySinceID:(NSString *)sinceID withDelegate:(id<UshahidiDelegate>)delegate {
@@ -384,7 +384,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidentsBySinceID:sinceID];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];	
-	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
+	return [self.deployment.incidents allValues];
 }
 
 #pragma mark -

@@ -315,7 +315,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getLocationsByCountryID:countryID];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.locations allValues];
+	return [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
 #pragma mark -
@@ -337,7 +337,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidents];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
+	return [self.deployment.incidents allValues];
 }
 
 - (NSInteger) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate {
@@ -464,7 +464,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		}
 		SEL selector = @selector(downloadedFromUshahidi:countries:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self countries:[self.deployment.countries allValues] error:error hasChanges:hasChanges];
+			[delegate downloadedFromUshahidi:self 
+								   countries:[self.deployment.countries allValues] 
+									   error:error 
+								  hasChanges:hasChanges];
 		}
 	}
 	else if ([Deployment isCategoriesUrl:requestURL]) {
@@ -484,7 +487,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		}
 		SEL selector = @selector(downloadedFromUshahidi:categories:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self categories:[self.deployment.categories allValues] error:error hasChanges:hasChanges];
+			[delegate downloadedFromUshahidi:self 
+								  categories:[[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)] 
+									   error:error 
+								  hasChanges:hasChanges];
 		}
 	}
 	else if ([Deployment isLocationsUrl:requestURL]) {
@@ -504,7 +510,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		}
 		SEL selector = @selector(downloadedFromUshahidi:locations:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self locations:[self.deployment.locations allValues] error:error hasChanges:hasChanges];
+			[delegate downloadedFromUshahidi:self 
+								   locations:[[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)] 
+									   error:error 
+								  hasChanges:hasChanges];
 		}
 	}
 	else if ([Deployment isIncidentsUrl:requestURL]) {
@@ -526,7 +535,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		}
 		SEL selector = @selector(downloadedFromUshahidi:incidents:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self incidents:[self.deployment.incidents allValues] error:error hasChanges:hasChanges];
+			[delegate downloadedFromUshahidi:self 
+								   incidents:[self.deployment.incidents allValues] 
+									   error:error 
+								  hasChanges:hasChanges];
 		}
 	}
 }

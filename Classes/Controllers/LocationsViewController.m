@@ -39,7 +39,6 @@
 
 - (IBAction) search:(id)sender {
 	DLog(@"");
-	//[self showSearchBar:YES animated:YES];
 }
 
 - (IBAction) findLocation:(id)sender {
@@ -191,15 +190,8 @@
 		[self.filteredRows removeAllObjects];
 		[self.allRows addObjectsFromArray:locations];
 		[self.filteredRows addObjectsFromArray:self.allRows];
-		//MapTableCell *cell = (MapTableCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:TableSectionLocation]];
-//		if (cell != nil) {
-//			[cell removeAllPins];
-//			for (Location *location in theLocations) {
-//				NSString *subtitle = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
-//				[cell addPinWithTitle:location.name subtitle:subtitle latitude:location.latitude longitude:location.longitude];
-//			}
-//			[cell resizeRegionToFitAllPins:YES];
-//		}
+		[self.tableView reloadData];
+		[self.tableView flashScrollIndicators];
 	}
 	else {
 		DLog(@"No Changes");

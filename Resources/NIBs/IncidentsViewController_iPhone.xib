@@ -260,6 +260,14 @@
 					</object>
 					<int key="connectionID">29</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">refreshButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="435947910"/>
+					</object>
+					<int key="connectionID">30</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -403,7 +411,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">29</int>
+			<int key="maxID">30</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -689,6 +697,7 @@
 							<string>addIncidentViewController</string>
 							<string>mapView</string>
 							<string>mapViewController</string>
+							<string>refreshButton</string>
 							<string>sortOrder</string>
 							<string>viewIncidentViewController</string>
 						</object>
@@ -697,6 +706,7 @@
 							<string>AddIncidentViewController</string>
 							<string>MKMapView</string>
 							<string>MapViewController</string>
+							<string>UIBarButtonItem</string>
 							<string>UISegmentedControl</string>
 							<string>ViewIncidentViewController</string>
 						</object>
@@ -708,6 +718,7 @@
 							<string>addIncidentViewController</string>
 							<string>mapView</string>
 							<string>mapViewController</string>
+							<string>refreshButton</string>
 							<string>sortOrder</string>
 							<string>viewIncidentViewController</string>
 						</object>
@@ -724,6 +735,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapViewController</string>
 								<string key="candidateClassName">MapViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">refreshButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">sortOrder</string>

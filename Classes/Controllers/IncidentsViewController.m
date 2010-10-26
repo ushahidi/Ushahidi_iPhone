@@ -46,7 +46,7 @@ typedef enum {
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController, mapViewController, mapView, deployment, sortOrder;
+@synthesize addIncidentViewController, viewIncidentViewController, mapViewController, mapView, deployment, sortOrder, refreshButton;
 
 typedef enum {
 	TableSectionPending,
@@ -80,6 +80,7 @@ typedef enum {
 
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
+	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:@"Loading..."];
 	[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
 	if ([[Settings sharedSettings] downloadMaps]) {
@@ -180,6 +181,7 @@ typedef enum {
 	[mapView release];
 	[deployment release];
 	[sortOrder release];
+	[refreshButton release];
     [super dealloc];
 }
 
@@ -316,6 +318,7 @@ typedef enum {
 		[self.loadingView hide];
 		DLog(@"No Changes");
 	}
+	self.refreshButton.enabled = YES;
 }
 
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error {

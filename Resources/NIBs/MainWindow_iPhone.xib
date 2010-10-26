@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="96"/>
+			<integer value="18"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -190,12 +190,12 @@
 								</object>
 								<object class="NSCustomResource">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">radar.png</string>
+									<string key="NSResourceName">map.png</string>
 								</object>
 							</object>
-							<object class="NSColor" key="IBTintColor">
+							<object class="NSColor" key="IBTintColor" id="735855150">
 								<int key="NSColorSpace">3</int>
-								<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
+								<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
 							</object>
 						</object>
 						<reference key="IBUINavigationItem" ref="583687517"/>
@@ -281,10 +281,7 @@
 								</object>
 							</object>
 							<bool key="IBMomentary">YES</bool>
-							<object class="NSColor" key="IBTintColor">
-								<int key="NSColorSpace">3</int>
-								<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
-							</object>
+							<reference key="IBTintColor" ref="735855150"/>
 						</object>
 						<reference key="IBUINavigationItem" ref="345076606"/>
 					</object>
@@ -1409,10 +1406,12 @@
 							<string>add:</string>
 							<string>map:</string>
 							<string>refresh:</string>
+							<string>sortOrder:</string>
 							<string>toggleReportsAndMap:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1428,6 +1427,7 @@
 							<string>add:</string>
 							<string>map:</string>
 							<string>refresh:</string>
+							<string>sortOrder:</string>
 							<string>toggleReportsAndMap:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1449,6 +1449,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">sortOrder:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">toggleReportsAndMap:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -1461,6 +1465,7 @@
 							<string>addIncidentViewController</string>
 							<string>mapView</string>
 							<string>mapViewController</string>
+							<string>sortOrder</string>
 							<string>viewIncidentViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1468,6 +1473,7 @@
 							<string>AddIncidentViewController</string>
 							<string>MKMapView</string>
 							<string>MapViewController</string>
+							<string>UISegmentedControl</string>
 							<string>ViewIncidentViewController</string>
 						</object>
 					</object>
@@ -1478,6 +1484,7 @@
 							<string>addIncidentViewController</string>
 							<string>mapView</string>
 							<string>mapViewController</string>
+							<string>sortOrder</string>
 							<string>viewIncidentViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1493,6 +1500,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapViewController</string>
 								<string key="candidateClassName">MapViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">sortOrder</string>
+								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">viewIncidentViewController</string>
@@ -2275,17 +2286,17 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>map.png</string>
 				<string>navbar_arrow_down.png</string>
 				<string>navbar_arrow_up.png</string>
-				<string>radar.png</string>
 				<string>reports.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<string>{28, 28}</string>
 				<string>{15, 13}</string>
 				<string>{15, 13}</string>
-				<string>{24, 24}</string>
-				<string>{24, 24}</string>
+				<string>{28, 28}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">117</string>

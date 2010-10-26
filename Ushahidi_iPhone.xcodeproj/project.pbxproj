@@ -20,7 +20,6 @@
 		3E119D70126FAF0B00C3DCBB /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D6F126FAF0B00C3DCBB /* Sound.m */; };
 		3E119D73126FAF1300C3DCBB /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D72126FAF1300C3DCBB /* Video.m */; };
 		3E4A006F1271F26C0017AED4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
-		3E4A00701271F26C0017AED4 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006D1271F26C0017AED4 /* radar.png */; };
 		3E4A00711271F26C0017AED4 /* reports.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006E1271F26C0017AED4 /* reports.png */; };
 		3E4A022712720E280017AED4 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3E4AF91D1270AA370017AED4 /* TableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AF91C1270AA370017AED4 /* TableHeaderView.m */; };
@@ -167,7 +166,6 @@
 		3E119D71126FAF1300C3DCBB /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
 		3E119D72126FAF1300C3DCBB /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
 		3E4A006C1271F26C0017AED4 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
-		3E4A006D1271F26C0017AED4 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
 		3E4A006E1271F26C0017AED4 /* reports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reports.png; sourceTree = "<group>"; };
 		3E4A022512720E280017AED4 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		3E4A022612720E280017AED4 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
@@ -625,7 +623,6 @@
 			isa = PBXGroup;
 			children = (
 				3E4A006C1271F26C0017AED4 /* map.png */,
-				3E4A006D1271F26C0017AED4 /* radar.png */,
 				3E4A006E1271F26C0017AED4 /* reports.png */,
 				3E8634061224384D001DE141 /* photo_placeholder.png */,
 				3E862BEB1222D0A1001DE141 /* loading_background.png */,
@@ -839,7 +836,6 @@
 				3E4AFF4E1271E1DF0017AED4 /* InfoViewController_iPhone.xib in Resources */,
 				3E4AFF521271E1EB0017AED4 /* InfoViewController_iPad.xib in Resources */,
 				3E4A006F1271F26C0017AED4 /* map.png in Resources */,
-				3E4A00701271F26C0017AED4 /* radar.png in Resources */,
 				3E4A00711271F26C0017AED4 /* reports.png in Resources */,
 				3EBB0F08127678D2007D7930 /* CategoriesViewController_iPhone.xib in Resources */,
 				3EBB0F0C127678DF007D7930 /* CategoriesViewController_iPad.xib in Resources */,

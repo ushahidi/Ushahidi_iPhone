@@ -43,6 +43,7 @@
 	MKMapView *mapView;
 	Deployment *deployment;
 	UISegmentedControl *sortOrder;
+	UIBarButtonItem *refreshButton;
 }
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
@@ -50,6 +51,7 @@
 @property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic,retain) IBOutlet MKMapView *mapView;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *sortOrder;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) add:(id)sender;

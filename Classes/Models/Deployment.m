@@ -87,6 +87,11 @@
 			[[self.url lowercaseString] hasPrefix:lowercaseString];
 }
 
+- (NSComparisonResult)compareByName:(Deployment *)deployment {
+	return [self.name localizedCaseInsensitiveCompare:deployment.name];
+}
+
+
 - (void)dealloc {
 	[name release];
 	[url release];

@@ -56,5 +56,6 @@
 - (id) filteredRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void) filterRows;
 - (void) filterRows:(BOOL)reloadTable;
+- (void) replaceRows:(NSArray *)rows;
 
 @end

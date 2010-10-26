@@ -126,7 +126,7 @@ typedef enum {
 		[self.allRows addObjectsFromArray:incidents];
 		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:incidents];
-		DLog(@"Re-Adding Rows: %d", [incidents count]);
+		DLog(@"Adding Rows: %d", [incidents count]);
 	}
 	else if (self.modalViewController != nil) {
 		DLog(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");

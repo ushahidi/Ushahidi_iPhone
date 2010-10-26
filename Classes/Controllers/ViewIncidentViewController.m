@@ -134,10 +134,16 @@ typedef enum {
 		return self.incident.errors != nil ? 1 : 0;
 	}
 	if (section == TableSectionNews) {
-		return [self.incident.news count];
+		if ([self.incident.news count] > 0) {
+			return [self.incident.news count];
+		}
+		return 1;
 	}
 	if (section == TableSectionPhotos) {
-		return [self.incident.photos count];
+		if ([self.incident.photos count] > 0) {
+			return [self.incident.photos count];
+		}
+		return 1;
 	}
 	if (section == TableSectionLocation) {
 		return 2;
@@ -146,7 +152,7 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionNews) {
+	if (indexPath.section == TableSectionNews && [self.incident.news count] > 0) {
 		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -165,7 +171,7 @@ typedef enum {
 		[cell resizeRegionToFitAllPins:NO];	
 		return cell;
 	}
-	else if (indexPath.section == TableSectionPhotos) {
+	else if (indexPath.section == TableSectionPhotos && [self.incident.photos count] > 0) {
 		ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
 		cell.indexPath = indexPath;
 		Photo *photo = [self.incident.photos objectAtIndex:indexPath.row];
@@ -184,7 +190,7 @@ typedef enum {
 		return cell;
 	}
 	else {
-		TextTableCell *cell = [TableCellFactory getTextTableCellWithDelegate:self table:theTableView];
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		cell.indexPath = indexPath;
@@ -195,7 +201,7 @@ typedef enum {
 			cell.textLabel.text = self.incident.description;
 		}
 		else if (indexPath.section == TableSectionCategory) {
-			cell.textLabel.text = [self.incident categoryNames];
+			cell.textLabel.text = [self.incident categoryNamesWithDefaultText:[Messages noCategorySpecified]];
 		}
 		else if (indexPath.section == TableSectionLocation) {
 			cell.textLabel.text = self.incident.location;
@@ -207,6 +213,12 @@ typedef enum {
 		}
 		else if (indexPath.section == TableSectionErrors) {
 			cell.textLabel.text = [self.incident errors];
+		}
+		else if (indexPath.section == TableSectionPhotos) {
+			cell.textLabel.text = [Messages noPhotos];
+		}
+		else if (indexPath.section == TableSectionNews) {
+			cell.textLabel.text = [Messages noNews];
 		}
 		return cell;	
 	}
@@ -256,10 +268,16 @@ typedef enum {
 		return 140;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
-		return 200;
+		if ([self.incident.photos count] > 0) {
+			return 200;
+		}
+		return [TextTableCell getCellSizeForText:[Messages noPhotos] forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionNews) {
-		return 55;
+		if ([self.incident.news count] > 0) {
+			return 55;
+		}
+		return [TextTableCell getCellSizeForText:[Messages noNews] forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionTitle) {
 		return [TextTableCell getCellSizeForText:self.incident.title forWidth:theTableView.contentSize.width].height;
@@ -271,7 +289,7 @@ typedef enum {
 		return [TextTableCell getCellSizeForText:self.incident.location forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionCategory) {
-		return [TextTableCell getCellSizeForText:[self.incident categoryNames] forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:[self.incident categoryNamesWithDefaultText:[Messages noCategorySpecified]] forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionDateTime) {
 		return [TextTableCell getCellSizeForText:[self.incident dateString] forWidth:theTableView.contentSize.width].height;

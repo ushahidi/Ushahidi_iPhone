@@ -27,6 +27,7 @@
 #import "Video.h"
 #import "NSDate+Extension.h"
 #import "NSDictionary+Extension.h"
+#import "NSString+Extension.h"
 
 @implementation Incident
 
@@ -133,13 +134,15 @@ typedef enum {
 }
 
 - (BOOL) matchesString:(NSString *)string {
-	NSString *lowercaseString = [string lowercaseString];
-	return	(string == nil || [string length] == 0) ||
-			[[self.title lowercaseString] hasPrefix:lowercaseString];
+	return self.title != nil && [self.title anyWordHasPrefix:string];
 }
 
 - (NSString *) dateString {
 	return self.date != nil ? [self.date dateToString:@"cccc, MMMM d, yyyy"] : nil;
+}
+
+- (NSString *) timeString {
+	return self.date != nil ? [self.date dateToString:@"HH:mm a"] : nil;
 }
 
 - (NSString *) dateDayMonthYear {
@@ -191,6 +194,10 @@ typedef enum {
 }
 
 - (NSString *) categoryNames {
+	return [self categoryNamesWithDefaultText:nil];
+}
+
+- (NSString *) categoryNamesWithDefaultText:(NSString *)defaultText {
 	NSMutableString *categoryNames = [NSMutableString stringWithCapacity:0];
 	for (Category *category in self.categories) {
 		if ([categoryNames length] > 0) {
@@ -198,7 +205,7 @@ typedef enum {
 		}
 		[categoryNames appendFormat:@"%@", category.title];
 	}
-	return categoryNames;
+	return [categoryNames length] > 0 ? categoryNames : defaultText;;
 }
 
 - (Photo *) getFirstPhoto; {
@@ -206,6 +213,21 @@ typedef enum {
 		return photo;
 	} 
 	return nil;
+}
+
+- (BOOL) hasRequiredValues {
+	return  self.title != nil && self.title.length > 0 &&
+			self.location != nil && self.location.length > 0 &&
+			self.date != nil &&
+			self.categories.count > 0;
+}
+
+- (NSComparisonResult)compareByTitle:(Incident *)incident {
+	return [self.title localizedCaseInsensitiveCompare:incident.title];
+}
+
+- (NSComparisonResult)compareByDate:(Incident *)incident {
+	return [incident.date compare:self.date];
 }
 
 - (void)dealloc {

@@ -33,4 +33,6 @@
 @property(nonatomic,retain) NSString *iso;
 @property(nonatomic,retain) NSString *capital;
 
+- (NSComparisonResult)compareByName:(Country *)country;
+
 @end

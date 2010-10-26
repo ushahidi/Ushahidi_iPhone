@@ -26,25 +26,14 @@
 
 @public
 	NSIndexPath *indexPath;
-
-@private
-	id<TextTableCellDelegate> delegate;	
 }
 
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 
-- (id)initWithDelegate:(id<TextTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setText:(NSString *)text;
 - (NSString *) getText;
 - (CGSize) getCellSize;
 + (CGSize)getCellSizeForText:(NSString *)theText forWidth:(CGFloat)width;
-
-@end
-
-@protocol TextTableCellDelegate <NSObject>
-
-@optional
-
-- (void) textChanged:(TextTableCell *)cell indexPath:(NSIndexPath *)indexPath size:(CGSize)size;
 
 @end

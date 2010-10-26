@@ -33,7 +33,6 @@
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
 															UIWebViewDelegate, 
 															UIActionSheetDelegate, 
-															TextTableCellDelegate, 
 															MapTableCellDelegate,
 															PhotoDelegate> {
 	

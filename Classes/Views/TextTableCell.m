@@ -34,9 +34,8 @@
 
 @synthesize delegate, indexPath; 
 
-- (id)initWithDelegate:(id<TextTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
-		self.delegate = theDelegate;
 		self.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 		self.textLabel.numberOfLines = 0; 
 		self.textLabel.font = [TextTableCell getLabelFont];
@@ -72,7 +71,6 @@
 }
 
 - (void)dealloc {
-	delegate = nil;
 	[indexPath release];
     [super dealloc];
 }

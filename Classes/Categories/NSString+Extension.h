@@ -23,5 +23,7 @@
 @interface NSString (Extension) 
 
 + (NSString *)getUUID;
++ (BOOL) isNilOrEmpty:(NSString *)string;
+- (BOOL) anyWordHasPrefix:(NSString *)prefix;
 
 @end

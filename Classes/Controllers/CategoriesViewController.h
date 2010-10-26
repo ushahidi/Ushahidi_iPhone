@@ -18,26 +18,27 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "Ushahidi.h"
+#import "CheckBoxTableCell.h"
 
-@interface Location : NSObject {
+@class Incident;
 
-@public 
-	NSString *identifier;
-	NSString *name;
-	NSString *countryID;
-	NSString *latitude;
-	NSString *longitude;
+@interface CategoriesViewController : TableViewController<UshahidiDelegate,
+														  CheckBoxTableCellDelegate> {
+
+@public
+	UIBarButtonItem *cancelButton;
+	UIBarButtonItem *doneButton;
+	Incident *incident;
 }
 
-@property(nonatomic,retain)	NSString *identifier;
-@property(nonatomic,retain) NSString *name;
-@property(nonatomic,retain) NSString *countryID;
-@property(nonatomic,retain) NSString *latitude;
-@property(nonatomic,retain) NSString *longitude;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property(nonatomic, retain) Incident *incident;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
-- (BOOL) matchesString:(NSString *)string;
-- (NSComparisonResult)compareByName:(Location *)location;
+- (IBAction) cancel:(id)sender;
+- (IBAction) done:(id)sender;
 
 @end

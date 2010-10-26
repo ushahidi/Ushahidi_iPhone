@@ -106,17 +106,15 @@
 #pragma mark -
 #pragma mark TextTableCell
 
-+ (TextTableCell *) getTextTableCellWithDelegate:(id<TextTableCellDelegate>)delegate
-										   table:(UITableView *)tableView {
-	return [TableCellFactory getTextTableCellWithDelegate:delegate table:tableView identifier:@"TextTableCell"];
++ (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView {
+	return [TableCellFactory getTextTableCellForTable:tableView identifier:@"TextTableCell"];
 }
 
-+ (TextTableCell *) getTextTableCellWithDelegate:(id<TextTableCellDelegate>)delegate
-										   table:(UITableView *)tableView
-									  identifier:(NSString *)cellIdentifier {
++ (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView
+								  identifier:(NSString *)cellIdentifier {
 	TextTableCell *cell = (TextTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[TextTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier];
+		cell = [[TextTableCell alloc] initWithReuseIdentifier:cellIdentifier];
 	}
 	return cell;
 }

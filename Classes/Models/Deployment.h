@@ -82,4 +82,6 @@
 - (NSString *) getPostVideo;
 - (NSString *) getPostPhoto;
 
+- (NSComparisonResult)compareByName:(Deployment *)deployment;
+
 @end

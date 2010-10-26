@@ -27,13 +27,14 @@
 
 @interface ImagePickerController ()
 
-- (void) showImagePicker:(UIImagePickerControllerSourceType)sourceType;
+- (void) showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType;
+- (void) notifyDelegateWithImage:(UIImage *)image;
 
 @end
 
 @implementation ImagePickerController
 
-@synthesize viewController, popoverController;
+@synthesize viewController, popoverController, delegate;
 
 - (id)initWithController:(UIViewController *)controller {
     if ((self = [super init])) {
@@ -42,7 +43,8 @@
     return self;
 }
 
-- (void) showImagePicker {
+- (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)theDelegate {
+	self.delegate = theDelegate;
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
@@ -54,11 +56,12 @@
 		[actionSheet release];
 	}
 	else {
-		[self showImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
+		[self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 	}
 }
 
 - (void)dealloc {
+	delegate = nil;
 	[viewController release];
 	[popoverController release];
 	[super dealloc];
@@ -71,7 +74,7 @@
 #pragma mark -
 #pragma mark Internal
 
-- (void) showImagePicker:(UIImagePickerControllerSourceType)sourceType {
+- (void) showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType {
 	DLog(@"showImagePicker:%d", sourceType);
 	UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
 	imagePicker.delegate = self;
@@ -89,27 +92,36 @@
 	[imagePicker release];
 }
 
+- (void) notifyDelegateWithImage:(UIImage *)image {
+	SEL selector = @selector(imagePicker:selectedImage:);
+	if (delegate != NULL && [delegate respondsToSelector:selector]) {
+		[delegate imagePicker:self selectedImage:image];
+	}
+}
+
 #pragma mark -
 #pragma mark UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
-	DLog(@"");
+	DLog(@"editingInfo: %@", editingInfo);
 	if (self.popoverController != nil) {
 		[self.popoverController dismissPopoverAnimated:YES];
 	}
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
+	[self notifyDelegateWithImage:image];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-	DLog(@"");
+	DLog(@"info: %@", info);
 	if (self.popoverController != nil) {
 		[self.popoverController dismissPopoverAnimated:YES];
 	}
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
+	[self notifyDelegateWithImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -128,10 +140,10 @@
 	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
 	DLog(@"titleAtIndex: %@", titleAtIndex);
 	if ([titleAtIndex isEqualToString:kTakePhoto]) {
-		[self showImagePicker:UIImagePickerControllerSourceTypeCamera];
+		[self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
 	}
 	else if ([titleAtIndex isEqualToString:kFromLibrary]) {
-		[self showImagePicker:UIImagePickerControllerSourceTypePhotoLibrary];
+		[self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 	}
 }
 

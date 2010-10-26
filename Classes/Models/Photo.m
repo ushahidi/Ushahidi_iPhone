@@ -38,9 +38,13 @@ NSInteger const kMaxHeight = 80;
 
 @synthesize delegate, image, thumbnail, indexPath, downloading;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super initWithDictionary:dictionary]) {
-		
++ (id)photoWithImage:(UIImage *)theImage {
+	return [[Photo alloc] initWithImage:theImage];
+}
+			
+- (id)initWithImage:(UIImage *)theImage {
+	if (self = [super init]) {
+		self.image = theImage;
 	}
 	return self;
 }
@@ -125,7 +129,7 @@ NSInteger const kMaxHeight = 80;
 }
 
 - (NSData *) getData {
-	return self.image != nil ? UIImagePNGRepresentation(self.image) : nil;
+	return self.image != nil ? UIImageJPEGRepresentation(self.image, 1.0) : nil;
 }
 
 @end

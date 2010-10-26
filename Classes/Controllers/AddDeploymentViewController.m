@@ -147,7 +147,7 @@ typedef enum {
 	return nil;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)theTableView titleForFooterInSection:(NSInteger)section {
 	if (section == TableSectionName) {
 		return @"Enter the name for an Ushahidi deployment. For example, Ushahidi Demo";
 	}

@@ -75,6 +75,7 @@
 
 - (BOOL) matchesString:(NSString *)string;
 - (NSString *) dateString;
+- (NSString *) timeString;
 - (NSString *) dateDayMonthYear;
 - (NSString *) dateHour;
 - (NSString *) dateMinute;
@@ -88,7 +89,12 @@
 - (void) removeCategory:(Category *)category;
 - (BOOL) hasCategory:(Category *)category;
 - (NSString *) categoryNames;
+- (NSString *) categoryNamesWithDefaultText:(NSString *)defaultText;
 
 - (Photo *) getFirstPhoto;
+- (BOOL) hasRequiredValues;
+
+- (NSComparisonResult)compareByTitle:(Incident *)incident;
+- (NSComparisonResult)compareByDate:(Incident *)incident;
 
 @end

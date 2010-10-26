@@ -69,6 +69,12 @@
 	return nil;
 }
 
+- (void) replaceRows:(NSArray *)rows {
+	[self.allRows removeAllObjects];
+	[self.allRows addObjectsFromArray:rows];
+	[self.filteredRows removeAllObjects];
+	[self.filteredRows addObjectsFromArray:rows];
+}
 
 - (void) filterRows {
 	[self filterRows:YES];

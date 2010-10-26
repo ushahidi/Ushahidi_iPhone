@@ -20,42 +20,37 @@
 
 #import <UIKit/UIKit.h>
 #import "TableViewController.h"
-#import "TextFieldTableCell.h"
-#import "TextViewTableCell.h"
-#import "ImagePickerController.h"
 #import "Ushahidi.h"
-#import "DatePicker.h"
-#import "ImagePickerController.h"
+#import "CheckBoxTableCell.h"
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <MapKit/MKAnnotation.h>
 
-@class CategoriesViewController;
-@class LocationsViewController;
 @class Incident;
+@class Location;
 
-@interface AddIncidentViewController : TableViewController<UshahidiDelegate, 
-															TextFieldTableCellDelegate, 
-															TextViewTableCellDelegate, 
-															DatePickerDelegate,
-															ImagePickerDelegate>  {
-																
+@interface LocationsViewController : TableViewController<UshahidiDelegate,
+														 CheckBoxTableCellDelegate> {
 @public
-	ImagePickerController *imagePickerController;
-	CategoriesViewController *categoriesViewController;
-	LocationsViewController *locationsViewController;
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
-																
-@private
-	DatePicker *datePicker;
+	MKMapView *mapView;
 	Incident *incident;
+	Location *location;
+	UISegmentedControl *mapType;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property(nonatomic, retain) IBOutlet ImagePickerController *imagePickerController;
-@property(nonatomic, retain) IBOutlet CategoriesViewController *categoriesViewController;
-@property(nonatomic, retain) IBOutlet LocationsViewController *locationsViewController;
+@property(nonatomic, retain) IBOutlet MKMapView *mapView;
+@property(nonatomic, retain) IBOutlet UISegmentedControl *mapType;
+@property(nonatomic, retain) Incident *incident;
+@property(nonatomic, retain) Location *location;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;
+- (IBAction) search:(id)sender;
+- (IBAction) findLocation:(id)sender;
+- (IBAction) mapTypeChanged:(id)sender;
 
 @end

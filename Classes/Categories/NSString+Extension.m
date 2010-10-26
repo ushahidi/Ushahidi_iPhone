@@ -29,4 +29,21 @@
 	return [(NSString *)string autorelease];
 }
 
++ (BOOL) isNilOrEmpty:(NSString *)string {
+	return string == nil || [string length] == 0;
+}
+
+
+- (BOOL) anyWordHasPrefix:(NSString *)prefix {
+	if (prefix == nil || [prefix length] == 0) {
+		return YES;
+	}
+	for(NSString *word in [[self lowercaseString] componentsSeparatedByString:@" "]) {
+		if ([word hasPrefix:[prefix lowercaseString]]) {
+			return YES;
+		}
+	}
+	return NO;
+}
+
 @end

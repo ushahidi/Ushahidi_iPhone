@@ -54,6 +54,10 @@
 	return self;
 }
 
+- (NSComparisonResult)compareByName:(Country *)country {
+	return [self.name localizedCaseInsensitiveCompare:country.name];
+}
+
 - (void)dealloc {
 	[identifier release];
 	[name release];

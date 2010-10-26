@@ -23,12 +23,19 @@
 #import "TableCellFactory.h"
 #import "Device.h"
 #import "LoadingViewController.h"
+#import "CategoriesViewController.h"
+#import "LocationsViewController.h"
+#import "TextTableCell.h"
 #import "AlertView.h"
 #import "InputView.h"
 #import "Category.h"
 #import "Location.h"
 #import "Incident.h"
 #import "Messages.h"
+#import "TableHeaderView.h"
+#import "UIColor+Extension.h"
+#import "Photo.h"
+#import "ImageTableCell.h"
 
 #define kCancel @"Cancel"
 #define kTakePhoto @"Take Photo"
@@ -51,24 +58,25 @@ typedef enum {
 
 @interface AddIncidentViewController ()
 
-@property(nonatomic, retain) NSMutableArray *categories;
-@property(nonatomic, retain) NSMutableArray *countries;
-@property(nonatomic, retain) NSMutableArray *locations;
 @property(nonatomic, retain) DatePicker *datePicker;
 @property(nonatomic, retain) Incident *incident;
+
+- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText;
+
 @end
 
 @implementation AddIncidentViewController
 
-@synthesize mapViewController, cancelButton, doneButton, imagePickerController, datePicker;
-@synthesize categories, countries, locations, incident;
+@synthesize cancelButton, doneButton, datePicker;
+@synthesize categoriesViewController, locationsViewController, imagePickerController;
+@synthesize incident;
 
 #pragma mark -
 #pragma mark Handlers
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
-	[incident release];
+	[self.incident release];
 	[self.view endEditing:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -87,39 +95,34 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
-- (void) viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-
-	self.incident = [[Incident alloc] initWithDefaultValues];
-	self.incident.pending = YES;
-	
-	[self.categories removeAllObjects];
-	[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesWithDelegate:self]];
-
-	[self.locations removeAllObjects];
-	[self.locations addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsWithDelegate:self]];
-	
-//	[self.countries removeAllObjects];
-//	[self.countries addObjectsFromArray:[[Ushahidi sharedUshahidi] getCountriesWithDelegate:self]];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initWithDelegate:self forController:self];
-	self.categories = [[NSMutableArray alloc] initWithCapacity:0];
-	self.countries = [[NSMutableArray alloc] initWithCapacity:0];
-	self.locations = [[NSMutableArray alloc] initWithCapacity:0];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+
+	if (self.modalViewController == nil) {
+		DLog(@"XXXXXXXXXXXXXX initWithDefaultValues XXXXXXXXXXXXXX");
+		self.incident = [[Incident alloc] initWithDefaultValues];
+		self.incident.pending = YES;
+		self.willBePushed = NO;
+	}
+	self.doneButton.enabled = [self.incident hasRequiredValues];
+	[self.tableView reloadData];
+	
+	DLog(@"self.incident.categories: %@", [self.incident categoryNames]);
+	DLog(@"self.incident.location: %@", self.incident.location);
 }
 
 - (void)dealloc {
-	[mapViewController release];
 	[cancelButton release];
 	[doneButton release];
 	[imagePickerController release];
-	[categories release];
-	[countries release];
-	[locations release];
+	[categoriesViewController release];
+	[locationsViewController release];
 	[incident release];
     [super dealloc];
 }
@@ -133,36 +136,22 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	if (section == TableSectionCategory) {
-		return [self.categories count];
+		return 1;
 	}
 	if (section == TableSectionLocation) {
-		return 2;
+		return 1;
 	}
 	if (section == TableSectionDate) {
 		return 2;
+	}
+	if (section == TableSectionPhotos) {
+		return [self.incident.photos count] + 1;
 	}
 	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionCategory) {
-		CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellWithDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
-		Category *category = [self.categories objectAtIndex:indexPath.row];
-		if (category != nil) {
-			[cell setTitle:category.title];	
-			[cell setDescription:category.description];
-			[cell setTextColor:category.color];
-			[cell setChecked:[self.incident hasCategory:category]];
-		}
-		else {
-			[cell setTitle:nil];
-			[cell setDescription:nil];
-			[cell setChecked:NO];
-		}
-		return cell;
-	}
-	else if (indexPath.section == TableSectionDescription) {
+	if (indexPath.section == TableSectionDescription) {
 		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellWithDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setPlaceholder:@"Enter description"];
@@ -170,38 +159,69 @@ typedef enum {
 		return cell;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
-		UITableViewCell *cell = [TableCellFactory getDefaultTableCellForTable:theTableView];
+		if (indexPath.row > 0) {
+			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
+			cell.indexPath = indexPath;
+			Photo *photo = [self.incident.photos objectAtIndex:indexPath.row - 1];
+			if (photo != nil) {
+				[cell setImage:photo.image];
+			}
+			else {
+				[cell setImage:nil];
+			}
+			return cell;	
+		}
+		else {
+			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+			[cell setText:[Messages addPhoto]];
+			return cell;
+		}
+	}
+	else if (indexPath.section == TableSectionLocation) {
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		cell.textLabel.text = @"Add New Incident Photo";
-		return cell;
-	}
-	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
-		MapTableCell *cell = [TableCellFactory getMapTableCellWithDelegate:self table:theTableView];
-		[cell setScrollable:YES];
-		[cell setZoomable:YES];
-		[cell setAnimatesDrop:YES];
-		[cell setShowRightCallout:YES];
-		if ([cell numberOfPins] == 0) {
-			[cell removeAllPins];
-			for (Location *location in self.locations) {
-				NSString *subtitle = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
-				[cell addPinWithTitle:location.name subtitle:subtitle latitude:location.latitude longitude:location.longitude];
-			}
-			[cell resizeRegionToFitAllPins:YES];	
+		if (self.incident.location != nil) {
+			[cell setText:self.incident.location];
+		}
+		else {
+			[cell setText:@"Select location"];
 		}
 		return cell;
 	}
 	else if (indexPath.section == TableSectionDate) {
-		DateTableCell *cell = [TableCellFactory getDateTableCellWithDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		if (indexPath.row == TableSectionDateRowDate) {
-			[cell setPlaceholder:@"Enter date"];
-			[cell setDate:self.incident.date timeFormat:NO];	
+			if (self.incident.date != nil) {
+				[cell setText:[self.incident dateString]];
+			}
+			else {
+				[cell setText:@"Enter date"];
+			}
 		}
 		else if (indexPath.row == TableSectionDateRowTime){
-			[cell setPlaceholder:@"Enter time"];
-			[cell setDate:self.incident.date timeFormat:YES];
+			if (self.incident.date != nil) {
+				[cell setText:[self.incident timeString]];
+			}
+			else {
+				[cell setText:@"Enter time"];
+			}
+		}
+		return cell;
+	}
+	else if (indexPath.section == TableSectionCategory) {
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
+		if ([self.incident.categories count] > 0) {
+			[cell setText:[self.incident categoryNames]];
+		}
+		else {
+			[cell setText:@"Select category"];
 		}
 		return cell;
 	}
@@ -253,12 +273,27 @@ typedef enum {
 	return nil;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == TableSectionPhotos) {
+		if (indexPath.row > 0) {
+			return 200;
+		}
+		return [TextTableCell getCellSizeForText:[Messages addPhoto] forWidth:theTableView.contentSize.width].height;
+	}
 	if (indexPath.section == TableSectionDescription) {
 		return 120;
 	}
-	if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
-		return 260;
+	if (indexPath.section == TableSectionLocation) {
+		CGSize size = [TextTableCell getCellSizeForText:self.incident.location forWidth:theTableView.contentSize.width];
+		if (size.height > 45) {
+			return size.height;
+		}
+	}
+	if (indexPath.section == TableSectionCategory) {
+		CGSize size = [TextTableCell getCellSizeForText:[self.incident categoryNames] forWidth:theTableView.contentSize.width];
+		if (size.height > 45) {
+			return size.height;
+		}
 	}
 	return 45;
 }
@@ -266,23 +301,56 @@ typedef enum {
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-	if (indexPath.section == TableSectionPhotos) {
-		[self.imagePickerController showImagePicker];
+	if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
+		[self.imagePickerController showImagePickerWithDelegate:self];
+	}
+	else if (indexPath.section == TableSectionCategory) {
+		self.categoriesViewController.incident = self.incident;
+		[self presentModalViewController:self.categoriesViewController animated:YES];
+	}
+	else if (indexPath.section == TableSectionLocation) {
+		self.locationsViewController.incident = self.incident;
+		[self presentModalViewController:self.locationsViewController animated:YES];
+	}
+	else if (indexPath.section == TableSectionDate){
+		UIDatePickerMode datePickerMode = indexPath.row == TableSectionDateRowDate
+			? UIDatePickerModeDate : UIDatePickerModeTime;
+		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath];
+		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 }
 
-#pragma mark -
-#pragma mark CheckBoxTableCellDelegate
+- (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
+	if (section == TableSectionTitle) {
+		return [self headerForTable:theTableView text:[Messages title]];
+	}
+	if (section == TableSectionCategory) {
+		return [self headerForTable:theTableView text:[Messages category]];
+	}
+	if (section == TableSectionLocation) {
+		return [self headerForTable:theTableView text:[Messages location]];
+	}
+	if (section == TableSectionDate) {
+		return [self headerForTable:theTableView text:[Messages date]];
+	}
+	if (section == TableSectionDescription) {
+		return [self headerForTable:theTableView text:[Messages description]];
+	}
+	if (section == TableSectionPhotos) {
+		return [self headerForTable:theTableView text:[Messages photos]];
+	}
+	if (section == TableSectionNews) {
+		return [self headerForTable:theTableView text:[Messages news]];
+	}
+	return nil;
+}
 
-- (void) checkBoxTableCellChanged:(CheckBoxTableCell *)cell index:(NSIndexPath *)indexPath checked:(BOOL)checked {
-	Category *category = [self.categories objectAtIndex:indexPath.row];
-	DLog(@"checkBoxTableCellChanged:%@ index:[%d, %d] checked:%d", category.title, indexPath.section, indexPath.row, checked)
-	if (checked) {
-		[self.incident addCategory:category];
-	}
-	else {
-		[self.incident removeCategory:category];
-	}
+- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText {
+	return [TableHeaderView headerForTable:theTableView text:theText textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiDarkTan]];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return [TableHeaderView getViewHeight];
 }
 
 #pragma mark -
@@ -298,6 +366,7 @@ typedef enum {
 	if (indexPath.section == TableSectionTitle) {
 		self.incident.title = text;
 	}
+	self.doneButton.enabled = [self.incident hasRequiredValues];
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
@@ -305,6 +374,7 @@ typedef enum {
 	if (indexPath.section == TableSectionTitle) {
 		self.incident.title = text;
 	}
+	self.doneButton.enabled = [self.incident hasRequiredValues];
 }
 
 #pragma mark -
@@ -328,61 +398,6 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)theCountries error:(NSError *)error hasChanges:(BOOL)hasChanges{
-	if (error != nil) {
-		DLog(@"error: %@", [error localizedDescription]);
-		//[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
-	}
-	else if(hasChanges) {
-		DLog(@"countries: %@", theCountries);
-		[self.countries removeAllObjects];
-		[self.countries addObjectsFromArray:theCountries];
-	}
-	else {
-		DLog(@"No Changes");
-	}
-}
-
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)theLocations error:(NSError *)error hasChanges:(BOOL)hasChanges{
-	if (error != nil) {
-		DLog(@"error: %@", [error localizedDescription]);
-		//[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
-	}
-	else if(hasChanges) {
-		DLog(@"locations: %@", theLocations);
-		[self.locations removeAllObjects];
-		[self.locations addObjectsFromArray:theLocations];
-		MapTableCell *cell = (MapTableCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:TableSectionLocation]];
-		if (cell != nil) {
-			[cell removeAllPins];
-			for (Location *location in theLocations) {
-				NSString *subtitle = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
-				[cell addPinWithTitle:location.name subtitle:subtitle latitude:location.latitude longitude:location.longitude];
-			}
-			[cell resizeRegionToFitAllPins:YES];
-		}
-	}
-	else {
-		DLog(@"No Changes");
-	}
-}
-
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error hasChanges:(BOOL)hasChanges {
-	if (error != nil) {
-		DLog(@"error: %@", [error localizedDescription]);
-		//[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
-	}
-	else if (hasChanges){
-		DLog(@"categories: %@", categories);
-		[self.categories removeAllObjects];
-		[self.categories addObjectsFromArray:theCategories];
-		[self.tableView reloadData];
-	}
-	else {
-		DLog(@"No Changes");
-	}
-}
-
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)theIncident error:(NSError *)error {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
@@ -396,43 +411,20 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark MapTableCellDelegate
-
-- (void) mapTableCell:(MapTableCell *)mapTableCell pinSelectedAtIndex:(NSInteger)index {
-	DLog(@"index:%d", index);
-	Location *location = [self.locations objectAtIndex:index];
-	if (location != nil) {
-		self.incident.location = location.name;
-		self.incident.latitude = location.latitude;
-		self.incident.longitude = location.longitude;
-		DLog(@"location:%@ latitude:%@ longitude:%@", location.name, location.latitude, location.longitude);
-		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:TableSectionLocation];
-		TextFieldTableCell *cell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-		if (cell != nil) {
-			[cell setText:location.name];	
-		}
-	}
-}
-
-#pragma mark -
-#pragma mark DateTableCellDelegate
-
-- (void) dateTableCellClicked:(DateTableCell *)cell date:(NSDate *)date indexPath:(NSIndexPath *)indexPath {
-	DLog(@"%@", date);
-	if (indexPath.row == TableSectionDateRowDate) {
-		[self.datePicker showWithDate:date mode:UIDatePickerModeDate indexPath:indexPath];
-	}
-	else if (indexPath.row == TableSectionDateRowTime) {
-		[self.datePicker showWithDate:date mode:UIDatePickerModeTime indexPath:indexPath];
-	}
-	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark -
 #pragma mark DatePickerDelegate
 
 - (void) datePickerReturned:(DatePicker *)theDatePicker date:(NSDate *)date indexPath:(NSIndexPath *)indexPath {
 	self.incident.date = date;
+	[self.tableView reloadData];
+	self.doneButton.enabled = [self.incident hasRequiredValues];
+}
+
+#pragma mark -
+#pragma mark ImagePickerDelegate
+
+- (void) imagePicker:(ImagePickerController *)imagePicker selectedImage:(UIImage *)image {
+	DLog(@"");
+	[self.incident addPhoto:[Photo photoWithImage:image]];
 	[self.tableView reloadData];
 }
 

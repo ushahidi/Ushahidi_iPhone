@@ -35,7 +35,13 @@
 + (NSString *) noLocationSpecified;
 + (NSString *) noCategorySpecified;
 + (NSString *) noDateSpecified;
++ (NSString *) noPhotos;
++ (NSString *) noNews;
++ (NSString *) addPhoto;
++ (NSString *) addNews;
 + (NSString *) searchServers;
 + (NSString *) searchIncidents;
++ (NSString *) searchCategories;
++ (NSString *) searchLocations;
 
 @end

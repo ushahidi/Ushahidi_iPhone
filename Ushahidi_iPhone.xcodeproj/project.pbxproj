@@ -132,6 +132,12 @@
 		3E8638C412247BAC001DE141 /* MKMapView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8638C312247BAC001DE141 /* MKMapView+Extension.m */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
+		3EBB0F0012767882007D7930 /* CategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoriesViewController.m */; };
+		3EBB0F08127678D2007D7930 /* CategoriesViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB0F07127678D2007D7930 /* CategoriesViewController_iPhone.xib */; };
+		3EBB0F0C127678DF007D7930 /* CategoriesViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB0F0B127678DF007D7930 /* CategoriesViewController_iPad.xib */; };
+		3EBB10E612768D69007D7930 /* LocationsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB10E512768D69007D7930 /* LocationsViewController_iPhone.xib */; };
+		3EBB10EC12768D76007D7930 /* LocationsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB10EB12768D76007D7930 /* LocationsViewController_iPad.xib */; };
+		3EBB10F612768DAA007D7930 /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationsViewController.m */; };
 		3ECB541E122F3F53000AAC56 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB541D122F3F53000AAC56 /* NavigationController.m */; };
 		3ECB55D2122F5BEE000AAC56 /* DateTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */; };
 		3ECB55ED122F5E33000AAC56 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55EC122F5E33000AAC56 /* DatePicker.m */; };
@@ -342,6 +348,14 @@
 		3E8638C312247BAC001DE141 /* MKMapView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Extension.m"; sourceTree = "<group>"; };
 		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3EBB0EFE12767882007D7930 /* CategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoriesViewController.h; sourceTree = "<group>"; };
+		3EBB0EFF12767882007D7930 /* CategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoriesViewController.m; sourceTree = "<group>"; };
+		3EBB0F07127678D2007D7930 /* CategoriesViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesViewController_iPhone.xib; sourceTree = "<group>"; };
+		3EBB0F0B127678DF007D7930 /* CategoriesViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesViewController_iPad.xib; sourceTree = "<group>"; };
+		3EBB10E512768D69007D7930 /* LocationsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationsViewController_iPhone.xib; sourceTree = "<group>"; };
+		3EBB10EB12768D76007D7930 /* LocationsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationsViewController_iPad.xib; sourceTree = "<group>"; };
+		3EBB10F412768DAA007D7930 /* LocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsViewController.h; sourceTree = "<group>"; };
+		3EBB10F512768DAA007D7930 /* LocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsViewController.m; sourceTree = "<group>"; };
 		3ECB541C122F3F53000AAC56 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		3ECB541D122F3F53000AAC56 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		3ECB55D0122F5BEE000AAC56 /* DateTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTableCell.h; sourceTree = "<group>"; };
@@ -568,6 +582,10 @@
 				3E8629FF1222BCD0001DE141 /* AddDeploymentViewController.m */,
 				3E8629FC1222BCD0001DE141 /* AddIncidentViewController.h */,
 				3E8629FD1222BCD0001DE141 /* AddIncidentViewController.m */,
+				3EBB0EFE12767882007D7930 /* CategoriesViewController.h */,
+				3EBB0EFF12767882007D7930 /* CategoriesViewController.m */,
+				3EBB10F412768DAA007D7930 /* LocationsViewController.h */,
+				3EBB10F512768DAA007D7930 /* LocationsViewController.m */,
 				3E862A0C1222BCD0001DE141 /* ViewIncidentViewController.h */,
 				3E862A0D1222BCD0001DE141 /* ViewIncidentViewController.m */,
 				3E862A001222BCD0001DE141 /* ImagePickerController.h */,
@@ -647,6 +665,10 @@
 				3E862A6F1222BD1D001DE141 /* MapViewController_iPhone.xib */,
 				3E862A701222BD1D001DE141 /* ViewIncidentViewController_iPad.xib */,
 				3E862A711222BD1D001DE141 /* ViewIncidentViewController_iPhone.xib */,
+				3EBB0F07127678D2007D7930 /* CategoriesViewController_iPhone.xib */,
+				3EBB0F0B127678DF007D7930 /* CategoriesViewController_iPad.xib */,
+				3EBB10E512768D69007D7930 /* LocationsViewController_iPhone.xib */,
+				3EBB10EB12768D76007D7930 /* LocationsViewController_iPad.xib */,
 				3E862A721222BD1D001DE141 /* WebViewController_iPad.xib */,
 				3E862A731222BD1D001DE141 /* WebViewController_iPhone.xib */,
 				3E862BE11222D092001DE141 /* LoadingViewController_iPhone.xib */,
@@ -814,6 +836,10 @@
 				3E4A006F1271F26C0017AED4 /* map.png in Resources */,
 				3E4A00701271F26C0017AED4 /* radar.png in Resources */,
 				3E4A00711271F26C0017AED4 /* reports.png in Resources */,
+				3EBB0F08127678D2007D7930 /* CategoriesViewController_iPhone.xib in Resources */,
+				3EBB0F0C127678DF007D7930 /* CategoriesViewController_iPad.xib in Resources */,
+				3EBB10E612768D69007D7930 /* LocationsViewController_iPhone.xib in Resources */,
+				3EBB10EC12768D76007D7930 /* LocationsViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +924,8 @@
 				3E4AF91D1270AA370017AED4 /* TableHeaderView.m in Sources */,
 				3E4AFF5F1271E21E0017AED4 /* InfoViewController.m in Sources */,
 				3E4A022712720E280017AED4 /* NSString+Extension.m in Sources */,
+				3EBB0F0012767882007D7930 /* CategoriesViewController.m in Sources */,
+				3EBB10F612768DAA007D7930 /* LocationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

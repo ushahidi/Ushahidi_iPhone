@@ -66,6 +66,22 @@
 	return NSLocalizedString(@"No Date Specified", @"No Date Specified");
 }
 
++ (NSString *) noPhotos {
+	return NSLocalizedString(@"No Photos", @"No Photos");
+}
+
++ (NSString *) noNews {
+	return NSLocalizedString(@"No News", @"No News");
+}
+
++ (NSString *) addPhoto {
+	return NSLocalizedString(@"Add photo", @"Add photo");
+}
+
++ (NSString *) addNews {
+	return NSLocalizedString(@"Add news", @"Add news");
+}
+
 + (NSString *) searchServers {
 	return NSLocalizedString(@"Search deployments...", @"Search deployments...");
 }
@@ -73,5 +89,13 @@
 + (NSString *) searchIncidents {
 	return NSLocalizedString(@"Search incidents...", @"Search incidents...");
 }
-	
+
++ (NSString *) searchCategories {
+	return NSLocalizedString(@"Search categories...", @"Search categories...");
+}
+
++ (NSString *) searchLocations {
+	return NSLocalizedString(@"Search locations...", @"Search locations...");
+}
+
 @end

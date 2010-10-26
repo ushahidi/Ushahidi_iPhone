@@ -71,12 +71,10 @@
 												  identifier:(NSString *)cellIdentifier;
 
 
-+ (TextTableCell *) getTextTableCellWithDelegate:(id<TextTableCellDelegate>)delegate
-											table:(UITableView *)tableView;
++ (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView;
 
-+ (TextTableCell *) getTextTableCellWithDelegate:(id<TextTableCellDelegate>)delegate
-											table:(UITableView *)tableView
-									   identifier:(NSString *)cellIdentifier;
++ (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView
+								  identifier:(NSString *)cellIdentifier;
 
 
 + (TextFieldTableCell *) getTextFieldTableCellWithDelegate:(id<TextFieldTableCellDelegate>)delegate

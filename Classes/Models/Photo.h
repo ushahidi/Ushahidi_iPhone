@@ -39,6 +39,8 @@
 @property(nonatomic,retain) UIImage *thumbnail;
 @property(nonatomic,retain) NSIndexPath *indexPath;
 
++ (id)photoWithImage:(UIImage *)image;
+- (id)initWithImage:(UIImage *)image;
 - (void) downloadWithDelegate:(id<PhotoDelegate>)delegate;
 - (NSData *) getData;
 

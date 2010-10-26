@@ -132,8 +132,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post setPostValue:[[Settings sharedSettings] firstName] forKey:@"person_first"];
 		[post setPostValue:[[Settings sharedSettings] lastName] forKey:@"person_last"];
 		[post setPostValue:[[Settings sharedSettings] email] forKey:@"person_email"];
+		NSInteger filename = 1;
 		for(Photo *photo in incident.photos) {
-			[post addData:[photo getData] forKey:@"incident_photo[]"];
+			[post addData:[photo getData] withFileName:[NSString stringWithFormat:@"%d.jpg", filename++] andContentType:@"image/jpeg" forKey:@"incident_photo[]"];
+			//[post addData:[photo getData] forKey:@"incident_photo[]"];
 		}
 		[post startAsynchronous];
 		return YES;
@@ -163,7 +165,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 							 forKey:@"http://demo.ushahidi.com"];
 	}
 	[self performSelector:@selector(notifyDelegate:) withObject:delegate afterDelay:2.0];
-	return [self.deployments allValues];
+	
+	return [[self.deployments allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
 - (void) notifyDelegate:(id<UshahidiDelegate>)delegate {
@@ -182,7 +185,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getCategories];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.categories allValues];
+	return [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)];
 }
 
 - (Category *) getCategoryByID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate {
@@ -201,7 +204,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getCountries];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.countries allValues];
+	return [[self.deployment.countries allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
 - (Country *) getCountryByID:(NSString *)countryId withDelegate:(id<UshahidiDelegate>)delegate {
@@ -246,7 +249,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getLocations];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.locations allValues];
+	return [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
 - (Location *) getLocationByID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate {
@@ -276,7 +279,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (NSArray *) getIncidents {
-	return [self.deployment.incidents allValues];
+	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 - (NSArray *) getIncidentsWithDelegate:(id<UshahidiDelegate>)delegate {
@@ -284,7 +287,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidents];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.incidents allValues];
+	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 - (NSInteger) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate {
@@ -300,7 +303,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidentsByCategoryID:categoryID];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.incidents allValues];
+	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 - (NSArray *) getIncidentsByCategoryName:(NSString *)categoryName withDelegate:(id<UshahidiDelegate>)delegate {
@@ -308,7 +311,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidentsByCategoryName:categoryName];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.incidents allValues];
+	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 - (NSArray *) getIncidentsByLocationID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate {
@@ -323,15 +326,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [self.deployment getIncidentsByLocationName:locationName];
 	[self.delegates setObject:delegate forKey:requestURL];
 	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.incidents allValues];
+	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 - (NSArray *) getIncidentsBySinceID:(NSString *)sinceID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ sinceID:%@", delegate, sinceID);
 	NSString *requestURL = [self.deployment getIncidentsBySinceID:sinceID];
 	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
-	return [self.deployment.incidents allValues];
+	[self startAsynchronousRequest:requestURL];	
+	return [[self.deployment.incidents allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 #pragma mark -

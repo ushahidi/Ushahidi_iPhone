@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "Location.h"
+#import "NSString+Extension.h"
 
 @implementation Location
 
@@ -58,6 +59,14 @@
 		self.longitude = [decoder decodeObjectForKey:@"longitude"];
 	}
 	return self;
+}
+
+- (BOOL) matchesString:(NSString *)string {
+	return self.name != nil && [self.name anyWordHasPrefix:string];
+}
+
+- (NSComparisonResult)compareByName:(Location *)location {
+	return [self.name localizedCaseInsensitiveCompare:location.name];
 }
 
 - (void)dealloc {

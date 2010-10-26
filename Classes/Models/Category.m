@@ -20,6 +20,7 @@
 
 #import "Category.h"
 #import "UIColor+Extension.h"
+#import "NSString+Extension.h"
 
 @interface Category ()
 
@@ -59,6 +60,14 @@
 		self.color = [decoder decodeObjectForKey:@"color"];
 	}
 	return self;
+}
+
+- (BOOL) matchesString:(NSString *)string {
+	return self.title != nil && [self.title anyWordHasPrefix:string];
+}
+
+- (NSComparisonResult)compareByTitle:(Category *)category {
+	return [self.title localizedCaseInsensitiveCompare:category.title];
 }
 
 - (void)dealloc {

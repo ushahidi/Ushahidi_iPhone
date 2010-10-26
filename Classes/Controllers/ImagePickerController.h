@@ -20,6 +20,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ImagePickerDelegate;
+
 @interface ImagePickerController : NSObject<UINavigationControllerDelegate,
 											UIImagePickerControllerDelegate,
 											UIActionSheetDelegate,
@@ -27,12 +29,22 @@
 @public
 	UIViewController *viewController;
 	UIPopoverController *popoverController;
+	id<ImagePickerDelegate> delegate;
 }
 
 @property(nonatomic, retain) UIViewController *viewController;
 @property(nonatomic, retain) UIPopoverController *popoverController;
+@property(nonatomic, assign) id<ImagePickerDelegate> delegate;
 
 - (id) initWithController:(UIViewController *)controller;
-- (void) showImagePicker;
+- (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)delegate;
+
+@end
+
+@protocol ImagePickerDelegate <NSObject>
+
+@optional
+
+- (void) imagePicker:(ImagePickerController *)imagePicker selectedImage:(UIImage *)image;
 
 @end

@@ -85,8 +85,8 @@ typedef enum {
 		DLog(@"Previous");
 		self.incident = [self.incidents objectAtIndex:index - 1];
 	}
-	self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.incidents count]];
 	NSInteger newIndex = [self.incidents indexOfObject:self.incident];
+	self.title = [NSString stringWithFormat:@"%d / %d", newIndex + 1, [self.incidents count]];
 	[self.nextPrevious setEnabled:(newIndex > 0) forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:(newIndex + 1 < [self.incidents count]) forSegmentAtIndex:NavBarNext];
 	[self.tableView reloadData];

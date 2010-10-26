@@ -51,7 +51,7 @@ typedef enum {
 		[button release];
 		self.imageView.image = [UIImage imageNamed:@"blank.png"];
 		self.accessoryType = UITableViewCellAccessoryNone;
-		self.selectionStyle = UITableViewCellSelectionStyleGray;
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
     return self;
 }

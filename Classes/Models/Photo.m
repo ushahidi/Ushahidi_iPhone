@@ -128,8 +128,12 @@ NSInteger const kMaxHeight = 80;
 	}
 }
 
-- (NSData *) getData {
+- (NSData *) getJpegData {
 	return self.image != nil ? UIImageJPEGRepresentation(self.image, 1.0) : nil;
+}
+
+- (NSData *) getPngData {
+	return self.image != nil ? UIImagePNGRepresentation(self.image) : nil;
 }
 
 @end

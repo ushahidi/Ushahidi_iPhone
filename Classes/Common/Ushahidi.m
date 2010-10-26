@@ -39,12 +39,15 @@
 
 - (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url;
 - (void) notifyDelegate:(id<UshahidiDelegate>)delegate;
+- (void) downloadIncidentMapsInBackground;
 
 @end
 
 @implementation Ushahidi
 
 @synthesize delegates, deployments, deployment;
+
+NSString * const kGoogleStaticMaps = @"http://maps.google.com/maps/api/staticmap";
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
@@ -95,6 +98,51 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 #pragma mark -
+#pragma mark Map Image
+
+- (void) downloadIncidentMaps {
+	DLog(@"downloadIncidentMaps");
+	[self performSelectorInBackground:@selector(downloadIncidentMapsInBackground) withObject:nil];
+}
+
+- (void) downloadIncidentMapsInBackground {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	DLog(@"downloadIncidentMapsInBackground...");
+	for(Incident *incident in [self.deployment.incidents allValues]) {
+		@try {
+			if (incident.map == nil && incident.latitude != nil && incident.longitude != nil) {
+				CGRect screen = [[UIScreen mainScreen] bounds];
+				NSMutableString *url = [NSMutableString stringWithString:kGoogleStaticMaps];
+				[url appendFormat:@"?center=%@,%@", incident.latitude, incident.longitude];
+				[url appendFormat:@"&markers=%@,%@", incident.latitude, incident.longitude];
+				[url appendFormat:@"&size=%dx%d", (int)CGRectGetWidth(screen), (int)CGRectGetWidth(screen)/2];
+				[url appendFormat:@"&zoom=%@", @"12"];
+				[url appendFormat:@"&sensor=false"];
+				DLog(@"REQUEST: %@", url);
+				ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+				[request setShouldRedirect:YES];
+				[request startSynchronous];
+				if ([request error] != nil) {
+					DLog(@"ERROR: %@", [[request error] localizedDescription]);
+				} 
+				else if ([request responseData] != nil) {
+					DLog(@"RESPONSE: BINARY IMAGE");
+					incident.map = [UIImage imageWithData:[request responseData]];
+				}
+				else {
+					DLog(@"RESPONSE: %@", [request responseString]);
+				}
+			}
+		}
+		@catch (NSException *e) {
+			DLog(@"NSException: %@", e);
+		}
+	}
+	DLog(@"...downloadIncidentMapsInBackground");
+	[pool release];
+}
+
+#pragma mark -
 #pragma mark Add/Upload Incidents
 
 - (BOOL)addIncident:(Incident *)incident withDelegate:(id<UshahidiDelegate>)delegate {
@@ -134,8 +182,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post setPostValue:[[Settings sharedSettings] email] forKey:@"person_email"];
 		NSInteger filename = 1;
 		for(Photo *photo in incident.photos) {
-			[post addData:[photo getData] withFileName:[NSString stringWithFormat:@"%d.jpg", filename++] andContentType:@"image/jpeg" forKey:@"incident_photo[]"];
-			//[post addData:[photo getData] forKey:@"incident_photo[]"];
+			[post addData:[photo getJpegData] withFileName:[NSString stringWithFormat:@"photo%d.jpg", filename++] 
+											andContentType:@"image/jpeg" 
+													forKey:@"incident_photo[]"];
+			//[post addData:[photo getJpegData] forKey:@"incident_photo[]"];
 		}
 		[post startAsynchronous];
 		return YES;

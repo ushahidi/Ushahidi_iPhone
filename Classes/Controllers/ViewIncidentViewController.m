@@ -159,17 +159,25 @@ typedef enum {
 		return cell;
 	}
 	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
-		MapTableCell *cell = [TableCellFactory getMapTableCellWithDelegate:self table:theTableView];
-		[cell setScrollable:NO];
-		[cell setZoomable:NO];
-		//TODO prevent map from re-adding pin
-		[cell removeAllPins];
-		[cell addPinWithTitle:self.incident.location 
-					 subtitle:[NSString stringWithFormat:@"%@,%@", self.incident.latitude, self.incident.longitude]
-					 latitude:self.incident.latitude 
-					longitude:self.incident.longitude];
-		[cell resizeRegionToFitAllPins:NO];	
-		return cell;
+		if (self.incident.map != nil) {
+			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
+			cell.indexPath = indexPath;
+			[cell setImage:self.incident.map];
+			return cell;
+		}
+		else {
+			MapTableCell *cell = [TableCellFactory getMapTableCellWithDelegate:self table:theTableView];
+			[cell setScrollable:NO];
+			[cell setZoomable:NO];
+			//TODO prevent map from re-adding pin
+			[cell removeAllPins];
+			[cell addPinWithTitle:self.incident.location 
+						 subtitle:[NSString stringWithFormat:@"%@,%@", self.incident.latitude, self.incident.longitude]
+						 latitude:self.incident.latitude 
+						longitude:self.incident.longitude];
+			[cell resizeRegionToFitAllPins:NO];	
+			return cell;
+		}
 	}
 	else if (indexPath.section == TableSectionPhotos && [self.incident.photos count] > 0) {
 		ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
@@ -209,7 +217,7 @@ typedef enum {
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;	
 		}
 		else if (indexPath.section == TableSectionDateTime) {
-			cell.textLabel.text = [self.incident dateString];
+			cell.textLabel.text = [self.incident dateTimeString];
 		}
 		else if (indexPath.section == TableSectionErrors) {
 			cell.textLabel.text = [self.incident errors];
@@ -265,6 +273,9 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
+		if (self.incident.map != nil) {
+			return 180;
+		}
 		return 140;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
@@ -292,7 +303,7 @@ typedef enum {
 		return [TextTableCell getCellSizeForText:[self.incident categoryNamesWithDefaultText:[Messages noCategorySpecified]] forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionDateTime) {
-		return [TextTableCell getCellSizeForText:[self.incident dateString] forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:[self.incident dateTimeString] forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionErrors) {
 		return self.incident.errors != nil 

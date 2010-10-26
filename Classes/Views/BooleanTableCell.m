@@ -30,8 +30,8 @@
 @implementation BooleanTableCell
 
 typedef enum {
-	SegmentToDo,
-	SegmentCompleted
+	SegmentTrue,
+	SegmentFalse
 } Segment;
 
 @synthesize delegate, indexPath, segmentControl;
@@ -41,33 +41,33 @@ typedef enum {
 		self.delegate = theDelegate;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 		self.accessoryType = UITableViewCellAccessoryNone;
-		self.segmentControl = [[UISegmentedControl alloc] initWithFrame:self.contentView.frame];
+		self.segmentControl = [[UISegmentedControl alloc] initWithFrame:CGRectMake(-1.0f, -1.0f, self.contentView.frame.size.width + 1, 48.0f)];
 		self.segmentControl.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-		[self.segmentControl insertSegmentWithTitle:@"To Do" atIndex:SegmentToDo animated:NO];
-		[self.segmentControl insertSegmentWithTitle:@"Complete" atIndex:SegmentCompleted animated:NO];
+		[self.segmentControl insertSegmentWithTitle:@"Yes" atIndex:SegmentTrue animated:NO];
+		[self.segmentControl insertSegmentWithTitle:@"No" atIndex:SegmentFalse animated:NO];
 		[self.segmentControl addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
 		[self.contentView addSubview:self.segmentControl];
 	}
     return self;
 }
 
-- (void) setIsCompleted:(BOOL)isCompleted {
-	if (isCompleted) {
-		self.segmentControl.selectedSegmentIndex = SegmentCompleted;
+- (void) setChecked:(BOOL)checked {
+	if (checked) {
+		self.segmentControl.selectedSegmentIndex = SegmentTrue;
 	}
 	else {
-		self.segmentControl.selectedSegmentIndex = SegmentToDo;
+		self.segmentControl.selectedSegmentIndex = SegmentFalse;
 	}
 }
 
-- (BOOL) getIsCompleted {
-	return self.segmentControl.selectedSegmentIndex == SegmentCompleted;
+- (BOOL) getChecked {
+	return self.segmentControl.selectedSegmentIndex == SegmentTrue;
 }
 
 - (void) valueChanged:(id)sender {
-	SEL selector = @selector(booleanCellChanged:completed:);
+	SEL selector = @selector(booleanCellChanged:checked:);
 	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
-		[self.delegate booleanCellChanged:self completed:(self.segmentControl.selectedSegmentIndex == SegmentCompleted)];
+		[self.delegate booleanCellChanged:self checked:(self.segmentControl.selectedSegmentIndex == SegmentTrue)];
 	}
 }
 

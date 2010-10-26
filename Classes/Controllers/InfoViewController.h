@@ -21,13 +21,16 @@
 #import <UIKit/UIKit.h>
 #import "TableViewController.h"
 #import "TextFieldTableCell.h"
+#import "BooleanTableCell.h"
 
-@interface InfoViewController : TableViewController<TextFieldTableCellDelegate> {
+@interface InfoViewController : TableViewController<TextFieldTableCellDelegate, 
+													BooleanTableCellDelegate> {
 	
 @private
 	NSString *email;
 	NSString *firstName;
 	NSString *lastName;
+	BOOL downloadMaps;
 }
 
 - (IBAction) cancel:(id)sender;

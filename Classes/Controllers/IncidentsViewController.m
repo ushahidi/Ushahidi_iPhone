@@ -33,6 +33,7 @@
 #import "MKMapView+Extension.h"
 #import "MapAnnotation.h"
 #import "Messages.h"
+#import "Settings.h"
 
 typedef enum {
 	ViewModeReports,
@@ -76,6 +77,9 @@ typedef enum {
 	DLog(@"");
 	[self.loadingView showWithMessage:@"Loading..."];
 	[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
+	if ([[Settings sharedSettings] downloadMaps]) {
+		[[Ushahidi sharedUshahidi] downloadIncidentMaps];	
+	}
 }
 
 - (IBAction) map:(id)sender {
@@ -163,7 +167,7 @@ typedef enum {
 	return [self.filteredRows count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	return [IncidentTableCell getCellHeight];
 }
 

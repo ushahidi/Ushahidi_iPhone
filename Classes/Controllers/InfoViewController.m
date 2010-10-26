@@ -29,6 +29,7 @@
 @property(nonatomic, retain) NSString *email;
 @property(nonatomic, retain) NSString *firstName;
 @property(nonatomic, retain) NSString *lastName;
+@property(nonatomic, assign) BOOL downloadMaps;
 
 - (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText;
 
@@ -39,10 +40,11 @@
 typedef enum {
 	TableSectionEmail,
 	TableSectionFirstName,
-	TableSectionLastName
+	TableSectionLastName,
+	TableSectionDownloadMaps
 } TableSection;
 
-@synthesize email, firstName, lastName;
+@synthesize email, firstName, lastName, downloadMaps;
 
 #pragma mark -
 #pragma mark Handlers
@@ -57,6 +59,7 @@ typedef enum {
 	[[Settings sharedSettings] setEmail:self.email];
 	[[Settings sharedSettings] setFirstName:self.firstName];
 	[[Settings sharedSettings] setLastName:self.lastName];
+	[[Settings sharedSettings] setDownloadMaps:self.downloadMaps];
 	[[Settings sharedSettings] save];
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -74,6 +77,7 @@ typedef enum {
 	self.email = [[Settings sharedSettings] email];
 	self.firstName = [[Settings sharedSettings] firstName];
 	self.lastName = [[Settings sharedSettings] lastName];
+	self.downloadMaps = [[Settings sharedSettings] downloadMaps];
 	[self.tableView reloadData];
 }
 
@@ -92,7 +96,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 3;
+	return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -100,21 +104,30 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView];
-	cell.indexPath = indexPath;
-	if (indexPath.section == TableSectionEmail) {
-		[cell setPlaceholder:@"Enter email"];
-		[cell setText:self.email];
+	if (indexPath.section == TableSectionDownloadMaps) {
+		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellWithDelegate:self table:theTableView];
+		cell.indexPath = indexPath;
+		[cell setChecked:self.downloadMaps];
+		return cell;
 	}
-	else if (indexPath.section == TableSectionFirstName) {
-		[cell setPlaceholder:@"Enter first name"];
-		[cell setText:self.firstName];
+	else {
+		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView];
+		cell.indexPath = indexPath;
+		if (indexPath.section == TableSectionEmail) {
+			[cell setPlaceholder:@"Enter email"];
+			[cell setText:self.email];
+		}
+		else if (indexPath.section == TableSectionFirstName) {
+			[cell setPlaceholder:@"Enter first name"];
+			[cell setText:self.firstName];
+		}
+		else if (indexPath.section == TableSectionLastName) {
+			[cell setPlaceholder:@"Enter last name"];
+			[cell setText:self.lastName];
+		}
+		return cell;	
 	}
-	else if (indexPath.section == TableSectionLastName) {
-		[cell setPlaceholder:@"Enter last name"];
-		[cell setText:self.lastName];
-	}
-	return cell;	
+	return nil;
 }
 
 - (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
@@ -126,6 +139,9 @@ typedef enum {
 	}
 	if (section == TableSectionLastName) {
 		return [self headerForTable:theTableView text:@"Last Name"];
+	}
+	if (section == TableSectionDownloadMaps) {
+		return [self headerForTable:theTableView text:@"Download Maps"];
 	}
 	return nil;
 }
@@ -170,6 +186,14 @@ typedef enum {
 	else if (indexPath.section == TableSectionLastName) {
 		self.lastName = text;
 	}
+}
+
+#pragma mark -
+#pragma mark BooleanTableCellDelegate
+		 
+- (void) booleanCellChanged:(BooleanTableCell *)cell checked:(BOOL)checked {
+	DLog(@"checked: %d", checked);
+	self.downloadMaps = checked;
 }
 
 @end

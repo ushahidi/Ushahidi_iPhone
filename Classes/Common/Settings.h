@@ -27,12 +27,14 @@
 	NSString *firstName;
 	NSString *lastName;
 	NSString *lastDeployment;
+	BOOL downloadMaps;
 }
 
 @property(nonatomic, retain) NSString *email;
 @property(nonatomic, retain) NSString *firstName;
 @property(nonatomic, retain) NSString *lastName;
 @property(nonatomic, retain) NSString *lastDeployment;
+@property(nonatomic, assign) BOOL downloadMaps;
 
 + (Settings *) sharedSettings;
 

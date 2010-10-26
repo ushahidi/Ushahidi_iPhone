@@ -36,6 +36,7 @@
 	NSString *location;
 	NSString *latitude;
 	NSString *longitude;
+	UIImage *map;
 	
 	BOOL active;
 	BOOL verified;
@@ -57,6 +58,7 @@
 @property(nonatomic,retain) NSString *location;
 @property(nonatomic,retain) NSString *latitude;
 @property(nonatomic,retain) NSString *longitude;
+@property(nonatomic,retain) UIImage *map;
 
 @property(nonatomic,assign) BOOL active;
 @property(nonatomic,assign) BOOL verified;
@@ -74,6 +76,8 @@
 - (id)initWithDefaultValues;
 
 - (BOOL) matchesString:(NSString *)string;
+
+- (NSString *) dateTimeString;
 - (NSString *) dateString;
 - (NSString *) timeString;
 - (NSString *) dateDayMonthYear;

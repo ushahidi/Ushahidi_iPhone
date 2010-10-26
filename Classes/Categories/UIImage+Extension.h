@@ -19,38 +19,9 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
-#import "Media.h"
 
-@protocol PhotoDelegate;
+@interface UIImage (Extension)
 
-@interface Photo : Media {
-
-@public
-	UIImage *image;	
-	UIImage *thumbnail;
-	NSIndexPath *indexPath;
-	
-@private 	
-	id<PhotoDelegate> delegate;
-	BOOL downloading;
-}
-
-@property(nonatomic,retain) UIImage *image;
-@property(nonatomic,retain) UIImage *thumbnail;
-@property(nonatomic,retain) NSIndexPath *indexPath;
-
-+ (id)photoWithImage:(UIImage *)image;
-- (id)initWithImage:(UIImage *)image;
-- (void) downloadWithDelegate:(id<PhotoDelegate>)delegate;
-- (NSData *) getJpegData;
-- (NSData *) getPngData;
-
-@end
-
-@protocol PhotoDelegate <NSObject>
-
-@optional
-
-- (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath;
++(UIImage *) getImageFromFolder:(NSString *)folder filename:(NSString *)filename; 
 
 @end

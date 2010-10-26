@@ -39,7 +39,12 @@ typedef enum {
 	MediaTypeNews
 } MediaType;
 
-@synthesize identifier, title, description, date, active, verified, pending, news, photos, sounds, videos, categories, location, latitude, longitude, errors;
+@synthesize identifier, title, description, date;
+@synthesize map;
+@synthesize active, verified, pending;
+@synthesize news, photos, sounds, videos, categories;
+@synthesize location, latitude, longitude;
+@synthesize errors;
 
 - (id)initWithDefaultValues {
 	if (self = [super init]) {
@@ -106,6 +111,12 @@ typedef enum {
 	[encoder encodeObject:self.location forKey:@"location"];
 	[encoder encodeObject:self.latitude forKey:@"latitude"];
 	[encoder encodeObject:self.longitude forKey:@"longitude"];
+	if (self.map != nil) {
+		[encoder encodeObject:UIImagePNGRepresentation(self.map) forKey:@"map"];
+	} 
+	else {
+		[encoder encodeObject:nil forKey:@"map"];
+	}
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -120,7 +131,10 @@ typedef enum {
 		self.location = [decoder decodeObjectForKey:@"location"];
 		self.latitude = [decoder decodeObjectForKey:@"latitude"];
 		self.longitude = [decoder decodeObjectForKey:@"longitude"];
-		
+		NSData *data = [decoder decodeObjectForKey:@"thumbnail"];
+		if (data != nil) {
+			self.map = [UIImage imageWithData:data];
+		}
 		self.news = [decoder decodeObjectForKey:@"news"];
 		if (self.news == nil) self.news = [NSArray array];
 		
@@ -137,12 +151,16 @@ typedef enum {
 	return self.title != nil && [self.title anyWordHasPrefix:string];
 }
 
+- (NSString *) dateTimeString {
+	return self.date != nil ? [self.date dateToString:@"h:mm a, cccc, MMMM d, yyyy"] : nil;
+}
+
 - (NSString *) dateString {
 	return self.date != nil ? [self.date dateToString:@"cccc, MMMM d, yyyy"] : nil;
 }
 
 - (NSString *) timeString {
-	return self.date != nil ? [self.date dateToString:@"HH:mm a"] : nil;
+	return self.date != nil ? [self.date dateToString:@"h:mm a"] : nil;
 }
 
 - (NSString *) dateDayMonthYear {
@@ -244,6 +262,7 @@ typedef enum {
 	[videos release];
 	[categories release];
 	[errors release];
+	[map release];
 	[super dealloc];
 }
 

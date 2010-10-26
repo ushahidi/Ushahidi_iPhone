@@ -37,8 +37,8 @@
 
 - (id)initWithDelegate:(id<BooleanTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 
-- (void) setIsCompleted:(BOOL)completed;
-- (BOOL) getIsCompleted;
+- (void) setChecked:(BOOL)completed;
+- (BOOL) getChecked;
 
 @end
 
@@ -46,6 +46,6 @@
 
 @optional
 
-- (void) booleanCellChanged:(BooleanTableCell *)cell completed:(BOOL)completed;
+- (void) booleanCellChanged:(BooleanTableCell *)cell checked:(BOOL)checked;
 
 @end

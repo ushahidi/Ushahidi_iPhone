@@ -138,6 +138,7 @@
 		3EBB10E612768D69007D7930 /* LocationsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB10E512768D69007D7930 /* LocationsViewController_iPhone.xib */; };
 		3EBB10EC12768D76007D7930 /* LocationsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBB10EB12768D76007D7930 /* LocationsViewController_iPad.xib */; };
 		3EBB10F612768DAA007D7930 /* LocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationsViewController.m */; };
+		3EC94CBC12773CDD00411AE0 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3ECB541E122F3F53000AAC56 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB541D122F3F53000AAC56 /* NavigationController.m */; };
 		3ECB55D2122F5BEE000AAC56 /* DateTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */; };
 		3ECB55ED122F5E33000AAC56 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55EC122F5E33000AAC56 /* DatePicker.m */; };
@@ -356,6 +357,8 @@
 		3EBB10EB12768D76007D7930 /* LocationsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationsViewController_iPad.xib; sourceTree = "<group>"; };
 		3EBB10F412768DAA007D7930 /* LocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationsViewController.h; sourceTree = "<group>"; };
 		3EBB10F512768DAA007D7930 /* LocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationsViewController.m; sourceTree = "<group>"; };
+		3EC94CBA12773CDD00411AE0 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
+		3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		3ECB541C122F3F53000AAC56 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		3ECB541D122F3F53000AAC56 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		3ECB55D0122F5BEE000AAC56 /* DateTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTableCell.h; sourceTree = "<group>"; };
@@ -469,6 +472,8 @@
 				3E86344A12243A0C001DE141 /* UIImage+Resize.m */,
 				3E86344B12243A0C001DE141 /* UIImage+RoundedCorner.h */,
 				3E86344C12243A0C001DE141 /* UIImage+RoundedCorner.m */,
+				3EC94CBA12773CDD00411AE0 /* UIImage+Extension.h */,
+				3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */,
 				3ECB579D122F809C000AAC56 /* UIView+Extension.h */,
 				3ECB579E122F809C000AAC56 /* UIView+Extension.m */,
 				3E862E7D1222F2D1001DE141 /* NSKeyedArchiver+Extension.h */,
@@ -926,6 +931,7 @@
 				3E4A022712720E280017AED4 /* NSString+Extension.m in Sources */,
 				3EBB0F0012767882007D7930 /* CategoriesViewController.m in Sources */,
 				3EBB10F612768DAA007D7930 /* LocationsViewController.m in Sources */,
+				3EC94CBC12773CDD00411AE0 /* UIImage+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -46,4 +46,18 @@
 	return NO;
 }
 
++ (NSString *)stringByAppendingPathComponents:(NSString *)string, ... {
+    va_list args;
+    va_start(args, string);
+	NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *filePath = [filePaths objectAtIndex:0];
+	for (NSString *arg = string; arg != nil; arg = va_arg(args, NSString*)) {
+		if (arg != nil && [arg length] > 0) {
+			filePath = [filePath stringByAppendingPathComponent:arg];
+		}
+	}
+	va_end(args);
+	return filePath;
+}
+
 @end

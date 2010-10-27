@@ -111,6 +111,7 @@ typedef enum {
 	if (segmentControl.selectedSegmentIndex == ViewModeReports) {
 		self.tableView.hidden = NO;
 		self.mapView.hidden = YES;
+		self.sortOrder.enabled = YES;
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
 		self.tableView.hidden = YES;
@@ -121,6 +122,7 @@ typedef enum {
 			[self.mapView addPinWithTitle:incident.title subtitle:[incident dateString] latitude:incident.latitude longitude:incident.longitude];
 		}
 		[self.mapView resizeRegionToFitAllPins:YES];
+		self.sortOrder.enabled = NO;
 	}
 }
 

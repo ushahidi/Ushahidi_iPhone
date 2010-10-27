@@ -75,7 +75,7 @@ typedef enum {
 	[self.view endEditing:YES];
 	[self.loadingView showWithMessage:@"Adding Server..."];
 	if ([[Ushahidi sharedUshahidi] addDeploymentByName:self.name andUrl:self.url]) {
-		[self.loadingView showWithMessage:@"Server Added!"];
+		[self.loadingView showWithMessage:@"Deployment Added!"];
 		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:2.0];
 	}
 	else {

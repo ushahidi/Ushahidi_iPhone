@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="18"/>
+			<integer value="17"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1465,6 +1465,7 @@
 							<string>addIncidentViewController</string>
 							<string>mapView</string>
 							<string>mapViewController</string>
+							<string>refreshButton</string>
 							<string>sortOrder</string>
 							<string>viewIncidentViewController</string>
 						</object>
@@ -1473,6 +1474,7 @@
 							<string>AddIncidentViewController</string>
 							<string>MKMapView</string>
 							<string>MapViewController</string>
+							<string>UIBarButtonItem</string>
 							<string>UISegmentedControl</string>
 							<string>ViewIncidentViewController</string>
 						</object>
@@ -1484,6 +1486,7 @@
 							<string>addIncidentViewController</string>
 							<string>mapView</string>
 							<string>mapViewController</string>
+							<string>refreshButton</string>
 							<string>sortOrder</string>
 							<string>viewIncidentViewController</string>
 						</object>
@@ -1500,6 +1503,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapViewController</string>
 								<string key="candidateClassName">MapViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">refreshButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">sortOrder</string>
@@ -2296,7 +2303,7 @@
 				<string>{28, 28}</string>
 				<string>{15, 13}</string>
 				<string>{15, 13}</string>
-				<string>{28, 28}</string>
+				<string>{26, 26}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">117</string>

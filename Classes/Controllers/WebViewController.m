@@ -98,6 +98,7 @@ typedef enum {
 	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
 	self.refreshButton.enabled = YES;
+	self.website = [[[theWebView request] URL] absoluteString];
 }
 
 - (void)webView:(UIWebView *)theWebView didFailLoadWithError:(NSError *)error {

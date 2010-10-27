@@ -327,8 +327,10 @@ typedef enum {
 		[self.navigationController pushViewController:self.mapViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionPhotos) {
-		self.imageViewController.image = [((ImageTableCell *)cell) getImage];
-		[self.navigationController pushViewController:self.imageViewController animated:YES];
+		if ([self.incident.photos count] > 0) {
+			self.imageViewController.image = [((ImageTableCell *)cell) getImage];
+			[self.navigationController pushViewController:self.imageViewController animated:YES];
+		}
 	}
 }
 

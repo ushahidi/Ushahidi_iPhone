@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="38"/>
+			<integer value="1"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -149,7 +149,7 @@
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 					</object>
-					<object class="IBUIActivityIndicatorView" id="496688793">
+					<object class="IBUIActivityIndicatorView" id="519965130">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{12, 12}, {20, 20}}</string>
@@ -258,7 +258,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">activityIndicator</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="496688793"/>
+						<reference key="destination" ref="519965130"/>
 					</object>
 					<int key="connectionID">39</int>
 				</object>
@@ -280,7 +280,7 @@
 							<reference ref="644359836"/>
 							<reference ref="629927120"/>
 							<reference ref="557858768"/>
-							<reference ref="496688793"/>
+							<reference ref="519965130"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -345,7 +345,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">38</int>
-						<reference key="object" ref="496688793"/>
+						<reference key="object" ref="519965130"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -397,7 +397,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">39</int>
+			<int key="maxID">40</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

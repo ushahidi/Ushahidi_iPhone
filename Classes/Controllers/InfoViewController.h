@@ -22,9 +22,11 @@
 #import "TableViewController.h"
 #import "TextFieldTableCell.h"
 #import "BooleanTableCell.h"
+#import "SliderTableCell.h"
 
 @interface InfoViewController : TableViewController<TextFieldTableCellDelegate, 
-													BooleanTableCellDelegate> {
+													BooleanTableCellDelegate, 
+													SliderTableCellDelegate> {
 	
 @private
 	NSString *email;
@@ -32,6 +34,8 @@
 	NSString *lastName;
 	BOOL downloadMaps;
 	BOOL becomeDiscrete;
+	CGFloat imageWidth;
+	UILabel *imageWidthLabel;
 }
 
 - (IBAction) cancel:(id)sender;

@@ -31,6 +31,8 @@
 @property(nonatomic, retain) NSString *lastName;
 @property(nonatomic, assign) BOOL downloadMaps;
 @property(nonatomic, assign) BOOL becomeDiscrete;
+@property(nonatomic, assign) CGFloat imageWidth;
+@property(nonatomic, retain) UILabel *imageWidthLabel;
 
 - (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText;
 
@@ -43,10 +45,11 @@ typedef enum {
 	TableSectionFirstName,
 	TableSectionLastName,
 	TableSectionDownloadMaps,
-	TableSectionBecomeDiscrete
+	TableSectionBecomeDiscrete,
+	TableSectionImageWidth
 } TableSection;
 
-@synthesize email, firstName, lastName, downloadMaps, becomeDiscrete;
+@synthesize email, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, imageWidthLabel;
 
 #pragma mark -
 #pragma mark Handlers
@@ -63,6 +66,7 @@ typedef enum {
 	[[Settings sharedSettings] setLastName:self.lastName];
 	[[Settings sharedSettings] setDownloadMaps:self.downloadMaps];
 	[[Settings sharedSettings] setBecomeDiscrete:self.becomeDiscrete];
+	[[Settings sharedSettings] setImageWidth:self.imageWidth];
 	[[Settings sharedSettings] save];
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -73,6 +77,11 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
+	self.imageWidthLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
+	self.imageWidthLabel.backgroundColor = [UIColor clearColor];
+	self.imageWidthLabel.textColor = [UIColor grayColor];
+	self.imageWidthLabel.textAlignment = UITextAlignmentCenter;
+	self.imageWidthLabel.font = [UIFont systemFontOfSize:15];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -82,6 +91,8 @@ typedef enum {
 	self.lastName = [[Settings sharedSettings] lastName];
 	self.downloadMaps = [[Settings sharedSettings] downloadMaps];
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
+	self.imageWidth = [[Settings sharedSettings] imageWidth];
+	self.imageWidthLabel.text = [NSString stringWithFormat:@"%d pixels", (int)self.imageWidth];
 	[self.tableView reloadData];
 }
 
@@ -100,7 +111,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 5;
+	return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -108,7 +119,8 @@ typedef enum {
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionDownloadMaps || indexPath.section == TableSectionBecomeDiscrete) {
+	if (indexPath.section == TableSectionDownloadMaps || 
+		indexPath.section == TableSectionBecomeDiscrete) {
 		return 35;
 	}
 	return 40;
@@ -125,6 +137,14 @@ typedef enum {
 		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellWithDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setChecked:self.becomeDiscrete];
+		return cell;
+	}
+	else if (indexPath.section == TableSectionImageWidth) {
+		SliderTableCell *cell = [TableCellFactory getSliderTableCellWithDelegate:self table:theTableView];
+		cell.indexPath = indexPath;
+		[cell setMaximum:1024];
+		[cell setMinimum:200];
+		[cell setValue:self.imageWidth];
 		return cell;
 	}
 	else {
@@ -163,12 +183,24 @@ typedef enum {
 	if (section == TableSectionBecomeDiscrete) {
 		return [self headerForTable:theTableView text:@"Discrete Mode Upon Shake"];
 	}
+	if (section == TableSectionImageWidth) {
+		return [self headerForTable:theTableView text:@"Image Width"];
+	}
 	return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	return [TableHeaderView getViewHeight];
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+	return section == TableSectionImageWidth ? self.imageWidthLabel : nil;
+}
+
+- (CGFloat)tableView:(UITableView *)theTableView heightForFooterInSection:(NSInteger)section {
+	return section == TableSectionImageWidth ? self.imageWidthLabel.frame.size.height : 0.0;
+}
+
 
 - (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText {
 	return [TableHeaderView headerForTable:theTableView text:theText textColor:[UIColor ushahidiRed] backgroundColor:[UIColor clearColor]];
@@ -219,6 +251,15 @@ typedef enum {
 	else if (cell.indexPath.section == TableSectionDownloadMaps) {
 		self.downloadMaps = checked;
 	}
+}
+
+#pragma mark -
+#pragma mark SliderTableCellDelegate
+
+- (void) sliderCellChanged:(SliderTableCell *)cell value:(CGFloat)value {
+	DLog(@"sliderCellChanged: %f", value);
+	self.imageWidth = value;
+	self.imageWidthLabel.text = [NSString stringWithFormat:@"%d pixels", (int)value];
 }
 
 @end

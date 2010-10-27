@@ -33,6 +33,7 @@
 @class DateTableCell;
 @class DeploymentTableCell;
 @class IncidentTableCell;
+@class SliderTableCell;
 
 @protocol TextTableCellDelegate;
 @protocol SearchTableCellDelegate;
@@ -42,6 +43,7 @@
 @protocol CheckBoxTableCellDelegate;
 @protocol MapTableCellDelegate;
 @protocol DateTableCellDelegate;
+@protocol SliderTableCellDelegate;
 
 @interface TableCellFactory : NSObject {
 
@@ -76,6 +78,12 @@
 + (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView
 								  identifier:(NSString *)cellIdentifier;
 
++ (SliderTableCell *) getSliderTableCellWithDelegate:(id<SliderTableCellDelegate>)delegate 
+											   table:(UITableView *)tableView;
+
++ (SliderTableCell *) getSliderTableCellWithDelegate:(id<SliderTableCellDelegate>)delegate
+											   table:(UITableView *)tableView
+										  identifier:(NSString *)cellIdentifier;
 
 + (TextFieldTableCell *) getTextFieldTableCellWithDelegate:(id<TextFieldTableCellDelegate>)delegate
 													 table:(UITableView *)tableView;

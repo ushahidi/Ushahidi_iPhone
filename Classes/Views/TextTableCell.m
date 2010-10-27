@@ -39,6 +39,8 @@
 		self.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 		self.textLabel.numberOfLines = 0; 
 		self.textLabel.font = [TextTableCell getLabelFont];
+		self.accessoryType = UITableViewCellAccessoryNone;
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
     return self;
 }

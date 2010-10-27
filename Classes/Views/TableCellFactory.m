@@ -32,6 +32,7 @@
 #import "DeploymentTableCell.h"
 #import "IncidentTableCell.h"
 #import "UIColor+Extension.h"
+#import "SliderTableCell.h"
 
 @interface TableCellFactory ()
 
@@ -133,6 +134,24 @@
 	SubtitleTableCell *cell = (SubtitleTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
 		cell = [[[SubtitleTableCell alloc] initWithDefaultImage:defaultImage reuseIdentifier:cellIdentifier] autorelease];
+	}
+	return cell;
+}
+
+#pragma mark -
+#pragma mark SliderTableCell
+
++ (SliderTableCell *) getSliderTableCellWithDelegate:(id<SliderTableCellDelegate>)delegate 
+											   table:(UITableView *)tableView {
+	return [TableCellFactory getSliderTableCellWithDelegate:delegate table:tableView identifier:@"SliderTableCell"];
+}
+
++ (SliderTableCell *) getSliderTableCellWithDelegate:(id<SliderTableCellDelegate>)delegate
+											   table:(UITableView *)tableView
+										  identifier:(NSString *)cellIdentifier {
+	SliderTableCell *cell = (SliderTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (cell == nil) {
+		cell = [[[SliderTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }

@@ -18,30 +18,33 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface Settings : NSObject {
+@protocol SliderTableCellDelegate;
+
+@interface SliderTableCell : UITableViewCell {
 
 @public
-	NSString *email;
-	NSString *firstName;
-	NSString *lastName;
-	NSString *lastDeployment;
-	BOOL downloadMaps;
-	BOOL becomeDiscrete;
-	CGFloat imageWidth;
+	NSIndexPath *indexPath; 
+
+@private
+	id<SliderTableCellDelegate>	delegate;
 }
 
-@property(nonatomic, retain) NSString *email;
-@property(nonatomic, retain) NSString *firstName;
-@property(nonatomic, retain) NSString *lastName;
-@property(nonatomic, retain) NSString *lastDeployment;
-@property(nonatomic, assign) BOOL downloadMaps;
-@property(nonatomic, assign) BOOL becomeDiscrete;
-@property(nonatomic, assign) CGFloat imageWidth;
+@property (nonatomic, retain) NSIndexPath *indexPath; 
 
-+ (Settings *) sharedSettings;
+- (id)initWithDelegate:(id<SliderTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier ;
 
-- (void) save;
+- (void) setMinimum:(CGFloat)minimum;
+- (void) setMaximum:(CGFloat)maximum;
+- (void) setValue:(CGFloat)value;
+
+@end
+
+@protocol SliderTableCellDelegate <NSObject>
+
+@optional
+
+- (void) sliderCellChanged:(SliderTableCell *)cell value:(CGFloat)value;
 
 @end

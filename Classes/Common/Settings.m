@@ -29,7 +29,7 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
-@synthesize email, firstName, lastName, lastDeployment, downloadMaps, becomeDiscrete;
+@synthesize email, firstName, lastName, lastDeployment, downloadMaps, becomeDiscrete, imageWidth;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -39,6 +39,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		self.lastDeployment = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastDeployment"];
 		self.downloadMaps = [[NSUserDefaults standardUserDefaults] boolForKey:@"downloadMaps"];
 		self.becomeDiscrete = [[NSUserDefaults standardUserDefaults] boolForKey:@"becomeDiscrete"];
+		self.imageWidth = [[NSUserDefaults standardUserDefaults] floatForKey:@"imageWidth"];
+		if (self.imageWidth == 0) self.imageWidth = 600;
 	}
 	return self;
 }
@@ -59,6 +61,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[[NSUserDefaults standardUserDefaults] setObject:self.lastDeployment forKey:@"lastDeployment"];
 	[[NSUserDefaults standardUserDefaults] setBool:self.downloadMaps forKey:@"downloadMaps"];
 	[[NSUserDefaults standardUserDefaults] setBool:self.becomeDiscrete forKey:@"becomeDiscrete"];
+	[[NSUserDefaults standardUserDefaults] setFloat:self.imageWidth forKey:@"imageWidth"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

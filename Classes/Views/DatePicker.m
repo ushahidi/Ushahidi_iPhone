@@ -20,9 +20,6 @@
 
 #import "DatePicker.h"
 
-#define kActionCancel @"Cancel"
-#define kActionSelect @"Select"
-
 @interface DatePicker ()
 
 @property (nonatomic, retain) IBOutlet UIViewController *controller;
@@ -51,13 +48,15 @@
 	self.date = theDate != nil  && [theDate timeIntervalSince1970] > 0 ? theDate : [NSDate date];
 	
 	UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil 
-															 delegate:self
-													cancelButtonTitle:kActionCancel
-											   destructiveButtonTitle:nil
-													otherButtonTitles:kActionSelect, nil] autorelease];    
+															  delegate:self
+													 cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+												destructiveButtonTitle:nil
+													 otherButtonTitles:NSLocalizedString(@"Select", @"Select"), 
+								   NSLocalizedString(@"Clear", @"Clear"),
+								   nil] autorelease];    
 	
 	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-	datePicker.datePickerMode = datePickerMode;
+	datePicker.datePickerMode = UIDatePickerModeDate;
 	[datePicker addTarget:self
 	               action:@selector(dateChanged:)
 	     forControlEvents:UIControlEventValueChanged];
@@ -73,7 +72,7 @@
 	actionSheet.frame = actionSheetRect;
 	
 	CGRect datePickerRect = datePicker.frame;
-	datePickerRect.origin.y = 150;
+	datePickerRect.origin.y = 207;
 	datePicker.frame = datePickerRect;
 	
 	[datePicker release];
@@ -90,13 +89,20 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
-	if ([titleAtIndex isEqualToString:kActionSelect]) {
+	if ([titleAtIndex isEqualToString:NSLocalizedString(@"Select", @"Select")]) {
 		SEL selector = @selector(datePickerReturned:date:indexPath:);
 		if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
 			[self.delegate datePickerReturned:self date:self.date indexPath:self.indexPath];
 		}
 	}
-	else if ([titleAtIndex isEqualToString:kActionCancel]) {
+	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"Clear", @"Clear")]) {
+		self.date = nil;
+		SEL selector = @selector(datePickerReturned:date:indexPath:);
+		if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
+			[self.delegate datePickerReturned:self date:nil indexPath:self.indexPath];
+		}
+	}
+	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"Cancel", @"Cancel")]) {
 		SEL selector = @selector(datePickerCancelled:);
 		if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
 			[self.delegate datePickerCancelled:self];
@@ -110,10 +116,6 @@
 	UIDatePicker *datePicker = (UIDatePicker *)sender;
 	DLog(@"date: %@", datePicker.date);
 	self.date = datePicker.date;
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-	DLog(@"row: %@", [pickerView selectedRowInComponent:component]);
 }
 
 @end

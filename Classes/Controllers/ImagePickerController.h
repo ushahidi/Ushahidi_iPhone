@@ -30,6 +30,9 @@
 	UIViewController *viewController;
 	UIPopoverController *popoverController;
 	id<ImagePickerDelegate> delegate;
+												
+@private
+	CGFloat width;
 }
 
 @property(nonatomic, retain) UIViewController *viewController;
@@ -38,6 +41,7 @@
 
 - (id) initWithController:(UIViewController *)controller;
 - (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)delegate;
+- (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)delegate width:(CGFloat)width;
 
 @end
 
@@ -45,6 +49,8 @@
 
 @optional
 
-- (void) imagePicker:(ImagePickerController *)imagePicker selectedImage:(UIImage *)image;
+- (void) imagePickerDidCancel:(ImagePickerController *)imagePicker;
+- (void) imagePickerDidSelect:(ImagePickerController *)imagePicker;
+- (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image;
 
 @end

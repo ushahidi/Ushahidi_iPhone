@@ -302,7 +302,7 @@ typedef enum {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
-		[self.imagePickerController showImagePickerWithDelegate:self];
+		[self.imagePickerController showImagePickerWithDelegate:self width:600];
 	}
 	else if (indexPath.section == TableSectionCategory) {
 		self.categoriesViewController.incident = self.incident;
@@ -422,8 +422,16 @@ typedef enum {
 #pragma mark -
 #pragma mark ImagePickerDelegate
 
-- (void) imagePicker:(ImagePickerController *)imagePicker selectedImage:(UIImage *)image {
-	DLog(@"");
+- (void) imagePickerDidCancel:(ImagePickerController *)imagePicker {
+	[self.loadingView hide];
+}
+
+- (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
+	[self.loadingView showWithMessage:@"Resizing..."];
+}
+
+- (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
+	[self.loadingView hideAfterDelay:0.5];
 	[self.incident addPhoto:[Photo photoWithImage:image]];
 	[self.tableView reloadData];
 }

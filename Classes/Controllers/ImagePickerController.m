@@ -20,6 +20,7 @@
 
 #import "ImagePickerController.h"
 #import "Device.h"
+#import "UIImage+Resize.h"
 
 #define kCancel @"Cancel"
 #define kTakePhoto @"Take Photo"
@@ -27,14 +28,19 @@
 
 @interface ImagePickerController ()
 
+@property(nonatomic, assign) CGFloat width;
+
 - (void) showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType;
-- (void) notifyDelegateWithImage:(UIImage *)image;
+- (void) resizeImageInBackground:(UIImage *)image;
+- (void) notifyDelegateImagePickerDidCancel;
+- (void) notifyDelegateImagePickerDidSelect;
+- (void) notifyDelegateImagePickerDidFinish:(UIImage *)image;
 
 @end
 
 @implementation ImagePickerController
 
-@synthesize viewController, popoverController, delegate;
+@synthesize viewController, popoverController, delegate, width;
 
 - (id)initWithController:(UIViewController *)controller {
     if ((self = [super init])) {
@@ -44,7 +50,12 @@
 }
 
 - (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)theDelegate {
+	[self showImagePickerWithDelegate:theDelegate width:0];
+}
+
+- (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)theDelegate width:(CGFloat)theWidth {
 	self.delegate = theDelegate;
+	self.width = theWidth;
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
@@ -92,10 +103,27 @@
 	[imagePicker release];
 }
 
-- (void) notifyDelegateWithImage:(UIImage *)image {
-	SEL selector = @selector(imagePicker:selectedImage:);
+- (void) notifyDelegateImagePickerDidCancel {
+	DLog(@"notifyDelegateImagePickerDidCancel");
+	SEL selector = @selector(imagePickerDidCancel:);
 	if (delegate != NULL && [delegate respondsToSelector:selector]) {
-		[delegate imagePicker:self selectedImage:image];
+		[delegate imagePickerDidCancel:self];
+	}
+}
+
+- (void) notifyDelegateImagePickerDidSelect {
+	DLog(@"notifyDelegateImagePickerDidSelect");
+	SEL selector = @selector(imagePickerDidSelect:);
+	if (delegate != NULL && [delegate respondsToSelector:selector]) {
+		[delegate imagePickerDidSelect:self];
+	}
+}
+
+- (void) notifyDelegateImagePickerDidFinish:(UIImage *)image {
+	DLog(@"notifyDelegateImagePickerDidFinish");
+	SEL selector = @selector(imagePickerDidFinish:image:);
+	if (delegate != NULL && [delegate respondsToSelector:selector]) {
+		[delegate imagePickerDidFinish:self image:image];
 	}
 }
 
@@ -110,7 +138,8 @@
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
-	[self notifyDelegateWithImage:image];
+	[self notifyDelegateImagePickerDidSelect];
+	[self performSelectorInBackground:@selector(resizeImageInBackground:) withObject:image];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -121,7 +150,8 @@
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
-	[self notifyDelegateWithImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+	[self notifyDelegateImagePickerDidSelect];
+	[self performSelectorInBackground:@selector(resizeImageInBackground:) withObject:[info objectForKey:UIImagePickerControllerOriginalImage]];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -132,8 +162,10 @@
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
+	[self notifyDelegateImagePickerDidCancel];
 }
 
+#pragma mark -
 #pragma mark UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -145,6 +177,26 @@
 	else if ([titleAtIndex isEqualToString:kFromLibrary]) {
 		[self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 	}
+}
+
+#pragma mark -
+#pragma mark UIImage+Resize
+
+- (void) resizeImageInBackground:(UIImage *)originalImage {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    DLog(@"resizeImageInBackground");
+	
+	if (self.width > 0) {
+		CGSize size = CGSizeMake(self.width, self.width * originalImage.size.height /  originalImage.size.width);
+		DLog(@"Original: %f,%f Resized: %f,%f", originalImage.size.width, originalImage.size.height, size.width, size.height);
+		UIImage *resizedImage = [originalImage resizedImage:size interpolationQuality:kCGInterpolationHigh];
+		[self performSelectorOnMainThread:@selector(notifyDelegateImagePickerDidFinish:) withObject:resizedImage waitUntilDone:YES];
+	}
+	else {
+		[self performSelectorOnMainThread:@selector(notifyDelegateImagePickerDidFinish:) withObject:originalImage waitUntilDone:YES];
+	}
+
+	[pool release];
 }
 
 @end

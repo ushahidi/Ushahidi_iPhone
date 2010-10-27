@@ -161,7 +161,7 @@ typedef enum {
 		return [self headerForTable:theTableView text:@"Download Maps"];
 	}
 	if (section == TableSectionBecomeDiscrete) {
-		return [self headerForTable:theTableView text:@"Become Discrete On Shake"];
+		return [self headerForTable:theTableView text:@"Discrete Mode Upon Shake"];
 	}
 	return nil;
 }

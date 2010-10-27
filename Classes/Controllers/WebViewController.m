@@ -38,10 +38,6 @@ typedef enum {
 	NavigationForward
 } Navigation;
 
-- (IBAction) search:(id)sender {
-	
-}
-
 - (IBAction) backForward:(id)sender {
 	if (self.backForwardButton.selectedSegmentIndex == NavigationBack) {
 		if (self.webView.canGoBack) {

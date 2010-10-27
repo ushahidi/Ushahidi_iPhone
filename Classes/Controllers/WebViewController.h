@@ -35,7 +35,6 @@
 @property(nonatomic,retain) IBOutlet UISegmentedControl *backForwardButton;
 @property(nonatomic,retain) NSString *website;
 
-- (IBAction) search:(id)sender;
 - (IBAction) backForward:(id)sender;
 
 @end

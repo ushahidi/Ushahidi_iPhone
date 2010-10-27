@@ -18,23 +18,14 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "TableViewController.h"
-#import "TextFieldTableCell.h"
-#import "BooleanTableCell.h"
+#import "MotionWindow.h"
 
-@interface InfoViewController : TableViewController<TextFieldTableCellDelegate, 
-													BooleanTableCellDelegate> {
-	
-@private
-	NSString *email;
-	NSString *firstName;
-	NSString *lastName;
-	BOOL downloadMaps;
-	BOOL becomeDiscrete;
+@implementation MotionWindow
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceShaken" object:self];
+    }
 }
-
-- (IBAction) cancel:(id)sender;
-- (IBAction) done:(id)sender;
 
 @end

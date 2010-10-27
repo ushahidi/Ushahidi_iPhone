@@ -23,27 +23,40 @@
 #import "AlertView.h"
 #import "InputView.h"
 
-#define kCancel	@"Cancel"
-#define kOpenInSafari @"Open in Safari"
-
 @interface WebViewController ()
 
 @end
 
 @implementation WebViewController
 
-@synthesize webView, refreshButton, backButton, forwardButton, website;
+@synthesize webView, refreshButton, backForwardButton, website;
 
-- (IBAction) action:(id)sender {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-															 delegate:self 
-													cancelButtonTitle:kCancel 
-											   destructiveButtonTitle:nil
-													otherButtonTitles:kOpenInSafari, nil];
-	[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
-	[actionSheet showInView:[self view]];
-	[actionSheet release];
+NSString * const kGoogleSearch = @"http://www.google.com/search?q=%@"; 
+
+typedef enum {
+	NavigationBack,
+	NavigationForward
+} Navigation;
+
+- (IBAction) search:(id)sender {
+	
 }
+
+- (IBAction) backForward:(id)sender {
+	if (self.backForwardButton.selectedSegmentIndex == NavigationBack) {
+		if (self.webView.canGoBack) {
+			[self.webView goBack];
+		}
+	}
+	else if (self.backForwardButton.selectedSegmentIndex == NavigationForward) {
+		if (self.webView.canGoForward) {
+			[self.webView goForward];
+		}
+	}
+	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
+	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
+}
+
 
 #pragma mark -
 #pragma mark UIViewController
@@ -59,19 +72,18 @@
 		self.title = @"Web";
 		[self.webView loadHTMLString:@"<html><head></head><body></body></html>" baseURL:nil];
 	}
+	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
+	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	self.backButton.enabled = self.webView.canGoBack;
-	self.forwardButton.enabled = self.webView.canGoForward;
 }
 
 - (void)dealloc {
 	[webView release];
 	[refreshButton release];
-	[backButton release];
-	[forwardButton release];
+	[backForwardButton release];
 	[super dealloc];
 }
 
@@ -79,37 +91,49 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)theWebView {
 	DLog(@"");
-	self.backButton.enabled = theWebView.canGoBack;
-	self.forwardButton.enabled = theWebView.canGoForward;
+	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
+	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
+	self.refreshButton.enabled = NO;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView {
 	DLog(@"");
 	self.title = [[[theWebView request] URL] absoluteString];
-	self.backButton.enabled = theWebView.canGoBack;
-	self.forwardButton.enabled = theWebView.canGoForward;
+	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
+	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
+	self.refreshButton.enabled = YES;
 }
 
 - (void)webView:(UIWebView *)theWebView didFailLoadWithError:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
-	self.backButton.enabled = theWebView.canGoBack;
-	self.forwardButton.enabled = theWebView.canGoForward;
+	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
+	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
+	self.refreshButton.enabled = YES;
 }
 
-#pragma mark UIActionSheetDelegate
+#pragma mark UISearchBarDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
-	DLog(@"titleAtIndex: %@", titleAtIndex);
-	if ([titleAtIndex isEqualToString:kOpenInSafari]) {
-		NSURL *websiteURL = [[self.webView request] URL];
-		if ([[UIApplication sharedApplication] canOpenURL:websiteURL]){
-			[[UIApplication sharedApplication] openURL:websiteURL];
-		}	
-		else {
-			DLog(@"Unable to open website: %@", [websiteURL absoluteString]);
-		}
-	}
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+	[searchBar setShowsCancelButton:YES animated:YES];
+}   
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+	[searchBar setShowsCancelButton:NO animated:YES];
+}   
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+	[searchBar setShowsCancelButton:NO animated:YES];
+	[searchBar resignFirstResponder];
 }
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+	[searchBar setShowsCancelButton:NO animated:YES];
+	[searchBar resignFirstResponder];
+	NSString *searchTextLowercase = [[searchBar text] lowercaseString];
+	NSURL *url = [searchTextLowercase hasPrefix:@"http://"] || [searchTextLowercase hasPrefix:@"https://"]
+		? [NSURL URLWithString:[searchBar text]]
+		: [NSURL URLWithString:[NSString stringWithFormat:kGoogleSearch, [[searchBar text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+	[self.webView loadRequest:[NSURLRequest requestWithURL:url]];
+}   
 
 @end

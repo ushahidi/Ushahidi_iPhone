@@ -29,7 +29,7 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
-@synthesize email, firstName, lastName, lastDeployment, downloadMaps;
+@synthesize email, firstName, lastName, lastDeployment, downloadMaps, becomeDiscrete;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -38,6 +38,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		self.lastName = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastName"];
 		self.lastDeployment = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastDeployment"];
 		self.downloadMaps = [[NSUserDefaults standardUserDefaults] boolForKey:@"downloadMaps"];
+		self.becomeDiscrete = [[NSUserDefaults standardUserDefaults] boolForKey:@"becomeDiscrete"];
 	}
 	return self;
 }
@@ -57,6 +58,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[[NSUserDefaults standardUserDefaults] setObject:self.lastName forKey:@"lastName"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.lastDeployment forKey:@"lastDeployment"];
 	[[NSUserDefaults standardUserDefaults] setBool:self.downloadMaps forKey:@"downloadMaps"];
+	[[NSUserDefaults standardUserDefaults] setBool:self.becomeDiscrete forKey:@"becomeDiscrete"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

@@ -37,7 +37,6 @@
 															PhotoDelegate> {
 	
 @public
-	WebViewController *webViewController;
 	MapViewController *mapViewController;
 	ImageViewController *imageViewController;
 	UISegmentedControl *nextPrevious;
@@ -45,7 +44,6 @@
 	NSArray *incidents;
 }
 
-@property(nonatomic,retain) IBOutlet WebViewController *webViewController;
 @property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic,retain) IBOutlet ImageViewController *imageViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;

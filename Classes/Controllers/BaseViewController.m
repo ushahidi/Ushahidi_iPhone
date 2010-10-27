@@ -19,15 +19,19 @@
  *****************************************************************************/
 
 #import "BaseViewController.h"
+#import "WebViewController.h"
 #import "LoadingViewController.h"
+#import "Settings.h"
 
 @interface BaseViewController ()
+
+- (void) deviceShaken;
 
 @end
 
 @implementation BaseViewController
 
-@synthesize loadingView, inputView, alertView, willBePushed, wasPushed;
+@synthesize loadingView, inputView, alertView, willBePushed, wasPushed, webViewController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +41,7 @@
 }
 
 - (void)dealloc {
+	[webViewController release];
 	[loadingView release];
 	[inputView release];
 	[alertView release];
@@ -53,10 +58,24 @@
 	self.wasPushed = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceShaken) name:@"DeviceShaken" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	self.willBePushed = NO;
 	self.wasPushed = NO;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -71,6 +90,28 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
 	DLog(@"%@", self.nibName);
+}
+
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void) deviceShaken {
+	DLog(@"deviceShaken");
+	if ([[Settings sharedSettings] becomeDiscrete]) {
+		if ([self isKindOfClass:[WebViewController class]]) {
+			DLog(@"backToWork");
+			[self dismissModalViewControllerAnimated:YES];
+		}
+		else {
+			DLog(@"becomeDiscrete");
+			if (self.webViewController.website == nil) {
+				self.webViewController.website = @"http://www.google.com";
+			}
+			self.webViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+			[self presentModalViewController:self.webViewController animated:YES];
+		}
+	}
 }
 
 @end

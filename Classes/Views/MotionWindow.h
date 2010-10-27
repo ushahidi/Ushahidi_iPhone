@@ -18,23 +18,10 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "TableViewController.h"
-#import "TextFieldTableCell.h"
-#import "BooleanTableCell.h"
+#import <Foundation/Foundation.h>
 
-@interface InfoViewController : TableViewController<TextFieldTableCellDelegate, 
-													BooleanTableCellDelegate> {
-	
-@private
-	NSString *email;
-	NSString *firstName;
-	NSString *lastName;
-	BOOL downloadMaps;
-	BOOL becomeDiscrete;
+@interface MotionWindow : UIWindow {
+
 }
-
-- (IBAction) cancel:(id)sender;
-- (IBAction) done:(id)sender;
 
 @end

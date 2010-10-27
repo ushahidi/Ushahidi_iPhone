@@ -122,7 +122,8 @@ typedef enum {
 			[self.mapView addPinWithTitle:incident.title subtitle:[incident dateString] latitude:incident.latitude longitude:incident.longitude];
 		}
 		[self.mapView resizeRegionToFitAllPins:YES];
-		self.sortOrder.enabled = NO;
+		self.sortOrder.enabled = NO
+		;
 	}
 }
 

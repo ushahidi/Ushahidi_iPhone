@@ -21,22 +21,21 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface WebViewController : BaseViewController<UIActionSheetDelegate> {
+@interface WebViewController : BaseViewController<UISearchBarDelegate> {
 	
 @public
 	UIWebView *webView;
 	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *backButton;
-	UIBarButtonItem *forwardButton;
+	UISegmentedControl *backForwardButton;
 	NSString *website;
 }
 
 @property(nonatomic,retain) IBOutlet UIWebView *webView;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *backButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *forwardButton;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *backForwardButton;
 @property(nonatomic,retain) NSString *website;
 
-- (IBAction) action:(id)sender;
+- (IBAction) search:(id)sender;
+- (IBAction) backForward:(id)sender;
 
 @end

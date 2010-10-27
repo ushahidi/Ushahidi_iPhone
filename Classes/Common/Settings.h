@@ -28,6 +28,7 @@
 	NSString *lastName;
 	NSString *lastDeployment;
 	BOOL downloadMaps;
+	BOOL becomeDiscrete;
 }
 
 @property(nonatomic, retain) NSString *email;
@@ -35,6 +36,7 @@
 @property(nonatomic, retain) NSString *lastName;
 @property(nonatomic, retain) NSString *lastDeployment;
 @property(nonatomic, assign) BOOL downloadMaps;
+@property(nonatomic, assign) BOOL becomeDiscrete;
 
 + (Settings *) sharedSettings;
 

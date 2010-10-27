@@ -30,6 +30,7 @@
 @property(nonatomic, retain) NSString *firstName;
 @property(nonatomic, retain) NSString *lastName;
 @property(nonatomic, assign) BOOL downloadMaps;
+@property(nonatomic, assign) BOOL becomeDiscrete;
 
 - (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText;
 
@@ -41,10 +42,11 @@ typedef enum {
 	TableSectionEmail,
 	TableSectionFirstName,
 	TableSectionLastName,
-	TableSectionDownloadMaps
+	TableSectionDownloadMaps,
+	TableSectionBecomeDiscrete
 } TableSection;
 
-@synthesize email, firstName, lastName, downloadMaps;
+@synthesize email, firstName, lastName, downloadMaps, becomeDiscrete;
 
 #pragma mark -
 #pragma mark Handlers
@@ -60,6 +62,7 @@ typedef enum {
 	[[Settings sharedSettings] setFirstName:self.firstName];
 	[[Settings sharedSettings] setLastName:self.lastName];
 	[[Settings sharedSettings] setDownloadMaps:self.downloadMaps];
+	[[Settings sharedSettings] setBecomeDiscrete:self.becomeDiscrete];
 	[[Settings sharedSettings] save];
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -78,6 +81,7 @@ typedef enum {
 	self.firstName = [[Settings sharedSettings] firstName];
 	self.lastName = [[Settings sharedSettings] lastName];
 	self.downloadMaps = [[Settings sharedSettings] downloadMaps];
+	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
 	[self.tableView reloadData];
 }
 
@@ -96,11 +100,18 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 4;
+	return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == TableSectionDownloadMaps || indexPath.section == TableSectionBecomeDiscrete) {
+		return 35;
+	}
+	return 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,6 +119,12 @@ typedef enum {
 		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellWithDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setChecked:self.downloadMaps];
+		return cell;
+	}
+	else if (indexPath.section == TableSectionBecomeDiscrete) {
+		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellWithDelegate:self table:theTableView];
+		cell.indexPath = indexPath;
+		[cell setChecked:self.becomeDiscrete];
 		return cell;
 	}
 	else {
@@ -142,6 +159,9 @@ typedef enum {
 	}
 	if (section == TableSectionDownloadMaps) {
 		return [self headerForTable:theTableView text:@"Download Maps"];
+	}
+	if (section == TableSectionBecomeDiscrete) {
+		return [self headerForTable:theTableView text:@"Become Discrete On Shake"];
 	}
 	return nil;
 }
@@ -193,7 +213,12 @@ typedef enum {
 		 
 - (void) booleanCellChanged:(BooleanTableCell *)cell checked:(BOOL)checked {
 	DLog(@"checked: %d", checked);
-	self.downloadMaps = checked;
+	if (cell.indexPath.section == TableSectionBecomeDiscrete) {
+		self.becomeDiscrete = checked;
+	}
+	else if (cell.indexPath.section == TableSectionDownloadMaps) {
+		self.downloadMaps = checked;
+	}
 }
 
 @end

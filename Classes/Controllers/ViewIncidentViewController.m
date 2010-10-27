@@ -59,7 +59,7 @@ typedef enum {
 
 @implementation ViewIncidentViewController
 
-@synthesize webViewController, mapViewController, imageViewController, nextPrevious, incident, incidents;
+@synthesize mapViewController, imageViewController, nextPrevious, incident, incidents;
 
 #pragma mark -
 #pragma mark Handlers
@@ -114,7 +114,6 @@ typedef enum {
 }
 
 - (void)dealloc {
-	[webViewController release];
 	[mapViewController release];
 	[imageViewController release];
 	[nextPrevious release];

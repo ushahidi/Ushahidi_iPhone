@@ -29,6 +29,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	DLog(@"");
+	application.applicationSupportsShakeToEdit = NO;
 	[window addSubview:navigationController.view];
 	[window makeKeyAndVisible];
 	return YES;

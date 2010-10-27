@@ -22,12 +22,16 @@
 #import "InputView.h"
 #import "AlertView.h"
 
+@class WebViewController;
 @class LoadingViewController;
 @class InputView;
 @class AlertView;
 
 @interface BaseViewController : UIViewController<InputViewDelegate, UIAlertViewDelegate> {
 
+@public 
+	IBOutlet WebViewController *webViewController;
+	
 @protected
 	LoadingViewController *loadingView;
 	InputView *inputView;
@@ -36,6 +40,7 @@
 	BOOL wasPushed;
 }
 
+@property(nonatomic, retain) WebViewController *webViewController;
 @property(nonatomic, retain) LoadingViewController *loadingView;
 @property(nonatomic, retain) InputView *inputView;
 @property(nonatomic, retain) AlertView *alertView;

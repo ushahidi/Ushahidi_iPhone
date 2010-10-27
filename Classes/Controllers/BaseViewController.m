@@ -92,10 +92,6 @@
 	DLog(@"%@", self.nibName);
 }
 
--(BOOL)canBecomeFirstResponder {
-    return YES;
-}
-
 - (void) deviceShaken {
 	DLog(@"deviceShaken");
 	if ([[Settings sharedSettings] becomeDiscrete]) {
@@ -105,9 +101,6 @@
 		}
 		else {
 			DLog(@"becomeDiscrete");
-			if (self.webViewController.website == nil) {
-				self.webViewController.website = @"http://www.google.com";
-			}
 			self.webViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 			[self presentModalViewController:self.webViewController animated:YES];
 		}

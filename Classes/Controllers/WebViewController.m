@@ -25,18 +25,24 @@
 
 @interface WebViewController ()
 
+- (void) showLoading:(BOOL)show;
+
 @end
 
 @implementation WebViewController
 
-@synthesize webView, refreshButton, backForwardButton, website;
+@synthesize webView, refreshButton, backForwardButton, website, searchBar, activityIndicator;
 
+NSString * const kHomePage = @"http://www.google.com";
 NSString * const kGoogleSearch = @"http://www.google.com/search?q=%@"; 
 
 typedef enum {
 	NavigationBack,
 	NavigationForward
 } Navigation;
+
+#pragma mark -
+#pragma mark Handlers
 
 - (IBAction) backForward:(id)sender {
 	if (self.backForwardButton.selectedSegmentIndex == NavigationBack) {
@@ -53,6 +59,16 @@ typedef enum {
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
 }
 
+- (void) showLoading:(BOOL)show {
+	if(show) {
+		self.refreshButton.image = [UIImage imageNamed:@"empty.png"];
+		[self.activityIndicator startAnimating];
+	}
+	else {
+		self.refreshButton.image = [UIImage imageNamed:@"refresh.png"];
+		[self.activityIndicator stopAnimating];
+	}
+}
 
 #pragma mark -
 #pragma mark UIViewController
@@ -61,25 +77,24 @@ typedef enum {
 	[super viewWillAppear:animated];
 	if (self.website != nil) {
 		self.title = self.website;
-		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.website]];
-		[self.webView loadRequest:request];
-	}
-	else {
-		self.title = @"Web";
 		[self.webView loadHTMLString:@"<html><head></head><body></body></html>" baseURL:nil];
+		[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.website]]];
+	}
+	else if (self.webView.request == nil){
+		self.title = @"Google";
+		[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:kHomePage]]];
 	}
 	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
 }
 
 - (void)dealloc {
 	[webView release];
 	[refreshButton release];
 	[backForwardButton release];
+	[searchBar release];
+	[website release];
+	[activityIndicator release];
 	[super dealloc];
 }
 
@@ -89,47 +104,47 @@ typedef enum {
 	DLog(@"");
 	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
-	self.refreshButton.enabled = NO;
+	[self showLoading:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView {
 	DLog(@"");
 	self.title = [[[theWebView request] URL] absoluteString];
+	self.searchBar.text = [[[theWebView request] URL] absoluteString];
 	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
-	self.refreshButton.enabled = YES;
-	self.website = [[[theWebView request] URL] absoluteString];
+	[self showLoading:NO];
 }
 
 - (void)webView:(UIWebView *)theWebView didFailLoadWithError:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
 	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
-	self.refreshButton.enabled = YES;
+	[self showLoading:NO];
 }
 
 #pragma mark UISearchBarDelegate
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-	[searchBar setShowsCancelButton:YES animated:YES];
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
+	[theSearchBar setShowsCancelButton:YES animated:YES];
 }   
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-	[searchBar setShowsCancelButton:NO animated:YES];
+- (void)searchBarTextDidEndEditing:(UISearchBar *)theSearchBar {
+	[theSearchBar setShowsCancelButton:NO animated:YES];
 }   
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
-	[searchBar setShowsCancelButton:NO animated:YES];
-	[searchBar resignFirstResponder];
+- (void)searchBarCancelButtonClicked:(UISearchBar *) theSearchBar {
+	[theSearchBar setShowsCancelButton:NO animated:YES];
+	[theSearchBar resignFirstResponder];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-	[searchBar setShowsCancelButton:NO animated:YES];
-	[searchBar resignFirstResponder];
-	NSString *searchTextLowercase = [[searchBar text] lowercaseString];
+- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
+	[theSearchBar setShowsCancelButton:NO animated:YES];
+	[theSearchBar resignFirstResponder];
+	NSString *searchTextLowercase = [[theSearchBar text] lowercaseString];
 	NSURL *url = [searchTextLowercase hasPrefix:@"http://"] || [searchTextLowercase hasPrefix:@"https://"]
-		? [NSURL URLWithString:[searchBar text]]
-		: [NSURL URLWithString:[NSString stringWithFormat:kGoogleSearch, [[searchBar text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+		? [NSURL URLWithString:[theSearchBar text]]
+		: [NSURL URLWithString:[NSString stringWithFormat:kGoogleSearch, [[theSearchBar text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 	[self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }   
 

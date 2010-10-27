@@ -27,12 +27,16 @@
 	UIWebView *webView;
 	UIBarButtonItem *refreshButton;
 	UISegmentedControl *backForwardButton;
+	UISearchBar *searchBar;
 	NSString *website;
+	UIActivityIndicatorView *activityIndicator;
 }
 
 @property(nonatomic,retain) IBOutlet UIWebView *webView;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *backForwardButton;
+@property(nonatomic,retain) IBOutlet UISearchBar *searchBar;
+@property(nonatomic,retain) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property(nonatomic,retain) NSString *website;
 
 - (IBAction) backForward:(id)sender;

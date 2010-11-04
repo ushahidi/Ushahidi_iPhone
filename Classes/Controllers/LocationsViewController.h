@@ -41,6 +41,7 @@
 	Location *location;
 	UISegmentedControl *locationType;
 	UIToolbar *toolBar;
+	UITextField *textField;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
@@ -48,6 +49,7 @@
 @property(nonatomic, retain) IBOutlet MKMapView *mapView;
 @property(nonatomic, retain) IBOutlet UISegmentedControl *locationType;
 @property(nonatomic, retain) IBOutlet UIToolbar *toolBar;
+@property(nonatomic, retain) IBOutlet UITextField *textField;
 @property(nonatomic, retain) Incident *incident;
 @property(nonatomic, retain) Location *location;
 

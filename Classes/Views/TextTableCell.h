@@ -34,6 +34,7 @@
 - (void) setText:(NSString *)text;
 - (NSString *) getText;
 - (CGSize) getCellSize;
+- (void) setTextColor:(UIColor *)textColor;
 + (CGSize)getCellSizeForText:(NSString *)theText forWidth:(CGFloat)width;
 
 @end

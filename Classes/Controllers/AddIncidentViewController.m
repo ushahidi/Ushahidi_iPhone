@@ -177,6 +177,7 @@ typedef enum {
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 			[cell setText:[Messages addPhoto]];
+			[cell setTextColor:[UIColor lightGrayColor]];
 			return cell;
 		}
 	}
@@ -186,9 +187,11 @@ typedef enum {
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		if (self.incident.location != nil) {
 			[cell setText:self.incident.location];
+			[cell setTextColor:[UIColor blackColor]];
 		}
 		else {
 			[cell setText:@"Select location"];
+			[cell setTextColor:[UIColor lightGrayColor]];
 		}
 		return cell;
 	}
@@ -199,17 +202,21 @@ typedef enum {
 		if (indexPath.row == TableSectionDateRowDate) {
 			if (self.incident.date != nil) {
 				[cell setText:[self.incident dateString]];
+				[cell setTextColor:[UIColor blackColor]];
 			}
 			else {
 				[cell setText:@"Enter date"];
+				[cell setTextColor:[UIColor lightGrayColor]];
 			}
 		}
 		else if (indexPath.row == TableSectionDateRowTime){
 			if (self.incident.date != nil) {
 				[cell setText:[self.incident timeString]];
+				[cell setTextColor:[UIColor blackColor]];
 			}
 			else {
 				[cell setText:@"Enter time"];
+				[cell setTextColor:[UIColor lightGrayColor]];
 			}
 		}
 		return cell;
@@ -220,9 +227,11 @@ typedef enum {
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		if ([self.incident.categories count] > 0) {
 			[cell setText:[self.incident categoryNames]];
+			[cell setTextColor:[UIColor blackColor]];
 		}
 		else {
 			[cell setText:@"Select category"];
+			[cell setTextColor:[UIColor lightGrayColor]];
 		}
 		return cell;
 	}
@@ -358,12 +367,10 @@ typedef enum {
 #pragma mark TextFieldTableCellDelegate
 
 - (void) textFieldFocussed:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath {
-	DLog(@"indexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
 }
 
 - (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
 	if (indexPath.section == TableSectionTitle) {
 		self.incident.title = text;
 	}
@@ -371,7 +378,6 @@ typedef enum {
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
 	if (indexPath.section == TableSectionTitle) {
 		self.incident.title = text;
 	}
@@ -382,17 +388,14 @@ typedef enum {
 #pragma mark TextViewTableCellDelegate
 
 - (void) textViewFocussed:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath {
-	DLog(@"indexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
 }
 
 - (void) textViewChanged:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
 	self.incident.description = text;
 }
 
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
 	self.incident.description = text;
 }
 

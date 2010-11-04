@@ -45,7 +45,7 @@
 		self.textView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.textView.autocapitalizationType = UITextAutocapitalizationTypeSentences;
-		self.textView.font = [UIFont boldSystemFontOfSize:18];
+		self.textView.font = [UIFont systemFontOfSize:16];
 		self.textView.backgroundColor = self.contentView.backgroundColor;
 		[self.contentView addSubview:self.textView];
 	}

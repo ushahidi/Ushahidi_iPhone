@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Deployment : NSObject {
+@interface Deployment : NSObject<NSCoding> {
 
 @public
 	NSString *name;

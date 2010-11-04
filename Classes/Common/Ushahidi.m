@@ -164,7 +164,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		ASIFormDataRequest *post = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:postUrl]];
 		[post setDelegate:self];
 		[post setUserInfo:[NSDictionary dictionaryWithObject:incident.identifier forKey:@"incident"]];
-		[post setShouldRedirect:YES];
+		//[post setShouldRedirect:YES];
 		[post setPostValue:@"report" forKey:@"task"];
 		[post setPostValue:@"json" forKey:@"resp"];
 		[post setPostValue:[incident title] forKey:@"incident_title"];
@@ -185,7 +185,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			[post addData:[photo getJpegData] withFileName:[NSString stringWithFormat:@"photo%d.jpg", filename++] 
 											andContentType:@"image/jpeg" 
 													forKey:@"incident_photo[]"];
-			//[post addData:[photo getJpegData] forKey:@"incident_photo[]"];
 		}
 		[post startAsynchronous];
 		return YES;
@@ -401,8 +400,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
 	NSString *requestURL = [request.originalURL absoluteString];
-	DLog(@"request:%@", requestURL);
-	DLog(@"status:%@", [request responseStatusMessage]);
+	DLog(@"request: %@", requestURL);
+	DLog(@"status: %@", [request responseStatusMessage]);
 	DLog(@"header: %@", [request responseHeaders]);
 	id<UshahidiDelegate> delegate = [self.delegates objectForKey:requestURL];
 	NSDictionary *json = [[request responseString] JSONValue];

@@ -32,21 +32,39 @@
 
 @implementation LocationsViewController
 
-@synthesize mapView, cancelButton, doneButton, incident, location, mapType;
+@synthesize mapView, cancelButton, doneButton, incident, location, locationType, toolBar;
+
+typedef enum {
+	LocationTypeExisting,
+	LocationTypeNew
+} LocationType;
 
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) search:(id)sender {
+- (IBAction) locate:(id)sender {
 	DLog(@"");
-}
-
-- (IBAction) findLocation:(id)sender {
+	[self.mapView removeAllPins];
 	self.mapView.showsUserLocation = YES;
+	self.tableView.hidden = YES;
+	self.mapView.hidden = NO;
+	self.toolBar.hidden = NO;
+	self.locationType.selectedSegmentIndex = LocationTypeNew;
 }
 
-- (IBAction) mapTypeChanged:(id)sender {
-	self.mapView.mapType = self.mapType.selectedSegmentIndex;
+- (IBAction) locationTypeChanged:(id)sender {
+	if (self.locationType.selectedSegmentIndex == LocationTypeExisting) {
+		//self.mapView.showsUserLocation = NO;
+		self.tableView.hidden = NO;
+		self.mapView.hidden = YES;
+		self.toolBar.hidden = YES;
+	} 
+	else if (self.locationType.selectedSegmentIndex == LocationTypeNew) {
+		self.tableView.hidden = YES;
+		self.mapView.hidden = NO;
+		self.toolBar.hidden = NO;
+		self.location = nil;
+	}
 }
 
 #pragma mark -
@@ -57,9 +75,14 @@
 }
 
 - (IBAction) done:(id)sender {
-	self.incident.location = [location name];
-	self.incident.latitude = [location latitude];
-	self.incident.longitude = [location longitude];
+	if (self.location != nil) {
+		self.incident.location = [location name];
+		self.incident.latitude = [location latitude];
+		self.incident.longitude = [location longitude];	
+	}
+	else {
+		[self setEditing:NO];
+	}
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -72,6 +95,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+	self.mapView.showsUserLocation = NO;
+	[self.mapView removeAllPins];
+	self.locationType.selectedSegmentIndex = LocationTypeExisting;
 	[self.allRows removeAllObjects];
 	[self.filteredRows removeAllObjects];
 	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsWithDelegate:self]];
@@ -89,7 +115,8 @@
 	[mapView release];
 	[incident release];
 	[location release];
-	[mapType release];
+	[locationType release];
+	[toolBar release];
     [super dealloc];
 }
 
@@ -196,6 +223,30 @@
 	else {
 		DLog(@"No Changes");
 	}
+}
+
+#pragma mark -
+#pragma mark MKMapViewDelegate
+
+- (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+	DLog(@"");
+	self.incident.latitude = [NSString stringWithFormat:@"%f", userLocation.coordinate.latitude];
+	self.incident.longitude = [NSString stringWithFormat:@"%f", userLocation.coordinate.longitude];
+	[theMapView performSelector:@selector(resizeRegionToFitAllPins) withObject:nil afterDelay:0.8];
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	self.incident.location = [textField.text stringByReplacingCharactersInRange:range withString:string];
+	DLog(@"location: %@", self.incident.location);
+	return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+	DLog(@"");
+	self.incident.location = textField.text;
 }
 
 @end

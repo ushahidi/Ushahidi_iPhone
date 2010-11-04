@@ -37,6 +37,10 @@
 	[self removeAnnotations:self.annotations];
 }
 
+- (void) resizeRegionToFitAllPins {
+	[self resizeRegionToFitAllPins:YES];
+}
+
 - (void) resizeRegionToFitAllPins:(BOOL)animated {
 	if ([self.annotations count] == 1) {
 		NSObject<MKAnnotation> *annotation = [self.annotations objectAtIndex:0];

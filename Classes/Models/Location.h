@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Location : NSObject {
+@interface Location : NSObject<NSCoding> {
 
 @public 
 	NSString *identifier;

@@ -58,6 +58,11 @@
 	}
 }
 
+
+- (void) setTextColor:(UIColor *)textColor {
+	self.textLabel.textColor = textColor;
+}
+
 - (CGSize) getCellSize {
 	CGRect rect = [self.textLabel textRectForBounds:CGRectMake(0.0, 0.0, self.frame.size.width, FLT_MAX) limitedToNumberOfLines:0];
 	return CGSizeMake(rect.size.width, rect.size.height);

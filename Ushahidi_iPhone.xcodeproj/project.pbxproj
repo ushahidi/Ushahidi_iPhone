@@ -30,6 +30,8 @@
 		3E4AFF4E1271E1DF0017AED4 /* InfoViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFF4D1271E1DF0017AED4 /* InfoViewController_iPhone.xib */; };
 		3E4AFF521271E1EB0017AED4 /* InfoViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFF511271E1EB0017AED4 /* InfoViewController_iPad.xib */; };
 		3E4AFF5F1271E21E0017AED4 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* InfoViewController.m */; };
+		3E84E7011282931400A55292 /* sort_alphabetical.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E84E6FF1282931400A55292 /* sort_alphabetical.png */; };
+		3E84E7021282931400A55292 /* sort_date.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E84E7001282931400A55292 /* sort_date.png */; };
 		3E8629FA1222BCC4001DE141 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3E8629FB1222BCC4001DE141 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3E862A101222BCD0001DE141 /* AddIncidentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* AddIncidentViewController.m */; };
@@ -184,6 +186,8 @@
 		3E4AFF511271E1EB0017AED4 /* InfoViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController_iPad.xib; sourceTree = "<group>"; };
 		3E4AFF5D1271E21E0017AED4 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		3E4AFF5E1271E21E0017AED4 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		3E84E6FF1282931400A55292 /* sort_alphabetical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_alphabetical.png; sourceTree = "<group>"; };
+		3E84E7001282931400A55292 /* sort_date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_date.png; sourceTree = "<group>"; };
 		3E8629F61222BCC4001DE141 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3E8629F71222BCC4001DE141 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3E8629F81222BCC4001DE141 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -634,6 +638,8 @@
 		3E862A3C1222BCE9001DE141 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3E84E6FF1282931400A55292 /* sort_alphabetical.png */,
+				3E84E7001282931400A55292 /* sort_date.png */,
 				3E15006E1278C37A00036A0F /* empty.png */,
 				3E15006F1278C37A00036A0F /* refresh.png */,
 				3E4A006C1271F26C0017AED4 /* map.png */,
@@ -855,6 +861,8 @@
 				3EBB10EC12768D76007D7930 /* LocationsViewController_iPad.xib in Resources */,
 				3E1500701278C37A00036A0F /* empty.png in Resources */,
 				3E1500711278C37A00036A0F /* refresh.png in Resources */,
+				3E84E7011282931400A55292 /* sort_alphabetical.png in Resources */,
+				3E84E7021282931400A55292 /* sort_date.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

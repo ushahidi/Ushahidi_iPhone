@@ -26,7 +26,7 @@
 @class Video;
 @class Category;
 
-@interface Incident : NSObject {
+@interface Incident : NSObject<NSCoding> {
 
 @public 
 	NSString *identifier;

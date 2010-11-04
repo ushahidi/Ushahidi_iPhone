@@ -27,6 +27,7 @@
 
 - (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
 - (void) removeAllPins;
+- (void) resizeRegionToFitAllPins;
 - (void) resizeRegionToFitAllPins:(BOOL)animated;
 
 @end

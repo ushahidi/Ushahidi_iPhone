@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Media : NSObject {
+@interface Media : NSObject<NSCoding> {
 
 @public
 	NSString *identifier; 

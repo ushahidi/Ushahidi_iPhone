@@ -30,27 +30,30 @@
 @class Location;
 
 @interface LocationsViewController : TableViewController<UshahidiDelegate,
-														 CheckBoxTableCellDelegate> {
+														 UITextFieldDelegate,
+														 CheckBoxTableCellDelegate,
+														 MKMapViewDelegate> {
 @public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
 	MKMapView *mapView;
 	Incident *incident;
 	Location *location;
-	UISegmentedControl *mapType;
+	UISegmentedControl *locationType;
+	UIToolbar *toolBar;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 @property(nonatomic, retain) IBOutlet MKMapView *mapView;
-@property(nonatomic, retain) IBOutlet UISegmentedControl *mapType;
+@property(nonatomic, retain) IBOutlet UISegmentedControl *locationType;
+@property(nonatomic, retain) IBOutlet UIToolbar *toolBar;
 @property(nonatomic, retain) Incident *incident;
 @property(nonatomic, retain) Location *location;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;
-- (IBAction) search:(id)sender;
-- (IBAction) findLocation:(id)sender;
-- (IBAction) mapTypeChanged:(id)sender;
+- (IBAction) locate:(id)sender;
+- (IBAction) locationTypeChanged:(id)sender;
 
 @end

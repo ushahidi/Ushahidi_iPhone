@@ -42,7 +42,7 @@
 		self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		self.textField.borderStyle = UITextBorderStyleNone;
-		self.textField.font = [UIFont boldSystemFontOfSize:18];
+		self.textField.font = [UIFont systemFontOfSize:16];
 		self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 		self.textField.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		self.textField.backgroundColor = self.contentView.backgroundColor;

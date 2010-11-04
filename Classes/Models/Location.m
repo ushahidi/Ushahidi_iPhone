@@ -69,6 +69,12 @@
 	return [self.name localizedCaseInsensitiveCompare:location.name];
 }
 
+- (BOOL) equals:(NSString *)theName latitude:(NSString *)theLatitude longitude:(NSString *)theLongitude {
+	return [self.name isEqualToString:theName] &&
+			[self.latitude isEqualToString:theLatitude] &&
+			[self.longitude isEqualToString:theLongitude];
+}
+
 - (void)dealloc {
 	[identifier release];
 	[name release];

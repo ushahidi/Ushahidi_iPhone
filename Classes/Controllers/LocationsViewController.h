@@ -27,7 +27,6 @@
 #import <MapKit/MKAnnotation.h>
 
 @class Incident;
-@class Location;
 
 @interface LocationsViewController : TableViewController<UshahidiDelegate,
 														 UITextFieldDelegate,
@@ -38,10 +37,14 @@
 	UIBarButtonItem *doneButton;
 	MKMapView *mapView;
 	Incident *incident;
-	Location *location;
 	UISegmentedControl *locationType;
 	UIToolbar *toolBar;
 	UITextField *textField;
+															 
+@private
+	NSString *location;
+	NSString *latitude;
+	NSString *longitude;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
@@ -51,7 +54,6 @@
 @property(nonatomic, retain) IBOutlet UIToolbar *toolBar;
 @property(nonatomic, retain) IBOutlet UITextField *textField;
 @property(nonatomic, retain) Incident *incident;
-@property(nonatomic, retain) Location *location;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;

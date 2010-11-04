@@ -75,11 +75,11 @@
 		
 		[self setRegion:[self regionThatFits:region] animated:animated];	
 	}
-	else {
+	else if (self.region.center.latitude != 0 && self.region.center.longitude != 0) {
 		MKCoordinateRegion coordinate = self.region;
 		coordinate.span.latitudeDelta = coordinate.span.latitudeDelta *10;
 		coordinate.span.longitudeDelta = coordinate.span.longitudeDelta *10;
-		[self setRegion:coordinate animated:YES];
+		[self setRegion:coordinate animated:YES];	
 	}
 }
 

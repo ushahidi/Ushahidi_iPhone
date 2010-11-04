@@ -28,11 +28,15 @@
 
 @interface LocationsViewController ()
 
+@property(nonatomic, retain) NSString *location;
+@property(nonatomic, retain) NSString *latitude;
+@property(nonatomic, retain) NSString *longitude;
+
 @end
 
 @implementation LocationsViewController
 
-@synthesize mapView, cancelButton, doneButton, incident, location, locationType, toolBar, textField;
+@synthesize mapView, cancelButton, doneButton, incident, location, latitude, longitude, locationType, toolBar, textField;
 
 typedef enum {
 	LocationTypeTable,
@@ -46,19 +50,20 @@ typedef enum {
 	DLog(@"");
 	[self.mapView removeAllPins];
 	[self.mapView resizeRegionToFitAllPins];
+	self.location = nil;
+	self.latitude = nil;
+	self.longitude = nil;
+	self.textField.text = nil;
 	self.mapView.showsUserLocation = YES;
 	self.tableView.hidden = YES;
 	self.mapView.hidden = NO;
 	self.toolBar.hidden = NO;
 	self.locationType.selectedSegmentIndex = LocationTypeMap;
-	self.textField.text = nil;
-	self.location = nil;
 	[self.tableView reloadData];
 }
 
 - (IBAction) locationTypeChanged:(id)sender {
 	if (self.locationType.selectedSegmentIndex == LocationTypeTable) {
-		//self.mapView.showsUserLocation = NO;
 		self.tableView.hidden = NO;
 		self.mapView.hidden = YES;
 		self.toolBar.hidden = YES;
@@ -67,8 +72,15 @@ typedef enum {
 		self.tableView.hidden = YES;
 		self.mapView.hidden = NO;
 		self.toolBar.hidden = NO;
-		self.location = nil;
-		[self.mapView performSelector:@selector(resizeRegionToFitAllPins) withObject:nil afterDelay:0.8];
+		[self.mapView removeAllPins];
+		if (self.location != nil && self.latitude != nil && self.longitude != nil) {
+			[self.mapView addPinWithTitle:self.location 
+								 subtitle:[NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude] 
+								 latitude:self.latitude 
+								longitude:self.longitude];	
+			[self.mapView performSelector:@selector(resizeRegionToFitAllPins) withObject:nil afterDelay:0.8];
+		}
+		self.textField.text = self.location;
 	}
 }
 
@@ -80,14 +92,10 @@ typedef enum {
 }
 
 - (IBAction) done:(id)sender {
-	if (self.location != nil) {
-		self.incident.location = [location name];
-		self.incident.latitude = [location latitude];
-		self.incident.longitude = [location longitude];	
-	}
-	else {
-		[self setEditing:NO];
-	}
+	[self setEditing:NO];
+	self.incident.location = self.location;
+	self.incident.latitude = self.latitude;
+	self.incident.longitude = self.longitude;	
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -100,6 +108,9 @@ typedef enum {
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+	self.location = self.incident.location;
+	self.latitude = self.incident.latitude;
+	self.longitude = self.incident.longitude;
 	self.mapView.showsUserLocation = NO;
 	[self.mapView removeAllPins];
 	self.locationType.selectedSegmentIndex = LocationTypeTable;
@@ -144,7 +155,9 @@ typedef enum {
 	if (theLocation != nil) {
 		[cell setTitle:theLocation.name];	
 		[cell setDescription:[NSString stringWithFormat:@"%@, %@", theLocation.latitude, theLocation.longitude]];
-		[cell setChecked:theLocation == self.location];
+		[cell setChecked:[theLocation equals:self.location
+									latitude:self.latitude
+								   longitude:self.longitude]];
 	}
 	else {
 		[cell setTitle:nil];
@@ -158,17 +171,14 @@ typedef enum {
 #pragma mark CheckBoxTableCellDelegate
 
 - (void) checkBoxTableCellChanged:(CheckBoxTableCell *)cell index:(NSIndexPath *)indexPath checked:(BOOL)checked {
-	self.location = (Location *)[self filteredRowAtIndexPath:indexPath];
-	DLog(@"checkBoxTableCellChanged:%@ index:[%d, %d] checked:%d", location.name, indexPath.section, indexPath.row, checked)
+	Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
+	DLog(@"checkBoxTableCellChanged:%@ index:[%d, %d] checked:%d", theLocation.name, indexPath.section, indexPath.row, checked)
 	self.mapView.showsUserLocation = NO;
 	[self.mapView removeAllPins];
 	if (checked) {
-		self.incident.location = location.name;
-		self.incident.latitude = location.latitude;
-		self.incident.longitude = location.longitude;
-		self.textField.text = location.name;
-		NSString *subtitle = [NSString stringWithFormat:@"%@, %@", location.latitude, location.longitude];
-		[self.mapView addPinWithTitle:location.name subtitle:subtitle latitude:location.latitude longitude:location.longitude];
+		self.location = theLocation.name;
+		self.latitude = theLocation.latitude;
+		self.longitude = theLocation.longitude;
 	}
 	[self.tableView reloadData];
 }
@@ -198,9 +208,9 @@ typedef enum {
 - (void) filterRows:(BOOL)reloadTable {
 	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
-	for (Category *category in self.allRows) {
-		if ([category matchesString:searchText]) {
-			[self.filteredRows addObject:category];
+	for (Location *loc in self.allRows) {
+		if ([loc matchesString:searchText]) {
+			[self.filteredRows addObject:loc];
 		}
 	}
 	DLog(@"Re-Adding Rows");
@@ -237,8 +247,10 @@ typedef enum {
 
 - (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
 	DLog(@"");
-	self.incident.latitude = [NSString stringWithFormat:@"%f", userLocation.coordinate.latitude];
-	self.incident.longitude = [NSString stringWithFormat:@"%f", userLocation.coordinate.longitude];
+	self.textField.text = [NSString stringWithFormat:@"%f, %f", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
+	self.location = [NSString stringWithFormat:@"%f, %f", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
+	self.latitude = [NSString stringWithFormat:@"%f", userLocation.coordinate.latitude];
+	self.longitude = [NSString stringWithFormat:@"%f", userLocation.coordinate.longitude];
 	[theMapView performSelector:@selector(resizeRegionToFitAllPins) withObject:nil afterDelay:1.0];
 }
 
@@ -246,14 +258,12 @@ typedef enum {
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-	self.incident.location = [theTextField.text stringByReplacingCharactersInRange:range withString:string];
-	DLog(@"location: %@", self.incident.location);
+	self.location = [theTextField.text stringByReplacingCharactersInRange:range withString:string];
 	return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)theTextField {
-	DLog(@"");
-	self.incident.location = theTextField.text;
+	self.location = theTextField.text;
 }
 
 @end

@@ -39,5 +39,6 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 - (BOOL) matchesString:(NSString *)string;
 - (NSComparisonResult)compareByName:(Location *)location;
+- (BOOL) equals:(NSString *)name latitude:(NSString *)latitude longitude:(NSString *)longitude;
 
 @end

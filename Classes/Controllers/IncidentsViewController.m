@@ -274,7 +274,7 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)theIncidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		if ([self.loadingView isShowing]) {
@@ -283,14 +283,14 @@ typedef enum {
 		[self.loadingView hide];
 	}
 	else if(hasChanges) {
-		DLog(@"incidents: %d", [theIncidents count]);
+		DLog(@"incidents: %d", [incidents count]);
 		[self.loadingView hide];
 		[self.allRows removeAllObjects];
 		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
-			[self.allRows addObjectsFromArray:[theIncidents sortedArrayUsingSelector:@selector(compareByDate:)]];
+			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
 		}
 		else {
-			[self.allRows addObjectsFromArray:[theIncidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
+			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
 		}
 		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:self.allRows];

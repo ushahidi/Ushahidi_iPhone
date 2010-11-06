@@ -37,7 +37,6 @@
 	
 @private
 	NSMutableDictionary *deployments;
-	NSMutableDictionary *delegates;
 }
 
 @property(nonatomic, retain) Deployment *deployment;

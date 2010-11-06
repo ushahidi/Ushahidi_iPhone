@@ -53,6 +53,7 @@ typedef enum {
 		self.sounds = [[NSMutableArray alloc] initWithCapacity:0];
 		self.videos = [[NSMutableArray alloc] initWithCapacity:0];
 		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
+		self.date = [[NSDate alloc] init];
 	}
 	return self;
 }

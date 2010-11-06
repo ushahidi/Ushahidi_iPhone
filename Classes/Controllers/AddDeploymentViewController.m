@@ -129,21 +129,21 @@ typedef enum {
 	cell.indexPath = indexPath;
 	if (indexPath.section == TableSectionName) {
 		[cell setText:self.name];
-		[cell setPlaceholder:@"Enter Ushahidi Name"];
+		[cell setPlaceholder:@"Enter Deployment Name"];
 	}
 	else if (indexPath.section == TableSectionURL) {
 		[cell setText:self.url];
-		[cell setPlaceholder:@"Enter Ushahidi URL"];
+		[cell setPlaceholder:@"Enter Deployment URL"];
 	}
 	return cell;
 }
 
 - (NSString *)tableView:(UITableView *)theTableView titleForFooterInSection:(NSInteger)section {
 	if (section == TableSectionName) {
-		return @"For example, Ushahidi Demo";
+		return @"Example: Ushahidi Demo";
 	}
 	if (section == TableSectionURL) {
-		return @"For example, http://demo.ushahidi.com";
+		return @"Example: http://demo.ushahidi.com";
 	}
 	return nil;
 }

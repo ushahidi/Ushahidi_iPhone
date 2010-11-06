@@ -35,9 +35,8 @@
 @interface Ushahidi ()
 
 @property(nonatomic, retain) NSMutableDictionary *deployments;
-@property(nonatomic, retain) NSMutableDictionary *delegates;
 
-- (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url;
+- (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url withDelegate:(id<UshahidiDelegate>)delegate;
 - (void) notifyDelegate:(id<UshahidiDelegate>)delegate;
 - (void) downloadIncidentMapsInBackground;
 
@@ -45,7 +44,7 @@
 
 @implementation Ushahidi
 
-@synthesize delegates, deployments, deployment;
+@synthesize deployments, deployment;
 
 NSString * const kGoogleStaticMaps = @"http://maps.google.com/maps/api/staticmap";
 
@@ -55,15 +54,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	if ((self = [super init])) {
 		self.deployments = [NSKeyedUnarchiver unarchiveObjectWithKey:@"deployments"];
 		if (self.deployments == nil) self.deployments = [[NSMutableDictionary alloc] init];
-		
-		self.delegates = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
 
 - (void)dealloc {
 	[deployments release];
-	[delegates release];
 	[super dealloc];
 }
 
@@ -159,9 +155,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (BOOL) uploadIncident:(Incident *)incident withDelegate:(id<UshahidiDelegate>)delegate {
 	@try {
 		NSString *postUrl = [self.deployment getPostReport];
-		[self.delegates setObject:delegate forKey:postUrl];
 		DLog(@"POST: %@", postUrl);
 		ASIFormDataRequest *post = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:postUrl]];
+		[post setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
 		[post setDelegate:self];
 		[post setUserInfo:[NSDictionary dictionaryWithObject:incident.identifier forKey:@"incident"]];
 		//[post setShouldRedirect:YES];
@@ -232,16 +228,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (NSArray *) getCategoriesWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
 	NSString *requestURL = [self.deployment getCategories];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)];
 }
 
 - (Category *) getCategoryByID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ category:%@", delegate, categoryID);
 	NSString *requestURL = [self.deployment getCategoryByID:categoryID];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.categories objectForKey:categoryID];
 }
 
@@ -251,24 +245,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (NSArray *) getCountriesWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
 	NSString *requestURL = [self.deployment getCountries];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [[self.deployment.countries allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
 - (Country *) getCountryByID:(NSString *)countryId withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ countryId:%@", delegate, countryId);
 	NSString *requestURL = [self.deployment getCountryByID:countryId];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.countries objectForKey:countryId];
 }
 
 - (Country *) getCountryByISO:(NSString *)countryISO withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ countryISO:%@", delegate, countryISO);
 	NSString *requestURL = [self.deployment getCountryByISO:countryISO];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	for (Country *country in [self.deployment.countries allValues]) {
 		if ([country.iso isEqualToString:countryISO]) {
 			return country;
@@ -280,8 +271,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (Country *) getCountryByName:(NSString *)countryName withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ countryName:%@", delegate, countryName);
 	NSString *requestURL = [self.deployment getCountryByName:countryName];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	for (Country *country in [self.deployment.countries allValues]) {
 		if ([country.name isEqualToString:countryName]) {
 			return country;
@@ -296,24 +286,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (NSArray *) getLocationsWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
 	NSString *requestURL = [self.deployment getLocations];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
 - (Location *) getLocationByID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ locationID:%@", delegate, locationID);
 	NSString *requestURL = [self.deployment getLocationByID:locationID];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.locations objectForKey:locationID];
 }
 
 - (NSArray *) getLocationsByCountryID:(NSString *)countryID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ countryID:%@", delegate, countryID);
 	NSString *requestURL = [self.deployment getLocationsByCountryID:countryID];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
@@ -323,8 +310,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) getGeoGraphicMidPointWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
 	NSString *requestURL = [self.deployment getGeoGraphicMidPoint];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 }
 
 - (NSArray *) getIncidents {
@@ -334,64 +320,59 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (NSArray *) getIncidentsWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
 	NSString *requestURL = [self.deployment getIncidents];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.incidents allValues];
 }
 
 - (NSInteger) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", delegate);
 	NSString *requestURL = [self.deployment getIncidentCount];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.incidents count];
 }
 
 - (NSArray *) getIncidentsByCategoryID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ categoryID:%@", delegate, categoryID);
 	NSString *requestURL = [self.deployment getIncidentsByCategoryID:categoryID];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.incidents allValues];
 }
 
 - (NSArray *) getIncidentsByCategoryName:(NSString *)categoryName withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ categoryName:%@", delegate, categoryName);
 	NSString *requestURL = [self.deployment getIncidentsByCategoryName:categoryName];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.incidents allValues];
 }
 
 - (NSArray *) getIncidentsByLocationID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ locationID:%@", delegate, locationID);
 	NSString *requestURL = [self.deployment getIncidentsByLocationID:locationID];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.incidents allValues];
 }
 
 - (NSArray *) getIncidentsByLocationName:(NSString *)locationName withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ locationName:%@", delegate, locationName);
 	NSString *requestURL = [self.deployment getIncidentsByLocationName:locationName];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];
 	return [self.deployment.incidents allValues];
 }
 
 - (NSArray *) getIncidentsBySinceID:(NSString *)sinceID withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@ sinceID:%@", delegate, sinceID);
 	NSString *requestURL = [self.deployment getIncidentsBySinceID:sinceID];
-	[self.delegates setObject:delegate forKey:requestURL];
-	[self startAsynchronousRequest:requestURL];	
+	[self startAsynchronousRequest:requestURL withDelegate:delegate];	
 	return [self.deployment.incidents allValues];
 }
 
 #pragma mark -
 #pragma mark ASIHTTPRequest
 
-- (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url {
+- (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url withDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"url: %@", url);
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+	[request setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
 	[request setDelegate:self];
 	[request setShouldRedirect:YES];
 	[request startAsynchronous];
@@ -403,7 +384,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"request: %@", requestURL);
 	DLog(@"status: %@", [request responseStatusMessage]);
 	DLog(@"header: %@", [request responseHeaders]);
-	id<UshahidiDelegate> delegate = [self.delegates objectForKey:requestURL];
+	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	NSDictionary *json = [[request responseString] JSONValue];
 	NSDictionary *payload = nil;
 	NSError *error = nil;
@@ -547,7 +528,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSString *requestURL = [request.originalURL absoluteString];
 	DLog(@"request:%@", requestURL);
 	DLog(@"error: %@", [[request error] localizedDescription]);
-	id<UshahidiDelegate> delegate = [self.delegates objectForKey:requestURL];
+	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	if ([Deployment isApiKeyUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:apiKey:error:hasChanges:);
 		if (delegate != NULL && [delegate respondsToSelector:selector]) {
@@ -575,7 +556,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	else if ([Deployment isIncidentsUrl:requestURL]) {
 		SEL selector = @selector(downloadedFromUshahidi:incidents:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
-			[delegate downloadedFromUshahidi:self incidents:nil error:[request error] hasChanges:NO];
+			[delegate downloadedFromUshahidi:self incidents:nil pending:nil error:[request error] hasChanges:NO];
 		}
 	}
 }

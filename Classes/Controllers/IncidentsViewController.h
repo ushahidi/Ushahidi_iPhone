@@ -32,7 +32,6 @@
 @class Deployment;
 
 @interface IncidentsViewController : TableViewController<UshahidiDelegate, 
-														 UIActionSheetDelegate, 
 														 MKMapViewDelegate, 
 														 PhotoDelegate>  {
 	
@@ -56,7 +55,6 @@
 
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;
-- (IBAction) action:(id)sender;
 - (IBAction) map:(id)sender;
 - (IBAction) toggleReportsAndMap:(id)sender;
 - (IBAction) sortOrder:(id)sender;

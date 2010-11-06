@@ -62,17 +62,6 @@ typedef enum {
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) action:(id)sender {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-															 delegate:self 
-													cancelButtonTitle: @"Cancel" 
-											   destructiveButtonTitle:nil
-													otherButtonTitles:nil];
-	[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
-	[actionSheet showInView:[self view]];
-	[actionSheet release];
-}
-
 - (IBAction) add:(id)sender {
 	DLog(@"");
 	[self presentModalViewController:self.addIncidentViewController animated:YES];
@@ -246,13 +235,6 @@ typedef enum {
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];
 }
 
-#pragma mark UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
-	DLog(@"titleAtIndex: %@", titleAtIndex);
-}
-
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
@@ -292,7 +274,7 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)theIncidents error:(NSError *)error hasChanges:(BOOL)hasChanges {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)theIncidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		if ([self.loadingView isShowing]) {

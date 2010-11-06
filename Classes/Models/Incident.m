@@ -131,9 +131,9 @@ typedef enum {
 		self.location = [decoder decodeObjectForKey:@"location"];
 		self.latitude = [decoder decodeObjectForKey:@"latitude"];
 		self.longitude = [decoder decodeObjectForKey:@"longitude"];
-		NSData *data = [decoder decodeObjectForKey:@"thumbnail"];
-		if (data != nil) {
-			self.map = [UIImage imageWithData:data];
+		NSData *mapData = [decoder decodeObjectForKey:@"map"];
+		if (mapData != nil) {
+			self.map = [UIImage imageWithData:mapData];
 		}
 		self.news = [decoder decodeObjectForKey:@"news"];
 		if (self.news == nil) self.news = [NSArray array];

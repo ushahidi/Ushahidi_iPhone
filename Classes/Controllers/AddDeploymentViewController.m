@@ -90,6 +90,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
+	[self addHeaders:@"Name", @"URL", nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -137,22 +138,12 @@ typedef enum {
 	return cell;
 }
 
-- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
-	if (section == TableSectionName) {
-		return @"Ushahidi Name";
-	}
-	if (section == TableSectionURL) {
-		return @"Ushahidi URL";
-	}
-	return nil;
-}
-
 - (NSString *)tableView:(UITableView *)theTableView titleForFooterInSection:(NSInteger)section {
 	if (section == TableSectionName) {
-		return @"Enter the name for an Ushahidi deployment. For example, Ushahidi Demo";
+		return @"For example, Ushahidi Demo";
 	}
 	if (section == TableSectionURL) {
-		return @"Enter the URL for an Ushahidi deployment. For example, http://demo.ushahidi.com";
+		return @"For example, http://demo.ushahidi.com";
 	}
 	return nil;
 }

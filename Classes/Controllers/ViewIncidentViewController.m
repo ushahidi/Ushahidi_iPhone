@@ -32,8 +32,8 @@
 #import "Photo.h"
 #import "Location.h"
 #import "UIColor+Extension.h"
-#import "TableHeaderView.h"
 #import "Messages.h"
+#import "TableHeaderView.h"
 
 typedef enum {
 	TableSectionErrors,
@@ -52,8 +52,6 @@ typedef enum {
 } NavBar;
 
 @interface ViewIncidentViewController ()
-
-- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText;
 
 @end
 
@@ -102,6 +100,7 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
+	[self addHeaders:[Messages errors], [Messages title], [Messages category], [Messages location], [Messages date], [Messages description], [Messages photos], [Messages news], nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -126,6 +125,11 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
 	return 8;
+}
+
+- (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
+	return section == TableSectionErrors && self.incident.errors == nil 
+		? 0 : [TableHeaderView getViewHeight];
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -230,44 +234,6 @@ typedef enum {
 		return cell;	
 	}
 	return nil;
-}
-
-- (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
-	if (section == TableSectionErrors) {
-		return self.incident.errors != nil 
-			? [self headerForTable:theTableView text:[Messages errors]]
-			: nil;
-	}
-	if (section == TableSectionTitle) {
-		return [self headerForTable:theTableView text:[Messages title]];
-	}
-	if (section == TableSectionCategory) {
-		return [self headerForTable:theTableView text:[Messages category]];
-	}
-	if (section == TableSectionLocation) {
-		return [self headerForTable:theTableView text:[Messages location]];
-	}
-	if (section == TableSectionDateTime) {
-		return [self headerForTable:theTableView text:[Messages date]];
-	}
-	if (section == TableSectionDescription) {
-		return [self headerForTable:theTableView text:[Messages description]];
-	}
-	if (section == TableSectionPhotos) {
-		return [self headerForTable:theTableView text:[Messages photos]];
-	}
-	if (section == TableSectionNews) {
-		return [self headerForTable:theTableView text:[Messages news]];
-	}
-	return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return [TableHeaderView getViewHeight];
-}
-
-- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText {
-	return [TableHeaderView headerForTable:theTableView text:theText textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiDarkTan]];
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -32,7 +32,6 @@
 #import "Location.h"
 #import "Incident.h"
 #import "Messages.h"
-#import "TableHeaderView.h"
 #import "UIColor+Extension.h"
 #import "Photo.h"
 #import "ImageTableCell.h"
@@ -61,8 +60,6 @@ typedef enum {
 
 @property(nonatomic, retain) DatePicker *datePicker;
 @property(nonatomic, retain) Incident *incident;
-
-- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText;
 
 @end
 
@@ -100,6 +97,7 @@ typedef enum {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initWithDelegate:self forController:self];
+	[self addHeaders:[Messages title], [Messages description], [Messages category], [Messages location], [Messages date], [Messages photos], [Messages news], nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -328,39 +326,6 @@ typedef enum {
 		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath];
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
-}
-
-- (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
-	if (section == TableSectionTitle) {
-		return [self headerForTable:theTableView text:[Messages title]];
-	}
-	if (section == TableSectionCategory) {
-		return [self headerForTable:theTableView text:[Messages category]];
-	}
-	if (section == TableSectionLocation) {
-		return [self headerForTable:theTableView text:[Messages location]];
-	}
-	if (section == TableSectionDate) {
-		return [self headerForTable:theTableView text:[Messages date]];
-	}
-	if (section == TableSectionDescription) {
-		return [self headerForTable:theTableView text:[Messages description]];
-	}
-	if (section == TableSectionPhotos) {
-		return [self headerForTable:theTableView text:[Messages photos]];
-	}
-	if (section == TableSectionNews) {
-		return [self headerForTable:theTableView text:[Messages news]];
-	}
-	return nil;
-}
-
-- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText {
-	return [TableHeaderView headerForTable:theTableView text:theText textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiDarkTan]];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return [TableHeaderView getViewHeight];
 }
 
 #pragma mark -

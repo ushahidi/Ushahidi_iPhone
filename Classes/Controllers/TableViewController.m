@@ -21,11 +21,14 @@
 #import "TableViewController.h"
 #import "TableCellFactory.h"
 #import "UIView+Extension.h"
+#import "TableHeaderView.h"
+#import "UIColor+Extension.h"
 
 @interface TableViewController ()
 
 @property(nonatomic,assign) CGFloat toolbarHeight;
 @property(nonatomic,assign) BOOL shouldBeginEditing;
+@property(nonatomic,retain) NSMutableArray *headers;
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
 - (void) keyboardWillShow:(NSNotification *)notification;
@@ -36,7 +39,7 @@
 
 @implementation TableViewController
 
-@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight, shouldBeginEditing;
+@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight, shouldBeginEditing, headers;
 
 - (void) hideSearchBar {
 	if (self.tableView.tableHeaderView != nil) {
@@ -105,6 +108,25 @@
 	return nil;
 }
 
+-(void) addHeader:(NSString *)header {
+    [self.headers addObject:header];
+}
+
+-(void) addHeaders:(NSString *)string, ... {
+    va_list args;
+    va_start(args, string);
+	for (NSString *arg = string; arg != nil; arg = va_arg(args, NSString*)) {
+		if (arg != nil && [arg length] > 0) {
+			[self.headers addObject:arg];
+		}
+	}
+	va_end(args);
+}
+
+- (void) clearHeaders {
+	[self.headers removeAllObjects];
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -139,6 +161,7 @@
 	DLog(@"%@", self.nibName);
 	self.allRows = [[NSMutableArray alloc] initWithCapacity:0];
 	self.filteredRows = [[NSMutableArray alloc] initWithCapacity:0];
+	self.headers = [[NSMutableArray alloc] initWithCapacity:0];
 	self.shouldBeginEditing = YES;
 }
 
@@ -149,6 +172,7 @@
 	[tableView release];
 	[oddRowColor release];
 	[evenRowColor release];
+	[headers release];
 	[super dealloc];
 }
 
@@ -178,6 +202,26 @@
 			cell.backgroundColor = self.evenRowColor;
 		}
 	}
+}
+
+- (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
+	if ([self.headers count] > section) {
+		NSString *header = [self.headers objectAtIndex:section];
+		if (self.tableView.style == UITableViewStyleGrouped) {
+			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor clearColor]];
+		}
+		else {
+			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiDarkTan]];
+		}
+	}
+	return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	if ([self.headers count] > section) {
+		return [TableHeaderView getViewHeight];
+	}
+	return 0;
 }
 
 #pragma mark -

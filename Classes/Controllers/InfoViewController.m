@@ -34,8 +34,6 @@
 @property(nonatomic, assign) CGFloat imageWidth;
 @property(nonatomic, retain) UILabel *imageWidthLabel;
 
-- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText;
-
 @end
 
 @implementation InfoViewController
@@ -82,6 +80,7 @@ typedef enum {
 	self.imageWidthLabel.textColor = [UIColor grayColor];
 	self.imageWidthLabel.textAlignment = UITextAlignmentCenter;
 	self.imageWidthLabel.font = [UIFont systemFontOfSize:15];
+	[self addHeaders:@"Email", @"First Name", @"Last Name", @"Download Incident Maps", @"Discrete Mode On Shake", @"Resized Image Width", nil];		
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -165,32 +164,6 @@ typedef enum {
 		return cell;	
 	}
 	return nil;
-}
-
-- (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
-	if (section == TableSectionEmail) {
-		return [self headerForTable:theTableView text:@"Email"];
-	}
-	if (section == TableSectionFirstName) {
-		return [self headerForTable:theTableView text:@"First Name"];
-	}
-	if (section == TableSectionLastName) {
-		return [self headerForTable:theTableView text:@"Last Name"];
-	}
-	if (section == TableSectionDownloadMaps) {
-		return [self headerForTable:theTableView text:@"Download Maps"];
-	}
-	if (section == TableSectionBecomeDiscrete) {
-		return [self headerForTable:theTableView text:@"Discrete Mode Upon Shake"];
-	}
-	if (section == TableSectionImageWidth) {
-		return [self headerForTable:theTableView text:@"Image Width"];
-	}
-	return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	return [TableHeaderView getViewHeight];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

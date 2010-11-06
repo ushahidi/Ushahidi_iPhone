@@ -38,6 +38,7 @@
 	
 @private
 	BOOL shouldBeginEditing;
+	NSMutableArray *headers;
 }
 
 @property(nonatomic,retain) UITableView *tableView;
@@ -57,5 +58,8 @@
 - (void) filterRows;
 - (void) filterRows:(BOOL)reloadTable;
 - (void) replaceRows:(NSArray *)rows;
+- (void) addHeader:(NSString *)header;
+- (void) addHeaders:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
+- (void) clearHeaders;
 
 @end

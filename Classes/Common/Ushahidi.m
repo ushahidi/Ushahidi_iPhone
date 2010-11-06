@@ -532,10 +532,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		if (hasChanges) {
 			DLog(@"Has New Incidents");
 		}
-		SEL selector = @selector(downloadedFromUshahidi:incidents:error:hasChanges:);
+		SEL selector = @selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:);
 		if (delegate != nil && [delegate respondsToSelector:selector]) {
 			[delegate downloadedFromUshahidi:self 
 								   incidents:[self.deployment.incidents allValues] 
+									 pending:self.deployment.pending
 									   error:error 
 								  hasChanges:hasChanges];
 		}

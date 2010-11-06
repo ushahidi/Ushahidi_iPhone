@@ -26,7 +26,7 @@
 
 @implementation Deployment
 
-@synthesize name, url, domain, countries, categories, locations, incidents;
+@synthesize name, url, domain, countries, categories, locations, incidents, pending;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
@@ -45,6 +45,7 @@
 		self.categories = [[NSMutableDictionary alloc] init];
 		self.locations = [[NSMutableDictionary alloc] init];
 		self.incidents = [[NSMutableDictionary alloc] init];
+		self.pending = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -57,6 +58,7 @@
 	[encoder encodeObject:self.categories forKey:@"categories"];
 	[encoder encodeObject:self.locations forKey:@"locations"];
 	[encoder encodeObject:self.incidents forKey:@"incidents"];
+	[encoder encodeObject:self.pending forKey:@"pending"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -76,6 +78,9 @@
 		
 		self.incidents = [decoder decodeObjectForKey:@"incidents"];
 		if (self.incidents == nil) self.incidents = [[NSMutableDictionary alloc] init];
+		
+		self.pending = [decoder decodeObjectForKey:@"pending"];
+		if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -100,6 +105,7 @@
 	[categories release];
 	[locations release];
 	[incidents release];
+	[pending release];
     [super dealloc];
 }
 
@@ -163,8 +169,8 @@
 #pragma mark -
 #pragma mark Locations
 
-+ (BOOL) isLocationsUrl:(NSString *)url {
-	return [url rangeOfString:@"task=locations"].location != NSNotFound;
++ (BOOL) isLocationsUrl:(NSString *)theUrl {
+	return [theUrl rangeOfString:@"task=locations"].location != NSNotFound;
 }
 
 - (NSString *) getLocations {
@@ -182,8 +188,8 @@
 #pragma mark -
 #pragma mark Incidents
 
-+ (BOOL) isIncidentsUrl:(NSString *)url {
-	return [url rangeOfString:@"task=incidents"].location != NSNotFound;
++ (BOOL) isIncidentsUrl:(NSString *)theUrl {
+	return [theUrl rangeOfString:@"task=incidents"].location != NSNotFound;
 }
 
 - (NSString *) getIncidents {

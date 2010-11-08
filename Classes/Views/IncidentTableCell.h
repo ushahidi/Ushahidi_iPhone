@@ -28,6 +28,7 @@
 	IBOutlet UILabel *categoryLabel;
 	IBOutlet UILabel *dateLabel;
 	IBOutlet UIImageView *imageView;
+	IBOutlet UIActivityIndicatorView *activityIndicator;
 }
 
 @property (nonatomic, retain) UILabel *titleLabel;
@@ -35,6 +36,8 @@
 @property (nonatomic, retain) UILabel *categoryLabel;
 @property (nonatomic, retain) UILabel *dateLabel;
 @property (nonatomic, retain) UIImageView *imageView;
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic) BOOL uploading;
 
 - (void) setTitle:(NSString *)title;
 - (NSString *) getTitle;

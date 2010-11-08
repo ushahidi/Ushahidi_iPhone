@@ -627,6 +627,14 @@
 					</object>
 					<int key="connectionID">107</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">incidentsViewController</string>
+						<reference key="source" ref="352634897"/>
+						<reference key="destination" ref="580405253"/>
+					</object>
+					<int key="connectionID">108</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1054,7 +1062,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">107</int>
+			<int key="maxID">108</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1174,6 +1182,7 @@
 							<string>categoriesViewController</string>
 							<string>doneButton</string>
 							<string>imagePickerController</string>
+							<string>incidentsViewController</string>
 							<string>locationsViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1182,6 +1191,7 @@
 							<string>CategoriesViewController</string>
 							<string>UIBarButtonItem</string>
 							<string>ImagePickerController</string>
+							<string>IncidentsViewController</string>
 							<string>LocationsViewController</string>
 						</object>
 					</object>
@@ -1193,6 +1203,7 @@
 							<string>categoriesViewController</string>
 							<string>doneButton</string>
 							<string>imagePickerController</string>
+							<string>incidentsViewController</string>
 							<string>locationsViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1212,6 +1223,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">imagePickerController</string>
 								<string key="candidateClassName">ImagePickerController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">incidentsViewController</string>
+								<string key="candidateClassName">IncidentsViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">locationsViewController</string>
@@ -1487,7 +1502,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>action:</string>
 							<string>add:</string>
 							<string>map:</string>
 							<string>refresh:</string>
@@ -1496,7 +1510,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1508,7 +1521,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>action:</string>
 							<string>add:</string>
 							<string>map:</string>
 							<string>refresh:</string>
@@ -1517,10 +1529,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">action:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 							<object class="IBActionInfo">
 								<string key="name">add:</string>
 								<string key="candidateClassName">id</string>
@@ -1657,8 +1665,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancel:</string>
 							<string>done:</string>
+							<string>locate:</string>
 							<string>locationTypeChanged:</string>
-							<string>search:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1674,8 +1682,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancel:</string>
 							<string>done:</string>
+							<string>locate:</string>
 							<string>locationTypeChanged:</string>
-							<string>search:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1688,11 +1696,11 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">locationTypeChanged:</string>
+								<string key="name">locate:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">search:</string>
+								<string key="name">locationTypeChanged:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -1705,6 +1713,7 @@
 							<string>doneButton</string>
 							<string>locationType</string>
 							<string>mapView</string>
+							<string>textField</string>
 							<string>toolBar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1713,6 +1722,7 @@
 							<string>UIBarButtonItem</string>
 							<string>UISegmentedControl</string>
 							<string>MKMapView</string>
+							<string>UITextField</string>
 							<string>UIToolbar</string>
 						</object>
 					</object>
@@ -1724,6 +1734,7 @@
 							<string>doneButton</string>
 							<string>locationType</string>
 							<string>mapView</string>
+							<string>textField</string>
 							<string>toolBar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1743,6 +1754,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapView</string>
 								<string key="candidateClassName">MKMapView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">textField</string>
+								<string key="candidateClassName">UITextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">toolBar</string>
@@ -1854,6 +1869,13 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/Views/MotionWindow.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Categories/NSObject+Extension.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2312,6 +2334,14 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">UITextField</string>
+					<string key="superclassName">UIControl</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="462629289">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UITextField.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">UIToolbar</string>
 					<string key="superclassName">UIView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -2321,10 +2351,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">UIKit.framework/Headers/UITextField.h</string>
-					</object>
+					<reference key="sourceIdentifier" ref="462629289"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIView</string>
@@ -2411,8 +2438,8 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{15, 13}</string>
 				<string>{15, 13}</string>
-				<string>{28, 28}</string>
-				<string>{26, 26}</string>
+				<string>{24, 24}</string>
+				<string>{30, 30}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">117</string>

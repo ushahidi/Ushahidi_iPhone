@@ -128,7 +128,8 @@
 	DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
 	SEL selector = @selector(mapTableCell:pinSelectedAtIndex:);
 	if (self.delegate != nil && [self.delegate respondsToSelector:selector]) {
-		[self.delegate mapTableCell:self pinSelectedAtIndex:mapAnnotation.index];
+		//TODO fix this to use actual index
+		[self.delegate mapTableCell:self pinSelectedAtIndex:0];
 	}
 	else {
 		DLog(@"delegate %@ does not respond to selector", self.delegate);

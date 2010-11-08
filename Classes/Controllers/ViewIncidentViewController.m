@@ -38,10 +38,10 @@
 typedef enum {
 	TableSectionErrors,
 	TableSectionTitle,
-	TableSectionCategory,
-	TableSectionLocation,
-	TableSectionDateTime,
 	TableSectionDescription,
+	TableSectionCategory,
+	TableSectionDateTime,
+	TableSectionLocation,
 	TableSectionPhotos,
 	TableSectionNews
 } TableSection;
@@ -100,7 +100,7 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
-	[self addHeaders:[Messages errors], [Messages title], [Messages category], [Messages location], [Messages date], [Messages description], [Messages photos], [Messages news], nil];
+	[self addHeaders:[Messages errors], [Messages title], [Messages description], [Messages category], [Messages date], [Messages location], [Messages photos], [Messages news], nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -237,11 +237,12 @@ typedef enum {
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
-		if (self.incident.map != nil) {
-			return 180;
+	if (indexPath.section == TableSectionLocation) {
+		if (indexPath.row == 0) {
+			return [TextTableCell getCellSizeForText:self.incident.location forWidth:theTableView.contentSize.width].height;
 		}
-		return 140;
+		return self.incident.map != nil
+			? self.incident.map.size.height : 150;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
 		if ([self.incident.photos count] > 0) {
@@ -260,9 +261,6 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionDescription) {
 		return [TextTableCell getCellSizeForText:self.incident.description forWidth:theTableView.contentSize.width].height;
-	}
-	else if (indexPath.section == TableSectionLocation) {
-		return [TextTableCell getCellSizeForText:self.incident.location forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionCategory) {
 		return [TextTableCell getCellSizeForText:[self.incident categoryNamesWithDefaultText:[Messages noCategorySpecified]] forWidth:theTableView.contentSize.width].height;
@@ -287,13 +285,21 @@ typedef enum {
 		[self.navigationController pushViewController:self.webViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionLocation) {
-		self.mapViewController.locationName = self.incident.location;
-		self.mapViewController.locationLatitude = self.incident.latitude;
-		self.mapViewController.locationLongitude = self.incident.longitude;
-		[self.navigationController pushViewController:self.mapViewController animated:YES];
+		if (self.incident.map != nil) {
+			self.imageViewController.title = self.incident.location;
+			self.imageViewController.image = self.incident.map;
+			[self.navigationController pushViewController:self.imageViewController animated:YES];
+		}
+		else {
+			self.mapViewController.locationName = self.incident.location;
+			self.mapViewController.locationLatitude = self.incident.latitude;
+			self.mapViewController.locationLongitude = self.incident.longitude;
+			[self.navigationController pushViewController:self.mapViewController animated:YES];	
+		}
 	}
 	else if (indexPath.section == TableSectionPhotos) {
 		if ([self.incident.photos count] > 0) {
+			self.imageViewController.title = @"Image";
 			self.imageViewController.image = [((ImageTableCell *)cell) getImage];
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}

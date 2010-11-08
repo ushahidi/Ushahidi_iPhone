@@ -68,6 +68,7 @@
 - (NSArray *) getLocationsByCountryID:(NSString *)countryID withDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getIncidents;
+- (NSArray *) getPending;
 - (NSArray *) getIncidentsWithDelegate:(id<UshahidiDelegate>)delegate;
 - (NSInteger) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate;
 - (void) getGeoGraphicMidPointWithDelegate:(id<UshahidiDelegate>)delegate;
@@ -76,8 +77,6 @@
 - (NSArray *) getIncidentsByLocationID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getIncidentsByLocationName:(NSString *)locationName withDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getIncidentsBySinceID:(NSString *)sinceID withDelegate:(id<UshahidiDelegate>)delegate;
-
-- (void) downloadIncidentMaps;
 
 @end
 			 
@@ -91,8 +90,8 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)countries error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)image error:(NSError *)error;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map;
+- (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error;
-
 
 @end

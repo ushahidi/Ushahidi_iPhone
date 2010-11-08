@@ -33,6 +33,10 @@
 @property(nonatomic, assign) BOOL becomeDiscrete;
 @property(nonatomic, assign) CGFloat imageWidth;
 @property(nonatomic, retain) UILabel *imageWidthLabel;
+@property(nonatomic, assign) NSInteger mapZoomLevel;
+@property(nonatomic, retain) UILabel *mapZoomLevelLabel;
+
+- (UILabel *) getFooterLabel;
 
 @end
 
@@ -42,12 +46,13 @@ typedef enum {
 	TableSectionEmail,
 	TableSectionFirstName,
 	TableSectionLastName,
-	TableSectionDownloadMaps,
 	TableSectionBecomeDiscrete,
-	TableSectionImageWidth
+	TableSectionImageWidth,
+	TableSectionDownloadMaps,
+	TableSectionMapZoomLevel
 } TableSection;
 
-@synthesize email, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, imageWidthLabel;
+@synthesize email, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, imageWidthLabel, mapZoomLevel, mapZoomLevelLabel;
 
 #pragma mark -
 #pragma mark Handlers
@@ -65,6 +70,7 @@ typedef enum {
 	[[Settings sharedSettings] setDownloadMaps:self.downloadMaps];
 	[[Settings sharedSettings] setBecomeDiscrete:self.becomeDiscrete];
 	[[Settings sharedSettings] setImageWidth:self.imageWidth];
+	[[Settings sharedSettings] setMapZoomLevel:self.mapZoomLevel];
 	[[Settings sharedSettings] save];
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -75,14 +81,19 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
-	self.imageWidthLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
-	self.imageWidthLabel.backgroundColor = [UIColor clearColor];
-	self.imageWidthLabel.textColor = [UIColor grayColor];
-	self.imageWidthLabel.textAlignment = UITextAlignmentCenter;
-	self.imageWidthLabel.font = [UIFont systemFontOfSize:15];
-	[self addHeaders:@"Email", @"First Name", @"Last Name", @"Download Incident Maps", @"Discrete Mode On Shake", @"Resized Image Width", nil];		
+	self.imageWidthLabel = [self getFooterLabel];
+	self.mapZoomLevelLabel = [self getFooterLabel];
+	[self addHeaders:@"Email", @"First Name", @"Last Name", @"Discrete Mode On Shake", @"Resized Image Width", @"Download Incident Maps", @"Map Zoom Level", nil];		
 }
 
+- (UILabel *) getFooterLabel {
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
+	label.backgroundColor = [UIColor clearColor];
+	label.textColor = [UIColor grayColor];
+	label.textAlignment = UITextAlignmentCenter;
+	label.font = [UIFont systemFontOfSize:15];
+	return label;
+}
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.email = [[Settings sharedSettings] email];
@@ -91,7 +102,9 @@ typedef enum {
 	self.downloadMaps = [[Settings sharedSettings] downloadMaps];
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
 	self.imageWidth = [[Settings sharedSettings] imageWidth];
+	self.mapZoomLevel = [[Settings sharedSettings] mapZoomLevel];
 	self.imageWidthLabel.text = [NSString stringWithFormat:@"%d pixels", (int)self.imageWidth];
+	self.mapZoomLevelLabel.text = [NSString stringWithFormat:@"%d zoom level", (int)self.mapZoomLevel];
 	[self.tableView reloadData];
 }
 
@@ -103,6 +116,8 @@ typedef enum {
 	[email release];
 	[firstName release];
 	[lastName release];
+	[mapZoomLevelLabel release];
+	[imageWidthLabel release];
     [super dealloc];
 }
 
@@ -110,7 +125,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 6;
+	return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -146,6 +161,14 @@ typedef enum {
 		[cell setValue:self.imageWidth];
 		return cell;
 	}
+	else if (indexPath.section == TableSectionMapZoomLevel) {
+		SliderTableCell *cell = [TableCellFactory getSliderTableCellWithDelegate:self table:theTableView];
+		cell.indexPath = indexPath;
+		[cell setMaximum:21];
+		[cell setMinimum:5];
+		[cell setValue:self.mapZoomLevel];
+		return cell;
+	}
 	else {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
@@ -167,17 +190,25 @@ typedef enum {
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	return section == TableSectionImageWidth ? self.imageWidthLabel : nil;
+	if (section == TableSectionImageWidth) {
+		return self.imageWidthLabel;
+	}
+	if (section == TableSectionMapZoomLevel) {
+		return self.mapZoomLevelLabel;
+	}
+	return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForFooterInSection:(NSInteger)section {
-	return section == TableSectionImageWidth ? self.imageWidthLabel.frame.size.height : 0.0;
+	if (section == TableSectionImageWidth) {
+		return self.imageWidthLabel.frame.size.height;
+	}
+	if (section == TableSectionMapZoomLevel) {
+		return self.mapZoomLevelLabel.frame.size.height;
+	}
+	return 0.0;
 }
 
-
-- (UIView *) headerForTable:(UITableView *)theTableView text:(NSString *)theText {
-	return [TableHeaderView headerForTable:theTableView text:theText textColor:[UIColor ushahidiRed] backgroundColor:[UIColor clearColor]];
-}
 
 #pragma mark -
 #pragma mark TextFieldTableCellDelegate
@@ -231,8 +262,14 @@ typedef enum {
 
 - (void) sliderCellChanged:(SliderTableCell *)cell value:(CGFloat)value {
 	DLog(@"sliderCellChanged: %f", value);
-	self.imageWidth = value;
-	self.imageWidthLabel.text = [NSString stringWithFormat:@"%d pixels", (int)value];
+	if (cell.indexPath.section == TableSectionImageWidth) {
+		self.imageWidth = value;
+		self.imageWidthLabel.text = [NSString stringWithFormat:@"%d pixels", (int)value];	
+	}
+	else if (cell.indexPath.section == TableSectionMapZoomLevel) {
+		self.mapZoomLevel = value;
+		self.mapZoomLevelLabel.text = [NSString stringWithFormat:@"%d zoom level", (int)value];
+	}
 }
 
 @end

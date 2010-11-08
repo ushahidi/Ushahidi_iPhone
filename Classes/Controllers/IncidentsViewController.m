@@ -34,19 +34,22 @@
 #import "MapAnnotation.h"
 #import "Messages.h"
 #import "Settings.h"
-
-typedef enum {
-	ViewModeReports,
-	ViewModeMap
-} ViewMode;
+#import "TableHeaderView.h"
 
 @interface IncidentsViewController ()
+
+@property(nonatomic,retain) NSMutableArray *pending;
 
 @end
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController, mapViewController, mapView, deployment, sortOrder, refreshButton;
+@synthesize addIncidentViewController, viewIncidentViewController, mapViewController, mapView, deployment, sortOrder, refreshButton, pending;
+
+typedef enum {
+	ViewModeReports,
+	ViewModeMap
+} ViewMode;
 
 typedef enum {
 	TableSectionPending,
@@ -72,9 +75,7 @@ typedef enum {
 	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:@"Loading..."];
 	[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
-	if ([[Settings sharedSettings] downloadMaps]) {
-		[[Ushahidi sharedUshahidi] downloadIncidentMaps];	
-	}
+	[[Ushahidi sharedUshahidi] uploadIncidents:self];
 }
 
 - (IBAction) sortOrder:(id)sender {
@@ -108,11 +109,23 @@ typedef enum {
 		[self.mapView removeAllPins];
 		self.mapView.showsUserLocation = YES;
 		for (Incident *incident in self.allRows) {
-			[self.mapView addPinWithTitle:incident.title subtitle:[incident dateString] latitude:incident.latitude longitude:incident.longitude];
+			[self.mapView addPinWithTitle:incident.title 
+								 subtitle:incident.dateString 
+								 latitude:incident.latitude 
+								longitude:incident.longitude
+								   object:incident
+								 pinColor:MKPinAnnotationColorRed];
+		}
+		for (Incident *incident in self.pending) {
+			[self.mapView addPinWithTitle:incident.title 
+								 subtitle:incident.dateString 
+								 latitude:incident.latitude 
+								longitude:incident.longitude 
+								   object:incident
+								 pinColor:MKPinAnnotationColorPurple];
 		}
 		[self.mapView resizeRegionToFitAllPins:YES];
-		self.sortOrder.enabled = NO
-		;
+		self.sortOrder.enabled = NO;
 	}
 }
 
@@ -121,10 +134,12 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
-	self.oddRowColor = [UIColor ushahidiDarkTan];
-	self.evenRowColor = [UIColor ushahidiLiteBrown];
+	self.oddRowColor = [UIColor ushahidiLiteTan];
+	self.evenRowColor = [UIColor ushahidiDarkTan];
 	[self showSearchBarWithPlaceholder:[Messages searchIncidents]];
+	[self addHeaders:@"Pending", @"Incidents", nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -160,6 +175,9 @@ typedef enum {
 		[self.filteredRows addObjectsFromArray:incidents];
 		DLog(@"Re-Adding Rows: %d", [incidents count]);
 	}
+	[self.pending removeAllObjects];
+	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getPending]];
+	[self.tableView reloadData];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -174,6 +192,7 @@ typedef enum {
 	[deployment release];
 	[sortOrder release];
 	[refreshButton release];
+	[pending release];
     [super dealloc];
 }
 
@@ -181,11 +200,21 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 1;
+	return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	return [self.filteredRows count];
+	if (section == TableSectionPending) {
+		return [self.pending count];
+	}
+	if (section == TableSectionIncidents) {
+		return [self.filteredRows count];
+	}
+	return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
+	return [self.pending count] > 0 ? [TableHeaderView getViewHeight] : 0;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -194,7 +223,8 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	IncidentTableCell *cell = [TableCellFactory getIncidentTableCellForTable:theTableView];
-	Incident *incident = [self filteredRowAtIndexPath:indexPath];
+	Incident *incident = indexPath.section == TableSectionIncidents
+		? [self filteredRowAtIndexPath:indexPath] : [self.pending objectAtIndex:indexPath.row];
 	if (incident != nil) {
 		[cell setTitle:incident.title];
 		[cell setLocation:incident.location];
@@ -205,16 +235,23 @@ typedef enum {
 			if (photo.thumbnail != nil) {
 				[cell setImage:photo.thumbnail];
 			}
-			else {
+			else if (photo.image != nil) {
+				[cell setImage:photo.image];
+			}
+			else if (photo.url != nil) {
 				[cell setImage:nil];
 				[photo downloadWithDelegate:self];
 			}
+		}
+		else if (incident.map != nil) {
+			[cell setImage:incident.map];
 		}
 		else {
 			[cell setImage:nil];
 		}
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
+		[cell setUploading:indexPath.section == TableSectionPending && incident.uploading];
 	}
 	else {
 		[cell setTitle:nil];
@@ -230,8 +267,14 @@ typedef enum {
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-	self.viewIncidentViewController.incident = [self.filteredRows objectAtIndex:indexPath.row];
-	self.viewIncidentViewController.incidents = self.filteredRows;
+	if (indexPath.section == TableSectionIncidents) {
+		self.viewIncidentViewController.incident = [self filteredRowAtIndexPath:indexPath];
+		self.viewIncidentViewController.incidents = self.filteredRows;
+	}
+	else {
+		self.viewIncidentViewController.incident = [self.pending objectAtIndex:indexPath.row];
+		self.viewIncidentViewController.incidents = self.pending;
+	}
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];
 }
 
@@ -274,13 +317,12 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)thePending error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		if ([self.loadingView isShowing]) {
 			[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 		}
-		[self.loadingView hide];
 	}
 	else if(hasChanges) {
 		DLog(@"incidents: %d", [incidents count]);
@@ -294,24 +336,58 @@ typedef enum {
 		}
 		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:self.allRows];
+		[self.pending removeAllObjects];
+		[self.pending addObjectsFromArray:thePending];
 		[self.tableView reloadData];
 		[self.tableView flashScrollIndicators];
-		[self.loadingView hide];
 		DLog(@"Re-Adding Rows");
 	}
 	else {
-		[self.loadingView hide];
 		DLog(@"No Changes");
 	}
+	[self.loadingView hide];
 	self.refreshButton.enabled = YES;
 }
 
-- (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error {
-	if (error != nil) {
-		DLog(@"error: %@", [error localizedDescription]);
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map {
+	NSInteger row = [self.filteredRows indexOfObject:incident];
+	if (row > -1) {
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionIncidents];
+		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+		if (cell != nil && [incident getFirstPhoto] == nil) {
+			[cell setImage:map];
+		}
 	}
-	else if (incident != nil){
+}
+
+- (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident {
+	if (incident != nil){
 		DLog(@"Incident: %@", incident.title);
+		NSInteger row = [self.pending indexOfObject:incident];
+		if (row > -1) {
+			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionPending];
+			IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+			if (cell != nil) {
+				[cell setUploading:YES];
+			}
+		}
+	}
+	else {
+		DLog(@"Incident is NULL");
+	}
+}
+
+- (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error {
+	if (incident != nil){
+		DLog(@"Incident: %@", incident.title);
+		NSInteger row = [self.pending indexOfObject:incident];
+		if (row > -1) {
+			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionPending];
+			IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+			if (cell != nil) {
+				[cell setUploading:NO];
+			}
+		}
 	}
 	else {
 		DLog(@"Incident is NULL");
@@ -329,7 +405,14 @@ typedef enum {
 		annotationView.pinColor = MKPinAnnotationColorGreen;
 	}
 	else {
-		annotationView.pinColor = MKPinAnnotationColorRed;
+		DLog(@"annotation: %@", [annotation class]);
+		if ([annotation isKindOfClass:[MapAnnotation class]]) {
+			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
+			annotationView.pinColor = mapAnnotation.pinColor;
+		}
+		else {
+			annotationView.pinColor = MKPinAnnotationColorRed;
+		}
 		UIButton *annotationButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 		[annotationButton addTarget:self action:@selector(annotationClicked:) forControlEvents:UIControlEventTouchUpInside];
 		annotationView.rightCalloutAccessoryView = annotationButton;
@@ -341,8 +424,13 @@ typedef enum {
 	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[[button superview] superview];
 	MapAnnotation *mapAnnotation = (MapAnnotation *)annotationView.annotation;
 	DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
-	self.viewIncidentViewController.incident = [self rowAtIndex:mapAnnotation.index];
-	self.viewIncidentViewController.incidents = self.allRows;
+	self.viewIncidentViewController.incident = (Incident *)mapAnnotation.object;
+	if (mapAnnotation.pinColor == MKPinAnnotationColorRed) {
+		self.viewIncidentViewController.incidents = self.allRows;	
+	}
+	else {
+		self.viewIncidentViewController.incidents = self.pending;
+	}
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];	
 }
 

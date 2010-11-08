@@ -23,7 +23,7 @@
 
 @implementation IncidentTableCell
 
-@synthesize titleLabel, locationLabel, categoryLabel, dateLabel, imageView;
+@synthesize titleLabel, locationLabel, categoryLabel, dateLabel, imageView, activityIndicator;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
@@ -41,6 +41,7 @@
 	[categoryLabel release];
 	[dateLabel release];
 	[imageView release];
+	[activityIndicator release];
     [super dealloc];
 }
 
@@ -116,6 +117,19 @@
 
 + (CGFloat) getCellHeight {
 	return 80;
+}
+
+- (BOOL) uploading {
+	return [self.activityIndicator isAnimating];
+}
+
+- (void) setUploading:(BOOL)isUploading {
+	if (isUploading) {
+		[self.activityIndicator startAnimating];
+	}
+	else {
+		[self.activityIndicator stopAnimating];
+	}
 }
 
 @end

@@ -34,6 +34,8 @@
 	NSString *lastName;
 	BOOL downloadMaps;
 	BOOL becomeDiscrete;
+	NSInteger mapZoomLevel;
+	UILabel *mapZoomLevelLabel;
 	CGFloat imageWidth;
 	UILabel *imageWidthLabel;
 }

@@ -29,18 +29,19 @@
 
 @class CategoriesViewController;
 @class LocationsViewController;
+@class IncidentsViewController;
 @class Incident;
 
-@interface AddIncidentViewController : TableViewController<UshahidiDelegate, 
-															TextFieldTableCellDelegate, 
-															TextViewTableCellDelegate, 
-															DatePickerDelegate,
-															ImagePickerDelegate>  {
+@interface AddIncidentViewController : TableViewController<TextFieldTableCellDelegate, 
+														   TextViewTableCellDelegate, 
+														   DatePickerDelegate,
+														   ImagePickerDelegate>  {
 																
 @public
 	ImagePickerController *imagePickerController;
 	CategoriesViewController *categoriesViewController;
 	LocationsViewController *locationsViewController;
+	IncidentsViewController *incidentsViewController;
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
 																
@@ -54,6 +55,7 @@
 @property(nonatomic, retain) IBOutlet ImagePickerController *imagePickerController;
 @property(nonatomic, retain) IBOutlet CategoriesViewController *categoriesViewController;
 @property(nonatomic, retain) IBOutlet LocationsViewController *locationsViewController;
+@property(nonatomic, retain) IBOutlet IncidentsViewController *incidentsViewController;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;

@@ -23,12 +23,45 @@
 
 @implementation MKMapView (Extension)
 
-- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude {
+- (void) addPinWithTitle:(NSString *)title 
+				subtitle:(NSString *)subtitle 
+				latitude:(NSString *)latitude 
+			   longitude:(NSString *)longitude {
+	[self addPinWithTitle:title 
+				 subtitle:subtitle 
+				 latitude:latitude 
+				longitude:longitude 
+				   object:nil
+				 pinColor:MKPinAnnotationColorRed];
+}
+
+- (void) addPinWithTitle:(NSString *)title 
+				subtitle:(NSString *)subtitle 
+				latitude:(NSString *)latitude 
+			   longitude:(NSString *)longitude
+				  object:(NSObject *)object {
+	[self addPinWithTitle:title 
+				 subtitle:subtitle 
+				 latitude:latitude 
+				longitude:longitude 
+				   object:object
+				 pinColor:MKPinAnnotationColorRed];
+}
+
+- (void) addPinWithTitle:(NSString *)title 
+				subtitle:(NSString *)subtitle 
+				latitude:(NSString *)latitude 
+			   longitude:(NSString *)longitude 
+				  object:(NSObject *)object
+				pinColor:(MKPinAnnotationColor)pinColor {
 	CLLocationCoordinate2D coordinate;
 	coordinate.latitude = [latitude floatValue];
 	coordinate.longitude = [longitude floatValue];
-	NSInteger index = [self.annotations count];
-	MapAnnotation *mapAnnotation = [[MapAnnotation alloc] initWithTitle:title subtitle:subtitle coordinate:coordinate index:index];
+	MapAnnotation *mapAnnotation = [[MapAnnotation alloc] initWithTitle:title 
+															   subtitle:subtitle 
+															 coordinate:coordinate
+															   pinColor:pinColor];
+	[mapAnnotation setObject:object];
 	[self addAnnotation:mapAnnotation];
 	[mapAnnotation release];
 }
@@ -75,7 +108,7 @@
 		
 		[self setRegion:[self regionThatFits:region] animated:animated];	
 	}
-	else if (self.region.center.latitude != 0 && self.region.center.longitude != 0) {
+	else if ((int)self.region.center.latitude != 0 && (int)self.region.center.longitude != 0) {
 		MKCoordinateRegion coordinate = self.region;
 		coordinate.span.latitudeDelta = coordinate.span.latitudeDelta *10;
 		coordinate.span.longitudeDelta = coordinate.span.longitudeDelta *10;

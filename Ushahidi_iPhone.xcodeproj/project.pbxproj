@@ -23,6 +23,7 @@
 		3E1500711278C37A00036A0F /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15006F1278C37A00036A0F /* refresh.png */; };
 		3E1501171278D82500036A0F /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
 		3E2E853812787E7F00ADA49B /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
+		3E30492912874F3600E3C942 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E30492812874F3600E3C942 /* NSObject+Extension.m */; };
 		3E4A006F1271F26C0017AED4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
 		3E4A00711271F26C0017AED4 /* reports.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006E1271F26C0017AED4 /* reports.png */; };
 		3E4A022712720E280017AED4 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
@@ -147,6 +148,7 @@
 		3ECB55D2122F5BEE000AAC56 /* DateTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */; };
 		3ECB55ED122F5E33000AAC56 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55EC122F5E33000AAC56 /* DatePicker.m */; };
 		3ECB579F122F809C000AAC56 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB579E122F809C000AAC56 /* UIView+Extension.m */; };
+		3ECD0A4712889A9A0006AF7C /* NSError+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -176,6 +178,8 @@
 		3E1501161278D82500036A0F /* SliderTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderTableCell.m; sourceTree = "<group>"; };
 		3E2E853612787E7F00ADA49B /* MotionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionWindow.h; sourceTree = "<group>"; };
 		3E2E853712787E7F00ADA49B /* MotionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionWindow.m; sourceTree = "<group>"; };
+		3E30492712874F3600E3C942 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
+		3E30492812874F3600E3C942 /* NSObject+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Extension.m"; sourceTree = "<group>"; };
 		3E4A006C1271F26C0017AED4 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		3E4A006E1271F26C0017AED4 /* reports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reports.png; sourceTree = "<group>"; };
 		3E4A022512720E280017AED4 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
@@ -377,6 +381,8 @@
 		3ECB55EC122F5E33000AAC56 /* DatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePicker.m; sourceTree = "<group>"; };
 		3ECB579D122F809C000AAC56 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		3ECB579E122F809C000AAC56 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		3ECD0A4512889A9A0006AF7C /* NSError+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Extension.h"; sourceTree = "<group>"; };
+		3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -498,6 +504,10 @@
 				3E8638C312247BAC001DE141 /* MKMapView+Extension.m */,
 				3E4A022512720E280017AED4 /* NSString+Extension.h */,
 				3E4A022612720E280017AED4 /* NSString+Extension.m */,
+				3E30492712874F3600E3C942 /* NSObject+Extension.h */,
+				3E30492812874F3600E3C942 /* NSObject+Extension.m */,
+				3ECD0A4512889A9A0006AF7C /* NSError+Extension.h */,
+				3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -595,10 +605,10 @@
 				3E4AFF5E1271E21E0017AED4 /* InfoViewController.m */,
 				3E862A061222BCD0001DE141 /* DeploymentsViewController.h */,
 				3E862A071222BCD0001DE141 /* DeploymentsViewController.m */,
-				3E862A041222BCD0001DE141 /* IncidentsViewController.h */,
-				3E862A051222BCD0001DE141 /* IncidentsViewController.m */,
 				3E8629FE1222BCD0001DE141 /* AddDeploymentViewController.h */,
 				3E8629FF1222BCD0001DE141 /* AddDeploymentViewController.m */,
+				3E862A041222BCD0001DE141 /* IncidentsViewController.h */,
+				3E862A051222BCD0001DE141 /* IncidentsViewController.m */,
 				3E8629FC1222BCD0001DE141 /* AddIncidentViewController.h */,
 				3E8629FD1222BCD0001DE141 /* AddIncidentViewController.m */,
 				3EBB0EFE12767882007D7930 /* CategoriesViewController.h */,
@@ -952,6 +962,8 @@
 				3EC94CBC12773CDD00411AE0 /* UIImage+Extension.m in Sources */,
 				3E2E853812787E7F00ADA49B /* MotionWindow.m in Sources */,
 				3E1501171278D82500036A0F /* SliderTableCell.m in Sources */,
+				3E30492912874F3600E3C942 /* NSObject+Extension.m in Sources */,
+				3ECD0A4712889A9A0006AF7C /* NSError+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

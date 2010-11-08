@@ -25,6 +25,8 @@
 #import "LoadingViewController.h"
 #import "CategoriesViewController.h"
 #import "LocationsViewController.h"
+#import "IncidentsViewController.h"
+#import "IncidentsViewController.h"
 #import "TextTableCell.h"
 #import "AlertView.h"
 #import "InputView.h"
@@ -45,8 +47,8 @@ typedef enum {
 	TableSectionTitle,
 	TableSectionDescription,
 	TableSectionCategory,
-	TableSectionLocation,
 	TableSectionDate,
+	TableSectionLocation,
 	TableSectionPhotos,
 	TableSectionNews
 } TableSection;
@@ -66,7 +68,7 @@ typedef enum {
 @implementation AddIncidentViewController
 
 @synthesize cancelButton, doneButton, datePicker;
-@synthesize categoriesViewController, locationsViewController, imagePickerController;
+@synthesize categoriesViewController, locationsViewController, imagePickerController, incidentsViewController;
 @synthesize incident;
 
 #pragma mark -
@@ -82,7 +84,7 @@ typedef enum {
 - (IBAction) done:(id)sender {
 	DLog(@"done");
 	[self.view endEditing:YES];
-	if([[Ushahidi sharedUshahidi] addIncident:self.incident withDelegate:self]) {
+	if([[Ushahidi sharedUshahidi] addIncident:self.incident withDelegate:self.incidentsViewController]) {
 		[self dismissModalViewControllerAnimated:YES];
 	}
 	else {
@@ -97,7 +99,7 @@ typedef enum {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initWithDelegate:self forController:self];
-	[self addHeaders:[Messages title], [Messages description], [Messages category], [Messages location], [Messages date], [Messages photos], [Messages news], nil];
+	[self addHeaders:[Messages title], [Messages description], [Messages category], [Messages date], [Messages location], [Messages photos], [Messages news], nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -106,7 +108,6 @@ typedef enum {
 	if (self.modalViewController == nil) {
 		DLog(@"XXXXXXXXXXXXXX initWithDefaultValues XXXXXXXXXXXXXX");
 		self.incident = [[Incident alloc] initWithDefaultValues];
-		self.incident.pending = YES;
 		self.willBePushed = NO;
 	}
 	self.doneButton.enabled = [self.incident hasRequiredValues];
@@ -122,6 +123,7 @@ typedef enum {
 	[imagePickerController release];
 	[categoriesViewController release];
 	[locationsViewController release];
+	[incidentsViewController release];
 	[incident release];
     [super dealloc];
 }
@@ -362,21 +364,6 @@ typedef enum {
 
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	self.incident.description = text;
-}
-
-#pragma mark -
-#pragma mark UshahidiDelegate
-
-- (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)theIncident error:(NSError *)error {
-	if (error != nil) {
-		DLog(@"error: %@", [error localizedDescription]);
-	}
-	else if (theIncident != nil){
-		DLog(@"Incident: %@", theIncident.title);
-	}
-	else {
-		DLog(@"Incident is NULL");
-	}
 }
 
 #pragma mark -

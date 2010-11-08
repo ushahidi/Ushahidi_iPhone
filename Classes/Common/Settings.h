@@ -30,6 +30,7 @@
 	BOOL downloadMaps;
 	BOOL becomeDiscrete;
 	CGFloat imageWidth;
+	NSInteger mapZoomLevel;
 }
 
 @property(nonatomic, retain) NSString *email;
@@ -39,6 +40,7 @@
 @property(nonatomic, assign) BOOL downloadMaps;
 @property(nonatomic, assign) BOOL becomeDiscrete;
 @property(nonatomic, assign) CGFloat imageWidth;
+@property(nonatomic, assign) NSInteger mapZoomLevel;
 
 + (Settings *) sharedSettings;
 

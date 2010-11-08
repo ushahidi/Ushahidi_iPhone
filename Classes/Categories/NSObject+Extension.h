@@ -18,31 +18,12 @@
  **
  *****************************************************************************/
 
-#import "MapAnnotation.h"
+#import <Foundation/Foundation.h>
 
-@implementation MapAnnotation
+@interface NSObject (Extension) 
 
-@synthesize coordinate, title, subtitle, pinColor, object;
-
-- (id) initWithTitle:(NSString *)theTitle 
-			subtitle:(NSString *)theSubtitle 
-		  coordinate:(CLLocationCoordinate2D)theCoordinate 
-			pinColor:(MKPinAnnotationColor)thePinColor {
-	if (self = [super init]) {
-		self.title = theTitle;
-		self.subtitle = theSubtitle;
-		self.coordinate = theCoordinate;
-		self.pinColor = thePinColor;
-	}
-    return self;
-}
-
-
-- (void)dealloc {
-	[title release];
-	[subtitle release];
-	[object release];
-	[super dealloc];
-}
+- (void) dispatchSelector:(SEL)selector
+				   target:(id)target
+				  objects:(id)obj, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

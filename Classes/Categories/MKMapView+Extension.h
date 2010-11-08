@@ -25,7 +25,24 @@
 
 @interface MKMapView (Extension)
 
-- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) addPinWithTitle:(NSString *)title 
+				subtitle:(NSString *)subtitle 
+				latitude:(NSString *)latitude 
+			   longitude:(NSString *)longitude;
+
+- (void) addPinWithTitle:(NSString *)title 
+				subtitle:(NSString *)subtitle 
+				latitude:(NSString *)latitude 
+			   longitude:(NSString *)longitude 
+				  object:(NSObject *)object;
+
+- (void) addPinWithTitle:(NSString *)title 
+				subtitle:(NSString *)subtitle 
+				latitude:(NSString *)latitude 
+			   longitude:(NSString *)longitude 
+				  object:(NSObject *)object 
+				pinColor:(MKPinAnnotationColor)pinColor;
+
 - (void) removeAllPins;
 - (void) resizeRegionToFitAllPins;
 - (void) resizeRegionToFitAllPins:(BOOL)animated;

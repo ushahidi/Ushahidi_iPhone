@@ -20,6 +20,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class Location;
+
 @interface Deployment : NSObject<NSCoding> {
 
 @public
@@ -46,6 +48,7 @@
 
 - (id)initWithName:(NSString *)name url:(NSString *)url;
 - (BOOL) matchesString:(NSString *)string;
+- (BOOL) containsLocation:(Location *)location;
 
 + (BOOL) isApiKeyUrl:(NSString *)url;
 - (NSString *) getGoogleApiKey;

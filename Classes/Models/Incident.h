@@ -40,7 +40,7 @@
 	
 	BOOL active;
 	BOOL verified;
-	BOOL pending;
+	BOOL uploading;
 	
 	NSMutableArray *news;
 	NSMutableArray *photos;
@@ -62,7 +62,7 @@
 
 @property(nonatomic,assign) BOOL active;
 @property(nonatomic,assign) BOOL verified;
-@property(nonatomic,assign) BOOL pending;
+@property(nonatomic,assign) BOOL uploading;
 
 @property(nonatomic,retain) NSMutableArray *news;
 @property(nonatomic,retain) NSMutableArray *photos;
@@ -77,13 +77,13 @@
 
 - (BOOL) matchesString:(NSString *)string;
 
-- (NSString *) dateTimeString;
-- (NSString *) dateString;
-- (NSString *) timeString;
-- (NSString *) dateDayMonthYear;
-- (NSString *) dateHour;
-- (NSString *) dateMinute;
-- (NSString *) dateAmPm;
+@property(nonatomic,readonly) NSString *dateTimeString;
+@property(nonatomic,readonly) NSString *dateString;
+@property(nonatomic,readonly) NSString *timeString;
+@property(nonatomic,readonly) NSString *dateDayMonthYear;
+@property(nonatomic,readonly) NSString *dateHour;
+@property(nonatomic,readonly) NSString *dateMinute;
+@property(nonatomic,readonly) NSString *dateAmPm;
 
 - (void) addPhoto:(Photo *)photo;
 - (void) addNews:(News *)news;

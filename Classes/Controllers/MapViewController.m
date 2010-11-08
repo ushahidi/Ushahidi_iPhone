@@ -105,7 +105,10 @@ typedef enum {
 	[super viewDidAppear:animated];
 	[self.mapView removeAllPins];
 	NSString *subtitle = [NSString stringWithFormat:@"%f,%f", self.locationLatitude, self.locationLongitude];
-	[self.mapView addPinWithTitle:self.locationName subtitle:subtitle latitude:self.locationLatitude longitude:self.locationLongitude];
+	[self.mapView addPinWithTitle:self.locationName 
+						 subtitle:subtitle 
+						 latitude:self.locationLatitude 
+						longitude:self.locationLongitude];
 	[self.mapView resizeRegionToFitAllPins:YES];
 }
 

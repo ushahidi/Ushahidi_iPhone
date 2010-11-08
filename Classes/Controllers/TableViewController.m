@@ -211,7 +211,7 @@
 			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor clearColor]];
 		}
 		else {
-			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiDarkTan]];
+			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiLiteBrown]];
 		}
 	}
 	return nil;

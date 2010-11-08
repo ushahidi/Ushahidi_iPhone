@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "Deployment.h"
+#import "Location.h"
 
 @interface Deployment ()
 
@@ -92,10 +93,19 @@
 			[[self.url lowercaseString] hasPrefix:lowercaseString];
 }
 
+
+- (BOOL) containsLocation:(Location *)location {
+	for (Location *current in [self.locations allValues]) {
+		if ([current equals:location.name latitude:location.latitude longitude:location.longitude]) {
+			return YES;
+		}
+	}
+	return NO;
+}
+
 - (NSComparisonResult)compareByName:(Deployment *)deployment {
 	return [self.name localizedCaseInsensitiveCompare:deployment.name];
 }
-
 
 - (void)dealloc {
 	[name release];

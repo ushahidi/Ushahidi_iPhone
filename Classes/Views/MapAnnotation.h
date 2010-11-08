@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MKAnnotation.h>
+#import <MapKit/MKPinAnnotationView.h>
 
 @interface MapAnnotation : NSObject <MKAnnotation> {
 	
@@ -27,14 +28,19 @@
 	CLLocationCoordinate2D coordinate;
 	NSString *title;
 	NSString *subtitle;
-	NSInteger index;
+	MKPinAnnotationColor pinColor;
+	NSObject *object;
 }
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
-@property (nonatomic, assign) NSInteger index;
-
-- (id) initWithTitle:(NSString *)title subtitle:(NSString *)subtitle coordinate:(CLLocationCoordinate2D)coordinate index:(NSInteger)index;
+@property (nonatomic, assign) MKPinAnnotationColor pinColor;
+@property (nonatomic, retain) NSObject *object;
+		   
+- (id) initWithTitle:(NSString *)title 
+			subtitle:(NSString *)subtitle 
+		  coordinate:(CLLocationCoordinate2D)coordinate 
+		   pinColor:(MKPinAnnotationColor)pinColor;
 
 @end

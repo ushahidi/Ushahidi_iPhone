@@ -43,6 +43,9 @@
 	Deployment *deployment;
 	UISegmentedControl *sortOrder;
 	UIBarButtonItem *refreshButton;
+															 
+@private
+	NSMutableArray *pending;
 }
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;

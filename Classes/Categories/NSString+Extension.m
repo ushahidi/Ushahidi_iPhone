@@ -33,7 +33,6 @@
 	return string == nil || [string length] == 0;
 }
 
-
 - (BOOL) anyWordHasPrefix:(NSString *)prefix {
 	if (prefix == nil || [prefix length] == 0) {
 		return YES;

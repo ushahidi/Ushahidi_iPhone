@@ -67,6 +67,9 @@
 
 - (void)addPostValue:(id <NSObject>)value forKey:(NSString *)key
 {
+	if (value == nil) {
+		value = @"";
+	}
 	if (![self postData]) {
 		[self setPostData:[NSMutableArray array]];
 	}
@@ -219,6 +222,7 @@
 #endif
 	
 	NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding([self stringEncoding]));
+	NSLog(@"charset: %@", charset);
 	
 	// Set your own boundary string only if really obsessive. We don't bother to check if post data contains the boundary, since it's pretty unlikely that it does.
 	NSString *stringBoundary = @"0xKhTmLbOuNdArY";
@@ -304,6 +308,7 @@
 	[self addToDebugBody:string];
 #endif
 	[super appendPostData:[string dataUsingEncoding:[self stringEncoding]]];
+	NSLog(@"%@", string);
 }
 
 #if DEBUG_FORM_DATA_REQUEST

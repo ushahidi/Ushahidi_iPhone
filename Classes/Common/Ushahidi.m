@@ -189,8 +189,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post setDelegate:self];
 		[post setTimeOutSeconds:120];
 		[post setShouldRedirect:YES];
+		[post setAllowCompressedResponse:NO];
 		[post setShouldCompressRequestBody:NO];
+		[post setShouldAttemptPersistentConnection:NO];
 		[post setValidatesSecureCertificate:NO];
+		[post setPostFormat:ASIMultipartFormDataPostFormat];
+		[post addRequestHeader:@"Accept" value:@"*/*"];
+		[post addRequestHeader:@"Cache-Control" value:@"no-cache"];
+		[post addRequestHeader:@"Connection" value:@"Keep-Alive"];
 		[post setDidFinishSelector:@selector(uploadFinished:)];
 		[post setDidFailSelector:@selector(uploadFailed:)];
 		[post setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:delegate, @"delegate",
@@ -212,6 +218,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post addPostValue:[[Settings sharedSettings] email] forKey:@"person_email"];
 		NSInteger filename = 1;
 		for(Photo *photo in incident.photos) {
+			//[post addData:[photo getPngData] forKey:@"incident_photo[]"];
 			[post addData:[photo getJpegData] withFileName:[NSString stringWithFormat:@"incident_photo%d.jpg", filename++] 
 											andContentType:@"image/jpeg" 
 													forKey:@"incident_photo[]"];
@@ -232,6 +239,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void)uploadFinished:(ASIHTTPRequest *)request {
 	DLog(@"request: %@", [request.originalURL absoluteString]);
 	DLog(@"status: %@", [request responseStatusMessage]);
+	DLog(@"response: %@", [request responseString]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	Incident *incident = [[request userInfo] objectForKey:@"incident"];
 	NSDictionary *json = [[request responseString] JSONValue];
@@ -243,7 +251,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					   objects:self, incident, error, nil];
 	}
 	else {
-		NSDictionary *payload = [json	objectForKey:@"payload"];
+		NSDictionary *payload = [json objectForKey:@"payload"];
 		DLog(@"response: %@", payload);
 		incident.uploading = NO;
 		if ([@"true" isEqualToString:[payload objectForKey:@"success"]]) {
@@ -533,6 +541,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
+		DLog(@"response: %@", [request responseString]);
 		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:@"Invalid response."];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 						target:delegate 
@@ -540,7 +549,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 	else {
 		BOOL hasChanges = NO;
-		NSDictionary *payload = [json	objectForKey:@"payload"];
+		NSDictionary *payload = [json objectForKey:@"payload"];
 		NSArray *incidents = [payload objectForKey:@"incidents"]; 
 		for (NSDictionary *dictionary in incidents) {
 			Incident *incident = [[Incident alloc] initWithDictionary:[dictionary objectForKey:@"incident"] 

@@ -157,7 +157,6 @@ typedef enum {
 }
 
 - (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	DLog(@"text: %@", text);
 	if (indexPath.section == TableSectionName) {
 		self.name = text;
 	}
@@ -168,7 +167,6 @@ typedef enum {
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	DLog(@"text: %@", text);
 	if (indexPath.section == TableSectionName) {
 		self.name = text;
 	}

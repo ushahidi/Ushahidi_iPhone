@@ -122,10 +122,6 @@
 #pragma mark -
 #pragma mark API Keys
 
-+ (BOOL) isApiKeyUrl:(NSString *)url {
-	return [url rangeOfString:@"task=apikeys"].location != NSNotFound;
-}
-
 - (NSString *) getGoogleApiKey {
 	return [NSString stringWithFormat:@"http://%@/api?task=apikeys&by=google&resp=json", self.domain];
 }
@@ -141,10 +137,6 @@
 #pragma mark -
 #pragma mark Categories
 
-+ (BOOL) isCategoriesUrl:(NSString *)url {
-	return [url rangeOfString:@"task=categories"].location != NSNotFound;
-}
-
 - (NSString *) getCategories {
 	return [NSString stringWithFormat:@"http://%@/api?task=categories&resp=json", self.domain];
 }
@@ -155,10 +147,6 @@
 
 #pragma mark -
 #pragma mark Countries
-
-+ (BOOL) isCountriesUrl:(NSString *)url {
-	return [url rangeOfString:@"task=countries"].location != NSNotFound;
-}
 
 - (NSString *) getCountries {
 	return [NSString stringWithFormat:@"http://%@/api?task=countries&resp=json", self.domain];
@@ -179,10 +167,6 @@
 #pragma mark -
 #pragma mark Locations
 
-+ (BOOL) isLocationsUrl:(NSString *)theUrl {
-	return [theUrl rangeOfString:@"task=locations"].location != NSNotFound;
-}
-
 - (NSString *) getLocations {
 	return [NSString stringWithFormat:@"http://%@/api?task=locations&resp=json", self.domain];
 }
@@ -197,10 +181,6 @@
 
 #pragma mark -
 #pragma mark Incidents
-
-+ (BOOL) isIncidentsUrl:(NSString *)theUrl {
-	return [theUrl rangeOfString:@"task=incidents"].location != NSNotFound;
-}
 
 - (NSString *) getIncidents {
 	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=all&resp=json", self.domain];

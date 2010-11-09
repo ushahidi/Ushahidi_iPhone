@@ -59,7 +59,7 @@
 - (NSArray *) getLocationsForDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getIncidents;
-- (NSArray *) getPending;
+- (NSArray *) getIncidentsPending;
 - (NSArray *) getIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getIncidentsByCategoryID:(NSString *)categoryID forDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getIncidentsByCategoryName:(NSString *)categoryName forDelegate:(id<UshahidiDelegate>)delegate;

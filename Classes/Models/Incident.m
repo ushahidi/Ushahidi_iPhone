@@ -61,7 +61,7 @@ typedef enum {
 - (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media {
 	if (self = [self initWithDefaultValues]) {
 		if (dictionary != nil) {
-			//DLog(@"dictionary: %@", dictionary);
+			DLog(@"inspection: %@", dictionary);
 			self.identifier = [dictionary stringForKey:@"incidentid"];
 			self.title = [dictionary stringForKey:@"incidenttitle"];
 			self.description = [dictionary stringForKey:@"incidentdescription"];

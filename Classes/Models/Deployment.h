@@ -50,27 +50,22 @@
 - (BOOL) matchesString:(NSString *)string;
 - (BOOL) containsLocation:(Location *)location;
 
-+ (BOOL) isApiKeyUrl:(NSString *)url;
 - (NSString *) getGoogleApiKey;
 - (NSString *) getYahooApiKey;
 - (NSString *) getMicrosoftApiKey;
 
-+ (BOOL) isCategoriesUrl:(NSString *)url;
 - (NSString *) getCategories;
 - (NSString *) getCategoryByID:(NSString *)categoryID;
 
-+ (BOOL) isCountriesUrl:(NSString *)url;
 - (NSString *) getCountries;
 - (NSString *) getCountryByID:(NSString *)countryID;
 - (NSString *) getCountryByISO:(NSString *)countryISO;
 - (NSString *) getCountryByName:(NSString *)countryName;
 
-+ (BOOL) isLocationsUrl:(NSString *)url;
 - (NSString *) getLocations;
 - (NSString *) getLocationByID:(NSString *)locationID;
 - (NSString *) getLocationsByCountryID:(NSString *)countryID;
 
-+ (BOOL) isIncidentsUrl:(NSString *)url;
 - (NSString *) getIncidents;
 - (NSString *) getIncidentsByCategoryID:(NSString *)categoryID;
 - (NSString *) getIncidentsByCategoryName:(NSString *)categoryName;

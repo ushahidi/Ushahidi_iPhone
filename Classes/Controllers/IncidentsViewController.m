@@ -176,7 +176,7 @@ typedef enum {
 		DLog(@"Re-Adding Rows: %d", [incidents count]);
 	}
 	[self.pending removeAllObjects];
-	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getPending]];
+	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
 	[self.tableView reloadData];
 }
 

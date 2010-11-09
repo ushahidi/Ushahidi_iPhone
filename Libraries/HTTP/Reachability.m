@@ -191,11 +191,11 @@ static void logNetworkStatus_(const char *name, int line, NetworkStatus status) 
 @synthesize key = key_;
 
 // Preclude direct access to ivars.
-+ (BOOL) accessServerVariablesDirectly {
++ (BOOL) accessInstanceVariablesDirectly {
 	
 	return NO;
 
-} // accessServerVariablesDirectly
+} // accessInstanceVariablesDirectly
 
 
 - (void) dealloc {

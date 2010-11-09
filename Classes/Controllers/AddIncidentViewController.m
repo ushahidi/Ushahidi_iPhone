@@ -84,7 +84,7 @@ typedef enum {
 - (IBAction) done:(id)sender {
 	DLog(@"done");
 	[self.view endEditing:YES];
-	if([[Ushahidi sharedUshahidi] addIncident:self.incident withDelegate:self.incidentsViewController]) {
+	if ([[Ushahidi sharedUshahidi] addIncident:self.incident forDelegate:self.incidentsViewController]) {
 		[self dismissModalViewControllerAnimated:YES];
 	}
 	else {
@@ -98,7 +98,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
-	self.datePicker = [[DatePicker alloc] initWithDelegate:self forController:self];
+	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
 	[self addHeaders:[Messages title], [Messages description], [Messages category], [Messages date], [Messages location], [Messages photos], [Messages news], nil];
 }
 
@@ -153,7 +153,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDescription) {
-		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellWithDelegate:self table:theTableView];
+		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setPlaceholder:@"Enter description"];
 		[cell setText:self.incident.description];
@@ -236,7 +236,7 @@ typedef enum {
 		return cell;
 	}
 	else {
-		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView];
+		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		if (indexPath.section == TableSectionTitle) {
 			[cell setPlaceholder:@"Enter title"];
@@ -312,7 +312,7 @@ typedef enum {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
-		[self.imagePickerController showImagePickerWithDelegate:self width:[[Settings sharedSettings] imageWidth]];
+		[self.imagePickerController showImagePickerForDelegate:self width:[[Settings sharedSettings] imageWidth]];
 	}
 	else if (indexPath.section == TableSectionCategory) {
 		self.categoriesViewController.incident = self.incident;

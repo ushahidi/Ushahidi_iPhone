@@ -35,7 +35,7 @@
 @property (nonatomic, retain) UITextField *textField;
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 
-- (id)initWithDelegate:(id<TextFieldTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initForDelegate:(id<TextFieldTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 
 - (void) setPlaceholder:(NSString *)placeholder;
 - (void) setIsPassword:(BOOL)isPassword;

@@ -34,7 +34,7 @@
 @property (nonatomic, retain)			NSIndexPath					*indexPath; 
 @property (nonatomic, retain, readonly) NSDate						*date;
 
-- (id)initWithDelegate:(id<DateTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initForDelegate:(id<DateTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setDate:(NSDate *)date timeFormat:(BOOL)timeFormat;
 - (void) setFont:(UIFont *)font;
 - (void) setPlaceholder:(NSString *)placeholder;

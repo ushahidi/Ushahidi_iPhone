@@ -25,7 +25,6 @@
 - (void)dispatchSelector:(SEL)selector
 				  target:(id)target
 				 objects:(id)firstArgument, ... {
-	DLog(@"dispatchSelector: %@", [target class]);
 	if(target && [target respondsToSelector:selector]) {
 		NSMethodSignature *signature = [target methodSignatureForSelector:selector];
         if(signature) {

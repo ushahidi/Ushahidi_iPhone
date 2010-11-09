@@ -142,19 +142,19 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDownloadMaps) {
-		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellWithDelegate:self table:theTableView];
+		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setChecked:self.downloadMaps];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionBecomeDiscrete) {
-		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellWithDelegate:self table:theTableView];
+		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setChecked:self.becomeDiscrete];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionImageWidth) {
-		SliderTableCell *cell = [TableCellFactory getSliderTableCellWithDelegate:self table:theTableView];
+		SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setMaximum:1024];
 		[cell setMinimum:200];
@@ -162,7 +162,7 @@ typedef enum {
 		return cell;
 	}
 	else if (indexPath.section == TableSectionMapZoomLevel) {
-		SliderTableCell *cell = [TableCellFactory getSliderTableCellWithDelegate:self table:theTableView];
+		SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		[cell setMaximum:21];
 		[cell setMinimum:5];
@@ -170,7 +170,7 @@ typedef enum {
 		return cell;
 	}
 	else {
-		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellWithDelegate:self table:theTableView];
+		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView];
 		cell.indexPath = indexPath;
 		if (indexPath.section == TableSectionEmail) {
 			[cell setPlaceholder:@"Enter email"];

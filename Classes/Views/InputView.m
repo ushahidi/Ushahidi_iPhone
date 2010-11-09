@@ -37,7 +37,7 @@
 
 @synthesize delegate, input;
 
-- (id) initWithDelegate:(id<InputViewDelegate>)theDelegate {
+- (id) initForDelegate:(id<InputViewDelegate>)theDelegate {
 	if (self = [super init]) {
 		self.delegate = theDelegate;
 	}

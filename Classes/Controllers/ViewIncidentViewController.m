@@ -169,7 +169,7 @@ typedef enum {
 			return cell;
 		}
 		else {
-			MapTableCell *cell = [TableCellFactory getMapTableCellWithDelegate:self table:theTableView];
+			MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView];
 			[cell setScrollable:NO];
 			[cell setZoomable:NO];
 			//TODO prevent map from re-adding pin
@@ -192,7 +192,7 @@ typedef enum {
 			}
 			else {
 				[cell setImage:nil];
-				[photo downloadWithDelegate:self];
+				[photo downloadForDelegate:self];
 			}
 		}
 		else {

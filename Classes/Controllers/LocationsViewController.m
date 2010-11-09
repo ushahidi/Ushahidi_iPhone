@@ -116,7 +116,7 @@ typedef enum {
 	self.locationType.selectedSegmentIndex = LocationTypeTable;
 	[self.allRows removeAllObjects];
 	[self.filteredRows removeAllObjects];
-	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsWithDelegate:self]];
+	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsForDelegate:self]];
 	[self.filteredRows addObjectsFromArray:self.allRows];
 	[self.tableView reloadData];
 }
@@ -149,7 +149,7 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellWithDelegate:self table:theTableView];
+	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView];
 	cell.indexPath = indexPath;
 	Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
 	if (theLocation != nil) {

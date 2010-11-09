@@ -31,7 +31,7 @@
 
 @synthesize delegate, indexPath, searchBar;
 
-- (id)initWithDelegate:(id<SearchTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initForDelegate:(id<SearchTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.delegate = theDelegate;
         self.selectionStyle = UITableViewCellSelectionStyleNone;

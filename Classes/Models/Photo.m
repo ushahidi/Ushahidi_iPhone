@@ -20,6 +20,7 @@
 
 #import "Photo.h"
 #import "UIImage+Resize.h"
+#import "NSObject+Extension.h"
 
 @interface Photo ()
 
@@ -27,7 +28,6 @@
 @property (nonatomic, assign) BOOL downloading;
 
 - (void) downloadImageInBackground:(NSString *)urlString;
-- (void) notifyDelegate;
 
 @end
 
@@ -39,12 +39,16 @@ NSInteger const kMaxHeight = 80;
 @synthesize delegate, image, thumbnail, indexPath, downloading;
 
 + (id)photoWithImage:(UIImage *)theImage {
-	return [[Photo alloc] initWithImage:theImage];
+	return [[[Photo alloc] initWithImage:theImage] autorelease];
 }
 			
 - (id)initWithImage:(UIImage *)theImage {
 	if (self = [super init]) {
 		self.image = theImage;
+		CGSize thumbnailSize = theImage.size.width > theImage.size.height
+			? CGSizeMake(kMaxWidth, kMaxWidth * self.image.size.height / self.image.size.width)
+			: CGSizeMake(kMaxHeight * self.image.size.width / self.image.size.height, kMaxHeight);
+		self.thumbnail = [theImage resizedImage:thumbnailSize interpolationQuality:kCGInterpolationMedium];
 	}
 	return self;
 }
@@ -87,7 +91,7 @@ NSInteger const kMaxHeight = 80;
     [super dealloc];
 }
 
-- (void) downloadWithDelegate:(id<PhotoDelegate>)theDelegate {
+- (void) downloadForDelegate:(id<PhotoDelegate>)theDelegate {
 	self.delegate = theDelegate;
 	if (self.url != nil && self.downloading == NO) {
 		self.downloading = YES;
@@ -112,19 +116,14 @@ NSInteger const kMaxHeight = 80;
 				thumbnailSize = CGSizeMake(kMaxHeight * self.image.size.width / self.image.size.height, kMaxHeight);
 			}
 			self.thumbnail = [self.image resizedImage:thumbnailSize interpolationQuality:kCGInterpolationMedium];
-			[self performSelectorOnMainThread:@selector(notifyDelegate) withObject:nil waitUntilDone:YES];
+			[self dispatchSelector:@selector(photoDownloaded:indexPath:)  
+							target:self.delegate 
+						   objects:self, self.indexPath, nil];
 		}
 	}
 	@finally {
 		self.downloading = NO;
 		[pool release];
-	}
-}
-
-- (void) notifyDelegate {
-	SEL selector = @selector(photoDownloaded:indexPath:);
-	if (self.delegate != nil && [self.delegate respondsToSelector:selector]) {
-		[self.delegate photoDownloaded:self indexPath:self.indexPath];
 	}
 }
 

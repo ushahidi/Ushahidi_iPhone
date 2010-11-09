@@ -74,8 +74,8 @@ typedef enum {
 	DLog(@"");
 	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:@"Loading..."];
-	[[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
-	[[Ushahidi sharedUshahidi] uploadIncidents:self];
+	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
+	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 }
 
 - (IBAction) sortOrder:(id)sender {
@@ -149,7 +149,7 @@ typedef enum {
 	}
 	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.willBePushed) {
-		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidentsWithDelegate:self];
+		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 		[self.allRows removeAllObjects];
 		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
@@ -240,7 +240,7 @@ typedef enum {
 			}
 			else if (photo.url != nil) {
 				[cell setImage:nil];
-				[photo downloadWithDelegate:self];
+				[photo downloadForDelegate:self];
 			}
 		}
 		else if (incident.map != nil) {

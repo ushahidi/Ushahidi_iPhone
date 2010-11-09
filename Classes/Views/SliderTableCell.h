@@ -33,7 +33,7 @@
 
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 
-- (id)initWithDelegate:(id<SliderTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier ;
+- (id)initForDelegate:(id<SliderTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier ;
 
 - (void) setMinimum:(CGFloat)minimum;
 - (void) setMaximum:(CGFloat)maximum;

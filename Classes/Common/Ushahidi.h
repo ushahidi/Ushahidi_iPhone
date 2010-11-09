@@ -49,34 +49,23 @@
 - (BOOL)addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
 - (Deployment *) getDeploymentWithUrl:(NSString *)url;
 
-- (BOOL)addIncident:(Incident *)incident withDelegate:(id<UshahidiDelegate>)delegate;
-- (BOOL)uploadIncident:(Incident *)incident withDelegate:(id<UshahidiDelegate>)delegate;
-- (void)uploadIncidents:(id<UshahidiDelegate>)delegate;
+- (BOOL)addIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
+- (BOOL)uploadIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
+- (void)uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 
-- (NSArray *) getDeploymentsWithDelegate:(id<UshahidiDelegate>)delegate;
-
-- (NSArray *) getCategoriesWithDelegate:(id<UshahidiDelegate>)delegate;
-- (Category *) getCategoryByID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate;
-
-- (NSArray *) getCountriesWithDelegate:(id<UshahidiDelegate>)delegate;
-- (Country *) getCountryByID:(NSString *)countryId withDelegate:(id<UshahidiDelegate>)delegate;
-- (Country *) getCountryByISO:(NSString *)countryISO withDelegate:(id<UshahidiDelegate>)delegate;
-- (Country *) getCountryByName:(NSString *)countryName withDelegate:(id<UshahidiDelegate>)delegate;
-
-- (NSArray *) getLocationsWithDelegate:(id<UshahidiDelegate>)delegate;
-- (Location *) getLocationByID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate;
-- (NSArray *) getLocationsByCountryID:(NSString *)countryID withDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getDeploymentsForDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getCategoriesForDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getCountriesForDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getLocationsForDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getIncidents;
 - (NSArray *) getPending;
-- (NSArray *) getIncidentsWithDelegate:(id<UshahidiDelegate>)delegate;
-- (NSInteger) getIncidentsCountWithDelegate:(id<UshahidiDelegate>)delegate;
-- (void) getGeoGraphicMidPointWithDelegate:(id<UshahidiDelegate>)delegate;
-- (NSArray *) getIncidentsByCategoryID:(NSString *)categoryID withDelegate:(id<UshahidiDelegate>)delegate;
-- (NSArray *) getIncidentsByCategoryName:(NSString *)categoryName withDelegate:(id<UshahidiDelegate>)delegate;
-- (NSArray *) getIncidentsByLocationID:(NSString *)locationID withDelegate:(id<UshahidiDelegate>)delegate;
-- (NSArray *) getIncidentsByLocationName:(NSString *)locationName withDelegate:(id<UshahidiDelegate>)delegate;
-- (NSArray *) getIncidentsBySinceID:(NSString *)sinceID withDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getIncidentsByCategoryID:(NSString *)categoryID forDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getIncidentsByCategoryName:(NSString *)categoryName forDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getIncidentsByLocationID:(NSString *)locationID forDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getIncidentsByLocationName:(NSString *)locationName forDelegate:(id<UshahidiDelegate>)delegate;
+- (NSArray *) getIncidentsBySinceID:(NSString *)sinceID forDelegate:(id<UshahidiDelegate>)delegate;
 
 @end
 			 

@@ -40,8 +40,8 @@
 @property(nonatomic, assign) id<ImagePickerDelegate> delegate;
 
 - (id) initWithController:(UIViewController *)controller;
-- (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)delegate;
-- (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)delegate width:(CGFloat)width;
+- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)delegate;
+- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)delegate width:(CGFloat)width;
 
 @end
 

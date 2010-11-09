@@ -35,7 +35,7 @@
 
 @property (nonatomic, retain) NSDate *date;
 
-- (id) initWithDelegate:(id<DatePickerDelegate>)theDelegate forController:(UIViewController *)theController;
+- (id) initForDelegate:(id<DatePickerDelegate>)theDelegate forController:(UIViewController *)theController;
 - (void) showWithDate:(NSDate *)date mode:(UIDatePickerMode)datePickerMode indexPath:(NSIndexPath *)indexPath;
 @end
 

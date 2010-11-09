@@ -30,7 +30,7 @@
 
 @synthesize delegate, indexPath;
 
-- (id)initWithDelegate:(id<SliderTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initForDelegate:(id<SliderTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
         self.delegate = theDelegate;
 		UISlider *slider = [[UISlider alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 10)];

@@ -34,7 +34,7 @@
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UISearchBar *searchBar;
 
-- (id)initWithDelegate:(id<SearchTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initForDelegate:(id<SearchTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setKeyboardType:(UIKeyboardType)keyboardType;
 - (void) setBarStyle:(UIBarStyle)barStyle;
 - (void) setPlaceholder:(NSString *)placeholder;

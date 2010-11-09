@@ -29,7 +29,7 @@
 	NSString				*input;
 }
 
-- (id) initWithDelegate:(id<InputViewDelegate>)delegate;
+- (id) initForDelegate:(id<InputViewDelegate>)delegate;
 - (void) showWithTitle:(NSString *)title placeholder:(NSString *)placeholder;
 
 @end 

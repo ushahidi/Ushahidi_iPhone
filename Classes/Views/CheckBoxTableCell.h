@@ -37,7 +37,7 @@
 @property (nonatomic, retain) UIImage *checkedImage;
 @property (nonatomic, retain) UIImage *uncheckedImage;
 
-- (id)initWithDelegate:(id<CheckBoxTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initForDelegate:(id<CheckBoxTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setChecked:(BOOL)checked;
 - (BOOL) getChecked;
 - (void) setTitle:(NSString *)title;

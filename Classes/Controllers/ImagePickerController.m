@@ -49,11 +49,11 @@
     return self;
 }
 
-- (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)theDelegate {
-	[self showImagePickerWithDelegate:theDelegate width:0];
+- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)theDelegate {
+	[self showImagePickerForDelegate:theDelegate width:0];
 }
 
-- (void) showImagePickerWithDelegate:(id<ImagePickerDelegate>)theDelegate width:(CGFloat)theWidth {
+- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)theDelegate width:(CGFloat)theWidth {
 	self.delegate = theDelegate;
 	self.width = theWidth;
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {

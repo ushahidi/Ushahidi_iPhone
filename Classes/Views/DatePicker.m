@@ -35,7 +35,7 @@
 
 @synthesize delegate, controller, date, indexPath;
 
-- (id) initWithDelegate:(id<DatePickerDelegate>)theDelegate forController:(UIViewController *)theController {
+- (id) initForDelegate:(id<DatePickerDelegate>)theDelegate forController:(UIViewController *)theController {
 	if (self = [super init]) {
 		self.delegate = theDelegate;
 		self.controller = theController;

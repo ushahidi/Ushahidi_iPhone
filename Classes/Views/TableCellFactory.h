@@ -78,48 +78,48 @@
 + (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView
 								  identifier:(NSString *)cellIdentifier;
 
-+ (SliderTableCell *) getSliderTableCellWithDelegate:(id<SliderTableCellDelegate>)delegate 
++ (SliderTableCell *) getSliderTableCellForDelegate:(id<SliderTableCellDelegate>)delegate 
 											   table:(UITableView *)tableView;
 
-+ (SliderTableCell *) getSliderTableCellWithDelegate:(id<SliderTableCellDelegate>)delegate
++ (SliderTableCell *) getSliderTableCellForDelegate:(id<SliderTableCellDelegate>)delegate
 											   table:(UITableView *)tableView
 										  identifier:(NSString *)cellIdentifier;
 
-+ (TextFieldTableCell *) getTextFieldTableCellWithDelegate:(id<TextFieldTableCellDelegate>)delegate
++ (TextFieldTableCell *) getTextFieldTableCellForDelegate:(id<TextFieldTableCellDelegate>)delegate
 													 table:(UITableView *)tableView;
 
-+ (TextFieldTableCell *) getTextFieldTableCellWithDelegate:(id<TextFieldTableCellDelegate>)delegate
++ (TextFieldTableCell *) getTextFieldTableCellForDelegate:(id<TextFieldTableCellDelegate>)delegate
 													 table:(UITableView *)tableView
 												identifier:(NSString *)cellIdentifier;
 
-+ (TextViewTableCell *) getTextViewTableCellWithDelegate:(id<TextViewTableCellDelegate>)delegate
++ (TextViewTableCell *) getTextViewTableCellForDelegate:(id<TextViewTableCellDelegate>)delegate
 												   table:(UITableView *)tableView;
 
-+ (TextViewTableCell *) getTextViewTableCellWithDelegate:(id<TextViewTableCellDelegate>)delegate
++ (TextViewTableCell *) getTextViewTableCellForDelegate:(id<TextViewTableCellDelegate>)delegate
 												   table:(UITableView *)tableView
 											  identifier:(NSString *)cellIdentifier;
 
 
-+ (SearchTableCell *) getSearchTableCellWithDelegate:(id<SearchTableCellDelegate>)delegate 
++ (SearchTableCell *) getSearchTableCellForDelegate:(id<SearchTableCellDelegate>)delegate 
 											   table:(UITableView *)tableView;
 
-+ (SearchTableCell *) getSearchTableCellWithDelegate:(id<SearchTableCellDelegate>)delegate 
++ (SearchTableCell *) getSearchTableCellForDelegate:(id<SearchTableCellDelegate>)delegate 
 											   table:(UITableView *)tableView
 										  identifier:(NSString *)cellIdentifier;
 
 
-+ (BooleanTableCell *) getBooleanTableCellWithDelegate:(id<BooleanTableCellDelegate>)delegate
++ (BooleanTableCell *) getBooleanTableCellForDelegate:(id<BooleanTableCellDelegate>)delegate
 												 table:(UITableView *)tableView;
 
-+ (BooleanTableCell *) getBooleanTableCellWithDelegate:(id<BooleanTableCellDelegate>)delegate
++ (BooleanTableCell *) getBooleanTableCellForDelegate:(id<BooleanTableCellDelegate>)delegate
 												 table:(UITableView *)tableView
 											identifier:(NSString *)cellIdentifier;
 
 
-+ (CheckBoxTableCell *) getCheckBoxTableCellWithDelegate:(id<CheckBoxTableCellDelegate>)delegate
++ (CheckBoxTableCell *) getCheckBoxTableCellForDelegate:(id<CheckBoxTableCellDelegate>)delegate
 												   table:(UITableView *)tableView;
 
-+ (CheckBoxTableCell *) getCheckBoxTableCellWithDelegate:(id<CheckBoxTableCellDelegate>)delegate
++ (CheckBoxTableCell *) getCheckBoxTableCellForDelegate:(id<CheckBoxTableCellDelegate>)delegate
 												   table:(UITableView *)tableView
 											  identifier:(NSString *)cellIdentifier;
 
@@ -131,17 +131,17 @@
 									 identifier:(NSString *)cellIdentifier;
 
 
-+ (MapTableCell *) getMapTableCellWithDelegate:(id<MapTableCellDelegate>)delegate
++ (MapTableCell *) getMapTableCellForDelegate:(id<MapTableCellDelegate>)delegate
 										 table:(UITableView *)tableView;
 
-+ (MapTableCell *) getMapTableCellWithDelegate:(id<MapTableCellDelegate>)delegate
++ (MapTableCell *) getMapTableCellForDelegate:(id<MapTableCellDelegate>)delegate
 										 table:(UITableView *)tableView
 									identifier:(NSString *)cellIdentifier;
 
-+ (DateTableCell *) getDateTableCellWithDelegate:(id<DateTableCellDelegate>)delegate
++ (DateTableCell *) getDateTableCellForDelegate:(id<DateTableCellDelegate>)delegate
 										   table:(UITableView *)tableView;
 
-+ (DateTableCell *) getDateTableCellWithDelegate:(id<DateTableCellDelegate>)delegate
++ (DateTableCell *) getDateTableCellForDelegate:(id<DateTableCellDelegate>)delegate
 										   table:(UITableView *)tableView
 									  identifier:(NSString *)cellIdentifier;
 

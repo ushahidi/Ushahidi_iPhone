@@ -55,7 +55,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[self.allRows removeAllObjects];
 	[self.filteredRows removeAllObjects];
-	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesWithDelegate:self]];
+	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
 	[self.filteredRows addObjectsFromArray:self.allRows];
 	[self.tableView reloadData];
 }
@@ -83,7 +83,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellWithDelegate:self table:theTableView];
+	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView];
 	cell.indexPath = indexPath;
 	Category *category = (Category *)[self filteredRowAtIndexPath:indexPath];
 	if (category != nil) {

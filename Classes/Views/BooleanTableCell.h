@@ -35,7 +35,7 @@
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
 
-- (id)initWithDelegate:(id<BooleanTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initForDelegate:(id<BooleanTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 
 - (void) setChecked:(BOOL)completed;
 - (BOOL) getChecked;

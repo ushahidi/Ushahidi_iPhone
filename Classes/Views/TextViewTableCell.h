@@ -38,7 +38,7 @@
 @property (nonatomic, assign) NSIndexPath *indexPath;
 @property (nonatomic, assign) NSInteger limit;
 
-- (id)initWithDelegate:(id<TextViewTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initForDelegate:(id<TextViewTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 
 - (void) setText:(NSString *)text;
 - (void) setPlaceholder:(NSString *)placeholder;

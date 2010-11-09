@@ -51,7 +51,7 @@
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
 	[self.loadingView showWithMessage:@"Loading..."];
-	[[Ushahidi sharedUshahidi] getDeploymentsWithDelegate:self];
+	[[Ushahidi sharedUshahidi] getDeploymentsForDelegate:self];
 }
 
 - (void) info:(id)sender {
@@ -81,7 +81,7 @@
 	[super viewWillAppear:animated];
 	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.willBePushed || self.modalViewController != nil) {
-		NSArray *deployments = [[Ushahidi sharedUshahidi] getDeploymentsWithDelegate:self];
+		NSArray *deployments = [[Ushahidi sharedUshahidi] getDeploymentsForDelegate:self];
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:deployments];
 		[self.filteredRows removeAllObjects];

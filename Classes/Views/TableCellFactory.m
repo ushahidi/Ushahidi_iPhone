@@ -141,17 +141,17 @@
 #pragma mark -
 #pragma mark SliderTableCell
 
-+ (SliderTableCell *) getSliderTableCellWithDelegate:(id<SliderTableCellDelegate>)delegate 
++ (SliderTableCell *) getSliderTableCellForDelegate:(id<SliderTableCellDelegate>)delegate 
 											   table:(UITableView *)tableView {
-	return [TableCellFactory getSliderTableCellWithDelegate:delegate table:tableView identifier:@"SliderTableCell"];
+	return [TableCellFactory getSliderTableCellForDelegate:delegate table:tableView identifier:@"SliderTableCell"];
 }
 
-+ (SliderTableCell *) getSliderTableCellWithDelegate:(id<SliderTableCellDelegate>)delegate
++ (SliderTableCell *) getSliderTableCellForDelegate:(id<SliderTableCellDelegate>)delegate
 											   table:(UITableView *)tableView
 										  identifier:(NSString *)cellIdentifier {
 	SliderTableCell *cell = (SliderTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[SliderTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[SliderTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }
@@ -159,17 +159,17 @@
 #pragma mark -
 #pragma mark TextFieldTableCell
 
-+ (TextFieldTableCell *) getTextFieldTableCellWithDelegate:(id<TextFieldTableCellDelegate>)delegate
++ (TextFieldTableCell *) getTextFieldTableCellForDelegate:(id<TextFieldTableCellDelegate>)delegate
 													 table:(UITableView *)tableView {
-	return [TableCellFactory getTextFieldTableCellWithDelegate:delegate table:tableView identifier:@"TextFieldTableCell"];
+	return [TableCellFactory getTextFieldTableCellForDelegate:delegate table:tableView identifier:@"TextFieldTableCell"];
 }
 
-+ (TextFieldTableCell *) getTextFieldTableCellWithDelegate:(id<TextFieldTableCellDelegate>)delegate
++ (TextFieldTableCell *) getTextFieldTableCellForDelegate:(id<TextFieldTableCellDelegate>)delegate
 													 table:(UITableView *)tableView
 												identifier:(NSString *)cellIdentifier {
 	TextFieldTableCell *cell = (TextFieldTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[TextFieldTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[TextFieldTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }
@@ -177,17 +177,17 @@
 #pragma mark -
 #pragma mark TextViewTableCell
 
-+ (TextViewTableCell *) getTextViewTableCellWithDelegate:(id<TextViewTableCellDelegate>)delegate
++ (TextViewTableCell *) getTextViewTableCellForDelegate:(id<TextViewTableCellDelegate>)delegate
 												   table:(UITableView *)tableView {
-	return [TableCellFactory getTextViewTableCellWithDelegate:delegate table:tableView identifier:@"TextViewTableCell"];
+	return [TableCellFactory getTextViewTableCellForDelegate:delegate table:tableView identifier:@"TextViewTableCell"];
 }
 
-+ (TextViewTableCell *) getTextViewTableCellWithDelegate:(id<TextViewTableCellDelegate>)delegate
++ (TextViewTableCell *) getTextViewTableCellForDelegate:(id<TextViewTableCellDelegate>)delegate
 													 table:(UITableView *)tableView
 												identifier:(NSString *)cellIdentifier {
 	TextViewTableCell *cell = (TextViewTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[TextViewTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[TextViewTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }
@@ -195,17 +195,17 @@
 #pragma mark -
 #pragma mark SearchTableCell
 
-+ (SearchTableCell *) getSearchTableCellWithDelegate:(id<SearchTableCellDelegate>)delegate 
++ (SearchTableCell *) getSearchTableCellForDelegate:(id<SearchTableCellDelegate>)delegate 
 											   table:(UITableView *)tableView {
-	return [TableCellFactory getSearchTableCellWithDelegate:delegate table:tableView identifier:@"SearchTableCell"];
+	return [TableCellFactory getSearchTableCellForDelegate:delegate table:tableView identifier:@"SearchTableCell"];
 }
 
-+ (SearchTableCell *) getSearchTableCellWithDelegate:(id<SearchTableCellDelegate>)delegate 
++ (SearchTableCell *) getSearchTableCellForDelegate:(id<SearchTableCellDelegate>)delegate 
 											   table:(UITableView *)tableView
 										  identifier:(NSString *)cellIdentifier {
 	SearchTableCell *cell = (SearchTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[SearchTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[SearchTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }
@@ -213,17 +213,17 @@
 #pragma mark -
 #pragma mark BooleanTableCell
 
-+ (BooleanTableCell *) getBooleanTableCellWithDelegate:(id<BooleanTableCellDelegate>)delegate
++ (BooleanTableCell *) getBooleanTableCellForDelegate:(id<BooleanTableCellDelegate>)delegate
 												 table:(UITableView *)tableView {
-	return [TableCellFactory getBooleanTableCellWithDelegate:delegate table:tableView identifier:@"BooleanTableCell"];
+	return [TableCellFactory getBooleanTableCellForDelegate:delegate table:tableView identifier:@"BooleanTableCell"];
 }
 
-+ (BooleanTableCell *) getBooleanTableCellWithDelegate:(id<BooleanTableCellDelegate>)delegate
++ (BooleanTableCell *) getBooleanTableCellForDelegate:(id<BooleanTableCellDelegate>)delegate
 												 table:(UITableView *)tableView
 											identifier:(NSString *)cellIdentifier {
 	BooleanTableCell *cell = (BooleanTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[BooleanTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[BooleanTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }
@@ -231,17 +231,17 @@
 #pragma mark -
 #pragma mark CheckBoxTableCell
 
-+ (CheckBoxTableCell *) getCheckBoxTableCellWithDelegate:(id<CheckBoxTableCellDelegate>)delegate
++ (CheckBoxTableCell *) getCheckBoxTableCellForDelegate:(id<CheckBoxTableCellDelegate>)delegate
 												   table:(UITableView *)tableView {
-	return [TableCellFactory getCheckBoxTableCellWithDelegate:delegate table:tableView identifier:@"CheckBoxTableCell"];
+	return [TableCellFactory getCheckBoxTableCellForDelegate:delegate table:tableView identifier:@"CheckBoxTableCell"];
 }
 
-+ (CheckBoxTableCell *) getCheckBoxTableCellWithDelegate:(id<CheckBoxTableCellDelegate>)delegate
++ (CheckBoxTableCell *) getCheckBoxTableCellForDelegate:(id<CheckBoxTableCellDelegate>)delegate
 												   table:(UITableView *)tableView
 											  identifier:(NSString *)cellIdentifier {
 	CheckBoxTableCell *cell = (CheckBoxTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[CheckBoxTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[CheckBoxTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 		cell.checkedImage = [UIImage imageNamed:@"selected.png"];
 		cell.uncheckedImage = [UIImage imageNamed:@"unselected.png"];
 	}
@@ -269,17 +269,17 @@
 #pragma mark -
 #pragma mark MapTableCell
 
-+ (MapTableCell *) getMapTableCellWithDelegate:(id<MapTableCellDelegate>)delegate
++ (MapTableCell *) getMapTableCellForDelegate:(id<MapTableCellDelegate>)delegate
 										 table:(UITableView *)tableView {
-	return [TableCellFactory getMapTableCellWithDelegate:delegate table:tableView identifier:@"MapTableCell"];
+	return [TableCellFactory getMapTableCellForDelegate:delegate table:tableView identifier:@"MapTableCell"];
 }
 
-+ (MapTableCell *) getMapTableCellWithDelegate:(id<MapTableCellDelegate>)delegate
++ (MapTableCell *) getMapTableCellForDelegate:(id<MapTableCellDelegate>)delegate
 										 table:(UITableView *)tableView
 									identifier:(NSString *)cellIdentifier {
 	MapTableCell *cell = (MapTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[MapTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[MapTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }
@@ -287,17 +287,17 @@
 #pragma mark -
 #pragma mark MapTableCell
 
-+ (DateTableCell *) getDateTableCellWithDelegate:(id<DateTableCellDelegate>)delegate
++ (DateTableCell *) getDateTableCellForDelegate:(id<DateTableCellDelegate>)delegate
 										  table:(UITableView *)tableView {
-	return [TableCellFactory getDateTableCellWithDelegate:delegate table:tableView identifier:@"DateTableCell"];
+	return [TableCellFactory getDateTableCellForDelegate:delegate table:tableView identifier:@"DateTableCell"];
 }
 
-+ (DateTableCell *) getDateTableCellWithDelegate:(id<DateTableCellDelegate>)delegate
++ (DateTableCell *) getDateTableCellForDelegate:(id<DateTableCellDelegate>)delegate
 										  table:(UITableView *)tableView
 									 identifier:(NSString *)cellIdentifier {
 	DateTableCell *cell = (DateTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
-		cell = [[[DateTableCell alloc] initWithDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
+		cell = [[[DateTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 	}
 	return cell;
 }

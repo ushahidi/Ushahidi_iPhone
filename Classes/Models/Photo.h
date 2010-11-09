@@ -41,7 +41,7 @@
 
 + (id)photoWithImage:(UIImage *)image;
 - (id)initWithImage:(UIImage *)image;
-- (void) downloadWithDelegate:(id<PhotoDelegate>)delegate;
+- (void) downloadForDelegate:(id<PhotoDelegate>)delegate;
 - (NSData *) getJpegData;
 - (NSData *) getPngData;
 

@@ -42,7 +42,7 @@
 @property (nonatomic, assign) BOOL animatesDrop;
 @property (nonatomic, assign) BOOL showRightCallout;
 
-- (id)initWithDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initForDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setMapType:(MKMapType)mapType;
 - (void) setScrollable:(BOOL)scrollable;
 - (void) setZoomable:(BOOL)zoomable;

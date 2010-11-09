@@ -36,7 +36,7 @@ typedef enum {
 
 @synthesize delegate, indexPath, segmentControl;
 
-- (id)initWithDelegate:(id<BooleanTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initForDelegate:(id<BooleanTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.delegate = theDelegate;
         self.selectionStyle = UITableViewCellSelectionStyleNone;

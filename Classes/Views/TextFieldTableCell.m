@@ -31,7 +31,7 @@
 
 @synthesize delegate, textField, indexPath;
 
-- (id)initWithDelegate:(id<TextFieldTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initForDelegate:(id<TextFieldTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.delegate = theDelegate;
         self.selectionStyle = UITableViewCellSelectionStyleNone;

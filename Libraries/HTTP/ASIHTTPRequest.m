@@ -23,7 +23,7 @@
 
 
 // Automatically set on build
-NSString *ASIHTTPRequestVersion = @"v1.7-51 2010-08-18";
+NSString *ASIHTTPRequestVersion = @"v1.7-56 2010-08-30";
 
 NSString* const NetworkRequestErrorDomain = @"ASIHTTPRequestErrorDomain";
 
@@ -652,6 +652,7 @@ static NSOperationQueue *sharedQueue = nil;
 		}
 
 		[self setComplete:NO];
+		[self setDidUseCachedResponse:NO];
 		
 		if (![self url]) {
 			[self failWithError:ASIUnableToCreateRequestError];
@@ -1884,11 +1885,14 @@ static NSOperationQueue *sharedQueue = nil;
 				[self setPostLength:0];
 
 				// Perhaps there are other headers we should be preserving, but it's hard to know what we need to keep and what to throw away.
-				NSString *userAgent = [[self requestHeaders] objectForKey:@"User-Agent"];
-				if (userAgent) {
-					[self setRequestHeaders:[NSMutableDictionary dictionaryWithObject:userAgent forKey:@"User-Agent"]];
-				} else {
-					[self setRequestHeaders:nil];
+				NSString *userAgentHeader = [[self requestHeaders] objectForKey:@"User-Agent"];
+				NSString *acceptHeader = [[self requestHeaders] objectForKey:@"Accept"];
+				[self setRequestHeaders:nil];
+				if (userAgentHeader) {
+					[self addRequestHeader:@"User-Agent" value:userAgentHeader];
+				}
+				if (acceptHeader) {
+					[self addRequestHeader:@"Accept" value:acceptHeader];
 				}
 				[self setHaveBuiltRequestHeaders:NO];
 			} else {
@@ -1924,7 +1928,7 @@ static NSOperationQueue *sharedQueue = nil;
 		}
 
 		if (cLength) {
-			SInt32 length = CFStringGetIntValue((CFStringRef)cLength);
+			unsigned long long length = strtoull([cLength UTF8String], NULL, 0);
 
 			// Workaround for Apache HEAD requests for dynamically generated content returning the wrong Content-Length when using gzip
 			if ([self mainRequest] && [self allowCompressedResponse] && length == 20 && [self showAccurateProgress] && [self shouldResetDownloadProgress]) {
@@ -2829,7 +2833,7 @@ static NSOperationQueue *sharedQueue = nil;
 	}
 	
 	// Save to the cache
-	if ([self downloadCache]) {
+	if ([self downloadCache] && ![self didUseCachedResponse]) {
 		[[self downloadCache] storeResponseForRequest:self maxAge:[self secondsToCache]];
 	}
 	
@@ -2851,7 +2855,7 @@ static NSOperationQueue *sharedQueue = nil;
 		[self destroyReadStream];
 	}
 	
-	if (![self needsRedirect] && ![self authenticationNeeded]) {
+	if (![self needsRedirect] && ![self authenticationNeeded] && ![self didUseCachedResponse]) {
 		
 		if (fileError) {
 			[self failWithError:fileError];
@@ -2923,10 +2927,10 @@ static NSOperationQueue *sharedQueue = nil;
 			return NO;
 		}
 	}
-        
+
 	// only 200 responses are stored in the cache, so let the client know
 	// this was a successful response
-	self.responseStatusCode = 200;
+	[self setResponseStatusCode:200];
         
 	[self setDidUseCachedResponse:YES];
 	
@@ -3982,13 +3986,13 @@ static NSOperationQueue *sharedQueue = nil;
 + (void)registerForNetworkReachabilityNotifications
 {
 	[[Reachability reachabilityForInternetConnection] startNotifier];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:@"kNetworkReachabilityChangedNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
 }
 
 
 + (void)unsubscribeFromNetworkReachabilityNotifications
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"kNetworkReachabilityChangedNotification" object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 + (BOOL)isNetworkReachableViaWWAN

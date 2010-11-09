@@ -38,7 +38,7 @@ typedef enum {
 	CheckedTrue
 } Checked;
 
-- (id)initWithDelegate:(id<CheckBoxTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)identifier {
+- (id)initForDelegate:(id<CheckBoxTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)identifier {
 	if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier]) {
 		self.delegate = theDelegate;
 		UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 35, 35)];

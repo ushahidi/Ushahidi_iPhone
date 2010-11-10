@@ -258,6 +258,10 @@ typedef enum {
 	return [incident.date compare:self.date];
 }
 
+- (NSComparisonResult)compareByVerified:(Incident *)incident {
+	return incident.verified > self.verified;
+}
+
 - (void)dealloc {
 	[identifier release];
 	[title release];

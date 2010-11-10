@@ -59,7 +59,8 @@ typedef enum {
 
 typedef enum {
 	SortByDate,
-	SortByTitle
+	SortByTitle,
+	SortByVerified
 } SortBy;
 
 #pragma mark -
@@ -82,6 +83,9 @@ typedef enum {
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
 	if (segmentControl.selectedSegmentIndex == SortByDate) {
 		DLog(@"SortByDate");
+	}
+	else if (segmentControl.selectedSegmentIndex == SortByVerified) {
+		DLog(@"SortByVerified");
 	}
 	else if (segmentControl.selectedSegmentIndex == SortByTitle) {
 		DLog(@"SortByTitle");
@@ -148,33 +152,21 @@ typedef enum {
 		self.title = self.deployment.name;
 	}
 	DLog(@"willBePushed: %d", self.willBePushed);
-	if (self.willBePushed) {
-		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
-		[self.allRows removeAllObjects];
-		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
-			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
-		}
-		else {
-			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
-		}
-		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:incidents];
-		DLog(@"Adding Rows: %d", [incidents count]);
+	NSArray *incidents = self.willBePushed 
+		? [[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]
+		: [[Ushahidi sharedUshahidi] getIncidents];	
+	[self.allRows removeAllObjects];
+	if (self.sortOrder.selectedSegmentIndex == SortByDate) {
+		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
 	}
-	else if (self.modalViewController != nil) {
-		DLog(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidents];
-		[self.allRows removeAllObjects];
-		[self.filteredRows removeAllObjects];
-		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
-			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
-		}
-		else {
-			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
-		}
-		[self.filteredRows addObjectsFromArray:incidents];
-		DLog(@"Re-Adding Rows: %d", [incidents count]);
+	else if (self.sortOrder.selectedSegmentIndex == SortByVerified) {
+		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByVerified:)]];
 	}
+	else {
+		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
+	}
+	[self.filteredRows removeAllObjects];
+	[self.filteredRows addObjectsFromArray:self.allRows];
 	[self.pending removeAllObjects];
 	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
 	[self.tableView reloadData];
@@ -285,9 +277,16 @@ typedef enum {
 - (void) filterRows:(BOOL)reloadTable {
 	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
-	NSArray *incidents = (self.sortOrder.selectedSegmentIndex == SortByDate)
-		? [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)]
-		: [self.allRows sortedArrayUsingSelector:@selector(compareByTitle:)];
+	NSArray *incidents;
+	if (self.sortOrder.selectedSegmentIndex == SortByDate) {
+		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)];
+	}
+	else if (self.sortOrder.selectedSegmentIndex == SortByVerified) {
+		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByVerified:)];
+	}
+	else {
+		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByTitle:)];
+	}
 	for (Incident *incident in incidents) {
 		if ([incident matchesString:searchText]) {
 			[self.filteredRows addObject:incident];
@@ -331,6 +330,9 @@ typedef enum {
 		[self.allRows removeAllObjects];
 		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
+		}
+		else if (self.sortOrder.selectedSegmentIndex == SortByVerified) {
+			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByVerified:)]];
 		}
 		else {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];

@@ -103,5 +103,6 @@
 
 - (NSComparisonResult)compareByTitle:(Incident *)incident;
 - (NSComparisonResult)compareByDate:(Incident *)incident;
+- (NSComparisonResult)compareByVerified:(Incident *)incident;
 
 @end

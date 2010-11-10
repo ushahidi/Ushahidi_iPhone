@@ -46,10 +46,10 @@ typedef enum {
 	TableSectionEmail,
 	TableSectionFirstName,
 	TableSectionLastName,
-	TableSectionBecomeDiscrete,
 	TableSectionImageWidth,
 	TableSectionDownloadMaps,
-	TableSectionMapZoomLevel
+	TableSectionMapZoomLevel,
+	TableSectionBecomeDiscrete
 } TableSection;
 
 @synthesize email, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, imageWidthLabel, mapZoomLevel, mapZoomLevelLabel;
@@ -83,7 +83,7 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	self.imageWidthLabel = [self getFooterLabel];
 	self.mapZoomLevelLabel = [self getFooterLabel];
-	[self addHeaders:@"Email", @"First Name", @"Last Name", @"Discrete Mode On Shake", @"Resized Image Width", @"Download Incident Maps", @"Map Zoom Level", nil];		
+	[self addHeaders:@"Email", @"First Name", @"Last Name", @"Resized Image Width", @"Download Maps For Offline Viewing", @"Downloaded Map Zoom Level", @"Discrete Mode On Shake", nil];		
 }
 
 - (UILabel *) getFooterLabel {

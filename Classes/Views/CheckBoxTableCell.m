@@ -51,7 +51,6 @@ typedef enum {
 		[button release];
 		self.imageView.image = [UIImage imageNamed:@"blank.png"];
 		self.accessoryType = UITableViewCellAccessoryNone;
-		self.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
     return self;
 }
@@ -64,7 +63,7 @@ typedef enum {
 	[super dealloc];
 }
 
-- (BOOL) getChecked {
+- (BOOL) checked {
 	return (self.tag == CheckedTrue);
 }
 
@@ -121,7 +120,7 @@ typedef enum {
 
 - (void) buttonClicked:(id)sender {
 	DLog(@"");
-	if ([self getChecked]) {
+	if (self.checked) {
 		[self setChecked:NO];
 	}
 	else {
@@ -130,8 +129,19 @@ typedef enum {
 	SEL selector = @selector(checkBoxTableCellChanged:index:checked:);
 	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
 		DLog(@"");
-		[self.delegate checkBoxTableCellChanged:self index:self.indexPath checked:[self getChecked]];
+		[self.delegate checkBoxTableCellChanged:self index:self.indexPath checked:self.checked];
 	}
+}
+
+- (void) setSelectedColor:(UIColor *)color {
+	UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
+	[selectedBackgroundView setBackgroundColor:color];
+	[self setSelectedBackgroundView:selectedBackgroundView];
+	[selectedBackgroundView release];	
+}
+
+- (UIColor *) selectedColor {
+	return self.selectedBackgroundView.backgroundColor;
 }
 
 @end

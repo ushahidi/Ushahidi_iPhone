@@ -100,6 +100,20 @@
 	return cell;
 }
 
+- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
+	CheckBoxTableCell *cell = (CheckBoxTableCell *)[theTableView cellForRowAtIndexPath:indexPath];
+	Category *category = (Category *)[self filteredRowAtIndexPath:indexPath];
+	if (cell.checked) {
+		[cell setChecked:NO];
+		[self.incident removeCategory:category];
+	}
+	else {
+		[cell setChecked:YES];
+		[self.incident addCategory:category];
+	}
+}
+
 #pragma mark -
 #pragma mark CheckBoxTableCellDelegate
 

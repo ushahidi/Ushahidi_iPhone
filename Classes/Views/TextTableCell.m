@@ -58,7 +58,6 @@
 	}
 }
 
-
 - (void) setTextColor:(UIColor *)textColor {
 	self.textLabel.textColor = textColor;
 }
@@ -80,6 +79,17 @@
 - (void)dealloc {
 	[indexPath release];
     [super dealloc];
+}
+
+- (void) setSelectedColor:(UIColor *)color {
+	UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
+	[selectedBackgroundView setBackgroundColor:color];
+	[self setSelectedBackgroundView:selectedBackgroundView];
+	[selectedBackgroundView release];	
+}
+
+- (UIColor *) selectedColor {
+	return self.selectedBackgroundView.backgroundColor;
 }
 
 @end

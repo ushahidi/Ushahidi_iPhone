@@ -167,6 +167,25 @@ typedef enum {
 	return cell;
 }
 
+- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
+	CheckBoxTableCell *cell = (CheckBoxTableCell *)[theTableView cellForRowAtIndexPath:indexPath];
+	if (cell.checked) {
+		[cell setChecked:NO];
+		self.location = nil;
+		self.latitude = nil;
+		self.longitude = nil;
+	}
+	else {
+		[cell setChecked:YES];
+		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
+		self.location = theLocation.name;
+		self.latitude = theLocation.latitude;
+		self.longitude = theLocation.longitude;
+	}
+	[self.tableView reloadData];
+}
+
 #pragma mark -
 #pragma mark CheckBoxTableCellDelegate
 

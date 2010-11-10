@@ -36,10 +36,10 @@
 @property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UIImage *checkedImage;
 @property (nonatomic, retain) UIImage *uncheckedImage;
+@property (nonatomic, assign) UIColor *selectedColor;
+@property (nonatomic, assign) BOOL checked;
 
 - (id)initForDelegate:(id<CheckBoxTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
-- (void) setChecked:(BOOL)checked;
-- (BOOL) getChecked;
 - (void) setTitle:(NSString *)title;
 - (void) setDescription:(NSString *)description;
 - (void) setTextColor:(UIColor *)color;

@@ -66,6 +66,8 @@
 + (id)ushahidiDarkTan									{vendColor(242, 237, 220);} //#f2eddc 
 + (id)ushahidiLiteTan									{vendColor(246, 246, 238);} //#f6f6ee
 + (id)ushahidiRed										{vendColor(137, 31, 2);} //#891f02
++ (id)ushahidiVerified									{vendColor(153, 204, 153);} //#99CC99
++ (id)ushahidiUnverified								{vendColor(204, 102, 102);} //#CC6666
 
 + (id)aliceBlue                                         {vendColor(240, 248, 255);}
 + (id)alizarin                                          {vendColor(227, 38, 54);}

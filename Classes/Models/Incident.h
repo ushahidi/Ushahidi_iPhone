@@ -53,6 +53,7 @@
 
 @property(nonatomic,retain) NSString *identifier;
 @property(nonatomic,retain) NSString *title;
+@property(nonatomic,readonly) NSString *titleWithVerified;
 @property(nonatomic,retain) NSString *description;
 @property(nonatomic,retain) NSDate *date;
 @property(nonatomic,retain) NSString *location;

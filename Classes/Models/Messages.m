@@ -22,6 +22,14 @@
 
 @implementation Messages
 
++ (NSString *) yes {
+	return NSLocalizedString(@"Yes", @"Yes");
+}
+
++ (NSString *) no {
+	return NSLocalizedString(@"No", @"No");
+}
+
 + (NSString *) errors {
 	return NSLocalizedString(@"Errors", @"Errors");
 }
@@ -52,6 +60,14 @@
 
 + (NSString *) news {
 	return NSLocalizedString(@"News", @"News");
+}
+
++ (NSString *) verified {
+	return NSLocalizedString(@"Verified", @"Verified");
+}
+
++ (NSString *) unverified {
+	return NSLocalizedString(@"Unverified", @"Unverified");
 }
 
 + (NSString *) noLocationSpecified {

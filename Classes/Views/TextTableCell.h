@@ -29,6 +29,7 @@
 }
 
 @property (nonatomic, retain) NSIndexPath *indexPath; 
+@property (nonatomic, assign) UIColor *selectedColor;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setText:(NSString *)text;

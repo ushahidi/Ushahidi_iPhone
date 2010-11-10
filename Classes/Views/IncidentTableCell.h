@@ -27,6 +27,7 @@
 	IBOutlet UILabel *locationLabel;
 	IBOutlet UILabel *categoryLabel;
 	IBOutlet UILabel *dateLabel;
+	IBOutlet UILabel *verifiedLabel;
 	IBOutlet UIImageView *imageView;
 	IBOutlet UIActivityIndicatorView *activityIndicator;
 }
@@ -35,26 +36,18 @@
 @property (nonatomic, retain) UILabel *locationLabel;
 @property (nonatomic, retain) UILabel *categoryLabel;
 @property (nonatomic, retain) UILabel *dateLabel;
+@property (nonatomic, retain) UILabel *verifiedLabel;
 @property (nonatomic, retain) UIImageView *imageView;
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic) BOOL uploading;
 
-- (void) setTitle:(NSString *)title;
-- (NSString *) getTitle;
-
-- (void) setLocation:(NSString *)location;
-- (NSString *) getLocation;
-
-- (void) setCategory:(NSString *)category;
-- (NSString *) getCategory;
-
-- (void) setDate:(NSString *)date;
-- (NSString *) getDate;
-
-- (void) setImage:(UIImage *)image;
-- (UIImage *) getImage;
-
-- (void) setSelectedColor:(UIColor *)color;
+@property (nonatomic, assign) NSString *title;
+@property (nonatomic, assign) NSString *location;
+@property (nonatomic, assign) NSString *category;
+@property (nonatomic, assign) NSString *date;
+@property (nonatomic, assign) UIImage *image;
+@property (nonatomic, assign) UIColor *selectedColor;
+@property (nonatomic, assign) BOOL verified;
 
 + (CGFloat) getCellHeight;
 

@@ -20,10 +20,16 @@
 
 #import "IncidentTableCell.h"
 #import "Messages.h"
+#import "UIColor+Extension.h"
 
 @implementation IncidentTableCell
 
-@synthesize titleLabel, locationLabel, categoryLabel, dateLabel, imageView, activityIndicator;
+typedef enum {
+	VerifiedNo,
+	VerifiedYes
+} Verified;
+
+@synthesize titleLabel, locationLabel, categoryLabel, dateLabel, verifiedLabel, imageView, activityIndicator;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
@@ -41,6 +47,7 @@
 	[categoryLabel release];
 	[dateLabel release];
 	[imageView release];
+	[verifiedLabel release];
 	[activityIndicator release];
     [super dealloc];
 }
@@ -49,49 +56,49 @@
 	self.titleLabel.text = title;
 }
 
-- (NSString *) getTitle {
+- (NSString *) title {
 	return self.titleLabel.text;
 }
 
 - (void) setLocation:(NSString *)location {
-	self.locationLabel.text = location;
-//	if (location != nil && [location length] > 0) {
-//		self.locationLabel.text = location;
-//	}
-//	else {
-//		self.locationLabel.text = [Messages noLocationSpecified];
-//	}
+	//self.locationLabel.text = location;
+	if (location != nil && [location length] > 0) {
+		self.locationLabel.text = location;
+	}
+	else {
+		self.locationLabel.text = [Messages noLocationSpecified];
+	}
 }
 
-- (NSString *) getLocation {
+- (NSString *) location {
 	return self.titleLabel.text;
 }
 
 - (void) setCategory:(NSString *)category {
-	self.categoryLabel.text = category;
-//	if (category != nil && [category length] > 0) {
-//		self.categoryLabel.text = category;
-//	}
-//	else {
-//		self.categoryLabel.text = [Messages noCategorySpecified];
-//	}
+	//self.categoryLabel.text = category;
+	if (category != nil && [category length] > 0) {
+		self.categoryLabel.text = category;
+	}
+	else {
+		self.categoryLabel.text = [Messages noCategorySpecified];
+	}
 }
 
-- (NSString *) getCategory {
+- (NSString *) category {
 	return self.categoryLabel.text;
 }
 
 - (void) setDate:(NSString *)date {
-	self.dateLabel.text = date;
-//	if (date != nil && [date length] > 0) {
-//		self.dateLabel.text = date;
-//	}
-//	else {
-//		self.dateLabel.text = [Messages noDateSpecified];
-//	}
+	//self.dateLabel.text = date;
+	if (date != nil && [date length] > 0) {
+		self.dateLabel.text = date;
+	}
+	else {
+		self.dateLabel.text = [Messages noDateSpecified];
+	}
 }
 
-- (NSString *) getDate {
+- (NSString *) date {
 	return self.dateLabel.text;
 }
 
@@ -104,7 +111,7 @@
 	}
 }
 
-- (UIImage *) getImage {
+- (UIImage *) image {
 	return self.imageView.image;
 }
 
@@ -115,8 +122,29 @@
 	[selectedBackgroundView release];	
 }
 
+- (UIColor *) selectedColor {
+	return self.selectedBackgroundView.backgroundColor;
+}
+
+- (void) setVerified:(BOOL) verified {
+	if (verified) {
+		self.verifiedLabel.text = [Messages verified];
+		self.verifiedLabel.textColor = [UIColor ushahidiVerified];
+		self.verifiedLabel.tag = VerifiedYes;
+	}
+	else {
+		self.verifiedLabel.text = [Messages unverified];
+		self.verifiedLabel.textColor = [UIColor ushahidiUnverified];
+		self.verifiedLabel.tag = VerifiedNo;
+	}
+}
+
+- (BOOL) verified {
+	return self.verifiedLabel.tag == VerifiedYes;
+}
+
 + (CGFloat) getCellHeight {
-	return 80;
+	return 90;
 }
 
 - (BOOL) uploading {

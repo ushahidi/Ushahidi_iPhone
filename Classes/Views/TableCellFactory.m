@@ -116,6 +116,7 @@
 	TextTableCell *cell = (TextTableCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if (cell == nil) {
 		cell = [[TextTableCell alloc] initWithReuseIdentifier:cellIdentifier];
+		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
 	}
 	return cell;
 }
@@ -244,6 +245,7 @@
 		cell = [[[CheckBoxTableCell alloc] initForDelegate:delegate reuseIdentifier:cellIdentifier] autorelease];
 		cell.checkedImage = [UIImage imageNamed:@"selected.png"];
 		cell.uncheckedImage = [UIImage imageNamed:@"unselected.png"];
+		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
 	}
 	return cell;
 }

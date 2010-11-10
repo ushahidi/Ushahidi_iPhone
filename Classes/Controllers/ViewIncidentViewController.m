@@ -38,6 +38,7 @@
 typedef enum {
 	TableSectionErrors,
 	TableSectionTitle,
+	TableSectionVerified,
 	TableSectionDescription,
 	TableSectionCategory,
 	TableSectionDateTime,
@@ -100,7 +101,15 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
-	[self addHeaders:[Messages errors], [Messages title], [Messages description], [Messages category], [Messages date], [Messages location], [Messages photos], [Messages news], nil];
+	[self addHeaders:[Messages errors], 
+					 [Messages title],
+					 [Messages verified],
+					 [Messages description], 
+					 [Messages category], 
+					 [Messages date], 
+					 [Messages location], 
+					 [Messages photos], 
+					 [Messages news], nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -124,7 +133,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 8;
+	return 9;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
@@ -231,6 +240,9 @@ typedef enum {
 		else if (indexPath.section == TableSectionNews) {
 			cell.textLabel.text = [Messages noNews];
 		}
+		else if (indexPath.section == TableSectionVerified) {
+			cell.textLabel.text = self.incident.verified ? [Messages yes] : [Messages no];
+		}
 		return cell;	
 	}
 	return nil;
@@ -258,6 +270,10 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionTitle) {
 		return [TextTableCell getCellSizeForText:self.incident.title forWidth:theTableView.contentSize.width].height;
+	}
+	else if (indexPath.section == TableSectionVerified) {
+		NSString *verifiedText = self.incident.verified ? [Messages yes] : [Messages no];
+		return [TextTableCell getCellSizeForText:verifiedText forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionDescription) {
 		return [TextTableCell getCellSizeForText:self.incident.description forWidth:theTableView.contentSize.width].height;

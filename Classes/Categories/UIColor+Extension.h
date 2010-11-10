@@ -31,6 +31,8 @@
 + (id)ushahidiDarkTan;
 + (id)ushahidiLiteTan;
 + (id)ushahidiRed;
++ (id)ushahidiVerified;
++ (id)ushahidiUnverified;
 
 + (id)aliceBlue;
 + (id)alizarin;

@@ -8,7 +8,6 @@
 
 #import "ASIFormDataRequest.h"
 
-
 // Private stuff
 @interface ASIFormDataRequest ()
 - (void)buildMultipartFormDataPostBody;
@@ -209,11 +208,16 @@
 	[super buildPostBody];
 	
 #if DEBUG_FORM_DATA_REQUEST
-	NSLog(@"%@",[self debugBodyString]);
 	[self setDebugBodyString:nil];
 #endif
 }
 
+- (NSString *)getUUID {
+	CFUUIDRef theUUID = CFUUIDCreate(NULL);
+	CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+	CFRelease(theUUID);
+	return [(NSString *)string autorelease];
+}
 
 - (void)buildMultipartFormDataPostBody
 {
@@ -222,10 +226,9 @@
 #endif
 	
 	NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding([self stringEncoding]));
-	NSLog(@"charset: %@", charset);
 	
 	// Set your own boundary string only if really obsessive. We don't bother to check if post data contains the boundary, since it's pretty unlikely that it does.
-	NSString *stringBoundary = @"0xKhTmLbOuNdArY";
+	NSString *stringBoundary = [[self getUUID] stringByReplacingOccurrencesOfString:@"-" withString:@""];
 	
 	[self addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"multipart/form-data; charset=%@; boundary=%@", charset, stringBoundary]];
 	
@@ -308,7 +311,6 @@
 	[self addToDebugBody:string];
 #endif
 	[super appendPostData:[string dataUsingEncoding:[self stringEncoding]]];
-	NSLog(@"%@", string);
 }
 
 #if DEBUG_FORM_DATA_REQUEST

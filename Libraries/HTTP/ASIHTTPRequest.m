@@ -370,6 +370,7 @@ static NSOperationQueue *sharedQueue = nil;
 
 - (void)addRequestHeader:(NSString *)header value:(NSString *)value
 {
+	NSLog(@"%@=%@", header, value);
 	if (!requestHeaders) {
 		[self setRequestHeaders:[NSMutableDictionary dictionaryWithCapacity:1]];
 	}
@@ -457,6 +458,7 @@ static NSOperationQueue *sharedQueue = nil;
 	} else {
 		[[self postBody] appendData:data];
 	}
+	NSLog(@"%@", data);
 }
 
 - (void)appendPostDataFromFile:(NSString *)file

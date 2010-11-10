@@ -165,13 +165,13 @@ typedef enum {
 		DLog(@"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		NSArray *incidents = [[Ushahidi sharedUshahidi] getIncidents];
 		[self.allRows removeAllObjects];
-		if (self.sortOrder == SortByDate) {
+		[self.filteredRows removeAllObjects];
+		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
 		}
 		else {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
 		}
-		[self.filteredRows removeAllObjects];
 		[self.filteredRows addObjectsFromArray:incidents];
 		DLog(@"Re-Adding Rows: %d", [incidents count]);
 	}
@@ -228,8 +228,9 @@ typedef enum {
 	if (incident != nil) {
 		[cell setTitle:incident.title];
 		[cell setLocation:incident.location];
-		[cell setCategory:[incident categoryNames]];
-		[cell setDate:[incident dateString]];
+		[cell setCategory:incident.categoryNames];
+		[cell setDate:incident.dateString];
+		[cell setVerified:incident.verified];
 		Photo *photo = [incident getFirstPhoto];
 		if (photo != nil) {
 			if (photo.thumbnail != nil) {

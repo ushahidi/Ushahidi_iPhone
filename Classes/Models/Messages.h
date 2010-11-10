@@ -23,7 +23,8 @@
 @interface Messages : NSObject {
 
 }
-
++ (NSString *) yes;
++ (NSString *) no;
 + (NSString *) errors;
 + (NSString *) title;
 + (NSString *) category;
@@ -32,6 +33,8 @@
 + (NSString *) description;
 + (NSString *) photos;
 + (NSString *) news;
++ (NSString *) verified;
++ (NSString *) unverified;
 + (NSString *) noLocationSpecified;
 + (NSString *) noCategorySpecified;
 + (NSString *) noDateSpecified;

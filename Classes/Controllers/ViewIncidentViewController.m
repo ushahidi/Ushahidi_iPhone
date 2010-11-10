@@ -63,17 +63,6 @@ typedef enum {
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) action:(id)sender {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-															 delegate:self 
-													cancelButtonTitle: @"Cancel" 
-											   destructiveButtonTitle:nil
-													otherButtonTitles:@"Share this Incident", @"Rate this Incident", @"Comment on Incident", nil];
-	[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
-	[actionSheet showInView:[self view]];
-	[actionSheet release];
-}
-
 - (IBAction) nextPrevious:(id)sender {
 	NSInteger index = [self.incidents indexOfObject:self.incident];
 	if (self.nextPrevious.selectedSegmentIndex == NavBarNext) {
@@ -320,14 +309,6 @@ typedef enum {
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}
 	}
-}
-
-#pragma mark -
-#pragma mark UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
-	DLog(@"titleAtIndex: %@", titleAtIndex);
 }
 
 #pragma mark -

@@ -239,6 +239,10 @@ typedef enum {
 	return nil;
 }
 
+- (void) removePhotoAtIndex:(NSInteger)index {
+	[self.photos removeObjectAtIndex:index];
+}
+
 - (BOOL) hasRequiredValues {
 	return  self.title != nil && self.title.length > 0 &&
 			self.location != nil && self.location.length > 0 &&

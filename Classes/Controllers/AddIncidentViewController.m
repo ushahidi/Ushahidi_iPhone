@@ -314,6 +314,17 @@ typedef enum {
 	if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
 		[self.imagePickerController showImagePickerForDelegate:self width:[[Settings sharedSettings] imageWidth]];
 	}
+	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
+		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+																 delegate:self 
+														cancelButtonTitle:@"Cancel" 
+												   destructiveButtonTitle:@"Remove Photo"
+														otherButtonTitles:nil];
+		[actionSheet setTag:indexPath.row - 1];
+		[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
+		[actionSheet showInView:[self view]];
+		[actionSheet release];
+	}
 	else if (indexPath.section == TableSectionCategory) {
 		self.categoriesViewController.incident = self.incident;
 		[self presentModalViewController:self.categoriesViewController animated:YES];
@@ -383,13 +394,23 @@ typedef enum {
 }
 
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
-	[self.loadingView showWithMessage:@"Resizing..."];
+	[self.loadingView showWithMessage:[Messages resizing]];
 }
 
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
 	[self.loadingView hideAfterDelay:0.5];
 	[self.incident addPhoto:[Photo photoWithImage:image]];
 	[self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (actionSheet.cancelButtonIndex != buttonIndex) {
+		[self.incident removePhotoAtIndex:actionSheet.tag];
+		[self.tableView reloadData];	
+	}
 }
 
 @end

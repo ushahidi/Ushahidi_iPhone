@@ -114,4 +114,8 @@
 	return NSLocalizedString(@"Search locations...", @"Search locations...");
 }
 
++ (NSString *) resizing {
+	return NSLocalizedString(@"Resizing...", @"Resizing...");
+}
+
 @end

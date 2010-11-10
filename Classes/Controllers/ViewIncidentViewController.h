@@ -32,7 +32,6 @@
 
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
 															UIWebViewDelegate, 
-															UIActionSheetDelegate, 
 															MapTableCellDelegate,
 															PhotoDelegate> {
 	
@@ -50,7 +49,6 @@
 @property(nonatomic,retain) Incident *incident;
 @property(nonatomic,retain) NSArray *incidents;
 
-- (IBAction) action:(id)sender;
 - (IBAction) nextPrevious:(id)sender;
 
 @end

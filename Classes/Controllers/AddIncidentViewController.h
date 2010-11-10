@@ -35,7 +35,8 @@
 @interface AddIncidentViewController : TableViewController<TextFieldTableCellDelegate, 
 														   TextViewTableCellDelegate, 
 														   DatePickerDelegate,
-														   ImagePickerDelegate>  {
+														   ImagePickerDelegate,
+														   UIActionSheetDelegate>  {
 																
 @public
 	ImagePickerController *imagePickerController;

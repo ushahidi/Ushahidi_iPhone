@@ -46,5 +46,6 @@
 + (NSString *) searchIncidents;
 + (NSString *) searchCategories;
 + (NSString *) searchLocations;
++ (NSString *) resizing;
 
 @end

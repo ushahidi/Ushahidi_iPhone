@@ -97,6 +97,8 @@
 - (NSString *) categoryNamesWithDefaultText:(NSString *)defaultText;
 
 - (Photo *) getFirstPhoto;
+- (void) removePhotoAtIndex:(NSInteger)index;
+
 - (BOOL) hasRequiredValues;
 
 - (NSComparisonResult)compareByTitle:(Incident *)incident;

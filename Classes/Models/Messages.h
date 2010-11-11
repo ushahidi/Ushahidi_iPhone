@@ -47,5 +47,6 @@
 + (NSString *) searchCategories;
 + (NSString *) searchLocations;
 + (NSString *) resizing;
++ (NSString *) notUploaded;
 
 @end

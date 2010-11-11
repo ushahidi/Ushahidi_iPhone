@@ -27,7 +27,7 @@
 
 @implementation DateTableCell
 
-@synthesize delegate, indexPath, date;
+@synthesize delegate, date;
 
 - (id)initForDelegate:(id<DateTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {

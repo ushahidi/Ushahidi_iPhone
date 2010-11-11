@@ -85,7 +85,12 @@
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:deployments];
 		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:deployments];
+		NSString *searchText = [self getSearchText];
+		for (Deployment *deploment in deployments) {
+			if ([deploment matchesString:searchText]) {
+				[self.filteredRows addObject:deploment];
+			}
+		}
 		DLog(@"Re-Adding Rows: %d", [deployments count]);
 	}
 	if (animated) {
@@ -119,17 +124,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	DeploymentTableCell *cell = [TableCellFactory getDeploymentTableCellForTable:theTableView];
+	DeploymentTableCell *cell = [TableCellFactory getDeploymentTableCellForTable:theTableView indexPath:indexPath];
 	Deployment *deployment = [self filteredRowAtIndexPath:indexPath];
 	if (deployment != nil) {
 		[cell setTitle:deployment.name];
-		[cell setURL:deployment.url];
+		[cell setUrl:deployment.url];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	else {
 		[cell setTitle:nil];
-		[cell setURL:nil];
+		[cell setUrl:nil];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
@@ -137,6 +142,7 @@
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[self.view endEditing:YES];
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
 	[[Ushahidi sharedUshahidi] setDeployment:deployment];

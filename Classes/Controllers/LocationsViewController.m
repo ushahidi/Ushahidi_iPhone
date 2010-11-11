@@ -149,8 +149,7 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView];
-	cell.indexPath = indexPath;
+	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView indexPath:indexPath];
 	Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
 	if (theLocation != nil) {
 		[cell setTitle:theLocation.name];	

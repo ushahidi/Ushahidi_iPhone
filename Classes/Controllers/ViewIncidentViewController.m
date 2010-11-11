@@ -154,20 +154,19 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionNews && [self.incident.news count] > 0) {
-		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView];
+		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		return cell;
 	}
 	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
 		if (self.incident.map != nil) {
-			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
-			cell.indexPath = indexPath;
+			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
 			[cell setImage:self.incident.map];
 			return cell;
 		}
 		else {
-			MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView];
+			MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
 			[cell setScrollable:NO];
 			[cell setZoomable:NO];
 			//TODO prevent map from re-adding pin
@@ -181,8 +180,7 @@ typedef enum {
 		}
 	}
 	else if (indexPath.section == TableSectionPhotos && [self.incident.photos count] > 0) {
-		ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
-		cell.indexPath = indexPath;
+		ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
 		Photo *photo = [self.incident.photos objectAtIndex:indexPath.row];
 		if (photo != nil) {
 			if (photo.image != nil) {
@@ -199,10 +197,9 @@ typedef enum {
 		return cell;
 	}
 	else {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-		cell.indexPath = indexPath;
 		if (indexPath.section == TableSectionTitle) {
 			cell.textLabel.text = self.incident.title;
 		}

@@ -31,7 +31,7 @@
 
 @implementation CheckBoxTableCell
 
-@synthesize delegate, indexPath, checkedImage, uncheckedImage;
+@synthesize delegate, checkedImage, uncheckedImage;
 
 typedef enum {
 	CheckedFalse,
@@ -57,7 +57,6 @@ typedef enum {
 
 - (void)dealloc {
 	delegate = nil;
-	[indexPath release];
 	[checkedImage release];
 	[uncheckedImage release];
 	[super dealloc];

@@ -19,19 +19,18 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
 @protocol DateTableCellDelegate;
 
-@interface DateTableCell : UITableViewCell {
+@interface DateTableCell : IndexedTableCell {
 
 @public
 	id<DateTableCellDelegate>	delegate;
-	NSIndexPath					*indexPath;
 	NSDate						*date;
 }
 
 @property (nonatomic, assign)			id<DateTableCellDelegate>	delegate;
-@property (nonatomic, retain)			NSIndexPath					*indexPath; 
 @property (nonatomic, retain, readonly) NSDate						*date;
 
 - (id)initForDelegate:(id<DateTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier;

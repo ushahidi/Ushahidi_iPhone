@@ -22,6 +22,10 @@
 
 @implementation Messages
 
++ (NSString *) notUploaded {
+	return NSLocalizedString(@"Not Yet Uploaded", @"Not Yet Uploaded");
+}
+
 + (NSString *) yes {
 	return NSLocalizedString(@"Yes", @"Yes");
 }

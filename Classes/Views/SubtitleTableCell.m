@@ -29,7 +29,7 @@
 
 @implementation SubtitleTableCell
 
-@synthesize indexPath, defaultImage;
+@synthesize defaultImage;
 
 - (id)initWithDefaultImage:(UIImage *)theDefaultImage reuseIdentifier:(NSString *)reuseIdentifier {
 	if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier]) {
@@ -42,7 +42,6 @@
 }
 
 - (void)dealloc {
-	[indexPath release];
 	[defaultImage release];
 	[super dealloc];
 }

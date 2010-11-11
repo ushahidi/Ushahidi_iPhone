@@ -18,22 +18,22 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
 #import "IndexedTableCell.h"
 
-@protocol TextTableCellDelegate;
+@implementation IndexedTableCell
 
-@interface TextTableCell : IndexedTableCell {
+@synthesize indexPath;
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+        // Initialization code
+    }
+    return self;
 }
 
-@property (nonatomic, assign) UIColor *selectedColor;
-
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
-- (void) setText:(NSString *)text;
-- (NSString *) getText;
-- (CGSize) getCellSize;
-- (void) setTextColor:(UIColor *)textColor;
-+ (CGSize)getCellSizeForText:(NSString *)theText forWidth:(CGFloat)width;
+- (void)dealloc {
+	[indexPath release];
+    [super dealloc];
+}
 
 @end

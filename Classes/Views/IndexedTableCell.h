@@ -20,31 +20,12 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SearchTableCellDelegate;
-
-@interface SearchTableCell : UITableViewCell<UISearchBarDelegate> {
+@interface IndexedTableCell : UITableViewCell {
 
 @public
 	NSIndexPath	*indexPath;
-	UISearchBar *searchBar;
-@private
-	id<SearchTableCellDelegate>	delegate;
 }
 
-@property (nonatomic, retain) NSIndexPath *indexPath; 
-@property (nonatomic, retain) UISearchBar *searchBar;
-
-- (id)initForDelegate:(id<SearchTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
-- (void) setKeyboardType:(UIKeyboardType)keyboardType;
-- (void) setBarStyle:(UIBarStyle)barStyle;
-- (void) setPlaceholder:(NSString *)placeholder;
-
-@end
-
-@protocol SearchTableCellDelegate <NSObject>
-
-@optional
-
-- (void) searchCellChanged:(SearchTableCell *)cell searchText:(NSString *)text;
+@property (nonatomic, retain) NSIndexPath *indexPath;
 
 @end

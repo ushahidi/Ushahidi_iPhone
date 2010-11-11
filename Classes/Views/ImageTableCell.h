@@ -19,15 +19,14 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
-@interface ImageTableCell : UITableViewCell {
+@interface ImageTableCell : IndexedTableCell {
 	
 @public
-	NSIndexPath *indexPath;
 	UIImageView *cellImageView;
 }
 
-@property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UIImageView *cellImageView;
 
 - (id)initWithImage:(UIImage *)image reuseIdentifier:(NSString *)reuseIdentifier;

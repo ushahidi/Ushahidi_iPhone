@@ -83,8 +83,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView];
-	cell.indexPath = indexPath;
+	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView indexPath:indexPath];
 	Category *category = (Category *)[self filteredRowAtIndexPath:indexPath];
 	if (category != nil) {
 		[cell setTitle:category.title];	

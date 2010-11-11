@@ -22,7 +22,7 @@
 
 @implementation ImageTableCell
 
-@synthesize indexPath, cellImageView;
+@synthesize cellImageView;
 
 - (id)initWithImage:(UIImage *)theImage reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
@@ -46,7 +46,6 @@
 }
 
 - (void)dealloc {
-	[indexPath release];
 	[cellImageView release];
     [super dealloc];
 }

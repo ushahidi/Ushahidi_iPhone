@@ -19,20 +19,19 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
 @protocol BooleanTableCellDelegate;
 
-@interface BooleanTableCell : UITableViewCell {
+@interface BooleanTableCell : IndexedTableCell {
 
 @public
-	NSIndexPath *indexPath;
 	UISegmentedControl *segmentControl;
 	
 @private 	
 	id<BooleanTableCellDelegate> delegate;
 }
 
-@property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UISegmentedControl *segmentControl;
 
 - (id)initForDelegate:(id<BooleanTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;

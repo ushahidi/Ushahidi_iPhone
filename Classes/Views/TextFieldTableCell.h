@@ -19,21 +19,23 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
 @protocol TextFieldTableCellDelegate;
 
-@interface TextFieldTableCell : UITableViewCell<UITextFieldDelegate> {
+@interface TextFieldTableCell : IndexedTableCell<UITextFieldDelegate> {
 
 @public
 	UITextField	*textField;
-	NSIndexPath *indexPath;
 	
 @private
 	id<TextFieldTableCellDelegate> delegate;
 }
 
 @property (nonatomic, retain) UITextField *textField;
-@property (nonatomic, retain) NSIndexPath *indexPath; 
+@property (nonatomic, assign) UITextAutocorrectionType autocorrectionType;
+@property (nonatomic, assign) UITextAutocapitalizationType autocapitalizationType;
+@property (nonatomic, assign) UIKeyboardType keyboardType;
 
 - (id)initForDelegate:(id<TextFieldTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 

@@ -125,15 +125,20 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView];
-	cell.indexPath = indexPath;
+	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 	if (indexPath.section == TableSectionName) {
 		[cell setText:self.name];
 		[cell setPlaceholder:@"Enter Deployment Name"];
+		[cell setKeyboardType:UIKeyboardTypeDefault];
+		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+		[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 	}
 	else if (indexPath.section == TableSectionURL) {
 		[cell setText:self.url];
 		[cell setPlaceholder:@"Enter Deployment URL"];
+		[cell setKeyboardType:UIKeyboardTypeURL];
+		[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
+		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 	}
 	return cell;
 }

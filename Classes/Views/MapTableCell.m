@@ -32,7 +32,7 @@
 
 @implementation MapTableCell
 
-@synthesize delegate, indexPath, mapView, animatesDrop, showRightCallout;
+@synthesize delegate, mapView, animatesDrop, showRightCallout;
 
 #pragma mark -
 #pragma mark Public
@@ -84,7 +84,6 @@
 
 - (void)dealloc {
 	delegate = nil;
-	[indexPath release];
 	[mapView release];
     [super dealloc];
 }

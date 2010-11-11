@@ -106,15 +106,11 @@ typedef enum {
 	[super viewWillAppear:animated];
 
 	if (self.modalViewController == nil) {
-		DLog(@"XXXXXXXXXXXXXX initWithDefaultValues XXXXXXXXXXXXXX");
 		self.incident = [[Incident alloc] initWithDefaultValues];
 		self.willBePushed = NO;
 	}
 	self.doneButton.enabled = [self.incident hasRequiredValues];
 	[self.tableView reloadData];
-	
-	DLog(@"self.incident.categories: %@", [self.incident categoryNames]);
-	DLog(@"self.incident.location: %@", self.incident.location);
 }
 
 - (void)dealloc {
@@ -153,16 +149,17 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDescription) {
-		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
+		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setPlaceholder:@"Enter description"];
 		[cell setText:self.incident.description];
+		[cell setKeyboardType:UIKeyboardTypeDefault];
+		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+		[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
 		if (indexPath.row > 0) {
-			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView];
-			cell.indexPath = indexPath;
+			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
 			Photo *photo = [self.incident.photos objectAtIndex:indexPath.row - 1];
 			if (photo != nil) {
 				[cell setImage:photo.image];
@@ -173,7 +170,7 @@ typedef enum {
 			return cell;	
 		}
 		else {
-			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
+			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 			[cell setText:[Messages addPhoto]];
@@ -182,7 +179,7 @@ typedef enum {
 		}
 	}
 	else if (indexPath.section == TableSectionLocation) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		if (self.incident.location != nil) {
@@ -196,7 +193,7 @@ typedef enum {
 		return cell;
 	}
 	else if (indexPath.section == TableSectionDate) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		if (indexPath.row == TableSectionDateRowDate) {
@@ -222,7 +219,7 @@ typedef enum {
 		return cell;
 	}
 	else if (indexPath.section == TableSectionCategory) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView];
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		if ([self.incident.categories count] > 0) {
@@ -236,11 +233,13 @@ typedef enum {
 		return cell;
 	}
 	else {
-		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
+		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionTitle) {
 			[cell setPlaceholder:@"Enter title"];
 			[cell setText:self.incident.title];
+			[cell setKeyboardType:UIKeyboardTypeDefault];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
 		}
 		else if (indexPath.section == TableSectionLocation) {
 			[cell setPlaceholder:@"Select location"];

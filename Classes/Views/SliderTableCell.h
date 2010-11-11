@@ -19,19 +19,15 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
 @protocol SliderTableCellDelegate;
 
-@interface SliderTableCell : UITableViewCell {
-
-@public
-	NSIndexPath *indexPath; 
+@interface SliderTableCell : IndexedTableCell {
 
 @private
 	id<SliderTableCellDelegate>	delegate;
 }
-
-@property (nonatomic, retain) NSIndexPath *indexPath; 
 
 - (id)initForDelegate:(id<SliderTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier ;
 

@@ -40,6 +40,7 @@
 		self.textView.textAlignment = UITextAlignmentCenter;
 		self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		self.textView.keyboardType = UIKeyboardTypeDefault;
 		self.textView.userInteractionEnabled = YES;
 		self.textView.textAlignment = UITextAlignmentCenter;
 		self.textView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
@@ -58,6 +59,30 @@
 	[indexPath release];
 	[placeholder_ release];
     [super dealloc];
+}
+
+- (UIKeyboardType) keyboardType {
+	return self.textView.keyboardType;
+}
+
+- (void) setKeyboardType:(UIKeyboardType)keyboardType {
+	self.textView.keyboardType = keyboardType;
+}
+
+- (UITextAutocorrectionType) autocorrectionType {
+	return self.textView.autocorrectionType;
+}
+
+- (void) setAutocorrectionType:(UITextAutocorrectionType)autocorrectionType {
+	self.textView.autocorrectionType = autocorrectionType;
+}
+
+- (UITextAutocapitalizationType) autocapitalizationType {
+	return self.textView.autocapitalizationType;
+}
+
+- (void) setAutocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType {
+	self.textView.autocapitalizationType = autocapitalizationType;
 }
 
 - (void) showKeyboard {

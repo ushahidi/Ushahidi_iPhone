@@ -166,7 +166,12 @@ typedef enum {
 		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
 	}
 	[self.filteredRows removeAllObjects];
-	[self.filteredRows addObjectsFromArray:self.allRows];
+	NSString *searchText = [self getSearchText];
+	for (Incident *incident in self.allRows) {
+		if ([incident matchesString:searchText]) {
+			[self.filteredRows addObject:incident];
+		}
+	}
 	[self.pending removeAllObjects];
 	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
 	[self.tableView reloadData];
@@ -214,7 +219,7 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	IncidentTableCell *cell = [TableCellFactory getIncidentTableCellForTable:theTableView];
+	IncidentTableCell *cell = [TableCellFactory getIncidentTableCellForTable:theTableView indexPath:indexPath];
 	Incident *incident = indexPath.section == TableSectionIncidents
 		? [self filteredRowAtIndexPath:indexPath] : [self.pending objectAtIndex:indexPath.row];
 	if (incident != nil) {
@@ -259,6 +264,7 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[self.view endEditing:YES];
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == TableSectionIncidents) {
 		self.viewIncidentViewController.incident = [self filteredRowAtIndexPath:indexPath];

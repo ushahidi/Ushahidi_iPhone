@@ -22,7 +22,6 @@
 
 @class TextTableCell;
 @class SubtitleTableCell;
-@class SearchTableCell;
 @class TextFieldTableCell;
 @class TextViewTableCell;
 @class TextViewTableCell;
@@ -49,100 +48,52 @@
 
 }
 
-+ (DeploymentTableCell *) getDeploymentTableCellForTable:(UITableView *)tableView;
++ (DeploymentTableCell *) getDeploymentTableCellForTable:(UITableView *)tableView 
+											   indexPath:(NSIndexPath *)indexPath;
 
-+ (DeploymentTableCell *) getDeploymentTableCellForTable:(UITableView *)tableView
-										  identifier:(NSString *)cellIdentifier;
++ (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView 
+										   indexPath:(NSIndexPath *)indexPath;
 
-+ (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView;
-
-+ (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView
-										  identifier:(NSString *)cellIdentifier;
-
-+ (UITableViewCell *) getDefaultTableCellForTable:(UITableView *)tableView;
-
-+ (UITableViewCell *) getDefaultTableCellForTable:(UITableView *)tableView
-									   identifier:(NSString *)cellIdentifier;
-
++ (UITableViewCell *) getDefaultTableCellForTable:(UITableView *)tableView 
+										indexPath:(NSIndexPath *)indexPath;
 
 + (SubtitleTableCell *) getSubtitleTableCellWithDefaultImage:(UIImage *)defaultImage 
-													   table:(UITableView *)tableView;
+													   table:(UITableView *)tableView 
+												   indexPath:(NSIndexPath *)indexPath;
 
-+ (SubtitleTableCell *) getSubtitleTableCellWithDefaultImage:(UIImage *)defaultImage 
-													   table:(UITableView *)tableView
-												  identifier:(NSString *)cellIdentifier;
-
-
-+ (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView;
-
-+ (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView
-								  identifier:(NSString *)cellIdentifier;
++ (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView 
+								   indexPath:(NSIndexPath *)indexPath;
 
 + (SliderTableCell *) getSliderTableCellForDelegate:(id<SliderTableCellDelegate>)delegate 
-											   table:(UITableView *)tableView;
-
-+ (SliderTableCell *) getSliderTableCellForDelegate:(id<SliderTableCellDelegate>)delegate
-											   table:(UITableView *)tableView
-										  identifier:(NSString *)cellIdentifier;
+											  table:(UITableView *)tableView 
+										  indexPath:(NSIndexPath *)indexPath;
 
 + (TextFieldTableCell *) getTextFieldTableCellForDelegate:(id<TextFieldTableCellDelegate>)delegate
-													 table:(UITableView *)tableView;
-
-+ (TextFieldTableCell *) getTextFieldTableCellForDelegate:(id<TextFieldTableCellDelegate>)delegate
-													 table:(UITableView *)tableView
-												identifier:(NSString *)cellIdentifier;
+													table:(UITableView *)tableView 
+												indexPath:(NSIndexPath *)indexPath;
 
 + (TextViewTableCell *) getTextViewTableCellForDelegate:(id<TextViewTableCellDelegate>)delegate
-												   table:(UITableView *)tableView;
-
-+ (TextViewTableCell *) getTextViewTableCellForDelegate:(id<TextViewTableCellDelegate>)delegate
-												   table:(UITableView *)tableView
-											  identifier:(NSString *)cellIdentifier;
-
-
-+ (SearchTableCell *) getSearchTableCellForDelegate:(id<SearchTableCellDelegate>)delegate 
-											   table:(UITableView *)tableView;
-
-+ (SearchTableCell *) getSearchTableCellForDelegate:(id<SearchTableCellDelegate>)delegate 
-											   table:(UITableView *)tableView
-										  identifier:(NSString *)cellIdentifier;
-
+												  table:(UITableView *)tableView 
+											  indexPath:(NSIndexPath *)indexPath;
 
 + (BooleanTableCell *) getBooleanTableCellForDelegate:(id<BooleanTableCellDelegate>)delegate
-												 table:(UITableView *)tableView;
-
-+ (BooleanTableCell *) getBooleanTableCellForDelegate:(id<BooleanTableCellDelegate>)delegate
-												 table:(UITableView *)tableView
-											identifier:(NSString *)cellIdentifier;
-
+												table:(UITableView *)tableView 
+											indexPath:(NSIndexPath *)indexPath;
 
 + (CheckBoxTableCell *) getCheckBoxTableCellForDelegate:(id<CheckBoxTableCellDelegate>)delegate
-												   table:(UITableView *)tableView;
-
-+ (CheckBoxTableCell *) getCheckBoxTableCellForDelegate:(id<CheckBoxTableCellDelegate>)delegate
-												   table:(UITableView *)tableView
-											  identifier:(NSString *)cellIdentifier;
-
-+ (ImageTableCell *) getImageTableCellWithImage:(UIImage *)image 
-										  table:(UITableView *)tableView;
+												  table:(UITableView *)tableView 
+											  indexPath:(NSIndexPath *)indexPath;
 
 + (ImageTableCell *) getImageTableCellWithImage:(UIImage *)image 
 										  table:(UITableView *)tableView
-									 identifier:(NSString *)cellIdentifier;
-
-
-+ (MapTableCell *) getMapTableCellForDelegate:(id<MapTableCellDelegate>)delegate
-										 table:(UITableView *)tableView;
+									  indexPath:(NSIndexPath *)indexPath;
 
 + (MapTableCell *) getMapTableCellForDelegate:(id<MapTableCellDelegate>)delegate
-										 table:(UITableView *)tableView
-									identifier:(NSString *)cellIdentifier;
+										table:(UITableView *)tableView 
+									indexPath:(NSIndexPath *)indexPath;
 
 + (DateTableCell *) getDateTableCellForDelegate:(id<DateTableCellDelegate>)delegate
-										   table:(UITableView *)tableView;
-
-+ (DateTableCell *) getDateTableCellForDelegate:(id<DateTableCellDelegate>)delegate
-										   table:(UITableView *)tableView
-									  identifier:(NSString *)cellIdentifier;
+										  table:(UITableView *)tableView
+									  indexPath:(NSIndexPath *)indexPath;
 
 @end

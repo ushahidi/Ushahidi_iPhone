@@ -37,6 +37,9 @@
 @property (nonatomic, retain) UITextView *textView;
 @property (nonatomic, assign) NSIndexPath *indexPath;
 @property (nonatomic, assign) NSInteger limit;
+@property (nonatomic, assign) UITextAutocorrectionType autocorrectionType;
+@property (nonatomic, assign) UITextAutocapitalizationType autocapitalizationType;
+@property (nonatomic, assign) UIKeyboardType keyboardType;
 
 - (id)initForDelegate:(id<TextViewTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 

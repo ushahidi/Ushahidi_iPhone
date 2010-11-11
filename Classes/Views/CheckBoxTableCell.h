@@ -19,13 +19,13 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "IndexedTableCell.h"
 
 @protocol CheckBoxTableCellDelegate;
 
-@interface CheckBoxTableCell : UITableViewCell {
+@interface CheckBoxTableCell : IndexedTableCell {
 
 @public
-	NSIndexPath	*indexPath;
 	UIImage *checkedImage;
 	UIImage *uncheckedImage;
 
@@ -33,7 +33,6 @@
 	id<CheckBoxTableCellDelegate> delegate;
 }
 
-@property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UIImage *checkedImage;
 @property (nonatomic, retain) UIImage *uncheckedImage;
 @property (nonatomic, assign) UIColor *selectedColor;

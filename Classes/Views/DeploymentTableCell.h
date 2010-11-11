@@ -19,8 +19,9 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
-@interface DeploymentTableCell : UITableViewCell {
+@interface DeploymentTableCell : IndexedTableCell {
 
 @public
 	IBOutlet UILabel *titleLabel;
@@ -29,12 +30,8 @@
 
 @property (nonatomic, retain) UILabel *titleLabel;
 @property (nonatomic, retain) UILabel *urlLabel;
-
-- (void) setTitle:(NSString *)title;
-- (NSString *) getTitle;
-
-- (void) setURL:(NSString *)url;
-- (NSString *) getURL;
+@property (nonatomic, assign) NSString *title;
+@property (nonatomic, assign) NSString *url;
 
 + (CGFloat) getCellHeight;
 

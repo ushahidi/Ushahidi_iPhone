@@ -22,6 +22,7 @@
 		3E1500701278C37A00036A0F /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15006E1278C37A00036A0F /* empty.png */; };
 		3E1500711278C37A00036A0F /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15006F1278C37A00036A0F /* refresh.png */; };
 		3E1501171278D82500036A0F /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
+		3E236397128C7DB400CF804A /* IndexedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E236396128C7DB400CF804A /* IndexedTableCell.m */; };
 		3E2E853812787E7F00ADA49B /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3E30492912874F3600E3C942 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E30492812874F3600E3C942 /* NSObject+Extension.m */; };
 		3E4A006F1271F26C0017AED4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
@@ -49,7 +50,6 @@
 		3E862A331222BCE5001DE141 /* CheckBoxTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A211222BCE5001DE141 /* CheckBoxTableCell.m */; };
 		3E862A341222BCE5001DE141 /* ImageTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A231222BCE5001DE141 /* ImageTableCell.m */; };
 		3E862A351222BCE5001DE141 /* MapTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A251222BCE5001DE141 /* MapTableCell.m */; };
-		3E862A361222BCE5001DE141 /* SearchTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A271222BCE5001DE141 /* SearchTableCell.m */; };
 		3E862A371222BCE5001DE141 /* SubtitleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A291222BCE5001DE141 /* SubtitleTableCell.m */; };
 		3E862A381222BCE5001DE141 /* TableCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A2B1222BCE5001DE141 /* TableCellFactory.m */; };
 		3E862A391222BCE5001DE141 /* TextFieldTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A2D1222BCE5001DE141 /* TextFieldTableCell.m */; };
@@ -177,6 +177,8 @@
 		3E15006F1278C37A00036A0F /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		3E1501151278D82500036A0F /* SliderTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderTableCell.h; sourceTree = "<group>"; };
 		3E1501161278D82500036A0F /* SliderTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderTableCell.m; sourceTree = "<group>"; };
+		3E236395128C7DB400CF804A /* IndexedTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedTableCell.h; sourceTree = "<group>"; };
+		3E236396128C7DB400CF804A /* IndexedTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedTableCell.m; sourceTree = "<group>"; };
 		3E2E853612787E7F00ADA49B /* MotionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionWindow.h; sourceTree = "<group>"; };
 		3E2E853712787E7F00ADA49B /* MotionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionWindow.m; sourceTree = "<group>"; };
 		3E30492712874F3600E3C942 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
@@ -225,8 +227,6 @@
 		3E862A231222BCE5001DE141 /* ImageTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableCell.m; sourceTree = "<group>"; };
 		3E862A241222BCE5001DE141 /* MapTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapTableCell.h; sourceTree = "<group>"; };
 		3E862A251222BCE5001DE141 /* MapTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTableCell.m; sourceTree = "<group>"; };
-		3E862A261222BCE5001DE141 /* SearchTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableCell.h; sourceTree = "<group>"; };
-		3E862A271222BCE5001DE141 /* SearchTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableCell.m; sourceTree = "<group>"; };
 		3E862A281222BCE5001DE141 /* SubtitleTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubtitleTableCell.h; sourceTree = "<group>"; };
 		3E862A291222BCE5001DE141 /* SubtitleTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubtitleTableCell.m; sourceTree = "<group>"; };
 		3E862A2A1222BCE5001DE141 /* TableCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCellFactory.h; sourceTree = "<group>"; };
@@ -548,6 +548,8 @@
 			children = (
 				3E862A2A1222BCE5001DE141 /* TableCellFactory.h */,
 				3E862A2B1222BCE5001DE141 /* TableCellFactory.m */,
+				3E236395128C7DB400CF804A /* IndexedTableCell.h */,
+				3E236396128C7DB400CF804A /* IndexedTableCell.m */,
 				3E862A1E1222BCE5001DE141 /* BooleanTableCell.h */,
 				3E862A1F1222BCE5001DE141 /* BooleanTableCell.m */,
 				3E862A201222BCE5001DE141 /* CheckBoxTableCell.h */,
@@ -556,22 +558,22 @@
 				3E862A231222BCE5001DE141 /* ImageTableCell.m */,
 				3E862A241222BCE5001DE141 /* MapTableCell.h */,
 				3E862A251222BCE5001DE141 /* MapTableCell.m */,
-				3E8635DF12244A54001DE141 /* MapAnnotation.h */,
-				3E8635E012244A54001DE141 /* MapAnnotation.m */,
-				3E862A261222BCE5001DE141 /* SearchTableCell.h */,
-				3E862A271222BCE5001DE141 /* SearchTableCell.m */,
 				3E862A281222BCE5001DE141 /* SubtitleTableCell.h */,
 				3E862A291222BCE5001DE141 /* SubtitleTableCell.m */,
 				3E862A2C1222BCE5001DE141 /* TextFieldTableCell.h */,
 				3E862A2D1222BCE5001DE141 /* TextFieldTableCell.m */,
+				3E862A301222BCE5001DE141 /* TextViewTableCell.h */,
+				3E862A311222BCE5001DE141 /* TextViewTableCell.m */,
 				3ECB55D0122F5BEE000AAC56 /* DateTableCell.h */,
 				3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */,
 				3E862A2E1222BCE5001DE141 /* TextTableCell.h */,
 				3E862A2F1222BCE5001DE141 /* TextTableCell.m */,
-				3E862A301222BCE5001DE141 /* TextViewTableCell.h */,
-				3E862A311222BCE5001DE141 /* TextViewTableCell.m */,
 				3E1501151278D82500036A0F /* SliderTableCell.h */,
 				3E1501161278D82500036A0F /* SliderTableCell.m */,
+				3E119AD7126F7E6200C3DCBB /* DeploymentTableCell.h */,
+				3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */,
+				3E119ADC126F7E7600C3DCBB /* IncidentTableCell.h */,
+				3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */,
 				3ECB55EB122F5E33000AAC56 /* DatePicker.h */,
 				3ECB55EC122F5E33000AAC56 /* DatePicker.m */,
 				3E862CA31222D604001DE141 /* AlertView.h */,
@@ -580,10 +582,8 @@
 				3E862CA91222D60F001DE141 /* InputView.m */,
 				3E4AF91B1270AA370017AED4 /* TableHeaderView.h */,
 				3E4AF91C1270AA370017AED4 /* TableHeaderView.m */,
-				3E119AD7126F7E6200C3DCBB /* DeploymentTableCell.h */,
-				3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */,
-				3E119ADC126F7E7600C3DCBB /* IncidentTableCell.h */,
-				3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */,
+				3E8635DF12244A54001DE141 /* MapAnnotation.h */,
+				3E8635E012244A54001DE141 /* MapAnnotation.m */,
 				3E2E853612787E7F00ADA49B /* MotionWindow.h */,
 				3E2E853712787E7F00ADA49B /* MotionWindow.m */,
 			);
@@ -904,7 +904,6 @@
 				3E862A331222BCE5001DE141 /* CheckBoxTableCell.m in Sources */,
 				3E862A341222BCE5001DE141 /* ImageTableCell.m in Sources */,
 				3E862A351222BCE5001DE141 /* MapTableCell.m in Sources */,
-				3E862A361222BCE5001DE141 /* SearchTableCell.m in Sources */,
 				3E862A371222BCE5001DE141 /* SubtitleTableCell.m in Sources */,
 				3E862A381222BCE5001DE141 /* TableCellFactory.m in Sources */,
 				3E862A391222BCE5001DE141 /* TextFieldTableCell.m in Sources */,
@@ -968,6 +967,7 @@
 				3E1501171278D82500036A0F /* SliderTableCell.m in Sources */,
 				3E30492912874F3600E3C942 /* NSObject+Extension.m in Sources */,
 				3ECD0A4712889A9A0006AF7C /* NSError+Extension.m in Sources */,
+				3E236397128C7DB400CF804A /* IndexedTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,6 +978,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -985,6 +986,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
 				PRODUCT_NAME = Ushahidi_iPhone;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "938BD1E4-3A4C-460F-BCAD-C61630C31C8F";
 			};
 			name = Debug;
 		};
@@ -992,11 +994,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
 				PRODUCT_NAME = Ushahidi_iPhone;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "938BD1E4-3A4C-460F-BCAD-C61630C31C8F";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1005,14 +1009,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dale Zak";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D138047B-A190-43B0-AF7E-5E0002550727";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "749D005A-EA23-4DD9-AB27-50F7E6D7EC3A";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1022,11 +1026,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
 				PRODUCT_NAME = Ushahidi_iPhone;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "749D005A-EA23-4DD9-AB27-50F7E6D7EC3A";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -1035,14 +1041,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dale Zak";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F9914F51-CCFD-407C-BA79-4C4F230E35D4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9FC6DDB-074D-4344-AA8D-573EB4A7D838";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1052,11 +1058,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
 				PRODUCT_NAME = Ushahidi_iPhone;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9FC6DDB-074D-4344-AA8D-573EB4A7D838";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -1065,7 +1073,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (89V8WPXURA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "DEBUG=1";
@@ -1073,7 +1081,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "23651937-5649-4D5C-806D-4FEC51CEDC86";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "938BD1E4-3A4C-460F-BCAD-C61630C31C8F";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1083,14 +1091,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (89V8WPXURA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "23651937-5649-4D5C-806D-4FEC51CEDC86";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "938BD1E4-3A4C-460F-BCAD-C61630C31C8F";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

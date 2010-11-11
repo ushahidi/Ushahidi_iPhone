@@ -29,7 +29,7 @@
 
 @private
 	UIViewController *controller;
-	id<DatePickerDelegate>	delegate;
+	id<DatePickerDelegate> delegate;
 	NSIndexPath *indexPath;
 }
 

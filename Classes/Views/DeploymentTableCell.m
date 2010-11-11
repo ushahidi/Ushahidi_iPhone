@@ -40,20 +40,20 @@
     [super dealloc];
 }
 
+- (NSString *) title {
+	return self.titleLabel.text;
+}
+
 - (void) setTitle:(NSString *)title {
 	self.titleLabel.text = title;
 }
 
-- (NSString *) getTitle {
-	return self.titleLabel.text;
-}
-
-- (void) setURL:(NSString *)url {
-	self.urlLabel.text = url;
-}
-
-- (NSString *) getURL {
+- (NSString *) url {
 	return self.urlLabel.text;
+}
+
+- (void) setUrl:(NSString *)url {
+	self.urlLabel.text = url;
 }
 
 - (void) setSelectedColor:(UIColor *)color {

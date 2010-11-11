@@ -32,7 +32,7 @@
 
 @implementation TextTableCell
 
-@synthesize delegate, indexPath; 
+@synthesize delegate; 
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
@@ -77,7 +77,6 @@
 }
 
 - (void)dealloc {
-	[indexPath release];
     [super dealloc];
 }
 

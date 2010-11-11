@@ -19,15 +19,14 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "IndexedTableCell.h"
 
-@interface SubtitleTableCell : UITableViewCell {
+@interface SubtitleTableCell : IndexedTableCell {
 	
 @public
-	NSIndexPath *indexPath;
 	UIImage *defaultImage;
 }
 
-@property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) UIImage *defaultImage;
 
 - (id)initWithDefaultImage:(UIImage *)defaultImage reuseIdentifier:(NSString *)reuseIdentifier;

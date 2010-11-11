@@ -34,7 +34,7 @@ typedef enum {
 	SegmentFalse
 } Segment;
 
-@synthesize delegate, indexPath, segmentControl;
+@synthesize delegate, segmentControl;
 
 - (id)initForDelegate:(id<BooleanTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
@@ -73,7 +73,6 @@ typedef enum {
 
 - (void)dealloc {
 	delegate = nil;
-	[indexPath release];
 	[segmentControl release];
     [super dealloc];
 }

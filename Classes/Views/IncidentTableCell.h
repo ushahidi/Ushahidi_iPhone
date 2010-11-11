@@ -19,8 +19,9 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
-@interface IncidentTableCell : UITableViewCell {
+@interface IncidentTableCell : IndexedTableCell {
 
 @public
 	IBOutlet UILabel *titleLabel;

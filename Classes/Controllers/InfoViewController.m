@@ -142,47 +142,51 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDownloadMaps) {
-		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
+		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setChecked:self.downloadMaps];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionBecomeDiscrete) {
-		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
+		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setChecked:self.becomeDiscrete];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionImageWidth) {
-		SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
+		SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setMaximum:1024];
 		[cell setMinimum:200];
 		[cell setValue:self.imageWidth];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionMapZoomLevel) {
-		SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
+		SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setMaximum:21];
 		[cell setMinimum:5];
 		[cell setValue:self.mapZoomLevel];
 		return cell;
 	}
 	else {
-		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView];
-		cell.indexPath = indexPath;
+		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionEmail) {
 			[cell setPlaceholder:@"Enter email"];
 			[cell setText:self.email];
+			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		}
 		else if (indexPath.section == TableSectionFirstName) {
 			[cell setPlaceholder:@"Enter first name"];
 			[cell setText:self.firstName];
+			[cell setKeyboardType:UIKeyboardTypeDefault];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
 		else if (indexPath.section == TableSectionLastName) {
 			[cell setPlaceholder:@"Enter last name"];
 			[cell setText:self.lastName];
+			[cell setKeyboardType:UIKeyboardTypeDefault];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
 		return cell;	
 	}

@@ -29,7 +29,7 @@
 
 @implementation TextFieldTableCell
 
-@synthesize delegate, textField, indexPath;
+@synthesize delegate, textField;
 
 - (id)initForDelegate:(id<TextFieldTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
@@ -41,6 +41,7 @@
 		self.textField.textAlignment = UITextAlignmentCenter;
 		self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		self.textField.keyboardType = UIKeyboardTypeDefault;
 		self.textField.borderStyle = UITextBorderStyleNone;
 		self.textField.font = [UIFont systemFontOfSize:16];
 		self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -54,8 +55,31 @@
 - (void)dealloc {
 	delegate = nil;
 	[textField release];
-	[indexPath release];
     [super dealloc];
+}
+
+- (UIKeyboardType) keyboardType {
+	return self.textField.keyboardType;
+}
+
+- (void) setKeyboardType:(UIKeyboardType)keyboardType {
+	self.textField.keyboardType = keyboardType;
+}
+
+- (UITextAutocorrectionType) autocorrectionType {
+	return self.textField.autocorrectionType;
+}
+
+- (void) setAutocorrectionType:(UITextAutocorrectionType)autocorrectionType {
+	self.textField.autocorrectionType = autocorrectionType;
+}
+
+- (UITextAutocapitalizationType) autocapitalizationType {
+	return self.textField.autocapitalizationType;
+}
+
+- (void) setAutocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType {
+	self.textField.autocapitalizationType = autocapitalizationType;
 }
 
 - (void) showKeyboard {

@@ -22,13 +22,13 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
+#import "IndexedTableCell.h"
 
 @protocol MapTableCellDelegate;
 
-@interface MapTableCell : UITableViewCell<MKMapViewDelegate> {
+@interface MapTableCell : IndexedTableCell<MKMapViewDelegate> {
 
 @public
-	NSIndexPath	*indexPath;
 	MKMapView *mapView;
 	BOOL animatesDrop;
 	BOOL showRightCallout;
@@ -37,7 +37,6 @@
 	id<MapTableCellDelegate> delegate;
 }
 
-@property (nonatomic, retain) NSIndexPath *indexPath; 
 @property (nonatomic, retain) MKMapView *mapView;
 @property (nonatomic, assign) BOOL animatesDrop;
 @property (nonatomic, assign) BOOL showRightCallout;

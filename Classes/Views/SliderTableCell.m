@@ -28,7 +28,7 @@
 
 @implementation SliderTableCell
 
-@synthesize delegate, indexPath;
+@synthesize delegate;
 
 - (id)initForDelegate:(id<SliderTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
@@ -70,7 +70,6 @@
 
 - (void)dealloc {
 	delegate = nil;
-	[indexPath release];
     [super dealloc];
 }
 

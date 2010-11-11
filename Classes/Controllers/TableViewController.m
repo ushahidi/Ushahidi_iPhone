@@ -194,7 +194,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return [TableCellFactory getDefaultTableCellForTable:theTableView];
+	return [TableCellFactory getDefaultTableCellForTable:theTableView indexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)theTableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

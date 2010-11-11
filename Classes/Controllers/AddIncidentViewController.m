@@ -33,15 +33,10 @@
 #import "Category.h"
 #import "Location.h"
 #import "Incident.h"
-#import "Messages.h"
 #import "UIColor+Extension.h"
 #import "Photo.h"
 #import "ImageTableCell.h"
 #import "Settings.h"
-
-#define kCancel @"Cancel"
-#define kTakePhoto @"Take Photo"
-#define kFromLibrary @"From Library"
 
 typedef enum {
 	TableSectionTitle,
@@ -99,7 +94,13 @@ typedef enum {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
-	[self addHeaders:[Messages title], [Messages description], [Messages category], [Messages date], [Messages location], [Messages photos], [Messages news], nil];
+	[self addHeaders:NSLocalizedString(@"Title", @"Title"),
+					 NSLocalizedString(@"Description", @"Description"),
+					 NSLocalizedString(@"Category", @"Category"),
+					 NSLocalizedString(@"Date", @"Date"),
+					 NSLocalizedString(@"Location", @"Location"),
+					 NSLocalizedString(@"Photos", @"Photos"),
+					 NSLocalizedString(@"News", @"News"), nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -173,7 +174,7 @@ typedef enum {
 			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
-			[cell setText:[Messages addPhoto]];
+			[cell setText:NSLocalizedString(@"Add Photo", @"Add Photo")];
 			[cell setTextColor:[UIColor lightGrayColor]];
 			return cell;
 		}
@@ -187,7 +188,7 @@ typedef enum {
 			[cell setTextColor:[UIColor blackColor]];
 		}
 		else {
-			[cell setText:@"Select location"];
+			[cell setText:NSLocalizedString(@"Select location", @"Select location")];
 			[cell setTextColor:[UIColor lightGrayColor]];
 		}
 		return cell;
@@ -202,7 +203,7 @@ typedef enum {
 				[cell setTextColor:[UIColor blackColor]];
 			}
 			else {
-				[cell setText:@"Enter date"];
+				[cell setText:NSLocalizedString(@"Enter date", @"Enter date")];
 				[cell setTextColor:[UIColor lightGrayColor]];
 			}
 		}
@@ -212,7 +213,7 @@ typedef enum {
 				[cell setTextColor:[UIColor blackColor]];
 			}
 			else {
-				[cell setText:@"Enter time"];
+				[cell setText:NSLocalizedString(@"Enter time", @"Enter time")];
 				[cell setTextColor:[UIColor lightGrayColor]];
 			}
 		}
@@ -227,7 +228,7 @@ typedef enum {
 			[cell setTextColor:[UIColor blackColor]];
 		}
 		else {
-			[cell setText:@"Select category"];
+			[cell setText:NSLocalizedString(@"Select category", @"Select category")];
 			[cell setTextColor:[UIColor lightGrayColor]];
 		}
 		return cell;
@@ -235,14 +236,14 @@ typedef enum {
 	else {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionTitle) {
-			[cell setPlaceholder:@"Enter title"];
+			[cell setPlaceholder:NSLocalizedString(@"Enter title", @"Enter title")];
 			[cell setText:self.incident.title];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
 		}
 		else if (indexPath.section == TableSectionLocation) {
-			[cell setPlaceholder:@"Select location"];
+			[cell setPlaceholder:NSLocalizedString(@"Select location", @"Select location")];
 			if (self.incident.location != nil) {
 				[cell setText:self.incident.location];
 			}
@@ -251,35 +252,10 @@ typedef enum {
 			}
 		}
 		else if (indexPath.section == TableSectionNews) {
-			[cell setPlaceholder:@"Add news"];
+			[cell setPlaceholder:NSLocalizedString(@"Add news", @"Add news")];
 		}
 		return cell;	
 	}
-}
-
-- (NSString *)tableView:(UITableView *)theTableView titleForHeaderInSection:(NSInteger)section {
-	if (section == TableSectionTitle) {
-		return [Messages title];
-	}
-	if (section == TableSectionCategory) {
-		return [Messages category];
-	}
-	if (section == TableSectionLocation) {
-		return [Messages location];
-	}
-	if (section == TableSectionDate) {
-		return [Messages date];
-	}
-	if (section == TableSectionDescription) {
-		return [Messages description];
-	}
-	if (section == TableSectionPhotos) {
-		return [Messages photos];
-	}
-	if (section == TableSectionNews) {
-		return [Messages news];
-	}
-	return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -287,7 +263,7 @@ typedef enum {
 		if (indexPath.row > 0) {
 			return 200;
 		}
-		return [TextTableCell getCellSizeForText:[Messages addPhoto] forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:NSLocalizedString(@"Add Photo", @"Add Photo") forWidth:theTableView.contentSize.width].height;
 	}
 	if (indexPath.section == TableSectionDescription) {
 		return 120;
@@ -316,8 +292,8 @@ typedef enum {
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
-														cancelButtonTitle:@"Cancel" 
-												   destructiveButtonTitle:@"Remove Photo"
+														cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") 
+												   destructiveButtonTitle:NSLocalizedString(@"Remove Photo", @"Remove Photo")
 														otherButtonTitles:nil];
 		[actionSheet setTag:indexPath.row - 1];
 		[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
@@ -393,7 +369,7 @@ typedef enum {
 }
 
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
-	[self.loadingView showWithMessage:[Messages resizing]];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", @"Resizing...")];
 }
 
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {

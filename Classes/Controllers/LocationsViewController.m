@@ -22,7 +22,6 @@
 #import "LoadingViewController.h"
 #import "Incident.h"
 #import "Location.h"
-#import "Messages.h"
 #import "TableCellFactory.h"
 #import "MKMapView+Extension.h"
 
@@ -104,7 +103,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self showSearchBarWithPlaceholder:[Messages searchLocations]];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search locations...", @"Search locations...")];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

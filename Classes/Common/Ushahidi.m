@@ -242,7 +242,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
 		DLog(@"response: %@", [request responseString]);
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:@"Invalid response."];
+		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid response", @"Invalid response")];
 		[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
 						target:delegate 
 					   objects:self, incident, error, nil];
@@ -266,7 +266,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				incident.errors = [messages objectForKey:@"message"];
 			}
 			else {
-				incident.errors = @"Unable to upload incident.";
+				incident.errors = NSLocalizedString(@"Unable to upload incident.", @"Unable to upload incident.");
 			}
 			NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:incident.errors];
 			[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
@@ -292,7 +292,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (NSArray *) getDeploymentsForDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", [delegate class]);
 	if ([self.deployments count] == 0) {
-		[self.deployments setObject:[[Deployment alloc] initWithName:@"Demo Ushahidi" 
+		[self.deployments setObject:[[Deployment alloc] initWithName:NSLocalizedString(@"Demo Ushahidi", @"Demo Ushahidi") 
 																 url:@"http://demo.ushahidi.com"] 
 							 forKey:@"http://demo.ushahidi.com"];
 	}
@@ -325,7 +325,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:@"Invalid response."];
+		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid response", @"Invalid response")];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:categories:error:hasChanges:) 
 						target:delegate 
 					   objects:self, [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)], error, NO, nil];
@@ -379,7 +379,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:@"Invalid response."];
+		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid response", @"Invalid response")];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:countries:error:hasChanges:) 
 						target:delegate 
 					   objects:self, [self.deployment.countries allValues], error, NO, nil];
@@ -432,7 +432,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:@"Invalid response."];
+		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid response", @"Invalid response")];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:locations:error:hasChanges:)
 						target:delegate
 					   objects:self, [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)], error, NO, nil];
@@ -539,7 +539,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
 		DLog(@"response: %@", [request responseString]);
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:@"Invalid response."];
+		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid response", @"Invalid response")];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 						target:delegate 
 					   objects:self, [self.deployment.incidents allValues], self.deployment.pending, error, NO, nil];

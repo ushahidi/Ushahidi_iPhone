@@ -41,7 +41,7 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title 
 													message:message
 												   delegate:self.controller 
-										  cancelButtonTitle:@"OK" 
+										  cancelButtonTitle:NSLocalizedString(@"OK", @"OK") 
 										  otherButtonTitles:nil];
 	[alert show];
 	[alert release];
@@ -49,7 +49,7 @@
 
 - (BOOL) showTipOnceOnly:(NSString *)tip {
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:tip] == 0) {
-		[self showWithTitle:@"Tips" andMessage:[[[NSBundle mainBundle] infoDictionary] objectForKey:tip]];
+		[self showWithTitle:NSLocalizedString(@"Tips", @"Tips") andMessage:[[[NSBundle mainBundle] infoDictionary] objectForKey:tip]];
 		[[NSUserDefaults standardUserDefaults] setInteger:1 forKey:tip];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		return YES;

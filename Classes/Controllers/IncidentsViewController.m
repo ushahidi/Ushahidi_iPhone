@@ -32,7 +32,6 @@
 #import "Deployment.h"
 #import "MKMapView+Extension.h"
 #import "MapAnnotation.h"
-#import "Messages.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
 
@@ -74,7 +73,7 @@ typedef enum {
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
 	self.refreshButton.enabled = NO;
-	[self.loadingView showWithMessage:@"Loading..."];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", @"Loading...")];
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 }
@@ -142,8 +141,9 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiDarkTan];
-	[self showSearchBarWithPlaceholder:[Messages searchIncidents]];
-	[self addHeaders:@"Pending", @"Incidents", nil];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search incidents...", @"Search incidents...")];
+	[self addHeaders:NSLocalizedString(@"Pending", @"Pending"),
+					 NSLocalizedString(@"Incidents", @"Incidents"),nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -327,7 +327,7 @@ typedef enum {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		if ([self.loadingView isShowing]) {
-			[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+			[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") andMessage:[error localizedDescription]];
 		}
 	}
 	else if(hasChanges) {
@@ -407,7 +407,10 @@ typedef enum {
 #pragma mark MKMapView
 
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
-	MKPinAnnotationView *annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
+	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:@"MKPinAnnotationView"];
+	if (annotationView == nil) {
+		 annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
+	}
 	annotationView.animatesDrop = YES;
 	annotationView.canShowCallout = YES;
 	if ([annotation class] == MKUserLocation.class) {

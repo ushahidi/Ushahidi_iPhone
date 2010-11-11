@@ -73,14 +73,14 @@ typedef enum {
 - (IBAction) done:(id)sender {
 	DLog(@"done");
 	[self.view endEditing:YES];
-	[self.loadingView showWithMessage:@"Adding Server..."];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", @"Adding...")];
 	if ([[Ushahidi sharedUshahidi] addDeploymentByName:self.name andUrl:self.url]) {
-		[self.loadingView showWithMessage:@"Deployment Added!"];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Deployment Added", @"Deployment Added")];
 		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:2.0];
 	}
 	else {
 		[self.loadingView hide];
-		[self.alertView showWithTitle:@"Error" andMessage:@"There was a problem adding deployment."];
+		[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") andMessage:NSLocalizedString(@"There was a problem adding deployment", @"There was a problem adding deployment")];
 	}	
 }
 
@@ -90,7 +90,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
-	[self addHeaders:@"Name", @"URL", nil];
+	[self addHeaders:NSLocalizedString(@"Name", @"Name"),
+					NSLocalizedString(@"URL", @"URL"), nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -128,14 +129,14 @@ typedef enum {
 	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 	if (indexPath.section == TableSectionName) {
 		[cell setText:self.name];
-		[cell setPlaceholder:@"Enter Deployment Name"];
+		[cell setPlaceholder:NSLocalizedString(@"Enter Deployment Name", @"Enter Deployment Name")];
 		[cell setKeyboardType:UIKeyboardTypeDefault];
 		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 	}
 	else if (indexPath.section == TableSectionURL) {
 		[cell setText:self.url];
-		[cell setPlaceholder:@"Enter Deployment URL"];
+		[cell setPlaceholder:NSLocalizedString(@"Enter Deployment URL", @"Enter Deployment URL")];
 		[cell setKeyboardType:UIKeyboardTypeURL];
 		[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
@@ -145,10 +146,10 @@ typedef enum {
 
 - (NSString *)tableView:(UITableView *)theTableView titleForFooterInSection:(NSInteger)section {
 	if (section == TableSectionName) {
-		return @"Example: Ushahidi Demo";
+		return NSLocalizedString(@"Example: Ushahidi Demo", @"Example: Ushahidi Demo");
 	}
 	if (section == TableSectionURL) {
-		return @"Example: http://demo.ushahidi.com";
+		return NSLocalizedString(@"Example: http://demo.ushahidi.com", @"Example: http://demo.ushahidi.com");
 	}
 	return nil;
 }

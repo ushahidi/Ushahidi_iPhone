@@ -19,7 +19,6 @@
  *****************************************************************************/
 
 #import "IncidentTableCell.h"
-#import "Messages.h"
 #import "UIColor+Extension.h"
 
 @implementation IncidentTableCell
@@ -66,7 +65,7 @@ typedef enum {
 		self.locationLabel.text = location;
 	}
 	else {
-		self.locationLabel.text = [Messages noLocationSpecified];
+		self.locationLabel.text = NSLocalizedString(@"No Location Specified", @"No Location Specified");
 	}
 }
 
@@ -80,7 +79,7 @@ typedef enum {
 		self.categoryLabel.text = category;
 	}
 	else {
-		self.categoryLabel.text = [Messages noCategorySpecified];
+		self.categoryLabel.text = NSLocalizedString(@"No Category Specified", @"No Category Specified");
 	}
 }
 
@@ -94,7 +93,7 @@ typedef enum {
 		self.dateLabel.text = date;
 	}
 	else {
-		self.dateLabel.text = [Messages noDateSpecified];
+		self.dateLabel.text = NSLocalizedString(@"No Date Specified", @"No Date Specified");
 	}
 }
 
@@ -128,12 +127,12 @@ typedef enum {
 
 - (void) setVerified:(BOOL) verified {
 	if (verified) {
-		self.verifiedLabel.text = [Messages verified];
+		self.verifiedLabel.text = NSLocalizedString(@"Verified", @"Verified");
 		self.verifiedLabel.textColor = [UIColor ushahidiVerified];
 		self.verifiedLabel.tag = VerifiedYes;
 	}
 	else {
-		self.verifiedLabel.text = [Messages unverified];
+		self.verifiedLabel.text = NSLocalizedString(@"Unverified", @"Unverified");
 		self.verifiedLabel.textColor = [UIColor ushahidiUnverified];
 		self.verifiedLabel.tag = VerifiedNo;
 	}

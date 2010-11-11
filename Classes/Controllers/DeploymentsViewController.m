@@ -29,7 +29,6 @@
 #import "AlertView.h"
 #import "InputView.h"
 #import "Deployment.h"
-#import "Messages.h"
 #import "Settings.h"
 
 @interface DeploymentsViewController ()
@@ -50,7 +49,7 @@
 	 
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
-	[self.loadingView showWithMessage:@"Loading..."];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", @"Loading...")];
 	[[Ushahidi sharedUshahidi] getDeploymentsForDelegate:self];
 }
 
@@ -68,7 +67,7 @@
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiDarkTan];
 	self.evenRowColor = [UIColor ushahidiLiteBrown];
-	[self showSearchBarWithPlaceholder:[Messages searchServers]];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search deployments...", @"Search deployments...")];
 	
 	UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [infoButton addTarget:self action:@selector(info:) forControlEvents:UIControlEventTouchUpInside];
@@ -160,7 +159,7 @@
 	[self.loadingView hide];
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+		[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") andMessage:[error localizedDescription]];
 	}
 	else if (hasChanges) {
 		DLog(@"deployments: %@", theDeployments);

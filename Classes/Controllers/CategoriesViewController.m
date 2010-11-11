@@ -22,7 +22,6 @@
 #import "LoadingViewController.h"
 #import "Incident.h"
 #import "Category.h"
-#import "Messages.h"
 #import "TableCellFactory.h"
 
 @interface CategoriesViewController ()
@@ -49,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self showSearchBarWithPlaceholder:[Messages searchCategories]];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search categories...", @"Search categories...")];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

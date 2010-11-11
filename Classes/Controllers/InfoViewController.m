@@ -83,7 +83,13 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	self.imageWidthLabel = [self getFooterLabel];
 	self.mapZoomLevelLabel = [self getFooterLabel];
-	[self addHeaders:@"Email", @"First Name", @"Last Name", @"Resized Image Width", @"Download Maps For Offline Viewing", @"Downloaded Map Zoom Level", @"Discrete Mode On Shake", nil];		
+	[self addHeaders:NSLocalizedString(@"Email", @"Email"), 
+					 NSLocalizedString(@"First Name", @"First Name"), 
+					 NSLocalizedString(@"Last Name", @"Last Name"),
+					 NSLocalizedString(@"Resized Image Width", @"Resized Image Width"), 
+					 NSLocalizedString(@"Download Maps For Offline Viewing", @"Download Maps For Offline Viewing"), 
+					 NSLocalizedString(@"Downloaded Map Zoom Level", @"Downloaded Map Zoom Level"),
+					 NSLocalizedString(@"Discrete Mode On Shake", @"Discrete Mode On Shake"), nil];		
 }
 
 - (UILabel *) getFooterLabel {
@@ -103,8 +109,8 @@ typedef enum {
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
 	self.imageWidth = [[Settings sharedSettings] imageWidth];
 	self.mapZoomLevel = [[Settings sharedSettings] mapZoomLevel];
-	self.imageWidthLabel.text = [NSString stringWithFormat:@"%d pixels", (int)self.imageWidth];
-	self.mapZoomLevelLabel.text = [NSString stringWithFormat:@"%d zoom level", (int)self.mapZoomLevel];
+	self.imageWidthLabel.text = [NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", @"pixels")];
+	self.mapZoomLevelLabel.text = [NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", @"zoom level")];
 	[self.tableView reloadData];
 }
 
@@ -168,21 +174,21 @@ typedef enum {
 	else {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionEmail) {
-			[cell setPlaceholder:@"Enter email"];
+			[cell setPlaceholder:NSLocalizedString(@"Enter email", @"Enter email")];
 			[cell setText:self.email];
 			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		}
 		else if (indexPath.section == TableSectionFirstName) {
-			[cell setPlaceholder:@"Enter first name"];
+			[cell setPlaceholder:NSLocalizedString(@"Enter first name", @"Enter first name")];
 			[cell setText:self.firstName];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
 		else if (indexPath.section == TableSectionLastName) {
-			[cell setPlaceholder:@"Enter last name"];
+			[cell setPlaceholder:NSLocalizedString(@"Enter last name", @"Enter last name")];
 			[cell setText:self.lastName];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
@@ -268,11 +274,11 @@ typedef enum {
 	DLog(@"sliderCellChanged: %f", value);
 	if (cell.indexPath.section == TableSectionImageWidth) {
 		self.imageWidth = value;
-		self.imageWidthLabel.text = [NSString stringWithFormat:@"%d pixels", (int)value];	
+		self.imageWidthLabel.text = [NSString stringWithFormat:@"%d %@", (int)value, NSLocalizedString(@"pixels", @"pixels")];
 	}
 	else if (cell.indexPath.section == TableSectionMapZoomLevel) {
 		self.mapZoomLevel = value;
-		self.mapZoomLevelLabel.text = [NSString stringWithFormat:@"%d zoom level", (int)value];
+		self.mapZoomLevelLabel.text = [NSString stringWithFormat:@"%d %@", (int)value, NSLocalizedString(@"zoom level", @"zoom level")];
 	}
 }
 

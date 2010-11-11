@@ -28,7 +28,6 @@
 #import "NSDate+Extension.h"
 #import "NSDictionary+Extension.h"
 #import "NSString+Extension.h"
-#import "Messages.h"
 
 @implementation Incident
 
@@ -54,7 +53,7 @@ typedef enum {
 		self.sounds = [[NSMutableArray alloc] initWithCapacity:0];
 		self.videos = [[NSMutableArray alloc] initWithCapacity:0];
 		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
-		self.date = [[NSDate alloc] init];
+		self.date = [NSDate date];
 	}
 	return self;
 }
@@ -149,12 +148,6 @@ typedef enum {
 
 - (BOOL) matchesString:(NSString *)string {
 	return self.title != nil && [self.title anyWordHasPrefix:string];
-}
-
-- (NSString *) titleWithVerified {
-	return self.verified
-		? [NSString stringWithFormat:@"%@ (%@)", self.title, [Messages verified]]
-		: [NSString stringWithFormat:@"%@ (%@)", self.title, [Messages unverified]];
 }
 
 - (NSString *) dateTimeString {

@@ -52,8 +52,7 @@
 													 cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
 												destructiveButtonTitle:nil
 													 otherButtonTitles:NSLocalizedString(@"Select", @"Select"), 
-								   NSLocalizedString(@"Clear", @"Clear"),
-								   nil] autorelease];    
+																	   NSLocalizedString(@"Clear", @"Clear"), nil] autorelease];    
 	
 	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
 	datePicker.datePickerMode = UIDatePickerModeDate;

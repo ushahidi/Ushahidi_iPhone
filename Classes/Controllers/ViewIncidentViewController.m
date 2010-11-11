@@ -32,7 +32,6 @@
 #import "Photo.h"
 #import "Location.h"
 #import "UIColor+Extension.h"
-#import "Messages.h"
 #import "TableHeaderView.h"
 
 typedef enum {
@@ -90,15 +89,15 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
-	[self addHeaders:[Messages errors], 
-					 [Messages title],
-					 [Messages verified],
-					 [Messages description], 
-					 [Messages category], 
-					 [Messages date], 
-					 [Messages location], 
-					 [Messages photos], 
-					 [Messages news], nil];
+	[self addHeaders:NSLocalizedString(@"Errors", @"Errors"), 
+					 NSLocalizedString(@"Title", @"Title"),
+					 NSLocalizedString(@"Verified", @"Verified"),
+					 NSLocalizedString(@"Descriptin", @"Description"), 
+					 NSLocalizedString(@"Category", @"Category"), 
+					 NSLocalizedString(@"Date", @"Date"), 
+					 NSLocalizedString(@"Location", @"Location"), 
+					 NSLocalizedString(@"Photos", @"Photos"), 
+					 NSLocalizedString(@"News", @"News"), nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -207,7 +206,7 @@ typedef enum {
 			cell.textLabel.text = self.incident.description;
 		}
 		else if (indexPath.section == TableSectionCategory) {
-			cell.textLabel.text = [self.incident categoryNamesWithDefaultText:[Messages noCategorySpecified]];
+			cell.textLabel.text = [self.incident categoryNamesWithDefaultText:NSLocalizedString(@"No Category Specified", @"No Category Specified")];
 		}
 		else if (indexPath.section == TableSectionLocation) {
 			cell.textLabel.text = self.incident.location;
@@ -221,13 +220,13 @@ typedef enum {
 			cell.textLabel.text = [self.incident errors];
 		}
 		else if (indexPath.section == TableSectionPhotos) {
-			cell.textLabel.text = [Messages noPhotos];
+			cell.textLabel.text = NSLocalizedString(@"No Photos", @"No Photos");
 		}
 		else if (indexPath.section == TableSectionNews) {
-			cell.textLabel.text = [Messages noNews];
+			cell.textLabel.text = NSLocalizedString(@"No News", @"No News");
 		}
 		else if (indexPath.section == TableSectionVerified) {
-			cell.textLabel.text = self.incident.verified ? [Messages yes] : [Messages no];
+			cell.textLabel.text = self.incident.verified ? NSLocalizedString(@"Yes", @"Yes") : NSLocalizedString(@"No", @"No");
 		}
 		return cell;	
 	}
@@ -246,26 +245,26 @@ typedef enum {
 		if ([self.incident.photos count] > 0) {
 			return 200;
 		}
-		return [TextTableCell getCellSizeForText:[Messages noPhotos] forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No Photos", @"No Photos") forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionNews) {
 		if ([self.incident.news count] > 0) {
 			return 55;
 		}
-		return [TextTableCell getCellSizeForText:[Messages noNews] forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No News", @"No News") forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionTitle) {
 		return [TextTableCell getCellSizeForText:self.incident.title forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionVerified) {
-		NSString *verifiedText = self.incident.verified ? [Messages yes] : [Messages no];
+		NSString *verifiedText = self.incident.verified ? NSLocalizedString(@"Yes", @"Yes") : NSLocalizedString(@"No", @"No");
 		return [TextTableCell getCellSizeForText:verifiedText forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionDescription) {
 		return [TextTableCell getCellSizeForText:self.incident.description forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionCategory) {
-		return [TextTableCell getCellSizeForText:[self.incident categoryNamesWithDefaultText:[Messages noCategorySpecified]] forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:[self.incident categoryNamesWithDefaultText:NSLocalizedString(@"No Category Specified", @"No Category Specified")] forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionDateTime) {
 		return [TextTableCell getCellSizeForText:[self.incident dateTimeString] forWidth:theTableView.contentSize.width].height;
@@ -301,7 +300,7 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionPhotos) {
 		if ([self.incident.photos count] > 0) {
-			self.imageViewController.title = @"Image";
+			self.imageViewController.title = NSLocalizedString(@"Image", @"Image");
 			self.imageViewController.image = [((ImageTableCell *)cell) getImage];
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}

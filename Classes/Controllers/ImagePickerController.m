@@ -22,10 +22,6 @@
 #import "Device.h"
 #import "UIImage+Resize.h"
 
-#define kCancel @"Cancel"
-#define kTakePhoto @"Take Photo"
-#define kFromLibrary @"From Library"
-
 @interface ImagePickerController ()
 
 @property(nonatomic, assign) CGFloat width;
@@ -59,9 +55,10 @@
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
-														cancelButtonTitle:kCancel
+														cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
 												   destructiveButtonTitle:nil
-														otherButtonTitles:kTakePhoto, kFromLibrary, nil];
+														otherButtonTitles:NSLocalizedString(@"Take Photo", @"Take Photo"), 
+																		  NSLocalizedString(@"From Library", @"From Library"), nil];
 		[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
 		[actionSheet showInView:self.viewController.view];
 		[actionSheet release];
@@ -171,10 +168,10 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
 	DLog(@"titleAtIndex: %@", titleAtIndex);
-	if ([titleAtIndex isEqualToString:kTakePhoto]) {
+	if ([titleAtIndex isEqualToString:NSLocalizedString(@"Take Photo", @"Take Photo")]) {
 		[self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
 	}
-	else if ([titleAtIndex isEqualToString:kFromLibrary]) {
+	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"From Library", @"From Library")]) {
 		[self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 	}
 }

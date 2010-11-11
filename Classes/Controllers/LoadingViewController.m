@@ -51,11 +51,11 @@
 }
 
 - (void) show {
-	[self showWithMessage:@"Loading..." afterDelay:0.0];
+	[self showWithMessage:NSLocalizedString(@"Loading...", @"Loading...") afterDelay:0.0];
 }
 
 - (void) showAfterDelay:(NSTimeInterval)delay {
-	[self showWithMessage:@"Loading..." afterDelay:delay];
+	[self showWithMessage:NSLocalizedString(@"Loading...", @"Loading...") afterDelay:delay];
 }
 
 - (void) showWithMessage:(NSString *)message {

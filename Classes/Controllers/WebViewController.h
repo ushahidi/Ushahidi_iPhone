@@ -30,6 +30,10 @@
 	UISearchBar *searchBar;
 	NSString *website;
 	UIActivityIndicatorView *activityIndicator;
+	
+@private
+	NSString *homePage;
+	NSString *googleSearch;
 }
 
 @property(nonatomic,retain) IBOutlet UIWebView *webView;

@@ -22,8 +22,12 @@
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
+#import "Device.h"
 
 @interface WebViewController ()
+
+@property(nonatomic,retain) NSString *homePage;
+@property(nonatomic,retain) NSString *googleSearch;
 
 - (void) showLoading:(BOOL)show;
 
@@ -31,10 +35,7 @@
 
 @implementation WebViewController
 
-@synthesize webView, refreshButton, backForwardButton, website, searchBar, activityIndicator;
-
-NSString * const kHomePage = @"http://www.google.com";
-NSString * const kGoogleSearch = @"http://www.google.com/search?q=%@"; 
+@synthesize webView, refreshButton, backForwardButton, website, searchBar, activityIndicator, homePage, googleSearch;
 
 typedef enum {
 	NavigationBack,
@@ -73,6 +74,17 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
+- (void) viewDidLoad {
+	if ([Device isIPad]) {
+		self.homePage = @"http://www.google.com";
+		self.googleSearch = @"http://www.google.com/search?q=%@";
+	}
+	else {
+		self.homePage = @"http://www.google.com/?source=mog";
+		self.googleSearch = @"http://www.google.com/m/search?q=%@";
+	}
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.website != nil) {
@@ -82,7 +94,7 @@ typedef enum {
 	}
 	else if (self.webView.request == nil){
 		self.title = @"Google";
-		[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:kHomePage]]];
+		[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.homePage]]];
 	}
 	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
@@ -144,7 +156,7 @@ typedef enum {
 	NSString *searchTextLowercase = [[theSearchBar text] lowercaseString];
 	NSURL *url = [searchTextLowercase hasPrefix:@"http://"] || [searchTextLowercase hasPrefix:@"https://"]
 		? [NSURL URLWithString:[theSearchBar text]]
-		: [NSURL URLWithString:[NSString stringWithFormat:kGoogleSearch, [[theSearchBar text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+		: [NSURL URLWithString:[NSString stringWithFormat:googleSearch, [[theSearchBar text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 	[self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }   
 

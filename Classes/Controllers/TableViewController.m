@@ -23,6 +23,7 @@
 #import "UIView+Extension.h"
 #import "TableHeaderView.h"
 #import "UIColor+Extension.h"
+#import "Device.h"
 
 @interface TableViewController ()
 
@@ -163,6 +164,11 @@
 	self.filteredRows = [[NSMutableArray alloc] initWithCapacity:0];
 	self.headers = [[NSMutableArray alloc] initWithCapacity:0];
 	self.shouldBeginEditing = YES;
+	if ([Device isIPad]) {
+		[self.tableView setBackgroundView:nil];
+		[self.tableView setBackgroundView:[[[UIView alloc] init] autorelease]];
+		[self.tableView setBackgroundColor:[UIColor ushahidiLiteTan]];	
+	}
 }
 
 - (void)dealloc {

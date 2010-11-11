@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="40"/>
+			<integer value="37"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -105,7 +105,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUISegmentedControl" id="191443781">
 								<reference key="NSNextResponder" ref="453054362"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{56, 8}, {256, 30}}</string>
 								<reference key="NSSuperview" ref="453054362"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -181,7 +181,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUITextField" id="160302869">
 								<reference key="NSNextResponder" ref="630799124"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">290</int>
 								<string key="NSFrame">{{12, 7}, {300, 31}}</string>
 								<reference key="NSSuperview" ref="630799124"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -389,8 +389,8 @@
 							<reference ref="366623903"/>
 							<reference ref="908504725"/>
 							<reference ref="453054362"/>
-							<reference ref="73927885"/>
 							<reference ref="630799124"/>
+							<reference ref="73927885"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -696,6 +696,13 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/Categories/MKMapView+Extension.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Categories/NSObject+Extension.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

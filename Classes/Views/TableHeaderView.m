@@ -19,6 +19,13 @@
  *****************************************************************************/
 
 #import "TableHeaderView.h"
+#import "Device.h"
+
+@interface TableHeaderView ()
+
++ (CGFloat) getPaddingForTable:(UITableView *)tableView;
+
+@end
 
 @implementation TableHeaderView
 
@@ -41,7 +48,8 @@
 		label.opaque = YES;
 		label.textColor = theTextColor;
 		label.font = [UIFont boldSystemFontOfSize:16];
-		label.frame = CGRectMake(10.0, 0.0, theFrame.size.width - 10.0, theFrame.size.height);
+		CGFloat padding = [TableHeaderView getPaddingForTable:tableView];
+		label.frame = CGRectMake(padding, 0.0, theFrame.size.width - padding, theFrame.size.height);
 		label.text = theText;
 		label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 		
@@ -49,6 +57,13 @@
 		[label release];
 	}
     return self;
+}
+
++ (CGFloat) getPaddingForTable:(UITableView *)tableView {
+	if ([Device isIPad]) {
+		return tableView.style == UITableViewStylePlain ? 10 : 50;
+	}
+	return tableView.style == UITableViewStylePlain ? 10 : 15;
 }
 
 - (void)dealloc {

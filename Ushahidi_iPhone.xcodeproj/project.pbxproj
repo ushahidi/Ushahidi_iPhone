@@ -23,6 +23,7 @@
 		3E1501171278D82500036A0F /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
 		3E236397128C7DB400CF804A /* IndexedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E236396128C7DB400CF804A /* IndexedTableCell.m */; };
 		3E2366A5128C9FEC00CF804A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E2366A4128C9FEC00CF804A /* Localizable.strings */; };
+		3E236798128CAAC700CF804A /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */; };
 		3E2E853812787E7F00ADA49B /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3E30492912874F3600E3C942 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E30492812874F3600E3C942 /* NSObject+Extension.m */; };
 		3E4A006F1271F26C0017AED4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
@@ -77,15 +78,11 @@
 		3E862A7A1222BD1D001DE141 /* IncidentsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A681222BD1D001DE141 /* IncidentsViewController_iPad.xib */; };
 		3E862A7B1222BD1D001DE141 /* IncidentsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A691222BD1D001DE141 /* IncidentsViewController_iPhone.xib */; };
 		3E862A7C1222BD1D001DE141 /* DeploymentsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6A1222BD1D001DE141 /* DeploymentsViewController_iPad.xib */; };
-		3E862A7D1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6B1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib */; };
-		3E862A7E1222BD1D001DE141 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */; };
-		3E862A7F1222BD1D001DE141 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6D1222BD1D001DE141 /* MainWindow_iPhone.xib */; };
 		3E862A801222BD1D001DE141 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6E1222BD1D001DE141 /* MapViewController_iPad.xib */; };
 		3E862A811222BD1D001DE141 /* MapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6F1222BD1D001DE141 /* MapViewController_iPhone.xib */; };
 		3E862A821222BD1D001DE141 /* ViewIncidentViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A701222BD1D001DE141 /* ViewIncidentViewController_iPad.xib */; };
 		3E862A831222BD1D001DE141 /* ViewIncidentViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A711222BD1D001DE141 /* ViewIncidentViewController_iPhone.xib */; };
 		3E862A841222BD1D001DE141 /* WebViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A721222BD1D001DE141 /* WebViewController_iPad.xib */; };
-		3E862A851222BD1D001DE141 /* WebViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A731222BD1D001DE141 /* WebViewController_iPhone.xib */; };
 		3E862A941222BD57001DE141 /* AppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A931222BD57001DE141 /* AppDelegate_iPad.m */; };
 		3E862A971222BD61001DE141 /* AppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A961222BD61001DE141 /* AppDelegate_iPhone.m */; };
 		3E862AC21222C019001DE141 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AB91222C019001DE141 /* NSObject+SBJSON.m */; };
@@ -262,15 +259,12 @@
 		3E862A681222BD1D001DE141 /* IncidentsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentsViewController_iPad.xib; sourceTree = "<group>"; };
 		3E862A691222BD1D001DE141 /* IncidentsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentsViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E862A6A1222BD1D001DE141 /* DeploymentsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentsViewController_iPad.xib; sourceTree = "<group>"; };
-		3E862A6B1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentsViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
-		3E862A6D1222BD1D001DE141 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
 		3E862A6E1222BD1D001DE141 /* MapViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController_iPad.xib; sourceTree = "<group>"; };
 		3E862A6F1222BD1D001DE141 /* MapViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E862A701222BD1D001DE141 /* ViewIncidentViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewIncidentViewController_iPad.xib; sourceTree = "<group>"; };
 		3E862A711222BD1D001DE141 /* ViewIncidentViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewIncidentViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E862A721222BD1D001DE141 /* WebViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController_iPad.xib; sourceTree = "<group>"; };
-		3E862A731222BD1D001DE141 /* WebViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E862A921222BD57001DE141 /* AppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate_iPad.h; sourceTree = "<group>"; };
 		3E862A931222BD57001DE141 /* AppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate_iPad.m; sourceTree = "<group>"; };
 		3E862A951222BD61001DE141 /* AppDelegate_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate_iPhone.h; sourceTree = "<group>"; };
@@ -690,7 +684,6 @@
 			isa = PBXGroup;
 			children = (
 				3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */,
-				3E862A6D1222BD1D001DE141 /* MainWindow_iPhone.xib */,
 				3E862CD81222D8F0001DE141 /* SplashViewController_iPhone.xib */,
 				3E862CDC1222D8FC001DE141 /* SplashViewController_iPad.xib */,
 				3E4AFF4D1271E1DF0017AED4 /* InfoViewController_iPhone.xib */,
@@ -704,7 +697,6 @@
 				3E862A681222BD1D001DE141 /* IncidentsViewController_iPad.xib */,
 				3E862A691222BD1D001DE141 /* IncidentsViewController_iPhone.xib */,
 				3E862A6A1222BD1D001DE141 /* DeploymentsViewController_iPad.xib */,
-				3E862A6B1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib */,
 				3E862A6E1222BD1D001DE141 /* MapViewController_iPad.xib */,
 				3E862A6F1222BD1D001DE141 /* MapViewController_iPhone.xib */,
 				3E862A701222BD1D001DE141 /* ViewIncidentViewController_iPad.xib */,
@@ -714,7 +706,6 @@
 				3EBB10E512768D69007D7930 /* LocationsViewController_iPhone.xib */,
 				3EBB10EB12768D76007D7930 /* LocationsViewController_iPad.xib */,
 				3E862A721222BD1D001DE141 /* WebViewController_iPad.xib */,
-				3E862A731222BD1D001DE141 /* WebViewController_iPhone.xib */,
 				3E862BE11222D092001DE141 /* LoadingViewController_iPhone.xib */,
 				3E862BE21222D092001DE141 /* LoadingViewController_iPad.xib */,
 				3E119AC0126F64AB00C3DCBB /* DeploymentTableCell.xib */,
@@ -868,15 +859,12 @@
 				3E862A7A1222BD1D001DE141 /* IncidentsViewController_iPad.xib in Resources */,
 				3E862A7B1222BD1D001DE141 /* IncidentsViewController_iPhone.xib in Resources */,
 				3E862A7C1222BD1D001DE141 /* DeploymentsViewController_iPad.xib in Resources */,
-				3E862A7D1222BD1D001DE141 /* DeploymentsViewController_iPhone.xib in Resources */,
-				3E862A7E1222BD1D001DE141 /* MainWindow_iPad.xib in Resources */,
-				3E862A7F1222BD1D001DE141 /* MainWindow_iPhone.xib in Resources */,
+				3E236798128CAAC700CF804A /* MainWindow_iPad.xib in Resources */,
 				3E862A801222BD1D001DE141 /* MapViewController_iPad.xib in Resources */,
 				3E862A811222BD1D001DE141 /* MapViewController_iPhone.xib in Resources */,
 				3E862A821222BD1D001DE141 /* ViewIncidentViewController_iPad.xib in Resources */,
 				3E862A831222BD1D001DE141 /* ViewIncidentViewController_iPhone.xib in Resources */,
 				3E862A841222BD1D001DE141 /* WebViewController_iPad.xib in Resources */,
-				3E862A851222BD1D001DE141 /* WebViewController_iPhone.xib in Resources */,
 				3E862BE31222D092001DE141 /* LoadingViewController_iPhone.xib in Resources */,
 				3E862BE41222D092001DE141 /* LoadingViewController_iPad.xib in Resources */,
 				3E862BEC1222D0A1001DE141 /* loading_background.png in Resources */,

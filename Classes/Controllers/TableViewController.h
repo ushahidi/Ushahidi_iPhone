@@ -39,6 +39,7 @@
 @private
 	BOOL shouldBeginEditing;
 	NSMutableArray *headers;
+	NSMutableDictionary *footers;
 }
 
 @property(nonatomic,retain) UITableView *tableView;
@@ -61,5 +62,6 @@
 - (void) addHeader:(NSString *)header;
 - (void) addHeaders:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
 - (void) clearHeaders;
+- (void) setFooter:(NSString *)text atSection:(NSInteger)section;
 
 @end

@@ -141,9 +141,9 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiDarkTan];
-	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search incidents...", @"Search incidents...")];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", @"Search reports...")];
 	[self addHeaders:NSLocalizedString(@"Pending", @"Pending"),
-					 NSLocalizedString(@"Incidents", @"Incidents"),nil];
+					 NSLocalizedString(@"Reports", @"Reports"),nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

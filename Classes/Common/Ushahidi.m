@@ -266,7 +266,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				incident.errors = [messages objectForKey:@"message"];
 			}
 			else {
-				incident.errors = NSLocalizedString(@"Unable to upload incident.", @"Unable to upload incident.");
+				incident.errors = NSLocalizedString(@"Unable to upload report.", @"Unable to upload report.");
 			}
 			NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:incident.errors];
 			[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 

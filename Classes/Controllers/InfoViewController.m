@@ -32,11 +32,7 @@
 @property(nonatomic, assign) BOOL downloadMaps;
 @property(nonatomic, assign) BOOL becomeDiscrete;
 @property(nonatomic, assign) CGFloat imageWidth;
-@property(nonatomic, retain) UILabel *imageWidthLabel;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
-@property(nonatomic, retain) UILabel *mapZoomLevelLabel;
-
-- (UILabel *) getFooterLabel;
 
 @end
 
@@ -52,7 +48,7 @@ typedef enum {
 	TableSectionBecomeDiscrete
 } TableSection;
 
-@synthesize email, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, imageWidthLabel, mapZoomLevel, mapZoomLevelLabel;
+@synthesize email, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
 
 #pragma mark -
 #pragma mark Handlers
@@ -81,8 +77,6 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
-	self.imageWidthLabel = [self getFooterLabel];
-	self.mapZoomLevelLabel = [self getFooterLabel];
 	[self addHeaders:NSLocalizedString(@"Email", @"Email"), 
 					 NSLocalizedString(@"First Name", @"First Name"), 
 					 NSLocalizedString(@"Last Name", @"Last Name"),
@@ -92,14 +86,6 @@ typedef enum {
 					 NSLocalizedString(@"Discrete Mode On Shake", @"Discrete Mode On Shake"), nil];		
 }
 
-- (UILabel *) getFooterLabel {
-	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
-	label.backgroundColor = [UIColor clearColor];
-	label.textColor = [UIColor grayColor];
-	label.textAlignment = UITextAlignmentCenter;
-	label.font = [UIFont systemFontOfSize:15];
-	return label;
-}
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.email = [[Settings sharedSettings] email];
@@ -109,8 +95,10 @@ typedef enum {
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
 	self.imageWidth = [[Settings sharedSettings] imageWidth];
 	self.mapZoomLevel = [[Settings sharedSettings] mapZoomLevel];
-	self.imageWidthLabel.text = [NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", @"pixels")];
-	self.mapZoomLevelLabel.text = [NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", @"zoom level")];
+	[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", @"pixels")]
+		  atSection:TableSectionImageWidth];
+	[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", @"zoom level")]
+		  atSection:TableSectionMapZoomLevel];
 	[self.tableView reloadData];
 }
 
@@ -122,8 +110,6 @@ typedef enum {
 	[email release];
 	[firstName release];
 	[lastName release];
-	[mapZoomLevelLabel release];
-	[imageWidthLabel release];
     [super dealloc];
 }
 
@@ -199,27 +185,6 @@ typedef enum {
 	return nil;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	if (section == TableSectionImageWidth) {
-		return self.imageWidthLabel;
-	}
-	if (section == TableSectionMapZoomLevel) {
-		return self.mapZoomLevelLabel;
-	}
-	return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)theTableView heightForFooterInSection:(NSInteger)section {
-	if (section == TableSectionImageWidth) {
-		return self.imageWidthLabel.frame.size.height;
-	}
-	if (section == TableSectionMapZoomLevel) {
-		return self.mapZoomLevelLabel.frame.size.height;
-	}
-	return 0.0;
-}
-
-
 #pragma mark -
 #pragma mark TextFieldTableCellDelegate
 					 
@@ -274,11 +239,13 @@ typedef enum {
 	DLog(@"sliderCellChanged: %f", value);
 	if (cell.indexPath.section == TableSectionImageWidth) {
 		self.imageWidth = value;
-		self.imageWidthLabel.text = [NSString stringWithFormat:@"%d %@", (int)value, NSLocalizedString(@"pixels", @"pixels")];
+		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", @"pixels")]
+			  atSection:TableSectionImageWidth];
 	}
 	else if (cell.indexPath.section == TableSectionMapZoomLevel) {
 		self.mapZoomLevel = value;
-		self.mapZoomLevelLabel.text = [NSString stringWithFormat:@"%d %@", (int)value, NSLocalizedString(@"zoom level", @"zoom level")];
+		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", @"zoom level")]
+			  atSection:TableSectionMapZoomLevel];
 	}
 }
 

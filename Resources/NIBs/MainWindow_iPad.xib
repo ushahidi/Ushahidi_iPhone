@@ -98,7 +98,7 @@
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="837724815">
 					<string key="IBUITitle">Ushahidi</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="831220183">
-						<string key="IBUITitle">Back</string>
+						<string key="IBUITitle">Ushahidi</string>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -135,9 +135,9 @@
 			</object>
 			<object class="IBUIViewController" id="151845411">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="966122881">
-					<string key="IBUITitle">Incidents</string>
+					<string key="IBUITitle">Reports</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="708736735">
-						<string key="IBUITitle">Incidents</string>
+						<string key="IBUITitle">Reports</string>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -204,12 +204,7 @@
 			</object>
 			<object class="IBUIViewController" id="605466144">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="160727568">
-					<string key="IBUITitle">Add Incident</string>
-					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="1066668196">
-						<string key="IBUITitle">Add Incident</string>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIStyle">1</int>
-					</object>
+					<string key="IBUITitle">Add Report</string>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				</object>
 				<string key="IBUINibName">AddIncidentViewController_iPad</string>
@@ -223,9 +218,9 @@
 			</object>
 			<object class="IBUIViewController" id="597297605">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="357798234">
-					<string key="IBUITitle">Incident</string>
+					<string key="IBUITitle">Report</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="369585251">
-						<string key="IBUITitle">Incident</string>
+						<string key="IBUITitle">Report</string>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -768,14 +763,8 @@
 						<reference key="object" ref="160727568"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1066668196"/>
 						</object>
 						<reference key="parent" ref="605466144"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">27</int>
-						<reference key="object" ref="1066668196"/>
-						<reference key="parent" ref="160727568"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">28</int>

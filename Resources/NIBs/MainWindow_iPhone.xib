@@ -99,7 +99,7 @@
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="995128150">
 					<string key="IBUITitle">Ushahidi</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="926871996">
-						<string key="IBUITitle">Back</string>
+						<string key="IBUITitle">Ushahidi</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -141,9 +141,9 @@
 			</object>
 			<object class="IBUIViewController" id="580405253">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="583687517">
-					<string key="IBUITitle">Incidents</string>
+					<string key="IBUITitle">Reports</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="408009208">
-						<string key="IBUITitle">Back</string>
+						<string key="IBUITitle">Reports</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -210,12 +210,7 @@
 			</object>
 			<object class="IBUIViewController" id="352634897">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="386622561">
-					<string key="IBUITitle">Add Incident</string>
-					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="285139868">
-						<string key="IBUITitle">Add Incident</string>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIStyle">1</int>
-					</object>
+					<string key="IBUITitle">Add Report</string>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
 				<string key="IBUINibName">AddIncidentViewController_iPhone</string>
@@ -229,9 +224,9 @@
 			</object>
 			<object class="IBUIViewController" id="652899661">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="345076606">
-					<string key="IBUITitle">Incident</string>
+					<string key="IBUITitle">Report</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="599071056">
-						<string key="IBUITitle">Back</string>
+						<string key="IBUITitle">Report</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -728,14 +723,8 @@
 						<reference key="object" ref="386622561"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="285139868"/>
 						</object>
 						<reference key="parent" ref="352634897"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="285139868"/>
-						<reference key="parent" ref="386622561"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>

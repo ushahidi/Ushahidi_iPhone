@@ -91,7 +91,11 @@ typedef enum {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	[self addHeaders:NSLocalizedString(@"Name", @"Name"),
-					NSLocalizedString(@"URL", @"URL"), nil];
+					 NSLocalizedString(@"URL", @"URL"), nil];
+	[self setFooter:NSLocalizedString(@"Example: Ushahidi Demo", @"Example: Ushahidi Demo")
+		  atSection:TableSectionName];
+	[self setFooter:NSLocalizedString(@"Example: http://demo.ushahidi.com", @"Example: http://demo.ushahidi.com")
+		  atSection:TableSectionURL];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -142,16 +146,6 @@ typedef enum {
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 	}
 	return cell;
-}
-
-- (NSString *)tableView:(UITableView *)theTableView titleForFooterInSection:(NSInteger)section {
-	if (section == TableSectionName) {
-		return NSLocalizedString(@"Example: Ushahidi Demo", @"Example: Ushahidi Demo");
-	}
-	if (section == TableSectionURL) {
-		return NSLocalizedString(@"Example: http://demo.ushahidi.com", @"Example: http://demo.ushahidi.com");
-	}
-	return nil;
 }
 
 #pragma mark -

@@ -92,7 +92,7 @@ typedef enum {
 	[self addHeaders:NSLocalizedString(@"Errors", @"Errors"), 
 					 NSLocalizedString(@"Title", @"Title"),
 					 NSLocalizedString(@"Verified", @"Verified"),
-					 NSLocalizedString(@"Descriptin", @"Description"), 
+					 NSLocalizedString(@"Description", @"Description"), 
 					 NSLocalizedString(@"Category", @"Category"), 
 					 NSLocalizedString(@"Date", @"Date"), 
 					 NSLocalizedString(@"Location", @"Location"), 

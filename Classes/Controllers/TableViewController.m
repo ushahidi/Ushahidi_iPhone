@@ -30,6 +30,7 @@
 @property(nonatomic,assign) CGFloat toolbarHeight;
 @property(nonatomic,assign) BOOL shouldBeginEditing;
 @property(nonatomic,retain) NSMutableArray *headers;
+@property(nonatomic,retain) NSMutableDictionary *footers;
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
 - (void) keyboardWillShow:(NSNotification *)notification;
@@ -40,7 +41,7 @@
 
 @implementation TableViewController
 
-@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight, shouldBeginEditing, headers;
+@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight, shouldBeginEditing, headers, footers;
 
 - (void) hideSearchBar {
 	if (self.tableView.tableHeaderView != nil) {
@@ -124,12 +125,45 @@
 	va_end(args);
 }
 
+- (void) setFooter:(NSString *)text atSection:(NSInteger)section {
+	NSString *key = [NSString stringWithFormat:@"%d", section];
+	UILabel *label = [self.footers objectForKey:key];
+	if (label != nil) {
+		label.text = text;
+	}
+	else {
+		UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
+		newLabel.backgroundColor = [UIColor clearColor];
+		newLabel.textColor = [UIColor grayColor];
+		newLabel.textAlignment = UITextAlignmentCenter;
+		newLabel.font = [UIFont systemFontOfSize:15];
+		newLabel.text = text;
+		[self.footers setObject:newLabel forKey:key];
+		[newLabel release];
+	}
+}
+
 - (void) clearHeaders {
 	[self.headers removeAllObjects];
 }
 
 #pragma mark -
 #pragma mark UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	DLog(@"%@", self.nibName);
+	self.allRows = [[NSMutableArray alloc] initWithCapacity:0];
+	self.filteredRows = [[NSMutableArray alloc] initWithCapacity:0];
+	self.headers = [[NSMutableArray alloc] initWithCapacity:0];
+	self.footers = [[NSMutableDictionary alloc] initWithCapacity:0];
+	self.shouldBeginEditing = YES;
+	if ([Device isIPad]) {
+		[self.tableView setBackgroundView:nil];
+		[self.tableView setBackgroundView:[[[UIView alloc] init] autorelease]];
+		[self.tableView setBackgroundColor:[UIColor ushahidiLiteTan]];	
+	}
+}
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
@@ -157,20 +191,6 @@
 	DLog(@"%@", self.nibName);
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	DLog(@"%@", self.nibName);
-	self.allRows = [[NSMutableArray alloc] initWithCapacity:0];
-	self.filteredRows = [[NSMutableArray alloc] initWithCapacity:0];
-	self.headers = [[NSMutableArray alloc] initWithCapacity:0];
-	self.shouldBeginEditing = YES;
-	if ([Device isIPad]) {
-		[self.tableView setBackgroundView:nil];
-		[self.tableView setBackgroundView:[[[UIView alloc] init] autorelease]];
-		[self.tableView setBackgroundColor:[UIColor ushahidiLiteTan]];	
-	}
-}
-
 - (void)dealloc {
 	DLog(@"%@", self.nibName);
 	[allRows release];
@@ -179,6 +199,7 @@
 	[oddRowColor release];
 	[evenRowColor release];
 	[headers release];
+	[footers release];
 	[super dealloc];
 }
 
@@ -223,11 +244,20 @@
 	return nil;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
 	if ([self.headers count] > section) {
 		return [TableHeaderView getViewHeight];
 	}
 	return 0;
+}
+
+- (UIView *)tableView:(UITableView *)theTableView viewForFooterInSection:(NSInteger)section {
+	return [self.footers objectForKey:[NSString stringWithFormat:@"%d", section]];
+}
+
+- (CGFloat)tableView:(UITableView *)theTableView heightForFooterInSection:(NSInteger)section {
+	UILabel *label = [self.footers objectForKey:[NSString stringWithFormat:@"%d", section]];
+	return label != nil ? label.frame.size.height : 0.0;
 }
 
 #pragma mark -

@@ -53,7 +53,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUINavigationItem" id="644250049">
 								<reference key="IBUINavigationBar" ref="115325622"/>
-								<string key="IBUITitle">Add Incident</string>
+								<string key="IBUITitle">Add Report</string>
 								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="669964906">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<int key="IBUIStyle">1</int>
@@ -260,7 +260,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>AddIncidentViewController</string>
 					<string>UIResponder</string>
-					<string>{{1922, -225}, {768, 1024}}</string>
+					<string>{{1400, 26}, {0, -22}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1309,7 +1309,7 @@
 			<integer value="3100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../../Ushahidi_iPhone.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../../Ushahidi_iOS.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">117</string>
 	</data>

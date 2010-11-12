@@ -24,6 +24,7 @@
 		3E236397128C7DB400CF804A /* IndexedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E236396128C7DB400CF804A /* IndexedTableCell.m */; };
 		3E2366A5128C9FEC00CF804A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E2366A4128C9FEC00CF804A /* Localizable.strings */; };
 		3E236798128CAAC700CF804A /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */; };
+		3E24638D128DAD1A00C01DF6 /* Ushahidi_iOS-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E24638C128DAD1A00C01DF6 /* Ushahidi_iOS-Info.plist */; };
 		3E2E853812787E7F00ADA49B /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3E30492912874F3600E3C942 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E30492812874F3600E3C942 /* NSObject+Extension.m */; };
 		3E4A006F1271F26C0017AED4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
@@ -154,11 +155,10 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* Ushahidi_iPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi_iPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28EEBFDC1118E19E00187D67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		32CA4F630368D1EE00C91783 /* Ushahidi_iPhone_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ushahidi_iPhone_Prefix.pch; sourceTree = "<group>"; };
 		3E119AC0126F64AB00C3DCBB /* DeploymentTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentTableCell.xib; sourceTree = "<group>"; };
 		3E119AC7126F64BA00C3DCBB /* IncidentTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTableCell.xib; sourceTree = "<group>"; };
 		3E119AD7126F7E6200C3DCBB /* DeploymentTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeploymentTableCell.h; sourceTree = "<group>"; };
@@ -182,6 +182,8 @@
 		3E2366C4128CA17800CF804A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E2366C7128CA17C00CF804A /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E2366C8128CA18300CF804A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3E24638B128DAD1A00C01DF6 /* Ushahidi_iOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ushahidi_iOS_Prefix.pch; sourceTree = "<group>"; };
+		3E24638C128DAD1A00C01DF6 /* Ushahidi_iOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ushahidi_iOS-Info.plist"; sourceTree = "<group>"; };
 		3E2E853612787E7F00ADA49B /* MotionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionWindow.h; sourceTree = "<group>"; };
 		3E2E853712787E7F00ADA49B /* MotionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionWindow.m; sourceTree = "<group>"; };
 		3E30492712874F3600E3C942 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
@@ -307,7 +309,6 @@
 		3E862AFA1222C154001DE141 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3E862AFB1222C154001DE141 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3E862B091222C177001DE141 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		3E862B1C1222C3C6001DE141 /* Ushahidi_iPhone-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ushahidi_iPhone-Info.plist"; sourceTree = "<group>"; };
 		3E862B271222C66E001DE141 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
 		3E862B281222C66E001DE141 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		3E862BC11222CFE0001DE141 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -414,7 +415,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Ushahidi_iPhone.app */,
+				1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -436,8 +437,8 @@
 			isa = PBXGroup;
 			children = (
 				3E98EF171211BC9800C35F36 /* main.m */,
-				32CA4F630368D1EE00C91783 /* Ushahidi_iPhone_Prefix.pch */,
-				3E862B1C1222C3C6001DE141 /* Ushahidi_iPhone-Info.plist */,
+				3E24638B128DAD1A00C01DF6 /* Ushahidi_iOS_Prefix.pch */,
+				3E24638C128DAD1A00C01DF6 /* Ushahidi_iOS-Info.plist */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -796,9 +797,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Ushahidi */ = {
+		1D6058900D05DD3D006BFB54 /* Ushahidi_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ushahidi" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ushahidi_iOS" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -808,9 +809,9 @@
 			);
 			dependencies = (
 			);
-			name = Ushahidi;
+			name = Ushahidi_iOS;
 			productName = Ushahidi_iPhone;
-			productReference = 1D6058910D05DD3D006BFB54 /* Ushahidi_iPhone.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -818,7 +819,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi_iPhone" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi_iOS" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -836,7 +837,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Ushahidi */,
+				1D6058900D05DD3D006BFB54 /* Ushahidi_iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -899,6 +900,7 @@
 				3EA84B12128D9E090022A532 /* DeploymentsViewController_iPhone.xib in Resources */,
 				3EA84B13128D9E090022A532 /* MainWindow_iPhone.xib in Resources */,
 				3EA84B14128D9E090022A532 /* WebViewController_iPhone.xib in Resources */,
+				3E24638D128DAD1A00C01DF6 /* Ushahidi_iOS-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1019,10 +1021,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
-				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
-				PRODUCT_NAME = Ushahidi_iPhone;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "938BD1E4-3A4C-460F-BCAD-C61630C31C8F";
+				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
+				PRODUCT_NAME = Ushahidi_iOS;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9208D295-0BDC-4AE7-9374-278D6B1DCE79";
 			};
 			name = Debug;
 		};
@@ -1033,10 +1035,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
-				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
-				PRODUCT_NAME = Ushahidi_iPhone;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "938BD1E4-3A4C-460F-BCAD-C61630C31C8F";
+				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
+				PRODUCT_NAME = Ushahidi_iOS;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9208D295-0BDC-4AE7-9374-278D6B1DCE79";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1052,7 +1054,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "749D005A-EA23-4DD9-AB27-50F7E6D7EC3A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E07074C-8C8F-4B29-9092-66D681C7A7CC";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1065,10 +1067,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
-				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
-				PRODUCT_NAME = Ushahidi_iPhone;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "749D005A-EA23-4DD9-AB27-50F7E6D7EC3A";
+				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
+				PRODUCT_NAME = Ushahidi_iOS;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6E07074C-8C8F-4B29-9092-66D681C7A7CC";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -1084,7 +1086,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9FC6DDB-074D-4344-AA8D-573EB4A7D838";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "175CA2F5-345F-4FF0-969D-66EC82EA4829";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1097,10 +1099,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ushahidi_iPhone_Prefix.pch;
-				INFOPLIST_FILE = "Ushahidi_iPhone-Info.plist";
-				PRODUCT_NAME = Ushahidi_iPhone;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C9FC6DDB-074D-4344-AA8D-573EB4A7D838";
+				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
+				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
+				PRODUCT_NAME = Ushahidi_iOS;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "175CA2F5-345F-4FF0-969D-66EC82EA4829";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -1117,7 +1119,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "938BD1E4-3A4C-460F-BCAD-C61630C31C8F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9208D295-0BDC-4AE7-9374-278D6B1DCE79";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1134,7 +1136,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "938BD1E4-3A4C-460F-BCAD-C61630C31C8F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9208D295-0BDC-4AE7-9374-278D6B1DCE79";
 				SDKROOT = iphoneos4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1143,7 +1145,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ushahidi" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Ushahidi_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -1154,7 +1156,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi_iPhone" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

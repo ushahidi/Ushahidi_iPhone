@@ -32,8 +32,7 @@
 
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
 															UIWebViewDelegate, 
-															MapTableCellDelegate,
-															PhotoDelegate> {
+															MapTableCellDelegate> {
 	
 @public
 	MapViewController *mapViewController;

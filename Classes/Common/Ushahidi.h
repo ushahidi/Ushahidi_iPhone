@@ -29,6 +29,7 @@
 @class Location;
 @class Category;
 @class Country;
+@class Photo;
 
 @interface Ushahidi : NSObject<ASIHTTPRequestDelegate> {
 
@@ -67,6 +68,8 @@
 - (NSArray *) getIncidentsByLocationName:(NSString *)locationName forDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getIncidentsBySinceID:(NSString *)sinceID forDelegate:(id<UshahidiDelegate>)delegate;
 
+- (void) downloadPhoto:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate;
+
 @end
 			 
 @protocol UshahidiDelegate <NSObject>
@@ -80,6 +83,7 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo;
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error;
 

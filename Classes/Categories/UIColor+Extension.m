@@ -59,6 +59,10 @@
 						   alpha:1.0f];  
 }
 
+- (BOOL) isEqualToColor:(UIColor *)otherColor {
+	return CGColorEqualToColor(self.CGColor, otherColor.CGColor);
+}
+
 + (id)ushahidiDarkGray									{vendColor(120, 105, 94);} //#78695e 
 + (id)ushahidiLiteGray									{vendColor(204, 204, 204);} //#cccccc
 + (id)ushahidiDarkBrown                                 {vendColor(215, 200, 150);} //#d7c896

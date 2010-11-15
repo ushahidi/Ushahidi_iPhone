@@ -18,40 +18,19 @@
  **
  *****************************************************************************/
 
-#import "Media.h"
-#import "NSDictionary+Extension.h"
+#import "NSURL+Extension.h"
 
-@implementation Media
+@implementation NSURL (Extension)
 
-@synthesize identifier, title, url;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super init]) {
-		self.identifier = [dictionary stringForKey:@"id"];
-		self.title = [dictionary stringForKey:@"title"];
-		self.url = [dictionary stringForKey:@"link"];
++ (NSURL *) URLWithStrings:(NSString *)string, ... {
+    va_list args;
+    va_start(args, string);
+	NSURL *url = [NSURL URLWithString:string];
+	for (NSString *arg = string; arg != nil; arg = va_arg(args, NSString*)) {
+		url = [NSURL URLWithString:arg relativeToURL:url];
 	}
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder {
-	[encoder encodeObject:self.title forKey:@"title"];
-	[encoder encodeObject:self.url forKey:@"url"];
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super init]) {
-		self.title = [decoder decodeObjectForKey:@"title"];
-		self.url = [decoder decodeObjectForKey:@"url"];
-	}
-	return self;
-}
-
-- (void)dealloc {
-	[identifier release];
-	[title release];
-	[url release];
-    [super dealloc];
+	va_end(args);
+	return url;
 }
 
 @end

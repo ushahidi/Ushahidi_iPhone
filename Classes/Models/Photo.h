@@ -21,7 +21,6 @@
 #import <Foundation/Foundation.h>
 #import "Media.h"
 
-@protocol PhotoDelegate;
 
 @interface Photo : Media {
 
@@ -29,28 +28,19 @@
 	UIImage *image;	
 	UIImage *thumbnail;
 	NSIndexPath *indexPath;
-	
-@private 	
-	id<PhotoDelegate> delegate;
 	BOOL downloading;
 }
 
 @property(nonatomic,retain) UIImage *image;
 @property(nonatomic,retain) UIImage *thumbnail;
 @property(nonatomic,retain) NSIndexPath *indexPath;
+@property (nonatomic, assign) BOOL downloading;
 
 + (id)photoWithImage:(UIImage *)image;
 - (id)initWithImage:(UIImage *)image;
-- (void) downloadForDelegate:(id<PhotoDelegate>)delegate;
 - (NSData *) getJpegData;
 - (NSData *) getPngData;
-
-@end
-
-@protocol PhotoDelegate <NSObject>
-
-@optional
-
-- (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath;
++ (NSInteger) maxThumbnailHeight;
++ (NSInteger) maxThumbnailWidth;
 
 @end

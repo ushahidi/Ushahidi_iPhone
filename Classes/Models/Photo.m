@@ -24,19 +24,14 @@
 
 @interface Photo ()
 
-@property (nonatomic, assign) id<PhotoDelegate> delegate;
-@property (nonatomic, assign) BOOL downloading;
-
-- (void) downloadImageInBackground:(NSString *)urlString;
-
 @end
 
 @implementation Photo
 
-NSInteger const kMaxWidth = 80;
-NSInteger const kMaxHeight = 80;
+NSInteger const kMaxThumbnaiWidth = 80;
+NSInteger const kMaxThumbnaiHeight = 80;
 
-@synthesize delegate, image, thumbnail, indexPath, downloading;
+@synthesize image, thumbnail, indexPath, downloading;
 
 + (id)photoWithImage:(UIImage *)theImage {
 	return [[[Photo alloc] initWithImage:theImage] autorelease];
@@ -46,11 +41,19 @@ NSInteger const kMaxHeight = 80;
 	if (self = [super init]) {
 		self.image = theImage;
 		CGSize thumbnailSize = theImage.size.width > theImage.size.height
-			? CGSizeMake(kMaxWidth, kMaxWidth * self.image.size.height / self.image.size.width)
-			: CGSizeMake(kMaxHeight * self.image.size.width / self.image.size.height, kMaxHeight);
+			? CGSizeMake(kMaxThumbnaiWidth, kMaxThumbnaiWidth * self.image.size.height / self.image.size.width)
+			: CGSizeMake(kMaxThumbnaiHeight * self.image.size.width / self.image.size.height, kMaxThumbnaiHeight);
 		self.thumbnail = [theImage resizedImage:thumbnailSize interpolationQuality:kCGInterpolationMedium];
 	}
 	return self;
+}
+
++ (NSInteger) maxThumbnailHeight {
+	return kMaxThumbnaiHeight;
+}
+
++ (NSInteger) maxThumbnailWidth {
+	return kMaxThumbnaiWidth;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
@@ -84,47 +87,10 @@ NSInteger const kMaxHeight = 80;
 }
 
 - (void)dealloc {
-	delegate = nil;
 	[image release];
 	[thumbnail release];
 	[indexPath release];
     [super dealloc];
-}
-
-- (void) downloadForDelegate:(id<PhotoDelegate>)theDelegate {
-	self.delegate = theDelegate;
-	if (self.url != nil && self.downloading == NO) {
-		self.downloading = YES;
-		[self performSelectorInBackground:@selector(downloadImageInBackground:) withObject:self.url];
-	}
-}
-
-- (void) downloadImageInBackground:(NSString *)urlString {
-	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	@try {
-		DLog(@"Downloading Photo: %@", urlString);
-		//TODO get full photo url
-		NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://demo.ushahidi.com/media/uploads/%@", urlString]];
-		NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-		if (imageData != nil) {
-			self.image = [[UIImage alloc] initWithData:imageData];
-			CGSize thumbnailSize = CGSizeMake(kMaxWidth, kMaxHeight);
-			if (self.image.size.width > self.image.size.height) {
-				thumbnailSize = CGSizeMake(kMaxWidth, kMaxWidth * self.image.size.height / self.image.size.width);
-			}
-			else {
-				thumbnailSize = CGSizeMake(kMaxHeight * self.image.size.width / self.image.size.height, kMaxHeight);
-			}
-			self.thumbnail = [self.image resizedImage:thumbnailSize interpolationQuality:kCGInterpolationMedium];
-			[self dispatchSelector:@selector(photoDownloaded:indexPath:)  
-							target:self.delegate 
-						   objects:self, self.indexPath, nil];
-		}
-	}
-	@finally {
-		self.downloading = NO;
-		[pool release];
-	}
 }
 
 - (NSData *) getJpegData {

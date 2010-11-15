@@ -34,7 +34,8 @@
 @property(nonatomic,retain) NSString *description;
 @property(nonatomic,retain) UIColor *color;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (id) initWithDictionary:(NSDictionary *)dictionary;
+- (BOOL) updateWithDictionary:(NSDictionary *)dictionary;
 - (BOOL) matchesString:(NSString *)string;
 - (NSComparisonResult)compareByTitle:(Category *)category;
 

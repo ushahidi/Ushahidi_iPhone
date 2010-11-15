@@ -31,14 +31,6 @@
 
 @implementation Incident
 
-typedef enum {
-	MediaTypeUnkown,
-	MediaTypePhoto,
-	MediaTypeVideo,
-	MediaTypeSound,
-	MediaTypeNews
-} MediaType;
-
 @synthesize identifier, title, description, date;
 @synthesize map;
 @synthesize active, verified, uploading;
@@ -58,7 +50,7 @@ typedef enum {
 	return self;
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media {
+- (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [self initWithDefaultValues]) {
 		if (dictionary != nil) {
 			DLog(@"inspection: %@", dictionary);
@@ -74,25 +66,6 @@ typedef enum {
 			self.location = [dictionary stringForKey:@"locationname"];
 			self.latitude = [dictionary stringForKey:@"locationlatitude"];
 			self.longitude = [dictionary stringForKey:@"locationlongitude"];
-		}
-		if (media != nil) {
-			DLog(@"media: %@", media);
-			for (NSDictionary *mediaDictionary in media) {
-				NSInteger mediatype = [mediaDictionary intForKey:@"mediatype"];
-				if (mediatype == MediaTypePhoto) {
-					[self addPhoto:[[Photo alloc] initWithDictionary:mediaDictionary]];
-				}
-				else if (mediatype == MediaTypeVideo) {
-					[self addVideo:[[Video alloc] initWithDictionary:mediaDictionary]];
-				}
-				else if (mediatype == MediaTypeSound) {
-					[self addSound:[[Sound alloc] initWithDictionary:mediaDictionary]];
-				}
-				else if (mediatype == MediaTypeNews) {
-					[self addNews:[[News alloc] initWithDictionary:mediaDictionary]];
-				}	
-			}
-			
 		}
 	}
 	return self;
@@ -207,7 +180,12 @@ typedef enum {
 }
 
 - (BOOL) hasCategory:(Category *)category {
-	return [self.categories containsObject:category];
+	for (Category *current in self.categories) {
+		if ([current.identifier isEqualToString:category.identifier]) {
+			return YES;
+		}
+	}
+	return NO;
 }
 
 - (NSString *) categoryNames {
@@ -225,9 +203,14 @@ typedef enum {
 	return [categoryNames length] > 0 ? categoryNames : defaultText;;
 }
 
-- (Photo *) getFirstPhoto {
+- (UIImage *) getFirstPhotoThumbnail {
 	for (Photo *photo in self.photos) {
-		return photo;
+		if (photo.thumbnail != nil) {
+			return photo.thumbnail;
+		}
+		if (photo.image != nil) {
+			return photo.image;
+		}
 	} 
 	return nil;
 }

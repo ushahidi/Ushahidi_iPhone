@@ -23,6 +23,7 @@
 @interface UIColor (Extension) 
 
 + (id) colorWithHexString:(NSString *)string;
+- (BOOL) isEqualToColor:(UIColor *)otherColor;
 
 + (id)ushahidiDarkGray;
 + (id)ushahidiLiteGray;

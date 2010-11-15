@@ -22,12 +22,6 @@
 #import "UIColor+Extension.h"
 #import "NSString+Extension.h"
 
-@interface Category ()
-
-// Internal private declarations go here
-
-@end
-
 @implementation Category
 
 @synthesize identifier, title, description, color;
@@ -43,6 +37,26 @@
 		}
 	}
 	return self;
+}
+
+- (BOOL) updateWithDictionary:(NSDictionary *)dictionary {
+	BOOL hasChanges = NO;
+	NSString *newTitle = [dictionary objectForKey:@"title"];
+	if ([self.title isEqualToString:newTitle] == NO) {
+		self.title = newTitle;
+		hasChanges = YES;
+	}
+	NSString *newDecription = [dictionary objectForKey:@"description"];
+	if ([self.description isEqualToString:newDecription] == NO) {
+		self.description = newDecription;
+		hasChanges = YES;
+	}
+	UIColor *newColor = [UIColor colorWithHexString:[dictionary objectForKey:@"color"]];
+	if ([self.color isEqualToColor:newColor] == NO) {
+		self.color = newColor;
+		hasChanges = YES;
+	}
+	return hasChanges;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {

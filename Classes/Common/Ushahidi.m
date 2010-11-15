@@ -25,6 +25,8 @@
 #import "NSString+Extension.h"
 #import "NSObject+Extension.h"
 #import "NSError+Extension.h"
+#import "NSURL+Extension.h"
+#import "NSDictionary+Extension.h"
 #import "JSON.h"
 #import "Deployment.h"
 #import "Category.h"
@@ -32,6 +34,9 @@
 #import "Country.h"
 #import "Incident.h"
 #import "Photo.h"
+#import "News.h"
+#import "Sound.h"
+#import "Video.h"
 #import "Settings.h"
 
 @interface Ushahidi ()
@@ -61,11 +66,22 @@
 - (void) getLocationsFinished:(ASIHTTPRequest *)request;
 - (void) getLocationsFailed:(ASIHTTPRequest *)request;
 
+- (void)downloadPhotoFinished:(ASIHTTPRequest *)request;
+- (void) downloadPhotoFailed:(ASIHTTPRequest *)request;
+
 @end
 
 @implementation Ushahidi
 
 @synthesize deployments, deployment;
+
+typedef enum {
+	MediaTypeUnkown,
+	MediaTypePhoto,
+	MediaTypeVideo,
+	MediaTypeSound,
+	MediaTypeNews
+} MediaType;
 
 NSString * const kGoogleStaticMaps = @"http://maps.google.com/maps/api/staticmap";
 
@@ -337,9 +353,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		BOOL hasChanges = NO;
 		for (NSDictionary *dictionary in categories) {
 			Category *category = [[Category alloc] initWithDictionary:[dictionary objectForKey:@"category"]];
-			if (category.identifier != nil && [self.deployment.categories objectForKey:category.identifier] == nil) {
-				[self.deployment.categories setObject:category forKey:category.identifier];
-				hasChanges = YES;
+			if (category.identifier != nil) {
+				Category *existing = [self.deployment.categories objectForKey:category.identifier];
+				if (existing == nil) {
+					[self.deployment.categories setObject:category forKey:category.identifier];
+					hasChanges = YES;
+				}
+				else if ([existing updateWithDictionary:[dictionary objectForKey:@"category"]]) {
+					hasChanges = YES;
+				}
 			}
 			[category release];
 		}
@@ -545,15 +567,49 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					   objects:self, [self.deployment.incidents allValues], self.deployment.pending, error, NO, nil];
 	}
 	else {
+		DLog(@"response: %@", json);
 		BOOL hasChanges = NO;
 		NSDictionary *payload = [json objectForKey:@"payload"];
 		NSArray *incidents = [payload objectForKey:@"incidents"]; 
 		for (NSDictionary *dictionary in incidents) {
-			Incident *incident = [[Incident alloc] initWithDictionary:[dictionary objectForKey:@"incident"] 
-													  mediaDictionary:[dictionary objectForKey:@"media"]];
+			Incident *incident = [[Incident alloc] initWithDictionary:[dictionary objectForKey:@"incident"]];
 			if (incident.identifier != nil && [self.deployment.incidents objectForKey:incident.identifier] == nil) {
 				[self.deployment.incidents setObject:incident forKey:incident.identifier];
 				hasChanges = YES;
+			}
+			NSDictionary *media = [dictionary objectForKey:@"media"];
+			DLog(@"media: %@ - %@", [media class], media);
+			if (media != nil && [media isKindOfClass:[NSArray class]]) {
+				for (NSDictionary *item in media) {
+					DLog(@"item: %@", item);
+					NSInteger mediatype = [item intForKey:@"type"];
+					if (mediatype == MediaTypePhoto) {
+						[incident addPhoto:[[Photo alloc] initWithDictionary:item]];
+					}
+					else if (mediatype == MediaTypeVideo) {
+						[incident addVideo:[[Video alloc] initWithDictionary:item]];
+					}
+					else if (mediatype == MediaTypeSound) {
+						[incident addSound:[[Sound alloc] initWithDictionary:item]];
+					}
+					else if (mediatype == MediaTypeNews) {
+						[incident addNews:[[News alloc] initWithDictionary:item]];
+					}	
+				}
+			}
+			NSDictionary *categories = [dictionary objectForKey:@"categories"];
+			if (categories != nil) {
+				DLog(@"categories: %@ - %@", [categories class], categories);
+				for (NSDictionary *item in categories) {
+					Category *category = [[Category alloc] initWithDictionary:[item objectForKey:@"category"]];
+					if ([incident hasCategory:category] == NO) {
+						[incident addCategory:category];
+					}
+					if (category.identifier != nil && [self.deployment.categories objectForKey:category.identifier] == nil) {
+						[self.deployment.categories setObject:category forKey:category.identifier];
+					}
+					[category release];
+				}
 			}
 			[incident release];
 		}
@@ -576,6 +632,51 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 					target:delegate 
 				   objects:self, nil, nil, [request error], NO, nil];
+}
+#pragma mark -
+#pragma mark Photo
+
+- (void) downloadPhoto:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate {
+	if (photo.url != nil && photo.downloading == NO) {
+		photo.downloading = YES;
+		NSURL *url = [NSURL URLWithStrings:self.deployment.domain, 
+										   @"/media/uploads/",
+										   photo.url, nil];
+		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+		[request setDelegate:self];
+		[request setShouldRedirect:YES];
+		[request setDidFinishSelector:@selector(downloadPhotoFinished:)];
+		[request setDidFailSelector:@selector(downloadPhotoFailed:)];
+		[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:delegate, @"delegate",
+																		photo, @"photo", nil]];
+		[request startAsynchronous];
+	}
+}
+
+- (void)downloadPhotoFinished:(ASIHTTPRequest *)request {
+	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
+	Photo *photo = (Photo *)[request.userInfo objectForKey:@"photo"];
+	photo.downloading = NO;
+	if ([request error] != nil) {
+		DLog(@"ERROR: %@", [[request error] localizedDescription]);
+	} 
+	else if ([request responseData] != nil) {
+		DLog(@"RESPONSE: BINARY IMAGE");
+		photo.image = [UIImage imageWithData:[request responseData]];
+		[self dispatchSelector:@selector(downloadedFromUshahidi:photo:) 
+						target:delegate 
+					   objects:self, photo, nil];
+	}
+	else {
+		DLog(@"RESPONSE: %@", [request responseString]);
+	}
+}
+
+- (void)downloadPhotoFailed:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST:%@", [request.originalURL absoluteString]);
+	DLog(@"ERROR: %@", [[request error] localizedDescription]);
+	Photo *photo = (Photo *)[request.userInfo objectForKey:@"photo"];
+	photo.downloading = NO;
 }
 
 #pragma mark -

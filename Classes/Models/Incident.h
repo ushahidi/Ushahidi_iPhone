@@ -72,7 +72,7 @@
 
 @property(nonatomic,retain) NSString *errors;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary mediaDictionary:(NSDictionary *)media;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 - (id)initWithDefaultValues;
 
 - (BOOL) matchesString:(NSString *)string;
@@ -95,7 +95,7 @@
 - (NSString *) categoryNames;
 - (NSString *) categoryNamesWithDefaultText:(NSString *)defaultText;
 
-- (Photo *) getFirstPhoto;
+- (UIImage *) getFirstPhotoThumbnail;
 - (void) removePhotoAtIndex:(NSInteger)index;
 
 - (BOOL) hasRequiredValues;

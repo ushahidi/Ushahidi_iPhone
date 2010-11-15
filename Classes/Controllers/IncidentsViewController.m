@@ -76,6 +76,8 @@ typedef enum {
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", @"Loading...")];
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
+	//[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
+	//[[Ushahidi sharedUshahidi] getLocationsForDelegate:self];
 }
 
 - (IBAction) sortOrder:(id)sender {
@@ -228,18 +230,9 @@ typedef enum {
 		[cell setCategory:incident.categoryNames];
 		[cell setDate:incident.dateString];
 		[cell setVerified:incident.verified];
-		Photo *photo = [incident getFirstPhoto];
-		if (photo != nil) {
-			if (photo.thumbnail != nil) {
-				[cell setImage:photo.thumbnail];
-			}
-			else if (photo.image != nil) {
-				[cell setImage:photo.image];
-			}
-			else if (photo.url != nil) {
-				[cell setImage:nil];
-				[photo downloadForDelegate:self];
-			}
+		UIImage *image = [incident getFirstPhotoThumbnail];
+		if (image != nil) {
+			[cell setImage:image];
 		}
 		else if (incident.map != nil) {
 			[cell setImage:incident.map];
@@ -363,7 +356,7 @@ typedef enum {
 	if (row > -1) {
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionIncidents];
 		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-		if (cell != nil && [incident getFirstPhoto] == nil) {
+		if (cell != nil && [incident getFirstPhotoThumbnail] == nil) {
 			[cell setImage:map];
 		}
 	}
@@ -450,7 +443,7 @@ typedef enum {
 #pragma mark PhotoDelegate
 
 - (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath {
-	DLog(@"photoDownloaded: %@", photo.url);
+	DLog(@"photoDownloaded: %@", [photo class]);
 	IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 	if (cell != nil && photo != nil && photo.thumbnail != nil) {
 		[cell setImage:photo.thumbnail];

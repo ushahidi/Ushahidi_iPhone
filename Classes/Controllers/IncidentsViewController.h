@@ -32,8 +32,7 @@
 @class Deployment;
 
 @interface IncidentsViewController : TableViewController<UshahidiDelegate, 
-														 MKMapViewDelegate, 
-														 PhotoDelegate>  {
+														 MKMapViewDelegate>  {
 	
 @public
 	AddIncidentViewController *addIncidentViewController;

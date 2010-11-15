@@ -18,40 +18,10 @@
  **
  *****************************************************************************/
 
-#import "Media.h"
-#import "NSDictionary+Extension.h"
+#import <Foundation/Foundation.h>
 
-@implementation Media
+@interface NSURL (Extension)
 
-@synthesize identifier, title, url;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-	if (self = [super init]) {
-		self.identifier = [dictionary stringForKey:@"id"];
-		self.title = [dictionary stringForKey:@"title"];
-		self.url = [dictionary stringForKey:@"link"];
-	}
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder {
-	[encoder encodeObject:self.title forKey:@"title"];
-	[encoder encodeObject:self.url forKey:@"url"];
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
-	if (self = [super init]) {
-		self.title = [decoder decodeObjectForKey:@"title"];
-		self.url = [decoder decodeObjectForKey:@"url"];
-	}
-	return self;
-}
-
-- (void)dealloc {
-	[identifier release];
-	[title release];
-	[url release];
-    [super dealloc];
-}
++ (NSURL *) URLWithStrings:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

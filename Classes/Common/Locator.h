@@ -28,6 +28,8 @@
 @private
 	CLLocationManager *locationManager;
 	id<LocatorDelegate> delegate;
+	NSString *latitude;
+	NSString *longitude;
 }
 
 + (Locator *) sharedLocator;

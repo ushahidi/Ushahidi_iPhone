@@ -26,7 +26,8 @@
 
 @property(nonatomic, retain) CLLocationManager *locationManager;
 @property(nonatomic, assign) id<LocatorDelegate> delegate;
-
+@property(nonatomic, retain) NSString *latitude;
+@property(nonatomic, retain) NSString *longitude;
 @end
 
 @implementation Locator
@@ -47,21 +48,29 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 - (void)dealloc {
 	delegate = nil;
 	[locationManager release];
+	[latitude release];
+	[longitude release];
 	[super dealloc];
 }
 
 - (void)detectLocationForDelegate:(id<LocatorDelegate>)theDelegate {
 	self.delegate = theDelegate;
-	 [locationManager startUpdatingLocation];
+	if (self.latitude != nil && self.longitude != nil) {
+		[self dispatchSelector:@selector(locator:latitude:longitude:)
+						target:self.delegate 
+					   objects:self, self.latitude, self.longitude, nil];	
+	}
+	[locationManager startUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     if (abs([newLocation.timestamp timeIntervalSinceNow]) < 15.0) {
-		NSString *latitude = [NSString stringWithFormat:@"%+.6f", newLocation.coordinate.latitude];
-		NSString *longitude = [NSString stringWithFormat:@"%+.6f", newLocation.coordinate.longitude];
+		self.latitude = [NSString stringWithFormat:@"%+.6f", newLocation.coordinate.latitude];
+		self.longitude = [NSString stringWithFormat:@"%+.6f", newLocation.coordinate.longitude];
         [self dispatchSelector:@selector(locator:latitude:longitude:)
 						target:self.delegate 
-					   objects:self, latitude, longitude, nil];
+					   objects:self, self.latitude, self.longitude, nil];
+		[self.locationManager stopUpdatingLocation];
     }
 }
 

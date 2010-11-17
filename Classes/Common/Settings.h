@@ -31,6 +31,7 @@
 	BOOL becomeDiscrete;
 	CGFloat imageWidth;
 	NSInteger mapZoomLevel;
+	
 }
 
 @property(nonatomic, retain) NSString *email;

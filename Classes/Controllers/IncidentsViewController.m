@@ -388,16 +388,22 @@ typedef enum {
 			[cell setImage:map];
 		}
 	}
+	else {
+		[self.tableView reloadData];
+	}
 }
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident photo:(Photo *)photo {
-	DLog(@"downloadedFromUshahidi:incident:photo %@", [photo url]);
+	DLog(@"downloadedFromUshahidi:incident:photo:%@ indexPath:%@", [photo url], [photo indexPath]);
 	if (photo != nil && photo.indexPath != nil) {
 		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
 		if (cell != nil) {
 			//TODO use thumbnail instead
 			[cell setImage:photo.image];
 		}	
+	}
+	else {
+		[self.tableView reloadData];
 	}
 }
 

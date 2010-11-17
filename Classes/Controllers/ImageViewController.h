@@ -26,9 +26,15 @@
 @public
 	UIImageView *imageView;
 	UIImage *image;
+	NSArray *images;
+	UISegmentedControl *nextPrevious;
 }
 
 @property(nonatomic, retain) IBOutlet UIImageView *imageView;
 @property(nonatomic, retain) UIImage *image;
+@property(nonatomic, retain) NSArray *images;
+@property(nonatomic, retain) IBOutlet UISegmentedControl *nextPrevious;
+
+- (IBAction) nextPrevious:(id)sender;
 
 @end

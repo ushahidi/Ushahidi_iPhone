@@ -307,6 +307,7 @@ typedef enum {
 		if ([self.incident.photos count] > 0) {
 			self.imageViewController.title = NSLocalizedString(@"Image", @"Image");
 			self.imageViewController.image = [((ImageTableCell *)cell) getImage];
+			self.imageViewController.images = self.incident.photoImages;
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}
 	}

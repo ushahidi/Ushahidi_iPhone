@@ -325,7 +325,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		
 	}
 	else {
-		NSDictionary *payload = [json	objectForKey:@"payload"];
+		NSDictionary *payload = [json objectForKey:@"payload"];
 		NSArray *categories = [payload objectForKey:@"categories"]; 
 		BOOL hasChanges = NO;
 		for (NSDictionary *dictionary in categories) {
@@ -378,7 +378,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid response", @"Invalid response")];
+		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid server response", @"Invalid server response")];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:countries:error:hasChanges:) 
 						target:delegate 
 					   objects:self, [self.deployment.countries allValues], error, NO, nil];
@@ -431,7 +431,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid response", @"Invalid response")];
+		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid server response", @"Invalid server response")];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:locations:error:hasChanges:)
 						target:delegate
 					   objects:self, [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)], error, NO, nil];
@@ -479,10 +479,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (NSArray *) getIncidentsForDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"delegate: %@", [delegate class]);
-	[self startAsynchronousRequest:[self.deployment getIncidents] 
+	if ([[Settings sharedSettings] downloadMaps]) {
+		for (Incident *incident in [self.deployment.incidents allValues]) {
+			[self downloadMap:incident forDelegate:delegate];
+		}
+		[self.mapQueue go];
+	}
+	NSString *requestURL = self.deployment.sinceID != nil
+		? [self.deployment getIncidentsBySinceID:self.deployment.sinceID] : [self.deployment getIncidents];
+	[self startAsynchronousRequest:requestURL 
 					   forDelegate:delegate
-					  finishSelector:@selector(getIncidentsFinished:)
-					  failSelector:@selector(getIncidentsFailed:)];
+					finishSelector:@selector(getIncidentsFinished:)
+					  failSelector:@selector(getIncidentsFailed:)];	
 	return [self.deployment.incidents allValues];
 }
 
@@ -538,7 +546,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSDictionary *json = [[request responseString] JSONValue];
 	if (json == nil) {
 		DLog(@"response: %@", [request responseString]);
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid response", @"Invalid response")];
+		NSError *error = [NSError errorWithDomain:self.deployment.domain code:500 message:NSLocalizedString(@"Invalid server response", @"Invalid server response")];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 						target:delegate 
 					   objects:self, [self.deployment.incidents allValues], self.deployment.pending, error, NO, nil];
@@ -550,9 +558,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		NSArray *incidents = [payload objectForKey:@"incidents"]; 
 		for (NSDictionary *dictionary in incidents) {
 			Incident *incident = [[Incident alloc] initWithDictionary:[dictionary objectForKey:@"incident"]];
-			if (incident.identifier != nil && [self.deployment.incidents objectForKey:incident.identifier] == nil) {
-				[self.deployment.incidents setObject:incident forKey:incident.identifier];
-				hasChanges = YES;
+			if (incident.identifier != nil) {
+				if ([self.deployment.incidents objectForKey:incident.identifier] == nil) {
+					[self.deployment.incidents setObject:incident forKey:incident.identifier];
+					hasChanges = YES;
+				}
+				if (self.deployment.sinceID == nil) {
+					self.deployment.sinceID = incident.identifier;
+				}
+				else if ([self.deployment.sinceID intValue] < [incident.identifier intValue]) {
+					self.deployment.sinceID = incident.identifier;
+				}
 			}
 			NSDictionary *media = [dictionary objectForKey:@"media"];
 			if (media != nil && [media isKindOfClass:[NSArray class]]) {

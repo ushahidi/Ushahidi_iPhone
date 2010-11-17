@@ -27,7 +27,7 @@
 
 @implementation Deployment
 
-@synthesize name, url, domain, countries, categories, locations, incidents, pending;
+@synthesize name, url, domain, countries, categories, locations, incidents, pending, sinceID;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
@@ -55,6 +55,7 @@
 	[encoder encodeObject:self.name forKey:@"name"];
 	[encoder encodeObject:self.url forKey:@"url"];
 	[encoder encodeObject:self.domain forKey:@"domain"];
+	[encoder encodeObject:self.sinceID forKey:@"sinceID"];
 	[encoder encodeObject:self.countries forKey:@"countries"];
 	[encoder encodeObject:self.categories forKey:@"categories"];
 	[encoder encodeObject:self.locations forKey:@"locations"];
@@ -67,6 +68,7 @@
 		self.name = [decoder decodeObjectForKey:@"name"];
 		self.url = [decoder decodeObjectForKey:@"url"];
 		self.domain = [decoder decodeObjectForKey:@"domain"];
+		self.sinceID = [decoder decodeObjectForKey:@"sinceID"];
 		
 		self.countries = [decoder decodeObjectForKey:@"countries"];
 		if (self.countries == nil) self.countries = [[NSMutableDictionary alloc] init];
@@ -116,6 +118,7 @@
 	[locations release];
 	[incidents release];
 	[pending release];
+	[sinceID release];
     [super dealloc];
 }
 
@@ -202,8 +205,8 @@
 	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=locname&name=%@&resp=json", self.domain, locationName];
 }
 
-- (NSString *) getIncidentsBySinceID:(NSString *)sinceID {
-	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=sinceid&id=%@&resp=json", self.domain, sinceID];
+- (NSString *) getIncidentsBySinceID:(NSString *)theSinceID {
+	return [NSString stringWithFormat:@"http://%@/api?task=incidents&by=sinceid&id=%@&resp=json", self.domain, theSinceID];
 }
 
 - (NSString *) getIncidentCount {

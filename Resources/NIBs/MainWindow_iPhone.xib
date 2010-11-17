@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1024</int>
+		<int key="IBDocument.SystemTarget">1056</int>
 		<string key="IBDocument.SystemVersion">10F569</string>
-		<string key="IBDocument.InterfaceBuilderVersion">788</string>
+		<string key="IBDocument.InterfaceBuilderVersion">823</string>
 		<string key="IBDocument.AppKitVersion">1038.29</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">117</string>
+			<string key="NS.object.0">132</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="110"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -263,11 +264,11 @@
 							</object>
 							<object class="NSMutableArray" key="IBSegmentImages">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSCustomResource">
+								<object class="NSCustomResource" id="679342780">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">arrow_up.png</string>
 								</object>
-								<object class="NSCustomResource">
+								<object class="NSCustomResource" id="506707658">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">arrow_down.png</string>
 								</object>
@@ -333,11 +334,55 @@
 			</object>
 			<object class="IBUIViewController" id="1680078">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="318949492">
+					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Image</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="814090282">
 						<string key="IBUITitle">Image</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="102508587">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<object class="IBUISegmentedControl" key="IBUICustomView" id="889581697">
+							<reference key="NSNextResponder"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
+							<reference key="NSSuperview"/>
+							<bool key="IBUIOpaque">NO</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBSegmentControlStyle">2</int>
+							<int key="IBNumberOfSegments">2</int>
+							<int key="IBSelectedSegmentIndex">0</int>
+							<object class="NSArray" key="IBSegmentTitles">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<string/>
+								<string/>
+							</object>
+							<object class="NSMutableArray" key="IBSegmentWidths">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<real value="0.0"/>
+								<real value="0.0"/>
+							</object>
+							<object class="NSMutableArray" key="IBSegmentEnabledStates">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<boolean value="YES"/>
+								<boolean value="YES"/>
+							</object>
+							<object class="NSMutableArray" key="IBSegmentContentOffsets">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<string>{0, 0}</string>
+								<string>{0, 0}</string>
+							</object>
+							<object class="NSMutableArray" key="IBSegmentImages">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<reference ref="679342780"/>
+								<reference ref="506707658"/>
+							</object>
+							<bool key="IBMomentary">YES</bool>
+							<reference key="IBTintColor" ref="735855150"/>
+						</object>
+						<reference key="IBUINavigationItem" ref="318949492"/>
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
@@ -627,6 +672,23 @@
 					</object>
 					<int key="connectionID">108</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">nextPrevious:</string>
+						<reference key="source" ref="889581697"/>
+						<reference key="destination" ref="1680078"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">111</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">nextPrevious</string>
+						<reference key="source" ref="1680078"/>
+						<reference key="destination" ref="889581697"/>
+					</object>
+					<int key="connectionID">112</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -825,6 +887,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="814090282"/>
+							<reference ref="102508587"/>
 						</object>
 						<reference key="parent" ref="1680078"/>
 					</object>
@@ -899,6 +962,20 @@
 						<reference key="object" ref="268590964"/>
 						<reference key="parent" ref="5652634"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">110</int>
+						<reference key="object" ref="102508587"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="889581697"/>
+						</object>
+						<reference key="parent" ref="318949492"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">109</int>
+						<reference key="object" ref="889581697"/>
+						<reference key="parent" ref="102508587"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -908,6 +985,7 @@
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
 					<string>10.IBPluginDependency</string>
+					<string>109.IBPluginDependency</string>
 					<string>11.IBPluginDependency</string>
 					<string>12.CustomClassName</string>
 					<string>12.IBEditorWindowLastContentRect</string>
@@ -970,6 +1048,7 @@
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>AddDeploymentViewController</string>
 					<string>{{1120, 26}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1008,7 +1087,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>ImageViewController</string>
-					<string>{{614, 353}, {320, 480}}</string>
+					<string>{{780, 52}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>SplashViewController</string>
@@ -1048,7 +1127,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">108</int>
+			<int key="maxID">112</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1465,15 +1544,47 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ImageViewController</string>
 					<string key="superclassName">BaseViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">nextPrevious:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">nextPrevious:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">nextPrevious:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">imageView</string>
-						<string key="NS.object.0">UIImageView</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>imageView</string>
+							<string>nextPrevious</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIImageView</string>
+							<string>UISegmentedControl</string>
+						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">imageView</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">imageView</string>
-							<string key="candidateClassName">UIImageView</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>imageView</string>
+							<string>nextPrevious</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">imageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">nextPrevious</string>
+								<string key="candidateClassName">UISegmentedControl</string>
+							</object>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -1651,13 +1762,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancel:</string>
 							<string>done:</string>
-							<string>locate:</string>
-							<string>locationTypeChanged:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -1668,8 +1775,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancel:</string>
 							<string>done:</string>
-							<string>locate:</string>
-							<string>locationTypeChanged:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1681,14 +1786,6 @@
 								<string key="name">done:</string>
 								<string key="candidateClassName">id</string>
 							</object>
-							<object class="IBActionInfo">
-								<string key="name">locate:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">locationTypeChanged:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -1697,19 +1794,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>doneButton</string>
-							<string>locationType</string>
-							<string>mapView</string>
-							<string>textField</string>
-							<string>toolBar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
-							<string>UISegmentedControl</string>
-							<string>MKMapView</string>
-							<string>UITextField</string>
-							<string>UIToolbar</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1718,10 +1807,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>doneButton</string>
-							<string>locationType</string>
-							<string>mapView</string>
-							<string>textField</string>
-							<string>toolBar</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1732,22 +1817,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">doneButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">locationType</string>
-								<string key="candidateClassName">UISegmentedControl</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">mapView</string>
-								<string key="candidateClassName">MKMapView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">textField</string>
-								<string key="candidateClassName">UITextField</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">toolBar</string>
-								<string key="candidateClassName">UIToolbar</string>
 							</object>
 						</object>
 					</object>
@@ -2299,24 +2368,18 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">UITextField</string>
-					<string key="superclassName">UIControl</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="462629289">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">UIKit.framework/Headers/UITextField.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">UIToolbar</string>
-					<string key="superclassName">UIView</string>
+					<string key="className">UIView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">UIKit.framework/Headers/UIToolbar.h</string>
+						<string key="minorKey">UIKit.framework/Headers/UIPrintFormatter.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIView</string>
-					<reference key="sourceIdentifier" ref="462629289"/>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">UIKit.framework/Headers/UITextField.h</string>
+					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIView</string>
@@ -2381,14 +2444,14 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<integer value="1024" key="NS.object.0"/>
+			<integer value="1056" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
 			<integer value="3100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../../Ushahidi_iPhone.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../../Ushahidi_iOS.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2407,6 +2470,6 @@
 				<string>{30, 30}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">117</string>
+		<string key="IBCocoaTouchPluginVersion">132</string>
 	</data>
 </archive>

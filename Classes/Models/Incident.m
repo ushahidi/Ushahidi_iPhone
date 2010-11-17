@@ -257,6 +257,14 @@
 		? [NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude] : nil;
 }
 
+- (NSArray *) photoImages {
+	NSMutableArray *images = [NSMutableArray arrayWithCapacity:[self.photos count]];
+	for (Photo *photo in self.photos) {
+		[images addObject:photo.image];
+	}
+	return images;
+}
+
 - (NSComparisonResult)compareByTitle:(Incident *)incident {
 	return [self.title localizedCaseInsensitiveCompare:incident.title];
 }

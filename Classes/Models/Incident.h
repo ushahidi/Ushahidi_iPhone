@@ -67,6 +67,7 @@
 
 @property(nonatomic,retain) NSMutableArray *news;
 @property(nonatomic,retain) NSMutableArray *photos;
+@property(nonatomic,assign,readonly) NSArray *photoImages;
 @property(nonatomic,retain) NSMutableArray *sounds;
 @property(nonatomic,retain) NSMutableArray *videos;
 @property(nonatomic,retain) NSMutableArray *categories;

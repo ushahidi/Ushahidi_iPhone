@@ -30,58 +30,19 @@
 @property(nonatomic, retain) NSString *location;
 @property(nonatomic, retain) NSString *latitude;
 @property(nonatomic, retain) NSString *longitude;
+@property(nonatomic, retain) NSString *currentLatitude;
+@property(nonatomic, retain) NSString *currentLongitude;
 
 @end
 
 @implementation LocationsViewController
 
-@synthesize mapView, cancelButton, doneButton, incident, location, latitude, longitude, locationType, toolBar, textField;
+@synthesize cancelButton, doneButton, incident, location, latitude, longitude, currentLatitude, currentLongitude;
 
 typedef enum {
-	LocationTypeTable,
-	LocationTypeMap
-} LocationType;
-
-#pragma mark -
-#pragma mark Handlers
-
-- (IBAction) locate:(id)sender {
-	DLog(@"");
-	[self.mapView removeAllPins];
-	[self.mapView resizeRegionToFitAllPins];
-	self.location = nil;
-	self.latitude = nil;
-	self.longitude = nil;
-	self.textField.text = nil;
-	self.mapView.showsUserLocation = YES;
-	self.tableView.hidden = YES;
-	self.mapView.hidden = NO;
-	self.toolBar.hidden = NO;
-	self.locationType.selectedSegmentIndex = LocationTypeMap;
-	[self.tableView reloadData];
-}
-
-- (IBAction) locationTypeChanged:(id)sender {
-	if (self.locationType.selectedSegmentIndex == LocationTypeTable) {
-		self.tableView.hidden = NO;
-		self.mapView.hidden = YES;
-		self.toolBar.hidden = YES;
-	} 
-	else if (self.locationType.selectedSegmentIndex == LocationTypeMap) {
-		self.tableView.hidden = YES;
-		self.mapView.hidden = NO;
-		self.toolBar.hidden = NO;
-		[self.mapView removeAllPins];
-		if (self.location != nil && self.latitude != nil && self.longitude != nil) {
-			[self.mapView addPinWithTitle:self.location 
-								 subtitle:[NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude] 
-								 latitude:self.latitude 
-								longitude:self.longitude];	
-			[self.mapView performSelector:@selector(resizeRegionToFitAllPins) withObject:nil afterDelay:0.8];
-		}
-		self.textField.text = self.location;
-	}
-}
+	TableSectionNewLocation,
+	TableSectionExistingLocations
+} TableSection;
 
 #pragma mark -
 #pragma mark Handlers
@@ -104,15 +65,15 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search locations...", @"Search locations...")];
+	[self addHeaders:NSLocalizedString(@"New Location", @"New Location"),
+					 NSLocalizedString(@"Existing Locations", @"Existing Locations"), nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+	[[Locator sharedLocator] detectLocationForDelegate:self];
 	self.location = self.incident.location;
 	self.latitude = self.incident.latitude;
 	self.longitude = self.incident.longitude;
-	self.mapView.showsUserLocation = NO;
-	[self.mapView removeAllPins];
-	self.locationType.selectedSegmentIndex = LocationTypeTable;
 	[self.allRows removeAllObjects];
 	[self.filteredRows removeAllObjects];
 	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsForDelegate:self]];
@@ -127,12 +88,10 @@ typedef enum {
 - (void)dealloc {
 	[cancelButton release];
 	[doneButton release];
-	[mapView release];
 	[incident release];
 	[location release];
-	[locationType release];
-	[toolBar release];
-	[textField release];
+	[currentLatitude release];
+	[currentLongitude release];
     [super dealloc];
 }
 
@@ -140,27 +99,47 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 1;
+	return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
+	if (section == TableSectionNewLocation) {
+		return 1;
+	}
 	return self.filteredRows.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView indexPath:indexPath];
-	Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
-	if (theLocation != nil) {
-		[cell setTitle:theLocation.name];	
-		[cell setDescription:[NSString stringWithFormat:@"%@, %@", theLocation.latitude, theLocation.longitude]];
-		[cell setChecked:[theLocation equals:self.location
-									latitude:self.latitude
-								   longitude:self.longitude]];
+	if (indexPath.section == TableSectionNewLocation) {
+		[cell setTitle:NSLocalizedString(@"Current Location", @"Current Location")];
+		if (self.currentLatitude != nil) {
+			[cell setDescription:[NSString stringWithFormat:@"%@, %@", self.currentLatitude, self.currentLongitude]];	
+		}
+		else {
+			[cell setDescription:@""];
+		}
+		[cell setChecked:self.location == nil];
 	}
 	else {
-		[cell setTitle:nil];
-		[cell setDescription:nil];
-		[cell setChecked:NO];
+		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
+		if (theLocation != nil) {
+			[cell setTitle:theLocation.name];	
+			[cell setDescription:[NSString stringWithFormat:@"%@, %@", theLocation.latitude, theLocation.longitude]];
+			if (self.location == nil) {
+				[cell setChecked:NO];
+			}
+			else {
+				[cell setChecked:[theLocation equals:self.location
+											latitude:self.latitude
+										   longitude:self.longitude]];
+			}
+		}
+		else {
+			[cell setTitle:nil];
+			[cell setDescription:nil];
+			[cell setChecked:NO];
+		}	
 	}
 	return cell;
 }
@@ -188,35 +167,21 @@ typedef enum {
 #pragma mark CheckBoxTableCellDelegate
 
 - (void) checkBoxTableCellChanged:(CheckBoxTableCell *)cell index:(NSIndexPath *)indexPath checked:(BOOL)checked {
-	Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
-	DLog(@"checkBoxTableCellChanged:%@ index:[%d, %d] checked:%d", theLocation.name, indexPath.section, indexPath.row, checked)
-	self.mapView.showsUserLocation = NO;
-	[self.mapView removeAllPins];
-	if (checked) {
-		self.location = theLocation.name;
-		self.latitude = theLocation.latitude;
-		self.longitude = theLocation.longitude;
-	}
-	[self.tableView reloadData];
-}
-
-#pragma mark -
-#pragma mark UshahidiDelegate
-
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories error:(NSError *)error hasChanges:(BOOL)hasChanges {
-	if(hasChanges) {
-		DLog(@"categories: %d", [categories count]);
-		[self.loadingView hide];
-		[self replaceRows:categories];
-		[self.tableView reloadData];
-		[self.tableView flashScrollIndicators];
-		[self.loadingView hide];
-		DLog(@"Re-Adding Rows");
+	if (indexPath.section == TableSectionNewLocation) {
+		self.location = nil;
+		self.latitude = self.currentLatitude;
+		self.longitude = self.currentLongitude;
 	}
 	else {
-		[self.loadingView hide];
-		DLog(@"No Changes");
+		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
+		DLog(@"checkBoxTableCellChanged:%@ index:[%d, %d] checked:%d", theLocation.name, indexPath.section, indexPath.row, checked)
+		if (checked) {
+			self.location = theLocation.name;
+			self.latitude = theLocation.latitude;
+			self.longitude = theLocation.longitude;
+		}
 	}
+	[self.tableView reloadData];
 }
 
 #pragma mark -
@@ -240,12 +205,12 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges{
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		//[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
 	}
-	else if(hasChanges) {
+	else if (hasChanges) {
 		DLog(@"locations: %@", locations);
 		[self.allRows removeAllObjects];
 		[self.filteredRows removeAllObjects];
@@ -260,27 +225,13 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark MKMapViewDelegate
+#pragma mark LocatorDelegate
 
-- (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-	DLog(@"");
-	self.textField.text = [NSString stringWithFormat:@"%f, %f", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
-	self.location = [NSString stringWithFormat:@"%f, %f", userLocation.coordinate.latitude, userLocation.coordinate.longitude];
-	self.latitude = [NSString stringWithFormat:@"%f", userLocation.coordinate.latitude];
-	self.longitude = [NSString stringWithFormat:@"%f", userLocation.coordinate.longitude];
-	[theMapView performSelector:@selector(resizeRegionToFitAllPins) withObject:nil afterDelay:1.0];
-}
-
-#pragma mark -
-#pragma mark UITextFieldDelegate
-
-- (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-	self.location = [theTextField.text stringByReplacingCharactersInRange:range withString:string];
-	return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)theTextField {
-	self.location = theTextField.text;
+- (void) locator:(Locator *)locator latitude:(NSString *)userLatitude longitude:(NSString *)userLongitude {
+	DLog(@"locator: %@, %@", userLatitude, userLongitude);
+	self.currentLatitude = userLatitude;
+	self.currentLongitude = userLongitude;
+	[self.tableView reloadData];
 }
 
 @end

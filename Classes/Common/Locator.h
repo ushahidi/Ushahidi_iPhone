@@ -18,38 +18,27 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "TableViewController.h"
-#import "Ushahidi.h"
-#import "CheckBoxTableCell.h"
+#import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import <MapKit/MapKit.h>
-#import <MapKit/MKAnnotation.h>
-#import "Locator.h"
 
-@class Incident;
+@protocol LocatorDelegate;
 
-@interface LocationsViewController : TableViewController<UshahidiDelegate,
-														 LocatorDelegate,
-														 CheckBoxTableCellDelegate> {
-@public
-	UIBarButtonItem *cancelButton;
-	UIBarButtonItem *doneButton;
-	Incident *incident;
-															 
+@interface Locator : NSObject<CLLocationManagerDelegate> {
+
 @private
-	NSString *location;
-	NSString *latitude;
-	NSString *longitude;
-	NSString *currentLatitude;
-	NSString *currentLongitude;
+	CLLocationManager *locationManager;
+	id<LocatorDelegate> delegate;
 }
 
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property(nonatomic, retain) Incident *incident;
++ (Locator *) sharedLocator;
+- (void)detectLocationForDelegate:(id<LocatorDelegate>)delegate;
 
-- (IBAction) cancel:(id)sender;
-- (IBAction) done:(id)sender;
+@end
+
+@protocol LocatorDelegate <NSObject>
+
+@optional
+
+- (void) locator:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude;
 
 @end

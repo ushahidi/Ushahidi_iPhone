@@ -45,6 +45,8 @@
 		self.sounds = [[NSMutableArray alloc] initWithCapacity:0];
 		self.videos = [[NSMutableArray alloc] initWithCapacity:0];
 		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
+		self.latitude = nil;
+		self.longitude = nil;
 		self.date = [NSDate date];
 	}
 	return self;
@@ -248,6 +250,11 @@
 			self.location != nil && self.location.length > 0 &&
 			self.date != nil &&
 			self.categories.count > 0;
+}
+
+- (NSString *) coordinates {
+	return self.latitude != nil && self.longitude != nil 
+		? [NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude] : nil;
 }
 
 - (NSComparisonResult)compareByTitle:(Incident *)incident {

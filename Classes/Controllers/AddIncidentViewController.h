@@ -26,6 +26,7 @@
 #import "Ushahidi.h"
 #import "DatePicker.h"
 #import "ImagePickerController.h"
+#import "Locator.h"
 
 @class CategoriesViewController;
 @class LocationsViewController;
@@ -36,7 +37,8 @@
 														   TextViewTableCellDelegate, 
 														   DatePickerDelegate,
 														   ImagePickerDelegate,
-														   UIActionSheetDelegate>  {
+														   UIActionSheetDelegate, 
+														   LocatorDelegate>  {
 																
 @public
 	ImagePickerController *imagePickerController;

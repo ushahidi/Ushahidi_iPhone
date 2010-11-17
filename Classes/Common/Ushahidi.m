@@ -50,7 +50,8 @@
 							   finishSelector:(SEL)finishSelector
 								 failSelector:(SEL)failSelector;
 
-- (void) queueFinished:(ASINetworkQueue *)queue;
+- (void) mapQueueFinished:(ASINetworkQueue *)queue;
+- (void) photoQueueFinished:(ASINetworkQueue *)queue;
 
 - (void) getDeploymentsFinished:(id<UshahidiDelegate>)delegate;
 
@@ -101,10 +102,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		if (self.deployments == nil) self.deployments = [[NSMutableDictionary alloc] init];
 		self.mapQueue = [ASINetworkQueue queue];
 		[self.mapQueue setDelegate:self];
-		[self.mapQueue setQueueDidFinishSelector:@selector(queueFinished:)];
+		[self.mapQueue setQueueDidFinishSelector:@selector(mapQueueFinished:)];
 		self.photoQueue = [ASINetworkQueue queue];
 		[self.photoQueue setDelegate:self];
-		[self.photoQueue setQueueDidFinishSelector:@selector(queueFinished:)];
+		[self.photoQueue setQueueDidFinishSelector:@selector(photoQueueFinished:)];
 	}
 	return self;
 }
@@ -648,7 +649,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	} 
 	else if ([request responseData] != nil) {
-		DLog(@"RESPONSE: BINARY IMAGE");
+		DLog(@"RESPONSE: BINARY IMAGE %@", [request.originalURL absoluteString]);
 		photo.image = [UIImage imageWithData:[request responseData]];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:incident:photo:) 
 						target:delegate 
@@ -666,6 +667,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	if (photo != nil) {
 		photo.downloading = NO;
 	}
+}
+
+- (void)photoQueueFinished:(ASINetworkQueue *)queue {
+	DLog(@"photoQueueFinished");
 }
 
 #pragma mark -
@@ -698,10 +703,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	} 
 	else if ([request responseData] != nil) {
-		DLog(@"RESPONSE: MAP IMAGE");
+		DLog(@"RESPONSE: MAP IMAGE %@", [request.originalURL absoluteString]);
 		UIImage *map = [UIImage imageWithData:[request responseData]];
 		if (map.size.width == kGoogleOverCapacitySize && map.size.height == kGoogleOverCapacitySize) {
-			DLog(@"Over Capacity, Cancelling Queue!!");
+			DLog(@"Over Capacity, Cancelling Map Queue!!");
 			[self.mapQueue cancelAllOperations];	
 		}
 		else {
@@ -721,6 +726,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 }
 
+- (void)mapQueueFinished:(ASINetworkQueue *)queue {
+	DLog(@"mapQueueFinished");
+}
+
 #pragma mark -
 #pragma mark ASIHTTPRequest
 
@@ -737,10 +746,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[request setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
 	[request startAsynchronous];
 	return request;
-}
-
-- (void)queueFinished:(ASINetworkQueue *)queue {
-	DLog(@"queueFinished");
 }
 
 @end

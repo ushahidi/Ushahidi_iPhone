@@ -133,6 +133,8 @@
 		3E8635E112244A54001DE141 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8635E012244A54001DE141 /* MapAnnotation.m */; };
 		3E8637E612246A64001DE141 /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8637E512246A64001DE141 /* NSDictionary+Extension.m */; };
 		3E8638C412247BAC001DE141 /* MKMapView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8638C312247BAC001DE141 /* MKMapView+Extension.m */; };
+		3E91985A1293A81F005AC005 /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9198591293A81F005AC005 /* Locator.m */; };
+		3E9198A61293AD09005AC005 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9198A51293AD09005AC005 /* CoreLocation.framework */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
 		3EA84B12128D9E090022A532 /* DeploymentsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA84B0F128D9E090022A532 /* DeploymentsViewController_iPhone.xib */; };
@@ -365,6 +367,9 @@
 		3E8637E512246A64001DE141 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
 		3E8638C212247BAC001DE141 /* MKMapView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Extension.h"; sourceTree = "<group>"; };
 		3E8638C312247BAC001DE141 /* MKMapView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Extension.m"; sourceTree = "<group>"; };
+		3E9198581293A81F005AC005 /* Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locator.h; sourceTree = "<group>"; };
+		3E9198591293A81F005AC005 /* Locator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locator.m; sourceTree = "<group>"; };
+		3E9198A51293AD09005AC005 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3EA84B0F128D9E090022A532 /* DeploymentsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentsViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -408,6 +413,7 @@
 				3E862AEF1222C120001DE141 /* MobileCoreServices.framework in Frameworks */,
 				3E862AF51222C138001DE141 /* libz.1.2.3.dylib in Frameworks */,
 				3E862B0A1222C177001DE141 /* CFNetwork.framework in Frameworks */,
+				3E9198A61293AD09005AC005 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +464,7 @@
 				3E862AEE1222C120001DE141 /* MobileCoreServices.framework */,
 				3E862AF41222C138001DE141 /* libz.1.2.3.dylib */,
 				3E862B091222C177001DE141 /* CFNetwork.framework */,
+				3E9198A51293AD09005AC005 /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -656,6 +663,8 @@
 				3E8629F91222BCC4001DE141 /* Device.m */,
 				3E862BC11222CFE0001DE141 /* Settings.h */,
 				3E862BC21222CFE0001DE141 /* Settings.m */,
+				3E9198581293A81F005AC005 /* Locator.h */,
+				3E9198591293A81F005AC005 /* Locator.m */,
 				3E862E761222F178001DE141 /* Ushahidi.h */,
 				3E862E771222F178001DE141 /* Ushahidi.m */,
 			);
@@ -996,6 +1005,7 @@
 				3ECD0A4712889A9A0006AF7C /* NSError+Extension.m in Sources */,
 				3E236397128C7DB400CF804A /* IndexedTableCell.m in Sources */,
 				3E244E72128DFDE400B36DB6 /* NSURL+Extension.m in Sources */,
+				3E91985A1293A81F005AC005 /* Locator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

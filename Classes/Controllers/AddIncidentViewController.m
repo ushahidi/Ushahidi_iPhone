@@ -53,6 +53,11 @@ typedef enum {
 	TableSectionDateRowTime
 } TableSectionDateRow;
 
+typedef enum {
+	TableSectionLocationName,
+	TableSectionLocationCoordinates
+} TableSectionLocationRow;
+
 @interface AddIncidentViewController ()
 
 @property(nonatomic, retain) DatePicker *datePicker;
@@ -105,7 +110,7 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-
+	[[Locator sharedLocator] detectLocationForDelegate:self];
 	if (self.modalViewController == nil) {
 		self.incident = [[Incident alloc] initWithDefaultValues];
 		self.willBePushed = NO;
@@ -137,7 +142,7 @@ typedef enum {
 		return 1;
 	}
 	if (section == TableSectionLocation) {
-		return 1;
+		return 2;
 	}
 	if (section == TableSectionDate) {
 		return 2;
@@ -180,18 +185,29 @@ typedef enum {
 		}
 	}
 	else if (indexPath.section == TableSectionLocation) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		if (self.incident.location != nil) {
+		if (indexPath.row == TableSectionLocationName) {
+			TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
+			[cell setKeyboardType:UIKeyboardTypeDefault];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 			[cell setText:self.incident.location];
-			[cell setTextColor:[UIColor blackColor]];
+			[cell setPlaceholder:NSLocalizedString(@"Enter location name", @"Enter location name")];
+			return cell;
 		}
 		else {
-			[cell setText:NSLocalizedString(@"Select location", @"Select location")];
-			[cell setTextColor:[UIColor lightGrayColor]];
+			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+			if (self.incident.coordinates != nil) {
+				[cell setText:self.incident.coordinates];
+				[cell setTextColor:[UIColor blackColor]];
+			}
+			else {
+				[cell setText:NSLocalizedString(@"Select location", @"Select location")];
+				[cell setTextColor:[UIColor lightGrayColor]];
+			}
+			return cell;	
 		}
-		return cell;
 	}
 	else if (indexPath.section == TableSectionDate) {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
@@ -242,15 +258,6 @@ typedef enum {
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
 		}
-		else if (indexPath.section == TableSectionLocation) {
-			[cell setPlaceholder:NSLocalizedString(@"Select location", @"Select location")];
-			if (self.incident.location != nil) {
-				[cell setText:self.incident.location];
-			}
-			else {
-				[cell setText:@""];
-			}
-		}
 		else if (indexPath.section == TableSectionNews) {
 			[cell setPlaceholder:NSLocalizedString(@"Add news", @"Add news")];
 		}
@@ -269,10 +276,7 @@ typedef enum {
 		return 120;
 	}
 	if (indexPath.section == TableSectionLocation) {
-		CGSize size = [TextTableCell getCellSizeForText:self.incident.location forWidth:theTableView.contentSize.width];
-		if (size.height > 45) {
-			return size.height;
-		}
+		return 45;
 	}
 	if (indexPath.section == TableSectionCategory) {
 		CGSize size = [TextTableCell getCellSizeForText:[self.incident categoryNames] forWidth:theTableView.contentSize.width];
@@ -385,6 +389,18 @@ typedef enum {
 	if (actionSheet.cancelButtonIndex != buttonIndex) {
 		[self.incident removePhotoAtIndex:actionSheet.tag];
 		[self.tableView reloadData];	
+	}
+}
+
+#pragma mark -
+#pragma mark LocatorDelegate
+
+- (void) locator:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
+	DLog(@"locator: %@, %@", latitude, longitude);
+	if (self.incident.latitude == nil || self.incident.longitude == nil) {
+		self.incident.latitude = latitude;
+		self.incident.longitude = longitude;
+		[self.tableView reloadData];
 	}
 }
 

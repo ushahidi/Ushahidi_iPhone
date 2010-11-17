@@ -58,6 +58,7 @@
 @property(nonatomic,retain) NSString *location;
 @property(nonatomic,retain) NSString *latitude;
 @property(nonatomic,retain) NSString *longitude;
+@property(nonatomic,assign,readonly) NSString *coordinates;
 @property(nonatomic,retain) UIImage *map;
 
 @property(nonatomic,assign) BOOL active;

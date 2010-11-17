@@ -76,8 +76,6 @@ typedef enum {
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", @"Loading...")];
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
-	//[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
-	//[[Ushahidi sharedUshahidi] getLocationsForDelegate:self];
 }
 
 - (IBAction) sortOrder:(id)sender {
@@ -177,11 +175,6 @@ typedef enum {
 	[self.pending removeAllObjects];
 	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
 	[self.tableView reloadData];
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	[self.view endEditing:YES];
 }
 
 - (void)dealloc {
@@ -351,17 +344,6 @@ typedef enum {
 	self.refreshButton.enabled = YES;
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map {
-	NSInteger row = [self.filteredRows indexOfObject:incident];
-	if (row > -1) {
-		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionIncidents];
-		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-		if (cell != nil && [incident getFirstPhotoThumbnail] == nil) {
-			[cell setImage:map];
-		}
-	}
-}
-
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident {
 	if (incident != nil){
 		DLog(@"Incident: %@", incident.title);
@@ -393,6 +375,29 @@ typedef enum {
 	}
 	else {
 		DLog(@"Incident is NULL");
+	}
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map {
+	DLog(@"downloadedFromUshahidi:incident:map:");
+	NSInteger row = [self.filteredRows indexOfObject:incident];
+	if (row != NSNotFound) {
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionIncidents];
+		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+		if (cell != nil && [incident getFirstPhotoThumbnail] == nil) {
+			[cell setImage:map];
+		}
+	}
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident photo:(Photo *)photo {
+	DLog(@"downloadedFromUshahidi:incident:photo %@", [photo url]);
+	if (photo != nil && photo.indexPath != nil) {
+		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
+		if (cell != nil) {
+			//TODO use thumbnail instead
+			[cell setImage:photo.image];
+		}	
 	}
 }
 
@@ -437,17 +442,6 @@ typedef enum {
 		self.viewIncidentViewController.incidents = self.pending;
 	}
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];	
-}
-
-#pragma mark -
-#pragma mark PhotoDelegate
-
-- (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath {
-	DLog(@"photoDownloaded: %@", [photo class]);
-	IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-	if (cell != nil && photo != nil && photo.thumbnail != nil) {
-		[cell setImage:photo.thumbnail];
-	}
 }
 
 @end

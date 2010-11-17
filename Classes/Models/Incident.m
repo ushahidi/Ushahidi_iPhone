@@ -152,18 +152,42 @@
 }
 
 - (void) addPhoto:(Photo *)photo {
+	for (Photo *media in self.photos) {
+		if ([media.identifier isEqualToString:photo.identifier]) {
+			return; //photo exists
+		}
+	}
+	DLog(@"addPhoto: %@", [photo identifier]);
 	[self.photos addObject:photo];
 }
 
 - (void) addNews:(News *)theNews {
+	for (Media *media in self.news) {
+		if ([media.identifier isEqualToString:theNews.identifier]) {
+			return; //photo exists
+		}
+	}
+	DLog(@"addNews: %@", [theNews identifier]);
 	[self.news addObject:theNews];
 }
 
 - (void) addSound:(Sound *)sound {
+	for (Media *media in self.sounds) {
+		if ([media.identifier isEqualToString:sound.identifier]) {
+			return; //sound exists
+		}
+	}
+	DLog(@"addSound: %@", [sound identifier]);
 	[self.sounds addObject:sound];
 }
 
 - (void) addVideo:(Video *)video {
+	for (Media *media in self.videos) {
+		if ([media.identifier isEqualToString:video.identifier]) {
+			return; //video exists
+		}
+	}
+	DLog(@"addVideo: %@", [video identifier]);
 	[self.videos addObject:video];
 }
 

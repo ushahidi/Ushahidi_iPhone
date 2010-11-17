@@ -39,7 +39,6 @@
 - (void) pushNextViewController {
 	NSString *lastDeployment = [[Settings sharedSettings] lastDeployment];
 	if (lastDeployment != nil) {
-		DLog(@"XXXXXXXXXXXXXX Last Deployment: %@", lastDeployment);
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
 		[[Ushahidi sharedUshahidi] setDeployment:deployment];
 		self.incidentsViewController.deployment = deployment;
@@ -61,7 +60,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self performSelector:@selector(pushNextViewController) withObject:nil afterDelay:0.5];
+	[self performSelector:@selector(pushNextViewController) withObject:nil afterDelay:0.3];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

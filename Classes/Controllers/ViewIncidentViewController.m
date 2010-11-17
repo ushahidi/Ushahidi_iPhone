@@ -78,6 +78,7 @@ typedef enum {
 	[self.nextPrevious setEnabled:(newIndex + 1 < [self.incidents count]) forSegmentAtIndex:NavBarNext];
 	[self.tableView reloadData];
 	[self.tableView flashScrollIndicators];
+	[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 #pragma mark -
@@ -187,7 +188,7 @@ typedef enum {
 			}
 			else {
 				[cell setImage:nil];
-				[photo downloadForDelegate:self];
+				[[Ushahidi sharedUshahidi] downloadPhoto:self.incident photo:photo forDelegate:self];
 			}
 		}
 		else {
@@ -243,6 +244,10 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionPhotos) {
 		if ([self.incident.photos count] > 0) {
+			Photo *photo = [self.incident.photos objectAtIndex:indexPath.row];
+			if (photo != nil && photo.image != nil) {
+				return self.tableView.frame.size.width * photo.image.size.height / photo.image.size.width;
+			}
 			return 200;
 		}
 		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No Photos", @"No Photos") forWidth:theTableView.contentSize.width].height;
@@ -308,13 +313,15 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark PhotoDelegate
+#pragma mark UshahidiDelegate
 
-- (void)photoDownloaded:(Photo *)photo indexPath:(NSIndexPath *)indexPath {
-	DLog(@"section:%d row:%d", indexPath.section, indexPath.row);
-	ImageTableCell *cell = (ImageTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-	if (cell != nil) {
-		[cell setImage:photo.image];
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo {
+	DLog(@"downloadedFromUshahidi: %@", [photo url]);
+	if (photo != nil) {
+		ImageTableCell *cell = (ImageTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
+		if (cell != nil) {
+			[cell setImage:photo.image];
+		}	
 	}
 }
 

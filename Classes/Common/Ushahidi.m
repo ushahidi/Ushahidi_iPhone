@@ -42,14 +42,21 @@
 @interface Ushahidi ()
 
 @property(nonatomic, retain) NSMutableDictionary *deployments;
+@property(nonatomic, retain) ASINetworkQueue *mapQueue;
+@property(nonatomic, retain) ASINetworkQueue *photoQueue;
 
 - (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url 
 								  forDelegate:(id<UshahidiDelegate>)delegate 
 							   finishSelector:(SEL)finishSelector
 								 failSelector:(SEL)failSelector;
 
+- (void) queueFinished:(ASINetworkQueue *)queue;
+
 - (void) getDeploymentsFinished:(id<UshahidiDelegate>)delegate;
-- (void) downloadMapsForDelegate:(id<UshahidiDelegate>)delegate;
+
+- (void) downloadMap:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
+- (void) downloadMapFinished:(ASIHTTPRequest *)request;
+- (void) downloadMapFailed:(ASIHTTPRequest *)request;
 
 - (void) uploadFinished:(ASIHTTPRequest *)request;
 - (void) uploadFailed:(ASIHTTPRequest *)request;
@@ -66,14 +73,14 @@
 - (void) getLocationsFinished:(ASIHTTPRequest *)request;
 - (void) getLocationsFailed:(ASIHTTPRequest *)request;
 
-- (void)downloadPhotoFinished:(ASIHTTPRequest *)request;
+- (void) downloadPhotoFinished:(ASIHTTPRequest *)request;
 - (void) downloadPhotoFailed:(ASIHTTPRequest *)request;
 
 @end
 
 @implementation Ushahidi
 
-@synthesize deployments, deployment;
+@synthesize deployments, deployment, mapQueue, photoQueue;
 
 typedef enum {
 	MediaTypeUnkown,
@@ -84,6 +91,7 @@ typedef enum {
 } MediaType;
 
 NSString * const kGoogleStaticMaps = @"http://maps.google.com/maps/api/staticmap";
+NSInteger const kGoogleOverCapacitySize = 100;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
@@ -91,12 +99,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	if ((self = [super init])) {
 		self.deployments = [NSKeyedUnarchiver unarchiveObjectWithKey:@"deployments"];
 		if (self.deployments == nil) self.deployments = [[NSMutableDictionary alloc] init];
+		self.mapQueue = [ASINetworkQueue queue];
+		[self.mapQueue setDelegate:self];
+		[self.mapQueue setQueueDidFinishSelector:@selector(queueFinished:)];
+		self.photoQueue = [ASINetworkQueue queue];
+		[self.photoQueue setDelegate:self];
+		[self.photoQueue setQueueDidFinishSelector:@selector(queueFinished:)];
 	}
 	return self;
 }
 
 - (void)dealloc {
+	[deployment release];
 	[deployments release];
+	[mapQueue release];
+	[photoQueue release];
 	[super dealloc];
 }
 
@@ -127,47 +144,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (Deployment *) getDeploymentWithUrl:(NSString *)url {
 	return [self.deployments objectForKey:url];
-}
-
-#pragma mark -
-#pragma mark Maps
-
-- (void) downloadMapsForDelegate:(id<UshahidiDelegate>)delegate {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	for(Incident *incident in [self.deployment.incidents allValues]) {
-		@try {
-			if (incident.map == nil && incident.latitude != nil && incident.longitude != nil) {
-				CGRect screen = [[UIScreen mainScreen] bounds];
-				NSMutableString *url = [NSMutableString stringWithString:kGoogleStaticMaps];
-				[url appendFormat:@"?center=%@,%@", incident.latitude, incident.longitude];
-				[url appendFormat:@"&markers=%@,%@", incident.latitude, incident.longitude];
-				[url appendFormat:@"&size=%dx%d", (int)CGRectGetWidth(screen), (int)CGRectGetWidth(screen)];
-				[url appendFormat:@"&zoom=%d", [[Settings sharedSettings] mapZoomLevel]];
-				[url appendFormat:@"&sensor=false"];
-				DLog(@"REQUEST: %@", url);
-				ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
-				[request setShouldRedirect:YES];
-				[request startSynchronous];
-				if ([request error] != nil) {
-					DLog(@"ERROR: %@", [[request error] localizedDescription]);
-				} 
-				else if ([request responseData] != nil) {
-					DLog(@"RESPONSE: BINARY IMAGE");
-					incident.map = [UIImage imageWithData:[request responseData]];
-					[self dispatchSelector:@selector(downloadedFromUshahidi:incident:map:) 
-									target:delegate 
-								   objects:self, incident, incident.map, nil];
-				}
-				else {
-					DLog(@"RESPONSE: %@", [request responseString]);
-				}
-			}
-		}
-		@catch (NSException *e) {
-			DLog(@"NSException: %@", e);
-		}
-	}
-	[pool release];
 }
 
 #pragma mark -
@@ -240,7 +216,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		return YES;
 	}
 	@catch (NSException *e) {
-		DLog(@"%@", e);
+		DLog(@"NSException: %@", e);
 		incident.uploading = NO;
 		[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
 						target:delegate 
@@ -578,13 +554,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				hasChanges = YES;
 			}
 			NSDictionary *media = [dictionary objectForKey:@"media"];
-			DLog(@"media: %@ - %@", [media class], media);
 			if (media != nil && [media isKindOfClass:[NSArray class]]) {
 				for (NSDictionary *item in media) {
-					DLog(@"item: %@", item);
+					DLog(@"media: %@", item);
 					NSInteger mediatype = [item intForKey:@"type"];
 					if (mediatype == MediaTypePhoto) {
-						[incident addPhoto:[[Photo alloc] initWithDictionary:item]];
+						Photo *photo = [[[Photo alloc] initWithDictionary:item] autorelease];
+						[incident addPhoto:photo];
+						if (photo.url != nil && photo.image == nil && photo.downloading == NO) {
+							[self downloadPhoto:incident photo:photo forDelegate:delegate];
+						}
 					}
 					else if (mediatype == MediaTypeVideo) {
 						[incident addVideo:[[Video alloc] initWithDictionary:item]];
@@ -596,9 +575,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 						[incident addNews:[[News alloc] initWithDictionary:item]];
 					}	
 				}
+				[self.photoQueue go];
 			}
 			NSDictionary *categories = [dictionary objectForKey:@"categories"];
-			if (categories != nil) {
+			if (categories != nil && [categories isKindOfClass:[NSArray class]]) {
 				DLog(@"categories: %@ - %@", [categories class], categories);
 				for (NSDictionary *item in categories) {
 					Category *category = [[Category alloc] initWithDictionary:[item objectForKey:@"category"]];
@@ -611,17 +591,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					[category release];
 				}
 			}
+			if ([[Settings sharedSettings] downloadMaps] && incident.map == nil) {
+				[self downloadMap:incident forDelegate:delegate];
+			}
 			[incident release];
 		}
 		if (hasChanges) {
 			DLog(@"Has New Incidents");
 		}
+		if ([[Settings sharedSettings] downloadMaps]) {
+			[self.mapQueue go];
+		}
 		[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 						target:delegate 
 					   objects:self, [self.deployment.incidents allValues], self.deployment.pending, nil, hasChanges, nil];
-		if ([[Settings sharedSettings] downloadMaps]) {
-			[self performSelectorInBackground:@selector(downloadMapsForDelegate:) withObject:delegate];
-		}
 	}
 }
 
@@ -636,36 +619,40 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Photo
 
-- (void) downloadPhoto:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate {
-	if (photo.url != nil && photo.downloading == NO) {
+- (void) downloadPhoto:(Incident *)incident photo:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate {
+	if (photo.url != nil && photo.image == nil && photo.downloading == NO) {
 		photo.downloading = YES;
-		NSURL *url = [NSURL URLWithStrings:self.deployment.domain, 
+		NSURL *url = [NSURL URLWithStrings:self.deployment.url	, 
 										   @"/media/uploads/",
 										   photo.url, nil];
+		DLog(@"downloadPhoto: %@", [url absoluteString]);
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 		[request setDelegate:self];
-		[request setShouldRedirect:YES];
 		[request setDidFinishSelector:@selector(downloadPhotoFinished:)];
 		[request setDidFailSelector:@selector(downloadPhotoFailed:)];
 		[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:delegate, @"delegate",
+																		incident, @"incident",
 																		photo, @"photo", nil]];
-		[request startAsynchronous];
+		[self.photoQueue addOperation:request];
 	}
 }
 
 - (void)downloadPhotoFinished:(ASIHTTPRequest *)request {
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
+	Incident *incident = (Incident *)[request.userInfo objectForKey:@"incident"];
 	Photo *photo = (Photo *)[request.userInfo objectForKey:@"photo"];
-	photo.downloading = NO;
+	if (photo != nil) {
+		photo.downloading = NO;	
+	}
 	if ([request error] != nil) {
 		DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	} 
 	else if ([request responseData] != nil) {
 		DLog(@"RESPONSE: BINARY IMAGE");
 		photo.image = [UIImage imageWithData:[request responseData]];
-		[self dispatchSelector:@selector(downloadedFromUshahidi:photo:) 
+		[self dispatchSelector:@selector(downloadedFromUshahidi:incident:photo:) 
 						target:delegate 
-					   objects:self, photo, nil];
+					   objects:self, incident, photo, nil];
 	}
 	else {
 		DLog(@"RESPONSE: %@", [request responseString]);
@@ -676,7 +663,62 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"REQUEST:%@", [request.originalURL absoluteString]);
 	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	Photo *photo = (Photo *)[request.userInfo objectForKey:@"photo"];
-	photo.downloading = NO;
+	if (photo != nil) {
+		photo.downloading = NO;
+	}
+}
+
+#pragma mark -
+#pragma mark Maps
+
+- (void) downloadMap:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate {
+	if (incident.map == nil && incident.latitude != nil && incident.longitude != nil) {
+		CGRect screen = [[UIScreen mainScreen] bounds];
+		NSMutableString *url = [NSMutableString stringWithString:kGoogleStaticMaps];
+		[url appendFormat:@"?center=%@,%@", incident.latitude, incident.longitude];
+		[url appendFormat:@"&markers=%@,%@", incident.latitude, incident.longitude];
+		[url appendFormat:@"&size=%dx%d", (int)CGRectGetWidth(screen), (int)CGRectGetWidth(screen)];
+		[url appendFormat:@"&zoom=%d", [[Settings sharedSettings] mapZoomLevel]];
+		[url appendFormat:@"&sensor=false"];
+		DLog(@"REQUEST: %@", url);
+		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
+		[request setDelegate:self];
+		[request setDidFinishSelector:@selector(downloadMapFinished:)];
+		[request setDidFailSelector:@selector(downloadMapFailed:)];
+		[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:delegate, @"delegate",
+																		incident, @"incident", nil]];
+		[self.mapQueue addOperation:request];	
+	}
+}
+
+- (void)downloadMapFinished:(ASIHTTPRequest *)request {
+	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
+	Incident *incident = (Incident *)[request.userInfo objectForKey:@"incident"];
+	if ([request error] != nil) {
+		DLog(@"ERROR: %@", [[request error] localizedDescription]);
+	} 
+	else if ([request responseData] != nil) {
+		DLog(@"RESPONSE: MAP IMAGE");
+		UIImage *map = [UIImage imageWithData:[request responseData]];
+		if (map.size.width == kGoogleOverCapacitySize && map.size.height == kGoogleOverCapacitySize) {
+			DLog(@"Over Capacity, Cancelling Queue!!");
+			[self.mapQueue cancelAllOperations];	
+		}
+		else {
+			incident.map = map;
+			[self dispatchSelector:@selector(downloadedFromUshahidi:incident:map:) 
+							target:delegate 
+						   objects:self, incident, incident.map, nil];
+		}
+	}
+	else {
+		DLog(@"RESPONSE: %@", [request responseString]);
+	}
+}
+
+- (void)downloadMapFailed:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 }
 
 #pragma mark -
@@ -684,17 +726,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url 
 								  forDelegate:(id<UshahidiDelegate>)delegate 
-							 finishSelector:(SEL)finishSelector
+							   finishSelector:(SEL)finishSelector
 								 failSelector:(SEL)failSelector {
 	DLog(@"url: %@", url);
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
-	[request setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
 	[request setDelegate:self];
 	[request setShouldRedirect:YES];
 	[request setDidFinishSelector:finishSelector];
 	[request setDidFailSelector:failSelector];
+	[request setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
 	[request startAsynchronous];
 	return request;
+}
+
+- (void)queueFinished:(ASINetworkQueue *)queue {
+	DLog(@"queueFinished");
 }
 
 @end

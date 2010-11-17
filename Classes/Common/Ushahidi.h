@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
+#import "ASINetworkQueue.h"
 
 @protocol UshahidiDelegate;
 
@@ -38,6 +39,8 @@
 	
 @private
 	NSMutableDictionary *deployments;
+	ASINetworkQueue *mapQueue;
+	ASINetworkQueue *photoQueue;
 }
 
 @property(nonatomic, retain) Deployment *deployment;
@@ -68,7 +71,7 @@
 - (NSArray *) getIncidentsByLocationName:(NSString *)locationName forDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getIncidentsBySinceID:(NSString *)sinceID forDelegate:(id<UshahidiDelegate>)delegate;
 
-- (void) downloadPhoto:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate;
+- (void) downloadPhoto:(Incident *)incident photo:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate;
 
 @end
 			 
@@ -83,7 +86,7 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident photo:(Photo *)photo;
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error;
 

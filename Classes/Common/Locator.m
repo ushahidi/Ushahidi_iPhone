@@ -32,7 +32,7 @@
 
 @implementation Locator
 
-@synthesize delegate, locationManager;
+@synthesize delegate, locationManager, latitude, longitude;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 

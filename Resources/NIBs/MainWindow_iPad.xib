@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="80"/>
+			<integer value="15"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -219,6 +219,7 @@
 			</object>
 			<object class="IBUIViewController" id="597297605">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="357798234">
+					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Report</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="369585251">
 						<string key="IBUITitle">Report</string>
@@ -229,9 +230,10 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="868370560">
-							<nil key="NSNextResponder"/>
+							<reference key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
+							<string key="NSFrame">{{690, 7}, {71, 30}}</string>
+							<reference key="NSSuperview"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBSegmentControlStyle">2</int>
@@ -258,13 +260,13 @@
 							</object>
 							<object class="NSMutableArray" key="IBSegmentImages">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSCustomResource">
+								<object class="NSCustomResource" id="39536659">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">navbar_arrow_up.png</string>
+									<string key="NSResourceName">arrow_up.png</string>
 								</object>
-								<object class="NSCustomResource">
+								<object class="NSCustomResource" id="553345802">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">navbar_arrow_down.png</string>
+									<string key="NSResourceName">arrow_down.png</string>
 								</object>
 							</object>
 							<bool key="IBMomentary">YES</bool>
@@ -326,7 +328,6 @@
 			</object>
 			<object class="IBUIViewController" id="603098313">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="736054130">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Image</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="59860965">
 						<string key="IBUITitle">Image</string>
@@ -337,10 +338,9 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="1062926696">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{690, 7}, {71, 30}}</string>
-							<reference key="NSSuperview"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBSegmentControlStyle">2</int>
@@ -368,14 +368,8 @@
 							</object>
 							<object class="NSMutableArray" key="IBSegmentImages">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSCustomResource">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">arrow_up.png</string>
-								</object>
-								<object class="NSCustomResource">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">arrow_down.png</string>
-								</object>
+								<reference ref="39536659"/>
+								<reference ref="553345802"/>
 							</object>
 							<bool key="IBMomentary">YES</bool>
 							<reference key="IBTintColor" ref="839758312"/>
@@ -1039,7 +1033,7 @@
 					<string>{{2407, -252}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>ViewIncidentViewController</string>
-					<string>{{2729, -252}, {320, 480}}</string>
+					<string>{{2417, -211}, {768, 1024}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>WebViewController</string>
 					<string>{{3168, -250}, {320, 480}}</string>
@@ -1062,7 +1056,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>ImageViewController</string>
-					<string>{{1701, -80}, {783, 852}}</string>
+					<string>{{1701, -168}, {768, 1024}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>SplashViewController</string>
@@ -2432,8 +2426,6 @@
 				<string>arrow_down.png</string>
 				<string>arrow_up.png</string>
 				<string>map.png</string>
-				<string>navbar_arrow_down.png</string>
-				<string>navbar_arrow_up.png</string>
 				<string>reports.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
@@ -2441,8 +2433,6 @@
 				<string>{15, 13}</string>
 				<string>{15, 13}</string>
 				<string>{24, 24}</string>
-				<string>{16, 16}</string>
-				<string>{16, 16}</string>
 				<string>{30, 30}</string>
 			</object>
 		</object>

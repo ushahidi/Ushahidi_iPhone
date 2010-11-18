@@ -26,6 +26,7 @@
 #import "SubtitleTableCell.h"
 #import "ImageTableCell.h"
 #import "LoadingViewController.h"
+#import "NSURL+Extension.h"
 #import "AlertView.h"
 #import "InputView.h"
 #import "Incident.h"
@@ -33,17 +34,28 @@
 #import "Location.h"
 #import "UIColor+Extension.h"
 #import "TableHeaderView.h"
+#import "Email.h"
+#import "Deployment.h"
+#import "News.h"
+
+@interface ViewIncidentViewController ()
+
+@property(nonatomic,retain) Email *email;
+
+@end
+
+@implementation ViewIncidentViewController
 
 typedef enum {
-	TableSectionErrors,
-	TableSectionTitle,
-	TableSectionVerified,
-	TableSectionDescription,
-	TableSectionCategory,
-	TableSectionDateTime,
-	TableSectionLocation,
-	TableSectionPhotos,
-	TableSectionNews
+TableSectionErrors,
+TableSectionTitle,
+TableSectionVerified,
+TableSectionDescription,
+TableSectionCategory,
+TableSectionDateTime,
+TableSectionLocation,
+TableSectionPhotos,
+TableSectionNews
 } TableSection;
 
 typedef enum {
@@ -51,13 +63,7 @@ typedef enum {
 	NavBarNext
 } NavBar;
 
-@interface ViewIncidentViewController ()
-
-@end
-
-@implementation ViewIncidentViewController
-
-@synthesize mapViewController, imageViewController, nextPrevious, incident, incidents;
+@synthesize mapViewController, imageViewController, nextPrevious, incident, incidents, email;
 
 #pragma mark -
 #pragma mark Handlers
@@ -81,15 +87,42 @@ typedef enum {
 	[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
+- (IBAction) emailLink:(id)sender {
+	DLog(@"");
+	NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
+	NSString *message = [NSString stringWithFormat:@"<a href=\"%@\">%@</a>", [link absoluteString], [link absoluteString]];
+	[self.email sendMessage:message withSubject:self.incident.title];
+}
+
+- (IBAction) emailDetails:(id)sender {
+	DLog(@"");
+	NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
+	NSMutableString *message = [NSMutableString string];
+	[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>",  NSLocalizedString(@"Link", @"Link"), [link absoluteString], [link absoluteString]];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", @"Title"), self.incident.title];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", @"Date"), self.incident.dateTimeString];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", @"Location"), self.incident.location];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", @"Category"), self.incident.categoryNames];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", @"Description"), self.incident.description];
+	if (self.incident.news != nil && [self.incident.news count] > 0) {
+		[message appendFormat:@"<ul>"];
+		for (News *news in self.incident.news) {
+			[message appendFormat:@"<li><a href=\"%@\"></a></li>", news.url, news.url];
+		}
+		[message appendFormat:@"</ul>"];
+	}
+	[self.email sendMessage:message withSubject:self.incident.title photos:self.incident.photoImages];
+}
+
 #pragma mark -
 #pragma mark UIViewController
-
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
+	self.email = [[Email alloc] initWithController:self];
 	[self addHeaders:NSLocalizedString(@"Errors", @"Errors"), 
 					 NSLocalizedString(@"Title", @"Title"),
 					 NSLocalizedString(@"Verified", @"Verified"),
@@ -118,6 +151,7 @@ typedef enum {
 	[imageViewController release];
 	[nextPrevious release];
 	[incident release];
+	[email release];
     [super dealloc];
 }
 

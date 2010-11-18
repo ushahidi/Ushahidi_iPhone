@@ -160,6 +160,11 @@
 		3ECB579F122F809C000AAC56 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB579E122F809C000AAC56 /* UIView+Extension.m */; };
 		3ECD0A4712889A9A0006AF7C /* NSError+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */; };
 		3ED45095128B475100578DB4 /* sort_verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED45094128B475100578DB4 /* sort_verified.png */; };
+		3EFC1C1D1295D81C00163B36 /* email_details.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1B1295D81C00163B36 /* email_details.png */; };
+		3EFC1C1E1295D81C00163B36 /* email_link.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1C1295D81C00163B36 /* email_link.png */; };
+		3EFC1C3B1295D92A00163B36 /* photo_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C3A1295D92A00163B36 /* photo_save.png */; };
+		3EFC1C861295DC9F00163B36 /* Email.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC1C851295DC9F00163B36 /* Email.m */; };
+		3EFC1CA31295DD2900163B36 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFC1CA21295DD2900163B36 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -410,6 +415,12 @@
 		3ECD0A4512889A9A0006AF7C /* NSError+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Extension.h"; sourceTree = "<group>"; };
 		3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extension.m"; sourceTree = "<group>"; };
 		3ED45094128B475100578DB4 /* sort_verified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_verified.png; sourceTree = "<group>"; };
+		3EFC1C1B1295D81C00163B36 /* email_details.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_details.png; sourceTree = "<group>"; };
+		3EFC1C1C1295D81C00163B36 /* email_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_link.png; sourceTree = "<group>"; };
+		3EFC1C3A1295D92A00163B36 /* photo_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_save.png; sourceTree = "<group>"; };
+		3EFC1C841295DC9F00163B36 /* Email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Email.h; sourceTree = "<group>"; };
+		3EFC1C851295DC9F00163B36 /* Email.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Email.m; sourceTree = "<group>"; };
+		3EFC1CA21295DD2900163B36 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -428,6 +439,7 @@
 				3E862AF51222C138001DE141 /* libz.1.2.3.dylib in Frameworks */,
 				3E862B0A1222C177001DE141 /* CFNetwork.framework in Frameworks */,
 				3E9198A61293AD09005AC005 /* CoreLocation.framework in Frameworks */,
+				3EFC1CA31295DD2900163B36 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +491,7 @@
 				3E862AF41222C138001DE141 /* libz.1.2.3.dylib */,
 				3E862B091222C177001DE141 /* CFNetwork.framework */,
 				3E9198A51293AD09005AC005 /* CoreLocation.framework */,
+				3EFC1CA21295DD2900163B36 /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -679,6 +692,8 @@
 				3E862BC21222CFE0001DE141 /* Settings.m */,
 				3E9198581293A81F005AC005 /* Locator.h */,
 				3E9198591293A81F005AC005 /* Locator.m */,
+				3EFC1C841295DC9F00163B36 /* Email.h */,
+				3EFC1C851295DC9F00163B36 /* Email.m */,
 				3E862E761222F178001DE141 /* Ushahidi.h */,
 				3E862E771222F178001DE141 /* Ushahidi.m */,
 			);
@@ -716,6 +731,9 @@
 				3E862A4D1222BD09001DE141 /* arrow_next.png */,
 				3E862A4E1222BD09001DE141 /* arrow_previous.png */,
 				3E862A4F1222BD09001DE141 /* unselected.png */,
+				3EFC1C1B1295D81C00163B36 /* email_details.png */,
+				3EFC1C1C1295D81C00163B36 /* email_link.png */,
+				3EFC1C3A1295D92A00163B36 /* photo_save.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -942,6 +960,9 @@
 				3E0535F91295B629000C7EB0 /* Icon-Small@2x.png in Resources */,
 				3E0535FA1295B629000C7EB0 /* Icon.png in Resources */,
 				3E0535FB1295B629000C7EB0 /* Icon@2x.png in Resources */,
+				3EFC1C1D1295D81C00163B36 /* email_details.png in Resources */,
+				3EFC1C1E1295D81C00163B36 /* email_link.png in Resources */,
+				3EFC1C3B1295D92A00163B36 /* photo_save.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1034,6 +1055,7 @@
 				3E236397128C7DB400CF804A /* IndexedTableCell.m in Sources */,
 				3E244E72128DFDE400B36DB6 /* NSURL+Extension.m in Sources */,
 				3E91985A1293A81F005AC005 /* Locator.m in Sources */,
+				3EFC1C861295DC9F00163B36 /* Email.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1067,7 +1089,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B7965BCF-0E93-4FD9-A506-F92426B5AEFB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "112F2148-2B68-4B48-B4D1-D09C924AE659";
 			};
 			name = Debug;
 		};
@@ -1081,7 +1103,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B7965BCF-0E93-4FD9-A506-F92426B5AEFB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "112F2148-2B68-4B48-B4D1-D09C924AE659";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1097,7 +1119,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E9106367-AD5E-48E5-A4B7-FBDED7E42E19";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CCDD9B8B-0E91-44E8-A341-AE9291B85C8C";
 				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1113,7 +1135,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E9106367-AD5E-48E5-A4B7-FBDED7E42E19";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CCDD9B8B-0E91-44E8-A341-AE9291B85C8C";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -1129,7 +1151,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7439B3C9-F950-44EC-983F-51B78D649F0B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5C510318-A982-41C8-BE29-EBD7AC041CEC";
 				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1145,7 +1167,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7439B3C9-F950-44EC-983F-51B78D649F0B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5C510318-A982-41C8-BE29-EBD7AC041CEC";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -1162,7 +1184,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B7965BCF-0E93-4FD9-A506-F92426B5AEFB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "112F2148-2B68-4B48-B4D1-D09C924AE659";
 				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1179,7 +1201,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B7965BCF-0E93-4FD9-A506-F92426B5AEFB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "112F2148-2B68-4B48-B4D1-D09C924AE659";
 				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

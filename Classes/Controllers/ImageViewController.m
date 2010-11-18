@@ -19,8 +19,15 @@
  *****************************************************************************/
 
 #import "ImageViewController.h"
+#import "LoadingViewController.h"
+#import "Email.h"
 
 @interface ImageViewController ()
+
+@property(nonatomic,retain) Email *email;
+
+- (void) savePhotoInBackground;
+- (void) imageSaved:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
 
 @end
 
@@ -31,7 +38,7 @@ typedef enum {
 	NavBarNext
 } NavBar;
 
-@synthesize imageView, image, images, nextPrevious;
+@synthesize imageView, image, images, nextPrevious, email;
 
 - (IBAction) nextPrevious:(id)sender {
 	NSInteger index = [self.images indexOfObject:self.image];
@@ -49,6 +56,31 @@ typedef enum {
 	self.title = [NSString stringWithFormat:@"%d / %d", newIndex + 1, [self.images count]];
 	[self.nextPrevious setEnabled:(newIndex > 0) forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:(newIndex + 1 < [self.images count]) forSegmentAtIndex:NavBarNext];
+}
+
+- (IBAction) emailPhoto:(id)sender {
+	DLog(@"");
+	[self.email sendMessage:nil withSubject:nil photos:[NSArray arrayWithObject:self.image]];
+}
+
+- (IBAction) savePhoto:(id)sender {
+	DLog(@"");
+	[self.loadingView showWithMessage:NSLocalizedString(@"Saving...", @"Saving...")];
+	[self performSelectorInBackground:@selector(savePhotoInBackground) withObject:nil];
+}
+
+- (void) savePhotoInBackground {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(imageSaved:didFinishSavingWithError:contextInfo:), nil);
+	[pool release];
+}
+
+- (void)imageSaved:(UIImage *)theImage didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+	[self.loadingView hide];
+    if (error != nil) {
+		[self.alertView showWithTitle:NSLocalizedString(@"Error Saving Photo", @"Error Saving Photo") 
+						   andMessage:[error localizedDescription]];
+	}
 }
 
 #pragma mark -
@@ -78,6 +110,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.email = [[Email alloc] initWithController:self];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -97,6 +130,7 @@ typedef enum {
 	[image release];
 	[images	release];
 	[nextPrevious release];
+	[email release];
 	[super dealloc];
 }
 

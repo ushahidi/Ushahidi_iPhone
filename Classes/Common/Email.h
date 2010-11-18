@@ -18,31 +18,23 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import <Foundation/Foundation.h>
 
-@class Email;
+#import <Foundation/Foundation.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+#import "AlertView.h"
 
-@interface ImageViewController : BaseViewController {
-	
-@public
-	UIImageView *imageView;
-	UIImage *image;
-	NSArray *images;
-	UISegmentedControl *nextPrevious;
-	
-@private
-	Email *email;
-	
+@interface Email : NSObject<MFMailComposeViewControllerDelegate> {
+	UIViewController *controller;
+	AlertView *alert;
 }
 
-@property(nonatomic, retain) IBOutlet UIImageView *imageView;
-@property(nonatomic, retain) UIImage *image;
-@property(nonatomic, retain) NSArray *images;
-@property(nonatomic, retain) IBOutlet UISegmentedControl *nextPrevious;
+@property (nonatomic, retain) UIViewController *controller;
+@property (nonatomic, retain) AlertView *alert;
 
-- (IBAction) nextPrevious:(id)sender;
-- (IBAction) emailPhoto:(id)sender;
-- (IBAction) savePhoto:(id)sender;
+- (id) initWithController:(UIViewController *)controller;
+- (void)sendMessage:(NSString *)message withSubject:(NSString *)subject;
+- (void)sendMessage:(NSString *)message withSubject:(NSString *)subject photos:(NSArray *)photos;
 
 @end

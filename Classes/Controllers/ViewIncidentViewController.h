@@ -29,6 +29,7 @@
 @class MapViewController;
 @class ImageViewController;
 @class Incident;
+@class Email;
 
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
 															UIWebViewDelegate, 
@@ -40,6 +41,10 @@
 	UISegmentedControl *nextPrevious;
 	Incident *incident;
 	NSArray *incidents;
+																
+@private
+	Email *email;
+																
 }
 
 @property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
@@ -49,5 +54,7 @@
 @property(nonatomic,retain) NSArray *incidents;
 
 - (IBAction) nextPrevious:(id)sender;
+- (IBAction) emailLink:(id)sender;
+- (IBAction) emailDetails:(id)sender;
 
 @end

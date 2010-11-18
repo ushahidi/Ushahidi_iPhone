@@ -57,7 +57,7 @@ typedef enum {
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.imageView.image = self.image;
-	if (self.images == nil || [self.images count] == 0) {
+	if (self.images != nil) {
 		NSInteger index = [self.images indexOfObject:self.image];
 		if (index != NSNotFound) {
 			self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.images count]];
@@ -71,7 +71,6 @@ typedef enum {
 		}	
 	}
 	else {
-		self.title = @"1 / 1";
 		[self.nextPrevious setEnabled:NO forSegmentAtIndex:NavBarPrevious];
 		[self.nextPrevious setEnabled:NO forSegmentAtIndex:NavBarNext];
 	}

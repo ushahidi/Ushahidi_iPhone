@@ -297,6 +297,7 @@ typedef enum {
 		if (self.incident.map != nil) {
 			self.imageViewController.title = self.incident.location;
 			self.imageViewController.image = self.incident.map;
+			self.imageViewController.images = nil;
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}
 		else {

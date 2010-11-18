@@ -60,7 +60,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self performSelector:@selector(pushNextViewController) withObject:nil afterDelay:0.3];
+	[self performSelector:@selector(pushNextViewController) withObject:nil afterDelay:0.0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

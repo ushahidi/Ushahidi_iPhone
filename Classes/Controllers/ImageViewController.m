@@ -57,29 +57,24 @@ typedef enum {
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.imageView.image = self.image;
-	NSInteger index = [self.images indexOfObject:self.image];
-	if (index != NSNotFound) {
-		self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.images count]];
-		[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
-		[self.nextPrevious setEnabled:index + 1 < [self.images count] forSegmentAtIndex:NavBarNext];	
+	if (self.images == nil || [self.images count] == 0) {
+		NSInteger index = [self.images indexOfObject:self.image];
+		if (index != NSNotFound) {
+			self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.images count]];
+			[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
+			[self.nextPrevious setEnabled:index + 1 < [self.images count] forSegmentAtIndex:NavBarNext];	
+		}
+		else {
+			self.title = @"1 / 1";
+			[self.nextPrevious setEnabled:NO forSegmentAtIndex:NavBarPrevious];
+			[self.nextPrevious setEnabled:NO forSegmentAtIndex:NavBarNext];
+		}	
 	}
 	else {
 		self.title = @"1 / 1";
 		[self.nextPrevious setEnabled:NO forSegmentAtIndex:NavBarPrevious];
 		[self.nextPrevious setEnabled:NO forSegmentAtIndex:NavBarNext];
 	}
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
 }
 
 - (void)viewDidLoad {

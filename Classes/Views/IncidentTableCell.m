@@ -20,6 +20,7 @@
 
 #import "IncidentTableCell.h"
 #import "UIColor+Extension.h"
+#import "Device.h"
 
 @implementation IncidentTableCell
 
@@ -143,7 +144,7 @@ typedef enum {
 }
 
 + (CGFloat) getCellHeight {
-	return 90;
+	return [Device isIPad] ? 100 : 90;
 }
 
 - (BOOL) uploading {

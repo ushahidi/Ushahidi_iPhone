@@ -32,6 +32,7 @@
 #import "DeploymentTableCell.h"
 #import "IncidentTableCell.h"
 #import "SliderTableCell.h"
+#import "Device.h"
 
 @interface TableCellFactory ()
 
@@ -72,7 +73,8 @@
 										   indexPath:(NSIndexPath *)indexPath {
 	IncidentTableCell *cell = (IncidentTableCell *)[tableView dequeueReusableCellWithIdentifier:@"IncidentTableCell"];
 	if (cell == nil) {
-		cell = (IncidentTableCell *)[TableCellFactory getTableViewCellFromNib:@"IncidentTableCell"];
+		NSString *nibName = [Device isIPad] ? @"IncidentTableCell_iPad" : @"IncidentTableCell_iPhone";
+		cell = (IncidentTableCell *)[TableCellFactory getTableViewCellFromNib:nibName];
 		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
 	}
 	cell.indexPath = indexPath;

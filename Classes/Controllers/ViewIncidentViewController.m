@@ -107,7 +107,10 @@ typedef enum {
 	self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.incidents count]];
 	[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:index + 1 < [self.incidents count] forSegmentAtIndex:NavBarNext];
-	[self.tableView reloadData];
+	if (self.willBePushed) {
+		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+	}
+	[self.tableView reloadData];	
 }
 
 - (void)dealloc {

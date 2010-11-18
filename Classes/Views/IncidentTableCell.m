@@ -144,7 +144,7 @@ typedef enum {
 }
 
 + (CGFloat) getCellHeight {
-	return [Device isIPad] ? 100 : 90;
+	return [Device isIPad] ? 110 : 90;
 }
 
 - (BOOL) uploading {

@@ -63,7 +63,8 @@ typedef enum {
 	NavBarNext
 } NavBar;
 
-@synthesize mapViewController, imageViewController, nextPrevious, incident, incidents, email;
+@synthesize mapViewController, imageViewController, nextPrevious, incident, incidents, email, pending;
+@synthesize emailLinkButton, emailDetailsButton;
 
 #pragma mark -
 #pragma mark Handlers
@@ -96,10 +97,14 @@ typedef enum {
 
 - (IBAction) emailDetails:(id)sender {
 	DLog(@"");
-	NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
 	NSMutableString *message = [NSMutableString string];
-	[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>",  NSLocalizedString(@"Link", @"Link"), [link absoluteString], [link absoluteString]];
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", @"Title"), self.incident.title];
+	if (self.pending) {
+		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", @"Title"), self.incident.title];	
+	}
+	else {
+		NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
+		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/><br/>", NSLocalizedString(@"Title", @"Title"), [link absoluteString], self.incident.title];
+	}
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", @"Date"), self.incident.dateTimeString];
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", @"Location"), self.incident.location];
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", @"Category"), self.incident.categoryNames];
@@ -144,6 +149,7 @@ typedef enum {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];	
+	self.emailLinkButton.enabled = !self.pending;
 }
 
 - (void)dealloc {
@@ -152,6 +158,8 @@ typedef enum {
 	[nextPrevious release];
 	[incident release];
 	[email release];
+	[emailLinkButton release];
+	[emailDetailsButton release];
     [super dealloc];
 }
 

@@ -253,10 +253,12 @@ typedef enum {
 	[self.view endEditing:YES];
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == TableSectionIncidents) {
+		self.viewIncidentViewController.pending = NO;
 		self.viewIncidentViewController.incident = [self filteredRowAtIndexPath:indexPath];
 		self.viewIncidentViewController.incidents = self.filteredRows;
 	}
 	else {
+		self.viewIncidentViewController.pending = YES;
 		self.viewIncidentViewController.incident = [self.pending objectAtIndex:indexPath.row];
 		self.viewIncidentViewController.incidents = self.pending;
 	}

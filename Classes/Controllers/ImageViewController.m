@@ -71,7 +71,8 @@ typedef enum {
 
 - (void) savePhotoInBackground {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(imageSaved:didFinishSavingWithError:contextInfo:), nil);
+	UIImageWriteToSavedPhotosAlbum
+	(self.imageView.image, self, @selector(imageSaved:didFinishSavingWithError:contextInfo:), nil);
 	[pool release];
 }
 

@@ -103,7 +103,7 @@ typedef enum {
 	}
 	else {
 		NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
-		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/><br/>", NSLocalizedString(@"Title", @"Title"), [link absoluteString], self.incident.title];
+		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", @"Title"), [link absoluteString], self.incident.title];
 	}
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", @"Date"), self.incident.dateTimeString];
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", @"Location"), self.incident.location];

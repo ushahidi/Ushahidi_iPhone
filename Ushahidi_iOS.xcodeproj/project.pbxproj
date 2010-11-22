@@ -160,6 +160,8 @@
 		3ECB579F122F809C000AAC56 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB579E122F809C000AAC56 /* UIView+Extension.m */; };
 		3ECD0A4712889A9A0006AF7C /* NSError+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */; };
 		3ED45095128B475100578DB4 /* sort_verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED45094128B475100578DB4 /* sort_verified.png */; };
+		3EF58725129AC37100489AF8 /* IncidentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF58724129AC37100489AF8 /* IncidentTableView.m */; };
+		3EF58728129AC37E00489AF8 /* IncidentMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF58727129AC37E00489AF8 /* IncidentMapView.m */; };
 		3EFC1C1D1295D81C00163B36 /* email_details.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1B1295D81C00163B36 /* email_details.png */; };
 		3EFC1C1E1295D81C00163B36 /* email_link.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1C1295D81C00163B36 /* email_link.png */; };
 		3EFC1C3B1295D92A00163B36 /* photo_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C3A1295D92A00163B36 /* photo_save.png */; };
@@ -415,6 +417,10 @@
 		3ECD0A4512889A9A0006AF7C /* NSError+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Extension.h"; sourceTree = "<group>"; };
 		3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extension.m"; sourceTree = "<group>"; };
 		3ED45094128B475100578DB4 /* sort_verified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_verified.png; sourceTree = "<group>"; };
+		3EF58723129AC37100489AF8 /* IncidentTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentTableView.h; sourceTree = "<group>"; };
+		3EF58724129AC37100489AF8 /* IncidentTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentTableView.m; sourceTree = "<group>"; };
+		3EF58726129AC37E00489AF8 /* IncidentMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentMapView.h; sourceTree = "<group>"; };
+		3EF58727129AC37E00489AF8 /* IncidentMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentMapView.m; sourceTree = "<group>"; };
 		3EFC1C1B1295D81C00163B36 /* email_details.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_details.png; sourceTree = "<group>"; };
 		3EFC1C1C1295D81C00163B36 /* email_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_link.png; sourceTree = "<group>"; };
 		3EFC1C3A1295D92A00163B36 /* photo_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_save.png; sourceTree = "<group>"; };
@@ -635,6 +641,10 @@
 				3E8635E012244A54001DE141 /* MapAnnotation.m */,
 				3E2E853612787E7F00ADA49B /* MotionWindow.h */,
 				3E2E853712787E7F00ADA49B /* MotionWindow.m */,
+				3EF58726129AC37E00489AF8 /* IncidentMapView.h */,
+				3EF58727129AC37E00489AF8 /* IncidentMapView.m */,
+				3EF58723129AC37100489AF8 /* IncidentTableView.h */,
+				3EF58724129AC37100489AF8 /* IncidentTableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1056,6 +1066,8 @@
 				3E244E72128DFDE400B36DB6 /* NSURL+Extension.m in Sources */,
 				3E91985A1293A81F005AC005 /* Locator.m in Sources */,
 				3EFC1C861295DC9F00163B36 /* Email.m in Sources */,
+				3EF58725129AC37100489AF8 /* IncidentTableView.m in Sources */,
+				3EF58728129AC37E00489AF8 /* IncidentMapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1089,7 +1101,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "112F2148-2B68-4B48-B4D1-D09C924AE659";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "145428FC-ACF3-44CD-8189-09D63562135D";
 			};
 			name = Debug;
 		};
@@ -1103,7 +1115,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "112F2148-2B68-4B48-B4D1-D09C924AE659";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "145428FC-ACF3-44CD-8189-09D63562135D";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1119,7 +1131,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CCDD9B8B-0E91-44E8-A341-AE9291B85C8C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "577DA67C-1721-4FB2-A6B2-B88BD9E0F0B1";
 				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1135,7 +1147,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CCDD9B8B-0E91-44E8-A341-AE9291B85C8C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "577DA67C-1721-4FB2-A6B2-B88BD9E0F0B1";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -1151,7 +1163,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5C510318-A982-41C8-BE29-EBD7AC041CEC";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "71E61A9F-0875-454C-968F-25B1CD8A4A51";
 				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1167,7 +1179,7 @@
 				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5C510318-A982-41C8-BE29-EBD7AC041CEC";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "71E61A9F-0875-454C-968F-25B1CD8A4A51";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -1184,7 +1196,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "112F2148-2B68-4B48-B4D1-D09C924AE659";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "145428FC-ACF3-44CD-8189-09D63562135D";
 				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1201,7 +1213,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "112F2148-2B68-4B48-B4D1-D09C924AE659";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "145428FC-ACF3-44CD-8189-09D63562135D";
 				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

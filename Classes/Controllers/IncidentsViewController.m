@@ -34,6 +34,8 @@
 #import "MapAnnotation.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
+#import "IncidentTableView.h"
+#import "IncidentMapView.h"
 
 @interface IncidentsViewController ()
 
@@ -43,10 +45,11 @@
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController, mapViewController, mapView, deployment, sortOrder, refreshButton, pending;
+@synthesize addIncidentViewController, viewIncidentViewController, mapView, deployment, tableSort, mapType, pending;
+@synthesize incidentTableView, incidentMapView;
 
 typedef enum {
-	ViewModeReports,
+	ViewModeTable,
 	ViewModeMap
 } ViewMode;
 
@@ -57,10 +60,16 @@ typedef enum {
 } TableSection;
 
 typedef enum {
-	SortByDate,
-	SortByTitle,
-	SortByVerified
-} SortBy;
+	TableSortDate,
+	TableSortTitle,
+	TableSortVerified
+} TableSort;
+
+typedef enum {
+	MapTypeRoad,
+	MapTypeSatellite,
+	MapTypeHybrid
+} MapType;
 
 #pragma mark -
 #pragma mark Handlers
@@ -72,43 +81,66 @@ typedef enum {
 
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
-	self.refreshButton.enabled = NO;
+	self.incidentTableView.refreshButton.enabled = NO;
+	self.incidentMapView.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", @"Loading...")];
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 }
 
-- (IBAction) sortOrder:(id)sender {
+- (IBAction) tableSortChanged:(id)sender {
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
-	if (segmentControl.selectedSegmentIndex == SortByDate) {
-		DLog(@"SortByDate");
+	if (segmentControl.selectedSegmentIndex == TableSortDate) {
+		DLog(@"TableSortDate");
 	}
-	else if (segmentControl.selectedSegmentIndex == SortByVerified) {
-		DLog(@"SortByVerified");
+	else if (segmentControl.selectedSegmentIndex == TableSortTitle) {
+		DLog(@"TableSortTitle");
 	}
-	else if (segmentControl.selectedSegmentIndex == SortByTitle) {
-		DLog(@"SortByTitle");
+	else if (segmentControl.selectedSegmentIndex == TableSortVerified) {
+		DLog(@"TableSortVerified");
 	}
 	[self filterRows:YES];
 }
 
-- (IBAction) map:(id)sender {
-	DLog(@"");
-	self.mapViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	[self presentModalViewController:self.mapViewController animated:YES];
+- (IBAction) mapTypeChanged:(id)sender {
+	if (self.mapType.selectedSegmentIndex == MapTypeRoad) {
+		DLog(@"MapTypeRoad");
+		self.mapView.mapType = MKMapTypeStandard;
+	}
+	else if (self.mapType.selectedSegmentIndex == MapTypeSatellite) {
+		DLog(@"MapTypeSatellite");
+		self.mapView.mapType = MKMapTypeSatellite;
+	}
+	else if (self.mapType.selectedSegmentIndex == MapTypeHybrid) {
+		DLog(@"MapTypeHybrid");
+		self.mapView.mapType = MKMapTypeHybrid;
+	}
 }
 
 - (IBAction) toggleReportsAndMap:(id)sender {
 	DLog(@"");
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
-	if (segmentControl.selectedSegmentIndex == ViewModeReports) {
-		self.tableView.hidden = NO;
-		self.mapView.hidden = YES;
-		self.sortOrder.enabled = YES;
+	if (segmentControl.selectedSegmentIndex == ViewModeTable) {
+		DLog(@"ViewModeTable");
+		self.incidentTableView.frame = self.view.frame;
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDuration:0.5];
+		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
+		[self.incidentMapView removeFromSuperview];
+		[self.view addSubview:self.incidentTableView];
+		[UIView commitAnimations];
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
-		self.tableView.hidden = YES;
-		self.mapView.hidden = NO;
+		DLog(@"ViewModeMap");
+		self.incidentMapView.frame = self.view.frame;
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDuration:0.5];
+		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:YES];
+		[self.incidentTableView removeFromSuperview];
+		[self.view addSubview:self.incidentMapView];
+		[UIView commitAnimations];
 		[self.mapView removeAllPins];
 		self.mapView.showsUserLocation = YES;
 		for (Incident *incident in self.allRows) {
@@ -128,7 +160,6 @@ typedef enum {
 								 pinColor:MKPinAnnotationColorPurple];
 		}
 		[self.mapView resizeRegionToFitAllPins:YES];
-		self.sortOrder.enabled = NO;
 	}
 }
 
@@ -148,6 +179,10 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	if (self.incidentTableView.superview == nil && self.incidentMapView.superview == nil) {
+		self.incidentTableView.frame = self.view.frame;
+		[self.view addSubview:self.incidentTableView];
+	}
 	if (self.deployment != nil) {
 		self.title = self.deployment.name;
 	}
@@ -156,10 +191,10 @@ typedef enum {
 		? [[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]
 		: [[Ushahidi sharedUshahidi] getIncidents];	
 	[self.allRows removeAllObjects];
-	if (self.sortOrder.selectedSegmentIndex == SortByDate) {
+	if (self.tableSort.selectedSegmentIndex == TableSortDate) {
 		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
 	}
-	else if (self.sortOrder.selectedSegmentIndex == SortByVerified) {
+	else if (self.tableSort.selectedSegmentIndex == TableSortVerified) {
 		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByVerified:)]];
 	}
 	else {
@@ -182,8 +217,8 @@ typedef enum {
 	[viewIncidentViewController release];
 	[mapView release];
 	[deployment release];
-	[sortOrder release];
-	[refreshButton release];
+	[tableSort release];
+	[mapType release];
 	[pending release];
     [super dealloc];
 }
@@ -272,10 +307,10 @@ typedef enum {
 	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
 	NSArray *incidents;
-	if (self.sortOrder.selectedSegmentIndex == SortByDate) {
+	if (self.tableSort.selectedSegmentIndex == TableSortDate) {
 		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)];
 	}
-	else if (self.sortOrder.selectedSegmentIndex == SortByVerified) {
+	else if (self.tableSort.selectedSegmentIndex == TableSortVerified) {
 		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByVerified:)];
 	}
 	else {
@@ -322,10 +357,10 @@ typedef enum {
 		DLog(@"incidents: %d", [incidents count]);
 		[self.loadingView hide];
 		[self.allRows removeAllObjects];
-		if (self.sortOrder.selectedSegmentIndex == SortByDate) {
+		if (self.tableSort.selectedSegmentIndex == TableSortDate) {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
 		}
-		else if (self.sortOrder.selectedSegmentIndex == SortByVerified) {
+		else if (self.tableSort.selectedSegmentIndex == TableSortVerified) {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByVerified:)]];
 		}
 		else {
@@ -335,15 +370,39 @@ typedef enum {
 		[self.filteredRows addObjectsFromArray:self.allRows];
 		[self.pending removeAllObjects];
 		[self.pending addObjectsFromArray:thePending];
-		[self.tableView reloadData];
-		[self.tableView flashScrollIndicators];
+		if (self.incidentTableView.superview != nil) {
+			[self.tableView reloadData];
+			[self.tableView flashScrollIndicators];	
+		}
+		else if (self.incidentMapView.superview != nil) {
+			[self.mapView removeAllPins];
+			self.mapView.showsUserLocation = YES;
+			for (Incident *incident in self.allRows) {
+				[self.mapView addPinWithTitle:incident.title 
+									 subtitle:incident.dateString 
+									 latitude:incident.latitude 
+									longitude:incident.longitude
+									   object:incident
+									 pinColor:MKPinAnnotationColorRed];
+			}
+			for (Incident *incident in self.pending) {
+				[self.mapView addPinWithTitle:incident.title 
+									 subtitle:incident.dateString 
+									 latitude:incident.latitude 
+									longitude:incident.longitude 
+									   object:incident
+									 pinColor:MKPinAnnotationColorPurple];
+			}
+			[self.mapView resizeRegionToFitAllPins:YES];
+		}
 		DLog(@"Re-Adding Rows");
 	}
 	else {
 		DLog(@"No Changes");
 	}
 	[self.loadingView hide];
-	self.refreshButton.enabled = YES;
+	self.incidentTableView.refreshButton.enabled = YES;
+	self.incidentMapView.refreshButton.enabled = YES;
 }
 
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident {
@@ -417,7 +476,7 @@ typedef enum {
 	if (annotationView == nil) {
 		 annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
 	}
-	annotationView.animatesDrop = YES;
+	annotationView.animatesDrop = NO;
 	annotationView.canShowCallout = YES;
 	if ([annotation class] == MKUserLocation.class) {
 		annotationView.pinColor = MKPinAnnotationColorGreen;

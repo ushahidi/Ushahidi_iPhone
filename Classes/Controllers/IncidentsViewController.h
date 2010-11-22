@@ -30,6 +30,8 @@
 @class ViewIncidentViewController;
 @class MapViewController;
 @class Deployment;
+@class IncidentTableView;
+@class IncidentMapView;
 
 @interface IncidentsViewController : TableViewController<UshahidiDelegate, 
 														 MKMapViewDelegate>  {
@@ -37,11 +39,12 @@
 @public
 	AddIncidentViewController *addIncidentViewController;
 	ViewIncidentViewController *viewIncidentViewController;
-	MapViewController *mapViewController;
 	MKMapView *mapView;
 	Deployment *deployment;
-	UISegmentedControl *sortOrder;
-	UIBarButtonItem *refreshButton;
+	UISegmentedControl *tableSort;
+	UISegmentedControl *mapType;
+	IncidentTableView *incidentTableView;
+	IncidentMapView *incidentMapView;
 															 
 @private
 	NSMutableArray *pending;
@@ -49,16 +52,17 @@
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
 @property(nonatomic,retain) IBOutlet ViewIncidentViewController *viewIncidentViewController;
-@property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic,retain) IBOutlet MKMapView *mapView;
-@property(nonatomic,retain) IBOutlet UISegmentedControl *sortOrder;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *tableSort;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
+@property(nonatomic,retain) IBOutlet IncidentTableView *incidentTableView;
+@property(nonatomic,retain) IBOutlet IncidentMapView *incidentMapView;
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) add:(id)sender;
 - (IBAction) refresh:(id)sender;
-- (IBAction) map:(id)sender;
 - (IBAction) toggleReportsAndMap:(id)sender;
-- (IBAction) sortOrder:(id)sender;
+- (IBAction) tableSortChanged:(id)sender;
+- (IBAction) mapTypeChanged:(id)sender;
 
 @end

@@ -181,6 +181,7 @@ typedef enum {
 	[super viewWillAppear:animated];
 	if (self.incidentTableView.superview == nil && self.incidentMapView.superview == nil) {
 		self.incidentTableView.frame = self.view.frame;
+		self.incidentMapView.frame = self.view.frame;
 		[self.view addSubview:self.incidentTableView];
 	}
 	if (self.deployment != nil) {

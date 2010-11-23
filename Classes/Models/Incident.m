@@ -122,7 +122,18 @@
 }
 
 - (BOOL) matchesString:(NSString *)string {
-	return self.title != nil && [self.title anyWordHasPrefix:string];
+	if (self.title != nil && [self.title anyWordHasPrefix:string]) {
+		return YES;
+	}
+	if (self.location != nil && [self.location anyWordHasPrefix:string]) {
+		return YES;
+	}
+	for (Category *category in self.categories) {
+		if ([category.title anyWordHasPrefix:string]) {
+			return YES;
+		}
+	}
+	return NO;
 }
 
 - (NSString *) dateTimeString {

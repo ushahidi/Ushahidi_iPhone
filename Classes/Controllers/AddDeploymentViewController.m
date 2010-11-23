@@ -90,8 +90,10 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
-	[self addHeaders:NSLocalizedString(@"Name", @"Name"),
-					 NSLocalizedString(@"URL", @"URL"), nil];
+	[self setHeader:NSLocalizedString(@"Name", @"Name") 
+		  atSection:TableSectionName];
+	[self setHeader:NSLocalizedString(@"URL", @"URL") 
+		  atSection:TableSectionURL];
 	[self setFooter:NSLocalizedString(@"Example: Ushahidi Demo", @"Example: Ushahidi Demo")
 		  atSection:TableSectionName];
 	[self setFooter:NSLocalizedString(@"Example: http://demo.ushahidi.com", @"Example: http://demo.ushahidi.com")

@@ -25,16 +25,19 @@
 #import "TableViewController.h"
 #import "Ushahidi.h"
 #import "Photo.h"
+#import "ItemPicker.h"
 
 @class AddIncidentViewController;
 @class ViewIncidentViewController;
 @class MapViewController;
 @class Deployment;
+@class Category;
 @class IncidentTableView;
 @class IncidentMapView;
 
 @interface IncidentsViewController : TableViewController<UshahidiDelegate, 
-														 MKMapViewDelegate>  {
+														 MKMapViewDelegate, 
+														 ItemPickerDelegate>  {
 	
 @public
 	AddIncidentViewController *addIncidentViewController;
@@ -48,6 +51,9 @@
 															 
 @private
 	NSMutableArray *pending;
+	ItemPicker *itemPicker;
+	NSMutableArray *categories;
+	Category *category;
 }
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
@@ -64,5 +70,6 @@
 - (IBAction) toggleReportsAndMap:(id)sender;
 - (IBAction) tableSortChanged:(id)sender;
 - (IBAction) mapTypeChanged:(id)sender;
+- (IBAction) filterChanged:(id)sender;
 
 @end

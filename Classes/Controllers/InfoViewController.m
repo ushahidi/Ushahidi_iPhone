@@ -77,13 +77,13 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
-	[self addHeaders:NSLocalizedString(@"Email", @"Email"), 
-					 NSLocalizedString(@"First Name", @"First Name"), 
-					 NSLocalizedString(@"Last Name", @"Last Name"),
-					 NSLocalizedString(@"Resized Image Width", @"Resized Image Width"), 
-					 NSLocalizedString(@"Download Maps For Offline Viewing", @"Download Maps For Offline Viewing"), 
-					 NSLocalizedString(@"Downloaded Map Zoom Level", @"Downloaded Map Zoom Level"),
-					 NSLocalizedString(@"Discrete Mode On Shake", @"Discrete Mode On Shake"), nil];		
+	[self setHeader:NSLocalizedString(@"Email", @"Email") atSection:TableSectionEmail];
+	[self setHeader:NSLocalizedString(@"First Name", @"First Name") atSection:TableSectionFirstName];
+	[self setHeader:NSLocalizedString(@"Last Name", @"Last Name") atSection:TableSectionLastName];
+	[self setHeader:NSLocalizedString(@"Resized Image Width", @"Resized Image Width") atSection:TableSectionImageWidth];
+	[self setHeader:NSLocalizedString(@"Download Maps For Offline Viewing", @"Download Maps For Offline Viewing") atSection:TableSectionDownloadMaps];
+	[self setHeader:NSLocalizedString(@"Downloaded Map Zoom Level", @"Downloaded Map Zoom Level") atSection:TableSectionMapZoomLevel];
+	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", @"Discrete Mode On Shake") atSection:TableSectionBecomeDiscrete];	
 }
 
 - (void) viewWillAppear:(BOOL)animated {

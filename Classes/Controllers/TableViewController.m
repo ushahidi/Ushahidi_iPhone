@@ -29,7 +29,7 @@
 
 @property(nonatomic,assign) CGFloat toolbarHeight;
 @property(nonatomic,assign) BOOL shouldBeginEditing;
-@property(nonatomic,retain) NSMutableArray *headers;
+@property(nonatomic,retain) NSMutableDictionary *headers;
 @property(nonatomic,retain) NSMutableDictionary *footers;
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
@@ -74,6 +74,22 @@
 	return nil;
 }
 
+- (void) setTableFooter:(NSString *)text {
+	if (text != nil) {
+		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
+		label.backgroundColor = [UIColor clearColor];
+		label.textColor = [UIColor grayColor];
+		label.textAlignment = UITextAlignmentCenter;
+		label.font = [UIFont systemFontOfSize:15];
+		label.text = text;
+		[self.tableView setTableFooterView:label];
+		[label release];
+	}
+	else {
+		[self.tableView setTableFooterView:nil];
+	}
+}
+
 - (void) replaceRows:(NSArray *)rows {
 	[self.allRows removeAllObjects];
 	[self.allRows addObjectsFromArray:rows];
@@ -110,19 +126,8 @@
 	return nil;
 }
 
--(void) addHeader:(NSString *)header {
-    [self.headers addObject:header];
-}
-
--(void) addHeaders:(NSString *)string, ... {
-    va_list args;
-    va_start(args, string);
-	for (NSString *arg = string; arg != nil; arg = va_arg(args, NSString*)) {
-		if (arg != nil && [arg length] > 0) {
-			[self.headers addObject:arg];
-		}
-	}
-	va_end(args);
+-(void) setHeader:(NSString *)header atSection:(NSInteger)section {
+   [self.headers setObject:header forKey:[NSString stringWithFormat:@"%d", section]];
 }
 
 - (void) setFooter:(NSString *)text atSection:(NSInteger)section {
@@ -153,10 +158,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	DLog(@"%@", self.nibName);
-	self.allRows = [[NSMutableArray alloc] initWithCapacity:0];
-	self.filteredRows = [[NSMutableArray alloc] initWithCapacity:0];
-	self.headers = [[NSMutableArray alloc] initWithCapacity:0];
-	self.footers = [[NSMutableDictionary alloc] initWithCapacity:0];
+	self.allRows = [NSMutableArray arrayWithCapacity:0];
+	self.filteredRows = [NSMutableArray arrayWithCapacity:0];
+	self.headers = [NSMutableDictionary dictionaryWithCapacity:0];
+	self.footers = [NSMutableDictionary dictionaryWithCapacity:0];
 	self.shouldBeginEditing = YES;
 	if ([Device isIPad]) {
 		[self.tableView setBackgroundView:nil];
@@ -233,7 +238,7 @@
 
 - (UIView *)tableView:(UITableView *)theTableView viewForHeaderInSection:(NSInteger)section {
 	if ([self.headers count] > section) {
-		NSString *header = [self.headers objectAtIndex:section];
+		NSString *header = [self.headers objectForKey:[NSString stringWithFormat:@"%d", section]];
 		if (self.tableView.style == UITableViewStyleGrouped) {
 			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor clearColor]];
 		}

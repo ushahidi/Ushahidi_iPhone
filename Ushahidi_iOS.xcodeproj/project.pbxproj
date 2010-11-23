@@ -42,6 +42,8 @@
 		3E4AFF4E1271E1DF0017AED4 /* InfoViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFF4D1271E1DF0017AED4 /* InfoViewController_iPhone.xib */; };
 		3E4AFF521271E1EB0017AED4 /* InfoViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E4AFF511271E1EB0017AED4 /* InfoViewController_iPad.xib */; };
 		3E4AFF5F1271E21E0017AED4 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* InfoViewController.m */; };
+		3E8090EC129B2B8500CF273F /* ItemPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8090EB129B2B8500CF273F /* ItemPicker.m */; };
+		3E809136129B2F8E00CF273F /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E809135129B2F8E00CF273F /* filter.png */; };
 		3E84E7011282931400A55292 /* sort_alphabetical.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E84E6FF1282931400A55292 /* sort_alphabetical.png */; };
 		3E84E7021282931400A55292 /* sort_date.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E84E7001282931400A55292 /* sort_date.png */; };
 		3E8629FA1222BCC4001DE141 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
@@ -224,6 +226,9 @@
 		3E4AFF511271E1EB0017AED4 /* InfoViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoViewController_iPad.xib; sourceTree = "<group>"; };
 		3E4AFF5D1271E21E0017AED4 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		3E4AFF5E1271E21E0017AED4 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		3E8090EA129B2B8500CF273F /* ItemPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPicker.h; sourceTree = "<group>"; };
+		3E8090EB129B2B8500CF273F /* ItemPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPicker.m; sourceTree = "<group>"; };
+		3E809135129B2F8E00CF273F /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
 		3E84E6FF1282931400A55292 /* sort_alphabetical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_alphabetical.png; sourceTree = "<group>"; };
 		3E84E7001282931400A55292 /* sort_date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_date.png; sourceTree = "<group>"; };
 		3E8629F61222BCC4001DE141 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -631,6 +636,8 @@
 				3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */,
 				3ECB55EB122F5E33000AAC56 /* DatePicker.h */,
 				3ECB55EC122F5E33000AAC56 /* DatePicker.m */,
+				3E8090EA129B2B8500CF273F /* ItemPicker.h */,
+				3E8090EB129B2B8500CF273F /* ItemPicker.m */,
 				3E862CA31222D604001DE141 /* AlertView.h */,
 				3E862CA41222D604001DE141 /* AlertView.m */,
 				3E862CA81222D60F001DE141 /* InputView.h */,
@@ -713,6 +720,7 @@
 		3E862A3C1222BCE9001DE141 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3E809135129B2F8E00CF273F /* filter.png */,
 				3E0535F41295B629000C7EB0 /* Icon.png */,
 				3E0535F51295B629000C7EB0 /* Icon@2x.png */,
 				3E0535F01295B629000C7EB0 /* Icon-72.png */,
@@ -973,6 +981,7 @@
 				3EFC1C1D1295D81C00163B36 /* email_details.png in Resources */,
 				3EFC1C1E1295D81C00163B36 /* email_link.png in Resources */,
 				3EFC1C3B1295D92A00163B36 /* photo_save.png in Resources */,
+				3E809136129B2F8E00CF273F /* filter.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,6 +1077,7 @@
 				3EFC1C861295DC9F00163B36 /* Email.m in Sources */,
 				3EF58725129AC37100489AF8 /* IncidentTableView.m in Sources */,
 				3EF58728129AC37E00489AF8 /* IncidentMapView.m in Sources */,
+				3E8090EC129B2B8500CF273F /* ItemPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

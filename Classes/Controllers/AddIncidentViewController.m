@@ -99,13 +99,13 @@ typedef enum {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
-	[self addHeaders:NSLocalizedString(@"Title", @"Title"),
-					 NSLocalizedString(@"Description", @"Description"),
-					 NSLocalizedString(@"Category", @"Category"),
-					 NSLocalizedString(@"Date", @"Date"),
-					 NSLocalizedString(@"Location", @"Location"),
-					 NSLocalizedString(@"Photos", @"Photos"),
-					 NSLocalizedString(@"News", @"News"), nil];
+	[self setHeader:NSLocalizedString(@"Title", @"Title") atSection:TableSectionTitle];
+	[self setHeader:NSLocalizedString(@"Description", @"Description") atSection:TableSectionDescription];
+	[self setHeader:NSLocalizedString(@"Category", @"Category") atSection:TableSectionCategory];
+	[self setHeader:NSLocalizedString(@"Date", @"Date") atSection:TableSectionDate];
+	[self setHeader:NSLocalizedString(@"Location", @"Location") atSection:TableSectionLocation];
+	[self setHeader:NSLocalizedString(@"Photos", @"Photos") atSection:TableSectionPhotos];
+	[self setHeader:NSLocalizedString(@"News", @"News") atSection:TableSectionNews];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

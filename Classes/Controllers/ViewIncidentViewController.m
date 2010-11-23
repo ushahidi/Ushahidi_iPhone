@@ -128,15 +128,15 @@ typedef enum {
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
 	self.email = [[Email alloc] initWithController:self];
-	[self addHeaders:NSLocalizedString(@"Errors", @"Errors"), 
-					 NSLocalizedString(@"Title", @"Title"),
-					 NSLocalizedString(@"Verified", @"Verified"),
-					 NSLocalizedString(@"Description", @"Description"), 
-					 NSLocalizedString(@"Category", @"Category"), 
-					 NSLocalizedString(@"Date", @"Date"), 
-					 NSLocalizedString(@"Location", @"Location"), 
-					 NSLocalizedString(@"Photos", @"Photos"), 
-					 NSLocalizedString(@"News", @"News"), nil];
+	[self setHeader:NSLocalizedString(@"Errors", @"Errors") atSection:TableSectionErrors];
+	[self setHeader:NSLocalizedString(@"Title", @"Title") atSection:TableSectionTitle];
+	[self setHeader:NSLocalizedString(@"Verified", @"Verified") atSection:TableSectionVerified];
+	[self setHeader:NSLocalizedString(@"Description", @"Description") atSection:TableSectionDescription];
+	[self setHeader:NSLocalizedString(@"Category", @"Category") atSection:TableSectionCategory];
+	[self setHeader:NSLocalizedString(@"Date", @"Date") atSection:TableSectionDateTime];
+	[self setHeader:NSLocalizedString(@"Location", @"Location") atSection:TableSectionLocation];
+	[self setHeader:NSLocalizedString(@"Photos", @"Photos") atSection:TableSectionPhotos];
+	[self setHeader:NSLocalizedString(@"News", @"News") atSection:TableSectionNews];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

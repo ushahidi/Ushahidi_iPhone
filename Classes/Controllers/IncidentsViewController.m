@@ -26,10 +26,12 @@
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
 #import "LoadingViewController.h"
+#import "NSDate+Extension.h"
 #import "AlertView.h"
 #import "InputView.h"
 #import "Incident.h"
 #import "Deployment.h"
+#import "Category.h"
 #import "MKMapView+Extension.h"
 #import "MapAnnotation.h"
 #import "Settings.h"
@@ -40,13 +42,18 @@
 @interface IncidentsViewController ()
 
 @property(nonatomic,retain) NSMutableArray *pending;
+@property(nonatomic,retain) ItemPicker *itemPicker;
+@property(nonatomic,retain) NSMutableArray *categories;
+@property(nonatomic,retain) Category *category;
+
+- (void) updateLastSyncLabel;
 
 @end
 
 @implementation IncidentsViewController
 
 @synthesize addIncidentViewController, viewIncidentViewController, mapView, deployment, tableSort, mapType, pending;
-@synthesize incidentTableView, incidentMapView;
+@synthesize incidentTableView, incidentMapView, itemPicker, categories, category;
 
 typedef enum {
 	ViewModeTable,
@@ -55,8 +62,7 @@ typedef enum {
 
 typedef enum {
 	TableSectionPending,
-	TableSectionIncidents,
-	TableSectionDownload
+	TableSectionIncidents
 } TableSection;
 
 typedef enum {
@@ -125,7 +131,7 @@ typedef enum {
 		self.incidentTableView.frame = self.view.frame;
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationDuration:0.6];
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
 		[self.incidentMapView removeFromSuperview];
 		[self.view addSubview:self.incidentTableView];
@@ -136,7 +142,7 @@ typedef enum {
 		self.incidentMapView.frame = self.view.frame;
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationDuration:0.6];
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:YES];
 		[self.incidentTableView removeFromSuperview];
 		[self.view addSubview:self.incidentMapView];
@@ -163,18 +169,40 @@ typedef enum {
 	}
 }
 
+- (IBAction) filterChanged:(id)sender {
+	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", @" --- ALL CATEGORIES --- ")];
+	for (Category *theCategory in self.categories) {
+		[items addObject:theCategory.title];
+	}
+	[self.itemPicker showWithItems:items withSelected:[self.category title]];
+}
+
+- (void) updateLastSyncLabel {
+	if (self.deployment.lastSync) {
+		[self setTableFooter:[NSString stringWithFormat:@"%@ %@", 
+							  NSLocalizedString(@"Last Sync", @"Last Sync"), 
+							  [self.deployment.lastSync dateToString:@"h:mm a, MMMM d, yyyy"]]];	
+	}
+	else {
+		[self setTableFooter:nil];
+	}
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
+	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiDarkTan];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", @"Search reports...")];
-	[self addHeaders:NSLocalizedString(@"Pending", @"Pending"),
-					 NSLocalizedString(@"Reports", @"Reports"),nil];
+	[self setHeader:NSLocalizedString(@"Pending Upload", @"Pending Upload") atSection:TableSectionPending];
+	[self setHeader:NSLocalizedString(@"All Categories", @"All Categories") atSection:TableSectionIncidents];
+	self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+	[self updateLastSyncLabel];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -204,7 +232,12 @@ typedef enum {
 	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
 	for (Incident *incident in self.allRows) {
-		if ([incident matchesString:searchText]) {
+		if (self.category != nil) {
+			if ([incident hasCategory:self.category] && [incident matchesString:searchText]) {
+				[self.filteredRows addObject:incident];
+			}
+		}
+		else if ([incident matchesString:searchText]) {
 			[self.filteredRows addObject:incident];
 		}
 	}
@@ -221,6 +254,9 @@ typedef enum {
 	[tableSort release];
 	[mapType release];
 	[pending release];
+	[itemPicker release];
+	[categories release];
+	[category release];
     [super dealloc];
 }
 
@@ -242,7 +278,13 @@ typedef enum {
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
-	return [self.pending count] > 0 ? [TableHeaderView getViewHeight] : 0;
+	if (section == TableSectionPending && [self.pending count] > 0) {
+		return [TableHeaderView getViewHeight];
+	}
+	else if (section == TableSectionIncidents) {
+		return [TableHeaderView getViewHeight];
+	}
+	return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -318,7 +360,12 @@ typedef enum {
 		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByTitle:)];
 	}
 	for (Incident *incident in incidents) {
-		if ([incident matchesString:searchText]) {
+		if (self.category != nil) {
+			if ([incident hasCategory:self.category] && [incident matchesString:searchText]) {
+				[self.filteredRows addObject:incident];
+			}
+		}
+		else if ([incident matchesString:searchText]) {
 			[self.filteredRows addObject:incident];
 		}
 	}
@@ -356,6 +403,7 @@ typedef enum {
 	}
 	else if(hasChanges) {
 		DLog(@"incidents: %d", [incidents count]);
+		[self updateLastSyncLabel];
 		[self.loadingView hide];
 		[self.allRows removeAllObjects];
 		if (self.tableSort.selectedSegmentIndex == TableSortDate) {
@@ -396,10 +444,12 @@ typedef enum {
 			}
 			[self.mapView resizeRegionToFitAllPins:YES];
 		}
-		DLog(@"Re-Adding Rows");
+		DLog(@"Re-Adding Incidents");
 	}
 	else {
-		DLog(@"No Changes");
+		DLog(@"No Changes Incidents");
+		[self updateLastSyncLabel];
+		[self.tableView reloadData];
 	}
 	[self.loadingView hide];
 	self.incidentTableView.refreshButton.enabled = YES;
@@ -460,12 +510,32 @@ typedef enum {
 	if (photo != nil && photo.indexPath != nil) {
 		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
 		if (cell != nil) {
-			//TODO use thumbnail instead
-			[cell setImage:photo.image];
+			if (photo.thumbnail != nil) {
+				[cell setImage:photo.thumbnail];
+			}
+			else {
+				[cell setImage:photo.image];
+			}
 		}	
 	}
 	else {
 		[self.tableView reloadData];
+	}
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error hasChanges:(BOOL)hasChanges {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+	}
+	else if(hasChanges) {
+		[self.categories removeAllObjects];
+		for (Category *theCategory in theCategories) {
+			[self.categories addObject:theCategory];
+		}
+		DLog(@"Re-Adding Categories");
+	}
+	else {
+		DLog(@"No Changes Categories");
 	}
 }
 
@@ -510,6 +580,32 @@ typedef enum {
 		self.viewIncidentViewController.incidents = self.pending;
 	}
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];	
+}
+
+#pragma mark -
+#pragma mark ItemPickerDelegate
+		 
+- (void) itemPickerReturned:(ItemPicker *)itemPicker item:(NSString *)item {
+	DLog(@"itemPickerReturned: %@", item);
+	self.category = nil;
+	for (Category *theCategory in self.categories) {
+		if ([theCategory.title isEqualToString:item]) {
+			self.category = theCategory;
+			DLog(@"Category: %@", theCategory.title);
+			break;
+		}
+	}
+	if (self.category != nil) {
+		[self setHeader:self.category.title atSection:TableSectionIncidents];
+	}
+	else {
+		[self setHeader:NSLocalizedString(@"All Categories", @"All Categories") atSection:TableSectionIncidents];
+	}
+	[self filterRows:YES];
+}
+
+- (void) itemPickerCancelled:(ItemPicker *)itemPicker {
+	DLog(@"itemPickerCancelled");
 }
 
 @end

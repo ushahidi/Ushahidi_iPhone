@@ -619,6 +619,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		if ([[Settings sharedSettings] downloadMaps]) {
 			[self.mapQueue go];
 		}
+		self.deployment.lastSync = [NSDate date];
 		[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 						target:delegate 
 					   objects:self, [self.deployment.incidents allValues], self.deployment.pending, nil, hasChanges, nil];

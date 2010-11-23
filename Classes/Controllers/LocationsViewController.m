@@ -65,8 +65,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search locations...", @"Search locations...")];
-	[self addHeaders:NSLocalizedString(@"New Location", @"New Location"),
-					 NSLocalizedString(@"Existing Locations", @"Existing Locations"), nil];
+	[self setHeader:NSLocalizedString(@"New Location", @"New Location") atSection:TableSectionNewLocation];
+	[self setHeader:NSLocalizedString(@"Existing Location", @"Existing Location") atSection:TableSectionExistingLocations];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

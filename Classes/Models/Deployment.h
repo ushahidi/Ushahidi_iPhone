@@ -29,6 +29,7 @@
 	NSString *url;
 	NSString *domain;
 	NSString *sinceID;
+	NSDate *lastSync;
 	
 	NSMutableDictionary *countries;
 	NSMutableDictionary *categories;
@@ -41,6 +42,7 @@
 @property(nonatomic,retain) NSString *url;
 @property(nonatomic,retain) NSString *domain;
 @property(nonatomic,retain) NSString *sinceID;
+@property(nonatomic,retain) NSDate *lastSync;
 
 @property(nonatomic, retain) NSMutableDictionary *countries;
 @property(nonatomic, retain) NSMutableDictionary *categories;

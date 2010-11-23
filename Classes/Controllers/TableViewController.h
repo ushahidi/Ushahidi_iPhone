@@ -38,7 +38,7 @@
 	
 @private
 	BOOL shouldBeginEditing;
-	NSMutableArray *headers;
+	NSMutableDictionary *headers;
 	NSMutableDictionary *footers;
 }
 
@@ -59,9 +59,9 @@
 - (void) filterRows;
 - (void) filterRows:(BOOL)reloadTable;
 - (void) replaceRows:(NSArray *)rows;
-- (void) addHeader:(NSString *)header;
-- (void) addHeaders:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
 - (void) clearHeaders;
+-(void) setHeader:(NSString *)header atSection:(NSInteger)section;
 - (void) setFooter:(NSString *)text atSection:(NSInteger)section;
+- (void) setTableFooter:(NSString *)text;
 
 @end

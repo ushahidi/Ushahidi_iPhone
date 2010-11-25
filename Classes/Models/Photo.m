@@ -40,10 +40,16 @@ NSInteger const kMaxThumbnaiHeight = 80;
 - (id)initWithImage:(UIImage *)theImage {
 	if (self = [super init]) {
 		self.image = theImage;
-		CGSize thumbnailSize = theImage.size.width > theImage.size.height
-			? CGSizeMake(kMaxThumbnaiWidth, kMaxThumbnaiWidth * self.image.size.height / self.image.size.width)
-			: CGSizeMake(kMaxThumbnaiHeight * self.image.size.width / self.image.size.height, kMaxThumbnaiHeight);
-		self.thumbnail = [theImage resizedImage:thumbnailSize interpolationQuality:kCGInterpolationMedium];
+		@try {
+			DLog(@"Creating Thumbnail...");
+			CGSize thumbnailSize = self.image.size.width > self.image.size.height
+				? CGSizeMake(kMaxThumbnaiWidth, kMaxThumbnaiWidth * self.image.size.height / self.image.size.width)
+				: CGSizeMake(kMaxThumbnaiHeight * self.image.size.width / self.image.size.height, kMaxThumbnaiHeight);
+			self.thumbnail = [self.image resizedImage:thumbnailSize interpolationQuality:kCGInterpolationMedium];
+		}
+		@catch (NSException *e) {
+			DLog(@"NSException: %@", e);
+		}
 	}
 	return self;
 }

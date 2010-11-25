@@ -154,12 +154,19 @@ typedef enum {
 	}
 }
 
-- (IBAction) filterChanged:(id)sender {
+- (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
 	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", @" --- ALL CATEGORIES --- ")];
 	for (Category *theCategory in self.categories) {
 		[items addObject:theCategory.title];
 	}
-	[self.itemPicker showWithItems:items withSelected:[self.category title]];
+	if (event != nil) {
+		UIView *toolBar = [[event.allTouches anyObject] view];
+		CGRect rect = CGRectMake(toolBar.frame.origin.x, self.view.frame.size.height, 0, 0);
+		[self.itemPicker showWithItems:items withSelected:[self.category title] forRect:rect];
+	}
+	else {
+		[self.itemPicker showWithItems:items withSelected:[self.category title] forRect:CGRectMake(100, self.view.frame.size.height, 0, 0)];	
+	}
 }
 
 - (void) updateLastSyncLabel {

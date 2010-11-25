@@ -23,7 +23,7 @@
 
 @protocol ItemPickerDelegate;
 
-@interface ItemPicker : NSObject<UIPickerViewDelegate, UIActionSheetDelegate, UIPickerViewDataSource> {
+@interface ItemPicker : NSObject<UIPickerViewDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPopoverControllerDelegate> {
 
 @public
 	NSString *item;
@@ -31,14 +31,15 @@
 
 @private
 	UIViewController *controller;
-	id<ItemPickerDelegate>	delegate;
+	id<ItemPickerDelegate> delegate;
+	UIPopoverController *popoverController;
 }
 
 @property (nonatomic, retain) NSString *item;
 @property (nonatomic, retain) NSArray *items;
 
 - (id) initWithDelegate:(id<ItemPickerDelegate>)delegate forController:(UIViewController *)controller;
-- (void) showWithItems:(NSArray *)items withSelected:(NSString *)item;
+- (void) showWithItems:(NSArray *)items withSelected:(NSString *)item forRect:(CGRect)rect;
 
 @end
 

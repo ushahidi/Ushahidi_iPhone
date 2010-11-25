@@ -26,8 +26,7 @@
 
 @property(nonatomic, retain) CLLocationManager *locationManager;
 @property(nonatomic, assign) id<LocatorDelegate> delegate;
-@property(nonatomic, retain) NSString *latitude;
-@property(nonatomic, retain) NSString *longitude;
+
 @end
 
 @implementation Locator

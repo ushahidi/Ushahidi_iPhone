@@ -25,12 +25,17 @@
 
 @interface Locator : NSObject<CLLocationManagerDelegate> {
 
+@public
+	NSString *latitude;
+	NSString *longitude;
+	
 @private
 	CLLocationManager *locationManager;
 	id<LocatorDelegate> delegate;
-	NSString *latitude;
-	NSString *longitude;
 }
+
+@property(nonatomic, retain) NSString *latitude;
+@property(nonatomic, retain) NSString *longitude;
 
 + (Locator *) sharedLocator;
 - (void)detectLocationForDelegate:(id<LocatorDelegate>)delegate;

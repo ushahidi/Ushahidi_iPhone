@@ -76,15 +76,15 @@ typedef enum {
 					([[self.url lowercaseString] hasPrefix:@"http://"] || 
 					 [[self.url lowercaseString] hasPrefix:@"https://"]);
 	if (hasName == NO && hasURL == NO) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Missing Fields", @"Missing Fields") 
+		[self.alertView showWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
 						   andMessage:NSLocalizedString(@"Name and URL are required fields", @"Name and URL are required fields")];
 	}
 	else if (hasName == NO) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Missing Fields", @"Missing Fields") 
+		[self.alertView showWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
 						   andMessage:NSLocalizedString(@"Name is a required field", @"Name is required field")];
 	}
 	else if (hasURL == NO) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Missing Fields", @"Missing Fields") 
+		[self.alertView showWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
 						   andMessage:NSLocalizedString(@"URL is a required field", @"URL is a required field")];
 	}
 	else {

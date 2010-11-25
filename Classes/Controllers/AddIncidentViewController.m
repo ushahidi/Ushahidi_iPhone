@@ -100,8 +100,8 @@ typedef enum {
 		[missingFields addObject:NSLocalizedString(@"Location", @"Location")]; 
 	}
 	if (missingFields.count > 0) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Missing Fields", @"Missing Fields") 
-						   andMessage:[missingFields componentsJoinedByString:@","]];
+		[self.alertView showWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
+						   andMessage:[missingFields componentsJoinedByString:@", "]];
 	}
 	else {
 		[self.view endEditing:YES];
@@ -133,8 +133,10 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[[Locator sharedLocator] detectLocationForDelegate:self];
-	[self setFooter:NSLocalizedString(@"Detecting Location...", @"Detecting Location...") atSection:TableSectionLocation];
+	if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
+		[[Locator sharedLocator] detectLocationForDelegate:self];
+		[self setFooter:NSLocalizedString(@"Detecting Location...", @"Detecting Location...") atSection:TableSectionLocation];	
+	}
 	if (self.modalViewController == nil) {
 		self.incident = [[Incident alloc] initWithDefaultValues];
 		self.willBePushed = NO;
@@ -388,10 +390,6 @@ typedef enum {
 #pragma mark -
 #pragma mark ImagePickerDelegate
 
-- (void) imagePickerDidCancel:(ImagePickerController *)imagePicker {
-	[self.loadingView hide];
-}
-
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
 	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", @"Resizing...")];
 }
@@ -400,6 +398,10 @@ typedef enum {
 	[self.loadingView hideAfterDelay:0.5];
 	[self.incident addPhoto:[Photo photoWithImage:image]];
 	[self.tableView reloadData];
+}
+
+- (void) imagePickerDidCancel:(ImagePickerController *)imagePicker {
+	[self.loadingView hide];
 }
 
 #pragma mark -

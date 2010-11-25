@@ -100,7 +100,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     }
     
     CGSize newSize = CGSizeMake(self.size.width * ratio, self.size.height * ratio);
-    
+
     return [self resizedImage:newSize interpolationQuality:quality];
 }
 

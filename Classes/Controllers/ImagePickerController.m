@@ -21,6 +21,7 @@
 #import "ImagePickerController.h"
 #import "Device.h"
 #import "UIImage+Resize.h"
+#import "NSObject+Extension.h"
 
 @interface ImagePickerController ()
 
@@ -28,9 +29,6 @@
 
 - (void) showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType;
 - (void) resizeImageInBackground:(UIImage *)image;
-- (void) notifyDelegateImagePickerDidCancel;
-- (void) notifyDelegateImagePickerDidSelect;
-- (void) notifyDelegateImagePickerDidFinish:(UIImage *)image;
 
 @end
 
@@ -88,40 +86,18 @@
 	imagePicker.delegate = self;
 	imagePicker.sourceType = sourceType;
 	if ([Device isIPad]) {
-		UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
-		self.popoverController = popover;
-		[popover release];
-		popover.delegate = self;
-		[popover presentPopoverFromRect:self.viewController.view.frame inView:self.viewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+		self.popoverController = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+		[self.popoverController setPopoverContentSize:imagePicker.view.frame.size animated:NO];
+		self.popoverController.delegate = self;
+		[self.popoverController presentPopoverFromRect:CGRectMake(self.viewController.view.frame.size.width/2,self.viewController.view.frame.size.height/2,0,0) 
+												inView:self.viewController.view 
+							  permittedArrowDirections:UIPopoverArrowDirectionAny 
+											  animated:YES];
 	}
 	else {
 		[viewController presentModalViewController:imagePicker animated:YES];
 	}
 	[imagePicker release];
-}
-
-- (void) notifyDelegateImagePickerDidCancel {
-	DLog(@"notifyDelegateImagePickerDidCancel");
-	SEL selector = @selector(imagePickerDidCancel:);
-	if (delegate != NULL && [delegate respondsToSelector:selector]) {
-		[delegate imagePickerDidCancel:self];
-	}
-}
-
-- (void) notifyDelegateImagePickerDidSelect {
-	DLog(@"notifyDelegateImagePickerDidSelect");
-	SEL selector = @selector(imagePickerDidSelect:);
-	if (delegate != NULL && [delegate respondsToSelector:selector]) {
-		[delegate imagePickerDidSelect:self];
-	}
-}
-
-- (void) notifyDelegateImagePickerDidFinish:(UIImage *)image {
-	DLog(@"notifyDelegateImagePickerDidFinish");
-	SEL selector = @selector(imagePickerDidFinish:image:);
-	if (delegate != NULL && [delegate respondsToSelector:selector]) {
-		[delegate imagePickerDidFinish:self image:image];
-	}
 }
 
 #pragma mark -
@@ -135,7 +111,7 @@
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
-	[self notifyDelegateImagePickerDidSelect];
+	[self dispatchSelector:@selector(imagePickerDidSelect:) target:delegate objects:self, nil];
 	[self performSelectorInBackground:@selector(resizeImageInBackground:) withObject:image];
 }
 
@@ -147,7 +123,7 @@
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
-	[self notifyDelegateImagePickerDidSelect];
+	[self dispatchSelector:@selector(imagePickerDidSelect:) target:delegate objects:self, nil];
 	[self performSelectorInBackground:@selector(resizeImageInBackground:) withObject:[info objectForKey:UIImagePickerControllerOriginalImage]];
 }
 
@@ -159,7 +135,7 @@
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
-	[self notifyDelegateImagePickerDidCancel];
+	[self dispatchSelector:@selector(imagePickerDidCancel:) target:delegate objects:self, nil];
 }
 
 #pragma mark -
@@ -182,17 +158,34 @@
 - (void) resizeImageInBackground:(UIImage *)originalImage {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     DLog(@"resizeImageInBackground");
-	
-	if (self.width > 0) {
-		CGSize size = CGSizeMake(self.width, self.width * originalImage.size.height /  originalImage.size.width);
-		DLog(@"Original: %f,%f Resized: %f,%f", originalImage.size.width, originalImage.size.height, size.width, size.height);
-		UIImage *resizedImage = [originalImage resizedImage:size interpolationQuality:kCGInterpolationHigh];
-		[self performSelectorOnMainThread:@selector(notifyDelegateImagePickerDidFinish:) withObject:resizedImage waitUntilDone:YES];
+	@try {
+		if (self.width > 0) {
+			CGSize size = CGSizeMake(self.width, self.width * originalImage.size.height / originalImage.size.width);
+			DLog(@"Original: %f,%f Resized: %f,%f", originalImage.size.width, originalImage.size.height, size.width, size.height);
+			UIImage *resizedImage = [originalImage resizedImage:size interpolationQuality:kCGInterpolationHigh];
+			if (resizedImage != nil) {
+				[self dispatchSelector:@selector(imagePickerDidFinish:image:) 
+								target:delegate 
+							   objects:self, resizedImage, nil];
+			}
+			else {
+				[self dispatchSelector:@selector(imagePickerDidFinish:image:) 
+								target:delegate 
+							   objects:self, originalImage, nil];
+			}
+		}
+		else {
+			[self dispatchSelector:@selector(imagePickerDidFinish:image:)
+							target:delegate 
+						   objects:self, originalImage, nil];
+		}
 	}
-	else {
-		[self performSelectorOnMainThread:@selector(notifyDelegateImagePickerDidFinish:) withObject:originalImage waitUntilDone:YES];
+	@catch (NSException *e) {
+		DLog(@"NSException: %@", e);
+		[self dispatchSelector:@selector(imagePickerDidFinish:image:) 
+						target:delegate 
+					   objects:self, originalImage, nil];
 	}
-
 	[pool release];
 }
 

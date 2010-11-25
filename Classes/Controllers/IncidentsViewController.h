@@ -72,6 +72,6 @@
 - (IBAction) toggleReportsAndMap:(id)sender;
 - (IBAction) tableSortChanged:(id)sender;
 - (IBAction) mapTypeChanged:(id)sender;
-- (IBAction) filterChanged:(id)sender;
+- (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
 
 @end

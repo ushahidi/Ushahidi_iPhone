@@ -22,7 +22,7 @@
 
 @protocol DatePickerDelegate;
 
-@interface DatePicker : NSObject<UIPickerViewDelegate, UIActionSheetDelegate> {
+@interface DatePicker : NSObject<UIPickerViewDelegate, UIActionSheetDelegate, UIPopoverControllerDelegate> {
 
 @public 
 	NSDate *date;
@@ -31,6 +31,7 @@
 	UIViewController *controller;
 	id<DatePickerDelegate> delegate;
 	NSIndexPath *indexPath;
+	UIPopoverController *popoverController;
 }
 
 @property (nonatomic, retain) NSDate *date;

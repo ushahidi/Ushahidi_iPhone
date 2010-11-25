@@ -20,18 +20,19 @@
 
 #import "ItemPicker.h"
 #import "NSObject+Extension.h"
+#import "Device.h"
 
 @interface ItemPicker ()
 
 @property (nonatomic, retain) IBOutlet UIViewController *controller;
 @property (nonatomic, assign) id<ItemPickerDelegate> delegate;
+@property (nonatomic, retain) UIPopoverController *popoverController;
 
 @end
 
-
 @implementation ItemPicker
 
-@synthesize delegate, controller, item, items;
+@synthesize delegate, controller, item, items, popoverController;
 
 - (id) initWithDelegate:(id<ItemPickerDelegate>)theDelegate forController:(UIViewController *)theController {
 	if (self = [super init]) {
@@ -41,21 +42,13 @@
     return self;
 }
 
-- (void) showWithItems:(NSArray *)theItems withSelected:(NSString *)theItem {
+- (void) showWithItems:(NSArray *)theItems withSelected:(NSString *)theItem forRect:(CGRect)rect {
 	self.items = theItems;
 	self.item = theItem;
 	
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-															 delegate:self
-													cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
-											   destructiveButtonTitle:nil
-													otherButtonTitles:NSLocalizedString(@"Select", @"Select"), nil];    
-	
-	UIPickerView *pickerView = [[UIPickerView alloc] init];
+	UIPickerView *pickerView = [[[UIPickerView alloc] init] autorelease];
 	pickerView.delegate = self;
 	pickerView.showsSelectionIndicator = YES;
-	[actionSheet addSubview:pickerView];
-	[actionSheet showInView:self.controller.view];        
 	
 	if (theItem != nil) {
 		NSInteger index = 0;
@@ -68,17 +61,38 @@
 		}
 	}
 	
-	CGRect actionSheetRect = actionSheet.frame;
-	actionSheetRect.origin.y -= pickerView.frame.size.height;
-	actionSheetRect.size.height += pickerView.frame.size.height;
-	actionSheet.frame = actionSheetRect;
-	
-	CGRect pickerViewRect = pickerView.frame;
-	pickerViewRect.origin.y = 150;
-	pickerView.frame = pickerViewRect;
-	
-	[pickerView release];
-	[actionSheet release];  
+	if ([Device isIPad]) {
+		UIViewController *viewController = [[[UIViewController alloc] init] autorelease];
+		viewController.view = pickerView;
+		viewController.view.frame = CGRectMake(0,0,320,160);
+		
+		self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
+		[self.popoverController setPopoverContentSize:CGSizeMake(320, 160) animated:NO];
+		self.popoverController.delegate = self;
+		[self.popoverController presentPopoverFromRect:rect
+												inView:self.controller.view 
+							  permittedArrowDirections:UIPopoverArrowDirectionDown 
+											  animated:YES];
+	}
+	else {
+		UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil 
+																  delegate:self
+														 cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+													destructiveButtonTitle:nil
+														 otherButtonTitles:NSLocalizedString(@"Select", @"Select"), nil] autorelease];    
+		
+		[actionSheet addSubview:pickerView];
+		[actionSheet showInView:self.controller.view];
+		
+		CGRect actionSheetRect = actionSheet.frame;
+		actionSheetRect.origin.y -= pickerView.frame.size.height;
+		actionSheetRect.size.height += pickerView.frame.size.height;
+		actionSheet.frame = actionSheetRect;
+		
+		CGRect pickerViewRect = pickerView.frame;
+		pickerViewRect.origin.y = 150;
+		pickerView.frame = pickerViewRect;
+	}
 }
 
 - (void)dealloc {
@@ -86,6 +100,7 @@
 	[item release];
 	[items release];
 	[controller release];
+	[popoverController release];
     [super dealloc];
 }
 
@@ -123,6 +138,15 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
 	return self.items != nil ? [self.items count] : 0;
+}
+
+#pragma mark UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+	DLog(@"");
+	[self dispatchSelector:@selector(itemPickerReturned:item:) 
+					target:self.delegate 
+				   objects:self, self.item, nil];
 }
 
 @end

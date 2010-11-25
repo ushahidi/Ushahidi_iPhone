@@ -37,6 +37,7 @@
 #import "Photo.h"
 #import "ImageTableCell.h"
 #import "Settings.h"
+#import "TableHeaderView.h"
 
 typedef enum {
 	TableSectionTitle,
@@ -317,7 +318,6 @@ typedef enum {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
 		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-		DLog(@"cell: %f, %f", cell.frame.origin.x, cell.frame.origin.y);
 		[self.imagePickerController showImagePickerForDelegate:self width:[[Settings sharedSettings] imageWidth] forRect:cell.frame];
 	}
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
@@ -341,9 +341,12 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionDate){
 		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+		CGRect rect = cell.frame;
+		rect.origin.y += [TableHeaderView getViewHeight];
+		rect.origin.y += 45/2;
 		UIDatePickerMode datePickerMode = indexPath.row == TableSectionDateRowDate
 			? UIDatePickerModeDate : UIDatePickerModeTime;
-		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath forRect:cell.frame];
+		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath forRect:rect];
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 }

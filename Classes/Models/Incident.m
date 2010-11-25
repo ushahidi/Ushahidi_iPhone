@@ -265,7 +265,9 @@
 }
 
 - (BOOL) hasLocation {
-	return self.location != nil && self.location.length > 0;
+	return	self.location != nil && self.location.length > 0 &&
+			self.latitude != nil && self.latitude.length > 0 &&
+			self.longitude != nil && self.longitude.length > 0;
 }
 
 - (BOOL) hasDate {

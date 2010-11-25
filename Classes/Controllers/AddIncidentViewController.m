@@ -356,11 +356,17 @@ typedef enum {
 	if (indexPath.section == TableSectionTitle) {
 		self.incident.title = text;
 	}
+	else if (indexPath.section == TableSectionLocation) {
+		self.incident.location = text;
+	}
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionTitle) {
 		self.incident.title = text;
+	}
+	else if (indexPath.section == TableSectionLocation) {
+		self.incident.location = text;
 	}
 }
 
@@ -372,11 +378,15 @@ typedef enum {
 }
 
 - (void) textViewChanged:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	self.incident.description = text;
+	if (indexPath.section == TableSectionDescription) {
+		self.incident.description = text;
+	}
 }
 
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	self.incident.description = text;
+	if (indexPath.section == TableSectionDescription) {
+		self.incident.description = text;
+	}
 }
 
 #pragma mark -

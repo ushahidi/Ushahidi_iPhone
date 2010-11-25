@@ -160,8 +160,9 @@ typedef enum {
 		[items addObject:theCategory.title];
 	}
 	if (event != nil) {
-		UIView *toolBar = [[event.allTouches anyObject] view];
-		CGRect rect = CGRectMake(toolBar.frame.origin.x, self.view.frame.size.height, 0, 0);
+		UIView *toolbar = [[event.allTouches anyObject] view];
+		DLog(@"toolbar: %@", toolbar);
+		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
 		[self.itemPicker showWithItems:items withSelected:[self.category title] forRect:rect];
 	}
 	else {

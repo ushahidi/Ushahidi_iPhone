@@ -26,6 +26,7 @@
 @interface ImagePickerController ()
 
 @property(nonatomic, assign) CGFloat width;
+@property(nonatomic, assign) CGRect rect;
 
 - (void) showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType;
 - (void) resizeImageInBackground:(UIImage *)image;
@@ -34,7 +35,7 @@
 
 @implementation ImagePickerController
 
-@synthesize viewController, popoverController, delegate, width;
+@synthesize viewController, popoverController, delegate, width, rect;
 
 - (id)initWithController:(UIViewController *)controller {
     if ((self = [super init])) {
@@ -43,13 +44,10 @@
     return self;
 }
 
-- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)theDelegate {
-	[self showImagePickerForDelegate:theDelegate width:0];
-}
-
-- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)theDelegate width:(CGFloat)theWidth {
+- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)theDelegate width:(CGFloat)theWidth forRect:(CGRect)theRect {
 	self.delegate = theDelegate;
 	self.width = theWidth;
+	self.rect = theRect;
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
@@ -89,8 +87,8 @@
 		self.popoverController = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
 		[self.popoverController setPopoverContentSize:imagePicker.view.frame.size animated:NO];
 		self.popoverController.delegate = self;
-		[self.popoverController presentPopoverFromRect:CGRectMake(self.viewController.view.frame.size.width/2,self.viewController.view.frame.size.height/2,0,0) 
-												inView:self.viewController.view 
+		[self.popoverController presentPopoverFromRect:self.rect
+		 										inView:self.viewController.view 
 							  permittedArrowDirections:UIPopoverArrowDirectionAny 
 											  animated:YES];
 	}

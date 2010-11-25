@@ -45,7 +45,7 @@
     return self;
 }
 
-- (void) showWithDate:(NSDate *)theDate mode:(UIDatePickerMode)datePickerMode indexPath:(NSIndexPath *)theIndexPath {
+- (void) showWithDate:(NSDate *)theDate mode:(UIDatePickerMode)datePickerMode indexPath:(NSIndexPath *)theIndexPath forRect:(CGRect)rect {
 	self.indexPath = theIndexPath;
 	self.date = theDate != nil  && [theDate timeIntervalSince1970] > 0 ? theDate : [NSDate date];
 	
@@ -65,8 +65,8 @@
 		self.popoverController = [[UIPopoverController alloc] initWithContentViewController:viewController];
 		[self.popoverController setPopoverContentSize:CGSizeMake(320, 160) animated:NO];
 		self.popoverController.delegate = self;
-		[self.popoverController presentPopoverFromRect:CGRectMake(self.controller.view.frame.size.width/2,self.controller.view.frame.size.height/2,0,0) 
-												inView:self.controller.view 
+		[self.popoverController presentPopoverFromRect:rect
+		 										inView:self.controller.view 
 							  permittedArrowDirections:UIPopoverArrowDirectionAny 
 											  animated:YES];
 	}

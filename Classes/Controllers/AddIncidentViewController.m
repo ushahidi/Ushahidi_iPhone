@@ -316,7 +316,9 @@ typedef enum {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
-		[self.imagePickerController showImagePickerForDelegate:self width:[[Settings sharedSettings] imageWidth]];
+		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+		DLog(@"cell: %f, %f", cell.frame.origin.x, cell.frame.origin.y);
+		[self.imagePickerController showImagePickerForDelegate:self width:[[Settings sharedSettings] imageWidth] forRect:cell.frame];
 	}
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
@@ -338,9 +340,10 @@ typedef enum {
 		[self presentModalViewController:self.locationsViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionDate){
+		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 		UIDatePickerMode datePickerMode = indexPath.row == TableSectionDateRowDate
 			? UIDatePickerModeDate : UIDatePickerModeTime;
-		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath];
+		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath forRect:cell.frame];
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 }

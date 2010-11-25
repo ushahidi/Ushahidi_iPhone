@@ -32,13 +32,16 @@
 	IBOutlet IncidentsViewController *incidentsViewController;
 	IBOutlet AddDeploymentViewController *addDeploymentViewController;
 	IBOutlet InfoViewController *infoViewController;
+	IBOutlet UIBarButtonItem *editButton;
 }
 
 @property(nonatomic, retain) IncidentsViewController *incidentsViewController;
 @property(nonatomic, retain) AddDeploymentViewController *addDeploymentViewController;
 @property(nonatomic, retain) InfoViewController *infoViewController;
+@property(nonatomic, retain) UIBarButtonItem *editButton;
 
 - (IBAction) add:(id)sender;
+- (IBAction) edit:(id)sender;
 - (IBAction) refresh:(id)sender;
 
 @end

@@ -143,6 +143,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return NO;
 }
 
+- (BOOL)removeDeployment:(Deployment *)theDeployment {
+	if (theDeployment != nil) {
+		[self.deployments removeObjectForKey:theDeployment.url];
+		return YES;
+	}
+	return NO;
+}
+
 - (Deployment *) getDeploymentWithUrl:(NSString *)url {
 	return [self.deployments objectForKey:url];
 }

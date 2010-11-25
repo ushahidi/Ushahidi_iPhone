@@ -51,6 +51,7 @@
 
 - (BOOL)addDeployment:(Deployment *)deployment;
 - (BOOL)addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
+- (BOOL)removeDeployment:(Deployment *)deployment;
 - (Deployment *) getDeploymentWithUrl:(NSString *)url;
 
 - (BOOL)addIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;

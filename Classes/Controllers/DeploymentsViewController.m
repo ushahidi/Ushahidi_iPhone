@@ -37,7 +37,7 @@
 
 @implementation DeploymentsViewController
 
-@synthesize incidentsViewController, addDeploymentViewController, infoViewController;
+@synthesize incidentsViewController, addDeploymentViewController, infoViewController, editButton;
 
 #pragma mark -
 #pragma mark Handlers
@@ -46,7 +46,18 @@
 	DLog(@"");
 	[self presentModalViewController:self.addDeploymentViewController animated:YES];
 }
-	 
+
+- (IBAction) edit:(id)sender {
+	if (self.tableView.editing) {
+		self.tableView.editing = NO;
+		self.editButton.title = NSLocalizedString(@"Edit", @"Edit");
+	}
+	else {
+		self.tableView.editing = YES;
+		self.editButton.title = NSLocalizedString(@"Done", @"Done");
+	}
+}
+
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", @"Loading...")];
@@ -108,6 +119,7 @@
 	[addDeploymentViewController release];
 	[incidentsViewController release];
 	[infoViewController release];
+	[editButton release];
     [super dealloc];
 }
 
@@ -141,6 +153,10 @@
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (self.tableView.editing) {
+		self.tableView.editing = NO;
+		self.editButton.title = NSLocalizedString(@"Edit", @"Edit");
+	}
 	[self.view endEditing:YES];
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
@@ -149,6 +165,22 @@
 	[[Settings sharedSettings] save];
 	self.incidentsViewController.deployment = deployment;
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (editingStyle == UITableViewCellEditingStyleDelete) {
+		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
+		if([[Ushahidi sharedUshahidi] removeDeployment:deployment]) {
+			DLog(@"Removed Deployment");
+			[self.allRows removeObject:deployment];
+			[self.filteredRows removeObject:deployment];
+			[self.tableView reloadData];
+		}
+		else {
+			[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") 
+							   andMessage:NSLocalizedString(@"Unable to remove deployment", @"Unable to remove deployment")];	
+		}
+	}	
 }
 
 #pragma mark -

@@ -49,11 +49,10 @@ typedef enum {
 #pragma mark Private
 
 - (BOOL) hasValidInputs {
-	return	self.name != nil && 
-			[self.name length] > 0 &&
-			self.url != nil && 
-			[self.url length] > 0 && 
-			([self.url hasPrefix:@"http://"] || [self.url hasPrefix:@"https://"]);
+	return	self.name != nil && [self.name length] > 0 &&
+			self.url != nil && [self.url length] > 0 && 
+			([[self.url lowercaseString] hasPrefix:@"http://"] || 
+			 [[self.url lowercaseString] hasPrefix:@"https://"]);
 }
 
 - (void) dismissModalView {

@@ -35,6 +35,7 @@
 	UIColor *oddRowColor;
 	UIColor *evenRowColor;
 	CGFloat toolbarHeight;
+	BOOL editing;
 	
 @private
 	BOOL shouldBeginEditing;
@@ -47,6 +48,7 @@
 @property(nonatomic,retain) NSMutableArray *filteredRows;
 @property(nonatomic,retain) UIColor *oddRowColor;
 @property(nonatomic,retain) UIColor *evenRowColor;
+@property(nonatomic,assign) BOOL editing;
 
 - (void) hideSearchBar;
 - (void) showSearchBar;

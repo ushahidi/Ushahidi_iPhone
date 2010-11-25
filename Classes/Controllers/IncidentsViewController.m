@@ -47,6 +47,7 @@
 @property(nonatomic,retain) Category *category;
 
 - (void) updateLastSyncLabel;
+- (void) pushViewIncidentsViewController;
 
 @end
 
@@ -328,7 +329,6 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[self.view endEditing:YES];
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == TableSectionIncidents) {
 		self.viewIncidentViewController.pending = NO;
@@ -340,6 +340,16 @@ typedef enum {
 		self.viewIncidentViewController.incident = [self.pending objectAtIndex:indexPath.row];
 		self.viewIncidentViewController.incidents = self.pending;
 	}
+	if (self.editing) {
+		[self.view endEditing:YES];
+		[self performSelector:@selector(pushViewIncidentsViewController) withObject:nil afterDelay:0.1];
+	}
+	else {
+		[self pushViewIncidentsViewController];
+	}
+}
+
+- (void) pushViewIncidentsViewController {
 	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];
 }
 

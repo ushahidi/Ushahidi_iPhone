@@ -41,7 +41,7 @@
 
 @implementation TableViewController
 
-@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight, shouldBeginEditing, headers, footers;
+@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight, shouldBeginEditing, headers, footers, editing;
 
 - (void) hideSearchBar {
 	if (self.tableView.tableHeaderView != nil) {
@@ -314,7 +314,7 @@
 
 - (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration {
 	[UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:NO];
+    [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:duration];
 	self.tableView.frame = frame;
 	[UIView commitAnimations];
@@ -338,10 +338,12 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
 	[searchBar setShowsCancelButton:YES animated:YES];
+	self.editing = YES;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
 	[searchBar setShowsCancelButton:NO animated:YES];
+	self.editing = NO;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

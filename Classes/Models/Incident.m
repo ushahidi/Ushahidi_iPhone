@@ -256,11 +256,24 @@
 	[self.photos removeObjectAtIndex:index];
 }
 
-- (BOOL) hasRequiredValues {
-	return  self.title != nil && self.title.length > 0 &&
-			self.location != nil && self.location.length > 0 &&
-			self.date != nil &&
-			self.categories.count > 0;
+- (BOOL) hasTitle {
+	return  self.title != nil && self.title.length > 0;
+}
+
+- (BOOL) hasDescription {
+	return self.description != nil && self.description.length > 0;
+}
+
+- (BOOL) hasLocation {
+	return self.location != nil && self.location.length > 0;
+}
+
+- (BOOL) hasDate {
+	return self.date != nil;
+}
+
+- (BOOL) hasCategory {
+	return self.categories != nil && self.categories.count > 0;
 }
 
 - (NSString *) coordinates {

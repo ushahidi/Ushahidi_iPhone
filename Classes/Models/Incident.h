@@ -87,6 +87,12 @@
 @property(nonatomic,readonly) NSString *dateMinute;
 @property(nonatomic,readonly) NSString *dateAmPm;
 
+@property(nonatomic,readonly) BOOL hasTitle;
+@property(nonatomic,readonly) BOOL hasDescription;
+@property(nonatomic,readonly) BOOL hasCategory;
+@property(nonatomic,readonly) BOOL hasLocation;
+@property(nonatomic,readonly) BOOL hasDate;
+
 - (void) addPhoto:(Photo *)photo;
 - (void) addNews:(News *)news;
 - (void) addSound:(Sound *)sound;
@@ -99,8 +105,6 @@
 
 - (UIImage *) getFirstPhotoThumbnail;
 - (void) removePhotoAtIndex:(NSInteger)index;
-
-- (BOOL) hasRequiredValues;
 
 - (NSComparisonResult)compareByTitle:(Incident *)incident;
 - (NSComparisonResult)compareByDate:(Incident *)incident;

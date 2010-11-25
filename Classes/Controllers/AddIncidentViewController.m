@@ -83,12 +83,35 @@ typedef enum {
 
 - (IBAction) done:(id)sender {
 	DLog(@"done");
-	[self.view endEditing:YES];
-	if ([[Ushahidi sharedUshahidi] addIncident:self.incident forDelegate:self.incidentsViewController]) {
-		[self dismissModalViewControllerAnimated:YES];
+	NSMutableArray *missingFields = [NSMutableArray array];
+	if (self.incident.hasTitle == NO) {
+		[missingFields addObject:NSLocalizedString(@"Title", @"Title")]; 
+	}
+	if (self.incident.hasDescription == NO) {
+		[missingFields addObject:NSLocalizedString(@"Description", @"Description")]; 
+	}
+	if (self.incident.hasCategory == NO) {
+		[missingFields addObject:NSLocalizedString(@"Category", @"Category")]; 
+	}
+	if (self.incident.hasDate == NO) {
+		[missingFields addObject:NSLocalizedString(@"Date", @"Date")]; 
+	}
+	if (self.incident.hasLocation == NO) {
+		[missingFields addObject:NSLocalizedString(@"Location", @"Location")]; 
+	}
+	if (missingFields.count > 0) {
+		[self.alertView showWithTitle:NSLocalizedString(@"Missing Fields", @"Missing Fields") 
+						   andMessage:[missingFields componentsJoinedByString:@","]];
 	}
 	else {
-		DLog(@"Unable to add incident");
+		[self.view endEditing:YES];
+		if ([[Ushahidi sharedUshahidi] addIncident:self.incident forDelegate:self.incidentsViewController]) {
+			[self dismissModalViewControllerAnimated:YES];
+		}
+		else {
+			[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") 
+							   andMessage:NSLocalizedString(@"Unable to add incident", @"Unable to add incident")];
+		}
 	}
 }
 
@@ -116,7 +139,6 @@ typedef enum {
 		self.incident = [[Incident alloc] initWithDefaultValues];
 		self.willBePushed = NO;
 	}
-	self.doneButton.enabled = [self.incident hasRequiredValues];
 	[self.tableView reloadData];
 }
 
@@ -332,14 +354,12 @@ typedef enum {
 	if (indexPath.section == TableSectionTitle) {
 		self.incident.title = text;
 	}
-	self.doneButton.enabled = [self.incident hasRequiredValues];
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionTitle) {
 		self.incident.title = text;
 	}
-	self.doneButton.enabled = [self.incident hasRequiredValues];
 }
 
 #pragma mark -
@@ -363,7 +383,6 @@ typedef enum {
 - (void) datePickerReturned:(DatePicker *)theDatePicker date:(NSDate *)date indexPath:(NSIndexPath *)indexPath {
 	self.incident.date = date;
 	[self.tableView reloadData];
-	self.doneButton.enabled = [self.incident hasRequiredValues];
 }
 
 #pragma mark -

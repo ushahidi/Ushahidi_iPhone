@@ -48,6 +48,7 @@
 
 - (void) updateLastSyncLabel;
 - (void) pushViewIncidentsViewController;
+- (void) populateMapPins;
 
 @end
 
@@ -137,6 +138,7 @@ typedef enum {
 		[self.incidentMapView removeFromSuperview];
 		[self.view addSubview:self.incidentTableView];
 		[UIView commitAnimations];
+		self.filterButton.enabled = [self.categories count] > 0;
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
 		DLog(@"ViewModeMap");
@@ -148,25 +150,7 @@ typedef enum {
 		[self.incidentTableView removeFromSuperview];
 		[self.view addSubview:self.incidentMapView];
 		[UIView commitAnimations];
-		[self.mapView removeAllPins];
-		self.mapView.showsUserLocation = YES;
-		for (Incident *incident in self.allRows) {
-			[self.mapView addPinWithTitle:incident.title 
-								 subtitle:incident.dateString 
-								 latitude:incident.latitude 
-								longitude:incident.longitude
-								   object:incident
-								 pinColor:MKPinAnnotationColorRed];
-		}
-		for (Incident *incident in self.pending) {
-			[self.mapView addPinWithTitle:incident.title 
-								 subtitle:incident.dateString 
-								 latitude:incident.latitude 
-								longitude:incident.longitude 
-								   object:incident
-								 pinColor:MKPinAnnotationColorPurple];
-		}
-		[self.mapView resizeRegionToFitAllPins:YES];
+		[self populateMapPins];
 	}
 }
 
@@ -189,6 +173,28 @@ typedef enum {
 	}
 }
 
+- (void) populateMapPins {
+	[self.mapView removeAllPins];
+	self.mapView.showsUserLocation = YES;
+	for (Incident *incident in self.allRows) {
+		[self.mapView addPinWithTitle:incident.title 
+							 subtitle:incident.dateString 
+							 latitude:incident.latitude 
+							longitude:incident.longitude
+							   object:incident
+							 pinColor:MKPinAnnotationColorRed];
+	}
+	for (Incident *incident in self.pending) {
+		[self.mapView addPinWithTitle:incident.title 
+							 subtitle:incident.dateString 
+							 latitude:incident.latitude 
+							longitude:incident.longitude 
+							   object:incident
+							 pinColor:MKPinAnnotationColorPurple];
+	}
+	[self.mapView resizeRegionToFitAllPins:YES];
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -202,8 +208,6 @@ typedef enum {
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", @"Search reports...")];
 	[self setHeader:NSLocalizedString(@"Pending Upload", @"Pending Upload") atSection:TableSectionPending];
 	[self setHeader:NSLocalizedString(@"All Categories", @"All Categories") atSection:TableSectionIncidents];
-	self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
-	[self updateLastSyncLabel];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -217,38 +221,27 @@ typedef enum {
 	if (self.deployment != nil) {
 		self.title = self.deployment.name;
 	}
-	if (self.willBePushed) {
-		self.category = nil;
-	}
-	NSArray *incidents = self.willBePushed 
-		? [[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]
-		: [[Ushahidi sharedUshahidi] getIncidents];	
 	[self.allRows removeAllObjects];
-	if (self.tableSort.selectedSegmentIndex == TableSortDate) {
-		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
-	}
-	else if (self.tableSort.selectedSegmentIndex == TableSortVerified) {
-		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByVerified:)]];
+	if (self.willBePushed) {
+		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
+		self.category = nil;
+		self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+		[self setHeader:NSLocalizedString(@"All Categories", @"All Categories") atSection:TableSectionIncidents];
 	}
 	else {
-		[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
-	}
-	[self.filteredRows removeAllObjects];
-	NSString *searchText = [self getSearchText];
-	for (Incident *incident in self.allRows) {
-		if (self.category != nil) {
-			if ([incident hasCategory:self.category] && [incident matchesString:searchText]) {
-				[self.filteredRows addObject:incident];
-			}
-		}
-		else if ([incident matchesString:searchText]) {
-			[self.filteredRows addObject:incident];
-		}
+		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
 	}
 	[self.pending removeAllObjects];
 	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
-	self.filterButton.enabled = [self.categories count] > 0;
-	[self.tableView reloadData];
+	[self filterRows:NO];
+	if (self.incidentTableView.superview != nil) {
+		[self updateLastSyncLabel];
+		[self.tableView reloadData];
+		self.filterButton.enabled = [self.categories count] > 0;
+	}
+	else if (self.incidentMapView.superview != nil) {
+		[self populateMapPins];
+	}
 }
 
 - (void)dealloc {
@@ -384,7 +377,6 @@ typedef enum {
 			[self.filteredRows addObject:incident];
 		}
 	}
-	DLog(@"Re-Adding Rows");
 	if (reloadTable) {
 		[self.tableView reloadData];	
 		[self.tableView flashScrollIndicators];
@@ -439,25 +431,7 @@ typedef enum {
 			[self.tableView flashScrollIndicators];	
 		}
 		else if (self.incidentMapView.superview != nil) {
-			[self.mapView removeAllPins];
-			self.mapView.showsUserLocation = YES;
-			for (Incident *incident in self.allRows) {
-				[self.mapView addPinWithTitle:incident.title 
-									 subtitle:incident.dateString 
-									 latitude:incident.latitude 
-									longitude:incident.longitude
-									   object:incident
-									 pinColor:MKPinAnnotationColorRed];
-			}
-			for (Incident *incident in self.pending) {
-				[self.mapView addPinWithTitle:incident.title 
-									 subtitle:incident.dateString 
-									 latitude:incident.latitude 
-									longitude:incident.longitude 
-									   object:incident
-									 pinColor:MKPinAnnotationColorPurple];
-			}
-			[self.mapView resizeRegionToFitAllPins:YES];
+			[self populateMapPins];
 		}
 		DLog(@"Re-Adding Incidents");
 	}

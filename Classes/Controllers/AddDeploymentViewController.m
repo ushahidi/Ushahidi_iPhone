@@ -71,16 +71,34 @@ typedef enum {
 
 - (IBAction) done:(id)sender {
 	DLog(@"done");
-	[self.view endEditing:YES];
-	[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", @"Adding...")];
-	if ([[Ushahidi sharedUshahidi] addDeploymentByName:self.name andUrl:self.url]) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Deployment Added", @"Deployment Added")];
-		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:2.0];
+	BOOL hasName = self.name != nil && [self.name length] > 0;
+	BOOL hasURL = self.url != nil && [self.url length] > 0 && 
+					([[self.url lowercaseString] hasPrefix:@"http://"] || 
+					 [[self.url lowercaseString] hasPrefix:@"https://"]);
+	if (hasName == NO && hasURL == NO) {
+		[self.alertView showWithTitle:NSLocalizedString(@"Missing Fields", @"Missing Fields") 
+						   andMessage:NSLocalizedString(@"Name and URL are required fields", @"Name and URL are required fields")];
+	}
+	else if (hasName == NO) {
+		[self.alertView showWithTitle:NSLocalizedString(@"Missing Fields", @"Missing Fields") 
+						   andMessage:NSLocalizedString(@"Name is a required field", @"Name is required field")];
+	}
+	else if (hasURL == NO) {
+		[self.alertView showWithTitle:NSLocalizedString(@"Missing Fields", @"Missing Fields") 
+						   andMessage:NSLocalizedString(@"URL is a required field", @"URL is a required field")];
 	}
 	else {
-		[self.loadingView hide];
-		[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") andMessage:NSLocalizedString(@"There was a problem adding deployment", @"There was a problem adding deployment")];
-	}	
+		[self.view endEditing:YES];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", @"Adding...")];
+		if ([[Ushahidi sharedUshahidi] addDeploymentByName:self.name andUrl:self.url]) {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Added", @"Added")];
+			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:2.0];
+		}
+		else {
+			[self.loadingView hide];
+			[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") andMessage:NSLocalizedString(@"There was a problem adding deployment", @"There was a problem adding deployment")];
+		}	
+	}
 }
 
 #pragma mark -
@@ -101,7 +119,7 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	self.doneButton.enabled = NO;
+	//self.doneButton.enabled = NO;
 	self.name = nil;
 	self.url = nil;
 	[self.tableView reloadData];
@@ -164,7 +182,7 @@ typedef enum {
 	else if (indexPath.section == TableSectionURL) {
 		self.url = text;
 	}
-	self.doneButton.enabled = [self hasValidInputs];
+	//self.doneButton.enabled = [self hasValidInputs];
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
@@ -174,7 +192,7 @@ typedef enum {
 	else if (indexPath.section == TableSectionURL) {
 		self.url = text;
 	}
-	self.doneButton.enabled = [self hasValidInputs];
+	//self.doneButton.enabled = [self hasValidInputs];
 }
 
 @end

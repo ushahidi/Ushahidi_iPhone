@@ -48,6 +48,7 @@
 	UISegmentedControl *mapType;
 	IncidentTableView *incidentTableView;
 	IncidentMapView *incidentMapView;
+	UIBarButtonItem *filterButton;
 															 
 @private
 	NSMutableArray *pending;
@@ -63,6 +64,7 @@
 @property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
 @property(nonatomic,retain) IBOutlet IncidentTableView *incidentTableView;
 @property(nonatomic,retain) IBOutlet IncidentMapView *incidentMapView;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) add:(id)sender;

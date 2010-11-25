@@ -54,7 +54,7 @@
 @implementation IncidentsViewController
 
 @synthesize addIncidentViewController, viewIncidentViewController, mapView, deployment, tableSort, mapType, pending;
-@synthesize incidentTableView, incidentMapView, itemPicker, categories, category;
+@synthesize incidentTableView, incidentMapView, itemPicker, categories, category, filterButton;
 
 typedef enum {
 	ViewModeTable,
@@ -208,6 +208,7 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.incidentTableView.superview == nil && self.incidentMapView.superview == nil) {
 		self.incidentTableView.frame = self.view.frame;
 		self.incidentMapView.frame = self.view.frame;
@@ -216,7 +217,9 @@ typedef enum {
 	if (self.deployment != nil) {
 		self.title = self.deployment.name;
 	}
-	DLog(@"willBePushed: %d", self.willBePushed);
+	if (self.willBePushed) {
+		self.category = nil;
+	}
 	NSArray *incidents = self.willBePushed 
 		? [[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]
 		: [[Ushahidi sharedUshahidi] getIncidents];	
@@ -244,6 +247,7 @@ typedef enum {
 	}
 	[self.pending removeAllObjects];
 	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
+	self.filterButton.enabled = [self.categories count] > 0;
 	[self.tableView reloadData];
 }
 
@@ -258,6 +262,7 @@ typedef enum {
 	[itemPicker release];
 	[categories release];
 	[category release];
+	[filterButton release];
     [super dealloc];
 }
 
@@ -547,6 +552,7 @@ typedef enum {
 	else {
 		DLog(@"No Changes Categories");
 	}
+	self.filterButton.enabled = [self.categories count] > 0;
 }
 
 #pragma mark -

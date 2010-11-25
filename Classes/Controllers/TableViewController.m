@@ -132,19 +132,24 @@
 
 - (void) setFooter:(NSString *)text atSection:(NSInteger)section {
 	NSString *key = [NSString stringWithFormat:@"%d", section];
-	UILabel *label = [self.footers objectForKey:key];
-	if (label != nil) {
-		label.text = text;
+	if (text != nil) {
+		UILabel *label = [self.footers objectForKey:key];
+		if (label != nil) {
+			label.text = text;
+		}
+		else {
+			UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
+			newLabel.backgroundColor = [UIColor clearColor];
+			newLabel.textColor = [UIColor grayColor];
+			newLabel.textAlignment = UITextAlignmentCenter;
+			newLabel.font = [UIFont systemFontOfSize:15];
+			newLabel.text = text;
+			[self.footers setObject:newLabel forKey:key];
+			[newLabel release];
+		}
 	}
 	else {
-		UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
-		newLabel.backgroundColor = [UIColor clearColor];
-		newLabel.textColor = [UIColor grayColor];
-		newLabel.textAlignment = UITextAlignmentCenter;
-		newLabel.font = [UIFont systemFontOfSize:15];
-		newLabel.text = text;
-		[self.footers setObject:newLabel forKey:key];
-		[newLabel release];
+		[self.footers removeObjectForKey:key];
 	}
 }
 

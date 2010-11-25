@@ -111,6 +111,7 @@ typedef enum {
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[[Locator sharedLocator] detectLocationForDelegate:self];
+	[self setFooter:NSLocalizedString(@"Detecting Location...", @"Detecting Location...") atSection:TableSectionLocation];
 	if (self.modalViewController == nil) {
 		self.incident = [[Incident alloc] initWithDefaultValues];
 		self.willBePushed = NO;
@@ -400,6 +401,7 @@ typedef enum {
 	if (self.incident.latitude == nil || self.incident.longitude == nil) {
 		self.incident.latitude = latitude;
 		self.incident.longitude = longitude;
+		[self setFooter:nil atSection:TableSectionLocation];
 		[self.tableView reloadData];
 	}
 }

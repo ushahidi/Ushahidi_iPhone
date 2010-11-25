@@ -55,7 +55,7 @@
 																	   NSLocalizedString(@"Clear", @"Clear"), nil] autorelease];    
 	
 	UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-	datePicker.datePickerMode = UIDatePickerModeDate;
+	datePicker.datePickerMode = datePickerMode;
 	[datePicker addTarget:self
 	               action:@selector(dateChanged:)
 	     forControlEvents:UIControlEventValueChanged];

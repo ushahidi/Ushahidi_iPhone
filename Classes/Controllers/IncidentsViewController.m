@@ -73,12 +73,6 @@ typedef enum {
 	TableSortVerified
 } TableSort;
 
-typedef enum {
-	MapTypeRoad,
-	MapTypeSatellite,
-	MapTypeHybrid
-} MapType;
-
 #pragma mark -
 #pragma mark Handlers
 
@@ -111,18 +105,8 @@ typedef enum {
 }
 
 - (IBAction) mapTypeChanged:(id)sender {
-	if (self.mapType.selectedSegmentIndex == MapTypeRoad) {
-		DLog(@"MapTypeRoad");
-		self.mapView.mapType = MKMapTypeStandard;
-	}
-	else if (self.mapType.selectedSegmentIndex == MapTypeSatellite) {
-		DLog(@"MapTypeSatellite");
-		self.mapView.mapType = MKMapTypeSatellite;
-	}
-	else if (self.mapType.selectedSegmentIndex == MapTypeHybrid) {
-		DLog(@"MapTypeHybrid");
-		self.mapView.mapType = MKMapTypeHybrid;
-	}
+	DLog(@"mapTypeChanged: %d", self.mapType.selectedSegmentIndex);
+	self.mapView.mapType = self.mapType.selectedSegmentIndex;
 }
 
 - (IBAction) toggleReportsAndMap:(id)sender {

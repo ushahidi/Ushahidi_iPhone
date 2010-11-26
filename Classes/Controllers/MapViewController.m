@@ -77,7 +77,14 @@ typedef enum {
 }
 
 - (IBAction) findLocation:(id)sender {
-	self.mapView.showsUserLocation = YES;
+	DLog(@"");
+	if (self.mapView.showsUserLocation && self.mapView.userLocation != nil) {
+		[self.mapView resizeRegionToFitAllPins:YES];
+	}
+	else {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", @"Locating...")];
+		self.mapView.showsUserLocation = YES;
+	}
 }
 
 - (IBAction) mapTypeChanged:(id)sender {
@@ -141,7 +148,18 @@ typedef enum {
 	MKPinAnnotationView *annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
 	annotationView.animatesDrop = YES;
 	annotationView.canShowCallout = YES;
+	if ([annotation class] == MKUserLocation.class) {
+		annotationView.pinColor = MKPinAnnotationColorGreen;
+	}
+	else {
+		annotationView.pinColor = MKPinAnnotationColorRed;
+	}
 	return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+	[self.loadingView hide];
+	[self.mapView resizeRegionToFitAllPins:YES];
 }
 
 #pragma mark -

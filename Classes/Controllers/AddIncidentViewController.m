@@ -134,13 +134,17 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
-		[[Locator sharedLocator] detectLocationForDelegate:self];
-		[self setFooter:NSLocalizedString(@"Detecting Location...", @"Detecting Location...") atSection:TableSectionLocation];	
-	}
 	if (self.modalViewController == nil) {
 		self.incident = [[Incident alloc] initWithDefaultValues];
 		self.willBePushed = NO;
+		if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
+			[[Locator sharedLocator] detectLocationForDelegate:self];
+			[self setFooter:NSLocalizedString(@"Detecting Location...", @"Detecting Location...") atSection:TableSectionLocation];	
+		}
+		else {
+			self.incident.latitude = [Locator sharedLocator].latitude;
+			self.incident.longitude = [Locator sharedLocator].longitude;
+		}
 	}
 	[self.tableView reloadData];
 }

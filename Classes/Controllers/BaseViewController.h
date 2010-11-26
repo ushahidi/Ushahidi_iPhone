@@ -47,6 +47,7 @@
 @property(nonatomic, assign) BOOL willBePushed;
 @property(nonatomic, assign) BOOL wasPushed;
 
+- (void)viewWillBePushed;
 - (void)viewWasPushed;
 
 @end

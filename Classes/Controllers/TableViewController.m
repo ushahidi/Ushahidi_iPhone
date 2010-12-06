@@ -76,7 +76,7 @@
 
 - (void) setTableFooter:(NSString *)text {
 	if (text != nil) {
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
+		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 26)];
 		label.backgroundColor = [UIColor clearColor];
 		label.textColor = [UIColor grayColor];
 		label.textAlignment = UITextAlignmentCenter;
@@ -138,7 +138,7 @@
 			label.text = text;
 		}
 		else {
-			UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 28)];
+			UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 26)];
 			newLabel.backgroundColor = [UIColor clearColor];
 			newLabel.textColor = [UIColor grayColor];
 			newLabel.textAlignment = UITextAlignmentCenter;
@@ -248,7 +248,7 @@
 			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor clearColor]];
 		}
 		else {
-			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiLiteBrown]];
+			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiDarkBrown]];
 		}
 	}
 	return nil;

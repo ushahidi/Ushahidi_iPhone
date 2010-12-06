@@ -92,7 +92,7 @@ typedef enum {
 	DLog(@"");
 	NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
 	NSString *message = [NSString stringWithFormat:@"<a href=\"%@\">%@</a>", [link absoluteString], [link absoluteString]];
-	[self.email sendMessage:message withSubject:self.incident.title];
+	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title];
 }
 
 - (IBAction) emailDetails:(id)sender {
@@ -116,7 +116,7 @@ typedef enum {
 		}
 		[message appendFormat:@"</ul>"];
 	}
-	[self.email sendMessage:message withSubject:self.incident.title photos:self.incident.photoImages];
+	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title];
 }
 
 #pragma mark -

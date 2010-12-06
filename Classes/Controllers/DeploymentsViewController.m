@@ -110,6 +110,11 @@
 	[self.tableView reloadData];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Choice an existing Ushahidi deployment, or add a new deployment to the list.", @"Choice an existing Ushahidi deployment, or add a new deployment to the list.")];
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[self.view endEditing:YES];

@@ -25,6 +25,7 @@
 #import "InputView.h"
 #import "Ushahidi.h"
 #import "UIColor+Extension.h"
+#import "NSString+Extension.h"
 
 typedef enum {
 	TableSectionName,
@@ -120,10 +121,14 @@ typedef enum {
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	//self.doneButton.enabled = NO;
 	self.name = nil;
 	self.url = nil;
 	[self.tableView reloadData];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Enter deployment name and URL. \nFor example, Ushahidi Demo and http://demo.ushahidi.com", @"Enter the deployment name and URL. For example, Ushahidi Demo and http://demo.ushahidi.com")];
 }
 
 - (void)dealloc {
@@ -140,13 +145,7 @@ typedef enum {
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	if (section == TableSectionName) {
-		return 1;
-	}
-	if (section == TableSectionURL) {
-		return 1;
-	}
-	return 0;
+	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -157,6 +156,9 @@ typedef enum {
 		[cell setKeyboardType:UIKeyboardTypeDefault];
 		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
+		if ([NSString isNilOrEmpty:self.name]) {
+			[cell showKeyboard];
+		}
 	}
 	else if (indexPath.section == TableSectionURL) {
 		[cell setText:self.url];
@@ -164,6 +166,9 @@ typedef enum {
 		[cell setKeyboardType:UIKeyboardTypeURL];
 		[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+		if ([NSString isNilOrEmpty:self.name] == NO && [NSString isNilOrEmpty:self.url]) {
+			[cell showKeyboard];
+		}
 	}
 	return cell;
 }
@@ -183,7 +188,6 @@ typedef enum {
 	else if (indexPath.section == TableSectionURL) {
 		self.url = text;
 	}
-	//self.doneButton.enabled = [self hasValidInputs];
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
@@ -193,7 +197,6 @@ typedef enum {
 	else if (indexPath.section == TableSectionURL) {
 		self.url = text;
 	}
-	//self.doneButton.enabled = [self hasValidInputs];
 }
 
 @end

@@ -42,16 +42,19 @@
 	[super dealloc];
 }
 
-- (void)sendMessage:(NSString *)message withSubject:(NSString *)subject {
-	[self sendMessage:message withSubject:subject photos:nil];
+- (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject {
+	[self sendToRecipients:recipients withMessage:message withSubject:subject withPhotos:nil];
 }
 
-- (void)sendMessage:(NSString *)message withSubject:(NSString *)subject photos:(NSArray *)photos {
+- (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject withPhotos:(NSArray *)photos {
 	DLog(@"message:%@ withSubject:%@ photos:%d", message, subject, [photos count]);
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
 	picker.mailComposeDelegate = self;
 	[picker setMessageBody:message isHTML:YES];
 	[picker setSubject:subject];
+	if (recipients != nil) {
+		[picker setToRecipients:recipients];
+	}
 	if (photos != nil) {
 		NSInteger index = 1;
 		for(UIImage *image in photos) {

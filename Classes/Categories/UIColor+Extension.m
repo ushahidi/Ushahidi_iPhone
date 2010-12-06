@@ -65,7 +65,7 @@
 
 + (id)ushahidiDarkGray									{vendColor(120, 105, 94);} //#78695e 
 + (id)ushahidiLiteGray									{vendColor(204, 204, 204);} //#cccccc
-+ (id)ushahidiDarkBrown                                 {vendColor(215, 200, 150);} //#d7c896
++ (id)ushahidiDarkBrown                                 {vendColor(230, 221, 190);} //#e6ddbe
 + (id)ushahidiLiteBrown									{vendColor(237, 230, 208);} //#ede6d0
 + (id)ushahidiDarkTan									{vendColor(242, 237, 220);} //#f2eddc 
 + (id)ushahidiLiteTan									{vendColor(246, 246, 238);} //#f6f6ee

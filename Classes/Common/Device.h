@@ -26,5 +26,8 @@
 
 + (BOOL) isIPad;
 + (BOOL) isGestureSupported;
++ (NSString *) appVersion;
++ (NSString *) deviceVersion;
++ (NSString *) deviceModel;
 
 @end

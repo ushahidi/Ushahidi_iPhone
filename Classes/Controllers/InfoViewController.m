@@ -23,16 +23,20 @@
 #import "UIColor+Extension.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
+#import "TextTableCell.h"
+#import "Email.h"
+#import "Device.h"
 
 @interface InfoViewController()
 
-@property(nonatomic, retain) NSString *email;
+@property(nonatomic, retain) NSString *userEmail;
 @property(nonatomic, retain) NSString *firstName;
 @property(nonatomic, retain) NSString *lastName;
 @property(nonatomic, assign) BOOL downloadMaps;
 @property(nonatomic, assign) BOOL becomeDiscrete;
 @property(nonatomic, assign) CGFloat imageWidth;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
+@property(nonatomic, retain) Email *email;
 
 @end
 
@@ -45,10 +49,12 @@ typedef enum {
 	TableSectionImageWidth,
 	TableSectionDownloadMaps,
 	TableSectionMapZoomLevel,
-	TableSectionBecomeDiscrete
+	TableSectionBecomeDiscrete,
+	TableSectionSupport,
+	TableSectionVersion
 } TableSection;
 
-@synthesize email, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
+@synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, email;
 
 #pragma mark -
 #pragma mark Handlers
@@ -60,7 +66,7 @@ typedef enum {
 
 - (IBAction) done:(id)sender {
 	[self.view endEditing:YES];
-	[[Settings sharedSettings] setEmail:self.email];
+	[[Settings sharedSettings] setEmail:self.userEmail];
 	[[Settings sharedSettings] setFirstName:self.firstName];
 	[[Settings sharedSettings] setLastName:self.lastName];
 	[[Settings sharedSettings] setDownloadMaps:self.downloadMaps];
@@ -77,18 +83,21 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
+	self.email = [[Email alloc] initWithController:self];
 	[self setHeader:NSLocalizedString(@"Email", @"Email") atSection:TableSectionEmail];
 	[self setHeader:NSLocalizedString(@"First Name", @"First Name") atSection:TableSectionFirstName];
 	[self setHeader:NSLocalizedString(@"Last Name", @"Last Name") atSection:TableSectionLastName];
 	[self setHeader:NSLocalizedString(@"Resized Image Width", @"Resized Image Width") atSection:TableSectionImageWidth];
 	[self setHeader:NSLocalizedString(@"Download Maps For Offline Viewing", @"Download Maps For Offline Viewing") atSection:TableSectionDownloadMaps];
 	[self setHeader:NSLocalizedString(@"Downloaded Map Zoom Level", @"Downloaded Map Zoom Level") atSection:TableSectionMapZoomLevel];
-	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", @"Discrete Mode On Shake") atSection:TableSectionBecomeDiscrete];	
+	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", @"Discrete Mode On Shake") atSection:TableSectionBecomeDiscrete];
+	[self setHeader:NSLocalizedString(@"Support", @"Support") atSection:TableSectionSupport];
+	[self setHeader:NSLocalizedString(@"Version", @"Version") atSection:TableSectionVersion];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	self.email = [[Settings sharedSettings] email];
+	self.userEmail = [[Settings sharedSettings] email];
 	self.firstName = [[Settings sharedSettings] firstName];
 	self.lastName = [[Settings sharedSettings] lastName];
 	self.downloadMaps = [[Settings sharedSettings] downloadMaps];
@@ -107,9 +116,10 @@ typedef enum {
 }
 
 - (void)dealloc {
-	[email release];
+	[userEmail release];
 	[firstName release];
 	[lastName release];
+	[email release];
     [super dealloc];
 }
 
@@ -117,7 +127,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 7;
+	return 9;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -157,11 +167,21 @@ typedef enum {
 		[cell setValue:self.mapZoomLevel];
 		return cell;
 	}
+	else if (indexPath.section == TableSectionSupport) {
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+		[cell setText:NSLocalizedString(@"Email Ushahidi Support", nil)];
+		return cell;
+	}
+	else if (indexPath.section == TableSectionVersion) {
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+		[cell setText:[Device appVersion]];
+		return cell;
+	}
 	else {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionEmail) {
 			[cell setPlaceholder:NSLocalizedString(@"Enter email", @"Enter email")];
-			[cell setText:self.email];
+			[cell setText:self.userEmail];
 			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
@@ -185,6 +205,16 @@ typedef enum {
 	return nil;
 }
 
+- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == TableSectionSupport) {
+		NSMutableString *message =[NSMutableString string];
+		[message appendFormat:@"App Version: %@<br/>", [Device appVersion]]; 
+		[message appendFormat:@"Device Model: %@<br/>", [Device deviceModel]]; 
+		[message appendFormat:@"Device Version: %@<br/>", [Device deviceVersion]]; 
+		[self.email sendToRecipients:[NSArray arrayWithObject:@"support@ushahidi.com"] withMessage:message withSubject:nil];
+	}
+}
+
 #pragma mark -
 #pragma mark TextFieldTableCellDelegate
 					 
@@ -196,7 +226,7 @@ typedef enum {
 - (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
 	if (indexPath.section == TableSectionEmail) {
-		self.email = text;
+		self.userEmail = text;
 	}
 	else if (indexPath.section == TableSectionFirstName) {
 		self.firstName = text;
@@ -209,7 +239,7 @@ typedef enum {
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
 	if (indexPath.section == TableSectionEmail) {
-		self.email = text;
+		self.userEmail = text;
 	}
 	else if (indexPath.section == TableSectionFirstName) {
 		self.firstName = text;

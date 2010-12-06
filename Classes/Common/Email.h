@@ -34,7 +34,7 @@
 @property (nonatomic, retain) AlertView *alert;
 
 - (id) initWithController:(UIViewController *)controller;
-- (void)sendMessage:(NSString *)message withSubject:(NSString *)subject;
-- (void)sendMessage:(NSString *)message withSubject:(NSString *)subject photos:(NSArray *)photos;
+- (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject;
+- (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject withPhotos:(NSArray *)photos;
 
 @end

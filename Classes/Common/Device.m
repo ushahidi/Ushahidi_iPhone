@@ -38,4 +38,16 @@
 	return gesture;
 }
 
++ (NSString *) appVersion {
+	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+}
+
++ (NSString *) deviceVersion {
+	return [[UIDevice currentDevice] systemVersion];
+}
+
++ (NSString *) deviceModel {
+	return [[UIDevice currentDevice] model];
+}
+
 @end

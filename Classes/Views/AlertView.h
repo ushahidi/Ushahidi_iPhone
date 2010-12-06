@@ -27,7 +27,8 @@
 }
 
 - (id) initWithController:(UIViewController *)controller;
-- (void) showWithTitle:(NSString *)title andMessage:(NSString *)message;
-- (BOOL) showTipOnceOnly:(NSString *)tip;
+- (void) showOkWithTitle:(NSString *)title andMessage:(NSString *)message;
+- (void) showYesNoWithTitle:(NSString *)title andMessage:(NSString *)message;
+- (BOOL) showInfoOnceOnly:(NSString *)info;
 
 @end

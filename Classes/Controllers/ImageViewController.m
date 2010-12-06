@@ -79,8 +79,8 @@ typedef enum {
 - (void)imageSaved:(UIImage *)theImage didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
 	[self.loadingView hide];
     if (error != nil) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Error Saving Photo", @"Error Saving Photo") 
-						   andMessage:[error localizedDescription]];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Error Saving Photo", @"Error Saving Photo") 
+							 andMessage:[error localizedDescription]];
 	}
 }
 

@@ -69,7 +69,8 @@
 - (void)mailComposeController:(MFMailComposeViewController*)theController didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	DLog(@"result:%d", result);
 	if (error) {
-		[self.alert showWithTitle:@"Error" andMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey]];
+		[self.alert showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
+						 andMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey]];
 	}
 	else if (result == MFMailComposeResultSent) {
 		

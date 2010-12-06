@@ -177,8 +177,8 @@
 			[self.tableView reloadData];
 		}
 		else {
-			[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") 
-							   andMessage:NSLocalizedString(@"Unable to remove deployment", @"Unable to remove deployment")];	
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
+								 andMessage:NSLocalizedString(@"Unable to remove deployment", @"Unable to remove deployment")];	
 		}
 	}	
 }
@@ -191,7 +191,8 @@
 	[self.loadingView hide];
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") andMessage:[error localizedDescription]];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
+							 andMessage:[error localizedDescription]];
 	}
 	else if (hasChanges) {
 		DLog(@"deployments: %@", theDeployments);

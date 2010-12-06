@@ -397,7 +397,8 @@ typedef enum {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		if ([self.loadingView isShowing]) {
-			[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") andMessage:[error localizedDescription]];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
+								 andMessage:[error localizedDescription]];
 		}
 	}
 	else if(hasChanges) {

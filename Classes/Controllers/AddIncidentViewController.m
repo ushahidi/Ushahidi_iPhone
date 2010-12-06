@@ -77,9 +77,8 @@ typedef enum {
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
-	[self.incident release];
-	[self.view endEditing:YES];
-	[self dismissModalViewControllerAnimated:YES];
+	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Question", @"Question") 
+							andMessage:NSLocalizedString(@"Are you sure you want to cancel?", @"Are you sure you want to cancel?")];
 }
 
 - (IBAction) done:(id)sender {
@@ -101,8 +100,8 @@ typedef enum {
 		[missingFields addObject:NSLocalizedString(@"Location", @"Location")]; 
 	}
 	if (missingFields.count > 0) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
-						   andMessage:[missingFields componentsJoinedByString:@", "]];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
+							 andMessage:[missingFields componentsJoinedByString:@", "]];
 	}
 	else {
 		[self.view endEditing:YES];
@@ -110,8 +109,8 @@ typedef enum {
 			[self dismissModalViewControllerAnimated:YES];
 		}
 		else {
-			[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") 
-							   andMessage:NSLocalizedString(@"Unable to add incident", @"Unable to add incident")];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
+								 andMessage:NSLocalizedString(@"Unable to add incident", @"Unable to add incident")];
 		}
 	}
 }
@@ -444,6 +443,17 @@ typedef enum {
 		self.incident.longitude = longitude;
 		[self setFooter:nil atSection:TableSectionLocation];
 		[self.tableView reloadData];
+	}
+}
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)theAlertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex != theAlertView.cancelButtonIndex) {
+		[self.incident release];
+		[self.view endEditing:YES];
+		[self dismissModalViewControllerAnimated:YES];	
 	}
 }
 

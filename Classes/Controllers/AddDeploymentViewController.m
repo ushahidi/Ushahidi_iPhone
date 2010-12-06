@@ -76,16 +76,16 @@ typedef enum {
 					([[self.url lowercaseString] hasPrefix:@"http://"] || 
 					 [[self.url lowercaseString] hasPrefix:@"https://"]);
 	if (hasName == NO && hasURL == NO) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
-						   andMessage:NSLocalizedString(@"Name and URL are required fields", @"Name and URL are required fields")];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
+							 andMessage:NSLocalizedString(@"Name and URL are required fields", @"Name and URL are required fields")];
 	}
 	else if (hasName == NO) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
-						   andMessage:NSLocalizedString(@"Name is a required field", @"Name is required field")];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
+							 andMessage:NSLocalizedString(@"Name is a required field", @"Name is required field")];
 	}
 	else if (hasURL == NO) {
-		[self.alertView showWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
-						   andMessage:NSLocalizedString(@"URL is a required field", @"URL is a required field")];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
+							 andMessage:NSLocalizedString(@"URL is a required field", @"URL is a required field")];
 	}
 	else {
 		[self.view endEditing:YES];
@@ -96,7 +96,8 @@ typedef enum {
 		}
 		else {
 			[self.loadingView hide];
-			[self.alertView showWithTitle:NSLocalizedString(@"Error", @"Error") andMessage:NSLocalizedString(@"There was a problem adding deployment", @"There was a problem adding deployment")];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
+								 andMessage:NSLocalizedString(@"There was a problem adding deployment", @"There was a problem adding deployment")];
 		}	
 	}
 }

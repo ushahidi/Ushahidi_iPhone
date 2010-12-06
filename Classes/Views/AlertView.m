@@ -37,7 +37,7 @@
     return self;
 }
 
-- (void) showWithTitle:(NSString *)title andMessage:(NSString *)message {
+- (void) showOkWithTitle:(NSString *)title andMessage:(NSString *)message {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title 
 													message:message
 												   delegate:self.controller 
@@ -47,10 +47,20 @@
 	[alert release];
 }
 
-- (BOOL) showTipOnceOnly:(NSString *)tip {
-	if ([[NSUserDefaults standardUserDefaults] integerForKey:tip] == 0) {
-		[self showWithTitle:NSLocalizedString(@"Tips", @"Tips") andMessage:[[[NSBundle mainBundle] infoDictionary] objectForKey:tip]];
-		[[NSUserDefaults standardUserDefaults] setInteger:1 forKey:tip];
+- (void) showYesNoWithTitle:(NSString *)title andMessage:(NSString *)message {
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title 
+													message:message
+												   delegate:self.controller 
+										  cancelButtonTitle:NSLocalizedString(@"No", @"No") 
+										  otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+	[alert show];
+	[alert release];
+}
+
+- (BOOL) showInfoOnceOnly:(NSString *)info {
+	if ([[NSUserDefaults standardUserDefaults] integerForKey:info] == 0) {
+		[self showOkWithTitle:NSLocalizedString(@"Info", @"Info") andMessage:info];
+		[[NSUserDefaults standardUserDefaults] setInteger:1 forKey:info];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		return YES;
 	}

@@ -38,7 +38,8 @@
 														   DatePickerDelegate,
 														   ImagePickerDelegate,
 														   UIActionSheetDelegate, 
-														   LocatorDelegate>  {
+														   LocatorDelegate,
+														   UIAlertViewDelegate>  {
 																
 @public
 	ImagePickerController *imagePickerController;

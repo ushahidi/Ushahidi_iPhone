@@ -84,11 +84,11 @@
 @synthesize deployments, deployment, mapQueue, photoQueue;
 
 typedef enum {
-	MediaTypeUnkown,
-	MediaTypePhoto,
-	MediaTypeVideo,
-	MediaTypeSound,
-	MediaTypeNews
+	MediaTypeUnkown = 0,
+	MediaTypePhoto = 1,
+	MediaTypeVideo = 2,
+	MediaTypeSound = 3,
+	MediaTypeNews = 4
 } MediaType;
 
 typedef enum {
@@ -138,6 +138,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void) save {
+	DLog(@"");
 	[NSKeyedArchiver archiveObject:self.deployments forKey:@"deployments"];
 }
 

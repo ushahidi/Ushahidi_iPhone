@@ -66,8 +66,13 @@ typedef enum {
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
-	[self.view endEditing:YES];
-	[self dismissModalViewControllerAnimated:YES];
+	if (self.editing) {
+		[self.view endEditing:YES];
+		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];	
+	}
+	else {
+		[self dismissModalView];
+	}
 }
 
 - (IBAction) done:(id)sender {

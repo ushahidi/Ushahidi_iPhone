@@ -192,12 +192,12 @@
 	[super viewWillDisappear:animated];
 	DLog(@"%@", self.nibName);
 	[self.view endEditing:YES];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 	DLog(@"%@", self.nibName);
 }
 
@@ -275,6 +275,7 @@
 
 -(void) keyboardWillShow:(NSNotification *)notification {
 	DLog(@"notification:%@", notification);
+	self.editing = YES;
 	NSTimeInterval duration = 0.3;
 	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
 	
@@ -298,6 +299,7 @@
 
 -(void) keyboardWillHide:(NSNotification *)notification {
 	DLog(@"notification:%@", notification);
+	self.editing = NO;
 	NSTimeInterval duration = 0.3;
 	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
 	
@@ -319,7 +321,7 @@
 
 - (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration {
 	[UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationBeginsFromCurrentState:NO];
     [UIView setAnimationDuration:duration];
 	self.tableView.frame = frame;
 	[UIView commitAnimations];

@@ -64,6 +64,8 @@ typedef enum {
 @property(nonatomic, retain) DatePicker *datePicker;
 @property(nonatomic, retain) Incident *incident;
 
+- (void) dismissModalView;
+
 @end
 
 @implementation AddIncidentViewController
@@ -113,6 +115,11 @@ typedef enum {
 								 andMessage:NSLocalizedString(@"Unable to add incident", nil)];
 		}
 	}
+}
+
+- (void) dismissModalView {
+	[self.loadingView hide];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
@@ -452,8 +459,13 @@ typedef enum {
 - (void)alertView:(UIAlertView *)theAlertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (buttonIndex != theAlertView.cancelButtonIndex) {
 		[self.incident release];
-		[self.view endEditing:YES];
-		[self dismissModalViewControllerAnimated:YES];	
+		if (self.editing) {
+			[self.view endEditing:YES];
+			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];	
+		}
+		else {
+			[self dismissModalView];
+		}
 	}
 }
 

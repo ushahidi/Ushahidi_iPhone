@@ -73,10 +73,10 @@
 	else {
 		UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil 
 																  delegate:self
-														 cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+														 cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 													destructiveButtonTitle:nil
-														 otherButtonTitles:NSLocalizedString(@"Select", @"Select"), 
-																		   NSLocalizedString(@"Clear", @"Clear"), nil] autorelease];    
+														 otherButtonTitles:NSLocalizedString(@"Select", nil), 
+																		   NSLocalizedString(@"Clear", nil), nil] autorelease];    
 		
 		[actionSheet addSubview:datePicker];
 		[actionSheet showInView:self.controller.view];        
@@ -104,18 +104,18 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
-	if ([titleAtIndex isEqualToString:NSLocalizedString(@"Select", @"Select")]) {
+	if ([titleAtIndex isEqualToString:NSLocalizedString(@"Select", nil)]) {
 		[self dispatchSelector:@selector(datePickerReturned:date:indexPath:) 
 						target:delegate objects:self, self.date, self.indexPath, nil];
 	}
-	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"Clear", @"Clear")]) {
+	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"Clear", nil)]) {
 		self.date = nil;
 		SEL selector = @selector(datePickerReturned:date:indexPath:);
 		if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
 			[self.delegate datePickerReturned:self date:nil indexPath:self.indexPath];
 		}
 	}
-	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"Cancel", @"Cancel")]) {
+	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"Cancel", nil)]) {
 		[self dispatchSelector:@selector(datePickerCancelled:) 
 						target:delegate objects:self, nil];
 	}

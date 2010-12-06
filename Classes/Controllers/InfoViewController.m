@@ -84,15 +84,15 @@ typedef enum {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	self.email = [[Email alloc] initWithController:self];
-	[self setHeader:NSLocalizedString(@"Email", @"Email") atSection:TableSectionEmail];
-	[self setHeader:NSLocalizedString(@"First Name", @"First Name") atSection:TableSectionFirstName];
-	[self setHeader:NSLocalizedString(@"Last Name", @"Last Name") atSection:TableSectionLastName];
-	[self setHeader:NSLocalizedString(@"Resized Image Width", @"Resized Image Width") atSection:TableSectionImageWidth];
-	[self setHeader:NSLocalizedString(@"Download Maps For Offline Viewing", @"Download Maps For Offline Viewing") atSection:TableSectionDownloadMaps];
-	[self setHeader:NSLocalizedString(@"Downloaded Map Zoom Level", @"Downloaded Map Zoom Level") atSection:TableSectionMapZoomLevel];
-	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", @"Discrete Mode On Shake") atSection:TableSectionBecomeDiscrete];
-	[self setHeader:NSLocalizedString(@"Support", @"Support") atSection:TableSectionSupport];
-	[self setHeader:NSLocalizedString(@"Version", @"Version") atSection:TableSectionVersion];
+	[self setHeader:NSLocalizedString(@"Email", nil) atSection:TableSectionEmail];
+	[self setHeader:NSLocalizedString(@"First Name", nil) atSection:TableSectionFirstName];
+	[self setHeader:NSLocalizedString(@"Last Name", nil) atSection:TableSectionLastName];
+	[self setHeader:NSLocalizedString(@"Resized Image Width", nil) atSection:TableSectionImageWidth];
+	[self setHeader:NSLocalizedString(@"Download Maps For Offline Viewing", nil) atSection:TableSectionDownloadMaps];
+	[self setHeader:NSLocalizedString(@"Downloaded Map Zoom Level", nil) atSection:TableSectionMapZoomLevel];
+	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", nil) atSection:TableSectionBecomeDiscrete];
+	[self setHeader:NSLocalizedString(@"Support", nil) atSection:TableSectionSupport];
+	[self setHeader:NSLocalizedString(@"Version", nil) atSection:TableSectionVersion];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -104,9 +104,9 @@ typedef enum {
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
 	self.imageWidth = [[Settings sharedSettings] imageWidth];
 	self.mapZoomLevel = [[Settings sharedSettings] mapZoomLevel];
-	[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", @"pixels")]
+	[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", nil)]
 		  atSection:TableSectionImageWidth];
-	[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", @"zoom level")]
+	[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", nil)]
 		  atSection:TableSectionMapZoomLevel];
 	[self.tableView reloadData];
 }
@@ -180,21 +180,21 @@ typedef enum {
 	else {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionEmail) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter email", @"Enter email")];
+			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
 			[cell setText:self.userEmail];
 			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		}
 		else if (indexPath.section == TableSectionFirstName) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter first name", @"Enter first name")];
+			[cell setPlaceholder:NSLocalizedString(@"Enter first name", nil)];
 			[cell setText:self.firstName];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
 		else if (indexPath.section == TableSectionLastName) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter last name", @"Enter last name")];
+			[cell setPlaceholder:NSLocalizedString(@"Enter last name", nil)];
 			[cell setText:self.lastName];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
@@ -269,12 +269,12 @@ typedef enum {
 	DLog(@"sliderCellChanged: %f", value);
 	if (cell.indexPath.section == TableSectionImageWidth) {
 		self.imageWidth = value;
-		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", @"pixels")]
+		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", nil)]
 			  atSection:TableSectionImageWidth];
 	}
 	else if (cell.indexPath.section == TableSectionMapZoomLevel) {
 		self.mapZoomLevel = value;
-		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", @"zoom level")]
+		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", nil)]
 			  atSection:TableSectionMapZoomLevel];
 	}
 }

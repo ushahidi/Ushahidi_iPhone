@@ -41,7 +41,7 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title 
 													message:message
 												   delegate:self.controller 
-										  cancelButtonTitle:NSLocalizedString(@"OK", @"OK") 
+										  cancelButtonTitle:NSLocalizedString(@"OK", nil) 
 										  otherButtonTitles:nil];
 	[alert show];
 	[alert release];
@@ -51,15 +51,15 @@
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title 
 													message:message
 												   delegate:self.controller 
-										  cancelButtonTitle:NSLocalizedString(@"No", @"No") 
-										  otherButtonTitles:NSLocalizedString(@"Yes", @"Yes"), nil];
+										  cancelButtonTitle:NSLocalizedString(@"No", nil) 
+										  otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
 	[alert show];
 	[alert release];
 }
 
 - (BOOL) showInfoOnceOnly:(NSString *)info {
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:info] == 0) {
-		[self showOkWithTitle:NSLocalizedString(@"Info", @"Info") andMessage:info];
+		[self showOkWithTitle:NSLocalizedString(@"Info", nil) andMessage:info];
 		[[NSUserDefaults standardUserDefaults] setInteger:1 forKey:info];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		return YES;

@@ -66,7 +66,7 @@ typedef enum {
 		self.locationLabel.text = location;
 	}
 	else {
-		self.locationLabel.text = NSLocalizedString(@"No Location Specified", @"No Location Specified");
+		self.locationLabel.text = NSLocalizedString(@"No Location Specified", nil);
 	}
 }
 
@@ -80,7 +80,7 @@ typedef enum {
 		self.categoryLabel.text = category;
 	}
 	else {
-		self.categoryLabel.text = NSLocalizedString(@"No Category Specified", @"No Category Specified");
+		self.categoryLabel.text = NSLocalizedString(@"No Category Specified", nil);
 	}
 }
 
@@ -94,7 +94,7 @@ typedef enum {
 		self.dateLabel.text = date;
 	}
 	else {
-		self.dateLabel.text = NSLocalizedString(@"No Date Specified", @"No Date Specified");
+		self.dateLabel.text = NSLocalizedString(@"No Date Specified", nil);
 	}
 }
 
@@ -128,12 +128,12 @@ typedef enum {
 
 - (void) setVerified:(BOOL) verified {
 	if (verified) {
-		self.verifiedLabel.text = NSLocalizedString(@"Verified", @"Verified");
+		self.verifiedLabel.text = NSLocalizedString(@"Verified", nil);
 		self.verifiedLabel.textColor = [UIColor ushahidiVerified];
 		self.verifiedLabel.tag = VerifiedYes;
 	}
 	else {
-		self.verifiedLabel.text = NSLocalizedString(@"Unverified", @"Unverified");
+		self.verifiedLabel.text = NSLocalizedString(@"Unverified", nil);
 		self.verifiedLabel.textColor = [UIColor ushahidiUnverified];
 		self.verifiedLabel.tag = VerifiedNo;
 	}

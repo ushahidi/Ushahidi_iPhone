@@ -77,9 +77,9 @@
 	else {
 		UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil 
 																  delegate:self
-														 cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+														 cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 													destructiveButtonTitle:nil
-														 otherButtonTitles:NSLocalizedString(@"Select", @"Select"), nil] autorelease];    
+														 otherButtonTitles:NSLocalizedString(@"Select", nil), nil] autorelease];    
 		
 		[actionSheet addSubview:pickerView];
 		[actionSheet showInView:self.controller.view];

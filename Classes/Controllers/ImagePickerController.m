@@ -51,10 +51,10 @@
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
-														cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel")
+														cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 												   destructiveButtonTitle:nil
-														otherButtonTitles:NSLocalizedString(@"Take Photo", @"Take Photo"), 
-																		  NSLocalizedString(@"From Library", @"From Library"), nil];
+														otherButtonTitles:NSLocalizedString(@"Take Photo", nil), 
+																		  NSLocalizedString(@"From Library", nil), nil];
 		[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
 		[actionSheet showInView:self.viewController.view];
 		[actionSheet release];
@@ -142,10 +142,10 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	NSString *titleAtIndex = [actionSheet buttonTitleAtIndex:buttonIndex];
 	DLog(@"titleAtIndex: %@", titleAtIndex);
-	if ([titleAtIndex isEqualToString:NSLocalizedString(@"Take Photo", @"Take Photo")]) {
+	if ([titleAtIndex isEqualToString:NSLocalizedString(@"Take Photo", nil)]) {
 		[self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
 	}
-	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"From Library", @"From Library")]) {
+	else if ([titleAtIndex isEqualToString:NSLocalizedString(@"From Library", nil)]) {
 		[self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 	}
 }

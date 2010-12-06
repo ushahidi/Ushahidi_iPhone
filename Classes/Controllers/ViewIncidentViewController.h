@@ -28,6 +28,7 @@
 @class WebViewController;
 @class MapViewController;
 @class ImageViewController;
+@class NewsViewController;
 @class Incident;
 @class Email;
 
@@ -38,6 +39,7 @@
 @public
 	MapViewController *mapViewController;
 	ImageViewController *imageViewController;
+	NewsViewController *newsViewController;
 	UISegmentedControl *nextPrevious;
 	Incident *incident;
 	NSArray *incidents;
@@ -52,6 +54,7 @@
 
 @property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic,retain) IBOutlet ImageViewController *imageViewController;
+@property(nonatomic,retain) IBOutlet NewsViewController *newsViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;
 @property(nonatomic,retain) Incident *incident;
 @property(nonatomic,retain) NSArray *incidents;

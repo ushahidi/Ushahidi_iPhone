@@ -57,9 +57,8 @@
 + (UITableViewCell *) getDefaultTableCellForTable:(UITableView *)tableView 
 										indexPath:(NSIndexPath *)indexPath;
 
-+ (SubtitleTableCell *) getSubtitleTableCellWithDefaultImage:(UIImage *)defaultImage 
-													   table:(UITableView *)tableView 
-												   indexPath:(NSIndexPath *)indexPath;
++ (SubtitleTableCell *) getSubtitleTableCellWithForTable:(UITableView *)tableView  
+											   indexPath:(NSIndexPath *)indexPath;
 
 + (TextTableCell *) getTextTableCellForTable:(UITableView *)tableView 
 								   indexPath:(NSIndexPath *)indexPath;

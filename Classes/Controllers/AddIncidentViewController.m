@@ -77,30 +77,30 @@ typedef enum {
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
-	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Question", @"Question") 
-							andMessage:NSLocalizedString(@"Are you sure you want to cancel?", @"Are you sure you want to cancel?")];
+	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Question", nil) 
+							andMessage:NSLocalizedString(@"Are you sure you want to cancel?", nil)];
 }
 
 - (IBAction) done:(id)sender {
 	DLog(@"done");
 	NSMutableArray *missingFields = [NSMutableArray array];
 	if (self.incident.hasTitle == NO) {
-		[missingFields addObject:NSLocalizedString(@"Title", @"Title")]; 
+		[missingFields addObject:NSLocalizedString(@"Title", nil)]; 
 	}
 	if (self.incident.hasDescription == NO) {
-		[missingFields addObject:NSLocalizedString(@"Description", @"Description")]; 
+		[missingFields addObject:NSLocalizedString(@"Description", nil)]; 
 	}
 	if (self.incident.hasCategory == NO) {
-		[missingFields addObject:NSLocalizedString(@"Category", @"Category")]; 
+		[missingFields addObject:NSLocalizedString(@"Category", nil)]; 
 	}
 	if (self.incident.hasDate == NO) {
-		[missingFields addObject:NSLocalizedString(@"Date", @"Date")]; 
+		[missingFields addObject:NSLocalizedString(@"Date", nil)]; 
 	}
 	if (self.incident.hasLocation == NO) {
-		[missingFields addObject:NSLocalizedString(@"Location", @"Location")]; 
+		[missingFields addObject:NSLocalizedString(@"Location", nil)]; 
 	}
 	if (missingFields.count > 0) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", nil) 
 							 andMessage:[missingFields componentsJoinedByString:@", "]];
 	}
 	else {
@@ -109,8 +109,8 @@ typedef enum {
 			[self dismissModalViewControllerAnimated:YES];
 		}
 		else {
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
-								 andMessage:NSLocalizedString(@"Unable to add incident", @"Unable to add incident")];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
+								 andMessage:NSLocalizedString(@"Unable to add incident", nil)];
 		}
 	}
 }
@@ -122,13 +122,13 @@ typedef enum {
     [super viewDidLoad];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
-	[self setHeader:NSLocalizedString(@"Title", @"Title") atSection:TableSectionTitle];
-	[self setHeader:NSLocalizedString(@"Description", @"Description") atSection:TableSectionDescription];
-	[self setHeader:NSLocalizedString(@"Category", @"Category") atSection:TableSectionCategory];
-	[self setHeader:NSLocalizedString(@"Date", @"Date") atSection:TableSectionDate];
-	[self setHeader:NSLocalizedString(@"Location", @"Location") atSection:TableSectionLocation];
-	[self setHeader:NSLocalizedString(@"Photos", @"Photos") atSection:TableSectionPhotos];
-	[self setHeader:NSLocalizedString(@"News", @"News") atSection:TableSectionNews];
+	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
+	[self setHeader:NSLocalizedString(@"Description", nil) atSection:TableSectionDescription];
+	[self setHeader:NSLocalizedString(@"Category", nil) atSection:TableSectionCategory];
+	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDate];
+	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
+	[self setHeader:NSLocalizedString(@"Photos", nil) atSection:TableSectionPhotos];
+	[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -138,7 +138,7 @@ typedef enum {
 		self.willBePushed = NO;
 		if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
 			[[Locator sharedLocator] detectLocationForDelegate:self];
-			[self setFooter:NSLocalizedString(@"Detecting Location...", @"Detecting Location...") atSection:TableSectionLocation];	
+			[self setFooter:NSLocalizedString(@"Detecting Location...", nil) atSection:TableSectionLocation];	
 		}
 		else {
 			self.incident.latitude = [Locator sharedLocator].latitude;
@@ -208,7 +208,7 @@ typedef enum {
 			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
-			[cell setText:NSLocalizedString(@"Add Photo", @"Add Photo")];
+			[cell setText:NSLocalizedString(@"Add Photo", nil)];
 			[cell setTextColor:[UIColor lightGrayColor]];
 			return cell;
 		}
@@ -220,7 +220,7 @@ typedef enum {
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 			[cell setText:self.incident.location];
-			[cell setPlaceholder:NSLocalizedString(@"Enter location name", @"Enter location name")];
+			[cell setPlaceholder:NSLocalizedString(@"Enter location name", nil)];
 			return cell;
 		}
 		else {
@@ -232,7 +232,7 @@ typedef enum {
 				[cell setTextColor:[UIColor blackColor]];
 			}
 			else {
-				[cell setText:NSLocalizedString(@"Select location", @"Select location")];
+				[cell setText:NSLocalizedString(@"Select location", nil)];
 				[cell setTextColor:[UIColor lightGrayColor]];
 			}
 			return cell;	
@@ -248,7 +248,7 @@ typedef enum {
 				[cell setTextColor:[UIColor blackColor]];
 			}
 			else {
-				[cell setText:NSLocalizedString(@"Enter date", @"Enter date")];
+				[cell setText:NSLocalizedString(@"Enter date", nil)];
 				[cell setTextColor:[UIColor lightGrayColor]];
 			}
 		}
@@ -258,7 +258,7 @@ typedef enum {
 				[cell setTextColor:[UIColor blackColor]];
 			}
 			else {
-				[cell setText:NSLocalizedString(@"Enter time", @"Enter time")];
+				[cell setText:NSLocalizedString(@"Enter time", nil)];
 				[cell setTextColor:[UIColor lightGrayColor]];
 			}
 		}
@@ -273,7 +273,7 @@ typedef enum {
 			[cell setTextColor:[UIColor blackColor]];
 		}
 		else {
-			[cell setText:NSLocalizedString(@"Select category", @"Select category")];
+			[cell setText:NSLocalizedString(@"Select category", nil)];
 			[cell setTextColor:[UIColor lightGrayColor]];
 		}
 		return cell;
@@ -281,14 +281,14 @@ typedef enum {
 	else {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionTitle) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter title", @"Enter title")];
+			[cell setPlaceholder:NSLocalizedString(@"Enter title", nil)];
 			[cell setText:self.incident.title];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
 		}
 		else if (indexPath.section == TableSectionNews) {
-			[cell setPlaceholder:NSLocalizedString(@"Add news", @"Add news")];
+			[cell setPlaceholder:NSLocalizedString(@"Add news", nil)];
 		}
 		return cell;	
 	}
@@ -299,7 +299,7 @@ typedef enum {
 		if (indexPath.row > 0) {
 			return 200;
 		}
-		return [TextTableCell getCellSizeForText:NSLocalizedString(@"Add Photo", @"Add Photo") forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:NSLocalizedString(@"Add Photo", nil) forWidth:theTableView.contentSize.width].height;
 	}
 	if (indexPath.section == TableSectionDescription) {
 		return 120;
@@ -326,8 +326,8 @@ typedef enum {
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
-														cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") 
-												   destructiveButtonTitle:NSLocalizedString(@"Remove Photo", @"Remove Photo")
+														cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+												   destructiveButtonTitle:NSLocalizedString(@"Remove Photo", nil)
 														otherButtonTitles:nil];
 		[actionSheet setTag:indexPath.row - 1];
 		[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
@@ -410,7 +410,7 @@ typedef enum {
 #pragma mark ImagePickerDelegate
 
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
-	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", @"Resizing...")];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", nil)];
 }
 
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {

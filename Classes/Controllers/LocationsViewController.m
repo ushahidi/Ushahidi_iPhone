@@ -64,9 +64,9 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search locations...", @"Search locations...")];
-	[self setHeader:NSLocalizedString(@"New Location", @"New Location") atSection:TableSectionNewLocation];
-	[self setHeader:NSLocalizedString(@"Existing Location", @"Existing Location") atSection:TableSectionExistingLocations];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search locations...", nil)];
+	[self setHeader:NSLocalizedString(@"New Location", nil) atSection:TableSectionNewLocation];
+	[self setHeader:NSLocalizedString(@"Existing Location", nil) atSection:TableSectionExistingLocations];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,7 +112,7 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView indexPath:indexPath];
 	if (indexPath.section == TableSectionNewLocation) {
-		[cell setTitle:NSLocalizedString(@"Current Location", @"Current Location")];
+		[cell setTitle:NSLocalizedString(@"Current Location", nil)];
 		if (self.currentLatitude != nil) {
 			[cell setDescription:[NSString stringWithFormat:@"%@, %@", self.currentLatitude, self.currentLongitude]];	
 		}

@@ -85,7 +85,7 @@ typedef enum {
 	DLog(@"");
 	self.incidentTableView.refreshButton.enabled = NO;
 	self.incidentMapView.refreshButton.enabled = NO;
-	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", @"Loading...")];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 }
@@ -139,7 +139,7 @@ typedef enum {
 }
 
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
-	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", @" --- ALL CATEGORIES --- ")];
+	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", nil)];
 	for (Category *theCategory in self.categories) {
 		[items addObject:theCategory.title];
 	}
@@ -157,7 +157,7 @@ typedef enum {
 - (void) updateLastSyncLabel {
 	if (self.deployment.lastSync) {
 		[self setTableFooter:[NSString stringWithFormat:@"%@ %@", 
-							  NSLocalizedString(@"Last Sync", @"Last Sync"), 
+							  NSLocalizedString(@"Last Sync", nil), 
 							  [self.deployment.lastSync dateToString:@"h:mm a, MMMM d, yyyy"]]];	
 	}
 	else {
@@ -197,9 +197,9 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiDarkTan];
-	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", @"Search reports...")];
-	[self setHeader:NSLocalizedString(@"Pending Upload", @"Pending Upload") atSection:TableSectionPending];
-	[self setHeader:NSLocalizedString(@"All Categories", @"All Categories") atSection:TableSectionIncidents];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", nil)];
+	[self setHeader:NSLocalizedString(@"Pending Upload", nil) atSection:TableSectionPending];
+	[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -218,7 +218,7 @@ typedef enum {
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
 		self.category = nil;
 		self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
-		[self setHeader:NSLocalizedString(@"All Categories", @"All Categories") atSection:TableSectionIncidents];
+		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
 	}
 	else {
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
@@ -234,6 +234,11 @@ typedef enum {
 	else if (self.incidentMapView.superview != nil) {
 		[self populateMapPins];
 	}
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Radar button to view report map, Tag button to filter by category or the Compose button to create a new incident report.", nil)];
 }
 
 - (void)dealloc {
@@ -397,7 +402,7 @@ typedef enum {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
 		if ([self.loadingView isShowing]) {
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
 								 andMessage:[error localizedDescription]];
 		}
 	}
@@ -582,7 +587,7 @@ typedef enum {
 		[self setHeader:self.category.title atSection:TableSectionIncidents];
 	}
 	else {
-		[self setHeader:NSLocalizedString(@"All Categories", @"All Categories") atSection:TableSectionIncidents];
+		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
 	}
 	[self filterRows:YES];
 }

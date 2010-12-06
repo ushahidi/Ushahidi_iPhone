@@ -77,28 +77,28 @@ typedef enum {
 					([[self.url lowercaseString] hasPrefix:@"http://"] || 
 					 [[self.url lowercaseString] hasPrefix:@"https://"]);
 	if (hasName == NO && hasURL == NO) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
-							 andMessage:NSLocalizedString(@"Name and URL are required fields", @"Name and URL are required fields")];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", nil) 
+							 andMessage:NSLocalizedString(@"Name and URL are required fields", nil)];
 	}
 	else if (hasName == NO) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
-							 andMessage:NSLocalizedString(@"Name is a required field", @"Name is required field")];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Field", nil) 
+							 andMessage:NSLocalizedString(@"Name is a required field", nil)];
 	}
 	else if (hasURL == NO) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", @"Required Fields") 
-							 andMessage:NSLocalizedString(@"URL is a required field", @"URL is a required field")];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Field", nil) 
+							 andMessage:NSLocalizedString(@"URL is a required field", nil)];
 	}
 	else {
 		[self.view endEditing:YES];
-		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", @"Adding...")];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
 		if ([[Ushahidi sharedUshahidi] addDeploymentByName:self.name andUrl:self.url]) {
-			[self.loadingView showWithMessage:NSLocalizedString(@"Added", @"Added")];
+			[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
 			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:2.0];
 		}
 		else {
 			[self.loadingView hide];
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
-								 andMessage:NSLocalizedString(@"There was a problem adding deployment", @"There was a problem adding deployment")];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
+								 andMessage:NSLocalizedString(@"There was a problem adding deployment", nil)];
 		}	
 	}
 }
@@ -109,13 +109,13 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
-	[self setHeader:NSLocalizedString(@"Name", @"Name") 
+	[self setHeader:NSLocalizedString(@"Name", nil) 
 		  atSection:TableSectionName];
-	[self setHeader:NSLocalizedString(@"URL", @"URL") 
+	[self setHeader:NSLocalizedString(@"URL", nil) 
 		  atSection:TableSectionURL];
-	[self setFooter:NSLocalizedString(@"Example: Ushahidi Demo", @"Example: Ushahidi Demo")
+	[self setFooter:NSLocalizedString(@"Example: Ushahidi Demo", nil)
 		  atSection:TableSectionName];
-	[self setFooter:NSLocalizedString(@"Example: http://demo.ushahidi.com", @"Example: http://demo.ushahidi.com")
+	[self setFooter:NSLocalizedString(@"Example: http://demo.ushahidi.com", nil)
 		  atSection:TableSectionURL];
 }
 
@@ -152,7 +152,7 @@ typedef enum {
 	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 	if (indexPath.section == TableSectionName) {
 		[cell setText:self.name];
-		[cell setPlaceholder:NSLocalizedString(@"Enter Deployment Name", @"Enter Deployment Name")];
+		[cell setPlaceholder:NSLocalizedString(@"Enter Deployment Name", nil)];
 		[cell setKeyboardType:UIKeyboardTypeDefault];
 		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
@@ -162,7 +162,7 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionURL) {
 		[cell setText:self.url];
-		[cell setPlaceholder:NSLocalizedString(@"Enter Deployment URL", @"Enter Deployment URL")];
+		[cell setPlaceholder:NSLocalizedString(@"Enter Deployment URL", nil)];
 		[cell setKeyboardType:UIKeyboardTypeURL];
 		[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];

@@ -20,21 +20,15 @@
 
 #import "SubtitleTableCell.h"
 
-@interface SubtitleTableCell (Internal)
+@interface SubtitleTableCell ()
 
-- (void) setButtonImage:(UIImage *)image;
-- (void) clicked:(id)sender;
 
 @end
 
 @implementation SubtitleTableCell
 
-@synthesize defaultImage;
-
-- (id)initWithDefaultImage:(UIImage *)theDefaultImage reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithIdentifier:(NSString *)reuseIdentifier {
 	if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier]) {
-		self.defaultImage = theDefaultImage;
-		self.imageView.image = theDefaultImage;
 		self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		self.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
@@ -42,7 +36,6 @@
 }
 
 - (void)dealloc {
-	[defaultImage release];
 	[super dealloc];
 }
 
@@ -72,13 +65,19 @@
 	return self.detailTextLabel.text;
 }
 
-- (void) setImage:(UIImage *)theImage {
-	if (theImage != nil) {
-		self.imageView.image = theImage;
-	}
-	else {
-		self.imageView.image = self.defaultImage;
-	}
+- (void) setSelectedColor:(UIColor *)color {
+	UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
+	[selectedBackgroundView setBackgroundColor:color];
+	[self setSelectedBackgroundView:selectedBackgroundView];
+	[selectedBackgroundView release];	
+}
+
+- (UIColor *) selectedColor {
+	return self.selectedBackgroundView.backgroundColor;
+}
+
++ (CGFloat) getCellHeight {
+	return 50;
 }
 
 @end

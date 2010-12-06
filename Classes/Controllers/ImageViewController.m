@@ -60,12 +60,12 @@ typedef enum {
 
 - (IBAction) emailPhoto:(id)sender {
 	DLog(@"");
-	[self.email sendMessage:nil withSubject:nil photos:[NSArray arrayWithObject:self.image]];
+	[self.email	sendToRecipients:nil withMessage:nil withSubject:nil withPhotos:[NSArray arrayWithObject:self.image]];
 }
 
 - (IBAction) savePhoto:(id)sender {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Saving...", @"Saving...")];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Saving...", nil)];
 	[self performSelectorInBackground:@selector(savePhotoInBackground) withObject:nil];
 }
 
@@ -79,7 +79,7 @@ typedef enum {
 - (void)imageSaved:(UIImage *)theImage didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
 	[self.loadingView hide];
     if (error != nil) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Error Saving Photo", @"Error Saving Photo") 
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Error Saving Photo", nil) 
 							 andMessage:[error localizedDescription]];
 	}
 }

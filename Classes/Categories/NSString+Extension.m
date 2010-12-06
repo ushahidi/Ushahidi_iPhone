@@ -45,6 +45,12 @@
 	return NO;
 }
 
+- (NSString *)stringByTrimmingSuffix:(NSString *)suffix {
+    if([self hasSuffix:suffix])
+		self = [self substringToIndex:[self length] - [suffix length]];
+    return self;
+}
+
 + (NSString *)stringByAppendingPathComponents:(NSString *)string, ... {
     va_list args;
     va_start(args, string);

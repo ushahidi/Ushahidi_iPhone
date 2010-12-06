@@ -37,7 +37,7 @@
 
 @implementation DeploymentsViewController
 
-@synthesize incidentsViewController, addDeploymentViewController, infoViewController, editButton;
+@synthesize incidentsViewController, addDeploymentViewController, infoViewController, editButton, refreshButton;
 
 #pragma mark -
 #pragma mark Handlers
@@ -50,22 +50,25 @@
 - (IBAction) edit:(id)sender {
 	if (self.tableView.editing) {
 		self.tableView.editing = NO;
-		self.editButton.title = NSLocalizedString(@"Edit", @"Edit");
+		self.editButton.title = NSLocalizedString(@"Edit", nil);
 	}
 	else {
 		self.tableView.editing = YES;
-		self.editButton.title = NSLocalizedString(@"Done", @"Done");
+		self.editButton.title = NSLocalizedString(@"Done", nil);
 	}
 }
 
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", @"Loading...")];
+	self.tableView.editing = NO;
+	self.refreshButton.enabled = NO;
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getDeploymentsForDelegate:self];
 }
 
 - (void) info:(id)sender {
 	DLog(@"info");
+	self.tableView.editing = NO;
 	self.infoViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:self.infoViewController animated:YES];
 }
@@ -78,7 +81,7 @@
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiDarkTan];
 	self.evenRowColor = [UIColor ushahidiLiteBrown];
-	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search deployments...", @"Search deployments...")];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search deployments...", nil)];
 	
 	UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [infoButton addTarget:self action:@selector(info:) forControlEvents:UIControlEventTouchUpInside];
@@ -112,7 +115,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Choice an existing Ushahidi deployment, or add a new deployment to the list.", @"Choice an existing Ushahidi deployment, or add a new deployment to the list.")];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Info button to view app settings, Plus button to add a deployment or the Edit button to remove a deployment.", nil)];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -125,6 +128,7 @@
 	[incidentsViewController release];
 	[infoViewController release];
 	[editButton release];
+	[refreshButton release];
     [super dealloc];
 }
 
@@ -160,7 +164,7 @@
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (self.tableView.editing) {
 		self.tableView.editing = NO;
-		self.editButton.title = NSLocalizedString(@"Edit", @"Edit");
+		self.editButton.title = NSLocalizedString(@"Edit", nil);
 	}
 	[self.view endEditing:YES];
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -182,8 +186,8 @@
 			[self.tableView reloadData];
 		}
 		else {
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
-								 andMessage:NSLocalizedString(@"Unable to remove deployment", @"Unable to remove deployment")];	
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
+								 andMessage:NSLocalizedString(@"Unable to remove deployment", nil)];	
 		}
 	}	
 }
@@ -196,7 +200,7 @@
 	[self.loadingView hide];
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Error", @"Error") 
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
 							 andMessage:[error localizedDescription]];
 	}
 	else if (hasChanges) {
@@ -212,6 +216,7 @@
 		DLog(@"No Changes");
 	}
 	[self.loadingView hide];
+	self.refreshButton.enabled = YES;
 }
 
 #pragma mark -

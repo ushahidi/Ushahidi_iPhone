@@ -21,7 +21,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface WebViewController : BaseViewController<UISearchBarDelegate> {
+@interface WebViewController : BaseViewController<UISearchBarDelegate, UIWebViewDelegate> {
 	
 @public
 	UIWebView *webView;

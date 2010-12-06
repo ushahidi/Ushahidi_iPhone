@@ -18,23 +18,25 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
-#import "IndexedTableCell.h"
+#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface SubtitleTableCell : IndexedTableCell {
+@interface NewsViewController : BaseViewController<UIWebViewDelegate> {
 
+@public
+	UIWebView *webView;
+	UISegmentedControl *backForwardButton;
+	NSString *website;
+	
+@private
+	NSString *current;
 }
 
-@property (nonatomic, assign) UIColor *selectedColor;
 
-- (id)initWithIdentifier:(NSString *)reuseIdentifier;
+@property(nonatomic,retain) IBOutlet UIWebView *webView;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *backForwardButton;
+@property(nonatomic,retain) NSString *website;
 
-- (void) setText:(NSString *)text;
-- (NSString *) getText;
-
-- (void) setDescription:(NSString *)description;
-- (NSString *) getDescription;
-
-+ (CGFloat) getCellHeight;
+- (IBAction) backForward:(id)sender;
 
 @end

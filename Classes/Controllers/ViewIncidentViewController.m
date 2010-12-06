@@ -22,6 +22,7 @@
 #import "WebViewController.h"
 #import "MapViewController.h"
 #import "ImageViewController.h"
+#import "NewsViewController.h"
 #import "TableCellFactory.h"
 #import "SubtitleTableCell.h"
 #import "ImageTableCell.h"
@@ -37,6 +38,7 @@
 #import "Email.h"
 #import "Deployment.h"
 #import "News.h"
+#import "NSString+Extension.h"
 
 @interface ViewIncidentViewController ()
 
@@ -63,7 +65,7 @@ typedef enum {
 	NavBarNext
 } NavBar;
 
-@synthesize mapViewController, imageViewController, nextPrevious, incident, incidents, email, pending;
+@synthesize mapViewController, imageViewController, newsViewController, nextPrevious, incident, incidents, email, pending;
 @synthesize emailLinkButton, emailDetailsButton;
 
 #pragma mark -
@@ -99,16 +101,16 @@ typedef enum {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
 	if (self.pending) {
-		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", @"Title"), self.incident.title];	
+		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];	
 	}
 	else {
 		NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
 		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", @"Title"), [link absoluteString], self.incident.title];
 	}
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", @"Date"), self.incident.dateTimeString];
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", @"Location"), self.incident.location];
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", @"Category"), self.incident.categoryNames];
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", @"Description"), self.incident.description];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", nil), self.incident.dateTimeString];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", nil), self.incident.location];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", nil), self.incident.categoryNames];
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", nil), self.incident.description];
 	if (self.incident.news != nil && [self.incident.news count] > 0) {
 		[message appendFormat:@"<ul>"];
 		for (News *news in self.incident.news) {
@@ -128,15 +130,15 @@ typedef enum {
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
 	self.email = [[Email alloc] initWithController:self];
-	[self setHeader:NSLocalizedString(@"Errors", @"Errors") atSection:TableSectionErrors];
-	[self setHeader:NSLocalizedString(@"Title", @"Title") atSection:TableSectionTitle];
-	[self setHeader:NSLocalizedString(@"Verified", @"Verified") atSection:TableSectionVerified];
-	[self setHeader:NSLocalizedString(@"Description", @"Description") atSection:TableSectionDescription];
-	[self setHeader:NSLocalizedString(@"Category", @"Category") atSection:TableSectionCategory];
-	[self setHeader:NSLocalizedString(@"Date", @"Date") atSection:TableSectionDateTime];
-	[self setHeader:NSLocalizedString(@"Location", @"Location") atSection:TableSectionLocation];
-	[self setHeader:NSLocalizedString(@"Photos", @"Photos") atSection:TableSectionPhotos];
-	[self setHeader:NSLocalizedString(@"News", @"News") atSection:TableSectionNews];
+	[self setHeader:NSLocalizedString(@"Errors", nil) atSection:TableSectionErrors];
+	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
+	[self setHeader:NSLocalizedString(@"Verified", nil) atSection:TableSectionVerified];
+	[self setHeader:NSLocalizedString(@"Description", nil) atSection:TableSectionDescription];
+	[self setHeader:NSLocalizedString(@"Category", nil) atSection:TableSectionCategory];
+	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDateTime];
+	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
+	[self setHeader:NSLocalizedString(@"Photos", nil) atSection:TableSectionPhotos];
+	[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -155,6 +157,7 @@ typedef enum {
 - (void)dealloc {
 	[mapViewController release];
 	[imageViewController release];
+	[newsViewController release];
 	[nextPrevious release];
 	[incident release];
 	[email release];
@@ -198,13 +201,7 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionNews && [self.incident.news count] > 0) {
-		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithDefaultImage:[UIImage imageNamed:@"no_image.png"] table:theTableView indexPath:indexPath];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		return cell;
-	}
-	else if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
+	if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
 		if (self.incident.map != nil) {
 			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
 			[cell setImage:self.incident.map];
@@ -241,6 +238,28 @@ typedef enum {
 		}
 		return cell;
 	}
+	else if (indexPath.section == TableSectionNews && [self.incident.news count] > 0) {
+		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithForTable:theTableView indexPath:indexPath];
+		News *news = [self.incident.news objectAtIndex:indexPath.row];
+		if (news != nil) {
+			if ([NSString isNilOrEmpty:news.title] == NO) {
+				[cell setText:news.title];	
+			}
+			else {
+				[cell setText:news.url];
+			}
+			[cell setDescription:news.url];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+		}
+		else {
+			[cell setText:@""];	
+			[cell setDescription:@""];
+			cell.accessoryType = UITableViewCellAccessoryNone;
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		}
+		return cell;
+	}
 	else {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryNone;
@@ -252,7 +271,7 @@ typedef enum {
 			cell.textLabel.text = self.incident.description;
 		}
 		else if (indexPath.section == TableSectionCategory) {
-			cell.textLabel.text = [self.incident categoryNamesWithDefaultText:NSLocalizedString(@"No Category Specified", @"No Category Specified")];
+			cell.textLabel.text = [self.incident categoryNamesWithDefaultText:NSLocalizedString(@"No Category Specified", nil)];
 		}
 		else if (indexPath.section == TableSectionLocation) {
 			cell.textLabel.text = self.incident.location;
@@ -266,13 +285,13 @@ typedef enum {
 			cell.textLabel.text = [self.incident errors];
 		}
 		else if (indexPath.section == TableSectionPhotos) {
-			cell.textLabel.text = NSLocalizedString(@"No Photos", @"No Photos");
+			cell.textLabel.text = NSLocalizedString(@"No Photos", nil);
 		}
 		else if (indexPath.section == TableSectionNews) {
-			cell.textLabel.text = NSLocalizedString(@"No News", @"No News");
+			cell.textLabel.text = NSLocalizedString(@"No News", nil);
 		}
 		else if (indexPath.section == TableSectionVerified) {
-			cell.textLabel.text = self.incident.verified ? NSLocalizedString(@"Yes", @"Yes") : NSLocalizedString(@"No", @"No");
+			cell.textLabel.text = self.incident.verified ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 		}
 		return cell;	
 	}
@@ -295,26 +314,26 @@ typedef enum {
 			}
 			return 200;
 		}
-		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No Photos", @"No Photos") forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No Photos", nil) forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionNews) {
 		if ([self.incident.news count] > 0) {
-			return 55;
+			return [SubtitleTableCell getCellHeight];
 		}
-		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No News", @"No News") forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No News", nil) forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionTitle) {
 		return [TextTableCell getCellSizeForText:self.incident.title forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionVerified) {
-		NSString *verifiedText = self.incident.verified ? NSLocalizedString(@"Yes", @"Yes") : NSLocalizedString(@"No", @"No");
+		NSString *verifiedText = self.incident.verified ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
 		return [TextTableCell getCellSizeForText:verifiedText forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionDescription) {
 		return [TextTableCell getCellSizeForText:self.incident.description forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionCategory) {
-		return [TextTableCell getCellSizeForText:[self.incident categoryNamesWithDefaultText:NSLocalizedString(@"No Category Specified", @"No Category Specified")] forWidth:theTableView.contentSize.width].height;
+		return [TextTableCell getCellSizeForText:[self.incident categoryNamesWithDefaultText:NSLocalizedString(@"No Category Specified", nil)] forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionDateTime) {
 		return [TextTableCell getCellSizeForText:[self.incident dateTimeString] forWidth:theTableView.contentSize.width].height;
@@ -331,9 +350,12 @@ typedef enum {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	UITableViewCell *cell = [theTableView cellForRowAtIndexPath:indexPath];
-	if (indexPath.section == TableSectionNews && indexPath.row > 0) {
-		self.webViewController.website = cell.detailTextLabel.text;
-		[self.navigationController pushViewController:self.webViewController animated:YES];
+	if (indexPath.section == TableSectionNews) {
+		if ([self.incident.news count] > 0) {
+			//self.webViewController.title = [((SubtitleTableCell *)cell) getText];
+			self.newsViewController.website = [((SubtitleTableCell *)cell) getDescription];
+			[self.navigationController pushViewController:self.newsViewController animated:YES];
+		}
 	}
 	else if (indexPath.section == TableSectionLocation) {
 		if (self.incident.map != nil) {
@@ -351,7 +373,7 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionPhotos) {
 		if ([self.incident.photos count] > 0) {
-			self.imageViewController.title = NSLocalizedString(@"Image", @"Image");
+			self.imageViewController.title = NSLocalizedString(@"Image", nil);
 			self.imageViewController.image = [((ImageTableCell *)cell) getImage];
 			self.imageViewController.images = self.incident.photoImages;
 			[self.navigationController pushViewController:self.imageViewController animated:YES];

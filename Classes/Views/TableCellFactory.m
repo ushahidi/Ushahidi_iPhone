@@ -112,12 +112,12 @@
 #pragma mark -
 #pragma mark SubtitleTableCell
 
-+ (SubtitleTableCell *) getSubtitleTableCellWithDefaultImage:(UIImage *)defaultImage 
-													   table:(UITableView *)tableView 
++ (SubtitleTableCell *) getSubtitleTableCellWithForTable:(UITableView *)tableView  
 												   indexPath:(NSIndexPath *)indexPath {
 	SubtitleTableCell *cell = (SubtitleTableCell *)[tableView dequeueReusableCellWithIdentifier:@"SubtitleTableCell"];
 	if (cell == nil) {
-		cell = [[[SubtitleTableCell alloc] initWithDefaultImage:defaultImage reuseIdentifier:@"SubtitleTableCell"] autorelease];
+		cell = [[[SubtitleTableCell alloc] initWithIdentifier:@"SubtitleTableCell"] autorelease];
+		cell.selectedColor = [UIColor ushahidiDarkBrown];
 	}
 	cell.indexPath = indexPath;
 	return cell;

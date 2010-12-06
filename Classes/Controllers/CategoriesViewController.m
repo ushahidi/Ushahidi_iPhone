@@ -48,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search categories...", @"Search categories...")];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search categories...", nil)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

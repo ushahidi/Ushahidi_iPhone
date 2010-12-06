@@ -25,6 +25,7 @@
 + (NSString *)getUUID;
 + (BOOL) isNilOrEmpty:(NSString *)string;
 - (BOOL) anyWordHasPrefix:(NSString *)prefix;
+- (NSString *)stringByTrimmingSuffix:(NSString *)suffix;
 + (NSString *)stringByAppendingPathComponents:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

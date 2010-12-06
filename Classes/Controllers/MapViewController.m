@@ -82,7 +82,7 @@ typedef enum {
 		[self.mapView resizeRegionToFitAllPins:YES];
 	}
 	else {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", @"Locating...")];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
 		self.mapView.showsUserLocation = YES;
 	}
 }

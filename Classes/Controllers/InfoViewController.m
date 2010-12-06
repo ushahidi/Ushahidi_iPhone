@@ -27,6 +27,7 @@
 #import "Email.h"
 #import "Device.h"
 #import "NSString+Extension.h"
+#import "LoadingViewController.h"
 
 @interface InfoViewController()
 
@@ -38,6 +39,8 @@
 @property(nonatomic, assign) CGFloat imageWidth;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
 @property(nonatomic, retain) Email *email;
+
+- (void) dismissModalView;
 
 @end
 
@@ -61,8 +64,13 @@ typedef enum {
 #pragma mark Handlers
 
 - (IBAction) cancel:(id)sender {
-	[self.view endEditing:YES];
-	[self dismissModalViewControllerAnimated:YES];
+	if (self.editing) {
+		[self.view endEditing:YES];
+		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];	
+	}
+	else {
+		[self dismissModalView];
+	}
 }
 
 - (IBAction) done:(id)sender {
@@ -71,7 +79,6 @@ typedef enum {
 							 andMessage:NSLocalizedString(@"Please enter a valid email address.", nil)];
 	}
 	else {
-		[self.view endEditing:YES];
 		[[Settings sharedSettings] setEmail:self.userEmail];
 		[[Settings sharedSettings] setFirstName:self.firstName];
 		[[Settings sharedSettings] setLastName:self.lastName];
@@ -80,8 +87,19 @@ typedef enum {
 		[[Settings sharedSettings] setImageWidth:self.imageWidth];
 		[[Settings sharedSettings] setMapZoomLevel:self.mapZoomLevel];
 		[[Settings sharedSettings] save];
-		[self dismissModalViewControllerAnimated:YES];	
+		if (self.editing) {
+			[self.view endEditing:YES];
+			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];
+		}
+		else {
+			[self dismissModalView];
+		}
 	}
+}
+
+- (void) dismissModalView {
+	[self.loadingView hide];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -

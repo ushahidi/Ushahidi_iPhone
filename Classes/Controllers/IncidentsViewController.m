@@ -513,6 +513,8 @@ typedef enum {
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Request", nil) 
+							 andMessage:NSLocalizedString([error localizedDescription], nil)];
 	}
 	else if(hasChanges) {
 		[self.categories removeAllObjects];

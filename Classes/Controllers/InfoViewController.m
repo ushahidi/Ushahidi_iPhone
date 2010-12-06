@@ -26,6 +26,7 @@
 #import "TextTableCell.h"
 #import "Email.h"
 #import "Device.h"
+#import "NSString+Extension.h"
 
 @interface InfoViewController()
 
@@ -65,16 +66,22 @@ typedef enum {
 }
 
 - (IBAction) done:(id)sender {
-	[self.view endEditing:YES];
-	[[Settings sharedSettings] setEmail:self.userEmail];
-	[[Settings sharedSettings] setFirstName:self.firstName];
-	[[Settings sharedSettings] setLastName:self.lastName];
-	[[Settings sharedSettings] setDownloadMaps:self.downloadMaps];
-	[[Settings sharedSettings] setBecomeDiscrete:self.becomeDiscrete];
-	[[Settings sharedSettings] setImageWidth:self.imageWidth];
-	[[Settings sharedSettings] setMapZoomLevel:self.mapZoomLevel];
-	[[Settings sharedSettings] save];
-	[self dismissModalViewControllerAnimated:YES];
+	if ([NSString isNilOrEmpty:self.userEmail] == NO && [self.userEmail isValidEmail] == NO) {
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Email", nil) 
+							 andMessage:NSLocalizedString(@"Please enter a valid email address.", nil)];
+	}
+	else {
+		[self.view endEditing:YES];
+		[[Settings sharedSettings] setEmail:self.userEmail];
+		[[Settings sharedSettings] setFirstName:self.firstName];
+		[[Settings sharedSettings] setLastName:self.lastName];
+		[[Settings sharedSettings] setDownloadMaps:self.downloadMaps];
+		[[Settings sharedSettings] setBecomeDiscrete:self.becomeDiscrete];
+		[[Settings sharedSettings] setImageWidth:self.imageWidth];
+		[[Settings sharedSettings] setMapZoomLevel:self.mapZoomLevel];
+		[[Settings sharedSettings] save];
+		[self dismissModalViewControllerAnimated:YES];	
+	}
 }
 
 #pragma mark -

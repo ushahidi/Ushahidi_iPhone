@@ -116,7 +116,7 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Download Maps For Offline Viewing", nil) atSection:TableSectionDownloadMaps];
 	[self setHeader:NSLocalizedString(@"Downloaded Map Zoom Level", nil) atSection:TableSectionMapZoomLevel];
 	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", nil) atSection:TableSectionBecomeDiscrete];
-	[self setHeader:NSLocalizedString(@"Support", nil) atSection:TableSectionSupport];
+	[self setHeader:NSLocalizedString(@"Contact", nil) atSection:TableSectionSupport];
 	[self setHeader:NSLocalizedString(@"Version", nil) atSection:TableSectionVersion];
 }
 
@@ -136,8 +136,9 @@ typedef enum {
 	[self.tableView reloadData];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return YES;
+- (void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Enable Discrete Mode to hide your current activity, or Download Maps so you can view map images offline.", nil)];
 }
 
 - (void)dealloc {
@@ -195,11 +196,15 @@ typedef enum {
 	else if (indexPath.section == TableSectionSupport) {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		[cell setText:NSLocalizedString(@"Email Ushahidi Support", nil)];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		return cell;
 	}
 	else if (indexPath.section == TableSectionVersion) {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		[cell setText:[Device appVersion]];
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		return cell;
 	}
 	else {

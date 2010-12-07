@@ -35,9 +35,11 @@
 #import "Incident.h"
 #import "UIColor+Extension.h"
 #import "Photo.h"
+#import "News.h"
 #import "ImageTableCell.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
+#import "NSString+Extension.h"
 
 typedef enum {
 	TableSectionTitle,
@@ -63,6 +65,7 @@ typedef enum {
 
 @property(nonatomic, retain) DatePicker *datePicker;
 @property(nonatomic, retain) Incident *incident;
+@property(nonatomic, retain) NSString *news;
 
 - (void) dismissModalView;
 
@@ -71,7 +74,7 @@ typedef enum {
 @implementation AddIncidentViewController
 
 @synthesize cancelButton, doneButton, datePicker;
-@synthesize categoriesViewController, locationsViewController, imagePickerController, incidentsViewController;
+@synthesize categoriesViewController, locationsViewController, imagePickerController, incidentsViewController, news;
 @synthesize incident;
 
 #pragma mark -
@@ -106,6 +109,9 @@ typedef enum {
 							 andMessage:[missingFields componentsJoinedByString:@", "]];
 	}
 	else {
+		if (self.news != nil && [self.news isValidURL]) {
+			[self.incident addNews:[News newsWithUrl:self.news]];
+		}
 		[self.view endEditing:YES];
 		if ([[Ushahidi sharedUshahidi] addIncident:self.incident forDelegate:self.incidentsViewController]) {
 			[self dismissModalViewControllerAnimated:YES];
@@ -163,6 +169,7 @@ typedef enum {
 	[locationsViewController release];
 	[incidentsViewController release];
 	[incident release];
+	[news release];
     [super dealloc];
 }
 
@@ -170,7 +177,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 6;
+	return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -219,6 +226,15 @@ typedef enum {
 			[cell setTextColor:[UIColor lightGrayColor]];
 			return cell;
 		}
+	}
+	else if (indexPath.section == TableSectionNews) {
+		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
+		[cell setKeyboardType:UIKeyboardTypeURL];
+		[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
+		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+		[cell setText:self.news];
+		[cell setPlaceholder:NSLocalizedString(@"Enter news URL", nil)];
+		return cell;
 	}
 	else if (indexPath.section == TableSectionLocation) {
 		if (indexPath.row == TableSectionLocationName) {
@@ -293,9 +309,6 @@ typedef enum {
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
-		}
-		else if (indexPath.section == TableSectionNews) {
-			[cell setPlaceholder:NSLocalizedString(@"Add news", nil)];
 		}
 		return cell;	
 	}
@@ -375,6 +388,9 @@ typedef enum {
 	else if (indexPath.section == TableSectionLocation) {
 		self.incident.location = text;
 	}
+	else if (indexPath.section == TableSectionNews) {
+		self.news = text;
+	}
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
@@ -383,6 +399,9 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionLocation) {
 		self.incident.location = text;
+	}
+	else if (indexPath.section == TableSectionNews) {
+		self.news = text;
 	}
 }
 

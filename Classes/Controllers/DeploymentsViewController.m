@@ -115,7 +115,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Info button to view app settings, Plus button to add a deployment or the Edit button to remove a deployment.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Info button to view app settings, the Plus button to add a deployment or the Edit button to remove a deployment.", nil)];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

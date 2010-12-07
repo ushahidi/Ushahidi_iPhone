@@ -29,6 +29,12 @@
 #import "NSDictionary+Extension.h"
 #import "NSString+Extension.h"
 
+@interface Incident ()
+
+- (BOOL) hasMedia:(Media *)media inCollection:(NSArray *)collection;
+
+@end
+
 @implementation Incident
 
 @synthesize identifier, title, description, date;
@@ -82,6 +88,8 @@
 	[encoder encodeBool:self.verified forKey:@"verified"];
 	[encoder encodeObject:self.news forKey:@"news"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
+	[encoder encodeObject:self.sounds forKey:@"sounds"];
+	[encoder encodeObject:self.videos forKey:@"videos"];
 	[encoder encodeObject:self.categories forKey:@"categories"];
 	[encoder encodeObject:self.location forKey:@"location"];
 	[encoder encodeObject:self.latitude forKey:@"latitude"];
@@ -114,6 +122,12 @@
 		
 		self.photos = [decoder decodeObjectForKey:@"photos"];
 		if (self.photos == nil) self.photos = [NSArray array];
+		
+		self.videos = [decoder decodeObjectForKey:@"videos"];
+		if (self.videos == nil) self.videos = [NSArray array];
+		
+		self.sounds = [decoder decodeObjectForKey:@"sounds"];
+		if (self.sounds == nil) self.sounds = [NSArray array];
 		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
 		if (self.categories == nil) self.categories = [NSArray array];
@@ -165,43 +179,40 @@
 }
 
 - (void) addPhoto:(Photo *)photo {
-	for (Photo *media in self.photos) {
-		if ([media.identifier isEqualToString:photo.identifier]) {
-			return; //photo exists
-		}
+	if ([self hasMedia:photo inCollection:self.photos] == NO) {
+		DLog(@"addPhoto: %@", [photo identifier]);
+		[self.photos addObject:photo];
 	}
-	DLog(@"addPhoto: %@", [photo identifier]);
-	[self.photos addObject:photo];
 }
 
-- (void) addNews:(News *)theNews {
-	for (Media *media in self.news) {
-		if ([media.identifier isEqualToString:theNews.identifier]) {
-			return; //photo exists
-		}
+- (void) addNews:(News *)article {
+	if ([self hasMedia:article inCollection:self.news] == NO) {
+		DLog(@"addNews: %@", [article identifier]);
+		[self.news addObject:article];
 	}
-	DLog(@"addNews: %@", [theNews identifier]);
-	[self.news addObject:theNews];
 }
 
 - (void) addSound:(Sound *)sound {
-	for (Media *media in self.sounds) {
-		if ([media.identifier isEqualToString:sound.identifier]) {
-			return; //sound exists
-		}
+	if ([self hasMedia:sound inCollection:self.sounds] == NO) {
+		DLog(@"addSound: %@", [sound identifier]);
+		[self.sounds addObject:sound];
 	}
-	DLog(@"addSound: %@", [sound identifier]);
-	[self.sounds addObject:sound];
 }
 
 - (void) addVideo:(Video *)video {
-	for (Media *media in self.videos) {
-		if ([media.identifier isEqualToString:video.identifier]) {
-			return; //video exists
+	if ([self hasMedia:video inCollection:self.videos] == NO) {
+		DLog(@"addVideo: %@", [video identifier]);
+		[self.videos addObject:video];	
+	}
+}
+
+- (BOOL) hasMedia:(Media *)media inCollection:(NSArray *)collection {
+	for (Media *existing in collection) {
+		if ([existing.identifier isEqualToString:media.identifier]) {
+			return YES;
 		}
 	}
-	DLog(@"addVideo: %@", [video identifier]);
-	[self.videos addObject:video];
+	return NO;
 }
 
 - (void) addCategory:(Category *)category {

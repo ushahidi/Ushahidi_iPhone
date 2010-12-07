@@ -27,6 +27,7 @@
 - (BOOL) anyWordHasPrefix:(NSString *)prefix;
 - (NSString *)stringByTrimmingSuffix:(NSString *)suffix;
 - (BOOL) isValidEmail;
+- (BOOL) isValidURL;
 + (NSString *)stringByAppendingPathComponents:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

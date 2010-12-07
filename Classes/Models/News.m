@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "News.h"
+#import "NSString+Extension.h"
 
 @implementation News
 
@@ -27,6 +28,13 @@
 	
 	}
 	return self;
+}
+
++ (News *) newsWithUrl:(NSString *)theUrl {
+	News *news = [[News alloc] init];
+	news.identifier = [NSString getUUID];
+	news.url = theUrl;
+	return [news autorelease];
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {

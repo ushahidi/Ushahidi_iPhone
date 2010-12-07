@@ -57,6 +57,12 @@
     return [emailTest evaluateWithObject:self];
 }
 
+- (BOOL) isValidURL {
+	NSString *urlRegex = @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegex]; 
+    return [urlTest evaluateWithObject:self];
+}
+
 + (NSString *)stringByAppendingPathComponents:(NSString *)string, ... {
     va_list args;
     va_start(args, string);

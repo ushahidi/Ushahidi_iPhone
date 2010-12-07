@@ -31,6 +31,7 @@
 @class NewsViewController;
 @class Incident;
 @class Email;
+@class MoviePlayer;
 
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
 															UIWebViewDelegate, 
@@ -49,6 +50,7 @@
 																
 @private
 	Email *email;
+	MoviePlayer *moviePlayer;
 																
 }
 

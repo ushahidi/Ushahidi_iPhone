@@ -123,8 +123,6 @@
 
 - (void) annotationClicked:(UIButton *)button {
 	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[[button superview] superview];
-	MapAnnotation *mapAnnotation = (MapAnnotation *)annotationView.annotation;
-	DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
 	SEL selector = @selector(mapTableCell:pinSelectedAtIndex:);
 	if (self.delegate != nil && [self.delegate respondsToSelector:selector]) {
 		//TODO fix this to use actual index

@@ -19,12 +19,18 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
-#import "Media.h"
+#import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface News : Media {
-
+@interface MoviePlayer : NSObject {
+	
+@private
+	UIViewController *controller;
+	MPMoviePlayerController *playerController;
+	MPMoviePlayerViewController *playerViewController;
 }
 
-+ (News *) newsWithUrl:(NSString *)url;
+- (id) initWithController:(UIViewController *)controller;
+- (void) playMovie:(NSString *)url;
 
 @end

@@ -36,6 +36,12 @@ typedef enum {
 	NavigationForward
 } Navigation;
 
+typedef enum {  
+    BrowserErrorHostNotFound = -1003,
+    BrowserErrorOperationNotCompleted = -999,
+    BrowserErrorNoInternetConnection = -1009
+} BrowserErrorCode;
+
 #pragma mark -
 #pragma mark Handlers
 
@@ -100,7 +106,13 @@ typedef enum {
 }
 
 - (void)webView:(UIWebView *)theWebView didFailLoadWithError:(NSError *)error {
-	DLog(@"error: %@", [error localizedDescription]);
+	DLog(@"error: %d %@", [error code], [error localizedDescription]);
+	if ([error code] == BrowserErrorNoInternetConnection) {
+		[self.alertView showOkWithTitle:NSLocalizedString(@"No Internet", nil) andMessage:[error localizedDescription]];
+	}
+	else if ([error code] == BrowserErrorHostNotFound) {
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Host Not Found", nil) andMessage:[error localizedDescription]];
+	}
 	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
 }

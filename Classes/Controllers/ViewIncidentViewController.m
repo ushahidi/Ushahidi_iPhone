@@ -38,26 +38,30 @@
 #import "Email.h"
 #import "Deployment.h"
 #import "News.h"
+#import "Video.h"
 #import "NSString+Extension.h"
+#import "MoviePlayer.h"
 
 @interface ViewIncidentViewController ()
 
 @property(nonatomic,retain) Email *email;
+@property(nonatomic,retain) MoviePlayer *moviePlayer;
 
 @end
 
 @implementation ViewIncidentViewController
 
 typedef enum {
-TableSectionErrors,
-TableSectionTitle,
-TableSectionVerified,
-TableSectionDescription,
-TableSectionCategory,
-TableSectionDateTime,
-TableSectionLocation,
-TableSectionPhotos,
-TableSectionNews
+	TableSectionErrors,
+	TableSectionTitle,
+	TableSectionVerified,
+	TableSectionDescription,
+	TableSectionCategory,
+	TableSectionDateTime,
+	TableSectionLocation,
+	TableSectionPhotos,
+	TableSectionNews,
+	TableSectionVideo
 } TableSection;
 
 typedef enum {
@@ -66,7 +70,7 @@ typedef enum {
 } NavBar;
 
 @synthesize mapViewController, imageViewController, newsViewController, nextPrevious, incident, incidents, email, pending;
-@synthesize emailLinkButton, emailDetailsButton;
+@synthesize emailLinkButton, emailDetailsButton, moviePlayer;
 
 #pragma mark -
 #pragma mark Handlers
@@ -130,6 +134,7 @@ typedef enum {
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
 	self.email = [[Email alloc] initWithController:self];
+	self.moviePlayer = [[MoviePlayer alloc] initWithController:self];
 	[self setHeader:NSLocalizedString(@"Errors", nil) atSection:TableSectionErrors];
 	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
 	[self setHeader:NSLocalizedString(@"Verified", nil) atSection:TableSectionVerified];
@@ -139,6 +144,7 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photos", nil) atSection:TableSectionPhotos];
 	[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
+	[self setHeader:NSLocalizedString(@"Video", nil) atSection:TableSectionVideo];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -154,6 +160,11 @@ typedef enum {
 	self.emailLinkButton.enabled = !self.pending;
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through reports, the Link button to send the report URL or the Email button to send the report details.", nil)];
+}
+
 - (void)dealloc {
 	[mapViewController release];
 	[imageViewController release];
@@ -161,6 +172,7 @@ typedef enum {
 	[nextPrevious release];
 	[incident release];
 	[email release];
+	[moviePlayer release];
 	[emailLinkButton release];
 	[emailDetailsButton release];
     [super dealloc];
@@ -170,7 +182,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 9;
+	return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
@@ -260,6 +272,28 @@ typedef enum {
 		}
 		return cell;
 	}
+	else if (indexPath.section == TableSectionVideo && [self.incident.videos count] > 0) {
+		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithForTable:theTableView indexPath:indexPath];
+		Video *video = [self.incident.videos objectAtIndex:indexPath.row];
+		if (video != nil) {
+			if ([NSString isNilOrEmpty:video.title] == NO) {
+				[cell setText:video.title];	
+			}
+			else {
+				[cell setText:video.url];
+			}
+			[cell setDescription:video.url];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+		}
+		else {
+			[cell setText:@""];	
+			[cell setDescription:@""];
+			cell.accessoryType = UITableViewCellAccessoryNone;
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		}
+		return cell;
+	}
 	else {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryNone;
@@ -289,6 +323,9 @@ typedef enum {
 		}
 		else if (indexPath.section == TableSectionNews) {
 			cell.textLabel.text = NSLocalizedString(@"No News", nil);
+		}
+		else if (indexPath.section == TableSectionVideo) {
+			cell.textLabel.text = NSLocalizedString(@"No Video", nil);
 		}
 		else if (indexPath.section == TableSectionVerified) {
 			cell.textLabel.text = self.incident.verified ? NSLocalizedString(@"Yes", nil) : NSLocalizedString(@"No", nil);
@@ -352,7 +389,6 @@ typedef enum {
 	UITableViewCell *cell = [theTableView cellForRowAtIndexPath:indexPath];
 	if (indexPath.section == TableSectionNews) {
 		if ([self.incident.news count] > 0) {
-			//self.webViewController.title = [((SubtitleTableCell *)cell) getText];
 			self.newsViewController.website = [((SubtitleTableCell *)cell) getDescription];
 			[self.navigationController pushViewController:self.newsViewController animated:YES];
 		}
@@ -377,6 +413,13 @@ typedef enum {
 			self.imageViewController.image = [((ImageTableCell *)cell) getImage];
 			self.imageViewController.images = self.incident.photoImages;
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
+		}
+	}
+	else if (indexPath.section == TableSectionVideo) {
+		if ([self.incident.videos count] > 0) {
+			Video *video = [self.incident.videos objectAtIndex:indexPath.row];
+			self.newsViewController.website = video.url;
+			[self.navigationController pushViewController:self.newsViewController animated:YES];
 		}
 	}
 }

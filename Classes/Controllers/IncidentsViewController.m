@@ -238,7 +238,7 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Radar button to view report map, Tag button to filter by category or the Compose button to create a new incident report.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Radar button to view the report map, the Tag button to filter by category or the Compose button to create a new incident report.", nil)];
 }
 
 - (void)dealloc {
@@ -400,10 +400,17 @@ typedef enum {
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)thePending error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
-		DLog(@"error: %@", [error localizedDescription]);
+		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 		if ([self.loadingView isShowing]) {
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
-								 andMessage:[error localizedDescription]];
+			if ([error code] > 1) {
+				[self.loadingView hide];
+				[self.alertView showOkWithTitle:NSLocalizedString(@"Server Error", nil) 
+									 andMessage:[error localizedDescription]];
+			}
+			else {
+				[self.loadingView showWithMessage:NSLocalizedString(@"No Internet", nil)];
+				[self.loadingView performSelector:@selector(hide) withObject:nil afterDelay:1.5];
+			}
 		}
 	}
 	else if(hasChanges) {
@@ -432,13 +439,14 @@ typedef enum {
 			[self populateMapPins];
 		}
 		DLog(@"Re-Adding Incidents");
+		[self.loadingView hide];
 	}
 	else {
 		DLog(@"No Changes Incidents");
 		[self updateLastSyncLabel];
 		[self.tableView reloadData];
+		[self.loadingView hide];
 	}
-	[self.loadingView hide];
 	self.incidentTableView.refreshButton.enabled = YES;
 	self.incidentMapView.refreshButton.enabled = YES;
 }
@@ -461,6 +469,14 @@ typedef enum {
 }
 
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error {
+	if (error != nil) {
+		DLog(@"error: %d %@", [error code], [error localizedDescription]);
+		if ([error code] > 1) {
+			[self.loadingView hide];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Upload Error", nil) 
+								 andMessage:[error localizedDescription]];
+		}
+	}
 	if (incident != nil){
 		DLog(@"Incident: %@", incident.title);
 		NSInteger row = [self.pending indexOfObject:incident];
@@ -512,9 +528,7 @@ typedef enum {
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
-		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Request", nil) 
-							 andMessage:NSLocalizedString([error localizedDescription], nil)];
+		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 	}
 	else if(hasChanges) {
 		[self.categories removeAllObjects];

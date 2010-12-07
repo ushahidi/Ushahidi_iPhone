@@ -51,6 +51,7 @@
 @private
 	DatePicker *datePicker;
 	Incident *incident;
+	NSString *news;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;

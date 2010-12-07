@@ -21,6 +21,8 @@
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.ushahidi.ios.app</string>
+	<key>UILaunchImageFile</key>
+	<string>Default</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

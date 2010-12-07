@@ -235,6 +235,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post addPostValue:[[Settings sharedSettings] firstName] forKey:@"person_first"];
 		[post addPostValue:[[Settings sharedSettings] lastName] forKey:@"person_last"];
 		[post addPostValue:[[Settings sharedSettings] email] forKey:@"person_email"];
+		if ([incident.news count] > 0) {
+			News *news = [incident.news objectAtIndex:0];
+			[post addPostValue:news.url forKey:@"incident_news"];
+		}
+		if ([incident.videos count] > 0) {
+			Video *video = [incident.videos objectAtIndex:0];
+			[post addPostValue:video.url forKey:@"incident_video"];
+		}
 		NSInteger filename = 1;
 		for(Photo *photo in incident.photos) {
 			[post addData:[photo getJpegData] withFileName:[NSString stringWithFormat:@"incident_photo%d.jpg", filename++] 

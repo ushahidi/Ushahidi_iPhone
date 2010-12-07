@@ -268,7 +268,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"response: %@", [request responseString]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	Incident *incident = [[request userInfo] objectForKey:@"incident"];
+	incident.uploading = NO;
 	if ([request responseStatusCode] != HttpStatusOK) {
+		incident.errors = [[request error] localizedDescription];
 		NSError *error = [NSError errorWithDomain:self.deployment.domain code:[request responseStatusCode] message:[request responseStatusMessage]];
 		[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
 						target:delegate 
@@ -318,6 +320,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"error: %@", [[request error] localizedDescription]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	Incident *incident = [[request userInfo] objectForKey:@"incident"];
+	incident.uploading = NO;
+	incident.errors = [[request error] localizedDescription];
 	[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
 					target:delegate 
 				   objects:self, incident, [request error], nil];

@@ -413,7 +413,7 @@ typedef enum {
 			}
 		}
 	}
-	else if(hasChanges) {
+	else if (hasChanges) {
 		DLog(@"incidents: %d", [incidents count]);
 		[self updateLastSyncLabel];
 		[self.loadingView hide];
@@ -453,8 +453,8 @@ typedef enum {
 
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident {
 	if (incident != nil){
-		DLog(@"Incident: %@", incident.title);
 		NSInteger row = [self.pending indexOfObject:incident];
+		DLog(@"Incident: %d %@", row, incident.title);
 		if (row > -1) {
 			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionPending];
 			IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -477,9 +477,9 @@ typedef enum {
 								 andMessage:[error localizedDescription]];
 		}
 	}
-	if (incident != nil){
-		DLog(@"Incident: %@", incident.title);
+	if (incident != nil) {
 		NSInteger row = [self.pending indexOfObject:incident];
+		DLog(@"Incident: %d %@", row, incident.title);
 		if (row > -1) {
 			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionPending];
 			IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];

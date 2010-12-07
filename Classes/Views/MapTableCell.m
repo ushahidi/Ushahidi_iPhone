@@ -122,7 +122,6 @@
 }
 
 - (void) annotationClicked:(UIButton *)button {
-	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[[button superview] superview];
 	SEL selector = @selector(mapTableCell:pinSelectedAtIndex:);
 	if (self.delegate != nil && [self.delegate respondsToSelector:selector]) {
 		//TODO fix this to use actual index

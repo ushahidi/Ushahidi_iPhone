@@ -186,13 +186,15 @@ typedef enum {
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
-	return section == TableSectionErrors && self.incident.errors == nil 
-		? 0 : [TableHeaderView getViewHeight];
+	if (section == TableSectionErrors) {
+		return [NSString isNilOrEmpty:self.incident.errors] ? 0 : [TableHeaderView getViewHeight];
+	}
+	return [TableHeaderView getViewHeight];
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	if (section == TableSectionErrors) {
-		return self.incident.errors != nil ? 1 : 0;
+		return [NSString isNilOrEmpty:self.incident.errors] ? 0 : 1;
 	}
 	if (section == TableSectionNews) {
 		if ([self.incident.news count] > 0) {
@@ -359,6 +361,12 @@ typedef enum {
 		}
 		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No News", nil) forWidth:theTableView.contentSize.width].height;
 	}
+	else if (indexPath.section == TableSectionVideo) {
+		if ([self.incident.videos count] > 0) {
+			return [SubtitleTableCell getCellHeight];
+		}
+		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No Video", nil) forWidth:theTableView.contentSize.width].height;
+	}
 	else if (indexPath.section == TableSectionTitle) {
 		return [TextTableCell getCellSizeForText:self.incident.title forWidth:theTableView.contentSize.width].height;
 	}
@@ -376,9 +384,8 @@ typedef enum {
 		return [TextTableCell getCellSizeForText:[self.incident dateTimeString] forWidth:theTableView.contentSize.width].height;
 	}
 	else if (indexPath.section == TableSectionErrors) {
-		return self.incident.errors != nil 
-			? [TextTableCell getCellSizeForText:self.incident.errors forWidth:theTableView.contentSize.width].height
-			: 0;
+		return [NSString isNilOrEmpty:self.incident.errors] 
+			? 0 : [TextTableCell getCellSizeForText:self.incident.errors forWidth:theTableView.contentSize.width].height;
 	}
 	return 45;
 }
@@ -433,7 +440,10 @@ typedef enum {
 		ImageTableCell *cell = (ImageTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
 		if (cell != nil) {
 			[cell setImage:photo.image];
-		}	
+		}
+		else {
+			[self.tableView reloadData];
+		}
 	}
 }
 

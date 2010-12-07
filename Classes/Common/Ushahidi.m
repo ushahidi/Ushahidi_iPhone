@@ -270,7 +270,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	Incident *incident = [[request userInfo] objectForKey:@"incident"];
 	incident.uploading = NO;
 	if ([request responseStatusCode] != HttpStatusOK) {
-		incident.errors = [[request error] localizedDescription];
+		incident.errors = [request responseStatusMessage];
 		NSError *error = [NSError errorWithDomain:self.deployment.domain code:[request responseStatusCode] message:[request responseStatusMessage]];
 		[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
 						target:delegate 
@@ -280,7 +280,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
 			DLog(@"response: %@", [request responseString]);
-			NSError *error = [NSError errorWithDomain:self.deployment.domain code:HttpStatusInternalServerError message:NSLocalizedString(@"Invalid response", nil)];
+			incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
+			NSError *error = [NSError errorWithDomain:self.deployment.domain code:HttpStatusInternalServerError message:NSLocalizedString(@"Unable To Upload Report", nil)];
 			[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
 							target:delegate 
 						   objects:self, incident, error, nil];
@@ -304,7 +305,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					incident.errors = [messages objectForKey:@"message"];
 				}
 				else {
-					incident.errors = NSLocalizedString(@"Unable to upload report.", nil);
+					incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
 				}
 				NSError *error = [NSError errorWithDomain:self.deployment.domain code:HttpStatusInternalServerError message:incident.errors];
 				[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 

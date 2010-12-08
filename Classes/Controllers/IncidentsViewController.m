@@ -225,6 +225,7 @@ typedef enum {
 		self.category = nil;
 		self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
 		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
+		[self.incidentMapView setLabel:NSLocalizedString(@"All Categories", nil)];
 	}
 	else {
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];

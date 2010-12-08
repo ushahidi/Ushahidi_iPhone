@@ -24,8 +24,10 @@
 
 @public
 	UIBarButtonItem *refreshButton;
+	UIBarButtonItem *filterButton;
 }
 
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
 
 @end

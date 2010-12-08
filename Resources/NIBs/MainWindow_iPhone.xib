@@ -12,8 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="119"/>
-			<integer value="11"/>
+			<integer value="17"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -99,7 +98,6 @@
 			</object>
 			<object class="IBUIViewController" id="888680612">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="995128150">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Ushahidi</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="926871996">
 						<string key="IBUITitle">Ushahidi</string>
@@ -150,6 +148,7 @@
 			</object>
 			<object class="IBUIViewController" id="580405253">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="583687517">
+					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Reports</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="408009208">
 						<string key="IBUITitle">Reports</string>
@@ -160,9 +159,10 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="268590964">
-							<nil key="NSNextResponder"/>
+							<reference key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
+							<reference key="NSSuperview"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<int key="IBSegmentControlStyle">2</int>
@@ -426,7 +426,6 @@
 			</object>
 			<object class="IBUIViewController" id="407784374">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="397214988">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">News</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="110699846">
 						<string key="IBUITitle">Back</string>
@@ -437,10 +436,9 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="587986711">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
-							<reference key="NSSuperview"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<int key="IBSegmentControlStyle">2</int>
@@ -1221,7 +1219,7 @@
 					<string>{{1120, 26}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>IncidentsViewController</string>
-					<string>{{1120, 26}, {320, 480}}</string>
+					<string>{{650, 211}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>MotionWindow</string>
@@ -2358,9 +2356,11 @@
 							<string>emailDetails:</string>
 							<string>emailLink:</string>
 							<string>nextPrevious:</string>
+							<string>smsLink:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -2373,6 +2373,7 @@
 							<string>emailDetails:</string>
 							<string>emailLink:</string>
 							<string>nextPrevious:</string>
+							<string>smsLink:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2386,6 +2387,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">nextPrevious:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">smsLink:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -2767,6 +2772,13 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">MediaPlayer.framework/Headers/MPMoviePlayerViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIViewController</string>
 					<reference key="sourceIdentifier" ref="932292564"/>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2846,7 +2858,7 @@
 				<string>{24, 24}</string>
 				<string>{24, 24}</string>
 				<string>{15, 13}</string>
-				<string>{24, 24}</string>
+				<string>{26, 21}</string>
 				<string>{30, 30}</string>
 			</object>
 		</object>

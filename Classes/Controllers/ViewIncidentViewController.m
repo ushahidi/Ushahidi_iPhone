@@ -41,10 +41,12 @@
 #import "Video.h"
 #import "NSString+Extension.h"
 #import "MoviePlayer.h"
+#import "SMS.h"
 
 @interface ViewIncidentViewController ()
 
 @property(nonatomic,retain) Email *email;
+@property(nonatomic,retain) SMS *sms;
 @property(nonatomic,retain) MoviePlayer *moviePlayer;
 
 @end
@@ -69,7 +71,7 @@ typedef enum {
 	NavBarNext
 } NavBar;
 
-@synthesize mapViewController, imageViewController, newsViewController, nextPrevious, incident, incidents, email, pending;
+@synthesize mapViewController, imageViewController, newsViewController, nextPrevious, incident, incidents, email, sms, pending;
 @synthesize emailLinkButton, emailDetailsButton, moviePlayer;
 
 #pragma mark -
@@ -101,16 +103,27 @@ typedef enum {
 	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title];
 }
 
-- (IBAction) emailDetails:(id)sender {
+- (IBAction) smsLink:(id)sender {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
 	if (self.pending) {
-		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];	
+		[message appendFormat:@"%@", self.incident.title];
 	}
 	else {
 		NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
-		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", @"Title"), [link absoluteString], self.incident.title];
+		[message appendFormat:@"%@ %@", self.incident.title, [link absoluteString]];
 	}
+	[self.sms sendToRecipients:nil withMessage:message];
+}
+
+- (IBAction) emailDetails:(id)sender {
+	DLog(@"");
+	NSMutableString *message = [NSMutableString string];
+	if (self.pending == NO) {
+		NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
+		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Link", nil), [link absoluteString], [link absoluteString]];
+	}
+	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", nil), self.incident.dateTimeString];
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", nil), self.incident.location];
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", nil), self.incident.categoryNames];
@@ -134,6 +147,7 @@ typedef enum {
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiLiteTan];
 	self.email = [[Email alloc] initWithController:self];
+	self.sms = [[SMS alloc] initWithController:self];
 	self.moviePlayer = [[MoviePlayer alloc] initWithController:self];
 	[self setHeader:NSLocalizedString(@"Errors", nil) atSection:TableSectionErrors];
 	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
@@ -157,7 +171,7 @@ typedef enum {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];	
-	self.emailLinkButton.enabled = !self.pending;
+	self.emailLinkButton.enabled = !self.pending && [self.sms canSend];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

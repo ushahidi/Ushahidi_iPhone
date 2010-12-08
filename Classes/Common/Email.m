@@ -19,8 +19,12 @@
  *****************************************************************************/
 
 #import "Email.h"
+#import "AlertView.h"
 
 @interface Email ()
+
+@property (nonatomic, retain) UIViewController *controller;
+@property (nonatomic, retain) AlertView *alert;
 
 @end 
 

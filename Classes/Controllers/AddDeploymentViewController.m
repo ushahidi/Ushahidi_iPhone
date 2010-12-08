@@ -51,9 +51,7 @@ typedef enum {
 
 - (BOOL) hasValidInputs {
 	return	self.name != nil && [self.name length] > 0 &&
-			self.url != nil && [self.url length] > 0 && 
-			([[self.url lowercaseString] hasPrefix:@"http://"] || 
-			 [[self.url lowercaseString] hasPrefix:@"https://"]);
+			self.url != nil && [self.url isValidURL];
 }
 
 - (void) dismissModalView {
@@ -184,6 +182,11 @@ typedef enum {
 - (void) textFieldFocussed:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath {
 	DLog(@"indexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
+	if (indexPath.section == TableSectionURL) {
+		if ([NSString isNilOrEmpty:self.url]) {
+			[cell setText:@"http://"];
+		}
+	}
 }
 
 - (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {

@@ -31,6 +31,7 @@
 @class NewsViewController;
 @class Incident;
 @class Email;
+@class SMS;
 @class MoviePlayer;
 
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
@@ -50,6 +51,7 @@
 																
 @private
 	Email *email;
+	SMS *sms;
 	MoviePlayer *moviePlayer;
 																
 }
@@ -67,5 +69,6 @@
 - (IBAction) nextPrevious:(id)sender;
 - (IBAction) emailLink:(id)sender;
 - (IBAction) emailDetails:(id)sender;
+- (IBAction) smsLink:(id)sender;
 
 @end

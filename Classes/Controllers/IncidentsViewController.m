@@ -48,14 +48,14 @@
 
 - (void) updateLastSyncLabel;
 - (void) pushViewIncidentsViewController;
-- (void) populateMapPins;
+- (void) populateMapPins:(BOOL)resizeMap;
 
 @end
 
 @implementation IncidentsViewController
 
 @synthesize addIncidentViewController, viewIncidentViewController, mapView, deployment, tableSort, mapType, pending;
-@synthesize incidentTableView, incidentMapView, itemPicker, categories, category, filterButton;
+@synthesize incidentTableView, incidentMapView, itemPicker, categories, category;
 
 typedef enum {
 	ViewModeTable,
@@ -122,7 +122,7 @@ typedef enum {
 		[self.incidentMapView removeFromSuperview];
 		[self.view addSubview:self.incidentTableView];
 		[UIView commitAnimations];
-		self.filterButton.enabled = [self.categories count] > 0;
+		self.incidentTableView.filterButton.enabled = [self.categories count] > 0;
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
 		DLog(@"ViewModeMap");
@@ -134,7 +134,10 @@ typedef enum {
 		[self.incidentTableView removeFromSuperview];
 		[self.view addSubview:self.incidentMapView];
 		[UIView commitAnimations];
-		[self populateMapPins];
+		if ([self.mapView.annotations count] == 0) {
+			[self populateMapPins:YES];
+		}
+		self.incidentMapView.filterButton.enabled = [self.categories count] > 0;
 	}
 }
 
@@ -165,10 +168,11 @@ typedef enum {
 	}
 }
 
-- (void) populateMapPins {
+- (void) populateMapPins:(BOOL)resizeMap {
+	self.mapView.showsUserLocation = NO;
 	[self.mapView removeAllPins];
 	self.mapView.showsUserLocation = YES;
-	for (Incident *incident in self.allRows) {
+	for (Incident *incident in self.filteredRows) {
 		[self.mapView addPinWithTitle:incident.title 
 							 subtitle:incident.dateString 
 							 latitude:incident.latitude 
@@ -184,7 +188,9 @@ typedef enum {
 							   object:incident
 							 pinColor:MKPinAnnotationColorPurple];
 	}
-	[self.mapView resizeRegionToFitAllPins:YES];
+	if (resizeMap) {
+		[self.mapView resizeRegionToFitAllPins:YES];	
+	}
 }
 
 #pragma mark -
@@ -226,13 +232,16 @@ typedef enum {
 	[self.pending removeAllObjects];
 	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
 	[self filterRows:NO];
-	if (self.incidentTableView.superview != nil) {
-		[self updateLastSyncLabel];
-		[self.tableView reloadData];
-		self.filterButton.enabled = [self.categories count] > 0;
-	}
-	else if (self.incidentMapView.superview != nil) {
-		[self populateMapPins];
+	if (self.willBePushed) {
+		if (self.incidentTableView.superview != nil) {
+			[self updateLastSyncLabel];
+			[self.tableView reloadData];
+			self.incidentTableView.filterButton.enabled = [self.categories count] > 0;
+			self.incidentMapView.filterButton.enabled = [self.categories count] > 0;
+		}
+		else if (self.incidentMapView.superview != nil) {
+			[self populateMapPins:YES];
+		}
 	}
 }
 
@@ -252,7 +261,6 @@ typedef enum {
 	[itemPicker release];
 	[categories release];
 	[category release];
-	[filterButton release];
     [super dealloc];
 }
 
@@ -351,7 +359,7 @@ typedef enum {
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
-- (void) filterRows:(BOOL)reloadTable {
+- (void) filterRows:(BOOL)reload {
 	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
 	NSArray *incidents;
@@ -374,9 +382,14 @@ typedef enum {
 			[self.filteredRows addObject:incident];
 		}
 	}
-	if (reloadTable) {
-		[self.tableView reloadData];	
-		[self.tableView flashScrollIndicators];
+	if (self.incidentTableView.superview != nil) {
+		if (reload) {
+			[self.tableView reloadData];	
+			[self.tableView flashScrollIndicators];	
+		}
+	}
+	else if (self.incidentMapView.superview != nil) {
+		[self populateMapPins:reload];
 	}
 } 
 
@@ -436,7 +449,7 @@ typedef enum {
 			[self.tableView flashScrollIndicators];	
 		}
 		else if (self.incidentMapView.superview != nil) {
-			[self populateMapPins];
+			[self populateMapPins:YES];
 		}
 		DLog(@"Re-Adding Incidents");
 		[self.loadingView hide];
@@ -540,7 +553,8 @@ typedef enum {
 	else {
 		DLog(@"No Changes Categories");
 	}
-	self.filterButton.enabled = [self.categories count] > 0;
+	self.incidentTableView.filterButton.enabled = [self.categories count] > 0;
+	self.incidentMapView.filterButton.enabled = [self.categories count] > 0;
 }
 
 #pragma mark -
@@ -557,7 +571,6 @@ typedef enum {
 		annotationView.pinColor = MKPinAnnotationColorGreen;
 	}
 	else {
-		DLog(@"annotation: %@", [annotation class]);
 		if ([annotation isKindOfClass:[MapAnnotation class]]) {
 			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
 			annotationView.pinColor = mapAnnotation.pinColor;
@@ -601,9 +614,11 @@ typedef enum {
 	}
 	if (self.category != nil) {
 		[self setHeader:self.category.title atSection:TableSectionIncidents];
+		[self.incidentMapView setLabel:self.category.title];
 	}
 	else {
 		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
+		[self.incidentMapView setLabel:NSLocalizedString(@"All Categories", nil)];
 	}
 	[self filterRows:YES];
 }

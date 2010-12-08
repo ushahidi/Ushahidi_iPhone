@@ -27,8 +27,14 @@
 
 @public
 	UIBarButtonItem *refreshButton;
+	UIBarButtonItem *filterButton;
+	UILabel *filterLabel;
 }
 
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
+@property(nonatomic,retain) IBOutlet UILabel *filterLabel;
+
+- (void) setLabel:(NSString *)label;
 
 @end

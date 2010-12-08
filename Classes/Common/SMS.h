@@ -18,29 +18,21 @@
  **
  *****************************************************************************/
 
-#import "IncidentMapView.h"
+#import <Foundation/Foundation.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMessageComposeViewController.h>
 
-@implementation IncidentMapView
+@class AlertView;
 
-@synthesize refreshButton, filterButton, filterLabel;
+@interface SMS : NSObject<MFMessageComposeViewControllerDelegate> {
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-		
-    }
-    return self;
+@private
+	UIViewController *controller;
+	AlertView *alert;
 }
 
-- (void) setLabel:(NSString *)label {
-	filterLabel.text = label;
-}
-
-- (void)dealloc {
-	[refreshButton release];
-	[filterButton release];
-	[filterLabel release];
-    [super dealloc];
-}
+- (id) initWithController:(UIViewController *)controller;
+- (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message;
+- (BOOL) canSend;
 
 @end

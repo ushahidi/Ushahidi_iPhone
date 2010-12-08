@@ -22,19 +22,19 @@
 
 @implementation IncidentTableView
 
-@synthesize refreshButton;
+@synthesize refreshButton, filterButton;
 
 - (id)initWithFrame:(CGRect)frame {
-    
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code.
+		
     }
     return self;
 }
 
 - (void)dealloc {
 	[refreshButton release];
+	[filterButton release];
     [super dealloc];
 }
 

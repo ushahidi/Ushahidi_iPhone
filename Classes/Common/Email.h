@@ -23,15 +23,15 @@
 #import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "AlertView.h"
+
+@class AlertView;
 
 @interface Email : NSObject<MFMailComposeViewControllerDelegate> {
+
+@private
 	UIViewController *controller;
 	AlertView *alert;
 }
-
-@property (nonatomic, retain) UIViewController *controller;
-@property (nonatomic, retain) AlertView *alert;
 
 - (id) initWithController:(UIViewController *)controller;
 - (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject;

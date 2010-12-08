@@ -248,7 +248,7 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Radar button to view the report map, the Tag button to filter by category or the Compose button to create a new incident report.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
 }
 
 - (void)dealloc {

@@ -38,6 +38,8 @@
 #import "Sound.h"
 #import "Video.h"
 #import "Settings.h"
+#import "Incident.h"
+#import "Internet.h"
 
 @interface Ushahidi ()
 
@@ -90,25 +92,6 @@ typedef enum {
 	MediaTypeSound = 3,
 	MediaTypeNews = 4
 } MediaType;
-
-typedef enum {
-	HttpStatusContinue = 100,
-	HttpStatusOK = 200,
-	HttpStatusCreate = 201,
-	HttpStatusAccepted = 202,
-	HttpStatusNoContent = 204,
-	HttpStatusMovedPermanently = 301,
-	HttpStatusNotModified = 304,
-	HttpStatusBadRequest = 400,
-	HttpStatusNoauthorized = 401,
-	HttpStatusForbidden = 403,
-	HttpStatusNotFound = 404,
-	HttpStatusTimeout = 408,
-	HttpStatusInternalServerError = 500,
-	HttpStatusNotImplemented = 501,
-	HttpStatusBadGateway = 502,
-	HttpStatusServiceUnavailable = 503
-} HttpStatus;
 
 NSString * const kGoogleStaticMaps = @"http://maps.google.com/maps/api/staticmap";
 NSInteger const kGoogleOverCapacitySize = 100;

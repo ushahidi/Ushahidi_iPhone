@@ -38,6 +38,7 @@
 #import "TableHeaderView.h"
 #import "IncidentTableView.h"
 #import "IncidentMapView.h"
+#import "Internet.h"
 
 @interface IncidentsViewController ()
 
@@ -224,6 +225,9 @@ typedef enum {
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
 		self.category = nil;
 		self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+		if ([self.categories count] == 0) {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];	
+		}
 		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
 		[self.incidentMapView setLabel:NSLocalizedString(@"All Categories", nil)];
 	}
@@ -415,16 +419,19 @@ typedef enum {
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)thePending error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
-		if ([self.loadingView isShowing]) {
-			if ([error code] > 1) {
-				[self.loadingView hide];
-				[self.alertView showOkWithTitle:NSLocalizedString(@"Server Error", nil) 
-									 andMessage:[error localizedDescription]];
-			}
-			else {
-				[self.loadingView showWithMessage:NSLocalizedString(@"No Internet", nil)];
-				[self.loadingView performSelector:@selector(hide) withObject:nil afterDelay:1.5];
-			}
+		if ([error code] == UnableToCreateRequest) {
+			[self.loadingView hide];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Request Error", nil) 
+								 andMessage:[error localizedDescription]];
+		}
+		else if ([error code] == NoInternetConnection) {
+			[self.loadingView showWithMessage:NSLocalizedString(@"No Internet", nil)];
+			[self.loadingView performSelector:@selector(hide) withObject:nil afterDelay:2.0];
+		}
+		else if ([self.loadingView isShowing]){
+			[self.loadingView hide];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Server Error", nil) 
+								 andMessage:[error localizedDescription]];
 		}
 	}
 	else if (hasChanges) {
@@ -589,15 +596,20 @@ typedef enum {
 - (void) annotationClicked:(UIButton *)button {
 	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[[button superview] superview];
 	MapAnnotation *mapAnnotation = (MapAnnotation *)annotationView.annotation;
-	DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
-	self.viewIncidentViewController.incident = (Incident *)mapAnnotation.object;
-	if (mapAnnotation.pinColor == MKPinAnnotationColorRed) {
-		self.viewIncidentViewController.incidents = self.allRows;	
+	if ([mapAnnotation class] == MKUserLocation.class) {
+		[self.alertView showOkWithTitle:NSLocalizedString(@"User Location", nil) andMessage:[NSString stringWithFormat:@"%f,%f", mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude]];
 	}
 	else {
-		self.viewIncidentViewController.incidents = self.pending;
+		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
+		self.viewIncidentViewController.incident = (Incident *)mapAnnotation.object;
+		if (mapAnnotation.pinColor == MKPinAnnotationColorRed) {
+			self.viewIncidentViewController.incidents = self.allRows;	
+		}
+		else {
+			self.viewIncidentViewController.incidents = self.pending;
+		}
+		[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];	
 	}
-	[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];	
 }
 
 #pragma mark -

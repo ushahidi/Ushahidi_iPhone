@@ -20,6 +20,7 @@
 
 #import "NewsViewController.h"
 #import "NSString+Extension.h"
+#import "Internet.h"
 
 @interface NewsViewController ()
 
@@ -35,12 +36,6 @@ typedef enum {
 	NavigationBack,
 	NavigationForward
 } Navigation;
-
-typedef enum {  
-    BrowserErrorHostNotFound = -1003,
-    BrowserErrorOperationNotCompleted = -999,
-    BrowserErrorNoInternetConnection = -1009
-} BrowserErrorCode;
 
 #pragma mark -
 #pragma mark Handlers

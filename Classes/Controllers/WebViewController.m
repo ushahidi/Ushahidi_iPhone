@@ -23,6 +23,7 @@
 #import "AlertView.h"
 #import "InputView.h"
 #import "Device.h"
+#import "Internet.h"
 
 @interface WebViewController ()
 
@@ -41,12 +42,6 @@ typedef enum {
 	NavigationBack,
 	NavigationForward
 } Navigation;
-
-typedef enum {  
-    BrowserErrorHostNotFound = -1003,
-    BrowserErrorOperationNotCompleted = -999,
-    BrowserErrorNoInternetConnection = -1009
-} BrowserErrorCode;
 
 #pragma mark -
 #pragma mark Handlers

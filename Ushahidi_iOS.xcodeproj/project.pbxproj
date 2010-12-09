@@ -176,6 +176,7 @@
 		3ED45095128B475100578DB4 /* sort_verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED45094128B475100578DB4 /* sort_verified.png */; };
 		3EF58725129AC37100489AF8 /* IncidentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF58724129AC37100489AF8 /* IncidentTableView.m */; };
 		3EF58728129AC37E00489AF8 /* IncidentMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF58727129AC37E00489AF8 /* IncidentMapView.m */; };
+		3EF8731712B136EF00E9D799 /* Internet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8731612B136EF00E9D799 /* Internet.m */; };
 		3EFC1C1D1295D81C00163B36 /* email_details.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1B1295D81C00163B36 /* email_details.png */; };
 		3EFC1C1E1295D81C00163B36 /* email_link.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1C1295D81C00163B36 /* email_link.png */; };
 		3EFC1C3B1295D92A00163B36 /* photo_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C3A1295D92A00163B36 /* photo_save.png */; };
@@ -453,6 +454,8 @@
 		3EF58724129AC37100489AF8 /* IncidentTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentTableView.m; sourceTree = "<group>"; };
 		3EF58726129AC37E00489AF8 /* IncidentMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentMapView.h; sourceTree = "<group>"; };
 		3EF58727129AC37E00489AF8 /* IncidentMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentMapView.m; sourceTree = "<group>"; };
+		3EF8731512B136EF00E9D799 /* Internet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Internet.h; sourceTree = "<group>"; };
+		3EF8731612B136EF00E9D799 /* Internet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Internet.m; sourceTree = "<group>"; };
 		3EFC1C1B1295D81C00163B36 /* email_details.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_details.png; sourceTree = "<group>"; };
 		3EFC1C1C1295D81C00163B36 /* email_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_link.png; sourceTree = "<group>"; };
 		3EFC1C3A1295D92A00163B36 /* photo_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_save.png; sourceTree = "<group>"; };
@@ -746,6 +749,8 @@
 				3EFC1C851295DC9F00163B36 /* Email.m */,
 				3ECFF2C312AFDB4F00DE75D7 /* SMS.h */,
 				3ECFF2C412AFDB4F00DE75D7 /* SMS.m */,
+				3EF8731512B136EF00E9D799 /* Internet.h */,
+				3EF8731612B136EF00E9D799 /* Internet.m */,
 				3E862E761222F178001DE141 /* Ushahidi.h */,
 				3E862E771222F178001DE141 /* Ushahidi.m */,
 			);
@@ -1132,6 +1137,7 @@
 				3E4C630A12AD4D05001ED08A /* NewsViewController.m in Sources */,
 				3E4C659B12AD774F001ED08A /* MoviePlayer.m in Sources */,
 				3ECFF2C512AFDB4F00DE75D7 /* SMS.m in Sources */,
+				3EF8731712B136EF00E9D799 /* Internet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,21 +9,22 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>Resources/Images/Icon.png</string>
+	<string>Icon.png</string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>Resources/Images/Icon.png</string>
-		<string>Resources/Images/Icon-72.png</string>
-		<string>Resources/Images/Icon@2x.png</string>
-		<string>Resources/Images/Icon-Small.png</string>
-		<string>Resources/Images/Icon-Small-50.png</string>
-		<string>Resources/Images/Icon-Small@2x.png</string>
-		<string>Resources/Images/iTunesArtwork.png</string>
+		<string>Icon.png</string>
+		<string>Icon-72.png</string>
+		<string>Icon@2x.png</string>
+		<string>Icon-Small.png</string>
+		<string>Icon-Small-50.png</string>
+		<string>Icon-Small@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.ushahidi.ios.app</string>
 	<key>UILaunchImageFile</key>
 	<string>Default</string>
+	<key>UILaunchImageFile~ipad</key>
+	<string>Default-Portrait</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

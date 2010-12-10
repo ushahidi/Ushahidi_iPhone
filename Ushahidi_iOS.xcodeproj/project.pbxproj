@@ -148,7 +148,7 @@
 		3E8635E112244A54001DE141 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8635E012244A54001DE141 /* MapAnnotation.m */; };
 		3E8637E612246A64001DE141 /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8637E512246A64001DE141 /* NSDictionary+Extension.m */; };
 		3E8638C412247BAC001DE141 /* MKMapView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8638C312247BAC001DE141 /* MKMapView+Extension.m */; };
-		3E8F5B7312B2C82C0087A64D /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F5B7212B2C82C0087A64D /* iTunesArtwork.png */; };
+		3E8F5B7312B2C82C0087A64D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F5B7212B2C82C0087A64D /* iTunesArtwork */; };
 		3E91985A1293A81F005AC005 /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9198591293A81F005AC005 /* Locator.m */; };
 		3E9198A61293AD09005AC005 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9198A51293AD09005AC005 /* CoreLocation.framework */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
@@ -416,7 +416,7 @@
 		3E8637E512246A64001DE141 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
 		3E8638C212247BAC001DE141 /* MKMapView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Extension.h"; sourceTree = "<group>"; };
 		3E8638C312247BAC001DE141 /* MKMapView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Extension.m"; sourceTree = "<group>"; };
-		3E8F5B7212B2C82C0087A64D /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		3E8F5B7212B2C82C0087A64D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		3E9198581293A81F005AC005 /* Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locator.h; sourceTree = "<group>"; };
 		3E9198591293A81F005AC005 /* Locator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locator.m; sourceTree = "<group>"; };
 		3E9198A51293AD09005AC005 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -777,7 +777,7 @@
 				3E862A431222BD09001DE141 /* Default.png */,
 				3E4C69C612ADBB94001ED08A /* Default@2x.png */,
 				3E002FB412949270003452A6 /* Default-Portrait.png */,
-				3E8F5B7212B2C82C0087A64D /* iTunesArtwork.png */,
+				3E8F5B7212B2C82C0087A64D /* iTunesArtwork */,
 				3ED45094128B475100578DB4 /* sort_verified.png */,
 				3E84E6FF1282931400A55292 /* sort_alphabetical.png */,
 				3E84E7001282931400A55292 /* sort_date.png */,
@@ -1046,7 +1046,7 @@
 				3ECFF35D12AFE9AD00DE75D7 /* radar.png in Resources */,
 				3ECFF3D312AFF33F00DE75D7 /* satellite.png in Resources */,
 				3ECFF3DD12AFF52400DE75D7 /* hybrid.png in Resources */,
-				3E8F5B7312B2C82C0087A64D /* iTunesArtwork.png in Resources */,
+				3E8F5B7312B2C82C0087A64D /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

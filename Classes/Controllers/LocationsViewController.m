@@ -24,6 +24,8 @@
 #import "Location.h"
 #import "TableCellFactory.h"
 #import "MKMapView+Extension.h"
+#import "MapAnnotation.h"
+#import "NSString+Extension.h"
 
 @interface LocationsViewController ()
 
@@ -33,16 +35,24 @@
 @property(nonatomic, retain) NSString *currentLatitude;
 @property(nonatomic, retain) NSString *currentLongitude;
 
+- (void) populateMapPins:(BOOL)centerMap;
+
 @end
 
 @implementation LocationsViewController
 
 @synthesize cancelButton, doneButton, incident, location, latitude, longitude, currentLatitude, currentLongitude;
+@synthesize mapView, viewMode, containerView;
 
 typedef enum {
 	TableSectionNewLocation,
 	TableSectionExistingLocations
 } TableSection;
+
+typedef enum {
+	ViewModeTable,
+	ViewModeMap
+} ViewMode;
 
 #pragma mark -
 #pragma mark Handlers
@@ -59,6 +69,64 @@ typedef enum {
 	[self dismissModalViewControllerAnimated:YES];
 }
 
+- (IBAction) viewModeChanged:(id)sender {
+	if (self.viewMode.selectedSegmentIndex == ViewModeTable) {
+		DLog(@"ViewModeTable");
+		CGRect rect = self.containerView.frame;
+		rect.origin = CGPointMake(0, 0);
+		self.tableView.frame = rect;
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDuration:0.6];
+		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.containerView cache:YES];
+		[self.mapView removeFromSuperview];
+		[self.containerView addSubview:self.tableView];
+		[UIView commitAnimations];
+		[self.tableView reloadData];
+	}
+	else if (self.viewMode.selectedSegmentIndex == ViewModeMap) {
+		DLog(@"ViewModeMap");
+		CGRect rect = self.containerView.frame;
+		rect.origin = CGPointMake(0, 0);
+		self.mapView.frame = rect;
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDuration:0.6];
+		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.containerView cache:YES];
+		[self.tableView removeFromSuperview];
+		[self.containerView addSubview:self.mapView];
+		[UIView commitAnimations];
+		[self populateMapPins:YES];
+	}
+}
+
+- (void) populateMapPins:(BOOL)centerMap {
+	self.mapView.showsUserLocation = NO;
+	[self.mapView removeAllPins];
+	self.mapView.showsUserLocation = YES;
+	for (Location *loc in self.allRows) {
+		[self.mapView addPinWithTitle:loc.name 
+							 subtitle:[NSString stringWithFormat:@"%@, %@", loc.latitude, loc.longitude] 
+							 latitude:loc.latitude 
+							longitude:loc.longitude
+							   object:loc
+							 pinColor:MKPinAnnotationColorRed];
+	}
+	if (centerMap) {
+		if ([NSString isNilOrEmpty:self.location] == NO) {			
+			for (NSObject <MKAnnotation> *mapAnnotation in self.mapView.annotations) {
+				DLog(@"%f, %f", mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
+				if (mapAnnotation.coordinate.latitude == self.latitude.floatValue &&
+					mapAnnotation.coordinate.longitude == self.longitude.floatValue) {
+					[self.mapView centerAtCoordinate:mapAnnotation.coordinate withDelta:0.4];
+					[self.mapView selectAnnotation:mapAnnotation animated:YES];
+					break;
+				}
+			}	
+		}	
+	}
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -67,6 +135,7 @@ typedef enum {
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search locations...", nil)];
 	[self setHeader:NSLocalizedString(@"New Location", nil) atSection:TableSectionNewLocation];
 	[self setHeader:NSLocalizedString(@"Existing Location", nil) atSection:TableSectionExistingLocations];
+	[self.containerView addSubview:self.tableView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,6 +161,9 @@ typedef enum {
 	[location release];
 	[currentLatitude release];
 	[currentLongitude release];
+	[mapView release];
+	[viewMode release];
+	[containerView release];
     [super dealloc];
 }
 
@@ -155,10 +227,18 @@ typedef enum {
 	}
 	else {
 		[cell setChecked:YES];
-		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
-		self.location = theLocation.name;
-		self.latitude = theLocation.latitude;
-		self.longitude = theLocation.longitude;
+		if (indexPath.section == TableSectionNewLocation) {
+			self.location = nil;
+			self.latitude = self.currentLatitude;
+			self.longitude = self.currentLongitude;
+		}
+		else {
+			Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
+			self.location = theLocation.name;
+			self.latitude = theLocation.latitude;
+			self.longitude = theLocation.longitude;			
+		}
+
 	}
 	[self.tableView reloadData];
 }
@@ -208,7 +288,9 @@ typedef enum {
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		//[self.alertView showWithTitle:@"Error" andMessage:[error localizedDescription]];
+		if ([self.allRows count] == 0) {
+			[self.alertView showOkWithTitle:@"Server Error" andMessage:[error localizedDescription]];
+		}
 	}
 	else if (hasChanges) {
 		DLog(@"locations: %@", locations);
@@ -232,6 +314,55 @@ typedef enum {
 	self.currentLatitude = userLatitude;
 	self.currentLongitude = userLongitude;
 	[self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark MKMapView
+
+- (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
+	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:@"MKPinAnnotationView"];
+	if (annotationView == nil) {
+		annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
+	}
+	annotationView.animatesDrop = NO;
+	annotationView.canShowCallout = YES;
+	if ([annotation class] == MKUserLocation.class) {
+		annotationView.pinColor = MKPinAnnotationColorGreen;
+	}
+	else {
+		if ([annotation isKindOfClass:[MapAnnotation class]]) {
+			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
+			annotationView.pinColor = mapAnnotation.pinColor;
+		}
+		else {
+			annotationView.pinColor = MKPinAnnotationColorRed;
+		}
+	}
+	return annotationView;
+}
+
+- (void)mapView:(MKMapView *)theMapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
+	MapAnnotation *mapAnnotation = (MapAnnotation *)annotationView.annotation;
+	if ([mapAnnotation class] == MKUserLocation.class) {
+		self.location = nil;
+		self.latitude = [NSString stringWithFormat:@"%f", mapAnnotation.coordinate.latitude];
+		self.longitude = [NSString stringWithFormat:@"%f",mapAnnotation.coordinate.longitude];
+	}
+	else {
+		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
+		Location *loc = (Location *)mapAnnotation.object;
+		self.location = loc.name;
+		self.latitude = loc.latitude;
+		self.longitude = loc.longitude;
+	}
+}
+
+- (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+	DLog(@"latitude:%f longitude:%f", userLocation.coordinate.latitude, userLocation.coordinate.longitude);
+	if ([NSString isNilOrEmpty:self.location]) {
+		[self.mapView centerAtCoordinate:userLocation.coordinate withDelta:0.4];
+		[self.mapView selectAnnotation:userLocation animated:YES];
+	}
 }
 
 @end

@@ -19,55 +19,67 @@
  *****************************************************************************/
 
 #import "MKMapView+Extension.h"
-#import "MapAnnotation.h"
 
 @implementation MKMapView (Extension)
 
-- (void) addPinWithTitle:(NSString *)title 
-				subtitle:(NSString *)subtitle 
-				latitude:(NSString *)latitude 
-			   longitude:(NSString *)longitude {
-	[self addPinWithTitle:title 
-				 subtitle:subtitle 
-				 latitude:latitude 
-				longitude:longitude 
-				   object:nil
-				 pinColor:MKPinAnnotationColorRed];
+- (MapAnnotation *) addPinWithTitle:(NSString *)title 
+						   subtitle:(NSString *)subtitle 
+						   latitude:(NSString *)latitude 
+						  longitude:(NSString *)longitude {
+	return [self addPinWithTitle:title 
+						subtitle:subtitle 
+						latitude:latitude 
+					   longitude:longitude 
+						  object:nil
+						pinColor:MKPinAnnotationColorRed];
 }
 
-- (void) addPinWithTitle:(NSString *)title 
-				subtitle:(NSString *)subtitle 
-				latitude:(NSString *)latitude 
-			   longitude:(NSString *)longitude
-				  object:(NSObject *)object {
-	[self addPinWithTitle:title 
-				 subtitle:subtitle 
-				 latitude:latitude 
-				longitude:longitude 
-				   object:object
-				 pinColor:MKPinAnnotationColorRed];
+- (MapAnnotation *) addPinWithTitle:(NSString *)title 
+						   subtitle:(NSString *)subtitle 
+						   latitude:(NSString *)latitude 
+						  longitude:(NSString *)longitude
+							 object:(NSObject *)object {
+	return [self addPinWithTitle:title 
+						subtitle:subtitle 
+						latitude:latitude 
+					   longitude:longitude 
+						  object:object
+						pinColor:MKPinAnnotationColorRed];
 }
 
-- (void) addPinWithTitle:(NSString *)title 
-				subtitle:(NSString *)subtitle 
-				latitude:(NSString *)latitude 
-			   longitude:(NSString *)longitude 
-				  object:(NSObject *)object
-				pinColor:(MKPinAnnotationColor)pinColor {
+- (MapAnnotation *) addPinWithTitle:(NSString *)title 
+						   subtitle:(NSString *)subtitle 
+						   latitude:(NSString *)latitude 
+						  longitude:(NSString *)longitude 
+							 object:(NSObject *)object
+						   pinColor:(MKPinAnnotationColor)pinColor {
 	CLLocationCoordinate2D coordinate;
 	coordinate.latitude = [latitude floatValue];
 	coordinate.longitude = [longitude floatValue];
-	MapAnnotation *mapAnnotation = [[MapAnnotation alloc] initWithTitle:title 
+	MapAnnotation *mapAnnotation = [[[MapAnnotation alloc] initWithTitle:title 
 															   subtitle:subtitle 
 															 coordinate:coordinate
-															   pinColor:pinColor];
+															   pinColor:pinColor] autorelease];
 	[mapAnnotation setObject:object];
 	[self addAnnotation:mapAnnotation];
-	[mapAnnotation release];
+	return mapAnnotation;
 }
 
 - (void) removeAllPins {
 	[self removeAnnotations:self.annotations];
+}
+
+- (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta {
+	MKCoordinateSpan span;
+	span.latitudeDelta = delta;
+	span.longitudeDelta = delta;
+	
+	MKCoordinateRegion region;
+	region.span = span;
+	region.center = coordinate;
+	
+	[self setRegion:region animated:TRUE];
+	[self regionThatFits:region];
 }
 
 - (void) resizeRegionToFitAllPins {

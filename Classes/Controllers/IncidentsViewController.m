@@ -110,7 +110,7 @@ typedef enum {
 	self.mapView.mapType = self.mapType.selectedSegmentIndex;
 }
 
-- (IBAction) toggleReportsAndMap:(id)sender {
+- (IBAction) viewModeChanged:(id)sender {
 	DLog(@"");
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
 	if (segmentControl.selectedSegmentIndex == ViewModeTable) {

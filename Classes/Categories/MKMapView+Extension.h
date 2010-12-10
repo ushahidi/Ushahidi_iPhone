@@ -22,29 +22,31 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
+#import "MapAnnotation.h"
 
 @interface MKMapView (Extension)
 
-- (void) addPinWithTitle:(NSString *)title 
-				subtitle:(NSString *)subtitle 
-				latitude:(NSString *)latitude 
-			   longitude:(NSString *)longitude;
+- (MapAnnotation *) addPinWithTitle:(NSString *)title 
+						   subtitle:(NSString *)subtitle 
+						   latitude:(NSString *)latitude 
+						  longitude:(NSString *)longitude;
 
-- (void) addPinWithTitle:(NSString *)title 
-				subtitle:(NSString *)subtitle 
-				latitude:(NSString *)latitude 
-			   longitude:(NSString *)longitude 
-				  object:(NSObject *)object;
+- (MapAnnotation *) addPinWithTitle:(NSString *)title 
+						   subtitle:(NSString *)subtitle 
+						   latitude:(NSString *)latitude 
+						  longitude:(NSString *)longitude 
+							 object:(NSObject *)object;
 
-- (void) addPinWithTitle:(NSString *)title 
-				subtitle:(NSString *)subtitle 
-				latitude:(NSString *)latitude 
-			   longitude:(NSString *)longitude 
-				  object:(NSObject *)object 
-				pinColor:(MKPinAnnotationColor)pinColor;
+- (MapAnnotation *) addPinWithTitle:(NSString *)title 
+						   subtitle:(NSString *)subtitle 
+						   latitude:(NSString *)latitude 
+						  longitude:(NSString *)longitude 
+							 object:(NSObject *)object 
+						   pinColor:(MKPinAnnotationColor)pinColor;
 
 - (void) removeAllPins;
 - (void) resizeRegionToFitAllPins;
 - (void) resizeRegionToFitAllPins:(BOOL)animated;
+- (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta;
 
 @end

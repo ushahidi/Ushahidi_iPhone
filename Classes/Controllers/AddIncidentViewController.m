@@ -158,6 +158,9 @@ typedef enum {
 			self.incident.longitude = [Locator sharedLocator].longitude;
 		}
 	}
+	if (self.willBePushed) {
+		[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+	}
 	[self.tableView reloadData];
 }
 

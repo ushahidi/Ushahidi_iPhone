@@ -20,6 +20,7 @@
 
 #import "SMS.h"
 #import "AlertView.h"
+#import "NSObject+Extension.h"
 
 @interface SMS ()
 
@@ -40,13 +41,13 @@
     return self;
 }
 
-- (void)dealloc {
+- (void) dealloc {
 	[controller release];
 	[alert release];
 	[super dealloc];
 }
 
-- (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message {
+- (void) sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message {
 	if ([MFMessageComposeViewController canSendText]) {
 		MFMessageComposeViewController *composeViewcontroller = [[[MFMessageComposeViewController alloc] init] autorelease];
 		composeViewcontroller.body = message;
@@ -62,16 +63,24 @@
 	return [MFMessageComposeViewController canSendText];
 }
 
-- (void)messageComposeViewController:(MFMessageComposeViewController *)composeViewcontroller didFinishWithResult:(MessageComposeResult)result {
+- (void) messageComposeViewController:(MFMessageComposeViewController *)composeViewcontroller didFinishWithResult:(MessageComposeResult)result {
 	if (result == MessageComposeResultCancelled) {
 		DLog(@"MessageComposeResultCancelled");
+		[self dispatchSelector:@selector(smsCancelled:) 
+						target:self.controller 
+					   objects:self, nil];
 	}
 	else if (result == MessageComposeResultSent) {
 		DLog(@"MessageComposeResultSent");
+		[self dispatchSelector:@selector(smsSent:) 
+						target:self.controller 
+					   objects:self, nil];
 	}
 	else if (result == MessageComposeResultFailed) {
 		DLog(@"MessageComposeResultFailed");
-		[self.alert showOkWithTitle:NSLocalizedString(@"Send Error", nil) andMessage:NSLocalizedString(@"Unable To Send Message", nil)];
+		[self dispatchSelector:@selector(smsFailed:) 
+						target:self.controller 
+					   objects:self, nil];
 	}
 	[composeViewcontroller dismissModalViewControllerAnimated:YES];
 }

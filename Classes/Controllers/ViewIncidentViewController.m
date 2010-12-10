@@ -114,6 +114,7 @@ typedef enum {
 		[message appendFormat:@"%@ %@", self.incident.title, [link absoluteString]];
 	}
 	[self.sms sendToRecipients:nil withMessage:message];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)];
 }
 
 - (IBAction) emailDetails:(id)sender {
@@ -129,13 +130,13 @@ typedef enum {
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", nil), self.incident.categoryNames];
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", nil), self.incident.description];
 	if (self.incident.news != nil && [self.incident.news count] > 0) {
-		[message appendFormat:@"<ul>"];
+		[message appendFormat:@"<b>%@</b>:<ul>", NSLocalizedString(@"News", nil)];
 		for (News *news in self.incident.news) {
-			[message appendFormat:@"<li><a href=\"%@\"></a></li>", news.url, news.url];
+			[message appendFormat:@"<li><a href=\"%@\">%@</a></li>", news.url, news.url];
 		}
 		[message appendFormat:@"</ul>"];
 	}
-	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title];
+	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title withPhotos:self.incident.photoImages];
 }
 
 #pragma mark -
@@ -459,6 +460,27 @@ typedef enum {
 			[self.tableView reloadData];
 		}
 	}
+}
+
+#pragma mark -
+#pragma mark SMSDelegate
+
+- (void) smsSent:(SMS *)theSms {
+	DLog(@"");
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) afterDelay:1.0];
+	[self.loadingView hideAfterDelay:2.0];
+}
+
+- (void) smsCancelled:(SMS *)theSms {
+	DLog(@"");
+	[self.loadingView hide];
+}
+
+- (void) smsFailed:(SMS *)theSms {
+	DLog(@"");
+	[self.loadingView hide];
+	[self.alertView showOkWithTitle:NSLocalizedString(@"SMS Failed", nil) 
+						 andMessage:NSLocalizedString(@"Unable To Send SMS", nil)];
 }
 
 @end

@@ -32,7 +32,17 @@
 }
 
 - (id) initWithController:(UIViewController *)controller;
-- (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message;
+- (void) sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message;
 - (BOOL) canSend;
+
+@end
+
+@protocol SMSDelegate <NSObject>
+
+@optional
+
+- (void) smsSent:(SMS *)sms;
+- (void) smsCancelled:(SMS *)sms;
+- (void) smsFailed:(SMS *)sms;
 
 @end

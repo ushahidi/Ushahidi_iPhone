@@ -24,6 +24,7 @@
 #import "MapTableCell.h"
 #import "Ushahidi.h"
 #import "Photo.h"
+#import "SMS.h"
 
 @class WebViewController;
 @class MapViewController;
@@ -35,7 +36,8 @@
 @class MoviePlayer;
 
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
-															UIWebViewDelegate, 
+															UIWebViewDelegate,
+															SMSDelegate,
 															MapTableCellDelegate> {
 	
 @public

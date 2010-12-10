@@ -44,16 +44,15 @@
 @interface Ushahidi ()
 
 @property(nonatomic, retain) NSMutableDictionary *deployments;
-@property(nonatomic, retain) ASINetworkQueue *mapQueue;
-@property(nonatomic, retain) ASINetworkQueue *photoQueue;
+@property(nonatomic, retain) NSOperationQueue *mainQueue;
+@property(nonatomic, retain) NSOperationQueue *mapQueue;
+@property(nonatomic, retain) NSOperationQueue *photoQueue;
 
-- (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url 
+- (ASIHTTPRequest *) queueAsynchronousRequest:(NSString *)url 
 								  forDelegate:(id<UshahidiDelegate>)delegate 
+								startSelector:(SEL)startSelector
 							   finishSelector:(SEL)finishSelector
 								 failSelector:(SEL)failSelector;
-
-- (void) mapQueueFinished:(ASINetworkQueue *)queue;
-- (void) photoQueueFinished:(ASINetworkQueue *)queue;
 
 - (void) getDeploymentsFinished:(id<UshahidiDelegate>)delegate;
 
@@ -64,15 +63,19 @@
 - (void) uploadFinished:(ASIHTTPRequest *)request;
 - (void) uploadFailed:(ASIHTTPRequest *)request;
 
+- (void) getIncidentsStarted:(ASIHTTPRequest *)request;
 - (void) getIncidentsFinished:(ASIHTTPRequest *)request;
 - (void) getIncidentsFailed:(ASIHTTPRequest *)request;
 
+- (void) getCategoriesStarted:(ASIHTTPRequest *)request;
 - (void) getCategoriesFinished:(ASIHTTPRequest *)request;
 - (void) getCategoriesFailed:(ASIHTTPRequest *)request;
 
+- (void) getCountriesStarted:(ASIHTTPRequest *)request;
 - (void) getCountriesFinished:(ASIHTTPRequest *)request;
 - (void) getCountriesFailed:(ASIHTTPRequest *)request;
 
+- (void) getLocationsStarted:(ASIHTTPRequest *)request;
 - (void) getLocationsFinished:(ASIHTTPRequest *)request;
 - (void) getLocationsFailed:(ASIHTTPRequest *)request;
 
@@ -83,7 +86,7 @@
 
 @implementation Ushahidi
 
-@synthesize deployments, deployment, mapQueue, photoQueue;
+@synthesize deployments, deployment, mainQueue, mapQueue, photoQueue;
 
 typedef enum {
 	MediaTypeUnkown = 0,
@@ -99,22 +102,31 @@ NSInteger const kGoogleOverCapacitySize = 100;
 SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (id) init {
+	DLog(@"");
 	if ((self = [super init])) {
 		self.deployments = [NSKeyedUnarchiver unarchiveObjectWithKey:@"deployments"];
 		if (self.deployments == nil) self.deployments = [[NSMutableDictionary alloc] init];
-		self.mapQueue = [ASINetworkQueue queue];
-		[self.mapQueue setDelegate:self];
-		[self.mapQueue setQueueDidFinishSelector:@selector(mapQueueFinished:)];
-		self.photoQueue = [ASINetworkQueue queue];
-		[self.photoQueue setDelegate:self];
-		[self.photoQueue setQueueDidFinishSelector:@selector(photoQueueFinished:)];
+		
+		self.mainQueue = [[NSOperationQueue alloc] init];
+		[self.mainQueue setMaxConcurrentOperationCount:1];
+		[self.mainQueue addObserver:self forKeyPath:@"operations" options:NSKeyValueObservingOptionNew context:nil];
+		
+		self.mapQueue = [[NSOperationQueue alloc] init];
+		[self.mapQueue setMaxConcurrentOperationCount:1];
+		[self.mapQueue addObserver:self forKeyPath:@"operations" options:NSKeyValueObservingOptionNew context:nil];
+		
+		self.photoQueue = [[NSOperationQueue alloc] init];
+		[self.photoQueue setMaxConcurrentOperationCount:1];
+		[self.photoQueue addObserver:self forKeyPath:@"operations" options:NSKeyValueObservingOptionNew context:nil];
 	}
 	return self;
 }
 
 - (void)dealloc {
+	DLog(@"");
 	[deployment release];
 	[deployments release];
+	[mainQueue release];
 	[mapQueue release];
 	[photoQueue release];
 	[super dealloc];
@@ -123,6 +135,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) save {
 	DLog(@"");
 	[NSKeyedArchiver archiveObject:self.deployments forKey:@"deployments"];
+//	for (Deployment *deploy in self.deployments) {
+//		[NSKeyedArchiver archiveObject:deploy forKey:deploy.domain];
+//	}
 }
 
 #pragma mark -
@@ -162,7 +177,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark Add/Upload Incidents
 
 - (BOOL)addIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
+	DLog(@"DELEGATE: %@", [delegate class]);
 	if (incident != nil) {
 		if (incident.identifier == nil) {
 			incident.identifier = [NSString getUUID];
@@ -174,14 +189,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
+	DLog(@"DELEGATE: %@", [delegate class]);
 	for(Incident *incident in self.deployment.pending) {
 		[self uploadIncident:incident forDelegate:delegate];
 	}
 }
 
 - (BOOL) uploadIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
+	DLog(@"DELEGATE: %@", [delegate class]);
 	@try {
 		incident.uploading = YES;
 		[self dispatchSelector:@selector(uploadingToUshahidi:incident:) 
@@ -232,7 +247,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 											andContentType:@"image/jpeg" 
 													forKey:@"incident_photo[]"];
 		}
+		
 		[post startAsynchronous];
+		
 		return YES;
 	}
 	@catch (NSException *e) {
@@ -246,9 +263,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void)uploadFinished:(ASIHTTPRequest *)request {
-	DLog(@"request: %@", [request.originalURL absoluteString]);
-	DLog(@"status: %@", [request responseStatusMessage]);
-	DLog(@"response: %@", [request responseString]);
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"STATUS: %@", [request responseStatusMessage]);
+	DLog(@"RESPONSE: %@", [request responseString]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	Incident *incident = [[request userInfo] objectForKey:@"incident"];
 	incident.uploading = NO;
@@ -262,7 +279,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
-			DLog(@"response: %@", [request responseString]);
+			DLog(@"RESPONSE: %@", [request responseString]);
 			incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
 			NSError *error = [NSError errorWithDomain:self.deployment.domain code:HttpStatusInternalServerError message:NSLocalizedString(@"Unable To Upload Report", nil)];
 			[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
@@ -271,7 +288,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		}
 		else {
 			NSDictionary *payload = [json objectForKey:@"payload"];
-			DLog(@"response: %@", payload);
+			DLog(@"RESPONSE: %@", payload);
 			incident.uploading = NO;
 			if ([@"true" isEqualToString:[payload objectForKey:@"success"]]) {
 				incident.errors = nil;
@@ -300,8 +317,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void)uploadFailed:(ASIHTTPRequest *)request {
-	DLog(@"request: %@", [request.originalURL absoluteString]);
-	DLog(@"error: %@", [[request error] localizedDescription]);
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	Incident *incident = [[request userInfo] objectForKey:@"incident"];
 	incident.uploading = NO;
@@ -315,7 +332,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark Deployments
 
 - (NSArray *) getDeploymentsForDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
+	DLog(@"DELEGATE: %@", [delegate class]);
 	if ([self.deployments count] == 0) {
 		[self.deployments setObject:[[Deployment alloc] initWithName:NSLocalizedString(@"Demo Ushahidi", nil) 
 																 url:@"http://demo.ushahidi.com"] 
@@ -327,7 +344,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void) getDeploymentsFinished:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
+	DLog(@"DELEGATE: %@", [delegate class]);
 	[self dispatchSelector:@selector(downloadedFromUshahidi:deployments:error:hasChanges:) 
 					target:delegate 
 				   objects:self, [self.deployments allValues], nil, NO, nil];
@@ -337,17 +354,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark Categories
 
 - (NSArray *) getCategoriesForDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
-	[self startAsynchronousRequest:[self.deployment getCategories] 
+	DLog(@"DELEGATE: %@", [delegate class]);
+	[self queueAsynchronousRequest:[self.deployment getCategories] 
 					   forDelegate:delegate
+					 startSelector:@selector(getCategoriesStarted:)
 					finishSelector:@selector(getCategoriesFinished:)
 					  failSelector:@selector(getCategoriesFailed:)];
+	
 	return [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)];
 }
 
+- (void) getCategoriesStarted:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [[request url] absoluteString]);
+	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
+	[self dispatchSelector:@selector(downloadingFromUshahidi:categories:) 
+					target:delegate 
+				   objects:self, [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)], nil];
+}
+
 - (void) getCategoriesFinished:(ASIHTTPRequest *)request {
-	DLog(@"request: %@", [request.originalURL absoluteString]);
-	DLog(@"status: %@", [request responseStatusMessage]);
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"STATUS: %@", [request responseStatusMessage]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	if ([request responseStatusCode] != HttpStatusOK) {
 		NSError *error = [NSError errorWithDomain:self.deployment.domain code:[request responseStatusCode] message:[request responseStatusMessage]];
@@ -375,9 +402,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					if (existing == nil) {
 						[self.deployment.categories setObject:category forKey:category.identifier];
 						hasChanges = YES;
+						DLog(@"CATEGORY: %@", dictionary);
 					}
 					else if ([existing updateWithDictionary:[dictionary objectForKey:@"category"]]) {
 						hasChanges = YES;
+						DLog(@"CATEGORY: %@", dictionary);
 					}
 				}
 				[category release];
@@ -393,8 +422,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void) getCategoriesFailed:(ASIHTTPRequest *)request {
-	DLog(@"request:%@", [request.originalURL absoluteString]);
-	DLog(@"error: %@", [[request error] localizedDescription]);
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	[self dispatchSelector:@selector(downloadedFromUshahidi:categories:error:hasChanges:) 
 					target:delegate 
@@ -405,17 +434,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark Countries
 
 - (NSArray *) getCountriesForDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
-	[self startAsynchronousRequest:[self.deployment getCountries] 
+	DLog(@"DELEGATE: %@", [delegate class]);
+	[self queueAsynchronousRequest:[self.deployment getCountries] 
 					   forDelegate:delegate
+					 startSelector:@selector(getCountriesStarted:)
 					finishSelector:@selector(getCountriesFinished:)
 					  failSelector:@selector(getCountriesFailed:)];
 	return [[self.deployment.countries allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
-- (void)getCountriesFinished:(ASIHTTPRequest *)request {
-	DLog(@"request: %@", [request.originalURL absoluteString]);
-	DLog(@"status: %@", [request responseStatusMessage]);
+- (void) getCountriesStarted:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [[request url] absoluteString]);
+	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
+	[self dispatchSelector:@selector(downloadingFromUshahidi:countries:) 
+					target:delegate 
+				   objects:self, [[self.deployment.countries allValues] sortedArrayUsingSelector:@selector(compareByName:)], nil];
+}
+
+- (void) getCountriesFinished:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"STATUS: %@", [request responseStatusMessage]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	if ([request responseStatusCode] != HttpStatusOK) {
 		NSError *error = [NSError errorWithDomain:self.deployment.domain code:[request responseStatusCode] message:[request responseStatusMessage]];
@@ -440,6 +478,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				if (country.identifier != nil && [self.deployment.countries objectForKey:country.identifier] == nil) {
 					[self.deployment.countries setObject:country forKey:country.identifier];
 					hasChanges = YES;
+					DLog(@"COUNTRY: %@", dictionary);
 				}
 				[country release];
 			}
@@ -454,8 +493,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void)getCountriesFailed:(ASIHTTPRequest *)request {
-	DLog(@"request:%@", [request.originalURL absoluteString]);
-	DLog(@"error: %@", [[request error] localizedDescription]);
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	[self dispatchSelector:@selector(downloadedFromUshahidi:countries:error:hasChanges:) 
 				target:delegate 
@@ -466,17 +505,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark Locations
 
 - (NSArray *) getLocationsForDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
-	[self startAsynchronousRequest:[self.deployment getLocations] 
+	DLog(@"DELEGATE: %@", [delegate class]);
+	[self queueAsynchronousRequest:[self.deployment getLocations] 
 					   forDelegate:delegate
+					 startSelector:@selector(getLocationsStarted:)
 					finishSelector:@selector(getLocationsFinished:)
 					  failSelector:@selector(getLocationsFailed:)];
+	
 	return [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)];
 }
 
-- (void)getLocationsFinished:(ASIHTTPRequest *)request {
-	DLog(@"request: %@", [request.originalURL absoluteString]);
-	DLog(@"status: %@", [request responseStatusMessage]);
+- (void) getLocationsStarted:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [[request url] absoluteString]);
+	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
+	[self dispatchSelector:@selector(downloadingFromUshahidi:locations:) 
+					target:delegate 
+				   objects:self, [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)], nil];
+}
+
+- (void) getLocationsFinished:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"STATUS: %@", [request responseStatusMessage]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	if ([request responseStatusCode] != HttpStatusOK) {
 		NSError *error = [NSError errorWithDomain:self.deployment.domain code:[request responseStatusCode] message:[request responseStatusMessage]];
@@ -493,7 +542,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 						   objects:self, [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)], error, NO, nil];
 		}
 		else {
-			NSDictionary *payload = [json	objectForKey:@"payload"];
+			NSDictionary *payload = [json objectForKey:@"payload"];
 			NSArray *locations = [payload objectForKey:@"locations"]; 
 			BOOL hasChanges = NO;
 			for (NSDictionary *dictionary in locations) {
@@ -501,6 +550,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				if ([self.deployment containsLocation:location] == NO) {
 					[self.deployment.locations setObject:location forKey:location.identifier];
 					hasChanges = YES;
+					DLog(@"LOCATION: %@", dictionary);
 				}
 				[location release];
 			}
@@ -514,9 +564,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
-- (void)getLocationsFailed:(ASIHTTPRequest *)request {
-	DLog(@"request:%@", [request.originalURL absoluteString]);
-	DLog(@"error: %@", [[request error] localizedDescription]);
+- (void) getLocationsFailed:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	[self dispatchSelector:@selector(downloadedFromUshahidi:locations:error:hasChanges:) 
 					target:delegate 
@@ -535,70 +585,40 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (NSArray *) getIncidentsForDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@", [delegate class]);
+	DLog(@"DELEGATE: %@", [delegate class]);
 	if ([[Settings sharedSettings] downloadMaps]) {
 		for (Incident *incident in [self.deployment.incidents allValues]) {
 			[self downloadMap:incident forDelegate:delegate];
 		}
-		[self.mapQueue go];
 	}
-	NSString *requestURL = self.deployment.sinceID != nil
-		? [self.deployment getIncidentsBySinceID:self.deployment.sinceID] : [self.deployment getIncidents];
-	[self startAsynchronousRequest:requestURL 
-					   forDelegate:delegate
-					finishSelector:@selector(getIncidentsFinished:)
-					  failSelector:@selector(getIncidentsFailed:)];	
+	if (self.deployment.sinceID != nil) {
+		[self queueAsynchronousRequest:[self.deployment getIncidentsBySinceID:self.deployment.sinceID] 
+						   forDelegate:delegate
+						 startSelector:@selector(getIncidentsStarted:)
+						finishSelector:@selector(getIncidentsFinished:)
+						  failSelector:@selector(getIncidentsFailed:)];
+	}
+	else {
+		[self queueAsynchronousRequest:[self.deployment getIncidents] 
+						   forDelegate:delegate
+						 startSelector:@selector(getIncidentsStarted:)
+						finishSelector:@selector(getIncidentsFinished:)
+						  failSelector:@selector(getIncidentsFailed:)];
+	}
 	return [self.deployment.incidents allValues];
 }
 
-- (NSArray *) getIncidentsByCategoryID:(NSString *)categoryID forDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@ categoryID:%@", [delegate class], categoryID);
-	[self startAsynchronousRequest:[self.deployment getIncidentsByCategoryID:categoryID] 
-					   forDelegate:delegate
-					finishSelector:@selector(getIncidentsFinished:)
-					  failSelector:@selector(getIncidentsFailed:)];
-	return [self.deployment.incidents allValues];
+- (void) getIncidentsStarted:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [[request url] absoluteString]);
+	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
+	[self dispatchSelector:@selector(downloadingFromUshahidi:inspections:) 
+					target:delegate 
+				   objects:self, [self.deployment.incidents allValues], nil];
 }
 
-- (NSArray *) getIncidentsByCategoryName:(NSString *)categoryName forDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@ categoryName:%@", [delegate class], categoryName);
-	[self startAsynchronousRequest:[self.deployment getIncidentsByCategoryName:categoryName] 
-					   forDelegate:delegate
-					finishSelector:@selector(getIncidentsFinished:)
-					  failSelector:@selector(getIncidentsFailed:)];
-	return [self.deployment.incidents allValues];
-}
-
-- (NSArray *) getIncidentsByLocationID:(NSString *)locationID forDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@ locationID:%@", [delegate class], locationID);
-	[self startAsynchronousRequest:[self.deployment getIncidentsByLocationID:locationID] 
-					   forDelegate:delegate
-					finishSelector:@selector(getIncidentsFinished:)
-					  failSelector:@selector(getIncidentsFailed:)];
-	return [self.deployment.incidents allValues];
-}
-
-- (NSArray *) getIncidentsByLocationName:(NSString *)locationName forDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@ locationName:%@", [delegate class], locationName);
-	[self startAsynchronousRequest:[self.deployment getIncidentsByLocationName:locationName] 
-					   forDelegate:delegate
-					finishSelector:@selector(getIncidentsFinished:)
-					  failSelector:@selector(getIncidentsFailed:)];
-	return [self.deployment.incidents allValues];
-}
-
-- (NSArray *) getIncidentsBySinceID:(NSString *)sinceID forDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"delegate: %@ sinceID:%@", [delegate class], sinceID);
-	[self startAsynchronousRequest:[self.deployment getIncidentsBySinceID:sinceID] 
-					   forDelegate:delegate
-					finishSelector:@selector(getIncidentsFinished:)
-					  failSelector:@selector(getIncidentsFailed:)];	
-	return [self.deployment.incidents allValues];
-}
-
-- (void)getIncidentsFinished:(ASIHTTPRequest *)request {
-	DLog(@"request: %@", [request.originalURL absoluteString]);
-	DLog(@"status: %@", [request responseStatusMessage]);
+- (void) getIncidentsFinished:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"STATUS: %@", [request responseStatusMessage]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	if ([request responseStatusCode] != HttpStatusOK) {
 		NSError *error = [NSError errorWithDomain:self.deployment.domain code:[request responseStatusCode] message:[request responseStatusMessage]];
@@ -609,14 +629,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
-			DLog(@"response: %@", [request responseString]);
+			DLog(@"RESPONSE: %@", [request responseString]);
 			NSError *error = [NSError errorWithDomain:self.deployment.domain code:HttpStatusInternalServerError message:NSLocalizedString(@"Invalid Server Response", nil)];
 			[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 							target:delegate 
 						   objects:self, [self.deployment.incidents allValues], self.deployment.pending, error, NO, nil];
 		}
 		else {
-			DLog(@"response: %@", json);
 			BOOL hasChanges = NO;
 			NSDictionary *payload = [json objectForKey:@"payload"];
 			NSArray *incidents = [payload objectForKey:@"incidents"]; 
@@ -626,6 +645,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					if ([self.deployment.incidents objectForKey:incident.identifier] == nil) {
 						[self.deployment.incidents setObject:incident forKey:incident.identifier];
 						hasChanges = YES;
+						DLog(@"INCIDENT: %@", dictionary);
 					}
 					if (self.deployment.sinceID == nil) {
 						self.deployment.sinceID = incident.identifier;
@@ -637,7 +657,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				NSDictionary *media = [dictionary objectForKey:@"media"];
 				if (media != nil && [media isKindOfClass:[NSArray class]]) {
 					for (NSDictionary *item in media) {
-						DLog(@"media: %@", item);
+						DLog(@"INCIDENT MEDIA: %@", item);
 						NSInteger mediatype = [item intForKey:@"type"];
 						if (mediatype == MediaTypePhoto) {
 							Photo *photo = [[[Photo alloc] initWithDictionary:item] autorelease];
@@ -656,12 +676,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 							[incident addNews:[[News alloc] initWithDictionary:item]];
 						}	
 					}
-					[self.photoQueue go];
 				}
 				NSDictionary *categories = [dictionary objectForKey:@"categories"];
 				if (categories != nil && [categories isKindOfClass:[NSArray class]]) {
-					DLog(@"categories: %@ - %@", [categories class], categories);
 					for (NSDictionary *item in categories) {
+						DLog(@"INCIDENT CATEGORY: %@", item);
 						Category *category = [[Category alloc] initWithDictionary:[item objectForKey:@"category"]];
 						if ([incident hasCategory:category] == NO) {
 							[incident addCategory:category];
@@ -680,9 +699,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			if (hasChanges) {
 				DLog(@"Has New Incidents");
 			}
-			if ([[Settings sharedSettings] downloadMaps]) {
-				[self.mapQueue go];
-			}
 			self.deployment.lastSync = [NSDate date];
 			[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 							target:delegate 
@@ -691,9 +707,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
-- (void)getIncidentsFailed:(ASIHTTPRequest *)request {
-	DLog(@"request:%@", [request.originalURL absoluteString]);
-	DLog(@"error: %@", [[request error] localizedDescription]);
+- (void) getIncidentsFailed:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 					target:delegate 
@@ -705,9 +721,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) downloadPhoto:(Incident *)incident photo:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate {
 	if (photo.url != nil && photo.image == nil && photo.downloading == NO) {
 		photo.downloading = YES;
-		NSURL *url = [NSURL URLWithStrings:self.deployment.url	, 
-										   @"/media/uploads/",
-										   photo.url, nil];
+		NSURL *url = [NSURL URLWithStrings:self.deployment.url, @"/media/uploads/", photo.url, nil];
 		DLog(@"downloadPhoto: %@", [url absoluteString]);
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 		[request setDelegate:self];
@@ -720,7 +734,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
-- (void)downloadPhotoFinished:(ASIHTTPRequest *)request {
+- (void) downloadPhotoFinished:(ASIHTTPRequest *)request {
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	Incident *incident = (Incident *)[request.userInfo objectForKey:@"incident"];
 	Photo *photo = (Photo *)[request.userInfo objectForKey:@"photo"];
@@ -742,17 +756,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
-- (void)downloadPhotoFailed:(ASIHTTPRequest *)request {
+- (void) downloadPhotoFailed:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST:%@", [request.originalURL absoluteString]);
 	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	Photo *photo = (Photo *)[request.userInfo objectForKey:@"photo"];
 	if (photo != nil) {
 		photo.downloading = NO;
 	}
-}
-
-- (void)photoQueueFinished:(ASINetworkQueue *)queue {
-	DLog(@"photoQueueFinished");
 }
 
 #pragma mark -
@@ -768,6 +778,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[url appendFormat:@"&zoom=%d", [[Settings sharedSettings] mapZoomLevel]];
 		[url appendFormat:@"&sensor=false"];
 		DLog(@"REQUEST: %@", url);
+		
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
 		[request setDelegate:self];
 		[request setDidFinishSelector:@selector(downloadMapFinished:)];
@@ -778,7 +789,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
-- (void)downloadMapFinished:(ASIHTTPRequest *)request {
+- (void) downloadMapFinished:(ASIHTTPRequest *)request {
 	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
 	Incident *incident = (Incident *)[request.userInfo objectForKey:@"incident"];
 	if ([request error] != nil) {
@@ -803,31 +814,54 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
-- (void)downloadMapFailed:(ASIHTTPRequest *)request {
+- (void) downloadMapFailed:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"ERROR: %@", [[request error] localizedDescription]);
-}
-
-- (void)mapQueueFinished:(ASINetworkQueue *)queue {
-	DLog(@"mapQueueFinished");
 }
 
 #pragma mark -
 #pragma mark ASIHTTPRequest
 
-- (ASIHTTPRequest *) startAsynchronousRequest:(NSString *)url 
-								  forDelegate:(id<UshahidiDelegate>)delegate 
+- (ASIHTTPRequest *) queueAsynchronousRequest:(NSString *)url 
+								  forDelegate:(id<UshahidiDelegate>)delegate
+								startSelector:(SEL)startSelector
 							   finishSelector:(SEL)finishSelector
 								 failSelector:(SEL)failSelector {
-	DLog(@"url: %@", url);
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:url]];
 	[request setDelegate:self];
 	[request setShouldRedirect:YES];
+	[request setDidStartSelector:startSelector];
 	[request setDidFinishSelector:finishSelector];
 	[request setDidFailSelector:failSelector];
 	[request setUserInfo:[NSDictionary dictionaryWithObject:delegate forKey:@"delegate"]];
-	[request startAsynchronous];
+	
+	[self.mainQueue addOperation:request];
+	
 	return request;
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == self.mainQueue && [keyPath isEqual:@"operations"]) {
+        if ([self.mainQueue.operations count] == 0) {
+            DLog(@"MainQueue Finished");
+			[[NSNotificationCenter defaultCenter] postNotificationName:kMainQueueFinished object:nil];
+		}
+    }
+	else if (object == self.mapQueue && [keyPath isEqual:@"operations"]) {
+        if ([self.mapQueue.operations count] == 0) {
+			DLog(@"MapQueue Finished");
+			[[NSNotificationCenter defaultCenter] postNotificationName:kMapQueueFinished object:nil];
+		}
+    }
+	else if (object == self.photoQueue && [keyPath isEqual:@"operations"]) {
+        if ([self.photoQueue.operations count] == 0) {
+			DLog(@"PhotoQueue Finished");
+			[[NSNotificationCenter defaultCenter] postNotificationName:kPhotoQueueFinished object:nil];
+		}
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 @end

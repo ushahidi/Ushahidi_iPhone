@@ -24,6 +24,7 @@
 #import "Location.h"
 #import "TableCellFactory.h"
 #import "MKMapView+Extension.h"
+#import "MKPinAnnotationView+Extension.h"
 #import "MapAnnotation.h"
 #import "NSString+Extension.h"
 
@@ -115,8 +116,8 @@ typedef enum {
 			[loc.name isEqualToString:self.location] &&
 			[loc.latitude isEqualToString:self.latitude] &&
 			[loc.longitude isEqualToString:self.longitude]) {
-			[self.mapView centerAtCoordinate:mapAnnotation.coordinate withDelta:0.4];
-			[self.mapView selectAnnotation:mapAnnotation animated:YES];
+			[self.mapView centerAtCoordinate:mapAnnotation.coordinate withDelta:0.4 animated:NO];
+			[self.mapView selectAnnotation:mapAnnotation animated:NO];
 		}
 	}
 }
@@ -314,25 +315,7 @@ typedef enum {
 #pragma mark MKMapView
 
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
-	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:@"MKPinAnnotationView"];
-	if (annotationView == nil) {
-		annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
-	}
-	annotationView.animatesDrop = NO;
-	annotationView.canShowCallout = YES;
-	if ([annotation class] == MKUserLocation.class) {
-		annotationView.pinColor = MKPinAnnotationColorGreen;
-	}
-	else {
-		if ([annotation isKindOfClass:[MapAnnotation class]]) {
-			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
-			annotationView.pinColor = mapAnnotation.pinColor;
-		}
-		else {
-			annotationView.pinColor = MKPinAnnotationColorRed;
-		}
-	}
-	return annotationView;
+	return [MKPinAnnotationView getPinForMap:theMapView andAnnotation:annotation];
 }
 
 - (void)mapView:(MKMapView *)theMapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
@@ -354,7 +337,7 @@ typedef enum {
 - (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
 	DLog(@"latitude:%f longitude:%f", userLocation.coordinate.latitude, userLocation.coordinate.longitude);
 	if ([NSString isNilOrEmpty:self.location]) {
-		[self.mapView centerAtCoordinate:userLocation.coordinate withDelta:0.4];
+		[self.mapView centerAtCoordinate:userLocation.coordinate withDelta:0.4 animated:NO];
 		[self.mapView selectAnnotation:userLocation animated:YES];
 	}
 }

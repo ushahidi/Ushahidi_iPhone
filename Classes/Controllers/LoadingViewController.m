@@ -63,7 +63,7 @@
 }
 
 - (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay {
-	DLog(@"message:%@ delay:%d", message, delay);
+	DLog(@"message:%@ delay:%.2f", message, delay);
 	if ([NSThread isMainThread]) {
 		if (self.view.superview == nil) {
 			[self.controller.view performSelector:@selector(addSubview:) withObject:self.view afterDelay:delay];
@@ -86,12 +86,16 @@
 	return self.view.superview != nil;
 }
 
+- (NSString *) message {
+	return self.activityIndicatorLabel.text;
+}
+
 - (void) hide {
 	[self hideAfterDelay:0.0];
 }
 
 - (void) hideAfterDelay:(NSTimeInterval)delay {
-	DLog(@"delay:%d", delay);
+	DLog(@"message:%@ delay:%.2f", self.activityIndicatorLabel.text, delay);
 	if ([NSThread isMainThread]) {
 		[self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:delay];
 	}
@@ -105,7 +109,7 @@
 	[UIView setAnimationDuration:0.3];
 	self.view.alpha = 0.0;
 	[UIView commitAnimations];
-	[self.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];
+	[self.view performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:0.3];	
 }
 
 @end

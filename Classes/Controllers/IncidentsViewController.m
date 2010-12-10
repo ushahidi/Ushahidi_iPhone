@@ -33,6 +33,7 @@
 #import "Deployment.h"
 #import "Category.h"
 #import "MKMapView+Extension.h"
+#import "MKPinAnnotationView+Extension.h"
 #import "MapAnnotation.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
@@ -50,6 +51,10 @@
 - (void) updateLastSyncLabel;
 - (void) pushViewIncidentsViewController;
 - (void) populateMapPins:(BOOL)resizeMap;
+
+- (void) mainQueueFinished;
+- (void) mapQueueFinished;
+- (void) photoQueueFinished;
 
 @end
 
@@ -225,6 +230,7 @@ typedef enum {
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
 		self.category = nil;
 		self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+		[[Ushahidi sharedUshahidi] getLocationsForDelegate:self];
 		if ([self.categories count] == 0) {
 			[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];	
 		}
@@ -236,7 +242,7 @@ typedef enum {
 	}
 	[self.pending removeAllObjects];
 	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
-	[self filterRows:NO];
+	[self filterRows:YES];
 	if (self.willBePushed) {
 		if (self.incidentTableView.superview != nil) {
 			[self updateLastSyncLabel];
@@ -248,11 +254,21 @@ typedef enum {
 			[self populateMapPins:YES];
 		}
 	}
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoQueueFinished) name:kPhotoQueueFinished object:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMainQueueFinished object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMapQueueFinished object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kPhotoQueueFinished object:nil];
 }
 
 - (void)dealloc {
@@ -416,6 +432,21 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
+- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories {
+	DLog(@"Downloading Categories...");
+	[self.loadingView showWithMessage:NSLocalizedString(@"Categories...", nil)];
+}
+
+- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations {
+	DLog(@"Downloading Locations...");
+	[self.loadingView showWithMessage:NSLocalizedString(@"Locations...", nil)];
+}
+
+- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)thePending {
+	DLog(@"Downloading Incidents...");
+	[self.loadingView showWithMessage:NSLocalizedString(@"Incidents...", nil)];
+}
+
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)thePending error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
@@ -425,8 +456,11 @@ typedef enum {
 								 andMessage:[error localizedDescription]];
 		}
 		else if ([error code] == NoInternetConnection) {
-			[self.loadingView showWithMessage:NSLocalizedString(@"No Internet", nil)];
-			[self.loadingView performSelector:@selector(hide) withObject:nil afterDelay:2.0];
+			if ([self.loadingView isShowing]) {
+				[self.loadingView hide];
+				[self.alertView showOkWithTitle:NSLocalizedString(@"No Internet", nil) 
+									 andMessage:[error localizedDescription]];
+			}
 		}
 		else if ([self.loadingView isShowing]){
 			[self.loadingView hide];
@@ -437,7 +471,6 @@ typedef enum {
 	else if (hasChanges) {
 		DLog(@"incidents: %d", [incidents count]);
 		[self updateLastSyncLabel];
-		[self.loadingView hide];
 		[self.allRows removeAllObjects];
 		if (self.tableSort.selectedSegmentIndex == TableSortDate) {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
@@ -460,13 +493,11 @@ typedef enum {
 			[self populateMapPins:YES];
 		}
 		DLog(@"Re-Adding Incidents");
-		[self.loadingView hide];
 	}
 	else {
 		DLog(@"No Changes Incidents");
 		[self updateLastSyncLabel];
 		[self.tableView reloadData];
-		[self.loadingView hide];
 	}
 	self.incidentTableView.refreshButton.enabled = YES;
 	self.incidentMapView.refreshButton.enabled = YES;
@@ -483,16 +514,20 @@ typedef enum {
 				[cell setUploading:YES];
 			}
 		}
+		else {
+			[self.tableView reloadData];
+		}
 	}
 	else {
 		DLog(@"Incident is NULL");
+		[self.tableView reloadData];
 	}
 }
 
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error {
 	if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
-		if ([error code] > 1) {
+		if ([error code] > NoInternetConnection) {
 			[self.loadingView hide];
 			[self.alertView showOkWithTitle:NSLocalizedString(@"Upload Error", nil) 
 								 andMessage:[error localizedDescription]];
@@ -565,27 +600,25 @@ typedef enum {
 	self.incidentMapView.filterButton.enabled = [self.categories count] > 0;
 }
 
+- (void) mainQueueFinished {
+	DLog(@"");
+	[self.loadingView hideAfterDelay:1.0];
+}
+
+- (void) mapQueueFinished {
+	DLog(@"");
+}
+
+- (void) photoQueueFinished {
+	DLog(@"");
+}
+
 #pragma mark -
 #pragma mark MKMapView
 
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
-	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[theMapView dequeueReusableAnnotationViewWithIdentifier:@"MKPinAnnotationView"];
-	if (annotationView == nil) {
-		 annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
-	}
-	annotationView.animatesDrop = NO;
-	annotationView.canShowCallout = YES;
-	if ([annotation class] == MKUserLocation.class) {
-		annotationView.pinColor = MKPinAnnotationColorGreen;
-	}
-	else {
-		if ([annotation isKindOfClass:[MapAnnotation class]]) {
-			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
-			annotationView.pinColor = mapAnnotation.pinColor;
-		}
-		else {
-			annotationView.pinColor = MKPinAnnotationColorRed;
-		}
+	MKPinAnnotationView *annotationView = [MKPinAnnotationView getPinForMap:theMapView andAnnotation:annotation];
+	if ([annotation class] != MKUserLocation.class) {
 		UIButton *annotationButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 		[annotationButton addTarget:self action:@selector(annotationClicked:) forControlEvents:UIControlEventTouchUpInside];
 		annotationView.rightCalloutAccessoryView = annotationButton;

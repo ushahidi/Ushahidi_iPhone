@@ -70,6 +70,10 @@
 }
 
 - (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta {
+	[self centerAtCoordinate:coordinate withDelta:delta animated:YES];
+}
+
+- (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta animated:(BOOL)animated {
 	MKCoordinateSpan span;
 	span.latitudeDelta = delta;
 	span.longitudeDelta = delta;
@@ -78,7 +82,7 @@
 	region.span = span;
 	region.center = coordinate;
 	
-	[self setRegion:region animated:TRUE];
+	[self setRegion:region animated:animated];
 	[self regionThatFits:region];
 }
 

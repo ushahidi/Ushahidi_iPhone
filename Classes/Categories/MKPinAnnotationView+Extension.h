@@ -18,32 +18,13 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <MapKit/MKAnnotation.h>
 
-@interface LoadingViewController : UIViewController {
+@interface MKPinAnnotationView (Extension)
 
-@public
-	IBOutlet UIActivityIndicatorView *activityIndicator;
-	IBOutlet UIImageView *activityIndicatorBackground;
-	IBOutlet UILabel *activityIndicatorLabel;
-	
-@private
-	UIViewController *controller;
-}
-
-@property (nonatomic, retain) UILabel *activityIndicatorLabel;
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, retain) UIImageView *activityIndicatorBackground;
-
-- (id) initWithController:(UIViewController *)controller;
-
-- (void) show;
-- (void) showAfterDelay:(NSTimeInterval)delay;
-- (void) showWithMessage:(NSString *)message;
-- (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay;
-- (void) hide;
-- (void) hideAfterDelay:(NSTimeInterval)delay;
-- (BOOL) isShowing;
-- (NSString *) message;
++ (MKPinAnnotationView *) getPinForMap:(MKMapView *)mapView andAnnotation:(id <MKAnnotation>)annotation;
 
 @end

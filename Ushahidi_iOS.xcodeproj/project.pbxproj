@@ -177,6 +177,7 @@
 		3EF58725129AC37100489AF8 /* IncidentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF58724129AC37100489AF8 /* IncidentTableView.m */; };
 		3EF58728129AC37E00489AF8 /* IncidentMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF58727129AC37E00489AF8 /* IncidentMapView.m */; };
 		3EF8731712B136EF00E9D799 /* Internet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8731612B136EF00E9D799 /* Internet.m */; };
+		3EF8785F12B29C1500E9D799 /* MKPinAnnotationView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8785E12B29C1500E9D799 /* MKPinAnnotationView+Extension.m */; };
 		3EFC1C1D1295D81C00163B36 /* email_details.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1B1295D81C00163B36 /* email_details.png */; };
 		3EFC1C1E1295D81C00163B36 /* email_link.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1C1295D81C00163B36 /* email_link.png */; };
 		3EFC1C3B1295D92A00163B36 /* photo_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C3A1295D92A00163B36 /* photo_save.png */; };
@@ -456,6 +457,8 @@
 		3EF58727129AC37E00489AF8 /* IncidentMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentMapView.m; sourceTree = "<group>"; };
 		3EF8731512B136EF00E9D799 /* Internet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Internet.h; sourceTree = "<group>"; };
 		3EF8731612B136EF00E9D799 /* Internet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Internet.m; sourceTree = "<group>"; };
+		3EF8785D12B29C1500E9D799 /* MKPinAnnotationView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPinAnnotationView+Extension.h"; sourceTree = "<group>"; };
+		3EF8785E12B29C1500E9D799 /* MKPinAnnotationView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPinAnnotationView+Extension.m"; sourceTree = "<group>"; };
 		3EFC1C1B1295D81C00163B36 /* email_details.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_details.png; sourceTree = "<group>"; };
 		3EFC1C1C1295D81C00163B36 /* email_link.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_link.png; sourceTree = "<group>"; };
 		3EFC1C3A1295D92A00163B36 /* photo_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo_save.png; sourceTree = "<group>"; };
@@ -598,6 +601,8 @@
 				3E8637E512246A64001DE141 /* NSDictionary+Extension.m */,
 				3E8638C212247BAC001DE141 /* MKMapView+Extension.h */,
 				3E8638C312247BAC001DE141 /* MKMapView+Extension.m */,
+				3EF8785D12B29C1500E9D799 /* MKPinAnnotationView+Extension.h */,
+				3EF8785E12B29C1500E9D799 /* MKPinAnnotationView+Extension.m */,
 				3E4A022512720E280017AED4 /* NSString+Extension.h */,
 				3E4A022612720E280017AED4 /* NSString+Extension.m */,
 				3E30492712874F3600E3C942 /* NSObject+Extension.h */,
@@ -1138,6 +1143,7 @@
 				3E4C659B12AD774F001ED08A /* MoviePlayer.m in Sources */,
 				3ECFF2C512AFDB4F00DE75D7 /* SMS.m in Sources */,
 				3EF8731712B136EF00E9D799 /* Internet.m in Sources */,
+				3EF8785F12B29C1500E9D799 /* MKPinAnnotationView+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,5 +48,6 @@
 - (void) resizeRegionToFitAllPins;
 - (void) resizeRegionToFitAllPins:(BOOL)animated;
 - (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta;
+- (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta animated:(BOOL)animated;
 
 @end

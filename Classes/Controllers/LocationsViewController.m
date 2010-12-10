@@ -314,6 +314,31 @@ typedef enum {
 #pragma mark -
 #pragma mark MKMapView
 
+- (void)mapViewWillStartLoadingMap:(MKMapView *)theMapView {
+	DLog(@"");
+}
+
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)theMapView {
+	DLog(@"");
+	[self.mapView selectAnnotation:nil animated:NO];
+	for(NSObject<MKAnnotation> *annotation in theMapView.annotations) {
+		if ([annotation isKindOfClass:[MapAnnotation class]]) {
+			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
+			Location *loc = (Location *)mapAnnotation.object;
+			if ([loc.name isEqualToString:self.location] &&
+				[loc.latitude isEqualToString:self.latitude] &&
+				[loc.longitude isEqualToString:self.longitude]) {
+				[self.mapView selectAnnotation:annotation animated:NO];
+				break;
+			}
+		}
+	}
+}
+
+- (void)mapViewDidFailLoadingMap:(MKMapView *)theMapView withError:(NSError *)error {
+	DLog(@"");
+}
+
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
 	return [MKPinAnnotationView getPinForMap:theMapView andAnnotation:annotation];
 }

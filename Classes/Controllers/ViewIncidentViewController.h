@@ -25,6 +25,7 @@
 #import "Ushahidi.h"
 #import "Photo.h"
 #import "SMS.h"
+#import "Email.h"
 
 @class WebViewController;
 @class MapViewController;
@@ -38,6 +39,7 @@
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
 															UIWebViewDelegate,
 															SMSDelegate,
+															EmailDelegate,
 															MapTableCellDelegate> {
 	
 @public

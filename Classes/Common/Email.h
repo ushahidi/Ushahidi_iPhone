@@ -38,3 +38,13 @@
 - (void) sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject withPhotos:(NSArray *)photos;
 
 @end
+
+@protocol EmailDelegate <NSObject>
+
+@optional
+
+- (void) emailSent:(Email *)email;
+- (void) emailCancelled:(Email *)email;
+- (void) emailFailed:(Email *)email;
+
+@end

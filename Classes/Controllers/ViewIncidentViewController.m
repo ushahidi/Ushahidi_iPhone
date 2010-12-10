@@ -114,7 +114,6 @@ typedef enum {
 		[message appendFormat:@"%@ %@", self.incident.title, [link absoluteString]];
 	}
 	[self.sms sendToRecipients:nil withMessage:message];
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)];
 }
 
 - (IBAction) emailDetails:(id)sender {
@@ -467,20 +466,37 @@ typedef enum {
 
 - (void) smsSent:(SMS *)theSms {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) afterDelay:1.0];
+	[self.loadingView showWithMessage:NSLocalizedString(@"SMS Sent", nil)];
 	[self.loadingView hideAfterDelay:2.0];
 }
 
 - (void) smsCancelled:(SMS *)theSms {
 	DLog(@"");
-	[self.loadingView hide];
 }
 
 - (void) smsFailed:(SMS *)theSms {
 	DLog(@"");
-	[self.loadingView hide];
 	[self.alertView showOkWithTitle:NSLocalizedString(@"SMS Failed", nil) 
 						 andMessage:NSLocalizedString(@"Unable To Send SMS", nil)];
+}
+
+#pragma mark -
+#pragma mark EmailDelegate
+
+- (void) emailSent:(Email *)email {
+	DLog(@"");
+	[self.loadingView showWithMessage:NSLocalizedString(@"Email Sent", nil)];
+	[self.loadingView hideAfterDelay:2.0];
+}
+
+- (void) emailCancelled:(Email *)email {
+	DLog(@"");
+}
+
+- (void) emailFailed:(Email *)email {
+	DLog(@"");
+	[self.alertView showOkWithTitle:NSLocalizedString(@"Email Failed", nil) 
+						 andMessage:NSLocalizedString(@"Unable To Send Email", nil)];
 }
 
 @end

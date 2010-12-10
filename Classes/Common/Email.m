@@ -20,6 +20,7 @@
 
 #import "Email.h"
 #import "AlertView.h"
+#import "NSObject+Extension.h"
 
 @interface Email ()
 
@@ -80,10 +81,19 @@
 						 andMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey]];
 	}
 	else if (result == MFMailComposeResultSent) {
-		
+		[self dispatchSelector:@selector(emailSent:) 
+						target:self.controller 
+					   objects:self, nil];
 	}
 	else if (result == MFMailComposeResultCancelled) {
-		
+		[self dispatchSelector:@selector(emailCancelled:) 
+						target:self.controller 
+					   objects:self, nil];
+	}
+	else if (result == MFMailComposeResultFailed) {
+		[self dispatchSelector:@selector(emailFailed:) 
+						target:self.controller 
+					   objects:self, nil];
 	}
 	[theController dismissModalViewControllerAnimated:YES];
 }

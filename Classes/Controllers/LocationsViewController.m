@@ -105,25 +105,19 @@ typedef enum {
 	[self.mapView removeAllPins];
 	self.mapView.showsUserLocation = YES;
 	for (Location *loc in self.allRows) {
-		[self.mapView addPinWithTitle:loc.name 
-							 subtitle:[NSString stringWithFormat:@"%@, %@", loc.latitude, loc.longitude] 
-							 latitude:loc.latitude 
-							longitude:loc.longitude
-							   object:loc
-							 pinColor:MKPinAnnotationColorRed];
-	}
-	if (centerMap) {
-		if ([NSString isNilOrEmpty:self.location] == NO) {			
-			for (NSObject <MKAnnotation> *mapAnnotation in self.mapView.annotations) {
-				DLog(@"%f, %f", mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
-				if (mapAnnotation.coordinate.latitude == self.latitude.floatValue &&
-					mapAnnotation.coordinate.longitude == self.longitude.floatValue) {
-					[self.mapView centerAtCoordinate:mapAnnotation.coordinate withDelta:0.4];
-					[self.mapView selectAnnotation:mapAnnotation animated:YES];
-					break;
-				}
-			}	
-		}	
+		MapAnnotation *mapAnnotation = [self.mapView addPinWithTitle:loc.name 
+															subtitle:[NSString stringWithFormat:@"%@, %@", loc.latitude, loc.longitude] 
+															latitude:loc.latitude 
+														   longitude:loc.longitude
+															  object:loc
+															pinColor:MKPinAnnotationColorRed];
+		if (centerMap &&
+			[loc.name isEqualToString:self.location] &&
+			[loc.latitude isEqualToString:self.latitude] &&
+			[loc.longitude isEqualToString:self.longitude]) {
+			[self.mapView centerAtCoordinate:mapAnnotation.coordinate withDelta:0.4];
+			[self.mapView selectAnnotation:mapAnnotation animated:YES];
+		}
 	}
 }
 

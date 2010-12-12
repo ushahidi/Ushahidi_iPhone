@@ -20,6 +20,7 @@
 
 #import "Deployment.h"
 #import "Location.h"
+#import "NSString+Extension.h"
 
 @interface Deployment ()
 
@@ -27,16 +28,16 @@
 
 @implementation Deployment
 
-@synthesize name, url, domain, countries, categories, locations, incidents, pending, sinceID, lastSync;
+@synthesize name, url, domain, countries, categories, locations, incidents, pending, sinceID, synced, added;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
 		self.name = theName;
 		self.url = theUrl;
-		if ([theUrl hasPrefix:@"http://"]) {
+		if ([[theUrl lowercaseString] hasPrefix:@"http://"]) {
 			self.domain = [theUrl stringByReplacingOccurrencesOfString:@"http://" withString:@""];
 		}
-		else if ([theUrl hasPrefix:@"https://"]) {
+		else if ([[theUrl lowercaseString] hasPrefix:@"https://"]) {
 			self.domain = [theUrl stringByReplacingOccurrencesOfString:@"https://" withString:@""];
 		}
 		else {
@@ -47,6 +48,7 @@
 		self.locations = [[NSMutableDictionary alloc] init];
 		self.incidents = [[NSMutableDictionary alloc] init];
 		self.pending = [[NSMutableArray alloc] init];
+		self.added = [NSDate date];
 	}
 	return self;
 }
@@ -61,7 +63,8 @@
 	[encoder encodeObject:self.locations forKey:@"locations"];
 	[encoder encodeObject:self.incidents forKey:@"incidents"];
 	[encoder encodeObject:self.pending forKey:@"pending"];
-	[encoder encodeObject:self.lastSync forKey:@"lastSync"];
+	[encoder encodeObject:self.synced forKey:@"synced"];
+	[encoder encodeObject:self.added forKey:@"added"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -86,16 +89,15 @@
 		self.pending = [decoder decodeObjectForKey:@"pending"];
 		if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 		
-		self.lastSync = [decoder decodeObjectForKey:@"lastSync"];
+		self.synced = [decoder decodeObjectForKey:@"synced"];
+		self.added = [decoder decodeObjectForKey:@"added"];
 	}
 	return self;
 }
 
 - (BOOL) matchesString:(NSString *)string {
 	NSString *lowercaseString = [string lowercaseString];
-	return	(string == nil || [string length] == 0) ||
-			[[self.name lowercaseString] hasPrefix:lowercaseString] ||
-			[[self.url lowercaseString] hasPrefix:lowercaseString];
+	return	[[self.name lowercaseString] anyWordHasPrefix:lowercaseString];
 }
 
 
@@ -112,6 +114,10 @@
 	return [self.name localizedCaseInsensitiveCompare:deployment.name];
 }
 
+- (NSComparisonResult)compareByDate:(Deployment *)deployment {
+		return [deployment.added compare:self.added];
+}
+
 - (void)dealloc {
 	[name release];
 	[url release];
@@ -122,7 +128,8 @@
 	[incidents release];
 	[pending release];
 	[sinceID release];
-	[lastSync release];
+	[synced release];
+	[added release];
     [super dealloc];
 }
 

@@ -38,7 +38,7 @@ typedef enum {
 	NavBarNext
 } NavBar;
 
-@synthesize imageView, image, images, nextPrevious, email;
+@synthesize imageView, image, images, nextPrevious, email, emailButton, saveButton;
 
 - (IBAction) nextPrevious:(id)sender {
 	NSInteger index = [self.images indexOfObject:self.image];
@@ -58,7 +58,7 @@ typedef enum {
 	[self.nextPrevious setEnabled:(newIndex + 1 < [self.images count]) forSegmentAtIndex:NavBarNext];
 }
 
-- (IBAction) emailPhoto:(id)sender {
+- (IBAction) sendEmail:(id)sender {
 	DLog(@"");
 	[self.email	sendToRecipients:nil withMessage:nil withSubject:nil withPhotos:[NSArray arrayWithObject:self.image]];
 }
@@ -87,6 +87,12 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	self.email = [[Email alloc] initWithController:self];
+	self.emailButton.enabled = [self.email canSend];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.imageView.image = self.image;
@@ -109,11 +115,6 @@ typedef enum {
 	}
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	self.email = [[Email alloc] initWithController:self];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
@@ -132,6 +133,8 @@ typedef enum {
 	[images	release];
 	[nextPrevious release];
 	[email release];
+	[emailButton release];
+	[saveButton release];
 	[super dealloc];
 }
 

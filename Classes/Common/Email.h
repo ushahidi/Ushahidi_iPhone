@@ -34,6 +34,7 @@
 }
 
 - (id) initWithController:(UIViewController *)controller;
+- (BOOL) canSend;
 - (void) sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject;
 - (void) sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject withPhotos:(NSArray *)photos;
 

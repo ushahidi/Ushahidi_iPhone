@@ -60,7 +60,8 @@
 }
 
 - (BOOL) canSend {
-	return [MFMessageComposeViewController canSendText];
+	Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
+	return messageClass != nil && [messageClass canSendText];
 }
 
 - (void) messageComposeViewController:(MFMessageComposeViewController *)composeViewcontroller didFinishWithResult:(MessageComposeResult)result {

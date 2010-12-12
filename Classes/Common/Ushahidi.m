@@ -173,6 +173,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return [self.deployments objectForKey:url];
 }
 
+- (NSArray *) getDeploymentsForDelegate:(id<UshahidiDelegate>)delegate {
+	DLog(@"DELEGATE: %@", [delegate class]);
+	if ([self.deployments count] == 0) {
+		[self.deployments setObject:[[Deployment alloc] initWithName:NSLocalizedString(@"Demo Ushahidi", nil) 
+																 url:@"http://demo.ushahidi.com"] 
+							 forKey:@"http://demo.ushahidi.com"];
+	}
+	//TODO load Ushahidi deployments from server
+	[self performSelector:@selector(getDeploymentsFinished:) withObject:delegate afterDelay:0.5];
+	return [self.deployments allValues];
+}
+
+- (void) getDeploymentsFinished:(id<UshahidiDelegate>)delegate {
+	DLog(@"DELEGATE: %@", [delegate class]);
+	[self dispatchSelector:@selector(downloadedFromUshahidi:deployments:error:hasChanges:) 
+					target:delegate 
+				   objects:self, [self.deployments allValues], nil, NO, nil];
+}
+
 #pragma mark -
 #pragma mark Add/Upload Incidents
 
@@ -326,28 +345,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
 					target:delegate 
 				   objects:self, incident, [request error], nil];
-}
-
-#pragma mark -
-#pragma mark Deployments
-
-- (NSArray *) getDeploymentsForDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"DELEGATE: %@", [delegate class]);
-	if ([self.deployments count] == 0) {
-		[self.deployments setObject:[[Deployment alloc] initWithName:NSLocalizedString(@"Demo Ushahidi", nil) 
-																 url:@"http://demo.ushahidi.com"] 
-							 forKey:@"http://demo.ushahidi.com"];
-	}
-	//TODO load Ushahidi deployments from server
-	[self performSelector:@selector(getDeploymentsFinished:) withObject:delegate afterDelay:0.5];
-	return [[self.deployments allValues] sortedArrayUsingSelector:@selector(compareByName:)];
-}
-
-- (void) getDeploymentsFinished:(id<UshahidiDelegate>)delegate {
-	DLog(@"DELEGATE: %@", [delegate class]);
-	[self dispatchSelector:@selector(downloadedFromUshahidi:deployments:error:hasChanges:) 
-					target:delegate 
-				   objects:self, [self.deployments allValues], nil, NO, nil];
 }
 
 #pragma mark -
@@ -699,7 +696,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			if (hasChanges) {
 				DLog(@"Has New Incidents");
 			}
-			self.deployment.lastSync = [NSDate date];
+			self.deployment.synced = [NSDate date];
 			[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
 							target:delegate 
 						   objects:self, [self.deployment.incidents allValues], self.deployment.pending, nil, hasChanges, nil];

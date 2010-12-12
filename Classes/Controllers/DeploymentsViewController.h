@@ -34,6 +34,7 @@
 	IBOutlet InfoViewController *infoViewController;
 	IBOutlet UIBarButtonItem *editButton;
 	IBOutlet UIBarButtonItem *refreshButton;
+	IBOutlet UISegmentedControl *tableSort;
 }
 
 @property(nonatomic, retain) IncidentsViewController *incidentsViewController;
@@ -41,9 +42,11 @@
 @property(nonatomic, retain) InfoViewController *infoViewController;
 @property(nonatomic, retain) UIBarButtonItem *editButton;
 @property(nonatomic, retain) UIBarButtonItem *refreshButton;
+@property(nonatomic, retain) UISegmentedControl *tableSort;
 
 - (IBAction) add:(id)sender;
 - (IBAction) edit:(id)sender;
 - (IBAction) refresh:(id)sender;
+- (IBAction) tableSortChanged:(id)sender;
 
 @end

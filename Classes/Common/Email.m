@@ -47,6 +47,11 @@
 	[super dealloc];
 }
 
+- (BOOL) canSend {
+	Class messageClass = (NSClassFromString(@"MFMailComposeViewController"));
+	return messageClass != nil && [messageClass canSendMail];
+}
+
 - (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject {
 	[self sendToRecipients:recipients withMessage:message withSubject:subject withPhotos:nil];
 }

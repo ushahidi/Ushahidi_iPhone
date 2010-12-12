@@ -48,7 +48,7 @@
 @property(nonatomic,retain) NSMutableArray *categories;
 @property(nonatomic,retain) Category *category;
 
-- (void) updateLastSyncLabel;
+- (void) updateSyncedLabel;
 - (void) pushViewIncidentsViewController;
 - (void) populateMapPins:(BOOL)resizeMap;
 
@@ -163,11 +163,11 @@ typedef enum {
 	}
 }
 
-- (void) updateLastSyncLabel {
-	if (self.deployment.lastSync) {
+- (void) updateSyncedLabel {
+	if (self.deployment.synced) {
 		[self setTableFooter:[NSString stringWithFormat:@"%@ %@", 
 							  NSLocalizedString(@"Last Sync", nil), 
-							  [self.deployment.lastSync dateToString:@"h:mm a, MMMM d, yyyy"]]];	
+							  [self.deployment.synced dateToString:@"h:mm a, MMMM d, yyyy"]]];	
 	}
 	else {
 		[self setTableFooter:nil];
@@ -245,7 +245,7 @@ typedef enum {
 	[self filterRows:YES];
 	if (self.willBePushed) {
 		if (self.incidentTableView.superview != nil) {
-			[self updateLastSyncLabel];
+			[self updateSyncedLabel];
 			[self.tableView reloadData];
 			self.incidentTableView.filterButton.enabled = [self.categories count] > 0;
 			self.incidentMapView.filterButton.enabled = [self.categories count] > 0;
@@ -470,7 +470,7 @@ typedef enum {
 	}
 	else if (hasChanges) {
 		DLog(@"incidents: %d", [incidents count]);
-		[self updateLastSyncLabel];
+		[self updateSyncedLabel];
 		[self.allRows removeAllObjects];
 		if (self.tableSort.selectedSegmentIndex == TableSortDate) {
 			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
@@ -496,7 +496,7 @@ typedef enum {
 	}
 	else {
 		DLog(@"No Changes Incidents");
-		[self updateLastSyncLabel];
+		[self updateSyncedLabel];
 		[self.tableView reloadData];
 	}
 	self.incidentTableView.refreshButton.enabled = YES;

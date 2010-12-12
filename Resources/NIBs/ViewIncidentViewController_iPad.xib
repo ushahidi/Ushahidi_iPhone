@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.SystemVersion">10H574</string>
 		<string key="IBDocument.InterfaceBuilderVersion">823</string>
-		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -151,36 +151,36 @@
 					<int key="connectionID">10</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">emailLink:</string>
-						<reference key="source" ref="396130924"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">15</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">emailDetails:</string>
-						<reference key="source" ref="325857712"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">16</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">emailDetailsButton</string>
+						<string key="label">emailButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="325857712"/>
 					</object>
-					<int key="connectionID">17</int>
+					<int key="connectionID">19</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">emailLinkButton</string>
+						<string key="label">smsButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="396130924"/>
 					</object>
-					<int key="connectionID">18</int>
+					<int key="connectionID">20</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">sendSMS:</string>
+						<reference key="source" ref="396130924"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">sendEmail:</string>
+						<reference key="source" ref="325857712"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">22</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -264,7 +264,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>ViewIncidentViewController</string>
 					<string>UIResponder</string>
-					<string>{{1440, -168}, {768, 1024}}</string>
+					<string>{{657, 4}, {783, 852}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -289,7 +289,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">18</int>
+			<int key="maxID">22</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -359,24 +359,34 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>emailButton</string>
 							<string>imageView</string>
 							<string>nextPrevious</string>
+							<string>saveButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
 							<string>UIImageView</string>
 							<string>UISegmentedControl</string>
+							<string>UIBarButtonItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>emailButton</string>
 							<string>imageView</string>
 							<string>nextPrevious</string>
+							<string>saveButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">emailButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">imageView</string>
 								<string key="candidateClassName">UIImageView</string>
@@ -384,6 +394,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">nextPrevious</string>
 								<string key="candidateClassName">UISegmentedControl</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">saveButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 						</object>
 					</object>
@@ -507,6 +521,57 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
+					<string key="className">NewsViewController</string>
+					<string key="superclassName">BaseViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">backForward:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">backForward:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">backForward:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backForwardButton</string>
+							<string>webView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UISegmentedControl</string>
+							<string>UIWebView</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backForwardButton</string>
+							<string>webView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">backForwardButton</string>
+								<string key="candidateClassName">UISegmentedControl</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">webView</string>
+								<string key="candidateClassName">UIWebView</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/Controllers/NewsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
 					<string key="className">TableViewController</string>
 					<string key="superclassName">BaseViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
@@ -539,9 +604,9 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailDetails:</string>
-							<string>emailLink:</string>
 							<string>nextPrevious:</string>
+							<string>sendEmail:</string>
+							<string>sendSMS:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -554,22 +619,22 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailDetails:</string>
-							<string>emailLink:</string>
 							<string>nextPrevious:</string>
+							<string>sendEmail:</string>
+							<string>sendSMS:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
-								<string key="name">emailDetails:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">emailLink:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
 								<string key="name">nextPrevious:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">sendEmail:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">sendSMS:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -578,39 +643,38 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailDetailsButton</string>
-							<string>emailLinkButton</string>
+							<string>emailButton</string>
 							<string>imageViewController</string>
 							<string>mapViewController</string>
+							<string>newsViewController</string>
 							<string>nextPrevious</string>
+							<string>smsButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIBarButtonItem</string>
-							<string>UIBarButtonItem</string>
 							<string>ImageViewController</string>
 							<string>MapViewController</string>
+							<string>NewsViewController</string>
 							<string>UISegmentedControl</string>
+							<string>UIBarButtonItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailDetailsButton</string>
-							<string>emailLinkButton</string>
+							<string>emailButton</string>
 							<string>imageViewController</string>
 							<string>mapViewController</string>
+							<string>newsViewController</string>
 							<string>nextPrevious</string>
+							<string>smsButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">emailDetailsButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">emailLinkButton</string>
+								<string key="name">emailButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -622,8 +686,16 @@
 								<string key="candidateClassName">MapViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">newsViewController</string>
+								<string key="candidateClassName">NewsViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">nextPrevious</string>
 								<string key="candidateClassName">UISegmentedControl</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">smsButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 						</object>
 					</object>
@@ -919,6 +991,13 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">UIKit.framework/Headers/UIView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">MediaPlayer.framework/Headers/MPMoviePlayerViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

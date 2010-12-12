@@ -50,8 +50,8 @@
 	Incident *incident;
 	NSArray *incidents;
 	BOOL pending; 
-	UIBarButtonItem *emailLinkButton;
-	UIBarButtonItem *emailDetailsButton;
+	UIBarButtonItem *smsButton;
+	UIBarButtonItem *emailButton;
 																
 @private
 	Email *email;
@@ -66,13 +66,12 @@
 @property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;
 @property(nonatomic,retain) Incident *incident;
 @property(nonatomic,retain) NSArray *incidents;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *emailLinkButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *emailDetailsButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *smsButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *emailButton;
 @property(nonatomic,assign) BOOL pending;
 
 - (IBAction) nextPrevious:(id)sender;
-- (IBAction) emailLink:(id)sender;
-- (IBAction) emailDetails:(id)sender;
-- (IBAction) smsLink:(id)sender;
+- (IBAction) sendEmail:(id)sender;
+- (IBAction) sendSMS:(id)sender;
 
 @end

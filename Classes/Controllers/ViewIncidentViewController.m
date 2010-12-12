@@ -72,7 +72,7 @@ typedef enum {
 } NavBar;
 
 @synthesize mapViewController, imageViewController, newsViewController, nextPrevious, incident, incidents, email, sms, pending;
-@synthesize emailLinkButton, emailDetailsButton, moviePlayer;
+@synthesize smsButton, emailButton, moviePlayer;
 
 #pragma mark -
 #pragma mark Handlers
@@ -96,14 +96,14 @@ typedef enum {
 	[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
-- (IBAction) emailLink:(id)sender {
-	DLog(@"");
-	NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
-	NSString *message = [NSString stringWithFormat:@"<a href=\"%@\">%@</a>", [link absoluteString], [link absoluteString]];
-	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title];
-}
+//- (IBAction) emailLink:(id)sender {
+//	DLog(@"");
+//	NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
+//	NSString *message = [NSString stringWithFormat:@"<a href=\"%@\">%@</a>", [link absoluteString], [link absoluteString]];
+//	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title];
+//}
 
-- (IBAction) smsLink:(id)sender {
+- (IBAction) sendSMS:(id)sender {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
 	if (self.pending) {
@@ -116,7 +116,7 @@ typedef enum {
 	[self.sms sendToRecipients:nil withMessage:message];
 }
 
-- (IBAction) emailDetails:(id)sender {
+- (IBAction) sendEmail:(id)sender {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
 	if (self.pending == NO) {
@@ -171,7 +171,8 @@ typedef enum {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];	
-	self.emailLinkButton.enabled = !self.pending && [self.sms canSend];
+	self.smsButton.enabled = !self.pending && [self.sms canSend];
+	self.emailButton.enabled = [self.email canSend];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -187,8 +188,8 @@ typedef enum {
 	[incident release];
 	[email release];
 	[moviePlayer release];
-	[emailLinkButton release];
-	[emailDetailsButton release];
+	[smsButton release];
+	[emailButton release];
     [super dealloc];
 }
 

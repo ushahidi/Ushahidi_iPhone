@@ -29,7 +29,8 @@
 	NSString *url;
 	NSString *domain;
 	NSString *sinceID;
-	NSDate *lastSync;
+	NSDate *synced;
+	NSDate *added;
 	
 	NSMutableDictionary *countries;
 	NSMutableDictionary *categories;
@@ -42,7 +43,8 @@
 @property(nonatomic,retain) NSString *url;
 @property(nonatomic,retain) NSString *domain;
 @property(nonatomic,retain) NSString *sinceID;
-@property(nonatomic,retain) NSDate *lastSync;
+@property(nonatomic,retain) NSDate *synced;
+@property(nonatomic,retain) NSDate *added;
 
 @property(nonatomic, retain) NSMutableDictionary *countries;
 @property(nonatomic, retain) NSMutableDictionary *categories;
@@ -87,5 +89,6 @@
 - (NSString *) getPostPhoto;
 
 - (NSComparisonResult)compareByName:(Deployment *)deployment;
+- (NSComparisonResult)compareByDate:(Deployment *)deployment;
 
 @end

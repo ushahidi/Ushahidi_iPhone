@@ -151,36 +151,36 @@
 					<int key="connectionID">9</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">emailDetails:</string>
-						<reference key="source" ref="451447855"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">19</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">emailDetailsButton</string>
+						<string key="label">emailButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="451447855"/>
 					</object>
-					<int key="connectionID">20</int>
+					<int key="connectionID">23</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">emailLinkButton</string>
+						<string key="label">smsButton</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="911694275"/>
 					</object>
-					<int key="connectionID">21</int>
+					<int key="connectionID">24</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">smsLink:</string>
+						<string key="label">sendSMS:</string>
 						<reference key="source" ref="911694275"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
-					<int key="connectionID">22</int>
+					<int key="connectionID">25</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">sendEmail:</string>
+						<reference key="source" ref="451447855"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">26</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -293,7 +293,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">26</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -363,24 +363,34 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>emailButton</string>
 							<string>imageView</string>
 							<string>nextPrevious</string>
+							<string>saveButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
 							<string>UIImageView</string>
 							<string>UISegmentedControl</string>
+							<string>UIBarButtonItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>emailButton</string>
 							<string>imageView</string>
 							<string>nextPrevious</string>
+							<string>saveButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">emailButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">imageView</string>
 								<string key="candidateClassName">UIImageView</string>
@@ -388,6 +398,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">nextPrevious</string>
 								<string key="candidateClassName">UISegmentedControl</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">saveButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 						</object>
 					</object>
@@ -594,14 +608,12 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailDetails:</string>
-							<string>emailLink:</string>
 							<string>nextPrevious:</string>
-							<string>smsLink:</string>
+							<string>sendEmail:</string>
+							<string>sendSMS:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -611,27 +623,22 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailDetails:</string>
-							<string>emailLink:</string>
 							<string>nextPrevious:</string>
-							<string>smsLink:</string>
+							<string>sendEmail:</string>
+							<string>sendSMS:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">emailDetails:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">emailLink:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 							<object class="IBActionInfo">
 								<string key="name">nextPrevious:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">smsLink:</string>
+								<string key="name">sendEmail:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">sendSMS:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -640,42 +647,38 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailDetailsButton</string>
-							<string>emailLinkButton</string>
+							<string>emailButton</string>
 							<string>imageViewController</string>
 							<string>mapViewController</string>
 							<string>newsViewController</string>
 							<string>nextPrevious</string>
+							<string>smsButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>ImageViewController</string>
 							<string>MapViewController</string>
 							<string>NewsViewController</string>
 							<string>UISegmentedControl</string>
+							<string>UIBarButtonItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailDetailsButton</string>
-							<string>emailLinkButton</string>
+							<string>emailButton</string>
 							<string>imageViewController</string>
 							<string>mapViewController</string>
 							<string>newsViewController</string>
 							<string>nextPrevious</string>
+							<string>smsButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">emailDetailsButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">emailLinkButton</string>
+								<string key="name">emailButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -693,6 +696,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">nextPrevious</string>
 								<string key="candidateClassName">UISegmentedControl</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">smsButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 						</object>
 					</object>

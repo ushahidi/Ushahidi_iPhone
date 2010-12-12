@@ -37,7 +37,12 @@
 
 @implementation DeploymentsViewController
 
-@synthesize incidentsViewController, addDeploymentViewController, infoViewController, editButton, refreshButton;
+@synthesize incidentsViewController, addDeploymentViewController, infoViewController, editButton, refreshButton, tableSort;
+
+typedef enum {
+	TableSortDate,
+	TableSortName
+} TableSort;
 
 #pragma mark -
 #pragma mark Handlers
@@ -67,10 +72,22 @@
 }
 
 - (void) info:(id)sender {
-	DLog(@"info");
+	DLog(@"");
 	self.tableView.editing = NO;
 	self.infoViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:self.infoViewController animated:YES];
+}
+
+- (IBAction) tableSortChanged:(id)sender {
+	DLog(@"");
+	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
+	if (segmentControl.selectedSegmentIndex == TableSortDate) {
+		DLog(@"TableSortDate");
+	}
+	else if (segmentControl.selectedSegmentIndex == TableSortName) {
+		DLog(@"TableSortTitle");
+	}
+	[self filterRows:YES];
 }
 
 #pragma mark -
@@ -94,7 +111,9 @@
 	[super viewWillAppear:animated];
 	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.willBePushed || self.modalViewController != nil) {
-		NSArray *deployments = [[Ushahidi sharedUshahidi] getDeploymentsForDelegate:self];
+		SEL sorter = self.tableSort.selectedSegmentIndex == TableSortDate
+			? @selector(compareByDate:) : @selector(compareByName:);
+		NSArray *deployments = [[[Ushahidi sharedUshahidi] getDeploymentsForDelegate:self] sortedArrayUsingSelector:sorter];
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:deployments];
 		[self.filteredRows removeAllObjects];
@@ -129,6 +148,7 @@
 	[infoViewController release];
 	[editButton release];
 	[refreshButton release];
+	[tableSort release];
     [super dealloc];
 }
 
@@ -195,7 +215,7 @@
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi deployments:(NSArray *)theDeployments error:(NSError *)error hasChanges:(BOOL)hasChanges {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi deployments:(NSArray *)deployments error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	DLog(@"");
 	[self.loadingView hide];
 	if (error != nil) {
@@ -204,11 +224,23 @@
 							 andMessage:[error localizedDescription]];
 	}
 	else if (hasChanges) {
-		DLog(@"deployments: %@", theDeployments);
+		DLog(@"Has Changes: %d", [deployments count]);
+		NSArray *sortedDeployments;
+		if (self.tableSort.selectedSegmentIndex == TableSortDate) {
+			sortedDeployments = [deployments sortedArrayUsingSelector:@selector(compareByDate:)];
+		}
+		else {
+			sortedDeployments = [deployments sortedArrayUsingSelector:@selector(compareByName:)];
+		}
 		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:theDeployments];
+		[self.allRows addObjectsFromArray:sortedDeployments];
+		NSString *searchText = [self getSearchText];
 		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:theDeployments];
+		for (Deployment *deployment in sortedDeployments) {
+			if ([deployment matchesString:searchText]) {
+				[self.filteredRows addObject:deployment];
+			}
+		}
 		[self.tableView reloadData];	
 		[self.tableView flashScrollIndicators];
 	}
@@ -223,9 +255,16 @@
 #pragma mark UISearchBarDelegate
 
 - (void) filterRows:(BOOL)reloadTable {
-	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
-	for (Deployment *deployment in self.allRows) {
+	NSArray *deployments;
+	if (self.tableSort.selectedSegmentIndex == TableSortDate) {
+		deployments = [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)];
+	}
+	else {
+		deployments = [self.allRows sortedArrayUsingSelector:@selector(compareByName:)];
+	}
+	[self.filteredRows removeAllObjects];
+	for (Deployment *deployment in deployments) {
 		if ([deployment matchesString:searchText]) {
 			[self.filteredRows addObject:deployment];
 		}

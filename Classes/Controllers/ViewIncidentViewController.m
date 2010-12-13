@@ -27,7 +27,6 @@
 #import "SubtitleTableCell.h"
 #import "ImageTableCell.h"
 #import "LoadingViewController.h"
-#import "NSURL+Extension.h"
 #import "AlertView.h"
 #import "InputView.h"
 #import "Incident.h"
@@ -110,7 +109,7 @@ typedef enum {
 		[message appendFormat:@"%@", self.incident.title];
 	}
 	else {
-		NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
+		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
 		[message appendFormat:@"%@ %@", self.incident.title, [link absoluteString]];
 	}
 	[self.sms sendToRecipients:nil withMessage:message];
@@ -120,7 +119,7 @@ typedef enum {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
 	if (self.pending == NO) {
-		NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
+		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
 		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Link", nil), [link absoluteString], [link absoluteString]];
 	}
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];
@@ -416,7 +415,7 @@ typedef enum {
 		}
 	}
 	else if (indexPath.section == TableSectionLocation) {
-		if (self.incident.map != nil) {
+		if (indexPath.row == 1 && self.incident.map != nil) {
 			self.imageViewController.title = self.incident.location;
 			self.imageViewController.image = self.incident.map;
 			self.imageViewController.images = nil;

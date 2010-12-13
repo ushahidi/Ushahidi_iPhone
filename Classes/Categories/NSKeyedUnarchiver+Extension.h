@@ -23,5 +23,6 @@
 @interface NSKeyedUnarchiver (Extension)
 
 + (id) unarchiveObjectWithKey:(NSString *)key;
++ (id) unarchiveObjectWithKey:(NSString *)key andSubKey:(NSString *)subKey;
 
 @end

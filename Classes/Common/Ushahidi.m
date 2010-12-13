@@ -44,6 +44,7 @@
 @interface Ushahidi ()
 
 @property(nonatomic, retain) NSMutableDictionary *deployments;
+@property(nonatomic, retain) Deployment *deployment;
 @property(nonatomic, retain) NSOperationQueue *mainQueue;
 @property(nonatomic, retain) NSOperationQueue *mapQueue;
 @property(nonatomic, retain) NSOperationQueue *photoQueue;
@@ -81,6 +82,8 @@
 
 - (void) downloadPhotoFinished:(ASIHTTPRequest *)request;
 - (void) downloadPhotoFailed:(ASIHTTPRequest *)request;
+
+- (BOOL) isDuplicate:(Incident *)incident;
 
 @end
 
@@ -132,16 +135,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[super dealloc];
 }
 
-- (void) save {
+- (void) archive {
 	DLog(@"");
+	if (self.deployment != nil) {
+		[self.deployment archive];
+	}
 	[NSKeyedArchiver archiveObject:self.deployments forKey:@"deployments"];
-//	for (Deployment *deploy in self.deployments) {
-//		[NSKeyedArchiver archiveObject:deploy forKey:deploy.domain];
-//	}
 }
 
 #pragma mark -
 #pragma mark Deployments
+
+- (void) loadDeployment:(Deployment *)theDeployment {
+	DLog(@"%@", [theDeployment domain]);
+	if (self.deployment != nil) {
+		[self.deployment archive];
+	}
+	if (theDeployment != nil) {
+		[theDeployment unarchive];	
+		[[Settings sharedSettings] setLastDeployment:theDeployment.url];
+		self.deployment = theDeployment;
+	}
+	else {
+		[[Settings sharedSettings] setLastDeployment:nil];
+		self.deployment = nil;
+	}
+	[[Settings sharedSettings] save];
+}
 
 - (BOOL)addDeployment:(Deployment *)theDeployment {
 	if (theDeployment != nil) {
@@ -639,10 +659,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			for (NSDictionary *dictionary in incidents) {
 				Incident *incident = [[Incident alloc] initWithDictionary:[dictionary objectForKey:@"incident"]];
 				if (incident.identifier != nil) {
-					if ([self.deployment.incidents objectForKey:incident.identifier] == nil) {
-						[self.deployment.incidents setObject:incident forKey:incident.identifier];
+					if ([self isDuplicate:incident]) {
+						DLog(@"DUPLICATE: %@", dictionary);
 						hasChanges = YES;
+					}
+					else if ([self.deployment.incidents objectForKey:incident.identifier] == nil) {
+						[self.deployment.incidents setObject:incident forKey:incident.identifier];
 						DLog(@"INCIDENT: %@", dictionary);
+						hasChanges = YES;
 					}
 					if (self.deployment.sinceID == nil) {
 						self.deployment.sinceID = incident.identifier;
@@ -704,6 +728,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
+- (BOOL) isDuplicate:(Incident *)incident {
+	for (Incident *existing in [self.deployment.incidents allValues]) {
+		if ([existing isDuplicate:incident]) {
+			[existing setIdentifier:incident.identifier];
+			return YES;
+		}
+	}
+	return NO;
+}
+
+- (NSURL *) getUrlForIncident:(Incident *)incident {
+	return [NSURL URLWithStrings:self.deployment.url, @"/reports/view/", incident.identifier, nil];
+}
+
 - (void) getIncidentsFailed:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"ERROR: %@", [[request error] localizedDescription]);
@@ -712,6 +750,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					target:delegate 
 				   objects:self, nil, nil, [request error], NO, nil];
 }
+
 #pragma mark -
 #pragma mark Photo
 
@@ -796,7 +835,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		DLog(@"RESPONSE: MAP IMAGE %@", [request.originalURL absoluteString]);
 		UIImage *map = [UIImage imageWithData:[request responseData]];
 		if (map.size.width == kGoogleOverCapacitySize && map.size.height == kGoogleOverCapacitySize) {
-			DLog(@"Over Capacity, Cancelling Map Queue!!");
+			DLog(@"OVER CAPACITY, CANCELLING MAP QUEUE");
 			[self.mapQueue cancelAllOperations];	
 		}
 		else {

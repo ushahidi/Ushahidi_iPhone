@@ -28,8 +28,7 @@
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
-#import "Deployment.h"
-#import "Settings.h"
+#import "Deployment.h"b
 
 @interface DeploymentsViewController ()
 
@@ -126,8 +125,7 @@ typedef enum {
 		DLog(@"Re-Adding Rows: %d", [deployments count]);
 	}
 	if (animated) {
-		[[Settings sharedSettings] setLastDeployment:nil];
-		[[Settings sharedSettings] save];
+		[[Ushahidi sharedUshahidi] loadDeployment:nil];
 	}
 	[self.tableView reloadData];
 }
@@ -189,9 +187,7 @@ typedef enum {
 	[self.view endEditing:YES];
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
-	[[Ushahidi sharedUshahidi] setDeployment:deployment];
-	[[Settings sharedSettings] setLastDeployment:deployment.url];
-	[[Settings sharedSettings] save];
+	[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 	self.incidentsViewController.deployment = deployment;
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
 }

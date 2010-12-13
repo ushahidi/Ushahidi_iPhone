@@ -118,19 +118,19 @@
 			self.map = [UIImage imageWithData:mapData];
 		}
 		self.news = [decoder decodeObjectForKey:@"news"];
-		if (self.news == nil) self.news = [NSArray array];
+		if (self.news == nil) self.news = [NSMutableArray array];
 		
 		self.photos = [decoder decodeObjectForKey:@"photos"];
-		if (self.photos == nil) self.photos = [NSArray array];
+		if (self.photos == nil) self.photos = [NSMutableArray array];
 		
 		self.videos = [decoder decodeObjectForKey:@"videos"];
-		if (self.videos == nil) self.videos = [NSArray array];
+		if (self.videos == nil) self.videos = [NSMutableArray array];
 		
 		self.sounds = [decoder decodeObjectForKey:@"sounds"];
-		if (self.sounds == nil) self.sounds = [NSArray array];
+		if (self.sounds == nil) self.sounds = [NSMutableArray array];
 		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
-		if (self.categories == nil) self.categories = [NSArray array];
+		if (self.categories == nil) self.categories = [NSMutableArray array];
 	}
 	return self;
 }
@@ -148,6 +148,15 @@
 		}
 	}
 	return NO;
+}
+
+- (BOOL) isDuplicate:(Incident *)incident {
+	return	[self.title isEqualToString:incident.title] &&
+			[self.description isEqualToString:incident.description] &&
+			[self.date isEqualToDate:incident.date] &&
+			[self.location isEqualToString:incident.location] &&
+			[self.latitude isEqualToString:incident.latitude] && 
+			[self.longitude isEqualToString:incident.longitude];
 }
 
 - (NSString *) dateTimeString {

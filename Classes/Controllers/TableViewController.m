@@ -283,7 +283,9 @@
 	[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
 	
 	CGRect tableFrame = self.tableView.frame;
-	if ([UIDevice currentDevice].orientation == UIInterfaceOrientationPortrait ||
+	
+	if ([UIDevice currentDevice].orientation == UIDeviceOrientationUnknown ||
+		[UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
 		tableFrame.size.height -= keyboardFrame.size.height;	
 	}
@@ -307,7 +309,9 @@
 	[[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
 	
 	CGRect tableFrame = self.tableView.frame;
-	if ([UIDevice currentDevice].orientation == UIInterfaceOrientationPortrait ||
+	
+	if ([UIDevice currentDevice].orientation == UIDeviceOrientationUnknown ||
+		[UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
 		tableFrame.size.height += keyboardFrame.size.height;	
 	}
@@ -320,8 +324,9 @@
 }
 
 - (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration {
+	DLog(@"size: %f, %f", frame.size.width, frame.size.height);
 	[UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:NO];
+    [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:duration];
 	self.tableView.frame = frame;
 	[UIView commitAnimations];

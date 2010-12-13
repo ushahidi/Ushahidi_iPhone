@@ -42,7 +42,7 @@
 - (void) setPlaceholder:(NSString *)placeholder;
 - (void) setIsPassword:(BOOL)isPassword;
 - (void) setText:(NSString *)text;
-- (NSString *) getText;
+- (NSString *) text;
 - (void) showKeyboard;
 - (void) hideKeyboard;
 

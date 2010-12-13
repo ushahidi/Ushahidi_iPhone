@@ -95,7 +95,12 @@
 }
 
 - (void) hideAfterDelay:(NSTimeInterval)delay {
-	DLog(@"message:%@ delay:%.2f", self.activityIndicatorLabel.text, delay);
+	if (self.activityIndicatorLabel.text) {
+		DLog(@"message:%@ delay:%.2f", self.activityIndicatorLabel.text, delay);
+	}
+	else {
+		DLog(@"delay:%.2f", delay);
+	}
 	if ([NSThread isMainThread]) {
 		[self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:delay];
 	}

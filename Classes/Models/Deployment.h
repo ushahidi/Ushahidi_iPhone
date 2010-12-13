@@ -52,7 +52,11 @@
 @property(nonatomic, retain) NSMutableDictionary *incidents;
 @property(nonatomic, retain) NSMutableArray *pending;
 
-- (id)initWithName:(NSString *)name url:(NSString *)url;
+- (id) initWithName:(NSString *)name url:(NSString *)url;
+
+- (void) archive;
+- (void) unarchive;
+
 - (BOOL) matchesString:(NSString *)string;
 - (BOOL) containsLocation:(Location *)location;
 

@@ -129,11 +129,6 @@ typedef enum {
 	[self.tableView reloadData];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Enter deployment name and URL. \nFor example, Ushahidi Demo and http://demo.ushahidi.com", @"Enter the deployment name and URL. For example, Ushahidi Demo and http://demo.ushahidi.com")];
-}
-
 - (void)dealloc {
 	[cancelButton release];
 	[doneButton release];
@@ -194,6 +189,7 @@ typedef enum {
 		self.name = text;
 	}
 	else if (indexPath.section == TableSectionURL) {
+		DLog(@"%@", text);
 		self.url = text;
 	}
 }

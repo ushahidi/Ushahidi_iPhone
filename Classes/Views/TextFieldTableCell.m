@@ -26,7 +26,6 @@
 
 @end
 
-
 @implementation TextFieldTableCell
 
 @synthesize delegate, textField;
@@ -90,26 +89,43 @@
 	[self.textField resignFirstResponder];
 }
 
+- (void) setPlaceholder:(NSString *)placeholder {
+	self.textField.placeholder = placeholder;
+}
+
+- (void) setIsPassword:(BOOL)isPassword {
+	self.textField.secureTextEntry = isPassword;
+}
+
+- (void) setText:(NSString *)text {
+	DLog(@"%@", text);
+	self.textField.text = text;
+}
+
+- (NSString *) text {
+	return self.textField.text;
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate
+
 - (void)textFieldDidBeginEditing:(UITextField *)theTextField {
 	[theTextField becomeFirstResponder];
-	SEL selector = @selector(textFieldFocussed:indexPath:);
-	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
+	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldFocussed:indexPath:)]) {
 		[self.delegate textFieldFocussed:self indexPath:self.indexPath];
 	}
 }
  
 - (void)textFieldDidEndEditing:(UITextField *)theTextField {
 	[theTextField resignFirstResponder];
-	SEL selector = @selector(textFieldReturned:indexPath:text:);
-	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
+	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {
 		[self.delegate textFieldReturned:self indexPath:self.indexPath text:theTextField.text];
 	}
 }
  
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
 	[theTextField resignFirstResponder];
-	SEL selector = @selector(textFieldReturned:indexPath:text:);
-	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
+	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {
 		[self.delegate textFieldReturned:self indexPath:self.indexPath text:theTextField.text];
 	}
 	return YES;
@@ -120,28 +136,17 @@
 		[theTextField resignFirstResponder];
 		return YES;
 	}
+	else if (theTextField.keyboardType == UIKeyboardTypeURL && 
+			 [theTextField.text isEqualToString:@"http://"] && 
+			 [string hasPrefix:@"http"]) {
+		[theTextField setText:string];
+		return NO;
+	}
 	NSString *message = [theTextField.text stringByReplacingCharactersInRange:range withString:string];
-	SEL selector = @selector(textFieldChanged:indexPath:text:);
-	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
+	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldChanged:indexPath:text:)]) {
 		[self.delegate textFieldChanged:self indexPath:self.indexPath text:message];
 	}
 	return YES;	
-}
-
-- (void) setPlaceholder:(NSString *)placeholder {
-	self.textField.placeholder = placeholder;
-}
-
-- (void) setIsPassword:(BOOL)isPassword {
-	self.textField.secureTextEntry = isPassword;
-}
-
-- (void) setText:(NSString *)text {
-	self.textField.text = text;
-}
-
-- (NSString *) getText {
-	return self.textField.text;
 }
 
 @end

@@ -21,6 +21,9 @@
 #import "Deployment.h"
 #import "Location.h"
 #import "NSString+Extension.h"
+#import "NSObject+Extension.h"
+#import "NSKeyedArchiver+Extension.h"
+#import "NSKeyedUnarchiver+Extension.h"
 
 @interface Deployment ()
 
@@ -34,20 +37,15 @@
 	if (self = [super init]){
 		self.name = theName;
 		self.url = theUrl;
-		if ([[theUrl lowercaseString] hasPrefix:@"http://"]) {
+		if ([theUrl hasPrefix:@"http://"]) {
 			self.domain = [theUrl stringByReplacingOccurrencesOfString:@"http://" withString:@""];
 		}
-		else if ([[theUrl lowercaseString] hasPrefix:@"https://"]) {
+		else if ([theUrl hasPrefix:@"https://"]) {
 			self.domain = [theUrl stringByReplacingOccurrencesOfString:@"https://" withString:@""];
 		}
 		else {
 			self.domain = theUrl;
 		} 
-		self.countries = [[NSMutableDictionary alloc] init];
-		self.categories = [[NSMutableDictionary alloc] init];
-		self.locations = [[NSMutableDictionary alloc] init];
-		self.incidents = [[NSMutableDictionary alloc] init];
-		self.pending = [[NSMutableArray alloc] init];
 		self.added = [NSDate date];
 	}
 	return self;
@@ -58,11 +56,6 @@
 	[encoder encodeObject:self.url forKey:@"url"];
 	[encoder encodeObject:self.domain forKey:@"domain"];
 	[encoder encodeObject:self.sinceID forKey:@"sinceID"];
-	[encoder encodeObject:self.countries forKey:@"countries"];
-	[encoder encodeObject:self.categories forKey:@"categories"];
-	[encoder encodeObject:self.locations forKey:@"locations"];
-	[encoder encodeObject:self.incidents forKey:@"incidents"];
-	[encoder encodeObject:self.pending forKey:@"pending"];
 	[encoder encodeObject:self.synced forKey:@"synced"];
 	[encoder encodeObject:self.added forKey:@"added"];
 }
@@ -73,33 +66,64 @@
 		self.url = [decoder decodeObjectForKey:@"url"];
 		self.domain = [decoder decodeObjectForKey:@"domain"];
 		self.sinceID = [decoder decodeObjectForKey:@"sinceID"];
-		
-		self.countries = [decoder decodeObjectForKey:@"countries"];
-		if (self.countries == nil) self.countries = [[NSMutableDictionary alloc] init];
-		
-		self.categories = [decoder decodeObjectForKey:@"categories"];
-		if (self.categories == nil) self.categories = [[NSMutableDictionary alloc] init];
-		
-		self.locations = [decoder decodeObjectForKey:@"locations"];
-		if (self.locations == nil) self.locations = [[NSMutableDictionary alloc] init];
-		
-		self.incidents = [decoder decodeObjectForKey:@"incidents"];
-		if (self.incidents == nil) self.incidents = [[NSMutableDictionary alloc] init];
-		
-		self.pending = [decoder decodeObjectForKey:@"pending"];
-		if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
-		
 		self.synced = [decoder decodeObjectForKey:@"synced"];
 		self.added = [decoder decodeObjectForKey:@"added"];
 	}
 	return self;
 }
 
+- (void) archive {
+	DLog(@"Archiving %@", self.domain);
+	
+	[NSKeyedArchiver archiveObject:self.countries forKey:self.domain andSubKey:@"countries"];
+	DLog(@"countries: %d", [self.countries count]);
+	[self.countries removeAllObjects];
+	
+	[NSKeyedArchiver archiveObject:self.categories forKey:self.domain andSubKey:@"categories"];
+	DLog(@"categories: %d", [self.categories count]);
+	[self.categories removeAllObjects];
+	
+	[NSKeyedArchiver archiveObject:self.locations forKey:self.domain andSubKey:@"locations"];
+	DLog(@"locations: %d", [self.locations count]);
+	[self.locations removeAllObjects];
+	
+	[NSKeyedArchiver archiveObject:self.incidents forKey:self.domain andSubKey:@"incidents"];
+	DLog(@"incidents: %d", [self.incidents count]);
+	[self.incidents removeAllObjects];
+	
+	[NSKeyedArchiver archiveObject:self.pending forKey:self.domain andSubKey:@"pending"];
+	DLog(@"pending: %d", [self.pending count]);
+	[self.pending removeAllObjects];
+}
+
+- (void) unarchive {
+	DLog(@"Un-archiving %@", self.domain);
+	
+	self.countries = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"countries"];
+	if (self.countries == nil) self.countries = [[NSMutableDictionary alloc] init];
+	DLog(@"countries: %d", [self.countries count]);
+	
+	self.categories = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"categories"];
+	if (self.categories == nil) self.categories = [[NSMutableDictionary alloc] init];
+	DLog(@"categories: %d", [self.categories count]);
+	
+	self.locations = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"locations"];
+	if (self.locations == nil) self.locations = [[NSMutableDictionary alloc] init];
+	DLog(@"locations: %d", [self.locations count]);
+	
+	self.incidents = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"incidents"];
+	if (self.incidents == nil) self.incidents = [[NSMutableDictionary alloc] init];
+	DLog(@"incidents: %d", [self.incidents count]);
+	
+	self.pending = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"pending"];
+	if (self.pending == nil) self.pending = [[NSMutableDictionary alloc] init];
+	DLog(@"pending: %d", [self.pending count]);
+}
+
 - (BOOL) matchesString:(NSString *)string {
 	NSString *lowercaseString = [string lowercaseString];
 	return	[[self.name lowercaseString] anyWordHasPrefix:lowercaseString];
 }
-
 
 - (BOOL) containsLocation:(Location *)location {
 	for (Location *current in [self.locations allValues]) {

@@ -78,6 +78,7 @@
 - (id)initWithDefaultValues;
 
 - (BOOL) matchesString:(NSString *)string;
+- (BOOL) isDuplicate:(Incident *)incident;
 
 @property(nonatomic,readonly) NSString *dateTimeString;
 @property(nonatomic,readonly) NSString *dateString;

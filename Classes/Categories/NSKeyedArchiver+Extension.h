@@ -23,5 +23,6 @@
 @interface NSKeyedArchiver (Extension)
 
 + (void) archiveObject:(id)object forKey:(NSString *)key;
++ (void) archiveObject:(id)object forKey:(NSString *)key andSubKey:(NSString *)subKey;
 
 @end

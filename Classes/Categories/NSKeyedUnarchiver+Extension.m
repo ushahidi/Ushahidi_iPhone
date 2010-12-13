@@ -23,10 +23,33 @@
 @implementation NSKeyedUnarchiver (Extension)
 
 + (id) unarchiveObjectWithKey:(NSString *)key {
-	NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
-	DLog(@"Un-archiving %@", key);
-	return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+	@try {
+		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+		DLog(@"Un-archiving %@", filePath);
+		return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+	}
+	@catch (NSException *e) {
+		DLog(@"NSException: %@", e);
+	}
+	return nil;
+}
+
++ (id) unarchiveObjectWithKey:(NSString *)key andSubKey:(NSString *)subKey {
+	@try {
+		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *folderPath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+		if ([[NSFileManager defaultManager] fileExistsAtPath:folderPath] == NO) {
+			[[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
+		}
+		NSString *filePath = [folderPath stringByAppendingPathComponent:subKey];
+		DLog(@"Un-archiving %@", filePath);
+		return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+	}
+	@catch (NSException *e) {
+		DLog(@"NSException: %@", e);
+	}
+	return nil;
 }
 
 @end

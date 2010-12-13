@@ -42,7 +42,7 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
 	DLog(@"");
 	[[Settings sharedSettings] save];
-	[[Ushahidi sharedUshahidi] save];
+	[[Ushahidi sharedUshahidi] archive];
 }
 
 /*

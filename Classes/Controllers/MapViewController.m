@@ -23,6 +23,7 @@
 #import "AlertView.h"
 #import "InputView.h"
 #import "MKMapView+Extension.h"
+#import "MKPinAnnotationView+Extension.h"
 
 typedef enum {
 	MapTypeNormal,
@@ -104,19 +105,14 @@ typedef enum {
 		self.title = self.locationName;
 	}
 	else {
-		self.title = @"Map";
+		self.title = NSLocalizedString(@"Map", nil);
 	}
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
 	[self.mapView removeAllPins];
-	NSString *subtitle = [NSString stringWithFormat:@"%f,%f", self.locationLatitude, self.locationLongitude];
 	[self.mapView addPinWithTitle:self.locationName 
-						 subtitle:subtitle 
+						 subtitle:[NSString stringWithFormat:@"%f,%f", self.locationLatitude, self.locationLongitude] 
 						 latitude:self.locationLatitude 
 						longitude:self.locationLongitude];
-	[self.mapView resizeRegionToFitAllPins:YES];
+	[self.mapView resizeRegionToFitAllPins:NO];
 }
 
 - (void)dealloc {
@@ -145,16 +141,7 @@ typedef enum {
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
-	MKPinAnnotationView *annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
-	annotationView.animatesDrop = YES;
-	annotationView.canShowCallout = YES;
-	if ([annotation class] == MKUserLocation.class) {
-		annotationView.pinColor = MKPinAnnotationColorGreen;
-	}
-	else {
-		annotationView.pinColor = MKPinAnnotationColorRed;
-	}
-	return annotationView;
+	return [MKPinAnnotationView getPinForMap:theMapView andAnnotation:annotation];
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {

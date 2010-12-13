@@ -47,7 +47,7 @@
         } 
     }
 	[[Settings sharedSettings] save];
-	[[Ushahidi sharedUshahidi] save];
+	[[Ushahidi sharedUshahidi] archive];
 }
 
 #pragma mark -

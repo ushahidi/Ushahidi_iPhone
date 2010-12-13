@@ -23,10 +23,31 @@
 @implementation NSKeyedArchiver (Extension)
 
 + (void) archiveObject:(id)object forKey:(NSString *)key {
-	NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
-	DLog(@"Archiving %@", key);
-	[NSKeyedArchiver archiveRootObject:object toFile:filePath];
+	@try {
+		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+		DLog(@"Archiving %@", filePath);
+		[NSKeyedArchiver archiveRootObject:object toFile:filePath];
+	}
+	@catch (NSException *e) {
+		DLog(@"NSException: %@", e);
+	}
+}
+
++ (void) archiveObject:(id)object forKey:(NSString *)key andSubKey:(NSString *)subKey {
+	@try {
+		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *folderPath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+		if ([[NSFileManager defaultManager] fileExistsAtPath:folderPath] == NO) {
+			[[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
+		}
+		NSString *filePath = [folderPath stringByAppendingPathComponent:subKey];
+		DLog(@"Archiving %@", filePath);
+		[NSKeyedArchiver archiveRootObject:object toFile:filePath];
+	}
+	@catch (NSException *e) {
+		DLog(@"NSException: %@", e);
+	}
 }
 
 @end

@@ -22,6 +22,7 @@
 #import "DeploymentsViewController.h"
 #import "IncidentsViewController.h"
 #import "Settings.h"
+#import "NSString+Extension.h"
 
 @interface SplashViewController ()
 
@@ -38,12 +39,17 @@
 
 - (void) pushNextViewController {
 	NSString *lastDeployment = [[Settings sharedSettings] lastDeployment];
-	if (lastDeployment != nil) {
+	if ([NSString isNilOrEmpty:lastDeployment] == NO) {
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
-		[[Ushahidi sharedUshahidi] setDeployment:deployment];
-		self.incidentsViewController.deployment = deployment;
-		[self.navigationController pushViewController:self.deploymentsViewController animated:NO];
-		[self.navigationController pushViewController:self.incidentsViewController animated:YES];
+		if (deployment != nil) {
+			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
+			self.incidentsViewController.deployment = deployment;
+			[self.navigationController pushViewController:self.deploymentsViewController animated:NO];
+			[self.navigationController pushViewController:self.incidentsViewController animated:YES];			
+		}
+		else {
+			[self.navigationController pushViewController:self.deploymentsViewController animated:YES];
+		}
 	}
 	else {
 		[self.navigationController pushViewController:self.deploymentsViewController animated:YES];

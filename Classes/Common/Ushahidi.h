@@ -36,23 +36,20 @@
 #define kPhotoQueueFinished @"photoQueueFinished"
 
 @interface Ushahidi : NSObject<ASIHTTPRequestDelegate> {
-
-@public
-	Deployment *deployment;
 	
 @private
 	NSMutableDictionary *deployments;
+	Deployment *deployment;
 	NSOperationQueue *mainQueue;
 	NSOperationQueue *mapQueue;
 	NSOperationQueue *photoQueue;
 }
 
-@property(nonatomic, retain) Deployment *deployment;
-
 + (Ushahidi *) sharedUshahidi;
 
-- (void) save;
+- (void) archive;
 
+- (void) loadDeployment:(Deployment *)deployment;
 - (BOOL) addDeployment:(Deployment *)deployment;
 - (BOOL) addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
 - (BOOL) removeDeployment:(Deployment *)deployment;
@@ -70,6 +67,7 @@
 - (NSArray *) getIncidents;
 - (NSArray *) getIncidentsPending;
 - (NSArray *) getIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
+- (NSURL *) getUrlForIncident:(Incident *)incident;
 
 - (void) downloadPhoto:(Incident *)incident photo:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate;
 

@@ -24,5 +24,6 @@
 
 + (void) archiveObject:(id)object forKey:(NSString *)key;
 + (void) archiveObject:(id)object forKey:(NSString *)key andSubKey:(NSString *)subKey;
++ (void) archiveObject:(id)object forPath:(NSString *)path andKey:(NSString *)key;
 
 @end

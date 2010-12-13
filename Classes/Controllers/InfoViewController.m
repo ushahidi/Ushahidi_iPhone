@@ -46,6 +46,8 @@
 
 @implementation InfoViewController
 
+NSString * const kUshahidiWebsite = @"http://www.ushahidi.com";
+
 typedef enum {
 	TableSectionEmail,
 	TableSectionFirstName,
@@ -55,6 +57,7 @@ typedef enum {
 	TableSectionMapZoomLevel,
 	TableSectionBecomeDiscrete,
 	TableSectionSupport,
+	TableSectionWebsite,
 	TableSectionVersion
 } TableSection;
 
@@ -117,6 +120,7 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Downloaded Map Zoom Level", nil) atSection:TableSectionMapZoomLevel];
 	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", nil) atSection:TableSectionBecomeDiscrete];
 	[self setHeader:NSLocalizedString(@"Contact", nil) atSection:TableSectionSupport];
+	[self setHeader:NSLocalizedString(@"Website", nil) atSection:TableSectionWebsite];
 	[self setHeader:NSLocalizedString(@"Version", nil) atSection:TableSectionVersion];
 }
 
@@ -153,7 +157,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 9;
+	return 10;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -200,6 +204,13 @@ typedef enum {
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		return cell;
 	}
+	else if (indexPath.section == TableSectionWebsite) {
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+		[cell setText:kUshahidiWebsite];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
+		return cell;
+	}
 	else if (indexPath.section == TableSectionVersion) {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		[cell setText:[Device appVersion]];
@@ -242,6 +253,9 @@ typedef enum {
 		[message appendFormat:@"Device Model: %@<br/>", [Device deviceModel]]; 
 		[message appendFormat:@"Device Version: %@<br/>", [Device deviceVersion]]; 
 		[self.email sendToRecipients:[NSArray arrayWithObject:@"support@ushahidi.com"] withMessage:message withSubject:nil];
+	}
+	else if (indexPath.section == TableSectionWebsite) {
+		[self.alertView showYesNoWithTitle:NSLocalizedString(@"Open In Safari?", nil) andMessage:kUshahidiWebsite];
 	}
 }
 
@@ -306,6 +320,15 @@ typedef enum {
 		self.mapZoomLevel = value;
 		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", nil)]
 			  atSection:TableSectionMapZoomLevel];
+	}
+}
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)theAlertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex != [theAlertView cancelButtonIndex]) {
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:kUshahidiWebsite]];
 	}
 }
 

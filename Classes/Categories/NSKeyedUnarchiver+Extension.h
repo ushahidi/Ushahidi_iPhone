@@ -24,5 +24,6 @@
 
 + (id) unarchiveObjectWithKey:(NSString *)key;
 + (id) unarchiveObjectWithKey:(NSString *)key andSubKey:(NSString *)subKey;
++ (id) unarchiveObjectWithPath:(NSString *)path andKey:(NSString *)key;
 
 @end

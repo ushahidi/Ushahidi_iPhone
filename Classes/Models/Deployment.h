@@ -56,6 +56,7 @@
 
 - (void) archive;
 - (void) unarchive;
+- (NSString *) archiveFolder;
 
 - (BOOL) matchesString:(NSString *)string;
 - (BOOL) containsLocation:(Location *)location;

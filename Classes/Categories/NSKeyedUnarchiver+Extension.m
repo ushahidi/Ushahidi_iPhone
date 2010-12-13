@@ -52,4 +52,16 @@
 	return nil;
 }
 
++ (id) unarchiveObjectWithPath:(NSString *)path andKey:(NSString *)key {
+	@try {
+		NSString *filePath = [path stringByAppendingPathComponent:key];
+		DLog(@"Un-archiving %@", filePath);
+		return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+	}
+	@catch (NSException *e) {
+		DLog(@"NSException: %@", e);
+	}
+	return nil;
+}
+
 @end

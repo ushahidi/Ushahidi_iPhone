@@ -74,50 +74,57 @@
 
 - (void) archive {
 	DLog(@"Archiving %@", self.domain);
+	NSString *path = [self archiveFolder];
 	
-	[NSKeyedArchiver archiveObject:self.countries forKey:self.domain andSubKey:@"countries"];
+	[NSKeyedArchiver archiveObject:self.countries forPath:path andKey:@"countries"];
 	DLog(@"countries: %d", [self.countries count]);
 	[self.countries removeAllObjects];
 	
-	[NSKeyedArchiver archiveObject:self.categories forKey:self.domain andSubKey:@"categories"];
+	[NSKeyedArchiver archiveObject:self.categories forPath:path andKey:@"categories"];
 	DLog(@"categories: %d", [self.categories count]);
 	[self.categories removeAllObjects];
 	
-	[NSKeyedArchiver archiveObject:self.locations forKey:self.domain andSubKey:@"locations"];
+	[NSKeyedArchiver archiveObject:self.locations forPath:path andKey:@"locations"];
 	DLog(@"locations: %d", [self.locations count]);
 	[self.locations removeAllObjects];
 	
-	[NSKeyedArchiver archiveObject:self.incidents forKey:self.domain andSubKey:@"incidents"];
+	[NSKeyedArchiver archiveObject:self.incidents forPath:path andKey:@"incidents"];
 	DLog(@"incidents: %d", [self.incidents count]);
 	[self.incidents removeAllObjects];
 	
-	[NSKeyedArchiver archiveObject:self.pending forKey:self.domain andSubKey:@"pending"];
+	[NSKeyedArchiver archiveObject:self.pending forPath:path andKey:@"pending"];
 	DLog(@"pending: %d", [self.pending count]);
 	[self.pending removeAllObjects];
 }
 
 - (void) unarchive {
 	DLog(@"Un-archiving %@", self.domain);
+	NSString *path = [self archiveFolder];
 	
-	self.countries = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"countries"];
+	self.countries = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"countries"];
 	if (self.countries == nil) self.countries = [[NSMutableDictionary alloc] init];
 	DLog(@"countries: %d", [self.countries count]);
 	
-	self.categories = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"categories"];
+	self.categories = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"categories"];
 	if (self.categories == nil) self.categories = [[NSMutableDictionary alloc] init];
 	DLog(@"categories: %d", [self.categories count]);
 	
-	self.locations = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"locations"];
+	self.locations = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"locations"];
 	if (self.locations == nil) self.locations = [[NSMutableDictionary alloc] init];
 	DLog(@"locations: %d", [self.locations count]);
 	
-	self.incidents = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"incidents"];
+	self.incidents = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"incidents"];
 	if (self.incidents == nil) self.incidents = [[NSMutableDictionary alloc] init];
 	DLog(@"incidents: %d", [self.incidents count]);
 	
-	self.pending = [NSKeyedUnarchiver unarchiveObjectWithKey:self.domain andSubKey:@"pending"];
+	self.pending = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"pending"];
 	if (self.pending == nil) self.pending = [[NSMutableDictionary alloc] init];
 	DLog(@"pending: %d", [self.pending count]);
+}
+
+- (NSString *) archiveFolder {
+	NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	return [[filePaths objectAtIndex:0] stringByAppendingPathComponent:self.domain];
 }
 
 - (BOOL) matchesString:(NSString *)string {

@@ -50,4 +50,15 @@
 	}
 }
 
++ (void) archiveObject:(id)object forPath:(NSString *)path andKey:(NSString *)key {
+	@try {
+		NSString *filePath = [path stringByAppendingPathComponent:key];
+		DLog(@"Archiving %@", filePath);
+		[NSKeyedArchiver archiveRootObject:object toFile:filePath];
+	}
+	@catch (NSException *e) {
+		DLog(@"NSException: %@", e);
+	}
+}
+
 @end

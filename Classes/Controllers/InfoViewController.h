@@ -29,7 +29,8 @@
 
 @interface InfoViewController : TableViewController<TextFieldTableCellDelegate, 
 													BooleanTableCellDelegate, 
-													SliderTableCellDelegate> {
+													SliderTableCellDelegate,
+													UIAlertViewDelegate> {
 	
 @private
 	NSString *userEmail;

@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -82,7 +82,7 @@
 							<object class="IBUIBarButtonItem" id="6022158">
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">email_details.png</string>
+									<string key="NSResourceName">email.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="295115829"/>
@@ -751,7 +751,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>email_details.png</string>
+				<string>email.png</string>
 				<string>photo_save.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">

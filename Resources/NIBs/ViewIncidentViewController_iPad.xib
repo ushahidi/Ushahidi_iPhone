@@ -75,7 +75,7 @@
 							<object class="IBUIBarButtonItem" id="396130924">
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">email_link.png</string>
+									<string key="NSResourceName">sms.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="930604400"/>
@@ -88,7 +88,7 @@
 							<object class="IBUIBarButtonItem" id="325857712">
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">email_details.png</string>
+									<string key="NSResourceName">email.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="930604400"/>
@@ -320,9 +320,9 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailPhoto:</string>
 							<string>nextPrevious:</string>
 							<string>savePhoto:</string>
+							<string>sendEmail:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -335,22 +335,22 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>emailPhoto:</string>
 							<string>nextPrevious:</string>
 							<string>savePhoto:</string>
+							<string>sendEmail:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">emailPhoto:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 							<object class="IBActionInfo">
 								<string key="name">nextPrevious:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">savePhoto:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">sendEmail:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -1063,13 +1063,13 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>email_details.png</string>
-				<string>email_link.png</string>
+				<string>email.png</string>
+				<string>sms.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{30, 30}</string>
-				<string>{30, 30}</string>
+				<string>{29, 26}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">132</string>

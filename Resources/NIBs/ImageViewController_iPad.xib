@@ -82,7 +82,7 @@
 							<object class="IBUIBarButtonItem" id="231835546">
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">email_details.png</string>
+									<string key="NSResourceName">email.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="673686198"/>
@@ -751,7 +751,7 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>email_details.png</string>
+				<string>email.png</string>
 				<string>photo_save.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">

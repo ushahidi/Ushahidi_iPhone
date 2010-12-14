@@ -326,7 +326,7 @@
 - (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration {
 	DLog(@"size: %f, %f", frame.size.width, frame.size.height);
 	[UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationBeginsFromCurrentState:NO];
     [UIView setAnimationDuration:duration];
 	self.tableView.frame = frame;
 	[UIView commitAnimations];

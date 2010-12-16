@@ -150,6 +150,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"%@", [theDeployment domain]);
 	if (self.deployment != nil) {
 		[self.deployment archive];
+		[self.deployment purge];
 	}
 	if (theDeployment != nil) {
 		[theDeployment unarchive];	

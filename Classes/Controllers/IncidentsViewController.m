@@ -121,21 +121,20 @@ typedef enum {
 	if (segmentControl.selectedSegmentIndex == ViewModeTable) {
 		DLog(@"ViewModeTable");
 		self.incidentTableView.frame = self.view.frame;
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationDuration:0.6];
+		[UIView beginAnimations:@"ViewModeTable" context:nil];
+		[UIView setAnimationDuration:0.6];
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
 		[self.incidentMapView removeFromSuperview];
 		[self.view addSubview:self.incidentTableView];
 		[UIView commitAnimations];
 		self.incidentTableView.filterButton.enabled = [self.categories count] > 0;
+		[self.tableView reloadData];
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
 		DLog(@"ViewModeMap");
 		self.incidentMapView.frame = self.view.frame;
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationDuration:0.6];
+		[UIView beginAnimations:@"ViewModeMap" context:nil];
+		[UIView setAnimationDuration:0.6];
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:YES];
 		[self.incidentTableView removeFromSuperview];
 		[self.view addSubview:self.incidentMapView];
@@ -643,6 +642,10 @@ typedef enum {
 		}
 		[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];	
 	}
+}
+
+- (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+	[theMapView resizeRegionToFitAllPins:YES];	
 }
 
 #pragma mark -

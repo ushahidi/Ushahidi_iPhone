@@ -32,5 +32,6 @@
 - (id)initWithImage:(UIImage *)image reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setImage:(UIImage *)image;
 - (UIImage *) getImage;
+- (BOOL) hasImage;
 
 @end

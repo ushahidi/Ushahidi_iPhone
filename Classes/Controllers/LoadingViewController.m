@@ -110,7 +110,7 @@
 }
 
 - (void) removeFromSuperview {
-	[UIView beginAnimations:nil context:nil];
+	[UIView beginAnimations:@"RemoveFromSuperView" context:nil];
 	[UIView setAnimationDuration:0.3];
 	self.view.alpha = 0.0;
 	[UIView commitAnimations];

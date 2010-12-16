@@ -95,13 +95,6 @@ typedef enum {
 	[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
-//- (IBAction) emailLink:(id)sender {
-//	DLog(@"");
-//	NSURL *link = [NSURL URLWithStrings:[[[Ushahidi sharedUshahidi] deployment] url], @"/reports/view/", self.incident.identifier, nil];
-//	NSString *message = [NSString stringWithFormat:@"<a href=\"%@\">%@</a>", [link absoluteString], [link absoluteString]];
-//	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title];
-//}
-
 - (IBAction) sendSMS:(id)sender {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
@@ -239,13 +232,16 @@ typedef enum {
 			MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
 			[cell setScrollable:NO];
 			[cell setZoomable:NO];
-			//TODO prevent map from re-adding pin
-			[cell removeAllPins];
-			[cell addPinWithTitle:self.incident.location 
-						 subtitle:[NSString stringWithFormat:@"%@,%@", self.incident.latitude, self.incident.longitude]
-						 latitude:self.incident.latitude 
-						longitude:self.incident.longitude];
-			[cell resizeRegionToFitAllPins:NO];	
+			NSString *subtitle = [NSString stringWithFormat:@"%@,%@", self.incident.latitude, self.incident.longitude];
+			if ([subtitle isEqualToString:cell.location] == NO) {
+				[cell removeAllPins];
+				[cell addPinWithTitle:self.incident.location 
+							 subtitle:subtitle
+							 latitude:self.incident.latitude 
+							longitude:self.incident.longitude];
+				[cell resizeRegionToFitAllPins:NO];		
+				cell.location = subtitle;
+			}
 			return cell;
 		}
 	}
@@ -429,7 +425,7 @@ typedef enum {
 		}
 	}
 	else if (indexPath.section == TableSectionPhotos) {
-		if ([self.incident.photos count] > 0) {
+		if ([self.incident.photos count] > 0 && [((ImageTableCell *)cell) hasImage]) {
 			self.imageViewController.title = NSLocalizedString(@"Image", nil);
 			self.imageViewController.image = [((ImageTableCell *)cell) getImage];
 			self.imageViewController.images = self.incident.photoImages;

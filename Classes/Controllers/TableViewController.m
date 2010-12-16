@@ -35,7 +35,7 @@
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
 - (void) keyboardWillShow:(NSNotification *)notification;
 - (void) keyboardWillHide:(NSNotification *)notification;
-- (void) resizeTableToFrame:(CGRect)rect duration:(NSTimeInterval)duration;
+- (void) resizeTableToFrame:(CGRect)rect duration:(NSTimeInterval)duration animation:(NSString *)animation;
 
 @end
 
@@ -284,6 +284,9 @@
 	
 	CGRect tableFrame = self.tableView.frame;
 	
+	DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
+	DLog(@"Before: %f", tableFrame.size.height);
+	
 	if ([UIDevice currentDevice].orientation == UIDeviceOrientationUnknown ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
@@ -296,7 +299,9 @@
 	self.toolbarHeight = self.view.frame.size.height - (self.tableView.frame.origin.y + self.tableView.frame.size.height);
 	tableFrame.size.height += self.toolbarHeight;
 	
-	[self resizeTableToFrame:tableFrame duration:duration];
+	DLog(@"After: %f", tableFrame.size.height);
+	
+	[self resizeTableToFrame:tableFrame duration:duration animation:@"ShrinkTableHeight"];
 }
 
 -(void) keyboardWillHide:(NSNotification *)notification {
@@ -310,6 +315,9 @@
 	
 	CGRect tableFrame = self.tableView.frame;
 	
+	DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
+	DLog(@"Before: %f", tableFrame.size.height);
+	
 	if ([UIDevice currentDevice].orientation == UIDeviceOrientationUnknown ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
@@ -319,15 +327,16 @@
 		tableFrame.size.height += keyboardFrame.size.width;
 	}
 	tableFrame.size.height -= self.toolbarHeight;
+	DLog(@"After: %f", tableFrame.size.height);
 	
-	[self resizeTableToFrame:tableFrame duration:duration];
+	[self resizeTableToFrame:tableFrame duration:duration animation:@"RestoreTableHeight"];
 }
 
-- (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration {
+- (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration animation:(NSString *)animation {
 	DLog(@"size: %f, %f", frame.size.width, frame.size.height);
-	[UIView beginAnimations:nil context:nil];
-    [UIView setAnimationBeginsFromCurrentState:NO];
+	[UIView beginAnimations:animation context:nil];
     [UIView setAnimationDuration:duration];
+	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.tableView cache:YES];
 	self.tableView.frame = frame;
 	[UIView commitAnimations];
 }

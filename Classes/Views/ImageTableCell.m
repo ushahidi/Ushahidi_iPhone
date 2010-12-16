@@ -45,6 +45,10 @@
 	return self.cellImageView.image;
 }
 
+- (BOOL) hasImage {
+	return self.cellImageView.image != nil;
+}
+
 - (void)dealloc {
 	[cellImageView release];
     [super dealloc];

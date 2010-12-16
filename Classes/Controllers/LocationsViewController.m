@@ -76,9 +76,8 @@ typedef enum {
 		CGRect rect = self.containerView.frame;
 		rect.origin = CGPointMake(0, 0);
 		self.tableView.frame = rect;
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationDuration:0.6];
+		[UIView beginAnimations:@"ViewModeTable" context:nil];
+		[UIView setAnimationDuration:0.6];
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.containerView cache:YES];
 		[self.mapView removeFromSuperview];
 		[self.containerView addSubview:self.tableView];
@@ -90,9 +89,8 @@ typedef enum {
 		CGRect rect = self.containerView.frame;
 		rect.origin = CGPointMake(0, 0);
 		self.mapView.frame = rect;
-		[UIView beginAnimations:nil context:nil];
-		[UIView setAnimationBeginsFromCurrentState:YES];
-        [UIView setAnimationDuration:0.6];
+		[UIView beginAnimations:@"ViewModeMap" context:nil];
+		[UIView setAnimationDuration:0.6];
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.containerView cache:YES];
 		[self.tableView removeFromSuperview];
 		[self.containerView addSubview:self.mapView];

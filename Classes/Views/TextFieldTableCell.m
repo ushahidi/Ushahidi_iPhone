@@ -140,6 +140,9 @@
 			 [theTextField.text isEqualToString:@"http://"] && 
 			 [string hasPrefix:@"http"]) {
 		[theTextField setText:string];
+		if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldChanged:indexPath:text:)]) {
+			[self.delegate textFieldChanged:self indexPath:self.indexPath text:string];
+		}
 		return NO;
 	}
 	NSString *message = [theTextField.text stringByReplacingCharactersInRange:range withString:string];

@@ -78,22 +78,25 @@
 	
 	[NSKeyedArchiver archiveObject:self.countries forPath:path andKey:@"countries"];
 	DLog(@"countries: %d", [self.countries count]);
-	[self.countries removeAllObjects];
 	
 	[NSKeyedArchiver archiveObject:self.categories forPath:path andKey:@"categories"];
 	DLog(@"categories: %d", [self.categories count]);
-	[self.categories removeAllObjects];
 	
 	[NSKeyedArchiver archiveObject:self.locations forPath:path andKey:@"locations"];
 	DLog(@"locations: %d", [self.locations count]);
-	[self.locations removeAllObjects];
 	
 	[NSKeyedArchiver archiveObject:self.incidents forPath:path andKey:@"incidents"];
 	DLog(@"incidents: %d", [self.incidents count]);
-	[self.incidents removeAllObjects];
 	
 	[NSKeyedArchiver archiveObject:self.pending forPath:path andKey:@"pending"];
 	DLog(@"pending: %d", [self.pending count]);
+}
+
+- (void) purge {
+	[self.countries removeAllObjects];
+	[self.categories removeAllObjects];
+	[self.locations removeAllObjects];
+	[self.incidents removeAllObjects];
 	[self.pending removeAllObjects];
 }
 

@@ -76,10 +76,8 @@ typedef enum {
 - (IBAction) done:(id)sender {
 	DLog(@"done");
 	BOOL hasName = self.name != nil && [self.name length] > 0;
-	BOOL hasURL = self.url != nil && [self.url length] > 0 && 
-					([[self.url lowercaseString] hasPrefix:@"http://"] || 
-					 [[self.url lowercaseString] hasPrefix:@"https://"]);
-	if (hasName == NO && hasURL == NO) {
+	BOOL validURL = self.url != nil && [self.url isValidURL];
+	if (hasName == NO && validURL == NO) {
 		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", nil) 
 							 andMessage:NSLocalizedString(@"Name and URL are required fields", nil)];
 	}
@@ -87,7 +85,7 @@ typedef enum {
 		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Field", nil) 
 							 andMessage:NSLocalizedString(@"Name is a required field", nil)];
 	}
-	else if (hasURL == NO) {
+	else if (validURL == NO) {
 		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Field", nil) 
 							 andMessage:NSLocalizedString(@"URL is a required field", nil)];
 	}

@@ -46,8 +46,7 @@ typedef enum {
 
 - (void) showSearchBar:(BOOL)show animated:(BOOL)animated {
 	if (animated) {
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationBeginsFromCurrentState:YES];
+		[UIView beginAnimations:@"SearchBarVisibility" context:NULL];
 		[UIView setAnimationDuration:0.3];
 	}
 	CGRect searchBarFrame = self.searchBar.frame;

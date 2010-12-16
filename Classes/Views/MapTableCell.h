@@ -32,6 +32,7 @@
 	MKMapView *mapView;
 	BOOL animatesDrop;
 	BOOL showRightCallout;
+	NSString *location;
 	
 @private
 	id<MapTableCellDelegate> delegate;
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) MKMapView *mapView;
 @property (nonatomic, assign) BOOL animatesDrop;
 @property (nonatomic, assign) BOOL showRightCallout;
+@property (nonatomic, retain) NSString *location;
 
 - (id)initForDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setMapType:(MKMapType)mapType;

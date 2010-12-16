@@ -56,6 +56,7 @@
 
 - (void) archive;
 - (void) unarchive;
+- (void) purge;
 - (NSString *) archiveFolder;
 
 - (BOOL) matchesString:(NSString *)string;

@@ -287,17 +287,18 @@
 	DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
 	DLog(@"Before: %f", tableFrame.size.height);
 	
+	self.toolbarHeight = self.view.frame.size.height - (self.tableView.frame.origin.y + self.tableView.frame.size.height);
+	
 	if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
 		tableFrame.size.height -= keyboardFrame.size.height;	
+		tableFrame.size.height += self.toolbarHeight;
 	}
 	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
 			 [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
 		tableFrame.size.height -= keyboardFrame.size.width;
+		tableFrame.size.height += self.toolbarHeight;
 	}
-	
-	self.toolbarHeight = self.view.frame.size.height - (self.tableView.frame.origin.y + self.tableView.frame.size.height);
-	tableFrame.size.height += self.toolbarHeight;
 	
 	DLog(@"After: %f", tableFrame.size.height);
 	
@@ -321,12 +322,13 @@
 	if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
 		tableFrame.size.height += keyboardFrame.size.height;	
+		tableFrame.size.height -= self.toolbarHeight;
 	}
 	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
 			 [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
 		tableFrame.size.height += keyboardFrame.size.width;
+		tableFrame.size.height -= self.toolbarHeight;
 	}
-	tableFrame.size.height -= self.toolbarHeight;
 	DLog(@"After: %f", tableFrame.size.height);
 	
 	[self resizeTableToFrame:tableFrame duration:duration animation:@"RestoreTableHeight"];

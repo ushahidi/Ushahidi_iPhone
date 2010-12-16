@@ -31,7 +31,7 @@
 
 @implementation Deployment
 
-@synthesize name, url, domain, countries, categories, locations, incidents, pending, sinceID, synced, added;
+@synthesize name, url, domain, categories, locations, incidents, pending, sinceID, synced, added;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
@@ -76,9 +76,6 @@
 	DLog(@"Archiving %@", self.domain);
 	NSString *path = [self archiveFolder];
 	
-	[NSKeyedArchiver archiveObject:self.countries forPath:path andKey:@"countries"];
-	DLog(@"countries: %d", [self.countries count]);
-	
 	[NSKeyedArchiver archiveObject:self.categories forPath:path andKey:@"categories"];
 	DLog(@"categories: %d", [self.categories count]);
 	
@@ -93,7 +90,6 @@
 }
 
 - (void) purge {
-	[self.countries removeAllObjects];
 	[self.categories removeAllObjects];
 	[self.locations removeAllObjects];
 	[self.incidents removeAllObjects];
@@ -103,10 +99,6 @@
 - (void) unarchive {
 	DLog(@"Un-archiving %@", self.domain);
 	NSString *path = [self archiveFolder];
-	
-	self.countries = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"countries"];
-	if (self.countries == nil) self.countries = [[NSMutableDictionary alloc] init];
-	DLog(@"countries: %d", [self.countries count]);
 	
 	self.categories = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"categories"];
 	if (self.categories == nil) self.categories = [[NSMutableDictionary alloc] init];
@@ -126,8 +118,7 @@
 }
 
 - (NSString *) archiveFolder {
-	NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	return [[filePaths objectAtIndex:0] stringByAppendingPathComponent:self.domain];
+	return [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:self.domain];
 }
 
 - (BOOL) matchesString:(NSString *)string {
@@ -156,7 +147,6 @@
 	[name release];
 	[url release];
 	[domain release];
-	[countries release];
 	[categories release];
 	[locations release];
 	[incidents release];

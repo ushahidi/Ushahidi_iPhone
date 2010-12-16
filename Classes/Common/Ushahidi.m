@@ -31,7 +31,6 @@
 #import "Deployment.h"
 #import "Category.h"
 #import "Location.h"
-#import "Country.h"
 #import "Incident.h"
 #import "Photo.h"
 #import "News.h"
@@ -71,10 +70,6 @@
 - (void) getCategoriesStarted:(ASIHTTPRequest *)request;
 - (void) getCategoriesFinished:(ASIHTTPRequest *)request;
 - (void) getCategoriesFailed:(ASIHTTPRequest *)request;
-
-- (void) getCountriesStarted:(ASIHTTPRequest *)request;
-- (void) getCountriesFinished:(ASIHTTPRequest *)request;
-- (void) getCountriesFailed:(ASIHTTPRequest *)request;
 
 - (void) getLocationsStarted:(ASIHTTPRequest *)request;
 - (void) getLocationsFinished:(ASIHTTPRequest *)request;
@@ -477,77 +472,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[self dispatchSelector:@selector(downloadedFromUshahidi:categories:error:hasChanges:) 
 					target:delegate 
 				   objects:self, nil, [request error], NO, nil];
-}
-
-#pragma mark -
-#pragma mark Countries
-
-- (NSArray *) getCountriesForDelegate:(id<UshahidiDelegate>)delegate {
-	DLog(@"DELEGATE: %@", [delegate class]);
-	[self queueAsynchronousRequest:[self.deployment getCountries] 
-					   forDelegate:delegate
-					 startSelector:@selector(getCountriesStarted:)
-					finishSelector:@selector(getCountriesFinished:)
-					  failSelector:@selector(getCountriesFailed:)];
-	return [[self.deployment.countries allValues] sortedArrayUsingSelector:@selector(compareByName:)];
-}
-
-- (void) getCountriesStarted:(ASIHTTPRequest *)request {
-	DLog(@"REQUEST: %@", [[request url] absoluteString]);
-	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
-	[self dispatchSelector:@selector(downloadingFromUshahidi:countries:) 
-					target:delegate 
-				   objects:self, [[self.deployment.countries allValues] sortedArrayUsingSelector:@selector(compareByName:)], nil];
-}
-
-- (void) getCountriesFinished:(ASIHTTPRequest *)request {
-	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
-	DLog(@"STATUS: %@", [request responseStatusMessage]);
-	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
-	if ([request responseStatusCode] != HttpStatusOK) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain code:[request responseStatusCode] message:[request responseStatusMessage]];
-		[self dispatchSelector:@selector(downloadedFromUshahidi:countries:error:hasChanges:) 
-						target:delegate 
-					   objects:self, [self.deployment.countries allValues], error, NO, nil];
-	}
-	else {
-		NSDictionary *json = [[request responseString] JSONValue];
-		if (json == nil) {
-			NSError *error = [NSError errorWithDomain:self.deployment.domain code:HttpStatusInternalServerError message:NSLocalizedString(@"Invalid server response", nil)];
-			[self dispatchSelector:@selector(downloadedFromUshahidi:countries:error:hasChanges:) 
-							target:delegate 
-						   objects:self, [self.deployment.countries allValues], error, NO, nil];
-		}
-		else {
-			NSDictionary *payload = [json	objectForKey:@"payload"];
-			NSArray *countries = [payload objectForKey:@"countries"]; 
-			BOOL hasChanges = NO;
-			for (NSDictionary *dictionary in countries) {
-				Country *country = [[Country alloc] initWithDictionary:[dictionary objectForKey:@"country"]];
-				if (country.identifier != nil && [self.deployment.countries objectForKey:country.identifier] == nil) {
-					[self.deployment.countries setObject:country forKey:country.identifier];
-					hasChanges = YES;
-					DLog(@"COUNTRY: %@", dictionary);
-				}
-				[country release];
-			}
-			if (hasChanges) {
-				DLog(@"Has New Countries");
-			}
-			[self dispatchSelector:@selector(downloadedFromUshahidi:countries:error:hasChanges:) 
-							target:delegate 
-						   objects:self, [self.deployment.countries allValues], nil, hasChanges, nil];
-		}	
-	}
-}
-
-- (void)getCountriesFailed:(ASIHTTPRequest *)request {
-	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
-	DLog(@"ERROR: %@", [[request error] localizedDescription]);
-	id<UshahidiDelegate> delegate = [request.userInfo objectForKey:@"delegate"];
-	[self dispatchSelector:@selector(downloadedFromUshahidi:countries:error:hasChanges:) 
-				target:delegate 
-			   objects:self, nil, [request error], NO, nil];
 }
 
 #pragma mark -

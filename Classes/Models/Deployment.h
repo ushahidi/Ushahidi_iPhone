@@ -32,7 +32,6 @@
 	NSDate *synced;
 	NSDate *added;
 	
-	NSMutableDictionary *countries;
 	NSMutableDictionary *categories;
 	NSMutableDictionary *locations;
 	NSMutableDictionary *incidents;
@@ -46,7 +45,6 @@
 @property(nonatomic,retain) NSDate *synced;
 @property(nonatomic,retain) NSDate *added;
 
-@property(nonatomic, retain) NSMutableDictionary *countries;
 @property(nonatomic, retain) NSMutableDictionary *categories;
 @property(nonatomic, retain) NSMutableDictionary *locations;
 @property(nonatomic, retain) NSMutableDictionary *incidents;
@@ -68,11 +66,6 @@
 
 - (NSString *) getCategories;
 - (NSString *) getCategoryByID:(NSString *)categoryID;
-
-- (NSString *) getCountries;
-- (NSString *) getCountryByID:(NSString *)countryID;
-- (NSString *) getCountryByISO:(NSString *)countryISO;
-- (NSString *) getCountryByName:(NSString *)countryName;
 
 - (NSString *) getLocations;
 - (NSString *) getLocationByID:(NSString *)locationID;

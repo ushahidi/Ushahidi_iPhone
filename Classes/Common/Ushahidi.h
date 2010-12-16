@@ -28,7 +28,6 @@
 @class Incident;
 @class Location;
 @class Category;
-@class Country;
 @class Photo;
 
 #define kMainQueueFinished @"mainQueueFinished"
@@ -61,7 +60,6 @@
 
 - (NSArray *) getDeploymentsForDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getCategoriesForDelegate:(id<UshahidiDelegate>)delegate;
-- (NSArray *) getCountriesForDelegate:(id<UshahidiDelegate>)delegate;
 - (NSArray *) getLocationsForDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getIncidents;
@@ -77,7 +75,6 @@
 
 @optional
 
-- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)countries;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending;
@@ -85,7 +82,6 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi apiKey:(NSString *)apiKey error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi deployments:(NSArray *)deployments error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories error:(NSError *)error hasChanges:(BOOL)hasChanges;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi countries:(NSArray *)countries error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map;

@@ -30,6 +30,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {  
 	DLog(@"");
 	application.applicationSupportsShakeToEdit = NO;
+	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	[window addSubview:navigationController.view];
 	[window makeKeyAndVisible];
 	return YES;

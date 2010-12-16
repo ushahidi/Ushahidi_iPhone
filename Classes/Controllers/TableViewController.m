@@ -287,12 +287,12 @@
 	DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
 	DLog(@"Before: %f", tableFrame.size.height);
 	
-	if ([UIDevice currentDevice].orientation == UIDeviceOrientationUnknown ||
-		[UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
+	if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
 		tableFrame.size.height -= keyboardFrame.size.height;	
 	}
-	else {
+	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
+			 [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
 		tableFrame.size.height -= keyboardFrame.size.width;
 	}
 	
@@ -318,12 +318,12 @@
 	DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
 	DLog(@"Before: %f", tableFrame.size.height);
 	
-	if ([UIDevice currentDevice].orientation == UIDeviceOrientationUnknown ||
-		[UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
+	if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
 		tableFrame.size.height += keyboardFrame.size.height;	
 	}
-	else {
+	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
+			 [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
 		tableFrame.size.height += keyboardFrame.size.width;
 	}
 	tableFrame.size.height -= self.toolbarHeight;

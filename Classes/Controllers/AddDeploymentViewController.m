@@ -109,6 +109,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.view.backgroundColor = [UIColor ushahidiDarkTan];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	[self setHeader:NSLocalizedString(@"Name", nil) 
 		  atSection:TableSectionName];

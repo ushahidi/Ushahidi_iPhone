@@ -28,13 +28,13 @@
 	
 @public
 	IBOutlet UITableView *tableView;
+	IBOutlet UIToolbar *bottomBar;
 	
 @protected
 	NSMutableArray *allRows;
 	NSMutableArray *filteredRows;
 	UIColor *oddRowColor;
 	UIColor *evenRowColor;
-	CGFloat toolbarHeight;
 	BOOL editing;
 	
 @private
@@ -44,6 +44,7 @@
 }
 
 @property(nonatomic,retain) UITableView *tableView;
+@property(nonatomic,retain) UIToolbar *bottomBar;
 @property(nonatomic,retain) NSMutableArray *allRows;
 @property(nonatomic,retain) NSMutableArray *filteredRows;
 @property(nonatomic,retain) UIColor *oddRowColor;

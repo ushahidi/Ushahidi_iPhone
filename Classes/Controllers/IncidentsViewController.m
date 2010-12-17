@@ -414,21 +414,6 @@ typedef enum {
 } 
 
 #pragma mark -
-#pragma mark MKMapViewDelegate
-
-- (void)mapViewWillStartLoadingMap:(MKMapView *)theMapView {
-	DLog(@"");
-}
-
-- (void)mapViewDidFinishLoadingMap:(MKMapView *)theMapView {
-	DLog(@"");
-}
-
-- (void)mapViewDidFailLoadingMap:(MKMapView *)theMapView withError:(NSError *)error {
-	DLog(@"error: %@", [error localizedDescription]);
-}
-
-#pragma mark -
 #pragma mark UshahidiDelegate
 
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories {
@@ -646,6 +631,13 @@ typedef enum {
 
 - (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
 	[theMapView resizeRegionToFitAllPins:YES];	
+}
+
+#pragma mark -
+#pragma mark MKMapViewDelegate
+
+- (void)mapViewDidFailLoadingMap:(MKMapView *)theMapView withError:(NSError *)error {
+	DLog(@"error: %@", [error localizedDescription]);
 }
 
 #pragma mark -

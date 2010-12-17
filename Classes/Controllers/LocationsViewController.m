@@ -312,13 +312,8 @@ typedef enum {
 #pragma mark -
 #pragma mark MKMapView
 
-- (void)mapViewWillStartLoadingMap:(MKMapView *)theMapView {
-	DLog(@"");
-}
-
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)theMapView {
 	DLog(@"");
-	[self.mapView selectAnnotation:nil animated:NO];
 	for(NSObject<MKAnnotation> *annotation in theMapView.annotations) {
 		if ([annotation isKindOfClass:[MapAnnotation class]]) {
 			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
@@ -330,11 +325,15 @@ typedef enum {
 				break;
 			}
 		}
+		else if ([annotation isKindOfClass:[MKUserLocation class]]) {
+			[self.mapView selectAnnotation:annotation animated:NO];
+			break;
+		}
 	}
 }
 
 - (void)mapViewDidFailLoadingMap:(MKMapView *)theMapView withError:(NSError *)error {
-	DLog(@"");
+	DLog(@"error: %@", [error localizedDescription]);
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {

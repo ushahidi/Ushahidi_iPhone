@@ -27,21 +27,23 @@
 
 @interface TableViewController ()
 
-@property(nonatomic,assign) CGFloat toolbarHeight;
 @property(nonatomic,assign) BOOL shouldBeginEditing;
 @property(nonatomic,retain) NSMutableDictionary *headers;
 @property(nonatomic,retain) NSMutableDictionary *footers;
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
 - (void) keyboardWillShow:(NSNotification *)notification;
+- (void) keyboardDidShow:(NSNotification *)notification;
 - (void) keyboardWillHide:(NSNotification *)notification;
+- (void) keyboardDidHide:(NSNotification *)notification;
 - (void) resizeTableToFrame:(CGRect)rect duration:(NSTimeInterval)duration animation:(NSString *)animation;
+- (CGFloat) getFrameHeight:(CGRect)frame;
 
 @end
 
 @implementation TableViewController
 
-@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, toolbarHeight, shouldBeginEditing, headers, footers, editing;
+@synthesize tableView, bottomBar, allRows, filteredRows, oddRowColor, evenRowColor, shouldBeginEditing, headers, footers, editing;
 
 - (void) hideSearchBar {
 	if (self.tableView.tableHeaderView != nil) {
@@ -178,7 +180,9 @@
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 	DLog(@"%@", self.nibName);
 }
 
@@ -197,7 +201,9 @@
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 	DLog(@"%@", self.nibName);
 }
 
@@ -206,6 +212,7 @@
 	[allRows release];
 	[filteredRows release];
 	[tableView release];
+	[bottomBar release];
 	[oddRowColor release];
 	[evenRowColor release];
 	[headers release];
@@ -275,63 +282,73 @@
 
 -(void) keyboardWillShow:(NSNotification *)notification {
 	DLog(@"notification:%@", notification);
-	self.editing = YES;
 	NSTimeInterval duration = 0.3;
 	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
+	DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
 	
 	CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
 	[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
+	DLog(@"Keyboard x:%f y:%f width:%f height:%f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 	
 	CGRect tableFrame = self.tableView.frame;
+	DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
 	
-	DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
-	DLog(@"Before: %f", tableFrame.size.height);
-	
-	self.toolbarHeight = self.view.frame.size.height - (self.tableView.frame.origin.y + self.tableView.frame.size.height);
-	
-	if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
-		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
-		tableFrame.size.height -= keyboardFrame.size.height;	
-		tableFrame.size.height += self.toolbarHeight;
+	if (self.bottomBar) {
+		tableFrame.size.height = [self getFrameHeight:self.bottomBar.frame] - tableFrame.origin.y - [self getFrameHeight:keyboardFrame];
 	}
-	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
-			 [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-		tableFrame.size.height -= keyboardFrame.size.width;
-		tableFrame.size.height += self.toolbarHeight;
+	else {
+		tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y - [self getFrameHeight:keyboardFrame];
 	}
-	
-	DLog(@"After: %f", tableFrame.size.height);
 	
 	[self resizeTableToFrame:tableFrame duration:duration animation:@"ShrinkTableHeight"];
 }
 
+-(void) keyboardDidShow:(NSNotification *)notification {
+	self.editing = YES;
+}
+
 -(void) keyboardWillHide:(NSNotification *)notification {
 	DLog(@"notification:%@", notification);
-	self.editing = NO;
 	NSTimeInterval duration = 0.3;
 	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
+	DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
 	
 	CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
 	[[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
+	DLog(@"Keyboard x:%f y:%f width:%f height:%f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
 	
 	CGRect tableFrame = self.tableView.frame;
+	DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
 	
-	DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
-	DLog(@"Before: %f", tableFrame.size.height);
+	if (self.bottomBar) {
+		tableFrame.size.height = [self getFrameHeight:self.bottomBar.frame] - tableFrame.origin.y;
+	}
+	else {
+		tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y;
+	}
 	
+	[self resizeTableToFrame:tableFrame duration:duration animation:@"RestoreTableHeight"];
+}
+
+-(void) keyboardDidHide:(NSNotification *)notification {
+	self.editing = NO;
+}
+
+- (CGFloat) getFrameHeight:(CGRect)frame {
 	if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
 		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
-		tableFrame.size.height += keyboardFrame.size.height;	
-		tableFrame.size.height -= self.toolbarHeight;
+		DLog(@"UIDeviceOrientation: UIDeviceOrientationPortrait");
+		return frame.size.height;
 	}
 	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
 			 [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-		tableFrame.size.height += keyboardFrame.size.width;
-		tableFrame.size.height -= self.toolbarHeight;
+		DLog(@"UIDeviceOrientation: UIDeviceOrientationLandscape");
+		return frame.size.width;
 	}
-	DLog(@"After: %f", tableFrame.size.height);
-	
-	[self resizeTableToFrame:tableFrame duration:duration animation:@"RestoreTableHeight"];
+	else {
+		DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
+	}
+	return frame.size.height;
 }
 
 - (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration animation:(NSString *)animation {

@@ -188,7 +188,6 @@ typedef enum {
 		self.name = text;
 	}
 	else if (indexPath.section == TableSectionURL) {
-		DLog(@"%@", text);
 		self.url = text;
 	}
 }

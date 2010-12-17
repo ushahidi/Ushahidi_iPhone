@@ -21,6 +21,7 @@
 #import "Photo.h"
 #import "UIImage+Resize.h"
 #import "NSObject+Extension.h"
+#import "NSDictionary+Extension.h"
 
 @interface Photo ()
 
@@ -31,12 +32,20 @@
 NSInteger const kMaxThumbnaiWidth = 80;
 NSInteger const kMaxThumbnaiHeight = 80;
 
-@synthesize image, thumbnail, indexPath, downloading;
+@synthesize image, thumbnail, indexPath, downloading, imageURL, thumbnailURL;
 
 + (id)photoWithImage:(UIImage *)theImage {
 	return [[[Photo alloc] initWithImage:theImage] autorelease];
 }
-			
+
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+	if (self = [super initWithDictionary:dictionary]) {
+		self.imageURL = [dictionary stringForKey:@"link_url"];
+		self.thumbnailURL = [dictionary stringForKey:@"thumb_url"];
+	}
+	return self;
+}
+
 - (id)initWithImage:(UIImage *)theImage {
 	if (self = [super init]) {
 		self.image = theImage;
@@ -76,6 +85,8 @@ NSInteger const kMaxThumbnaiHeight = 80;
 	else {
 		[encoder encodeObject:nil forKey:@"thumbnail"];
 	}
+	[encoder encodeObject:self.imageURL forKey:@"imageURL"];
+	[encoder encodeObject:self.thumbnailURL forKey:@"thumbnailURL"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -88,6 +99,8 @@ NSInteger const kMaxThumbnaiHeight = 80;
 		if (thumbnailData != nil) {
 			self.thumbnail = [UIImage imageWithData:thumbnailData];
 		}
+		self.imageURL = [decoder decodeObjectForKey:@"imageURL"];
+		self.thumbnailURL = [decoder decodeObjectForKey:@"thumbnailURL"];
 	}
 	return self;
 }
@@ -96,6 +109,8 @@ NSInteger const kMaxThumbnaiHeight = 80;
 	[image release];
 	[thumbnail release];
 	[indexPath release];
+	[imageURL release];
+	[thumbnailURL release];
     [super dealloc];
 }
 

@@ -26,13 +26,17 @@
 
 @public
 	UIImage *image;	
+	NSString *imageURL;
 	UIImage *thumbnail;
+	NSString *thumbnailURL;
 	NSIndexPath *indexPath;
 	BOOL downloading;
 }
 
 @property(nonatomic,retain) UIImage *image;
+@property(nonatomic,retain) NSString *imageURL;
 @property(nonatomic,retain) UIImage *thumbnail;
+@property(nonatomic,retain) NSString *thumbnailURL;
 @property(nonatomic,retain) NSIndexPath *indexPath;
 @property (nonatomic, assign) BOOL downloading;
 

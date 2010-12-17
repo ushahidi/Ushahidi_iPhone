@@ -75,6 +75,7 @@
 - (void) getLocationsFinished:(ASIHTTPRequest *)request;
 - (void) getLocationsFailed:(ASIHTTPRequest *)request;
 
+- (void) downloadPhotoStarted:(ASIHTTPRequest *)request;
 - (void) downloadPhotoFinished:(ASIHTTPRequest *)request;
 - (void) downloadPhotoFailed:(ASIHTTPRequest *)request;
 
@@ -713,10 +714,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) downloadPhoto:(Incident *)incident photo:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate {
 	if (photo.url != nil && photo.image == nil && photo.downloading == NO) {
 		photo.downloading = YES;
-		NSURL *url = [NSURL URLWithStrings:self.deployment.url, @"/media/uploads/", photo.url, nil];
+		NSURL *url = nil;
+		if ([NSString isNilOrEmpty:photo.imageURL] == NO) {
+			url = [NSURL URLWithString:photo.imageURL];
+		}
+		else if ([[photo.url lowercaseString] hasPrefix:@"http://"] || [[photo.url lowercaseString] hasPrefix:@"https://"]) {
+			url = [NSURL URLWithString:photo.url];
+		}
+		else {
+			url = [NSURL URLWithStrings:self.deployment.url, @"/media/uploads/", photo.url, nil];
+		}
 		DLog(@"downloadPhoto: %@", [url absoluteString]);
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 		[request setDelegate:self];
+		[request setDidStartSelector:@selector(downloadPhotoStarted:)];
 		[request setDidFinishSelector:@selector(downloadPhotoFinished:)];
 		[request setDidFailSelector:@selector(downloadPhotoFailed:)];
 		[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:delegate, @"delegate",
@@ -724,6 +735,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 																		photo, @"photo", nil]];
 		[self.photoQueue addOperation:request];
 	}
+}
+
+- (void) downloadPhotoStarted:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST:%@", [request.originalURL absoluteString]);
 }
 
 - (void) downloadPhotoFinished:(ASIHTTPRequest *)request {

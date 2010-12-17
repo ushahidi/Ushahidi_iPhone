@@ -153,6 +153,7 @@ typedef enum {
 	[super viewWillAppear:animated];
 	if (self.modalViewController == nil) {
 		self.incident = [[Incident alloc] initWithDefaultValues];
+		self.news = nil;
 		self.willBePushed = NO;
 		if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
 			[[Locator sharedLocator] detectLocationForDelegate:self];
@@ -162,10 +163,7 @@ typedef enum {
 			self.incident.latitude = [Locator sharedLocator].latitude;
 			self.incident.longitude = [Locator sharedLocator].longitude;
 		}
-	}
-	if (self.willBePushed) {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
-		self.news = nil;
 	}
 	[self.tableView reloadData];
 }

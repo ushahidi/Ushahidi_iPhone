@@ -54,6 +54,7 @@
 - (BOOL) removeDeployment:(Deployment *)deployment;
 - (Deployment *) getDeploymentWithUrl:(NSString *)url;
 
+- (Incident *) getIncidentWithIdentifer:(NSString *)identifer;
 - (BOOL) addIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) uploadIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;

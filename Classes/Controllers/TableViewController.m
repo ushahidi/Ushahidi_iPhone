@@ -43,7 +43,7 @@
 
 @implementation TableViewController
 
-@synthesize tableView, bottomBar, allRows, filteredRows, oddRowColor, evenRowColor, shouldBeginEditing, headers, footers, editing;
+@synthesize tableView, toolBar, allRows, filteredRows, oddRowColor, evenRowColor, shouldBeginEditing, headers, footers, editing;
 
 - (void) hideSearchBar {
 	if (self.tableView.tableHeaderView != nil) {
@@ -212,7 +212,7 @@
 	[allRows release];
 	[filteredRows release];
 	[tableView release];
-	[bottomBar release];
+	[toolBar release];
 	[oddRowColor release];
 	[evenRowColor release];
 	[headers release];
@@ -293,12 +293,7 @@
 	CGRect tableFrame = self.tableView.frame;
 	DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
 	
-	if (self.bottomBar) {
-		tableFrame.size.height = [self getFrameHeight:self.bottomBar.frame] - tableFrame.origin.y - [self getFrameHeight:keyboardFrame];
-	}
-	else {
-		tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y - [self getFrameHeight:keyboardFrame];
-	}
+	tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y - [self getFrameHeight:keyboardFrame];
 	
 	[self resizeTableToFrame:tableFrame duration:duration animation:@"ShrinkTableHeight"];
 }
@@ -320,8 +315,8 @@
 	CGRect tableFrame = self.tableView.frame;
 	DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
 	
-	if (self.bottomBar) {
-		tableFrame.size.height = [self getFrameHeight:self.bottomBar.frame] - tableFrame.origin.y;
+	if (self.toolBar) {
+		tableFrame.size.height = self.toolBar.frame.origin.y - tableFrame.origin.y;
 	}
 	else {
 		tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y;

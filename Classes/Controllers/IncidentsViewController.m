@@ -253,6 +253,9 @@ typedef enum {
 			[self populateMapPins:YES];
 		}
 	}
+	if (animated) {
+		[[Settings sharedSettings] setLastIncident:nil];
+	}
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoQueueFinished) name:kPhotoQueueFinished object:nil];

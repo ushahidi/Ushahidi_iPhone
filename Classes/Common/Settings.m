@@ -29,7 +29,7 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
-@synthesize email, firstName, lastName, lastDeployment, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
+@synthesize email, firstName, lastName, lastDeployment, lastIncident, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -37,6 +37,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		self.firstName = [[NSUserDefaults standardUserDefaults] stringForKey:@"firstName"];
 		self.lastName = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastName"];
 		self.lastDeployment = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastDeployment"];
+		self.lastIncident = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastIncident"];
 		self.downloadMaps = [[NSUserDefaults standardUserDefaults] boolForKey:@"downloadMaps"];
 		self.becomeDiscrete = [[NSUserDefaults standardUserDefaults] boolForKey:@"becomeDiscrete"];
 		self.imageWidth = [[NSUserDefaults standardUserDefaults] floatForKey:@"imageWidth"];
@@ -52,6 +53,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[firstName release];
 	[lastName release];
 	[lastDeployment release];
+	[lastIncident release];
 	[super dealloc];
 }
 
@@ -61,6 +63,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[[NSUserDefaults standardUserDefaults] setObject:self.firstName forKey:@"firstName"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.lastName forKey:@"lastName"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.lastDeployment forKey:@"lastDeployment"];
+	[[NSUserDefaults standardUserDefaults] setObject:self.lastIncident forKey:@"lastIncident"];
 	[[NSUserDefaults standardUserDefaults] setBool:self.downloadMaps forKey:@"downloadMaps"];
 	[[NSUserDefaults standardUserDefaults] setBool:self.becomeDiscrete forKey:@"becomeDiscrete"];
 	[[NSUserDefaults standardUserDefaults] setFloat:self.imageWidth forKey:@"imageWidth"];

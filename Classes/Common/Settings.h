@@ -27,6 +27,7 @@
 	NSString *firstName;
 	NSString *lastName;
 	NSString *lastDeployment;
+	NSString *lastIncident;
 	BOOL downloadMaps;
 	BOOL becomeDiscrete;
 	CGFloat imageWidth;
@@ -38,6 +39,7 @@
 @property(nonatomic, retain) NSString *firstName;
 @property(nonatomic, retain) NSString *lastName;
 @property(nonatomic, retain) NSString *lastDeployment;
+@property(nonatomic, retain) NSString *lastIncident;
 @property(nonatomic, assign) BOOL downloadMaps;
 @property(nonatomic, assign) BOOL becomeDiscrete;
 @property(nonatomic, assign) CGFloat imageWidth;

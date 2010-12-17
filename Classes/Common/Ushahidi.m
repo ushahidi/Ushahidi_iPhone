@@ -550,6 +550,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Incidents
 
+- (Incident *) getIncidentWithIdentifer:(NSString *)identifer {
+	Incident *incident = [self.deployment.incidents objectForKey:identifer];
+	if (incident != nil) {
+		return incident;
+	}
+	for (Incident *pending in self.deployment.pending) {
+		if ([pending.identifier isEqualToString:identifer]) {
+			return pending;
+		}
+	}
+	return nil;
+}
+
 - (NSArray *) getIncidents {
 	return [self.deployment.incidents allValues];
 }

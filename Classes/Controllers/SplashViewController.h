@@ -22,15 +22,18 @@
 
 @class DeploymentsViewController;
 @class IncidentsViewController;
+@class ViewIncidentViewController;
 
 @interface SplashViewController : UIViewController {
 	
 @public
 	IBOutlet DeploymentsViewController *deploymentsViewController;
 	IBOutlet IncidentsViewController *incidentsViewController;
+	IBOutlet ViewIncidentViewController *viewIncidentViewController;
 }
 
 @property(nonatomic, retain) DeploymentsViewController *deploymentsViewController;
 @property(nonatomic, retain) IncidentsViewController *incidentsViewController;
+@property(nonatomic, retain) ViewIncidentViewController *viewIncidentViewController;
 
 @end

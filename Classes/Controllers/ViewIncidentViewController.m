@@ -41,6 +41,7 @@
 #import "NSString+Extension.h"
 #import "MoviePlayer.h"
 #import "SMS.h"
+#import "Settings.h"
 
 @interface ViewIncidentViewController ()
 
@@ -86,6 +87,7 @@ typedef enum {
 		DLog(@"Previous");
 		self.incident = [self.incidents objectAtIndex:index - 1];
 	}
+	[[Settings sharedSettings] setLastIncident:self.incident.identifier];
 	NSInteger newIndex = [self.incidents indexOfObject:self.incident];
 	self.title = [NSString stringWithFormat:@"%d / %d", newIndex + 1, [self.incidents count]];
 	[self.nextPrevious setEnabled:(newIndex > 0) forSegmentAtIndex:NavBarPrevious];
@@ -111,13 +113,22 @@ typedef enum {
 - (IBAction) sendEmail:(id)sender {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
-	if (self.pending == NO) {
-		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
-		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Link", nil), [link absoluteString], [link absoluteString]];
+	if (self.pending) {
+		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];
 	}
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];
+	else {
+		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
+		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", nil), [link absoluteString], self.incident.title];
+	}
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", nil), self.incident.dateTimeString];
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", nil), self.incident.location];
+	if ([NSString isNilOrEmpty:self.incident.latitude] == NO && [NSString isNilOrEmpty:self.incident.longitude] == NO) {
+		DLog(@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location);
+		NSString *locationURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location];
+		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Location", nil), locationURL, self.incident.location];
+	}
+	else {
+		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", nil), self.incident.location];
+	}
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", nil), self.incident.categoryNames];
 	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", nil), self.incident.description];
 	if (self.incident.news != nil && [self.incident.news count] > 0) {
@@ -165,11 +176,12 @@ typedef enum {
 	[self.tableView reloadData];	
 	self.smsButton.enabled = !self.pending && [self.sms canSend];
 	self.emailButton.enabled = [self.email canSend];
+	[[Settings sharedSettings] setLastIncident:self.incident.identifier];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through reports, the Link button to send the report URL or the Email button to send the report details.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through reports, the SMS button to send the report URL or the Email button to send the report details.", nil)];
 }
 
 - (void)dealloc {

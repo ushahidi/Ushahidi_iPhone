@@ -160,7 +160,7 @@
 }
 
 - (NSString *) dateTimeString {
-	return self.date != nil ? [self.date dateToString:@"h:mm a, cccc, MMMM d, yyyy"] : nil;
+	return self.date != nil ? [self.date dateToString:@"h:mm a, ccc, MMM d, yyyy"] : nil;
 }
 
 - (NSString *) dateString {

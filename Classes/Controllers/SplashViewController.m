@@ -21,6 +21,7 @@
 #import "SplashViewController.h"
 #import "DeploymentsViewController.h"
 #import "IncidentsViewController.h"
+#import "ViewIncidentViewController.h"
 #import "Settings.h"
 #import "NSString+Extension.h"
 
@@ -32,7 +33,7 @@
 
 @implementation SplashViewController
 
-@synthesize deploymentsViewController, incidentsViewController;
+@synthesize deploymentsViewController, incidentsViewController, viewIncidentViewController;
 
 #pragma mark -
 #pragma mark private
@@ -42,10 +43,26 @@
 	if ([NSString isNilOrEmpty:lastDeployment] == NO) {
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
 		if (deployment != nil) {
+			[self.navigationController pushViewController:self.deploymentsViewController animated:NO];
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 			self.incidentsViewController.deployment = deployment;
-			[self.navigationController pushViewController:self.deploymentsViewController animated:NO];
-			[self.navigationController pushViewController:self.incidentsViewController animated:YES];			
+			
+			NSString *lastIncident = [[Settings sharedSettings] lastIncident];
+			if ([NSString isNilOrEmpty:lastIncident] == NO) {
+				Incident *incident = [[Ushahidi sharedUshahidi] getIncidentWithIdentifer:lastIncident];
+				if (incident != nil) {
+					[self.navigationController pushViewController:self.incidentsViewController animated:NO];
+					self.viewIncidentViewController.incident = incident;
+					self.viewIncidentViewController.incidents = [[Ushahidi sharedUshahidi] getIncidents];
+					[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];
+				}
+				else {
+					[self.navigationController pushViewController:self.incidentsViewController animated:YES];
+				}
+			}
+			else {
+				[self.navigationController pushViewController:self.incidentsViewController animated:YES];			
+			}
 		}
 		else {
 			[self.navigationController pushViewController:self.deploymentsViewController animated:YES];
@@ -76,10 +93,6 @@
 	}
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
@@ -88,12 +101,10 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
 - (void)dealloc {
 	[deploymentsViewController release];
+	[incidentsViewController release];
+	[viewIncidentViewController release];
     [super dealloc];
 }
 

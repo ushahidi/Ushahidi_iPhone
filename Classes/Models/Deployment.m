@@ -113,7 +113,7 @@
 	DLog(@"incidents: %d", [self.incidents count]);
 	
 	self.pending = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"pending"];
-	if (self.pending == nil) self.pending = [[NSMutableDictionary alloc] init];
+	if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 	DLog(@"pending: %d", [self.pending count]);
 }
 

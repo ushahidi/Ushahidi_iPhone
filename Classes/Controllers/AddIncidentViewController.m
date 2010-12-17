@@ -109,14 +109,17 @@ typedef enum {
 							 andMessage:[missingFields componentsJoinedByString:@", "]];
 	}
 	else {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
 		if (self.news != nil && [self.news isValidURL]) {
 			[self.incident addNews:[News newsWithUrl:self.news]];
 		}
 		[self.view endEditing:YES];
 		if ([[Ushahidi sharedUshahidi] addIncident:self.incident forDelegate:self.incidentsViewController]) {
-			[self dismissModalViewControllerAnimated:YES];
+			[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.0];
 		}
 		else {
+			[self.loadingView hide];
 			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
 								 andMessage:NSLocalizedString(@"Unable to add incident", nil)];
 		}
@@ -162,6 +165,7 @@ typedef enum {
 	}
 	if (self.willBePushed) {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+		self.news = nil;
 	}
 	[self.tableView reloadData];
 }

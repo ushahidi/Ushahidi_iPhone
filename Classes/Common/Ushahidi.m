@@ -293,7 +293,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post addPostValue:[incident dateHour] forKey:@"incident_hour"];
 		[post addPostValue:[incident dateMinute] forKey:@"incident_minute"];
 		[post addPostValue:[incident dateAmPm] forKey:@"incident_ampm"];
-		[post addPostValue:[incident categoryNames] forKey:@"incident_category"];
+		[post addPostValue:[incident categoryIDs] forKey:@"incident_category"];
 		[post addPostValue:[incident location] forKey:@"location_name"];
 		[post addPostValue:[incident latitude] forKey:@"latitude"];
 		[post addPostValue:[incident longitude] forKey:@"longitude"];

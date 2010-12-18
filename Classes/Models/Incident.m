@@ -226,7 +226,9 @@
 
 - (void) addCategory:(Category *)category {
 	DLog(@"%@", category.title);
-	[self.categories addObject:category];
+	if ([self.categories containsObject:category] == NO) {
+		[self.categories addObject:category];
+	}
 }
 
 - (void) removeCategory:(Category *)category {
@@ -245,19 +247,30 @@
 	return NO;
 }
 
+- (NSString *) categoryIDs {
+	NSMutableString *categoryIDs = [NSMutableString string];
+	for (Category *category in self.categories) {
+		if ([categoryIDs length] > 0) {
+			[categoryIDs appendFormat:@","];
+		}
+		[categoryIDs appendFormat:@"%@", category.identifier];
+	}
+	return categoryIDs;
+}
+
 - (NSString *) categoryNames {
 	return [self categoryNamesWithDefaultText:nil];
 }
 
 - (NSString *) categoryNamesWithDefaultText:(NSString *)defaultText {
-	NSMutableString *categoryNames = [NSMutableString stringWithCapacity:0];
+	NSMutableString *categoryNames = [NSMutableString string];
 	for (Category *category in self.categories) {
 		if ([categoryNames length] > 0) {
 			[categoryNames appendFormat:@","];
 		}
 		[categoryNames appendFormat:@"%@", category.title];
 	}
-	return [categoryNames length] > 0 ? categoryNames : defaultText;;
+	return [categoryNames length] > 0 ? categoryNames : defaultText;
 }
 
 - (UIImage *) getFirstPhotoThumbnail {

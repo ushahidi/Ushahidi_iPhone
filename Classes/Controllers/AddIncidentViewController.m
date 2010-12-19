@@ -217,7 +217,7 @@ typedef enum {
 		if (indexPath.row > 0) {
 			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
 			Photo *photo = [self.incident.photos objectAtIndex:indexPath.row - 1];
-			if (photo != nil) {
+			if (photo != nil && photo.image != nil) {
 				[cell setImage:photo.image];
 			}
 			else {
@@ -443,16 +443,27 @@ typedef enum {
 #pragma mark ImagePickerDelegate
 
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
+	DLog(@"");
 	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", nil)];
 }
 
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
-	[self.loadingView hideAfterDelay:0.5];
-	[self.incident addPhoto:[Photo photoWithImage:image]];
-	[self.tableView reloadData];
+	DLog(@"");
+	if (image != nil && image.size.width > 0 && image.size.height > 0) {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+		[self.loadingView hideAfterDelay:1.0];
+		[self.incident addPhoto:[Photo photoWithImage:image]];
+		[self.tableView reloadData];	
+	}
+	else {
+		[self.loadingView hide];
+		[self.tableView reloadData];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Photo Error", nil) andMessage:NSLocalizedString(@"There was a problem adding the photo.", nil)];
+	}
 }
 
 - (void) imagePickerDidCancel:(ImagePickerController *)imagePicker {
+	DLog(@"");
 	[self.loadingView hide];
 }
 

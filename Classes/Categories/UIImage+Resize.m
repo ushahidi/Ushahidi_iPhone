@@ -16,9 +16,6 @@
 - (CGAffineTransform)transformForOrientation:(CGSize)newSize;
 @end
 
-CGFloat DegreesToRadians(CGFloat degrees) {return degrees * M_PI / 180;};
-CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
-
 @implementation UIImage (Resize)
 
 // Returns a copy of this image that is cropped to the given bounds.
@@ -51,7 +48,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     UIImage *croppedImage = [resizedImage croppedImage:cropRect];
     
     UIImage *transparentBorderImage = borderSize ? [croppedImage transparentBorderImage:borderSize] : croppedImage;
-
+	
     return [transparentBorderImage roundedCornerImage:cornerRadius borderSize:borderSize];
 }
 
@@ -100,7 +97,7 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     }
     
     CGSize newSize = CGSizeMake(self.size.width * ratio, self.size.height * ratio);
-
+    
     return [self resizedImage:newSize interpolationQuality:quality];
 }
 
@@ -114,37 +111,43 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
                 transform:(CGAffineTransform)transform
            drawTransposed:(BOOL)transpose
      interpolationQuality:(CGInterpolationQuality)quality {
-    CGRect newRect = CGRectIntegral(CGRectMake(0, 0, newSize.width, newSize.height));
-    CGRect transposedRect = CGRectMake(0, 0, newRect.size.height, newRect.size.width);
-    CGImageRef imageRef = self.CGImage;
-    
-    // Build a context that's the same dimensions as the new size
-    CGContextRef bitmap = CGBitmapContextCreate(NULL,
-                                                newRect.size.width,
-                                                newRect.size.height,
-                                                CGImageGetBitsPerComponent(imageRef),
-                                                0,
-                                                CGImageGetColorSpace(imageRef),
-                                                CGImageGetBitmapInfo(imageRef));
-    
-    // Rotate and/or flip the image if required by its orientation
-    CGContextConcatCTM(bitmap, transform);
-    
-    // Set the quality level to use when rescaling
-    CGContextSetInterpolationQuality(bitmap, quality);
-    
-    // Draw into the context; this scales the image
-    CGContextDrawImage(bitmap, transpose ? transposedRect : newRect, imageRef);
-    
-    // Get the resized image from the context and a UIImage
-    CGImageRef newImageRef = CGBitmapContextCreateImage(bitmap);
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
-    
-    // Clean up
-    CGContextRelease(bitmap);
-    CGImageRelease(newImageRef);
-    
-    return newImage;
+	@try {
+		CGRect newRect = CGRectIntegral(CGRectMake(0, 0, newSize.width, newSize.height));
+		CGRect transposedRect = CGRectMake(0, 0, newRect.size.height, newRect.size.width);
+		CGImageRef imageRef = self.CGImage;
+		
+		// Build a context that's the same dimensions as the new size
+		CGContextRef bitmap = CGBitmapContextCreate(NULL,
+													newRect.size.width,
+													newRect.size.height,
+													CGImageGetBitsPerComponent(imageRef),
+													0,
+													CGImageGetColorSpace(imageRef),
+													CGImageGetBitmapInfo(imageRef));
+		
+		// Rotate and/or flip the image if required by its orientation
+		CGContextConcatCTM(bitmap, transform);
+		
+		// Set the quality level to use when rescaling
+		CGContextSetInterpolationQuality(bitmap, quality);
+		
+		// Draw into the context; this scales the image
+		CGContextDrawImage(bitmap, transpose ? transposedRect : newRect, imageRef);
+		
+		// Get the resized image from the context and a UIImage
+		CGImageRef newImageRef = CGBitmapContextCreateImage(bitmap);
+		UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+		
+		// Clean up
+		CGContextRelease(bitmap);
+		CGImageRelease(newImageRef);
+		
+		return newImage != nil ? newImage : self;
+	}
+	@catch (NSException *e) {
+		DLog(@"NSException: %@", e);
+	}
+	return self;
 }
 
 // Returns an affine transform that takes into account the image orientation when drawing a scaled image

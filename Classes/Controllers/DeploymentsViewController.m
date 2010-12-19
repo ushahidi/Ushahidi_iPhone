@@ -195,15 +195,21 @@ typedef enum {
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
-		if([[Ushahidi sharedUshahidi] removeDeployment:deployment]) {
-			DLog(@"Removed Deployment");
-			[self.allRows removeObject:deployment];
-			[self.filteredRows removeObject:deployment];
-			[self.tableView reloadData];
+		@try {
+			if([[Ushahidi sharedUshahidi] removeDeployment:deployment]) {
+				DLog(@"Removed Deployment");
+				[self.allRows removeObject:deployment];
+				[self.filteredRows removeObject:deployment];
+				[self.tableView reloadData];
+			}
+			else {
+				[self.alertView showOkWithTitle:NSLocalizedString(@"Delete Error", nil) 
+									 andMessage:NSLocalizedString(@"There was a problem deleting the deployment.", nil)];	
+			}
 		}
-		else {
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
-								 andMessage:NSLocalizedString(@"Unable to remove deployment", nil)];	
+		@catch (NSException * e) {
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Delete Error", nil) 
+								 andMessage:NSLocalizedString(@"There was a problem deleting the deployment.", nil)];
 		}
 	}	
 }

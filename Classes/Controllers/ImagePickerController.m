@@ -163,25 +163,25 @@
 			UIImage *resizedImage = [originalImage resizedImage:size interpolationQuality:kCGInterpolationHigh];
 			if (resizedImage != nil) {
 				[self dispatchSelector:@selector(imagePickerDidFinish:image:) 
-								target:delegate 
+								target:self.delegate
 							   objects:self, resizedImage, nil];
 			}
 			else {
 				[self dispatchSelector:@selector(imagePickerDidFinish:image:) 
-								target:delegate 
+								target:self.delegate 
 							   objects:self, originalImage, nil];
 			}
 		}
 		else {
 			[self dispatchSelector:@selector(imagePickerDidFinish:image:)
-							target:delegate 
+							target:self.delegate 
 						   objects:self, originalImage, nil];
 		}
 	}
 	@catch (NSException *e) {
 		DLog(@"NSException: %@", e);
 		[self dispatchSelector:@selector(imagePickerDidFinish:image:) 
-						target:delegate 
+						target:self.delegate 
 					   objects:self, originalImage, nil];
 	}
 	[pool release];

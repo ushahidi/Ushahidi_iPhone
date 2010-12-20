@@ -22,6 +22,7 @@
 #import "UIImage+Resize.h"
 #import "NSObject+Extension.h"
 #import "NSDictionary+Extension.h"
+#import "NSString+Extension.h"
 
 @interface Photo ()
 

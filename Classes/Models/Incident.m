@@ -189,7 +189,12 @@
 
 - (void) addPhoto:(Photo *)photo {
 	if ([self hasMedia:photo inCollection:self.photos] == NO) {
-		DLog(@"addPhoto: %@", [photo identifier]);
+		if ([photo identifier] != nil) {
+			DLog(@"addPhoto: %@", [photo identifier]);
+		}
+		else {
+			DLog(@"addPhoto: NEW PHOTO");
+		}
 		[self.photos addObject:photo];
 	}
 }
@@ -216,9 +221,11 @@
 }
 
 - (BOOL) hasMedia:(Media *)media inCollection:(NSArray *)collection {
-	for (Media *existing in collection) {
-		if ([existing.identifier isEqualToString:media.identifier]) {
-			return YES;
+	if (media.identifier != nil) {
+		for (Media *existing in collection) {
+			if ([existing.identifier isEqualToString:media.identifier]) {
+				return YES;
+			}
 		}
 	}
 	return NO;

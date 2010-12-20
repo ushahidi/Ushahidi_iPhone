@@ -308,19 +308,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			Video *video = [incident.videos objectAtIndex:0];
 			[post addPostValue:video.url forKey:@"incident_video"];
 		}
-		if (incident.photos != nil && [incident.photos count] > 0) {
-			NSInteger filename = 1;
-			for(Photo *photo in incident.photos) {
-				if (photo != nil && photo.image.size.width > 0 && photo.image.size.height > 0) {
-					NSData *jpegData = [photo getJpegData];
-					if (jpegData != nil) {
-						[post addData:jpegData 
-						 withFileName:[NSString stringWithFormat:@"incident_photo%d.jpg", filename++] 
-					   andContentType:@"image/jpeg" 
-							   forKey:@"incident_photo[]"];	
-					}
+		NSInteger filename = 1;
+		for(Photo *photo in incident.photos) {
+			if (photo != nil && photo.image != nil && photo.image.size.width > 0 && photo.image.size.height > 0) {
+				NSData *jpegData = [photo getJpegData];
+				if (jpegData != nil) {
+					[post addData:jpegData 
+					 withFileName:[NSString stringWithFormat:@"incident_photo%d.jpg", filename++] 
+				   andContentType:@"image/jpeg" 
+						   forKey:@"incident_photo[]"];	
 				}
-			}	
+			}
 		}
 		[post startAsynchronous];
 		return YES;

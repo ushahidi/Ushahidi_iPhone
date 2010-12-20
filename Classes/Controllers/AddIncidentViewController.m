@@ -373,7 +373,7 @@ typedef enum {
 		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 		CGRect rect = cell.frame;
 		rect.origin.y += [TableHeaderView getViewHeight];
-		rect.origin.y += 45/2;
+		rect.origin.y += 45 / 2;
 		UIDatePickerMode datePickerMode = indexPath.row == TableSectionDateRowDate
 			? UIDatePickerModeDate : UIDatePickerModeTime;
 		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath forRect:rect];
@@ -444,13 +444,13 @@ typedef enum {
 
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", nil)];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing Photo...", nil)];
 }
 
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
 	DLog(@"");
 	if (image != nil && image.size.width > 0 && image.size.height > 0) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Photo Added", nil)];
 		[self.loadingView hideAfterDelay:1.0];
 		[self.incident addPhoto:[Photo photoWithImage:image]];
 		[self.tableView reloadData];	
@@ -470,7 +470,7 @@ typedef enum {
 #pragma mark -
 #pragma mark UIActionSheetDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (actionSheet.cancelButtonIndex != buttonIndex) {
 		[self.incident removePhotoAtIndex:actionSheet.tag];
 		[self.tableView reloadData];	
@@ -482,7 +482,7 @@ typedef enum {
 
 - (void) locator:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
 	DLog(@"locator: %@, %@", latitude, longitude);
-	if (self.incident.latitude == nil || self.incident.longitude == nil) {
+	if ([NSString isNilOrEmpty:self.incident.latitude] == NO || [NSString isNilOrEmpty:self.incident.longitude] == NO) {
 		self.incident.latitude = latitude;
 		self.incident.longitude = longitude;
 		[self setFooter:nil atSection:TableSectionLocation];

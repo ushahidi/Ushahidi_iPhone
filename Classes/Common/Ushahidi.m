@@ -402,6 +402,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Categories
 
+- (BOOL) hasCategories {
+	return [self.deployment.categories count] > 0;
+}
+
+- (NSArray *) getCategories {
+	return [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)];
+}
+
 - (NSArray *) getCategoriesForDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"DELEGATE: %@", [delegate class]);
 	[self queueAsynchronousRequest:[self.deployment getCategories] 
@@ -481,6 +489,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 #pragma mark -
 #pragma mark Locations
+
+- (BOOL) hasLocations {
+	return [self.deployment.locations count] > 0;
+}
+
+- (NSArray *) getLocations {
+	return [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)];
+}
 
 - (NSArray *) getLocationsForDelegate:(id<UshahidiDelegate>)delegate {
 	DLog(@"DELEGATE: %@", [delegate class]);

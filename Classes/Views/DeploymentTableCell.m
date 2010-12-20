@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "DeploymentTableCell.h"
+#import "Device.h"
 
 @interface DeploymentTableCell()
 
@@ -64,7 +65,7 @@
 }
 
 + (CGFloat) getCellHeight {
-	return 44;
+	return [Device isIPad] ? 55 : 44;
 }
 
 @end

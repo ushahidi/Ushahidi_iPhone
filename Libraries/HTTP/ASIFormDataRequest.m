@@ -212,13 +212,6 @@
 #endif
 }
 
-- (NSString *)getUUID {
-	CFUUIDRef theUUID = CFUUIDCreate(NULL);
-	CFStringRef string = CFUUIDCreateString(NULL, theUUID);
-	CFRelease(theUUID);
-	return [(NSString *)string autorelease];
-}
-
 - (void)buildMultipartFormDataPostBody
 {
 #if DEBUG_FORM_DATA_REQUEST
@@ -228,7 +221,8 @@
 	NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding([self stringEncoding]));
 	
 	// Set your own boundary string only if really obsessive. We don't bother to check if post data contains the boundary, since it's pretty unlikely that it does.
-	NSString *stringBoundary = [[self getUUID] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+	NSString *stringBoundary = [NSString stringWithFormat:@"---------------%.0f", [[NSDate date] timeIntervalSince1970]];
+	DLog(@"Boundary: %@", stringBoundary);
 	
 	[self addRequestHeader:@"Content-Type" value:[NSString stringWithFormat:@"multipart/form-data; charset=%@; boundary=%@", charset, stringBoundary]];
 	

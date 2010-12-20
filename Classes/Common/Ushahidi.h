@@ -60,7 +60,13 @@
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getDeploymentsForDelegate:(id<UshahidiDelegate>)delegate;
+
+- (BOOL) hasCategories;
+- (NSArray *) getCategories;
 - (NSArray *) getCategoriesForDelegate:(id<UshahidiDelegate>)delegate;
+
+- (BOOL) hasLocations;
+- (NSArray *) getLocations;
 - (NSArray *) getLocationsForDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getIncidents;

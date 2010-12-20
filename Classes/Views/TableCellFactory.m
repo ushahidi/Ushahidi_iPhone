@@ -59,7 +59,8 @@
 											   indexPath:(NSIndexPath *)indexPath {
 	DeploymentTableCell *cell = (DeploymentTableCell *)[tableView dequeueReusableCellWithIdentifier:@"DeploymentTableCell"];
 	if (cell == nil) {
-		cell = (DeploymentTableCell *)[TableCellFactory getTableViewCellFromNib:@"DeploymentTableCell"];
+		NSString *nibName = [Device isIPad] ? @"DeploymentTableCell_iPad" : @"DeploymentTableCell_iPhone";
+		cell = (DeploymentTableCell *)[TableCellFactory getTableViewCellFromNib:nibName];
 		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
 	}
 	cell.indexPath = indexPath;

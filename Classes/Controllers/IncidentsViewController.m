@@ -228,8 +228,18 @@ typedef enum {
 	if (self.willBePushed) {
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
 		self.category = nil;
-		self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
-		[[Ushahidi sharedUshahidi] getLocationsForDelegate:self];
+		if ([[Ushahidi sharedUshahidi] hasCategories]) {
+			self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategories]];
+		}
+		else {
+			self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+		}
+		if ([[Ushahidi sharedUshahidi] hasLocations]) {
+			//DO NOTHING
+		}
+		else {
+			[[Ushahidi sharedUshahidi] getLocationsForDelegate:self];
+		}
 		if ([self.categories count] == 0) {
 			[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];	
 		}

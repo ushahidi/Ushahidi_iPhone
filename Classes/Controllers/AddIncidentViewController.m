@@ -482,12 +482,12 @@ typedef enum {
 
 - (void) locator:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
 	DLog(@"locator: %@, %@", latitude, longitude);
-	if ([NSString isNilOrEmpty:self.incident.latitude] == NO || [NSString isNilOrEmpty:self.incident.longitude] == NO) {
+	if ([NSString isNilOrEmpty:self.incident.location] || [NSString isNilOrEmpty:self.incident.longitude]) {
 		self.incident.latitude = latitude;
 		self.incident.longitude = longitude;
-		[self setFooter:nil atSection:TableSectionLocation];
-		[self.tableView reloadData];
 	}
+	[self setFooter:nil atSection:TableSectionLocation];
+	[self.tableView reloadData];
 }
 
 #pragma mark -

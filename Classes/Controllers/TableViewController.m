@@ -340,6 +340,10 @@
 		DLog(@"UIDeviceOrientation: UIDeviceOrientationLandscape");
 		return frame.size.width;
 	}
+	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationUnknown) {
+		DLog(@"UIDeviceOrientation: UIDeviceOrientationUnknown");
+		return frame.size.height;
+	}
 	else {
 		DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
 	}

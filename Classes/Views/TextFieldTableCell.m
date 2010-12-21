@@ -98,7 +98,6 @@
 }
 
 - (void) setText:(NSString *)text {
-	DLog(@"%@", text);
 	self.textField.text = text;
 }
 

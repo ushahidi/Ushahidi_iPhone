@@ -487,7 +487,9 @@ typedef enum {
 		self.incident.longitude = longitude;
 	}
 	[self setFooter:nil atSection:TableSectionLocation];
-	[self.tableView reloadData];
+	if (self.editing == NO) {
+		[self.tableView reloadData];
+	}
 }
 
 #pragma mark -

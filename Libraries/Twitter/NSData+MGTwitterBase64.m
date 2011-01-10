@@ -1,5 +1,6 @@
 //
-//  NSData+Base64.m
+//  NSData+MGTwitterBase64.m
+//  Renamed by Aral Balkan due to name collision with the same category by Matt Gallagher.
 //
 // Derived from http://colloquy.info/project/browser/trunk/NSDataAdditions.h?rev=1576
 // Created by khammond on Mon Oct 29 2001.
@@ -8,7 +9,7 @@
 // Original development by Dave Winer.
 //
 
-#import "NSData+Base64.h"
+#import "NSData+MGTwitterBase64.h"
 
 #import <Foundation/Foundation.h>
 
@@ -18,7 +19,7 @@ static char encodingTable[64] = {
 		'g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v',
 		'w','x','y','z','0','1','2','3','4','5','6','7','8','9','+','/' };
 
-@implementation NSData (Base64)
+@implementation NSData (MGTwitterBase64)
 
 + (NSData *) dataWithBase64EncodedString:(NSString *) string {
 	NSData *result = [[NSData alloc] initWithBase64EncodedString:string];

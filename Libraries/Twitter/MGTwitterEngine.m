@@ -9,9 +9,9 @@
 #import "MGTwitterEngine.h"
 #import "MGTwitterHTTPURLConnection.h"
 
-#import "NSData+Base64.h"
+#import "NSData+MGTwitterBase64.h"
 
-#define USE_LIBXML 0
+#define USE_LIBXML 1
 
 #if YAJL_AVAILABLE
 	#define API_FORMAT @"json"

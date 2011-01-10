@@ -1,5 +1,6 @@
 //
-//  NSData+Base64.m
+//  NSData+MGTwitterBase64.m
+//  Renamed by Aral Balkan due to name collision with the same category by Matt Gallagher.
 //
 // Derived from http://colloquy.info/project/browser/trunk/NSDataAdditions.h?rev=1576
 // Created by khammond on Mon Oct 29 2001.
@@ -10,7 +11,7 @@
 
 #import "MGTwitterEngineGlobalHeader.h"
 
-@interface NSData (Base64)
+@interface NSData (MGTwitterBase64)
 
 /*!	@function	+dataWithBase64EncodedString:
 	@discussion	This method returns an autoreleased NSData object. The NSData object is initialized with the

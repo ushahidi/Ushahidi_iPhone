@@ -21,14 +21,15 @@
 #import <UIKit/UIKit.h>
 #import "TableViewController.h"
 #import "TextViewTableCell.h"
-#import "SA_OAuthTwitterController.h"
+#import "TextFieldTableCell.h"
+#import "XAuthTwitterEngineDelegate.h"
 #import "Bitly.h"
 
-@class SA_OAuthTwitterEngine;
-@class AlertView;
+@class XAuthTwitterEngine;
 
 @interface TwitterViewController : TableViewController<TextViewTableCellDelegate, 
-													   SA_OAuthTwitterControllerDelegate,
+													   TextFieldTableCellDelegate,
+													   XAuthTwitterEngineDelegate,
 													   BitlyDelegate> {
 @public
 	UIBarButtonItem *cancelButton;
@@ -38,8 +39,10 @@
 	NSString *tweet;
 
 @private
-	SA_OAuthTwitterEngine		*twitter;
-	Bitly						*bitly;
+	XAuthTwitterEngine *twitterEngine;
+	Bitly *bitly;
+	NSString *username;
+	NSString *password;
 }
 
 @property (nonatomic, retain) IBOutlet	UIBarButtonItem *cancelButton;

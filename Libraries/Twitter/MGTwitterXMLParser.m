@@ -11,6 +11,7 @@
 
 @implementation MGTwitterXMLParser
 
+@synthesize dateFormatter;
 
 #pragma mark Creation and Destruction
 
@@ -33,6 +34,10 @@ connectionIdentifier:(NSString *)theIdentifier requestType:(MGTwitterRequestType
      responseType:(MGTwitterResponseType)respType
 {
     if (self = [super init]) {
+		
+		self.dateFormatter = [[NSDateFormatter alloc] init];
+		[self.dateFormatter setDateFormat:kMGTwitterDateFormatString];		
+		
         xml = [theXML retain];
         identifier = [theIdentifier retain];
         requestType = reqType;
@@ -57,6 +62,7 @@ connectionIdentifier:(NSString *)theIdentifier requestType:(MGTwitterRequestType
 
 - (void)dealloc
 {
+	[self.dateFormatter release];
     [parser release];
     [parsedObjects release];
     [xml release];
@@ -111,12 +117,10 @@ connectionIdentifier:(NSString *)theIdentifier requestType:(MGTwitterRequestType
         [currentNode setObject:boolNumber forKey:elementName];
     } else if ([elementName isEqualToString:@"created_at"]) {
         // Change date-string into an NSDate.
-		#if !TARGET_OS_IPHONE
-			NSDate *creationDate = [NSDate dateWithNaturalLanguageString:[currentNode objectForKey:elementName]];
-			if (creationDate) {
-				[currentNode setObject:creationDate forKey:elementName];
-			}
-		#endif
+        NSDate *creationDate = [self.dateFormatter dateFromString:[currentNode objectForKey:elementName]]; //[NSDate dateWithNaturalLanguageString:[currentNode objectForKey:elementName]];
+        if (creationDate) {
+            [currentNode setObject:creationDate forKey:elementName];
+        }
     }
 }
 

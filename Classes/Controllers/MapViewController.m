@@ -79,7 +79,7 @@ typedef enum {
 - (IBAction) findLocation:(id)sender {
 	DLog(@"");
 	if (self.mapView.showsUserLocation && self.mapView.userLocation != nil) {
-		[self.mapView resizeRegionToFitAllPins:YES];
+		[self.mapView resizeRegionToFitAllPins:YES animated:YES];
 	}
 	else {
 		[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
@@ -111,7 +111,7 @@ typedef enum {
 						 subtitle:[NSString stringWithFormat:@"%f,%f", self.locationLatitude, self.locationLongitude] 
 						 latitude:self.locationLatitude 
 						longitude:self.locationLongitude];
-	[self.mapView resizeRegionToFitAllPins:NO];
+	[self.mapView resizeRegionToFitAllPins:NO animated:NO];
 }
 
 - (void)dealloc {
@@ -145,7 +145,7 @@ typedef enum {
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
 	[self.loadingView hide];
-	[self.mapView resizeRegionToFitAllPins:YES];
+	[self.mapView resizeRegionToFitAllPins:YES animated:YES];
 }
 
 #pragma mark -

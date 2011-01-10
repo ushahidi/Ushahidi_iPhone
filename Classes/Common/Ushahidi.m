@@ -142,6 +142,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Deployments
 
+- (NSString *) deploymentName {
+	return self.deployment != nil ? self.deployment.name : nil;
+}
+
 - (void) loadDeployment:(Deployment *)theDeployment {
 	DLog(@"%@", [theDeployment domain]);
 	if (self.deployment != nil) {

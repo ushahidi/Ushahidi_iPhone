@@ -20,6 +20,7 @@
 
 #import "ImageViewController.h"
 #import "LoadingViewController.h"
+#import "TwitterViewController.h"
 #import "Email.h"
 
 @interface ImageViewController ()
@@ -38,7 +39,8 @@ typedef enum {
 	NavBarNext
 } NavBar;
 
-@synthesize imageView, image, images, nextPrevious, email, emailButton, saveButton;
+@synthesize twitterViewController, imageView, image, images, nextPrevious, email, pending;
+@synthesize emailButton, saveButton, tweetButton;
 
 - (IBAction) nextPrevious:(id)sender {
 	NSInteger index = [self.images indexOfObject:self.image];
@@ -56,6 +58,11 @@ typedef enum {
 	self.title = [NSString stringWithFormat:@"%d / %d", newIndex + 1, [self.images count]];
 	[self.nextPrevious setEnabled:(newIndex > 0) forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:(newIndex + 1 < [self.images count]) forSegmentAtIndex:NavBarNext];
+}
+
+- (IBAction) tweetPhoto:(id)sender {
+	self.twitterViewController.tweet = [NSMutableString	stringWithFormat:@""];
+	[self presentModalViewController:self.twitterViewController animated:YES];
 }
 
 - (IBAction) sendEmail:(id)sender {
@@ -113,6 +120,7 @@ typedef enum {
 		[self.nextPrevious setEnabled:NO forSegmentAtIndex:NavBarPrevious];
 		[self.nextPrevious setEnabled:NO forSegmentAtIndex:NavBarNext];
 	}
+	self.tweetButton.enabled = !self.pending;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -128,6 +136,7 @@ typedef enum {
 }
 
 - (void)dealloc {
+	[twitterViewController release];
 	[imageView release];
 	[image release];
 	[images	release];
@@ -135,6 +144,7 @@ typedef enum {
 	[email release];
 	[emailButton release];
 	[saveButton release];
+	[tweetButton release];
 	[super dealloc];
 }
 

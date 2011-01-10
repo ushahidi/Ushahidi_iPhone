@@ -62,7 +62,7 @@
 }
 
 - (void) resizeRegionToFitAllPins:(BOOL)animated {
-	[self.mapView resizeRegionToFitAllPins:animated];
+	[self.mapView resizeRegionToFitAllPins:NO animated:animated];
 }
 
 #pragma mark -

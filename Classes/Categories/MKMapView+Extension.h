@@ -45,8 +45,7 @@
 						   pinColor:(MKPinAnnotationColor)pinColor;
 
 - (void) removeAllPins;
-- (void) resizeRegionToFitAllPins;
-- (void) resizeRegionToFitAllPins:(BOOL)animated;
+- (void) resizeRegionToFitAllPins:(BOOL)includeUserLocation animated:(BOOL)animated;
 - (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta;
 - (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta animated:(BOOL)animated;
 

@@ -27,6 +27,7 @@
 #import "SubtitleTableCell.h"
 #import "ImageTableCell.h"
 #import "LoadingViewController.h"
+#import "TwitterViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
 #import "Incident.h"
@@ -42,6 +43,7 @@
 #import "MoviePlayer.h"
 #import "SMS.h"
 #import "Settings.h"
+#import "Ushahidi.h"
 
 @interface ViewIncidentViewController ()
 
@@ -71,8 +73,9 @@ typedef enum {
 	NavBarNext
 } NavBar;
 
-@synthesize mapViewController, imageViewController, newsViewController, nextPrevious, incident, incidents, email, sms, pending;
-@synthesize smsButton, emailButton, moviePlayer;
+@synthesize mapViewController, imageViewController, newsViewController, twitterViewController;
+@synthesize nextPrevious, incident, incidents, email, sms, pending;
+@synthesize smsButton, emailButton, tweetButton, moviePlayer;
 
 #pragma mark -
 #pragma mark Handlers
@@ -95,6 +98,15 @@ typedef enum {
 	[self.tableView reloadData];
 	[self.tableView flashScrollIndicators];
 	[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+- (IBAction) sendTweet:(id)sender {
+	DLog(@"");
+	self.twitterViewController.tweet = [NSString stringWithFormat:@"%@, %@ %@", 
+										[[Ushahidi sharedUshahidi] deploymentName],
+										self.incident.title, 
+										[[[Ushahidi sharedUshahidi] getUrlForIncident:self.incident] absoluteString]];
+	[self presentModalViewController:self.twitterViewController animated:YES];
 }
 
 - (IBAction) sendSMS:(id)sender {
@@ -176,6 +188,7 @@ typedef enum {
 	[self.tableView reloadData];	
 	self.smsButton.enabled = !self.pending && [self.sms canSend];
 	self.emailButton.enabled = [self.email canSend];
+	self.tweetButton.enabled = !self.pending;
 	[[Settings sharedSettings] setLastIncident:self.incident.identifier];
 }
 
@@ -188,12 +201,14 @@ typedef enum {
 	[mapViewController release];
 	[imageViewController release];
 	[newsViewController release];
+	[twitterViewController release];
 	[nextPrevious release];
 	[incident release];
 	[email release];
 	[moviePlayer release];
 	[smsButton release];
 	[emailButton release];
+	[tweetButton release];
     [super dealloc];
 }
 
@@ -427,6 +442,7 @@ typedef enum {
 			self.imageViewController.title = self.incident.location;
 			self.imageViewController.image = self.incident.map;
 			self.imageViewController.images = nil;
+			self.imageViewController.pending = self.pending;
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}
 		else {

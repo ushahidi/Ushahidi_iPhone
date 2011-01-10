@@ -56,6 +56,7 @@ typedef enum {
 	TableSectionDownloadMaps,
 	TableSectionMapZoomLevel,
 	TableSectionBecomeDiscrete,
+	TableSectionShare,
 	TableSectionSupport,
 	TableSectionWebsite,
 	TableSectionVersion
@@ -119,6 +120,7 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Download Maps For Offline Viewing", nil) atSection:TableSectionDownloadMaps];
 	[self setHeader:NSLocalizedString(@"Downloaded Map Zoom Level", nil) atSection:TableSectionMapZoomLevel];
 	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", nil) atSection:TableSectionBecomeDiscrete];
+	[self setHeader:NSLocalizedString(@"Share", nil) atSection:TableSectionShare];
 	[self setHeader:NSLocalizedString(@"Contact", nil) atSection:TableSectionSupport];
 	[self setHeader:NSLocalizedString(@"Website", nil) atSection:TableSectionWebsite];
 	[self setHeader:NSLocalizedString(@"Version", nil) atSection:TableSectionVersion];
@@ -157,7 +159,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 10;
+	return 11;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -200,6 +202,13 @@ typedef enum {
 	else if (indexPath.section == TableSectionSupport) {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		[cell setText:NSLocalizedString(@"Email Ushahidi Support", nil)];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
+		return cell;
+	}
+	else if (indexPath.section == TableSectionShare) {
+		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+		[cell setText:NSLocalizedString(@"Share Ushahidi iOS", nil)];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 		return cell;
@@ -256,6 +265,11 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionWebsite) {
 		[self.alertView showYesNoWithTitle:NSLocalizedString(@"Open In Safari?", nil) andMessage:kUshahidiWebsite];
+	}
+	else if (indexPath.section == TableSectionShare) {
+		NSString *url = @"http://itunes.apple.com/app/ushahidi-ios/id410609585";
+		NSString *message = [NSString stringWithFormat:@"<a href='%@'>%@</a>", url, url];
+		[self.email sendToRecipients:nil withMessage:message withSubject:@"Ushahidi iOS"];
 	}
 }
 

@@ -22,31 +22,39 @@
 #import "BaseViewController.h"
 
 @class Email;
+@class TwitterViewController;
 
 @interface ImageViewController : BaseViewController {
 	
 @public
+	TwitterViewController *twitterViewController;
 	UIImageView *imageView;
 	UISegmentedControl *nextPrevious;
 	UIImage *image;
 	NSArray *images;
 	UIBarButtonItem *emailButton;
 	UIBarButtonItem *saveButton;
+	UIBarButtonItem *tweetButton;
+	BOOL pending; 
 	
 @private
 	Email *email;
 	
 }
 
+@property(nonatomic, retain) IBOutlet TwitterViewController *twitterViewController;
 @property(nonatomic, retain) IBOutlet UIImageView *imageView;
 @property(nonatomic, retain) IBOutlet UISegmentedControl *nextPrevious;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *emailButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *saveButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *tweetButton;
 @property(nonatomic, retain) UIImage *image;
 @property(nonatomic, retain) NSArray *images;
+@property(nonatomic, assign) BOOL pending;
 
 - (IBAction) nextPrevious:(id)sender;
 - (IBAction) sendEmail:(id)sender;
 - (IBAction) savePhoto:(id)sender;
+- (IBAction) tweetPhoto:(id)sender;
 
 @end

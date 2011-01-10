@@ -194,7 +194,7 @@ typedef enum {
 							 pinColor:MKPinAnnotationColorPurple];
 	}
 	if (resizeMap) {
-		[self.mapView resizeRegionToFitAllPins:YES];	
+		[self.mapView resizeRegionToFitAllPins:NO animated:YES];
 	}
 }
 
@@ -643,7 +643,7 @@ typedef enum {
 }
 
 - (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-	[theMapView resizeRegionToFitAllPins:YES];	
+	[theMapView resizeRegionToFitAllPins:NO animated:YES];
 }
 
 #pragma mark -

@@ -189,6 +189,7 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionURL) {
 		self.url = text;
+		DLog(@"REGEX: %d", [text isValidURL]);
 	}
 }
 

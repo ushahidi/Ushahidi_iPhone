@@ -31,6 +31,7 @@
 @class MapViewController;
 @class ImageViewController;
 @class NewsViewController;
+@class TwitterViewController;
 @class Incident;
 @class Email;
 @class SMS;
@@ -46,12 +47,14 @@
 	MapViewController *mapViewController;
 	ImageViewController *imageViewController;
 	NewsViewController *newsViewController;
+	TwitterViewController *twitterViewController;
 	UISegmentedControl *nextPrevious;
 	Incident *incident;
 	NSArray *incidents;
 	BOOL pending; 
 	UIBarButtonItem *smsButton;
 	UIBarButtonItem *emailButton;
+	UIBarButtonItem *tweetButton;
 																
 @private
 	Email *email;
@@ -63,15 +66,18 @@
 @property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
 @property(nonatomic,retain) IBOutlet ImageViewController *imageViewController;
 @property(nonatomic,retain) IBOutlet NewsViewController *newsViewController;
+@property(nonatomic,retain) IBOutlet TwitterViewController *twitterViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;
 @property(nonatomic,retain) Incident *incident;
 @property(nonatomic,retain) NSArray *incidents;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *smsButton;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *emailButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *tweetButton;
 @property(nonatomic,assign) BOOL pending;
 
 - (IBAction) nextPrevious:(id)sender;
 - (IBAction) sendEmail:(id)sender;
 - (IBAction) sendSMS:(id)sender;
+- (IBAction) sendTweet:(id)sender;
 
 @end

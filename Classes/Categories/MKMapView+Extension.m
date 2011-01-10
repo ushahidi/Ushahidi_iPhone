@@ -86,11 +86,7 @@
 	[self regionThatFits:region];
 }
 
-- (void) resizeRegionToFitAllPins {
-	[self resizeRegionToFitAllPins:YES];
-}
-
-- (void) resizeRegionToFitAllPins:(BOOL)animated {
+- (void) resizeRegionToFitAllPins:(BOOL)includeUserLocation animated:(BOOL)animated {
 	if ([self.annotations count] == 1) {
 		NSObject<MKAnnotation> *annotation = [self.annotations objectAtIndex:0];
 		
@@ -110,10 +106,18 @@
 		bottomRightCoordinate.longitude = -180;
 		
 		for (NSObject<MKAnnotation> *annotation in self.annotations) {
-			topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude);
-			topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude);
-			bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude);
-			bottomRightCoordinate.latitude = fmin(bottomRightCoordinate.latitude, annotation.coordinate.latitude);
+			if (includeUserLocation && [annotation isKindOfClass:MKUserLocation.class]) {
+				topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude);
+				topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude);
+				bottomRightCoordinate.latitude = fmin(bottomRightCoordinate.latitude, annotation.coordinate.latitude);
+				bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude);
+			}
+			else if (includeUserLocation == NO && [annotation isKindOfClass:MKUserLocation.class] == NO) {
+				topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude);
+				topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude);
+				bottomRightCoordinate.latitude = fmin(bottomRightCoordinate.latitude, annotation.coordinate.latitude);
+				bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude);
+			}
 		}
 		
 		MKCoordinateRegion region;

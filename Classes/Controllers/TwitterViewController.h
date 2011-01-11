@@ -22,24 +22,23 @@
 #import "TableViewController.h"
 #import "TextViewTableCell.h"
 #import "TextFieldTableCell.h"
-#import "XAuthTwitterEngineDelegate.h"
 #import "Bitly.h"
+#import "MGTwitterEngineDelegate.h"
 
-@class XAuthTwitterEngine;
+@class MGTwitterEngine;
 
 @interface TwitterViewController : TableViewController<TextViewTableCellDelegate, 
 													   TextFieldTableCellDelegate,
-													   XAuthTwitterEngineDelegate,
+													   MGTwitterEngineDelegate,
 													   BitlyDelegate> {
 @public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
 	UIBarButtonItem *logoutButton;
-	UIBarButtonItem *userButton;
 	NSString *tweet;
 
 @private
-	XAuthTwitterEngine *twitterEngine;
+	MGTwitterEngine *twitter;
 	Bitly *bitly;
 	NSString *username;
 	NSString *password;
@@ -48,13 +47,11 @@
 @property (nonatomic, retain) IBOutlet	UIBarButtonItem *cancelButton;
 @property (nonatomic, retain) IBOutlet	UIBarButtonItem *doneButton;
 @property (nonatomic, retain) IBOutlet	UIBarButtonItem *logoutButton;
-@property (nonatomic, retain) IBOutlet	UIBarButtonItem *userButton;
 @property (nonatomic, retain)			NSString *tweet;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;
 - (IBAction) shorten:(id)sender;
-- (IBAction) user:(id)sender; 
 - (IBAction) logout:(id)sender; 
 
 @end

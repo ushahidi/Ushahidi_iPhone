@@ -19,8 +19,6 @@
  *****************************************************************************/
 
 #import "TwitterViewController.h"
-#import "XAuthTwitterEngineDelegate.h"
-#import "XAuthTwitterEngine.h"
 #import "LoadingViewController.h"
 #import "TableCellFactory.h"
 #import "AlertView.h"
@@ -28,10 +26,12 @@
 #import "TextTableCell.h"
 #import "TextFieldTableCell.h"
 #import "NSString+Extension.h"
+#import "MGTwitterEngine.h"
+#import "OAToken.h"
 
 @interface TwitterViewController ()
 
-@property (nonatomic, retain) XAuthTwitterEngine *twitter;
+@property (nonatomic, retain) MGTwitterEngine *twitter;
 @property (nonatomic, retain) Bitly *bitly;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *password;
@@ -43,16 +43,17 @@
 
 @implementation TwitterViewController
 
-@synthesize cancelButton, doneButton, logoutButton, userButton;
+@synthesize cancelButton, doneButton, logoutButton;
 @synthesize tweet, twitter, bitly, username, password;
 
-#define kBitlyLogin @"BitlyLogin"
-#define kBitlyApiKey @"BitlyApiKey"
-#define kTwitterKey @"TwitterKey"
-#define kTwitterSecret @"TwitterSecret"
-#define kTwitterUsername @"TwitterUsername"
-#define kTwitterPassword @"TwitterPassword"
-#define kTwitterOAuth @"TwitterOAuth"
+#define kBitlyLogin			@"BitlyLogin"
+#define kBitlyApiKey		@"BitlyApiKey"
+#define kTwitterKey			@"TwitterKey"
+#define kTwitterSecret		@"TwitterSecret"
+#define kTwitterUsername	@"TwitterUsername"
+#define kTwitterPassword	@"TwitterPassword"
+#define kTwitterOAuthKey	@"TwitterOAuthKey"
+#define kTwitterOAuthSecret	@"TwitterOAuthSecret"
 
 NSInteger const kTwitterLimit = 140;
 
@@ -75,12 +76,14 @@ typedef enum {
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 	[self.tableView reloadData];
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)]; 
-	if ([self cachedTwitterOAuthDataForUsername:self.username] != nil) {
+	if (self.twitter.accessToken != nil) {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)]; 
 		[self.twitter sendUpdate:self.tweet];
 	}
 	else {
-		[self.twitter exchangeAccessTokenForUsername:self.username password:self.password];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Authenticating...", nil)];
+		[self.twitter setUsername:self.username];
+		[self.twitter getXAuthAccessTokenForUsername:self.username password:self.password];
 	}
 }
 
@@ -95,26 +98,20 @@ typedef enum {
 	}
 }  
 
-- (IBAction) user:(id)sender {
-	DLog(@"");
-	NSString *twitterUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"TwitterUsername"];
-	if ([NSString isNilOrEmpty:twitterUsername]) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Twitter Account", nil) andMessage:NSLocalizedString(@"Not Logged In", nil)];
-	}
-	else {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Twitter Account", nil) andMessage:twitterUsername];
-	}
-}
-
 - (IBAction) logout:(id)sender {
 	DLog(@"");
 	[self.loadingView showWithMessage:NSLocalizedString(@"Logout...", nil)]; 
 	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterUsername];
 	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterPassword];
-	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterOAuth];
+	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterOAuthKey];
+	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterOAuthSecret];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+	self.username = nil;
+	self.password = nil;
 	self.logoutButton.enabled = NO;
-	self.userButton.title = nil;
+	self.doneButton.enabled = NO;
+	self.twitter.accessToken = nil;
+	[self.tableView reloadData];
 	[self.loadingView hideAfterDelay:1.0];
 }
 
@@ -139,9 +136,22 @@ typedef enum {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	//Twitter API
-	self.twitter = [[XAuthTwitterEngine alloc] initXAuthWithDelegate:self];
-	self.twitter.consumerKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterKey];
-	self.twitter.consumerSecret = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterSecret];
+	self.twitter = [[MGTwitterEngine alloc] initWithDelegate:self];
+	
+	NSString *twitterKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterKey];
+	NSString *twitterSecret = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterSecret];
+	DLog(@"Twitter key:%@ secret:%@", twitterKey, twitterSecret);
+	[self.twitter setConsumerKey:twitterKey secret:twitterSecret];
+	
+	NSString *twitterOAuthKey = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuthKey];
+	NSString *twitterOAuthSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuthSecret];
+	DLog(@"OAuth key:%@ secret:%@", twitterOAuthKey, twitterOAuthSecret);
+	if ([NSString isNilOrEmpty:twitterOAuthKey] == NO && [NSString isNilOrEmpty:twitterOAuthSecret]) {
+		self.twitter.accessToken = [[OAToken alloc] initWithKey:twitterOAuthKey secret:twitterOAuthSecret];
+	}
+	else {
+		self.twitter.accessToken = nil;
+	}
 	//Bit.ly API
 	self.bitly = [[Bitly alloc] init];
 	self.bitly.login = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyLogin];
@@ -154,19 +164,17 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[self.tableView reloadData];
-	self.doneButton.enabled = [self hasRequiredInputs];
-	[self updateCharactersLeftLabel:[self.tweet  length]];
-	[self.tableView reloadData];
-	NSString *twitterUsername = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterUsername];
-	if ([NSString isNilOrEmpty:twitterUsername]) {
+	self.username = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterUsername];
+	self.password = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterPassword];
+	if ([NSString isNilOrEmpty:self.username] || [NSString isNilOrEmpty:self.password]) {
 		self.logoutButton.enabled = NO;
-		self.userButton.title = nil;
 	}
 	else {
 		self.logoutButton.enabled = YES;
-		self.userButton.title = twitterUsername;
 	}
+	self.doneButton.enabled = [self hasRequiredInputs];
+	[self updateCharactersLeftLabel:[self.tweet length]];
+	[self.tableView reloadData];
 	[self.loadingView hide];
 }
 
@@ -179,7 +187,6 @@ typedef enum {
 	[cancelButton release];
 	[doneButton release];
 	[logoutButton release];
-	[userButton release];
 	[twitter release];
 	[bitly release];
 	[tweet release];
@@ -277,6 +284,7 @@ typedef enum {
 	else if (indexPath.section == TableSectionPassword) {
 		self.password = text;
 	}
+	self.twitter.accessToken = nil;
 	self.doneButton.enabled = [self hasRequiredInputs];
 }
 
@@ -287,33 +295,20 @@ typedef enum {
 	else if (indexPath.section == TableSectionPassword) {
 		self.password = text;
 	}
+	self.twitter.accessToken = nil;
 	self.doneButton.enabled = [self hasRequiredInputs];
-}
-
-#pragma mark -
-#pragma mark SA_OAuthTwitterEngineDelegate
-
-- (void) storeCachedTwitterOAuthData:(NSString *)data forUsername:(NSString *)username {
-	DLog(@"OAUTH: %@", data);
-	[[NSUserDefaults standardUserDefaults] setObject:data forKey:@"TwitterOAuth"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	[self.twitter sendUpdate:self.tweet];
-}
-
-- (NSString *) cachedTwitterOAuthDataForUsername:(NSString *)username {
-	return [[NSUserDefaults standardUserDefaults] objectForKey:@"TwitterOAuth"];
 }
 
 #pragma mark -
 #pragma mark BitlyDelegate
 
 - (void) urlShortened:(Bitly *)bitly original:(NSString *)original shortened:(NSString *)shortened error:(NSError *)error {
-	DLog(@"original: %@", original);
-	DLog(@"shortened: %@", shortened);
+	DLog(@"original: %@ shortened: %@", original, shortened);
 	[self.loadingView hide];
 	if (error) {
 		DLog(@"error: %@", [error localizedDescription]);
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Bitly Error", nil) andMessage:[error localizedDescription]];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Bitly Error", nil) 
+							 andMessage:[error localizedDescription]];
 	}
 	else if (shortened) {
 		self.tweet = [self.tweet stringByReplacingOccurrencesOfString:original
@@ -323,39 +318,32 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark XAuthTwitterEngineDelegate methods
-
-- (void) storeCachedTwitterXAuthAccessTokenString:(NSString *)tokenString forUsername:(NSString *)username {
-	DLog(@"Access token string returned: %@", tokenString);
-	[[NSUserDefaults standardUserDefaults] setObject:tokenString forKey:kTwitterOAuth];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	self.doneButton.enabled = YES;
-}
-
-- (NSString *) cachedTwitterXAuthAccessTokenStringForUsername:(NSString *)username {
-	NSString *accessTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuth];
-	DLog(@"About to return access token string: %@", accessTokenString);
-	return accessTokenString;
-}
-
-- (void) twitterXAuthConnectionDidFailWithError:(NSError *)error {
-	DLog(@"Error: %@", error);
-	[self.loadingView hide];
-	[self.alertView showOkWithTitle:NSLocalizedString(@"Twitter Error", nil) 
-						 andMessage:NSLocalizedString(@"Please check your username and password and try again.", nil)];
-}
-
-#pragma mark -
 #pragma mark MGTwitterEngineDelegate methods
 
-- (void)requestSucceeded:(NSString *)connectionIdentifier {
-	DLog(@"Twitter request succeeded: %@", connectionIdentifier);
+- (void)accessTokenReceived:(OAToken *)token forRequest:(NSString *)connectionIdentifier {
+	DLog(@"key:%@ secret:%@", token.key, token.secret);
+	[[NSUserDefaults standardUserDefaults] setObject:token.key forKey:kTwitterOAuthKey];
+	[[NSUserDefaults standardUserDefaults] setObject:token.secret forKey:kTwitterOAuthSecret];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	[self.twitter setAccessToken:token];
+	
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)];
+	[self.twitter sendUpdate:self.tweet];
+}
+
+- (void)statusesReceived:(NSArray *)statuses forRequest:(NSString *)connectionIdentifier {
+	DLog(@"%@ : %@", connectionIdentifier, statuses);
 	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
 	[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
 }
 
+- (void)requestSucceeded:(NSString *)connectionIdentifier {
+	DLog(@"%@", connectionIdentifier);
+}
+
 - (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error {
-	DLog(@"Twitter request failed: %@ with error:%@", connectionIdentifier, error);
+	DLog(@"%@ : %@", connectionIdentifier, error);
 	[self.loadingView hide];
 	if ([[error domain] isEqualToString: @"HTTP"]) {
 		switch ([error code]) {

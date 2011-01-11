@@ -111,16 +111,6 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="618986239"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="675261810">
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<reference key="IBUIToolbar" ref="618986239"/>
-								<int key="IBUISystemItemIdentifier">5</int>
-							</object>
-							<object class="IBUIBarButtonItem" id="796912200">
-								<string type="base64-UTF8" key="IBUITitle">IA</string>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<reference key="IBUIToolbar" ref="618986239"/>
-							</object>
 							<object class="IBUIBarButtonItem" id="871149365">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="618986239"/>
@@ -251,22 +241,6 @@
 					</object>
 					<int key="connectionID">27</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">userButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="796912200"/>
-					</object>
-					<int key="connectionID">28</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">user:</string>
-						<reference key="source" ref="796912200"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">29</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -340,8 +314,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="282459423"/>
 							<reference ref="871149365"/>
-							<reference ref="796912200"/>
-							<reference ref="675261810"/>
 							<reference ref="630391893"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
@@ -354,16 +326,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
 						<reference key="object" ref="871149365"/>
-						<reference key="parent" ref="618986239"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">23</int>
-						<reference key="object" ref="796912200"/>
-						<reference key="parent" ref="618986239"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">24</int>
-						<reference key="object" ref="675261810"/>
 						<reference key="parent" ref="618986239"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -384,8 +346,6 @@
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
-					<string>23.IBPluginDependency</string>
-					<string>24.IBPluginDependency</string>
 					<string>25.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
@@ -398,8 +358,6 @@
 					<string>TwitterViewController</string>
 					<string>UIResponder</string>
 					<string>{{2029, -194}, {768, 1024}}</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -576,11 +534,9 @@
 							<string>cancelButton</string>
 							<string>doneButton</string>
 							<string>logoutButton</string>
-							<string>userButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
@@ -593,7 +549,6 @@
 							<string>cancelButton</string>
 							<string>doneButton</string>
 							<string>logoutButton</string>
-							<string>userButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -607,10 +562,6 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">logoutButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">userButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 						</object>

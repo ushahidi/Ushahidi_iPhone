@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1"/>
+			<integer value="21"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -108,16 +108,6 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">logout.png</string>
 								</object>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIToolbar" ref="181756334"/>
-							</object>
-							<object class="IBUIBarButtonItem" id="563293126">
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIToolbar" ref="181756334"/>
-								<int key="IBUISystemItemIdentifier">5</int>
-							</object>
-							<object class="IBUIBarButtonItem" id="890083610">
-								<string type="base64-UTF8" key="IBUITitle">IA</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIToolbar" ref="181756334"/>
 							</object>
@@ -259,22 +249,6 @@
 					</object>
 					<int key="connectionID">31</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">userButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="890083610"/>
-					</object>
-					<int key="connectionID">32</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">user:</string>
-						<reference key="source" ref="890083610"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">33</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -291,8 +265,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="825874395"/>
-							<reference ref="181756334"/>
 							<reference ref="888655836"/>
+							<reference ref="181756334"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -346,17 +320,15 @@
 						<reference key="object" ref="181756334"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="932476474"/>
-							<reference ref="457688211"/>
-							<reference ref="890083610"/>
-							<reference ref="563293126"/>
 							<reference ref="435980758"/>
+							<reference ref="457688211"/>
+							<reference ref="932476474"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">22</int>
-						<reference key="object" ref="932476474"/>
+						<int key="objectID">29</int>
+						<reference key="object" ref="435980758"/>
 						<reference key="parent" ref="181756334"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -365,18 +337,8 @@
 						<reference key="parent" ref="181756334"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">26</int>
-						<reference key="object" ref="890083610"/>
-						<reference key="parent" ref="181756334"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">27</int>
-						<reference key="object" ref="563293126"/>
-						<reference key="parent" ref="181756334"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">29</int>
-						<reference key="object" ref="435980758"/>
+						<int key="objectID">22</int>
+						<reference key="object" ref="932476474"/>
 						<reference key="parent" ref="181756334"/>
 					</object>
 				</object>
@@ -393,8 +355,6 @@
 					<string>21.IBViewBoundsToFrameTransform</string>
 					<string>22.IBPluginDependency</string>
 					<string>24.IBPluginDependency</string>
-					<string>26.IBPluginDependency</string>
-					<string>27.IBPluginDependency</string>
 					<string>29.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
@@ -413,8 +373,6 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+UAAA</bytes>
 					</object>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -592,11 +550,9 @@
 							<string>cancelButton</string>
 							<string>doneButton</string>
 							<string>logoutButton</string>
-							<string>userButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
@@ -609,7 +565,6 @@
 							<string>cancelButton</string>
 							<string>doneButton</string>
 							<string>logoutButton</string>
-							<string>userButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -623,10 +578,6 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">logoutButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">userButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 						</object>

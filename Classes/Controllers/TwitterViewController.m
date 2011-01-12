@@ -327,7 +327,6 @@ typedef enum {
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 	[self.twitter setAccessToken:token];
-	
 	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)];
 	[self.twitter sendUpdate:self.tweet];
 }

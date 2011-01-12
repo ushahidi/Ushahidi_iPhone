@@ -102,10 +102,15 @@ typedef enum {
 
 - (IBAction) sendTweet:(id)sender {
 	DLog(@"");
-	self.twitterViewController.tweet = [NSString stringWithFormat:@"%@, %@ %@", 
-										[[Ushahidi sharedUshahidi] deploymentName],
-										self.incident.title, 
-										[[[Ushahidi sharedUshahidi] getUrlForIncident:self.incident] absoluteString]];
+	NSMutableString *message = [NSMutableString string];
+	if (self.pending) {
+		[message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
+	}
+	else {
+		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
+		[message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
+	}
+	self.twitterViewController.tweet = message;
 	[self presentModalViewController:self.twitterViewController animated:YES];
 }
 
@@ -113,11 +118,11 @@ typedef enum {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
 	if (self.pending) {
-		[message appendFormat:@"%@", self.incident.title];
+		[message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
 	}
 	else {
 		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
-		[message appendFormat:@"%@ %@", self.incident.title, [link absoluteString]];
+		[message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
 	}
 	[self.sms sendToRecipients:nil withMessage:message];
 }

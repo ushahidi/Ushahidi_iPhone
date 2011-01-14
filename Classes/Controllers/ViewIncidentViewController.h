@@ -26,6 +26,7 @@
 #import "Photo.h"
 #import "SMS.h"
 #import "Email.h"
+#import "Bitly.h"
 
 @class WebViewController;
 @class MapViewController;
@@ -35,12 +36,14 @@
 @class Incident;
 @class Email;
 @class SMS;
+@class Bitly;
 @class MoviePlayer;
 
 @interface ViewIncidentViewController : TableViewController<UshahidiDelegate, 
 															UIWebViewDelegate,
 															SMSDelegate,
 															EmailDelegate,
+															BitlyDelegate,
 															MapTableCellDelegate> {
 	
 @public
@@ -59,6 +62,7 @@
 @private
 	Email *email;
 	SMS *sms;
+	Bitly *bitly;
 	MoviePlayer *moviePlayer;
 																
 }

@@ -42,6 +42,7 @@
 #import "NSString+Extension.h"
 #import "MoviePlayer.h"
 #import "SMS.h"
+#import "Bitly.h"
 #import "Settings.h"
 #import "Ushahidi.h"
 
@@ -49,11 +50,15 @@
 
 @property(nonatomic,retain) Email *email;
 @property(nonatomic,retain) SMS *sms;
+@property(nonatomic,retain) Bitly *bitly;
 @property(nonatomic,retain) MoviePlayer *moviePlayer;
 
 @end
 
 @implementation ViewIncidentViewController
+
+#define kBitlyLogin			@"BitlyLogin"
+#define kBitlyApiKey		@"BitlyApiKey"
 
 typedef enum {
 	TableSectionErrors,
@@ -75,7 +80,7 @@ typedef enum {
 
 @synthesize mapViewController, imageViewController, newsViewController, twitterViewController;
 @synthesize nextPrevious, incident, incidents, email, sms, pending;
-@synthesize smsButton, emailButton, tweetButton, moviePlayer;
+@synthesize smsButton, emailButton, tweetButton, moviePlayer, bitly;
 
 #pragma mark -
 #pragma mark Handlers
@@ -116,15 +121,15 @@ typedef enum {
 
 - (IBAction) sendSMS:(id)sender {
 	DLog(@"");
-	NSMutableString *message = [NSMutableString string];
 	if (self.pending) {
-		[message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
+		NSString *message = [NSString stringWithFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
+		[self.sms sendToRecipients:nil withMessage:message];
 	}
 	else {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Shortening...", nil)];
 		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
-		[message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
+		[self.bitly shortenUrl:[link absoluteString] forDelegate:self];
 	}
-	[self.sms sendToRecipients:nil withMessage:message];
 }
 
 - (IBAction) sendEmail:(id)sender {
@@ -169,6 +174,10 @@ typedef enum {
 	self.email = [[Email alloc] initWithController:self];
 	self.sms = [[SMS alloc] initWithController:self];
 	self.moviePlayer = [[MoviePlayer alloc] initWithController:self];
+	self.bitly = [[Bitly alloc] init];
+	self.bitly.login = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyLogin];
+	self.bitly.apiKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyApiKey];
+	
 	[self setHeader:NSLocalizedString(@"Errors", nil) atSection:TableSectionErrors];
 	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
 	[self setHeader:NSLocalizedString(@"Verified", nil) atSection:TableSectionVerified];
@@ -210,6 +219,7 @@ typedef enum {
 	[nextPrevious release];
 	[incident release];
 	[email release];
+	[bitly release];
 	[moviePlayer release];
 	[smsButton release];
 	[emailButton release];
@@ -495,8 +505,8 @@ typedef enum {
 
 - (void) smsSent:(SMS *)theSms {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"SMS Sent", nil)];
-	[self.loadingView hideAfterDelay:2.0];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
+	[self.loadingView hideAfterDelay:2.5];
 }
 
 - (void) smsCancelled:(SMS *)theSms {
@@ -514,8 +524,8 @@ typedef enum {
 
 - (void) emailSent:(Email *)email {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Email Sent", nil)];
-	[self.loadingView hideAfterDelay:2.0];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
+	[self.loadingView hideAfterDelay:2.5];
 }
 
 - (void) emailCancelled:(Email *)email {
@@ -526,6 +536,17 @@ typedef enum {
 	DLog(@"");
 	[self.alertView showOkWithTitle:NSLocalizedString(@"Email Failed", nil) 
 						 andMessage:NSLocalizedString(@"Unable To Send Email", nil)];
+}
+
+#pragma mark -
+#pragma mark BitlyDelegate
+
+- (void) urlShortened:(Bitly *)bitly original:(NSString *)original shortened:(NSString *)shortened error:(NSError *)error {
+	DLog(@"original: %@ shortened: %@", original, shortened);
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)];
+	NSString *link = [NSString isNilOrEmpty:shortened] ? original : shortened;
+	NSString *message = [NSString stringWithFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, link];
+	[self.sms sendToRecipients:nil withMessage:message];
 }
 
 @end

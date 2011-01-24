@@ -18,13 +18,23 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "ASIHTTPRequest+Extension.h"
+#import "Incident.h"
+#import "Ushahidi.h"
+#import "Photo.h"
 
-@interface NSDictionary (Extension)
+@implementation ASIHTTPRequest (Extension)
 
-- (NSString *) stringForKey:(NSString *)key;
-- (NSInteger) intForKey:(NSString *)key;
-- (BOOL) boolForKey:(NSString *)key;
-- (NSDate *) dateForKey:(NSString *)key;
+- (id<UshahidiDelegate>) getDelegate {
+	return [self.userInfo objectForKey:@"delegate"];
+}
+
+- (Incident *) getIncident {
+	return [self.userInfo objectForKey:@"incident"];
+}
+
+- (Photo *) getPhoto {
+	return [self.userInfo objectForKey:@"photo"];
+}
 
 @end

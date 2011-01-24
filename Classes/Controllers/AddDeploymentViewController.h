@@ -20,23 +20,29 @@
 
 #import <UIKit/UIKit.h>
 #import "TableViewController.h"
-#import "TextFieldTableCell.h"
+#import "Ushahidi.h"
+#import "MapDialog.h"
 
-@interface AddDeploymentViewController : TableViewController<TextFieldTableCellDelegate> {
+@interface AddDeploymentViewController : TableViewController<UshahidiDelegate, MapDialogDelegate> {
 	
 @public
 	UIBarButtonItem *cancelButton;
-	UIBarButtonItem *doneButton;
+	UIBarButtonItem *refreshButton;
+	UISegmentedControl *tableSort;
 	
 @private
 	NSString *name;
 	NSString *url;
+	MapDialog *mapDialog;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic, retain) IBOutlet UISegmentedControl *tableSort;
 
 - (IBAction) cancel:(id)sender;
-- (IBAction) done:(id)sender;
+- (IBAction) add:(id)sender;
+- (IBAction) refresh:(id)sender;
+- (IBAction) tableSortChanged:(id)sender;
 
 @end

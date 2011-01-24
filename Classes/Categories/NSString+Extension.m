@@ -77,4 +77,29 @@
 	return filePath;
 }
 
+- (NSString *) appendUrlStringWithFormat:(NSString *)format, ... {
+	va_list arguments;
+    va_start(arguments, format);
+	
+    NSString *formattedString = [[NSString alloc] initWithFormat:format arguments:arguments];
+    NSURL *domainURL = [NSURL URLWithString:self];
+	NSURL *fullURL = [NSURL URLWithString:formattedString relativeToURL:domainURL];
+	[formattedString release];
+	
+	va_end(arguments);
+	
+	return [fullURL absoluteString];
+}
+
++ (NSString *) stringByEscapingCharacters:(NSString *)string {
+	if (string != nil) {
+		NSString *escaped =[string stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		escaped = [escaped stringByReplacingOccurrencesOfString:@"&auml;" withString:@"Ä"];
+		escaped = [escaped stringByReplacingOccurrencesOfString:@"&ouml;" withString:@"Ö"];
+		escaped = [escaped stringByReplacingOccurrencesOfString:@"&eacute;" withString:@"É"];
+		return escaped;
+	}
+	return nil;
+}
+
 @end

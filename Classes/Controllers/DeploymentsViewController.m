@@ -28,7 +28,7 @@
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
-#import "Deployment.h"b
+#import "Deployment.h"
 
 @interface DeploymentsViewController ()
 
@@ -64,10 +64,8 @@ typedef enum {
 
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
-	self.tableView.editing = NO;
-	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-	[[Ushahidi sharedUshahidi] getDeploymentsForDelegate:self];
+	[self.loadingView performSelector:@selector(hide) withObject:nil afterDelay:0.6]; 
 }
 
 - (void) info:(id)sender {
@@ -97,7 +95,7 @@ typedef enum {
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiDarkTan];
 	self.evenRowColor = [UIColor ushahidiLiteBrown];
-	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search deployments...", nil)];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
 	
 	UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [infoButton addTarget:self action:@selector(info:) forControlEvents:UIControlEventTouchUpInside];
@@ -112,7 +110,7 @@ typedef enum {
 	if (self.willBePushed || self.modalViewController != nil) {
 		SEL sorter = self.tableSort.selectedSegmentIndex == TableSortDate
 			? @selector(compareByDate:) : @selector(compareByName:);
-		NSArray *deployments = [[[Ushahidi sharedUshahidi] getDeploymentsForDelegate:self] sortedArrayUsingSelector:sorter];
+		NSArray *deployments = [[Ushahidi sharedUshahidi] getDeploymentsUsingSorter:sorter];
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:deployments];
 		[self.filteredRows removeAllObjects];
@@ -132,7 +130,7 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Info button to view app settings, the Plus button to add a deployment or the Edit button to remove a deployment.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Info button to view app settings, the Plus button to add a map or the Edit button to remove a map.", nil)];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -204,12 +202,12 @@ typedef enum {
 			}
 			else {
 				[self.alertView showOkWithTitle:NSLocalizedString(@"Delete Error", nil) 
-									 andMessage:NSLocalizedString(@"There was a problem deleting the deployment.", nil)];	
+									 andMessage:NSLocalizedString(@"There was a problem deleting the map.", nil)];	
 			}
 		}
 		@catch (NSException * e) {
 			[self.alertView showOkWithTitle:NSLocalizedString(@"Delete Error", nil) 
-								 andMessage:NSLocalizedString(@"There was a problem deleting the deployment.", nil)];
+								 andMessage:NSLocalizedString(@"There was a problem deleting the map.", nil)];
 		}
 	}	
 }

@@ -20,11 +20,28 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (Extension)
+@protocol MapDialogDelegate;
 
-- (NSString *) stringForKey:(NSString *)key;
-- (NSInteger) intForKey:(NSString *)key;
-- (BOOL) boolForKey:(NSString *)key;
-- (NSDate *) dateForKey:(NSString *)key;
+@interface MapDialog : NSObject<UIAlertViewDelegate, UITextFieldDelegate> {
+	
+@private
+	id<MapDialogDelegate> delegate;
+	NSString *name;
+	NSString *url;
+	UITextField *nameField;
+	UITextField *urlField;
+}
+
+- (id) initForDelegate:(id<MapDialogDelegate>)delegate;
+- (void) showWithTitle:(NSString *)title name:(NSString *)name url:(NSString *)url;
+
+@end 
+
+@protocol MapDialogDelegate <NSObject>
+
+@optional
+
+- (void) mapDialogReturned:(MapDialog *)mapDialog name:(NSString *)name url:(NSString *)url;
+- (void) mapDialogCancelled:(MapDialog *)mapDialog;
 
 @end

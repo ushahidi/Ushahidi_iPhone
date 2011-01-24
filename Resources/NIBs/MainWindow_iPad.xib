@@ -96,9 +96,9 @@
 			</object>
 			<object class="IBUIViewController" id="417995747">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="837724815">
-					<string key="IBUITitle">Ushahidi</string>
+					<string key="IBUITitle">Ushahidi Maps</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="831220183">
-						<string key="IBUITitle">Ushahidi</string>
+						<string key="IBUITitle">Maps</string>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -118,7 +118,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="237163725">
-				<string key="IBUITitle">Add Instance</string>
+				<string key="IBUITitle">Add Map</string>
 				<string key="IBUINibName">AddDeploymentViewController_iPad</string>
 				<reference key="IBUISimulatedTopBarMetrics" ref="1010562029"/>
 				<reference key="IBUISimulatedStatusBarMetrics" ref="352775594"/>
@@ -1314,11 +1314,15 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>add:</string>
 							<string>cancel:</string>
-							<string>done:</string>
+							<string>refresh:</string>
+							<string>tableSortChanged:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -1327,17 +1331,27 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>add:</string>
 							<string>cancel:</string>
-							<string>done:</string>
+							<string>refresh:</string>
+							<string>tableSortChanged:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">add:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">cancel:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">done:</string>
+								<string key="name">refresh:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">tableSortChanged:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -1347,12 +1361,14 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
-							<string>doneButton</string>
+							<string>refreshButton</string>
+							<string>tableSort</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
+							<string>UISegmentedControl</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1360,7 +1376,8 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
-							<string>doneButton</string>
+							<string>refreshButton</string>
+							<string>tableSort</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1369,8 +1386,12 @@
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">doneButton</string>
+								<string key="name">refreshButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tableSort</string>
+								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 						</object>
 					</object>
@@ -1808,6 +1829,7 @@
 							<string>imageView</string>
 							<string>nextPrevious</string>
 							<string>saveButton</string>
+							<string>tweetButton</string>
 							<string>twitterViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1815,6 +1837,7 @@
 							<string>UIBarButtonItem</string>
 							<string>UIImageView</string>
 							<string>UISegmentedControl</string>
+							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>TwitterViewController</string>
 						</object>
@@ -1827,6 +1850,7 @@
 							<string>imageView</string>
 							<string>nextPrevious</string>
 							<string>saveButton</string>
+							<string>tweetButton</string>
 							<string>twitterViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -1845,6 +1869,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">saveButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tweetButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -2497,9 +2525,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancel:</string>
 							<string>done:</string>
+							<string>logout:</string>
+							<string>shorten:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -2510,6 +2542,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancel:</string>
 							<string>done:</string>
+							<string>logout:</string>
+							<string>shorten:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2521,6 +2555,14 @@
 								<string key="name">done:</string>
 								<string key="candidateClassName">id</string>
 							</object>
+							<object class="IBActionInfo">
+								<string key="name">logout:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">shorten:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -2529,9 +2571,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>doneButton</string>
+							<string>logoutButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 						</object>
@@ -2542,6 +2586,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
 							<string>doneButton</string>
+							<string>logoutButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2551,6 +2596,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">doneButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">logoutButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 						</object>
@@ -2626,6 +2675,7 @@
 							<string>newsViewController</string>
 							<string>nextPrevious</string>
 							<string>smsButton</string>
+							<string>tweetButton</string>
 							<string>twitterViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -2635,6 +2685,7 @@
 							<string>MapViewController</string>
 							<string>NewsViewController</string>
 							<string>UISegmentedControl</string>
+							<string>UIBarButtonItem</string>
 							<string>UIBarButtonItem</string>
 							<string>TwitterViewController</string>
 						</object>
@@ -2649,6 +2700,7 @@
 							<string>newsViewController</string>
 							<string>nextPrevious</string>
 							<string>smsButton</string>
+							<string>tweetButton</string>
 							<string>twitterViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -2675,6 +2727,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">smsButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">tweetButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">

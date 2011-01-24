@@ -26,33 +26,30 @@
 #import "Ushahidi.h"
 #import "UIColor+Extension.h"
 #import "NSString+Extension.h"
+#import "Deployment.h"
+#import "DeploymentTableCell.h"
 
 typedef enum {
-	TableSectionName,
-	TableSectionURL
-} TableSection;
+	TableSortDate,
+	TableSortName
+} TableSort;
 
 @interface AddDeploymentViewController ()
 
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *url;
+@property(nonatomic, retain) MapDialog *mapDialog;
 
-- (BOOL) hasValidInputs;
 - (void) dismissModalView;
 
 @end
 
 @implementation AddDeploymentViewController
 
-@synthesize cancelButton, doneButton, name, url;
+@synthesize cancelButton, refreshButton, tableSort, name, url, mapDialog;
 
 #pragma mark -
 #pragma mark Private
-
-- (BOOL) hasValidInputs {
-	return	self.name != nil && [self.name length] > 0 &&
-			self.url != nil && [self.url isValidURL];
-}
 
 - (void) dismissModalView {
 	[self.loadingView hide];
@@ -61,6 +58,22 @@ typedef enum {
 
 #pragma mark -
 #pragma mark Handlers
+
+- (IBAction) add:(id)sender {
+	DLog(@"");
+	self.name = nil;
+	self.url = nil;
+	[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Information", nil) 
+							 name:nil 
+							  url:nil];
+}
+
+- (IBAction) refresh:(id)sender {
+	DLog(@"");
+	self.refreshButton.enabled = NO;
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+	[[Ushahidi sharedUshahidi] getMapsForDelegate:self refresh:YES];
+}
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
@@ -73,35 +86,16 @@ typedef enum {
 	}
 }
 
-- (IBAction) done:(id)sender {
-	DLog(@"done");
-	BOOL hasName = self.name != nil && [self.name length] > 0;
-	BOOL validURL = self.url != nil && [self.url isValidURL];
-	if (hasName == NO && validURL == NO) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", nil) 
-							 andMessage:NSLocalizedString(@"Name and URL are required fields", nil)];
+- (IBAction) tableSortChanged:(id)sender {
+	DLog(@"");
+	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
+	if (segmentControl.selectedSegmentIndex == TableSortDate) {
+		DLog(@"TableSortDate");
 	}
-	else if (hasName == NO) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Field", nil) 
-							 andMessage:NSLocalizedString(@"Name is a required field", nil)];
+	else if (segmentControl.selectedSegmentIndex == TableSortName) {
+		DLog(@"TableSortTitle");
 	}
-	else if (validURL == NO) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Field", nil) 
-							 andMessage:NSLocalizedString(@"URL is a required field", nil)];
-	}
-	else {
-		[self.view endEditing:YES];
-		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
-		if ([[Ushahidi sharedUshahidi] addDeploymentByName:self.name andUrl:self.url]) {
-			[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
-			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:2.0];
-		}
-		else {
-			[self.loadingView hide];
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
-								 andMessage:NSLocalizedString(@"There was a problem adding deployment", nil)];
-		}	
-	}
+	[self filterRows:YES];
 }
 
 #pragma mark -
@@ -109,97 +103,171 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.view.backgroundColor = [UIColor ushahidiDarkTan];
-	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
-	[self setHeader:NSLocalizedString(@"Name", nil) 
-		  atSection:TableSectionName];
-	[self setHeader:NSLocalizedString(@"URL", nil) 
-		  atSection:TableSectionURL];
-	[self setFooter:NSLocalizedString(@"Example: Ushahidi Demo", nil)
-		  atSection:TableSectionName];
-	[self setFooter:NSLocalizedString(@"Example: http://demo.ushahidi.com", nil)
-		  atSection:TableSectionURL];
+	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
+	self.oddRowColor = [UIColor ushahidiDarkTan];
+	self.evenRowColor = [UIColor ushahidiLiteBrown];
+	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
+	self.mapDialog = [[MapDialog alloc] initForDelegate:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	self.name = nil;
-	self.url = nil;
+	SEL sorter = self.tableSort.selectedSegmentIndex == TableSortDate
+		? @selector(compareByDiscovered:) : @selector(compareByName:);
+	
+	NSArray *mapsUnsorted = [[Ushahidi sharedUshahidi] getMapsForDelegate:self refresh:NO];
+	NSArray *mapsSorted = [mapsUnsorted sortedArrayUsingSelector:sorter];
+	
+	if ([mapsSorted count] == 0) {
+		self.refreshButton.enabled = NO;
+		[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+	}
+	[self.allRows removeAllObjects];
+	[self.allRows addObjectsFromArray:mapsSorted];
+	[self.filteredRows removeAllObjects];
+	NSString *searchText = [self getSearchText];
+	for (Deployment *map in mapsSorted) {
+		if ([map matchesString:searchText]) {
+			[self.filteredRows addObject:map];
+		}
+	}
 	[self.tableView reloadData];
 }
 
 - (void)dealloc {
 	[cancelButton release];
-	[doneButton release];
-    [super dealloc];
+	[refreshButton release];
+	[tableSort release];
+	[name release];
+	[url release];
+	[mapDialog release];
+	[super dealloc];
 }
 
 #pragma mark -
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	return 1;
 }
 
+- (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
+	return [self.filteredRows count];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
-	if (indexPath.section == TableSectionName) {
-		[cell setText:self.name];
-		[cell setPlaceholder:NSLocalizedString(@"Enter Deployment Name", nil)];
-		[cell setKeyboardType:UIKeyboardTypeDefault];
-		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
-		[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
-		if ([NSString isNilOrEmpty:self.name]) {
-			[cell showKeyboard];
-		}
+	DeploymentTableCell *cell = [TableCellFactory getDeploymentTableCellForTable:theTableView indexPath:indexPath];
+	Deployment *map = [self filteredRowAtIndexPath:indexPath];
+	if (map != nil) {
+		[cell setTitle:map.name];
+		[cell setUrl:map.url];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
-	else if (indexPath.section == TableSectionURL) {
-		[cell setText:self.url];
-		[cell setPlaceholder:NSLocalizedString(@"Enter Deployment URL", nil)];
-		[cell setKeyboardType:UIKeyboardTypeURL];
-		[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
-		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-		if ([NSString isNilOrEmpty:self.name] == NO && [NSString isNilOrEmpty:self.url]) {
-			[cell showKeyboard];
-		}
+	else {
+		[cell setTitle:nil];
+		[cell setUrl:nil];
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	return cell;
 }
 
-#pragma mark -
-#pragma mark TextFieldTableCellDelegate
+- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+	Deployment *map = [self filteredRowAtIndexPath:indexPath];
+	[[Ushahidi sharedUshahidi] addDeployment:map];
+	[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
+}
 
-- (void) textFieldFocussed:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath {
-	DLog(@"indexPath:[%d, %d]", indexPath.section, indexPath.row);
-	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
-	if (indexPath.section == TableSectionURL) {
-		if ([NSString isNilOrEmpty:self.url]) {
-			[cell setText:@"http://"];
+#pragma mark -
+#pragma mark UshahidiDelegate
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi maps:(NSArray *)maps error:(NSError *)error hasChanges:(BOOL)hasChanges {
+	if (error != nil) {
+		DLog(@"error: %@", [error localizedDescription]);
+		[self.loadingView hide];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
+							 andMessage:[error localizedDescription]];
+	}
+	else if (hasChanges) {
+		DLog(@"Has Changes: %d", [maps count]);
+		NSArray *sortedMaps = self.tableSort.selectedSegmentIndex == TableSortDate
+			? [maps sortedArrayUsingSelector:@selector(compareByDiscovered:)]
+			: [maps sortedArrayUsingSelector:@selector(compareByName:)];
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:sortedMaps];
+		NSString *searchText = [self getSearchText];
+		[self.filteredRows removeAllObjects];
+		for (Deployment *map in sortedMaps) {
+			if ([map matchesString:searchText]) {
+				[self.filteredRows addObject:map];
+			}
+		}
+		[self.tableView reloadData];	
+		[self.tableView flashScrollIndicators];
+		[self.loadingView hide];
+	}
+	else {
+		DLog(@"No Changes");
+		[self.loadingView hide];
+	}
+	self.refreshButton.enabled = YES;
+}
+
+#pragma mark -
+#pragma mark UISearchBarDelegate
+
+- (void) filterRows:(BOOL)reloadTable {
+	NSString *searchText = [self getSearchText];
+	NSArray *maps;
+	if (self.tableSort.selectedSegmentIndex == TableSortDate) {
+		maps = [self.allRows sortedArrayUsingSelector:@selector(compareByDiscovered:)];
+	}
+	else {
+		maps = [self.allRows sortedArrayUsingSelector:@selector(compareByName:)];
+	}
+	[self.filteredRows removeAllObjects];
+	for (Deployment *map in maps) {
+		if ([map matchesString:searchText]) {
+			[self.filteredRows addObject:map];
 		}
 	}
-}
-
-- (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	if (indexPath.section == TableSectionName) {
-		self.name = text;
-	}
-	else if (indexPath.section == TableSectionURL) {
-		self.url = text;
-		DLog(@"REGEX: %d", [text isValidURL]);
+	if (reloadTable) {
+		[self.tableView reloadData];	
+		[self.tableView flashScrollIndicators];
 	}
 }
 
-- (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	if (indexPath.section == TableSectionName) {
-		self.name = text;
+#pragma mark -
+#pragma mark MapDialogDelegate
+
+- (void) mapDialogReturned:(MapDialog *)theMapDialog name:(NSString *)theName url:(NSString *)theUrl {
+	DLog(@"name:%@ url:%@", theName, theUrl);
+	self.name = theName;
+	self.url = theUrl;
+	if (self.name != nil && [self.name length] > 0 && 
+		self.url != nil && [self.url isValidURL]) {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+		[[Ushahidi sharedUshahidi] addDeploymentByName:theName andUrl:theUrl];	
+		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
 	}
-	else if (indexPath.section == TableSectionURL) {
-		self.url = text;
+	else {
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Input", nil) 
+							 andMessage:NSLocalizedString(@"Please enter a valid name and url.", nil)];
 	}
+}
+
+- (void) mapDialogCancelled:(MapDialog *)theMapDialog {
+	DLog(@"");
+	self.name = nil;
+	self.url = nil;
+}
+
+- (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex {
+	[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Name and URL", nil) 
+							 name:self.name 
+							  url:self.url];
 }
 
 @end

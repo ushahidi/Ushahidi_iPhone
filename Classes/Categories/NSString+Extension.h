@@ -29,5 +29,7 @@
 - (BOOL) isValidEmail;
 - (BOOL) isValidURL;
 + (NSString *)stringByAppendingPathComponents:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
+- (NSString *)appendUrlStringWithFormat:(NSString *)format, ...;
++ (NSString *) stringByEscapingCharacters:(NSString *)string;
 
 @end

@@ -19,12 +19,17 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "Ushahidi.h"
 
-@interface NSDictionary (Extension)
+@class Ushahidi;
+@class Incident;
+@class Photo;
+@protocol UshahidiDelegate;
 
-- (NSString *) stringForKey:(NSString *)key;
-- (NSInteger) intForKey:(NSString *)key;
-- (BOOL) boolForKey:(NSString *)key;
-- (NSDate *) dateForKey:(NSString *)key;
+@interface ASIHTTPRequest (Extension) 
+
+- (id<UshahidiDelegate>) getDelegate;
+- (Incident *) getIncident;
+- (Photo *) getPhoto;
 
 @end

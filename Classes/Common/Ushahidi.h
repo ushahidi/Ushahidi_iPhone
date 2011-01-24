@@ -37,8 +37,9 @@
 @interface Ushahidi : NSObject<ASIHTTPRequestDelegate> {
 	
 @private
-	NSMutableDictionary *deployments;
 	Deployment *deployment;
+	NSMutableDictionary *maps;
+	NSMutableDictionary *deployments;
 	NSOperationQueue *mainQueue;
 	NSOperationQueue *mapQueue;
 	NSOperationQueue *photoQueue;
@@ -48,6 +49,9 @@
 
 - (void) archive;
 
+- (NSArray *) getMapsForDelegate:(id<UshahidiDelegate>)delegate refresh:(BOOL)refresh;
+
+- (NSArray *) getDeploymentsUsingSorter:(SEL)sorter;
 - (void) loadDeployment:(Deployment *)deployment;
 - (BOOL) addDeployment:(Deployment *)deployment;
 - (BOOL) addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
@@ -59,8 +63,6 @@
 - (BOOL) addIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) uploadIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
-
-- (NSArray *) getDeploymentsForDelegate:(id<UshahidiDelegate>)delegate;
 
 - (BOOL) hasCategories;
 - (NSArray *) getCategories;
@@ -87,7 +89,7 @@
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending;
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi apiKey:(NSString *)apiKey error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi maps:(NSArray *)maps error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi deployments:(NSArray *)deployments error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;

@@ -21,16 +21,25 @@
 #import <Foundation/Foundation.h>
 
 @class Location;
+@class Photo;
 
 @interface Deployment : NSObject<NSCoding> {
 
 @public
+	NSString *identifier;
 	NSString *name;
+	NSString *description;
 	NSString *url;
 	NSString *domain;
 	NSString *sinceID;
 	NSDate *synced;
 	NSDate *added;
+	NSDate *discovered;
+	Photo *photo;
+	
+	BOOL subscribed;
+	NSString *latitude;
+	NSString *longitude;
 	
 	NSMutableDictionary *categories;
 	NSMutableDictionary *locations;
@@ -38,18 +47,26 @@
 	NSMutableArray *pending;
 }
 
-@property(nonatomic,retain) NSString *name;
-@property(nonatomic,retain) NSString *url;
-@property(nonatomic,retain) NSString *domain;
-@property(nonatomic,retain) NSString *sinceID;
-@property(nonatomic,retain) NSDate *synced;
-@property(nonatomic,retain) NSDate *added;
+@property(nonatomic, retain) NSString *identifier;
+@property(nonatomic, retain) NSString *name;
+@property(nonatomic, retain) NSString *description;
+@property(nonatomic, retain) NSString *url;
+@property(nonatomic, retain) NSString *domain;
+@property(nonatomic, retain) NSString *sinceID;
+@property(nonatomic, retain) NSDate *synced;
+@property(nonatomic, retain) NSDate *added;
+@property(nonatomic, retain) NSDate *discovered;
+@property(nonatomic, assign) BOOL subscribed;
+@property(nonatomic, retain) NSString *latitude;
+@property(nonatomic, retain) NSString *longitude;
+@property(nonatomic, retain) Photo *photo;
 
 @property(nonatomic, retain) NSMutableDictionary *categories;
 @property(nonatomic, retain) NSMutableDictionary *locations;
 @property(nonatomic, retain) NSMutableDictionary *incidents;
 @property(nonatomic, retain) NSMutableArray *pending;
 
+- (id) initWithDictionary:(NSDictionary *)dictionary;
 - (id) initWithName:(NSString *)name url:(NSString *)url;
 
 - (void) archive;
@@ -59,10 +76,6 @@
 
 - (BOOL) matchesString:(NSString *)string;
 - (BOOL) containsLocation:(Location *)location;
-
-- (NSString *) getGoogleApiKey;
-- (NSString *) getYahooApiKey;
-- (NSString *) getMicrosoftApiKey;
 
 - (NSString *) getCategories;
 - (NSString *) getCategoryByID:(NSString *)categoryID;
@@ -89,5 +102,6 @@
 
 - (NSComparisonResult)compareByName:(Deployment *)deployment;
 - (NSComparisonResult)compareByDate:(Deployment *)deployment;
+- (NSComparisonResult)compareByDiscovered:(Deployment *)deployment;
 
 @end

@@ -52,4 +52,17 @@
 	return NO;
 }
 
+
+- (NSDate *) dateForKey:(NSString *)key {
+	NSObject *object = [self objectForKey:key];
+	if (object != nil) {
+		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+		[formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+		NSDate *date = [formatter dateFromString:((NSString *)object)];
+		[formatter release];	
+		return date;
+	}
+	return nil;
+}
+
 @end

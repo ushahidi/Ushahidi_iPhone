@@ -29,8 +29,10 @@
 @property (nonatomic, retain) UITextField *nameField;
 @property (nonatomic, retain) UITextField *urlField;
 
-- (UITextField *) getTextField:(CGRect)frame text:(NSString *)text placeholder:(NSString *)placeholder keyboardType:(UIKeyboardType)keyboardType;
-
+- (UITextField *) getTextField:(CGRect)frame text:(NSString *)text 
+				   placeholder:(NSString *)placeholder 
+				  keyboardType:(UIKeyboardType)keyboardType 
+		autocapitalizationType:(UITextAutocapitalizationType) autocapitalizationType;
 @end
 
 @implementation MapDialog
@@ -55,26 +57,31 @@
 	self.nameField = [self getTextField:CGRectMake(12.0, 50.0, 260.0, 25.0)
 								   text:theName 
 							placeholder:NSLocalizedString(@"Enter name", nil) 
-						   keyboardType:UIKeyboardTypeDefault];
+						   keyboardType:UIKeyboardTypeDefault
+				 autocapitalizationType:UITextAutocapitalizationTypeWords];
 	[alertView addSubview:self.nameField];
 	
 	self.urlField = [self getTextField:CGRectMake(12.0, 85.0, 260.0, 25.0)
 								  text:theUrl 
 						   placeholder:NSLocalizedString(@"Enter url", nil) 
-						  keyboardType:UIKeyboardTypeURL];
+						  keyboardType:UIKeyboardTypeURL
+				autocapitalizationType:UITextAutocapitalizationTypeNone];
 	[alertView addSubview:self.urlField];
 	
 	[alertView show];
 	[alertView release];
 }
 
-- (UITextField *) getTextField:(CGRect)frame text:(NSString *)text placeholder:(NSString *)placeholder keyboardType:(UIKeyboardType)keyboardType {
+- (UITextField *) getTextField:(CGRect)frame text:(NSString *)text 
+				   placeholder:(NSString *)placeholder 
+				  keyboardType:(UIKeyboardType)keyboardType 
+		autocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType {
 	UITextField *textField = [[UITextField alloc] initWithFrame:frame];
 	textField.backgroundColor = [UIColor whiteColor];
 	textField.delegate = self;
 	textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	textField.adjustsFontSizeToFitWidth = YES;
-	textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+	textField.autocapitalizationType = autocapitalizationType;
 	textField.autocorrectionType = UITextAutocorrectionTypeYes;
 	textField.keyboardType = UIKeyboardTypeDefault;
 	textField.returnKeyType = UIReturnKeyDone;

@@ -63,7 +63,7 @@ typedef enum {
 	DLog(@"");
 	self.name = nil;
 	self.url = nil;
-	[self.mapDialog showWithTitle:NSLocalizedString(@"Map Details", nil) 
+	[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Details", nil) 
 							 name:nil 
 							  url:nil];
 }
@@ -253,7 +253,7 @@ typedef enum {
 		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
 	}
 	else {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Input", nil) 
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Map Details", nil) 
 							 andMessage:NSLocalizedString(@"Please enter a valid name and url.", nil)];
 	}
 }
@@ -265,9 +265,11 @@ typedef enum {
 }
 
 - (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex {
-	[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Name and URL", nil) 
-							 name:self.name 
-							  url:self.url];
+	if ([alert.title isEqualToString:NSLocalizedString(@"Invalid Map Details", nil)]) {
+		[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Details", nil) 
+								 name:self.name 
+								  url:self.url];	
+	}
 }
 
 @end

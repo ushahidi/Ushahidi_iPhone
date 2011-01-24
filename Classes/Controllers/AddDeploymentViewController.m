@@ -63,7 +63,7 @@ typedef enum {
 	DLog(@"");
 	self.name = nil;
 	self.url = nil;
-	[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Information", nil) 
+	[self.mapDialog showWithTitle:NSLocalizedString(@"Map Details", nil) 
 							 name:nil 
 							  url:nil];
 }

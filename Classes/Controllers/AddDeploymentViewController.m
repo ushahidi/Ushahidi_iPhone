@@ -161,7 +161,7 @@ typedef enum {
 	if (map != nil) {
 		[cell setTitle:map.name];
 		[cell setUrl:map.url];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	else {

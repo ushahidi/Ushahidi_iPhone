@@ -50,6 +50,11 @@
 	[super dealloc];	
 }
 
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	self.activityIndicatorBackground.layer.cornerRadius = 20.0f;
+}
+
 - (void) show {
 	[self showWithMessage:NSLocalizedString(@"Loading...", nil) afterDelay:0.0];
 }

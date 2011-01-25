@@ -285,10 +285,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				NSString *url = [dictionary stringForKey:@"url"];
 				if ([self.maps objectForKey:url] == nil) {
 					DLog(@"URL: %@", url);
-					Deployment *map = [[Deployment alloc] initWithDictionary:dictionary];
-					[self.maps setObject:map forKey:url];
-					[map release];
-					hasChanges = YES;
+					NSString *name = [dictionary stringForKey:@"name"];
+					if ([NSString isNilOrEmpty:name] == NO) {
+						Deployment *map = [[Deployment alloc] initWithDictionary:dictionary];
+						[self.maps setObject:map forKey:url];
+						[map release];
+						hasChanges = YES;	
+					}
 				}
 			}
 			[self dispatchSelector:callback 

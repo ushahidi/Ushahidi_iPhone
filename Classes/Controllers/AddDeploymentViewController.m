@@ -134,6 +134,11 @@ typedef enum {
 	[self.tableView reloadData];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Select an existing map from the list, or click the Plus button to manually add your own map.", nil)];
+}
+
 - (void)dealloc {
 	[cancelButton release];
 	[refreshButton release];

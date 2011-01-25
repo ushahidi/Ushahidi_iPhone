@@ -26,12 +26,15 @@
 @public
 	IBOutlet UILabel *titleLabel;
 	IBOutlet UILabel *urlLabel;
+	IBOutlet UILabel *descriptionLabel;
 }
 
 @property (nonatomic, retain) UILabel *titleLabel;
 @property (nonatomic, retain) UILabel *urlLabel;
+@property (nonatomic, retain) UILabel *descriptionLabel;
 @property (nonatomic, assign) NSString *title;
 @property (nonatomic, assign) NSString *url;
+@property (nonatomic, assign) NSString *description;
 
 + (CGFloat) getCellHeight;
 

@@ -27,7 +27,7 @@
 
 @implementation DeploymentTableCell
 
-@synthesize titleLabel, urlLabel;
+@synthesize titleLabel, urlLabel, descriptionLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
@@ -57,6 +57,14 @@
 	self.urlLabel.text = url;
 }
 
+- (NSString *) description {
+	return self.descriptionLabel.text;
+}
+
+- (void) setDescription:(NSString *)description {
+	self.descriptionLabel.text = description;
+}
+
 - (void) setSelectedColor:(UIColor *)color {
 	UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
 	[selectedBackgroundView setBackgroundColor:color];
@@ -65,7 +73,7 @@
 }
 
 + (CGFloat) getCellHeight {
-	return [Device isIPad] ? 55 : 44;
+	return [Device isIPad] ? 72 : 60;
 }
 
 @end

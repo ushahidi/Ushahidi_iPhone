@@ -29,6 +29,7 @@
 #import "AlertView.h"
 #import "InputView.h"
 #import "Deployment.h"
+#import "NSString+Extension.h"
 
 @interface DeploymentsViewController ()
 
@@ -165,12 +166,19 @@ typedef enum {
 	if (deployment != nil) {
 		[cell setTitle:deployment.name];
 		[cell setUrl:deployment.url];
+		if ([NSString isNilOrEmpty:deployment.description]) {
+			[cell setDescription:deployment.name];
+		}
+		else {
+			[cell setDescription:deployment.description];
+		}
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
 	else {
 		[cell setTitle:nil];
 		[cell setUrl:nil];
+		[cell setDescription:nil];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}

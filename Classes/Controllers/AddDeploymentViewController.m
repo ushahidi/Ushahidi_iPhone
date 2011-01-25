@@ -28,6 +28,7 @@
 #import "NSString+Extension.h"
 #import "Deployment.h"
 #import "DeploymentTableCell.h"
+#import "NSString+Extension.h"
 
 typedef enum {
 	TableSortDate,
@@ -166,6 +167,12 @@ typedef enum {
 	if (map != nil) {
 		[cell setTitle:map.name];
 		[cell setUrl:map.url];
+		if ([NSString isNilOrEmpty:map.description]) {
+			[cell setDescription:map.name];
+		}
+		else {
+			[cell setDescription:map.description];
+		}
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}
@@ -183,6 +190,10 @@ typedef enum {
 	Deployment *map = [self filteredRowAtIndexPath:indexPath];
 	[[Ushahidi sharedUshahidi] addDeployment:map];
 	[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return [DeploymentTableCell getCellHeight];
 }
 
 #pragma mark -

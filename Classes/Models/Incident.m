@@ -175,7 +175,11 @@
 	return self.date != nil ? [self.date dateToString:@"MM/dd/yyyy"] : nil;
 }
 
-- (NSString *) dateHour {
+- (NSString *) date12Hour {
+	return self.date != nil ? [self.date dateToString:@"hh"] : nil;
+}
+
+- (NSString *) date24Hour {
 	return self.date != nil ? [self.date dateToString:@"HH"] : nil;
 }
 
@@ -184,7 +188,18 @@
 }
 
 - (NSString *) dateAmPm {
-	return self.date != nil ? [[self.date dateToString:@"a"] lowercaseString] : nil;
+	if (self.date != nil) {
+		NSString *amPm = [self.date dateToString:@"a"];
+		if ([NSString isNilOrEmpty:amPm] == NO) {
+			return [amPm lowercaseString];
+		}
+		else {
+			NSCalendar *calendar = [NSCalendar currentCalendar];
+			NSDateComponents *components = [calendar components:kCFCalendarUnitHour fromDate:self.date];
+			return [components hour] >= 12 ? @"pm" : @"am";
+		}
+	}
+	return nil;
 }
 
 - (void) addPhoto:(Photo *)photo {

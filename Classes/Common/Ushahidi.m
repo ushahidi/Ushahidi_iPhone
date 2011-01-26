@@ -251,7 +251,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		if (self.maps == nil) self.maps = [[NSMutableDictionary alloc] init];
 	}
 	if ([self.maps count] == 0 || refresh) {
-		[self queueAsynchronousRequest:@"http://tracker.ushahidi.com/list/?q=&tw=100&th=100" 
+		[self queueAsynchronousRequest:@"http://tracker.ushahidi.com/list/?q=&tw=50&th=50" 
 						   forDelegate:delegate
 						 startSelector:@selector(getMapsStarted:)
 						finishSelector:@selector(getMapsFinished:)
@@ -284,7 +284,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			for (NSDictionary *dictionary in [json allValues]) {
 				NSString *url = [dictionary stringForKey:@"url"];
 				if ([self.maps objectForKey:url] == nil) {
-					DLog(@"URL: %@", url);
 					NSString *name = [dictionary stringForKey:@"name"];
 					if ([NSString isNilOrEmpty:name] == NO) {
 						Deployment *map = [[Deployment alloc] initWithDictionary:dictionary];
@@ -371,7 +370,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post addPostValue:[incident title] forKey:@"incident_title"];
 		[post addPostValue:[incident description] forKey:@"incident_description"];
 		[post addPostValue:[incident dateDayMonthYear] forKey:@"incident_date"];
-		[post addPostValue:[incident dateHour] forKey:@"incident_hour"];
+		[post addPostValue:[incident date12Hour] forKey:@"incident_hour"];
 		[post addPostValue:[incident dateMinute] forKey:@"incident_minute"];
 		[post addPostValue:[incident dateAmPm] forKey:@"incident_ampm"];
 		[post addPostValue:[incident categoryIDs] forKey:@"incident_category"];

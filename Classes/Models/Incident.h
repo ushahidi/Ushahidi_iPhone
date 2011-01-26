@@ -84,7 +84,8 @@
 @property(nonatomic,readonly) NSString *dateString;
 @property(nonatomic,readonly) NSString *timeString;
 @property(nonatomic,readonly) NSString *dateDayMonthYear;
-@property(nonatomic,readonly) NSString *dateHour;
+@property(nonatomic,readonly) NSString *date12Hour;
+@property(nonatomic,readonly) NSString *date24Hour;
 @property(nonatomic,readonly) NSString *dateMinute;
 @property(nonatomic,readonly) NSString *dateAmPm;
 

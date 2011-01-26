@@ -203,7 +203,7 @@ typedef enum {
 		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
 		@try {
 			if([[Ushahidi sharedUshahidi] removeDeployment:deployment]) {
-				[self.loadingView showWithMessage:NSLocalizedString(@"Removed", nil) animated:NO];
+				[self.loadingView showWithMessage:NSLocalizedString(@"Removed", nil)];
 				[self.loadingView hideAfterDelay:1.0];
 				DLog(@"Removed Deployment");
 				[self.allRows removeObject:deployment];

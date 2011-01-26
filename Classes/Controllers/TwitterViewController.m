@@ -333,7 +333,7 @@ typedef enum {
 
 - (void)statusesReceived:(NSArray *)statuses forRequest:(NSString *)connectionIdentifier {
 	DLog(@"%@ : %@", connectionIdentifier, statuses);
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) animated:NO];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
 	[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
 }
 

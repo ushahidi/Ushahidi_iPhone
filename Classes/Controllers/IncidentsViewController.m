@@ -423,10 +423,6 @@ typedef enum {
 	else if (self.incidentMapView.superview != nil) {
 		[self populateMapPins:reload];
 	}
-	if ([self.filteredRows count] == 0) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"No Reports", nil) animated:NO];
-		[self.loadingView hideAfterDelay:1.0];					 
-	}
 } 
 
 #pragma mark -
@@ -678,6 +674,10 @@ typedef enum {
 		[self.incidentMapView setLabel:NSLocalizedString(@"All Categories", nil)];
 	}
 	[self filterRows:YES];
+	if ([self.filteredRows count] == 0) {
+		[self.loadingView showWithMessage:NSLocalizedString(@"No Reports", nil)];
+		[self.loadingView hideAfterDelay:1.0];					 
+	}
 }
 
 - (void) itemPickerCancelled:(ItemPicker *)itemPicker {

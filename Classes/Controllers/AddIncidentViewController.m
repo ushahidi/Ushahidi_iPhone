@@ -115,7 +115,7 @@ typedef enum {
 		}
 		[self.view endEditing:YES];
 		if ([[Ushahidi sharedUshahidi] addIncident:self.incident forDelegate:self.incidentsViewController]) {
-			[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil) animated:NO];
+			[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
 			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.0];
 		}
 		else {
@@ -450,7 +450,7 @@ typedef enum {
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
 	DLog(@"");
 	if (image != nil && image.size.width > 0 && image.size.height > 0) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Photo Added", nil) animated:NO];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Photo Added", nil)];
 		[self.loadingView hideAfterDelay:1.0];
 		[self.incident addPhoto:[Photo photoWithImage:image]];
 		[self.tableView reloadData];	

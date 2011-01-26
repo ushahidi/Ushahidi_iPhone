@@ -67,7 +67,6 @@
 		3E72986012EE4F9D00FDED00 /* sort_alphabetical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984A12EE4F9D00FDED00 /* sort_alphabetical@2x.png */; };
 		3E72986112EE4F9D00FDED00 /* sort_date@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984B12EE4F9D00FDED00 /* sort_date@2x.png */; };
 		3E72986212EE4F9D00FDED00 /* sort_verified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984C12EE4F9D00FDED00 /* sort_verified@2x.png */; };
-		3E72986312EE4F9D00FDED00 /* tags@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984D12EE4F9D00FDED00 /* tags@2x.png */; };
 		3E72986412EE4F9D00FDED00 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984E12EE4F9D00FDED00 /* twitter@2x.png */; };
 		3E7298B712EE524700FDED00 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7298B612EE524700FDED00 /* QuartzCore.framework */; };
 		3E72990312EE5A2D00FDED00 /* satellite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72990212EE5A2D00FDED00 /* satellite@2x.png */; };
@@ -226,7 +225,6 @@
 		3ECB55ED122F5E33000AAC56 /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55EC122F5E33000AAC56 /* DatePicker.m */; };
 		3ECB579F122F809C000AAC56 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB579E122F809C000AAC56 /* UIView+Extension.m */; };
 		3ECD0A4712889A9A0006AF7C /* NSError+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */; };
-		3ECFF2B012AFD7AB00DE75D7 /* tags.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECFF2AF12AFD7AB00DE75D7 /* tags.png */; };
 		3ECFF2C512AFDB4F00DE75D7 /* SMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECFF2C412AFDB4F00DE75D7 /* SMS.m */; };
 		3ECFF35D12AFE9AD00DE75D7 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECFF35C12AFE9AD00DE75D7 /* radar.png */; };
 		3ECFF3D312AFF33F00DE75D7 /* satellite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECFF3D212AFF33F00DE75D7 /* satellite.png */; };
@@ -332,7 +330,6 @@
 		3E72984A12EE4F9D00FDED00 /* sort_alphabetical@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sort_alphabetical@2x.png"; sourceTree = "<group>"; };
 		3E72984B12EE4F9D00FDED00 /* sort_date@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sort_date@2x.png"; sourceTree = "<group>"; };
 		3E72984C12EE4F9D00FDED00 /* sort_verified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sort_verified@2x.png"; sourceTree = "<group>"; };
-		3E72984D12EE4F9D00FDED00 /* tags@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tags@2x.png"; sourceTree = "<group>"; };
 		3E72984E12EE4F9D00FDED00 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
 		3E7298B612EE524700FDED00 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3E72990212EE5A2D00FDED00 /* satellite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "satellite@2x.png"; sourceTree = "<group>"; };
@@ -629,7 +626,6 @@
 		3ECB579E122F809C000AAC56 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		3ECD0A4512889A9A0006AF7C /* NSError+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Extension.h"; sourceTree = "<group>"; };
 		3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Extension.m"; sourceTree = "<group>"; };
-		3ECFF2AF12AFD7AB00DE75D7 /* tags.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tags.png; sourceTree = "<group>"; };
 		3ECFF2C312AFDB4F00DE75D7 /* SMS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMS.h; sourceTree = "<group>"; };
 		3ECFF2C412AFDB4F00DE75D7 /* SMS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMS.m; sourceTree = "<group>"; };
 		3ECFF35C12AFE9AD00DE75D7 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
@@ -1013,8 +1009,6 @@
 				3E72984912EE4F9D00FDED00 /* sms@2x.png */,
 				3EFC1C1B1295D81C00163B36 /* email.png */,
 				3E72983D12EE4F9D00FDED00 /* email@2x.png */,
-				3ECFF2AF12AFD7AB00DE75D7 /* tags.png */,
-				3E72984D12EE4F9D00FDED00 /* tags@2x.png */,
 				3EEFE3E212DBAFC40076ABA1 /* logout.png */,
 				3E72984212EE4F9D00FDED00 /* logout@2x.png */,
 				3E862A421222BD09001DE141 /* blank.png */,
@@ -1420,7 +1414,6 @@
 				3E4C62FB12AD4CCA001ED08A /* NewsViewController_iPhone.xib in Resources */,
 				3E4C630212AD4CE1001ED08A /* NewsViewController_iPad.xib in Resources */,
 				3E4C69C712ADBB94001ED08A /* Default@2x.png in Resources */,
-				3ECFF2B012AFD7AB00DE75D7 /* tags.png in Resources */,
 				3ECFF35D12AFE9AD00DE75D7 /* radar.png in Resources */,
 				3ECFF3D312AFF33F00DE75D7 /* satellite.png in Resources */,
 				3ECFF3DD12AFF52400DE75D7 /* hybrid.png in Resources */,
@@ -1458,7 +1451,6 @@
 				3E72986012EE4F9D00FDED00 /* sort_alphabetical@2x.png in Resources */,
 				3E72986112EE4F9D00FDED00 /* sort_date@2x.png in Resources */,
 				3E72986212EE4F9D00FDED00 /* sort_verified@2x.png in Resources */,
-				3E72986312EE4F9D00FDED00 /* tags@2x.png in Resources */,
 				3E72986412EE4F9D00FDED00 /* twitter@2x.png in Resources */,
 				3E72990312EE5A2D00FDED00 /* satellite@2x.png in Resources */,
 				3E72990C12EE5CCD00FDED00 /* hybrid@2x.png in Resources */,

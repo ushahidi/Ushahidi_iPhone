@@ -20,6 +20,7 @@
 
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
+#import "IndexedTableCell.h"
 #import "TextTableCell.h"
 #import "SubtitleTableCell.h"
 #import "TextFieldTableCell.h"
@@ -132,7 +133,7 @@
 										  indexPath:(NSIndexPath *)indexPath  {
 	SliderTableCell *cell = (SliderTableCell *)[tableView dequeueReusableCellWithIdentifier:@"SliderTableCell"];
 	if (cell == nil) {
-		cell = [[[SliderTableCell alloc] initForDelegate:delegate reuseIdentifier:@"SliderTableCell"] autorelease];
+		cell = [[[SliderTableCell alloc] initForDelegate:(id<SliderTableCellDelegate>)delegate reuseIdentifier:@"SliderTableCell"] autorelease];
 	}
 	cell.indexPath = indexPath;
 	return cell;

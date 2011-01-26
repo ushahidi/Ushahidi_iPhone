@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class IndexedTableCell;
 @class TextTableCell;
 @class SubtitleTableCell;
 @class TextFieldTableCell;

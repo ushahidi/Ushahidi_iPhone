@@ -25,7 +25,6 @@
 #import "NSKeyedArchiver+Extension.h"
 #import "NSKeyedUnarchiver+Extension.h"
 #import "NSDictionary+Extension.h"
-#import "Photo.h"
 
 @interface Deployment ()
 
@@ -33,9 +32,9 @@
 
 @implementation Deployment
 
-@synthesize identifier, name, description, url, latitude, longitude, domain, photo;
+@synthesize identifier, name, description, url, domain;
 @synthesize categories, locations, incidents, pending;
-@synthesize discovered, synced, added, subscribed, sinceID;
+@synthesize discovered, synced, added, sinceID;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
@@ -57,12 +56,10 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]){
+		self.identifier = [dictionary stringForKey:@"id"];
 		self.url = [dictionary stringForKey:@"url"];
 		self.name = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"name"]];
 		self.description = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"description"]];
-		self.latitude = [dictionary stringForKey:@"latitude"];
-		self.longitude = [dictionary stringForKey:@"longitude"];
-		self.identifier = [dictionary stringForKey:@"id"];
 		self.discovered = [dictionary dateForKey:@"discovery_date"];
 		self.added = [NSDate date];
 		if ([self.url hasPrefix:@"http://"]) {
@@ -88,8 +85,6 @@
 	[encoder encodeObject:self.synced forKey:@"synced"];
 	[encoder encodeObject:self.added forKey:@"added"];
 	[encoder encodeObject:self.discovered forKey:@"discovered"];
-	[encoder encodeObject:self.latitude forKey:@"latitude"];
-	[encoder encodeObject:self.longitude forKey:@"longitude"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -103,8 +98,6 @@
 		self.synced = [decoder decodeObjectForKey:@"synced"];
 		self.added = [decoder decodeObjectForKey:@"added"];
 		self.discovered = [decoder decodeObjectForKey:@"discovered"];
-		self.latitude = [decoder decodeObjectForKey:@"latitude"];
-		self.longitude = [decoder decodeObjectForKey:@"longitude"];
 	}
 	return self;
 }
@@ -197,10 +190,7 @@
 	[sinceID release];
 	[synced release];
 	[added release];
-	[latitude release];
-	[longitude release];
 	[discovered release];
-	[photo release];
     [super dealloc];
 }
 

@@ -21,7 +21,6 @@
 #import <Foundation/Foundation.h>
 
 @class Location;
-@class Photo;
 
 @interface Deployment : NSObject<NSCoding> {
 
@@ -35,11 +34,6 @@
 	NSDate *synced;
 	NSDate *added;
 	NSDate *discovered;
-	Photo *photo;
-	
-	BOOL subscribed;
-	NSString *latitude;
-	NSString *longitude;
 	
 	NSMutableDictionary *categories;
 	NSMutableDictionary *locations;
@@ -56,10 +50,6 @@
 @property(nonatomic, retain) NSDate *synced;
 @property(nonatomic, retain) NSDate *added;
 @property(nonatomic, retain) NSDate *discovered;
-@property(nonatomic, assign) BOOL subscribed;
-@property(nonatomic, retain) NSString *latitude;
-@property(nonatomic, retain) NSString *longitude;
-@property(nonatomic, retain) Photo *photo;
 
 @property(nonatomic, retain) NSMutableDictionary *categories;
 @property(nonatomic, retain) NSMutableDictionary *locations;

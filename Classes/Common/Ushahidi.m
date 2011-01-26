@@ -272,7 +272,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		if (self.maps == nil) self.maps = [[NSMutableDictionary alloc] init];
 	}
 	if ([self.maps count] == 0 || refresh) {
-		[self queueAsynchronousRequest:@"http://tracker.ushahidi.com/list/?q=&tw=50&th=50" 
+		[self queueAsynchronousRequest:@"http://tracker.ushahidi.com/list/?return_vars=url,name,description,discovery_date" 
 						   forDelegate:delegate
 						 startSelector:@selector(getMapsStarted:)
 						finishSelector:@selector(getMapsFinished:)

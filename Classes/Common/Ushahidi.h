@@ -52,7 +52,7 @@
 - (NSArray *) getMapsForDelegate:(id<UshahidiDelegate>)delegate refresh:(BOOL)refresh;
 
 - (NSArray *) getDeploymentsUsingSorter:(SEL)sorter;
-- (void) loadDeployment:(Deployment *)deployment;
+- (void) loadDeployment:(Deployment *)deployment inBackground:(BOOL)inBackground;
 - (BOOL) addDeployment:(Deployment *)deployment;
 - (BOOL) addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
 - (BOOL) removeDeployment:(Deployment *)deployment;

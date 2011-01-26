@@ -122,7 +122,6 @@
 #pragma mark UIPickerViewDelegate
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-	DLog(@"didSelectRow: %d", row);
 	self.item = [self.items objectAtIndex:row];
 }
 

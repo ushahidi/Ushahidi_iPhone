@@ -44,7 +44,7 @@
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
 		if (deployment != nil) {
 			[self.navigationController pushViewController:self.deploymentsViewController animated:NO];
-			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
+			[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
 			self.incidentsViewController.deployment = deployment;
 			
 			NSString *lastIncident = [[Settings sharedSettings] lastIncident];

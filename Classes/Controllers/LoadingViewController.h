@@ -41,7 +41,9 @@
 - (void) show;
 - (void) showAfterDelay:(NSTimeInterval)delay;
 - (void) showWithMessage:(NSString *)message;
+- (void) showWithMessage:(NSString *)message animated:(BOOL)animated;
 - (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay;
+- (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay animated:(BOOL)animated;
 - (void) hide;
 - (void) hideAfterDelay:(NSTimeInterval)delay;
 - (BOOL) isShowing;

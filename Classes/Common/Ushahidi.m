@@ -85,6 +85,9 @@
 
 - (BOOL) isDuplicate:(Incident *)incident;
 
+- (void) loadDeployment:(Deployment *)theDeployment;
+- (void) loadDeploymentInBackground:(Deployment *)theDeployment;
+
 @end
 
 @implementation Ushahidi
@@ -136,6 +139,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[super dealloc];
 }
 
+#pragma mark -
+#pragma mark Archive
+
 - (void) archive {
 	DLog(@"");
 	if (self.deployment != nil) {
@@ -147,11 +153,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
-#pragma mark -
-#pragma mark Deployments
-
-- (NSString *) deploymentName {
-	return self.deployment != nil ? self.deployment.name : nil;
+- (void) loadDeployment:(Deployment *)theDeployment inBackground:(BOOL)inBackground {
+	if (inBackground) {
+		[self performSelectorInBackground:@selector(loadDeploymentInBackground:) withObject:theDeployment];
+	}
+	else {
+		[self loadDeployment:theDeployment];
+	}
 }
 
 - (void) loadDeployment:(Deployment *)theDeployment {
@@ -170,6 +178,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		self.deployment = nil;
 	}
 	[[Settings sharedSettings] save];
+}
+
+- (void) loadDeploymentInBackground:(Deployment *)theDeployment {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	[self loadDeployment:theDeployment];
+	[pool release];
+}
+
+#pragma mark -
+#pragma mark Deployments
+
+- (NSString *) deploymentName {
+	return self.deployment != nil ? self.deployment.name : nil;
 }
 
 - (BOOL)addDeployment:(Deployment *)theDeployment {

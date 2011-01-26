@@ -89,12 +89,12 @@
 - (void) resizeRegionToFitAllPins:(BOOL)includeUserLocation animated:(BOOL)animated {
 	if ([self.annotations count] == 1) {
 		NSObject<MKAnnotation> *annotation = [self.annotations objectAtIndex:0];
-		
-		CLLocationCoordinate2D coordinate;
-		coordinate.latitude = annotation.coordinate.latitude;
-		coordinate.longitude = annotation.coordinate.longitude;
-		
-		[self setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.05f, 0.05f)) animated:animated];	
+		if (includeUserLocation && [annotation isKindOfClass:MKUserLocation.class]) {
+			CLLocationCoordinate2D coordinate;
+			coordinate.latitude = annotation.coordinate.latitude;
+			coordinate.longitude = annotation.coordinate.longitude;
+			[self setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.05f, 0.05f)) animated:animated];		
+		}
 	}
 	else if ([self.annotations count] > 1){
 		CLLocationCoordinate2D topLeftCoordinate;

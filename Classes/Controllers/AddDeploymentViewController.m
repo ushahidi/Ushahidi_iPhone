@@ -186,7 +186,8 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+	[self.view endEditing:YES];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil) animated:NO];
 	Deployment *map = [self filteredRowAtIndexPath:indexPath];
 	[[Ushahidi sharedUshahidi] addDeployment:map];
 	[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
@@ -264,7 +265,7 @@ typedef enum {
 	self.url = theUrl;
 	if (self.name != nil && [self.name length] > 0 && 
 		self.url != nil && [self.url isValidURL]) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil) animated:NO];
 		[[Ushahidi sharedUshahidi] addDeploymentByName:theName andUrl:theUrl];	
 		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
 	}

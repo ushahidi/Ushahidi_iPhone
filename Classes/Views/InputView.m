@@ -20,9 +20,6 @@
 
 #import "InputView.h"
 
-#define kButtonCancel						@"Cancel"
-#define kButtonReturn						@"OK"
-
 @interface InputView () 
 
 @property (nonatomic, assign) id<InputViewDelegate>	delegate;
@@ -46,12 +43,11 @@
 
 - (void) showWithTitle:(NSString *)theTitle placeholder:(NSString *)placeholder {
 	DLog(@"title:%@", theTitle);
-	UIAlertView *alertView = [[[UIAlertView alloc] init] retain];
-	[alertView setDelegate:self];
-	[alertView setTitle:theTitle];
-	[alertView setMessage:@" "];
-	[alertView addButtonWithTitle:kButtonCancel];
-	[alertView addButtonWithTitle:kButtonReturn];
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:theTitle 
+														message:@" " 
+													   delegate:self 
+											  cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+											  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
 	
 	UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(20.0, 45.0, 245.0, 25.0)];
 	textField.delegate = self;
@@ -79,12 +75,11 @@
 			[textField resignFirstResponder];
 		}
 	}
-	if ([[alert buttonTitleAtIndex:buttonIndex] isEqualToString:kButtonCancel]) {
-		DLog(@"");
+	if (buttonIndex == alert.cancelButtonIndex) {
 		[self sendInputCancelled];
+		
 	}
-	else if ([[alert buttonTitleAtIndex:buttonIndex] isEqualToString:kButtonReturn]) {
-		DLog(@"");
+	else {
 		[self sendInputReturned:self.input];
 	}
 }

@@ -124,7 +124,7 @@ typedef enum {
 		DLog(@"Re-Adding Rows: %d", [deployments count]);
 	}
 	if (animated) {
-		[[Ushahidi sharedUshahidi] loadDeployment:nil];
+		[[Ushahidi sharedUshahidi] loadDeployment:nil inBackground:YES];
 	}
 	[self.tableView reloadData];
 }
@@ -193,7 +193,7 @@ typedef enum {
 	[self.view endEditing:YES];
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
-	[[Ushahidi sharedUshahidi] loadDeployment:deployment];
+	[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
 	self.incidentsViewController.deployment = deployment;
 	[self.navigationController pushViewController:self.incidentsViewController animated:YES];
 }
@@ -203,19 +203,21 @@ typedef enum {
 		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
 		@try {
 			if([[Ushahidi sharedUshahidi] removeDeployment:deployment]) {
+				[self.loadingView showWithMessage:NSLocalizedString(@"Removed", nil) animated:NO];
+				[self.loadingView hideAfterDelay:1.0];
 				DLog(@"Removed Deployment");
 				[self.allRows removeObject:deployment];
 				[self.filteredRows removeObject:deployment];
 				[self.tableView reloadData];
 			}
 			else {
-				[self.alertView showOkWithTitle:NSLocalizedString(@"Delete Error", nil) 
-									 andMessage:NSLocalizedString(@"There was a problem deleting the map.", nil)];	
+				[self.alertView showOkWithTitle:NSLocalizedString(@"Remove Error", nil) 
+									 andMessage:NSLocalizedString(@"There was a problem removing the map.", nil)];	
 			}
 		}
 		@catch (NSException * e) {
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Delete Error", nil) 
-								 andMessage:NSLocalizedString(@"There was a problem deleting the map.", nil)];
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Remove Error", nil) 
+								 andMessage:NSLocalizedString(@"There was a problem removing the map.", nil)];
 		}
 	}	
 }

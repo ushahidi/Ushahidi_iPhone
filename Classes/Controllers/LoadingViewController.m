@@ -56,18 +56,27 @@
 }
 
 - (void) show {
-	[self showWithMessage:NSLocalizedString(@"Loading...", nil) afterDelay:0.0];
+	[self showWithMessage:NSLocalizedString(@"Loading...", nil) afterDelay:0.0 animated:YES];
 }
 
 - (void) showAfterDelay:(NSTimeInterval)delay {
-	[self showWithMessage:NSLocalizedString(@"Loading...", nil) afterDelay:delay];
+	[self showWithMessage:NSLocalizedString(@"Loading...", nil) afterDelay:delay animated:YES];
 }
 
 - (void) showWithMessage:(NSString *)message {
-	[self showWithMessage:message afterDelay:0.0];
+	[self showWithMessage:message afterDelay:0.0 animated:YES];
 }
 
 - (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay {
+	[self showWithMessage:message afterDelay:delay animated:YES];
+}
+
+
+- (void) showWithMessage:(NSString *)message animated:(BOOL)animated {
+	[self showWithMessage:message afterDelay:0.0 animated:animated];
+}
+
+- (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay animated:(BOOL)animated {
 	DLog(@"message:%@ delay:%.2f", message, delay);
 	if ([NSThread isMainThread]) {
 		if (self.view.superview == nil) {
@@ -76,6 +85,7 @@
 			self.view.center = self.controller.view.center;
 		}
 		self.activityIndicatorLabel.text = message;
+		self.activityIndicator.hidden = !animated;
 	}
 	else {
 		if (self.view.superview == nil) {

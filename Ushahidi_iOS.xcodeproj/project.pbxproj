@@ -1621,7 +1621,6 @@
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Libraries/Twitter/SAOAuthTwitterEngine\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
@@ -1640,7 +1639,6 @@
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Libraries/Twitter/SAOAuthTwitterEngine\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
@@ -1678,7 +1676,6 @@
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Libraries/Twitter/SAOAuthTwitterEngine\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
@@ -1716,7 +1713,6 @@
 				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Libraries/Twitter/SAOAuthTwitterEngine\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;

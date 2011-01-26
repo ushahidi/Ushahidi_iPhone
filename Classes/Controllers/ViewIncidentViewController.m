@@ -296,6 +296,7 @@ typedef enum {
 			}
 			else {
 				[cell setImage:nil];
+				photo.indexPath = indexPath;
 				[[Ushahidi sharedUshahidi] downloadPhoto:self.incident photo:photo forDelegate:self];
 			}
 		}
@@ -505,7 +506,7 @@ typedef enum {
 
 - (void) smsSent:(SMS *)theSms {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) animated:NO];
 	[self.loadingView hideAfterDelay:2.5];
 }
 
@@ -524,7 +525,7 @@ typedef enum {
 
 - (void) emailSent:(Email *)email {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) animated:NO];
 	[self.loadingView hideAfterDelay:2.5];
 }
 

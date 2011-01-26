@@ -153,7 +153,6 @@ typedef enum {
 	}
 	if (event != nil) {
 		UIView *toolbar = [[event.allTouches anyObject] view];
-		DLog(@"toolbar: %@", toolbar);
 		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
 		[self.itemPicker showWithItems:items withSelected:[self.category title] forRect:rect];
 	}
@@ -423,6 +422,10 @@ typedef enum {
 	}
 	else if (self.incidentMapView.superview != nil) {
 		[self populateMapPins:reload];
+	}
+	if ([self.filteredRows count] == 0) {
+		[self.loadingView showWithMessage:NSLocalizedString(@"No Reports", nil) animated:NO];
+		[self.loadingView hideAfterDelay:1.0];					 
 	}
 } 
 

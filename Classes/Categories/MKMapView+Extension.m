@@ -89,11 +89,13 @@
 - (void) resizeRegionToFitAllPins:(BOOL)includeUserLocation animated:(BOOL)animated {
 	if ([self.annotations count] == 1) {
 		NSObject<MKAnnotation> *annotation = [self.annotations objectAtIndex:0];
-		if (includeUserLocation && [annotation isKindOfClass:MKUserLocation.class]) {
+		BOOL isUserLocation = [annotation isKindOfClass:MKUserLocation.class];
+		if ((includeUserLocation && isUserLocation) ||
+			isUserLocation == NO) {
 			CLLocationCoordinate2D coordinate;
 			coordinate.latitude = annotation.coordinate.latitude;
 			coordinate.longitude = annotation.coordinate.longitude;
-			[self setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.05f, 0.05f)) animated:animated];		
+			[self setRegion:MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.05f, 0.05f)) animated:animated];
 		}
 	}
 	else if ([self.annotations count] > 1){
@@ -106,13 +108,9 @@
 		bottomRightCoordinate.longitude = -180;
 		
 		for (NSObject<MKAnnotation> *annotation in self.annotations) {
-			if (includeUserLocation && [annotation isKindOfClass:MKUserLocation.class]) {
-				topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude);
-				topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude);
-				bottomRightCoordinate.latitude = fmin(bottomRightCoordinate.latitude, annotation.coordinate.latitude);
-				bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude);
-			}
-			else if (includeUserLocation == NO && [annotation isKindOfClass:MKUserLocation.class] == NO) {
+			BOOL isUserLocation = [annotation isKindOfClass:MKUserLocation.class];
+			if ((includeUserLocation && isUserLocation) ||
+				isUserLocation == NO) {
 				topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude);
 				topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude);
 				bottomRightCoordinate.latitude = fmin(bottomRightCoordinate.latitude, annotation.coordinate.latitude);

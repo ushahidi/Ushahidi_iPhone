@@ -160,7 +160,14 @@ typedef enum {
 		}
 		[message appendFormat:@"</ul>"];
 	}
-	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title withPhotos:self.incident.photoImages];
+	NSMutableArray *photos = [NSMutableArray array];
+	if (self.incident.map != nil) {
+		[photos addObject:self.incident.map];
+	}
+	if ([self.incident.photos count] > 0) {
+		[photos addObjectsFromArray:self.incident.photoImages];
+	}
+	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title withPhotos:photos];
 }
 
 #pragma mark -
@@ -208,7 +215,7 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through reports, the SMS button to send the report URL or the Email button to send the report details.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through reports, the SMS button to send the report URL, the Tweet button to share on Twitter or the Email button to send the report details.", nil)];
 }
 
 - (void)dealloc {

@@ -539,6 +539,8 @@ typedef enum {
 				[cell setUploading:NO];
 			}
 		}
+		[self.loadingView showWithMessage:NSLocalizedString(@"Uploaded", nil)];
+		[self.loadingView hideAfterDelay:1.0];
 	}
 	else {
 		DLog(@"Incident is NULL");

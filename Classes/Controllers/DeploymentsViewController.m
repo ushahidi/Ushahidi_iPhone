@@ -49,6 +49,8 @@ typedef enum {
 
 - (IBAction) add:(id)sender {
 	DLog(@"");
+	self.tableView.editing = NO;
+	self.editButton.title = NSLocalizedString(@"Edit", nil);
 	[self presentModalViewController:self.addDeploymentViewController animated:YES];
 }
 
@@ -65,6 +67,8 @@ typedef enum {
 
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
+	self.tableView.editing = NO;
+	self.editButton.title = NSLocalizedString(@"Edit", nil);
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[self.loadingView performSelector:@selector(hide) withObject:nil afterDelay:0.6]; 
 }
@@ -72,12 +76,15 @@ typedef enum {
 - (void) info:(id)sender {
 	DLog(@"");
 	self.tableView.editing = NO;
+	self.editButton.title = NSLocalizedString(@"Edit", nil);
 	self.infoViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:self.infoViewController animated:YES];
 }
 
 - (IBAction) tableSortChanged:(id)sender {
 	DLog(@"");
+	self.tableView.editing = NO;
+	self.editButton.title = NSLocalizedString(@"Edit", nil);
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
 	if (segmentControl.selectedSegmentIndex == TableSortDate) {
 		DLog(@"TableSortDate");

@@ -513,16 +513,18 @@ typedef enum {
 
 - (void) smsSent:(SMS *)theSms {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) afterDelay:1.0];
 	[self.loadingView hideAfterDelay:2.5];
 }
 
 - (void) smsCancelled:(SMS *)theSms {
 	DLog(@"");
+	[self.loadingView hide];
 }
 
 - (void) smsFailed:(SMS *)theSms {
 	DLog(@"");
+	[self.loadingView hide];
 	[self.alertView showOkWithTitle:NSLocalizedString(@"SMS Failed", nil) 
 						 andMessage:NSLocalizedString(@"Unable To Send SMS", nil)];
 }

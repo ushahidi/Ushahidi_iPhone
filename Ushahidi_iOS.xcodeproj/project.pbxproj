@@ -172,6 +172,7 @@
 		3E8637E612246A64001DE141 /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8637E512246A64001DE141 /* NSDictionary+Extension.m */; };
 		3E8638C412247BAC001DE141 /* MKMapView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8638C312247BAC001DE141 /* MKMapView+Extension.m */; };
 		3E8F5B7312B2C82C0087A64D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F5B7212B2C82C0087A64D /* iTunesArtwork */; };
+		3E91383E12F73F4800F8369F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E91383C12F73F4800F8369F /* Localizable.strings */; };
 		3E91985A1293A81F005AC005 /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9198591293A81F005AC005 /* Locator.m */; };
 		3E9198A61293AD09005AC005 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9198A51293AD09005AC005 /* CoreLocation.framework */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
@@ -502,6 +503,7 @@
 		3E8638C212247BAC001DE141 /* MKMapView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Extension.h"; sourceTree = "<group>"; };
 		3E8638C312247BAC001DE141 /* MKMapView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Extension.m"; sourceTree = "<group>"; };
 		3E8F5B7212B2C82C0087A64D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		3E91383D12F73F4800F8369F /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E9198581293A81F005AC005 /* Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locator.h; sourceTree = "<group>"; };
 		3E9198591293A81F005AC005 /* Locator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locator.m; sourceTree = "<group>"; };
 		3E9198A51293AD09005AC005 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -761,6 +763,7 @@
 		3E8629C71222BBC2001DE141 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E91382F12F73A1900F8369F /* Localizations */,
 				3E862A3C1222BCE9001DE141 /* Images */,
 				3E862A3D1222BCF2001DE141 /* NIBs */,
 			);
@@ -1137,6 +1140,14 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		3E91382F12F73A1900F8369F /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				3E91383C12F73F4800F8369F /* Localizable.strings */,
+			);
+			path = Localizations;
+			sourceTree = "<group>";
+		};
 		3EBBD5F712DCA73E007ECE4B /* MGTwitterEngine */ = {
 			isa = PBXGroup;
 			children = (
@@ -1330,6 +1341,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Ushahidi;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Ushahidi_iOS" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
@@ -1344,6 +1358,9 @@
 				es,
 				it,
 				en,
+				nl,
+				pt,
+				pl,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1458,6 +1475,7 @@
 				3E72992E12EF262A00FDED00 /* arrow_down@2x.png in Resources */,
 				3E72996C12EF30C500FDED00 /* selected@2x.png in Resources */,
 				3E72996E12EF30D100FDED00 /* unselected@2x.png in Resources */,
+				3E91383E12F73F4800F8369F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1598,6 +1616,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3E91383C12F73F4800F8369F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E91383D12F73F4800F8369F /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

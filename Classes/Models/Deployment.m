@@ -198,106 +198,106 @@
 #pragma mark Categories
 
 - (NSString *) getCategories {
-	return [self.url appendUrlStringWithFormat:@"/api?task=categories&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=categories&resp=json"];
 }
 
 - (NSString *) getCategoryByID:(NSString *)categoryID {
-	return [self.url appendUrlStringWithFormat:@"/api?task=categories&by=%@&resp=json", categoryID];
+	return [self.url appendUrlStringWithFormat:@"api?task=categories&by=%@&resp=json", categoryID];
 }
 
 #pragma mark -
 #pragma mark Countries
 
 - (NSString *) getCountries {
-	return [self.url appendUrlStringWithFormat:@"/api?task=countries&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=countries&resp=json"];
 }
 
 - (NSString *) getCountryByID:(NSString *)countryID {
-	return [self.url appendUrlStringWithFormat:@"/api?task=country&by=%@&resp=json", countryID];
+	return [self.url appendUrlStringWithFormat:@"api?task=country&by=%@&resp=json", countryID];
 }
 
 - (NSString *) getCountryByISO:(NSString *)countryISO {
-	return [self.url appendUrlStringWithFormat:@"/api?task=country&by=countryiso&iso=%@&resp=json", countryISO];
+	return [self.url appendUrlStringWithFormat:@"api?task=country&by=countryiso&iso=%@&resp=json", countryISO];
 }
 
 - (NSString *) getCountryByName:(NSString *)countryName {
-	return [self.url appendUrlStringWithFormat:@"/api?task=country&by=countryname&name=%@&resp=json", countryName];
+	return [self.url appendUrlStringWithFormat:@"api?task=country&by=countryname&name=%@&resp=json", countryName];
 }
 
 #pragma mark -
 #pragma mark Locations
 
 - (NSString *) getLocations {
-	return	[self.url appendUrlStringWithFormat:@"/api?task=locations&resp=json"];
+	return	[self.url appendUrlStringWithFormat:@"api?task=locations&resp=json"];
 }
 
 - (NSString *) getLocationByID:(NSString *)locationID {
-	return [self.url appendUrlStringWithFormat:@"/api?task=location&by=locid&id=%@&resp=json", locationID];
+	return [self.url appendUrlStringWithFormat:@"api?task=location&by=locid&id=%@&resp=json", locationID];
 }
 
 - (NSString *) getLocationsByCountryID:(NSString *)countryID {
-	return [self.url appendUrlStringWithFormat:@"/api?task=location&by=country&id=%@&resp=json", countryID];
+	return [self.url appendUrlStringWithFormat:@"api?task=location&by=country&id=%@&resp=json", countryID];
 }
 
 #pragma mark -
 #pragma mark Incidents
 
 - (NSString *) getIncidents {
-	return [self.url appendUrlStringWithFormat:@"/api?task=incidents&by=all&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=incidents&by=all&resp=json"];
 }
 
 - (NSString *) getIncidentsByCategoryID:(NSString *)categoryID {
-	return [self.url appendUrlStringWithFormat:@"/api?task=incidents&by=catid&id=%@&resp=json", categoryID];
+	return [self.url appendUrlStringWithFormat:@"api?task=incidents&by=catid&id=%@&resp=json", categoryID];
 }
 
 - (NSString *) getIncidentsByCategoryName:(NSString *)categoryName {
-	return [self.url appendUrlStringWithFormat:@"/api?task=incidents&by=catname&name=%@&resp=json", categoryName];
+	return [self.url appendUrlStringWithFormat:@"api?task=incidents&by=catname&name=%@&resp=json", categoryName];
 }
 
 - (NSString *) getIncidentsByLocationID:(NSString *)locationID {
-	return [self.url appendUrlStringWithFormat:@"/api?task=incidents&by=locid&id=%@&resp=json", locationID];
+	return [self.url appendUrlStringWithFormat:@"api?task=incidents&by=locid&id=%@&resp=json", locationID];
 }
 
 - (NSString *) getIncidentsByLocationName:(NSString *)locationName {
-	return [self.url appendUrlStringWithFormat:@"/api?task=incidents&by=locname&name=%@&resp=json", locationName];
+	return [self.url appendUrlStringWithFormat:@"api?task=incidents&by=locname&name=%@&resp=json", locationName];
 }
 
 - (NSString *) getIncidentsBySinceID:(NSString *)theSinceID {
-	return [self.url appendUrlStringWithFormat:@"/api?task=incidents&by=sinceid&id=%@&resp=json", theSinceID];
+	return [self.url appendUrlStringWithFormat:@"api?task=incidents&by=sinceid&id=%@&resp=json", theSinceID];
 }
 
 - (NSString *) getIncidentCount {
-	return [self.url appendUrlStringWithFormat:@"/api?task=incidentcount&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=incidentcount&resp=json"];
 }
 
 - (NSString *) getGeoGraphicMidPoint {
-	return [self.url appendUrlStringWithFormat:@"/api?task=geographicmidpoint&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=geographicmidpoint&resp=json"];
 }
 
 #pragma mark -
 #pragma mark System
 
 - (NSString *) getDeploymentVersion {
-	return [self.url appendUrlStringWithFormat:@"/api?task=version&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=version&resp=json"];
 }
 
 #pragma mark -
 #pragma mark Posts
 
 - (NSString *) getPostReport {
-	return [self.url appendUrlStringWithFormat:@"/api?task=report&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=report&resp=json"];
 }
 
 - (NSString *) getPostNews {
-	return [self.url appendUrlStringWithFormat:@"/api?task=tagnews&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=tagnews&resp=json"];
 }
 
 - (NSString *) getPostVideo {
-	return [self.url appendUrlStringWithFormat:@"/api?task=tagvideo&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=tagvideo&resp=json"];
 }
 
 - (NSString *) getPostPhoto {
-	return [self.url appendUrlStringWithFormat:@"/api?task=tagphoto&resp=json"];
+	return [self.url appendUrlStringWithFormat:@"api?task=tagphoto&resp=json"];
 }
 
 @end

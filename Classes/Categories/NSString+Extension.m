@@ -84,7 +84,8 @@ NSDictionary *entities;
     va_start(arguments, format);
 	
     NSString *formattedString = [[NSString alloc] initWithFormat:format arguments:arguments];
-    NSURL *domainURL = [NSURL URLWithString:self];
+	NSURL *domainURL = [NSURL URLWithString:self];
+	
 	NSURL *fullURL = [NSURL URLWithString:formattedString relativeToURL:domainURL];
 	[formattedString release];
 	

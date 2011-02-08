@@ -20,12 +20,11 @@
 
 #import "MapDialog.h"
 #import "NSObject+Extension.h"
+#import "NSString+Extension.h"
 
 @interface MapDialog () 
 
 @property (nonatomic, assign) id<MapDialogDelegate>	delegate;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *url;
 @property (nonatomic, retain) UITextField *nameField;
 @property (nonatomic, retain) UITextField *urlField;
 
@@ -37,13 +36,21 @@
 
 @implementation MapDialog
 
-@synthesize delegate, name, url, nameField, urlField;
+@synthesize delegate, nameField, urlField;
 
 - (id) initForDelegate:(id<MapDialogDelegate>)theDelegate {
 	if (self = [super init]) {
 		self.delegate = theDelegate;
 	}
     return self;
+}
+
+- (void)dealloc {
+	DLog(@"");
+	delegate = nil;
+	[nameField release];
+	[urlField release];
+	[super dealloc];
 }
 
 - (void) showWithTitle:(NSString *)theTitle name:(NSString *)theName url:(NSString *)theUrl {
@@ -63,7 +70,7 @@
 	
 	self.urlField = [self getTextField:CGRectMake(12.0, 85.0, 260.0, 25.0)
 								  text:theUrl 
-						   placeholder:NSLocalizedString(@"Enter url", nil) 
+						   placeholder:NSLocalizedString(@"Enter URL", nil) 
 						  keyboardType:UIKeyboardTypeURL
 				autocapitalizationType:UITextAutocapitalizationTypeNone];
 	[alertView addSubview:self.urlField];
@@ -90,6 +97,9 @@
 	return [textField autorelease];
 }
 
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
 - (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (buttonIndex == alert.cancelButtonIndex) {
 		[self dispatchSelector:@selector(mapDialogCancelled:) 
@@ -99,33 +109,40 @@
 	else {
 		[self dispatchSelector:@selector(mapDialogReturned:name:url:) 
 						target:self.delegate 
-					   objects:self, self.name, self.url, nil];
+					   objects:self, self.nameField.text, self.urlField.text, nil];
 	}
 }
 
+#pragma mark -
+#pragma mark UITextFieldDelegate
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	DLog(@"replacementString: %@", string);
 	if ([string isEqualToString:@"\n"]) {
 		[textField resignFirstResponder];
 		return NO;
 	}
-	else if (textField == self.nameField) {
-		self.name = [textField.text stringByReplacingCharactersInRange:range withString:string];
-	}
-	else if (textField == self.urlField) {
-		self.url = [textField.text stringByReplacingCharactersInRange:range withString:string];
+	if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"]) {
+		if (textField == self.urlField && [textField.text isEqualToString:@"http://"]) {
+			textField.text = string;
+			return NO;
+		}
 	}
 	return YES;
 }
 
-- (void)dealloc {
-	DLog(@"");
-	delegate = nil;
-	[name release];
-	[url release];
-	[nameField release];
-	[urlField release];
-	[super dealloc];
-}
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+	if (textField == self.urlField && [NSString isNilOrEmpty:textField.text]) {
+		textField.text = @"http://";
+	}
+	return YES;
+}   
+  
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+	if (textField == self.urlField && [textField.text isEqualToString:@"http://"]) {
+		textField.text = nil;
+	}
+	return YES;
+} 
 
 @end
-

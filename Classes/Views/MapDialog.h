@@ -26,8 +26,6 @@
 	
 @private
 	id<MapDialogDelegate> delegate;
-	NSString *name;
-	NSString *url;
 	UITextField *nameField;
 	UITextField *urlField;
 }

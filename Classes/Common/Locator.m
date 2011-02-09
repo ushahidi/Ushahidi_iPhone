@@ -55,7 +55,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 - (void)detectLocationForDelegate:(id<LocatorDelegate>)theDelegate {
 	self.delegate = theDelegate;
 	if (self.latitude != nil && self.longitude != nil) {
-		[self dispatchSelector:@selector(locator:latitude:longitude:)
+		[self dispatchSelector:@selector(locatorFinished:latitude:longitude:)
 						target:self.delegate 
 					   objects:self, self.latitude, self.longitude, nil];	
 	}
@@ -71,6 +71,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 					   objects:self, self.latitude, self.longitude, nil];
 		[self.locationManager stopUpdatingLocation];
     }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+	[self dispatchSelector:@selector(locatorFailed:error:)
+					target:self.delegate 
+				   objects:self, error, nil];
 }
 
 @end

@@ -40,6 +40,15 @@
 	self.inputView = [[InputView alloc] initForDelegate:self];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	DLog(@"%@", self.nibName);
+	self.webViewController = nil;
+	self.loadingView = nil;
+	self.inputView = nil;
+	self.alertView = nil;
+}
+
 - (void)dealloc {
 	[webViewController release];
 	[loadingView release];
@@ -84,11 +93,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-	DLog(@"%@", self.nibName);
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 	DLog(@"%@", self.nibName);
 }
 

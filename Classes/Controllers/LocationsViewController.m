@@ -131,6 +131,15 @@ typedef enum {
 	[self.containerView addSubview:self.tableView];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.cancelButton = nil;
+	self.doneButton = nil;
+	self.mapView = nil;
+	self.viewMode = nil;
+	self.containerView = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[[Locator sharedLocator] detectLocationForDelegate:self];
 	self.location = self.incident.location;
@@ -302,11 +311,15 @@ typedef enum {
 #pragma mark -
 #pragma mark LocatorDelegate
 
-- (void) locator:(Locator *)locator latitude:(NSString *)userLatitude longitude:(NSString *)userLongitude {
+- (void) locatorFinished:(Locator *)locator latitude:(NSString *)userLatitude longitude:(NSString *)userLongitude {
 	DLog(@"locator: %@, %@", userLatitude, userLongitude);
 	self.currentLatitude = userLatitude;
 	self.currentLongitude = userLongitude;
 	[self.tableView reloadData];
+}
+
+- (void) locatorFailed:(Locator *)locator error:(NSError *)error {
+	DLog(@"error: %@", [error localizedDescription]);
 }
 
 #pragma mark -

@@ -100,6 +100,17 @@ typedef enum {
 	self.emailButton.enabled = [self.email canSend];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.twitterViewController = nil;
+	self.imageView = nil;
+	self.nextPrevious = nil;
+	self.emailButton = nil;
+	self.saveButton = nil;
+	self.tweetButton = nil;
+	self.email = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.imageView.image = self.image;
@@ -125,14 +136,6 @@ typedef enum {
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 - (void)dealloc {

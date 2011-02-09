@@ -58,6 +58,12 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.webView = nil;
+	self.backForwardButton = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.current != nil && self.website != nil && 

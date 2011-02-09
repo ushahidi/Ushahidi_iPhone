@@ -46,6 +46,7 @@
 
 @optional
 
-- (void) locator:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) locatorFinished:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) locatorFailed:(Locator *)locator error:(NSError *)error;
 
 @end

@@ -212,6 +212,19 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.addIncidentViewController = nil;
+	self.viewIncidentViewController = nil;
+	self.mapView = nil;
+	self.tableSort = nil;
+	self.mapType = nil;
+	self.incidentTableView = nil;
+	self.incidentMapView = nil;
+	self.pending = nil;
+	self.itemPicker = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	DLog(@"willBePushed: %d", self.willBePushed);

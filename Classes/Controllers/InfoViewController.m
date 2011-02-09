@@ -126,6 +126,11 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Version", nil) atSection:TableSectionVersion];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.email = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.userEmail = [[Settings sharedSettings] email];

@@ -149,6 +149,17 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.imagePickerController = nil;
+	self.categoriesViewController = nil;
+	self.locationsViewController = nil;
+	self.incidentsViewController = nil;
+	self.cancelButton = nil;
+	self.doneButton = nil;
+	self.datePicker = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.modalViewController == nil) {
@@ -480,13 +491,21 @@ typedef enum {
 #pragma mark -
 #pragma mark LocatorDelegate
 
-- (void) locator:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
+- (void) locatorFinished:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
 	DLog(@"locator: %@, %@", latitude, longitude);
 	if ([NSString isNilOrEmpty:self.incident.location] || [NSString isNilOrEmpty:self.incident.longitude]) {
 		self.incident.latitude = latitude;
 		self.incident.longitude = longitude;
 	}
 	[self setFooter:nil atSection:TableSectionLocation];
+	if (self.editing == NO) {
+		[self.tableView reloadData];
+	}
+}
+
+- (void) locatorFailed:(Locator *)locator error:(NSError *)error {
+	DLog(@"error: %@", [error localizedDescription]);
+	[self setFooter:NSLocalizedString(@"Error Detecting Location", nil) atSection:TableSectionLocation];
 	if (self.editing == NO) {
 		[self.tableView reloadData];
 	}

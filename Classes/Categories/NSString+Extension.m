@@ -20,7 +20,7 @@
 
 #import "NSString+Extension.h"
 
-NSDictionary *entities;
+static NSDictionary *entities;
 
 @implementation NSString (Extension)
 
@@ -204,13 +204,13 @@ NSDictionary *entities;
 						@"÷", @"&divide;", //division
 						nil];
 		}
-		NSString *escaped = [string stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		NSString *escaped = [[NSString alloc] initWithString:[string stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 		for (NSString *entity in [entities allKeys]) {
 			if ([escaped rangeOfString:entity].location != NSNotFound) {
 				escaped = [escaped stringByReplacingOccurrencesOfString:entity withString:[entities objectForKey:entity]];	
 			}
 		}
-		return escaped;
+		return [escaped autorelease];
 	}
 	return nil;
 }

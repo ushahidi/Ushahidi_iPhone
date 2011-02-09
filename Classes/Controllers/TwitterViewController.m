@@ -162,6 +162,15 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Password", nil) atSection:TableSectionPassword];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.cancelButton = nil;
+	self.doneButton = nil;
+	self.logoutButton = nil;
+	self.twitter = nil;
+	self.bitly = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	self.username = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterUsername];

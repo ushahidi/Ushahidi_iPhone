@@ -76,6 +76,13 @@
 #pragma mark -
 #pragma mark UIViewController
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.deploymentsViewController = nil;
+	self.incidentsViewController = nil;
+	self.viewIncidentViewController = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated:animated];

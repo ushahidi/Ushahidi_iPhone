@@ -197,6 +197,19 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Video", nil) atSection:TableSectionVideo];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.mapViewController = nil;
+	self.imageViewController = nil;
+	self.newsViewController = nil;
+	self.twitterViewController = nil;
+	self.nextPrevious = nil;
+	self.email = nil;
+	self.sms = nil;
+	self.moviePlayer = nil;
+	self.bitly = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	NSInteger index = [self.incidents indexOfObject:self.incident];

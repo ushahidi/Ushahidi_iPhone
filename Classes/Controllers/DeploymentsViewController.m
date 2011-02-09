@@ -112,6 +112,16 @@ typedef enum {
     [infoBarButton release];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.incidentsViewController = nil;
+	self.addDeploymentViewController = nil;
+	self.infoViewController = nil;
+	self.editButton = nil;
+	self.refreshButton = nil;
+	self.tableSort = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	DLog(@"willBePushed: %d", self.willBePushed);

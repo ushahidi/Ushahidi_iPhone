@@ -55,6 +55,13 @@
 	self.activityIndicatorBackground.layer.cornerRadius = 20.0f;
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.activityIndicator = nil;
+	self.activityIndicatorBackground = nil;
+	self.activityIndicatorLabel = nil;
+}
+
 - (void) show {
 	[self showWithMessage:NSLocalizedString(@"Loading...", nil) afterDelay:0.0 animated:YES];
 }

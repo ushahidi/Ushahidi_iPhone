@@ -98,6 +98,14 @@ typedef enum {
 	[super viewDidLoad];
 	[self showSearchBar:NO animated:NO];
 }
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.mapView = nil;
+	self.searchBar = nil;
+	self.mapType = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.locationName != nil) {

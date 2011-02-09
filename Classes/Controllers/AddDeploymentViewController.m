@@ -125,6 +125,15 @@ typedef enum {
 	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.cancelButton = nil;
+	self.refreshButton = nil;
+	self.tableSort = nil;
+	self.mapDialog = nil;
+	self.itemPicker = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	NSArray *mapsUnsorted = [[Ushahidi sharedUshahidi] getMaps];
@@ -319,13 +328,22 @@ typedef enum {
 #pragma mark -
 #pragma mark LocatorDelegate
 					
-- (void) locator:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
+- (void) locatorFinished:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
 	DLog(@"latitude: %@ longitude:%@", latitude, longitude);
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getMapsForDelegate:self 
 										 latitude:latitude
 										longitude:longitude
 										 distance:self.mapDistance];
+}
+
+- (void) locatorFailed:(Locator *)locator error:(NSError *)error {
+	DLog(@"error: %@", [error localizedDescription]);
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+	[[Ushahidi sharedUshahidi] getMapsForDelegate:self 
+										 latitude:nil
+										longitude:nil
+										 distance:nil];
 }
 
 #pragma mark -

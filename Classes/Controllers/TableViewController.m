@@ -177,6 +177,18 @@
 	}
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.tableView = nil;
+	self.toolBar = nil;
+	self.allRows = nil;
+	self.filteredRows = nil;
+	self.headers = nil;
+	self.footers = nil;
+	self.oddRowColor = nil;
+	self.evenRowColor = nil;
+}
+
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];

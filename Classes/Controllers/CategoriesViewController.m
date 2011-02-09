@@ -51,6 +51,12 @@
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search categories...", nil)];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.cancelButton = nil;
+	self.doneButton = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[self.allRows removeAllObjects];
 	[self.filteredRows removeAllObjects];

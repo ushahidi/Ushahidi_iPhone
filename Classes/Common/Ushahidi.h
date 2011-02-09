@@ -43,13 +43,15 @@
 	NSOperationQueue *mainQueue;
 	NSOperationQueue *mapQueue;
 	NSOperationQueue *photoQueue;
+	NSString *mapDistance;
 }
 
 + (Ushahidi *) sharedUshahidi;
 
 - (void) archive;
 
-- (NSArray *) getMapsForDelegate:(id<UshahidiDelegate>)delegate refresh:(BOOL)refresh;
+- (NSArray *) getMaps;
+- (NSArray *) getMapsForDelegate:(id<UshahidiDelegate>)delegate latitude:(NSString *)latitude longitude:(NSString *)longitude distance:(NSString *)distance;
 
 - (NSArray *) getDeploymentsUsingSorter:(SEL)sorter;
 - (void) loadDeployment:(Deployment *)deployment inBackground:(BOOL)inBackground;

@@ -43,12 +43,13 @@
 
 @interface Ushahidi ()
 
+@property(nonatomic, retain) Deployment *deployment;
 @property(nonatomic, retain) NSMutableDictionary *maps;
 @property(nonatomic, retain) NSMutableDictionary *deployments;
-@property(nonatomic, retain) Deployment *deployment;
 @property(nonatomic, retain) NSOperationQueue *mainQueue;
 @property(nonatomic, retain) NSOperationQueue *mapQueue;
 @property(nonatomic, retain) NSOperationQueue *photoQueue;
+@property(nonatomic, retain) NSString *mapDistance;
 
 - (ASIHTTPRequest *) queueAsynchronousRequest:(NSString *)url 
 								  forDelegate:(id<UshahidiDelegate>)delegate 
@@ -92,7 +93,7 @@
 
 @implementation Ushahidi
 
-@synthesize maps, deployments, deployment, mainQueue, mapQueue, photoQueue;
+@synthesize maps, deployments, deployment, mainQueue, mapQueue, photoQueue, mapDistance;
 
 typedef enum {
 	MediaTypeUnkown = 0,
@@ -136,6 +137,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[mainQueue release];
 	[mapQueue release];
 	[photoQueue release];
+	[mapDistance release];
 	[super dealloc];
 }
 
@@ -266,18 +268,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Maps
 
-- (NSArray *) getMapsForDelegate:(id<UshahidiDelegate>)delegate refresh:(BOOL)refresh {
+- (NSArray *) getMaps {
 	if (self.maps == nil) {
 		self.maps = [NSKeyedUnarchiver unarchiveObjectWithKey:@"maps"];
 		if (self.maps == nil) self.maps = [[NSMutableDictionary alloc] init];
 	}
-	if ([self.maps count] == 0 || refresh) {
-		[self queueAsynchronousRequest:@"http://tracker.ushahidi.com/list/?return_vars=url,name,description,discovery_date" 
-						   forDelegate:delegate
-						 startSelector:@selector(getMapsStarted:)
-						finishSelector:@selector(getMapsFinished:)
-						  failSelector:@selector(getMapsFinished:)];	
+	return [self.maps allValues];
+}
+
+- (NSArray *) getMapsForDelegate:(id<UshahidiDelegate>)delegate latitude:(NSString *)latitude longitude:(NSString *)longitude distance:(NSString *)distance {
+	if (self.maps == nil) {
+		self.maps = [NSKeyedUnarchiver unarchiveObjectWithKey:@"maps"];
+		if (self.maps == nil) self.maps = [[NSMutableDictionary alloc] init];
 	}
+	self.mapDistance = distance;
+	NSMutableString *url = [NSMutableString stringWithFormat:@"http://tracker.ushahidi.com/list/?return_vars=url,name,description,discovery_date"];
+	if ([NSString isNilOrEmpty:latitude] == NO && [NSString isNilOrEmpty:longitude] == NO) {
+		[url appendFormat:@"&lat=%@", latitude];
+		[url appendFormat:@"&lon=%@", longitude];
+		if ([NSString isNilOrEmpty:distance] == NO) {
+			[url appendFormat:@"&distance=%@", distance];
+		}
+		else {
+			[url appendFormat:@"&distance=500"];
+		}
+		[url appendFormat:@"&units=km"];
+	}
+	[self queueAsynchronousRequest:url 
+					   forDelegate:delegate
+					 startSelector:@selector(getMapsStarted:)
+					finishSelector:@selector(getMapsFinished:)
+					  failSelector:@selector(getMapsFailed:)];
 	return [self.maps allValues];
 }
 
@@ -301,10 +322,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json != nil) {
+			if([self.mapDistance isEqualToString:[[Settings sharedSettings] mapDistance]] == NO) {
+				[[Settings sharedSettings] setMapDistance:self.mapDistance];
+				[self.maps removeAllObjects];
+			}
 			BOOL hasChanges = NO;
 			for (NSDictionary *dictionary in [json allValues]) {
 				NSString *url = [dictionary stringForKey:@"url"];
-				if ([self.maps objectForKey:url] == nil) {
+				if ([self.maps count] == 0 || [self.maps objectForKey:url] == nil) {
 					NSString *name = [dictionary stringForKey:@"name"];
 					if ([NSString isNilOrEmpty:name] == NO) {
 						Deployment *map = [[Deployment alloc] initWithDictionary:dictionary];

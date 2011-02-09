@@ -22,8 +22,13 @@
 #import "TableViewController.h"
 #import "Ushahidi.h"
 #import "MapDialog.h"
+#import "Locator.h"
+#import "ItemPicker.h"
 
-@interface AddDeploymentViewController : TableViewController<UshahidiDelegate, MapDialogDelegate> {
+@interface AddDeploymentViewController : TableViewController<UshahidiDelegate, 
+															 MapDialogDelegate, 
+															 LocatorDelegate, 
+															 ItemPickerDelegate> {
 	
 @public
 	UIBarButtonItem *cancelButton;
@@ -34,6 +39,8 @@
 	NSString *name;
 	NSString *url;
 	MapDialog *mapDialog;
+	ItemPicker *itemPicker;
+	NSString *mapDistance;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
@@ -42,7 +49,7 @@
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) add:(id)sender;
-- (IBAction) refresh:(id)sender;
+- (IBAction) refresh:(id)sender event:(UIEvent*)event;
 - (IBAction) tableSortChanged:(id)sender;
 
 @end

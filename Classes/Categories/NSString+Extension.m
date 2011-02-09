@@ -48,8 +48,9 @@ NSDictionary *entities;
 }
 
 - (NSString *)stringByTrimmingSuffix:(NSString *)suffix {
-    if([self hasSuffix:suffix])
+    if([self hasSuffix:suffix]) {
 		self = [self substringToIndex:[self length] - [suffix length]];
+	}
     return self;
 }
 

@@ -33,8 +33,8 @@
 @implementation Deployment
 
 @synthesize identifier, name, description, url, domain;
-@synthesize categories, locations, incidents, pending;
-@synthesize discovered, synced, added, sinceID;
+@synthesize categories, locations, incidents;
+@synthesize discovered, synced, added, sinceID, pending;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
@@ -58,8 +58,14 @@
 	if (self = [super init]){
 		self.identifier = [dictionary stringForKey:@"id"];
 		self.url = [dictionary stringForKey:@"url"];
-		self.name = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"name"]];
-		self.description = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"description"]];
+		
+		//TODO Properly escape Name and Description
+		self.name = [dictionary stringForKey:@"name"];
+		self.description = [dictionary stringForKey:@"description"];
+		
+		//self.name = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"name"]];
+		//self.description = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"description"]];
+		
 		self.discovered = [dictionary dateForKey:@"discovery_date"];
 		self.added = [NSDate date];
 		if ([self.url hasPrefix:@"http://"]) {

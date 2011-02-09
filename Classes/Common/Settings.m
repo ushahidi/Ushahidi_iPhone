@@ -29,7 +29,7 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
-@synthesize email, firstName, lastName, lastDeployment, lastIncident, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
+@synthesize email, firstName, lastName, lastDeployment, lastIncident, mapDistance, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -44,6 +44,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		if (self.imageWidth == 0) self.imageWidth = 600;
 		self.mapZoomLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"mapZoomLevel"];
 		if (self.mapZoomLevel == 0) self.mapZoomLevel = 12;
+		self.mapDistance = [[NSUserDefaults standardUserDefaults] stringForKey:@"mapDistance"];
+		if (self.mapDistance == nil) self.mapDistance = @"500";
 	}
 	return self;
 }
@@ -54,6 +56,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[lastName release];
 	[lastDeployment release];
 	[lastIncident release];
+	[mapDistance release];
 	[super dealloc];
 }
 
@@ -68,6 +71,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[[NSUserDefaults standardUserDefaults] setBool:self.becomeDiscrete forKey:@"becomeDiscrete"];
 	[[NSUserDefaults standardUserDefaults] setFloat:self.imageWidth forKey:@"imageWidth"];
 	[[NSUserDefaults standardUserDefaults] setInteger:self.mapZoomLevel forKey:@"mapZoomLevel"];
+	[[NSUserDefaults standardUserDefaults] setObject:self.mapDistance forKey:@"mapDistance"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

@@ -115,7 +115,7 @@
 #pragma mark SubtitleTableCell
 
 + (SubtitleTableCell *) getSubtitleTableCellWithForTable:(UITableView *)tableView  
-												   indexPath:(NSIndexPath *)indexPath {
+											   indexPath:(NSIndexPath *)indexPath {
 	SubtitleTableCell *cell = (SubtitleTableCell *)[tableView dequeueReusableCellWithIdentifier:@"SubtitleTableCell"];
 	if (cell == nil) {
 		cell = [[[SubtitleTableCell alloc] initWithIdentifier:@"SubtitleTableCell"] autorelease];
@@ -133,7 +133,7 @@
 										  indexPath:(NSIndexPath *)indexPath  {
 	SliderTableCell *cell = (SliderTableCell *)[tableView dequeueReusableCellWithIdentifier:@"SliderTableCell"];
 	if (cell == nil) {
-		cell = [[[SliderTableCell alloc] initForDelegate:(id<SliderTableCellDelegate>)delegate reuseIdentifier:@"SliderTableCell"] autorelease];
+		cell = [[[SliderTableCell alloc] initForDelegate:delegate reuseIdentifier:@"SliderTableCell"] autorelease];
 	}
 	cell.indexPath = indexPath;
 	return cell;

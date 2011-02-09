@@ -29,6 +29,9 @@
 #import "Deployment.h"
 #import "DeploymentTableCell.h"
 #import "NSString+Extension.h"
+#import "Settings.h"
+
+#define kKilometerPrefix @" km"
 
 typedef enum {
 	TableSortDate,
@@ -40,6 +43,8 @@ typedef enum {
 @property(nonatomic, retain) NSString *name;
 @property(nonatomic, retain) NSString *url;
 @property(nonatomic, retain) MapDialog *mapDialog;
+@property(nonatomic, retain) NSString *mapDistance;
+@property(nonatomic, retain) ItemPicker *itemPicker;
 
 - (void) dismissModalView;
 
@@ -47,7 +52,7 @@ typedef enum {
 
 @implementation AddDeploymentViewController
 
-@synthesize cancelButton, refreshButton, tableSort, name, url, mapDialog;
+@synthesize cancelButton, refreshButton, tableSort, name, url, mapDialog, mapDistance, itemPicker;
 
 #pragma mark -
 #pragma mark Private
@@ -69,11 +74,18 @@ typedef enum {
 							  url:nil];
 }
 
-- (IBAction) refresh:(id)sender {
+- (IBAction) refresh:(id)sender event:(UIEvent *)event {
 	DLog(@"");
-	self.refreshButton.enabled = NO;
-	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-	[[Ushahidi sharedUshahidi] getMapsForDelegate:self refresh:YES];
+	NSArray *items = [NSArray arrayWithObjects:@"50 km", @"100 km", @"250 km", @"500 km", @"750 km", @"1000 km", @"1500 km", nil];
+	NSString *selected = [NSString isNilOrEmpty:self.mapDistance] ? nil : [NSString stringWithFormat:@"%@%@", self.mapDistance, kKilometerPrefix];
+	if (event != nil) {
+		UIView *toolbar = [[event.allTouches anyObject] view];
+		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
+		[self.itemPicker showWithItems:items withSelected:selected forRect:rect];
+	}
+	else {
+		[self.itemPicker showWithItems:items withSelected:selected forRect:CGRectMake(100, self.view.frame.size.height, 0, 0)];	
+	}
 }
 
 - (IBAction) cancel:(id)sender {
@@ -109,27 +121,39 @@ typedef enum {
 	self.evenRowColor = [UIColor ushahidiLiteBrown];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
 	self.mapDialog = [[MapDialog alloc] initForDelegate:self];
+	self.mapDistance = [[Settings sharedSettings] mapDistance];
+	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	SEL sorter = self.tableSort.selectedSegmentIndex == TableSortDate
-		? @selector(compareByDiscovered:) : @selector(compareByName:);
-	
-	NSArray *mapsUnsorted = [[Ushahidi sharedUshahidi] getMapsForDelegate:self refresh:NO];
-	NSArray *mapsSorted = [mapsUnsorted sortedArrayUsingSelector:sorter];
-	
-	if ([mapsSorted count] == 0) {
-		self.refreshButton.enabled = NO;
-		[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+	NSArray *mapsUnsorted = [[Ushahidi sharedUshahidi] getMaps];
+	NSArray *mapsSorted = self.tableSort.selectedSegmentIndex == TableSortDate 
+		? [mapsUnsorted sortedArrayUsingSelector:@selector(compareByDiscovered:)]
+		: [mapsUnsorted sortedArrayUsingSelector:@selector(compareByName:)];
+	if ([mapsSorted count] > 0) {
+		[self.allRows removeAllObjects];
+		[self.allRows addObjectsFromArray:mapsSorted];
+		[self.filteredRows removeAllObjects];
+		NSString *searchText = [self getSearchText];
+		for (Deployment *map in mapsSorted) {
+			if ([map matchesString:searchText]) {
+				[self.filteredRows addObject:map];
+			}
+		}
 	}
-	[self.allRows removeAllObjects];
-	[self.allRows addObjectsFromArray:mapsSorted];
-	[self.filteredRows removeAllObjects];
-	NSString *searchText = [self getSearchText];
-	for (Deployment *map in mapsSorted) {
-		if ([map matchesString:searchText]) {
-			[self.filteredRows addObject:map];
+	else {
+		self.refreshButton.enabled = NO;
+		if ([NSString isNilOrEmpty:[Locator sharedLocator].latitude] && [NSString isNilOrEmpty:[Locator sharedLocator].longitude]) {
+			[[Locator sharedLocator] detectLocationForDelegate:self];
+			[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
+		}
+		else {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+			[[Ushahidi sharedUshahidi] getMapsForDelegate:self 
+												 latitude:[Locator sharedLocator].latitude
+												longitude:[Locator sharedLocator].longitude
+												 distance:self.mapDistance];
 		}
 	}
 	[self.tableView reloadData];
@@ -147,6 +171,9 @@ typedef enum {
 	[name release];
 	[url release];
 	[mapDialog release];
+	[itemPicker release];
+	[mapDistance release];
+	[itemPicker release];
 	[super dealloc];
 }
 
@@ -286,6 +313,37 @@ typedef enum {
 		[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Details", nil) 
 								 name:self.name 
 								  url:self.url];	
+	}
+}
+	
+#pragma mark -
+#pragma mark LocatorDelegate
+					
+- (void) locator:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
+	DLog(@"latitude: %@ longitude:%@", latitude, longitude);
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+	[[Ushahidi sharedUshahidi] getMapsForDelegate:self 
+										 latitude:latitude
+										longitude:longitude
+										 distance:self.mapDistance];
+}
+
+#pragma mark -
+#pragma mark ItemPickerDelegate
+
+- (void) itemPickerReturned:(ItemPicker *)theItemPicker item:(NSString *)item {
+	self.mapDistance = [item stringByReplacingOccurrencesOfString:kKilometerPrefix withString:@""];
+	self.refreshButton.enabled = NO;
+	if ([NSString isNilOrEmpty:[Locator sharedLocator].latitude] && [NSString isNilOrEmpty:[Locator sharedLocator].longitude]) {
+		[[Locator sharedLocator] detectLocationForDelegate:self];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
+	}
+	else {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+		[[Ushahidi sharedUshahidi] getMapsForDelegate:self 
+											 latitude:[Locator sharedLocator].latitude
+											longitude:[Locator sharedLocator].longitude
+											 distance:self.mapDistance];
 	}
 }
 

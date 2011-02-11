@@ -66,7 +66,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
     if (abs([newLocation.timestamp timeIntervalSinceNow]) < 15.0) {
 		self.latitude = [NSString stringWithFormat:@"%.6f", newLocation.coordinate.latitude];
 		self.longitude = [NSString stringWithFormat:@"%.6f", newLocation.coordinate.longitude];
-        [self dispatchSelector:@selector(locator:latitude:longitude:)
+        [self dispatchSelector:@selector(locatorFinished:latitude:longitude:)
 						target:self.delegate 
 					   objects:self, self.latitude, self.longitude, nil];
 		[self.locationManager stopUpdatingLocation];

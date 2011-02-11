@@ -59,12 +59,8 @@
 		self.identifier = [dictionary stringForKey:@"id"];
 		self.url = [dictionary stringForKey:@"url"];
 		
-		//TODO Properly escape Name and Description
-		self.name = [dictionary stringForKey:@"name"];
-		self.description = [dictionary stringForKey:@"description"];
-		
-		//self.name = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"name"]];
-		//self.description = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"description"]];
+		self.name = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"name"]];
+		self.description = [NSString stringByEscapingCharacters:[dictionary stringForKey:@"description"]];
 		
 		self.discovered = [dictionary dateForKey:@"discovery_date"];
 		self.added = [NSDate date];

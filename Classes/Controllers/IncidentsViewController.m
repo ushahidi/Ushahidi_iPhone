@@ -39,7 +39,9 @@
 #import "TableHeaderView.h"
 #import "IncidentTableView.h"
 #import "IncidentMapView.h"
+#import "CheckinMapView.h"
 #import "Internet.h"
+#import "Checkin.h"
 
 @interface IncidentsViewController ()
 
@@ -50,7 +52,8 @@
 
 - (void) updateSyncedLabel;
 - (void) pushViewIncidentsViewController;
-- (void) populateMapPins:(BOOL)resizeMap;
+- (void) populateReportPins:(BOOL)resizeMap;
+- (void) populateCheckinPins:(BOOL)resizeMap;
 
 - (void) mainQueueFinished;
 - (void) mapQueueFinished;
@@ -60,12 +63,15 @@
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController, mapView, deployment, tableSort, mapType, pending;
-@synthesize incidentTableView, incidentMapView, itemPicker, categories, category;
+@synthesize addIncidentViewController, viewIncidentViewController;
+@synthesize deployment, tableSort, mapType, viewMode, pending;
+@synthesize itemPicker, categories, category;
+@synthesize incidentTableView, incidentMapView, checkinMapView;
 
 typedef enum {
 	ViewModeTable,
-	ViewModeMap
+	ViewModeMap,
+	ViewModeCheckin
 } ViewMode;
 
 typedef enum {
@@ -82,18 +88,28 @@ typedef enum {
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) add:(id)sender {
+- (IBAction) addReport:(id)sender {
 	DLog(@"");
 	[self presentModalViewController:self.addIncidentViewController animated:YES];
 }
 
-- (IBAction) refresh:(id)sender {
+- (IBAction) addCheckin:(id)sender {
+	DLog(@"");
+}
+
+- (IBAction) refreshReports:(id)sender {
 	DLog(@"");
 	self.incidentTableView.refreshButton.enabled = NO;
 	self.incidentMapView.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
+}
+
+- (IBAction) refreshCheckins:(id)sender {
+	self.checkinMapView.refreshButton.enabled = NO;
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+	[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
 }
 
 - (IBAction) tableSortChanged:(id)sender {
@@ -110,9 +126,16 @@ typedef enum {
 	[self filterRows:YES];
 }
 
-- (IBAction) mapTypeChanged:(id)sender {
-	DLog(@"mapTypeChanged: %d", self.mapType.selectedSegmentIndex);
-	self.mapView.mapType = self.mapType.selectedSegmentIndex;
+- (IBAction) reportsMapTypeChanged:(id)sender {
+	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+	DLog(@"reportsMapTypeChanged: %d", segmentedControl.selectedSegmentIndex);
+	self.incidentMapView.mapView.mapType = segmentedControl.selectedSegmentIndex;
+}
+
+- (IBAction) checkinsMapTypeChanged:(id)sender {
+	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+	DLog(@"checkinsMapTypeChanged: %d", segmentedControl.selectedSegmentIndex);
+	self.checkinMapView.mapView.mapType = segmentedControl.selectedSegmentIndex;
 }
 
 - (IBAction) viewModeChanged:(id)sender {
@@ -125,6 +148,7 @@ typedef enum {
 		[UIView setAnimationDuration:0.6];
 		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
 		[self.incidentMapView removeFromSuperview];
+		[self.checkinMapView removeFromSuperview];
 		[self.view addSubview:self.incidentTableView];
 		[UIView commitAnimations];
 		self.incidentTableView.filterButton.enabled = [self.categories count] > 0;
@@ -135,18 +159,31 @@ typedef enum {
 		self.incidentMapView.frame = self.view.frame;
 		[UIView beginAnimations:@"ViewModeMap" context:nil];
 		[UIView setAnimationDuration:0.6];
-		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.view cache:YES];
+		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
 		[self.incidentTableView removeFromSuperview];
+		[self.checkinMapView removeFromSuperview];
 		[self.view addSubview:self.incidentMapView];
 		[UIView commitAnimations];
-		if ([self.mapView.annotations count] == 0) {
-			[self populateMapPins:YES];
+		if ([self.incidentMapView.mapView.annotations count] == 0) {
+			[self populateReportPins:YES];
 		}
 		self.incidentMapView.filterButton.enabled = [self.categories count] > 0;
 	}
+	else if (segmentControl.selectedSegmentIndex == ViewModeCheckin) {
+		DLog(@"ViewModeCheckin");
+		self.checkinMapView.frame = self.view.frame;
+		[UIView beginAnimations:@"ViewModeCheckin" context:nil];
+		[UIView setAnimationDuration:0.6];
+		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
+		[self.incidentTableView removeFromSuperview];
+		[self.incidentMapView removeFromSuperview];
+		[self.view addSubview:self.checkinMapView];
+		[UIView commitAnimations];
+		[self populateCheckinPins:YES];
+	}
 }
 
-- (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
+- (IBAction) reportsFilterChanged:(id)sender event:(UIEvent*)event {
 	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", nil)];
 	for (Category *theCategory in self.categories) {
 		[items addObject:theCategory.title];
@@ -161,6 +198,19 @@ typedef enum {
 	}
 }
 
+- (IBAction) checkinsFilterChanged:(id)sender event:(UIEvent*)event {
+	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CHECKINS --- ", nil)];
+	//TODO populate with user names
+	if (event != nil) {
+		UIView *toolbar = [[event.allTouches anyObject] view];
+		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
+		[self.itemPicker showWithItems:items withSelected:nil forRect:rect];
+	}
+	else {
+		[self.itemPicker showWithItems:items withSelected:nil forRect:CGRectMake(100, self.view.frame.size.height, 0, 0)];	
+	}
+}
+
 - (void) updateSyncedLabel {
 	if (self.deployment.synced) {
 		[self setTableFooter:[NSString stringWithFormat:@"%@ %@", 
@@ -172,12 +222,12 @@ typedef enum {
 	}
 }
 
-- (void) populateMapPins:(BOOL)resizeMap {
-	self.mapView.showsUserLocation = NO;
-	[self.mapView removeAllPins];
-	self.mapView.showsUserLocation = YES;
+- (void) populateReportPins:(BOOL)resizeMap {
+	self.incidentMapView.mapView.showsUserLocation = NO;
+	[self.incidentMapView.mapView removeAllPins];
+	self.incidentMapView.mapView.showsUserLocation = YES;
 	for (Incident *incident in self.filteredRows) {
-		[self.mapView addPinWithTitle:incident.title 
+		[self.incidentMapView.mapView addPinWithTitle:incident.title 
 							 subtitle:incident.dateString 
 							 latitude:incident.latitude 
 							longitude:incident.longitude
@@ -185,7 +235,7 @@ typedef enum {
 							 pinColor:MKPinAnnotationColorRed];
 	}
 	for (Incident *incident in self.pending) {
-		[self.mapView addPinWithTitle:incident.title 
+		[self.incidentMapView.mapView addPinWithTitle:incident.title 
 							 subtitle:incident.dateString 
 							 latitude:incident.latitude 
 							longitude:incident.longitude 
@@ -193,8 +243,22 @@ typedef enum {
 							 pinColor:MKPinAnnotationColorPurple];
 	}
 	if (resizeMap) {
-		[self.mapView resizeRegionToFitAllPins:NO animated:YES];
+		[self.incidentMapView.mapView resizeRegionToFitAllPins:NO animated:YES];
 	}
+}
+
+- (void) populateCheckinPins:(BOOL)resizeMap {
+	NSArray *checkins = [[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
+	[self.checkinMapView.mapView removeAllPins];
+	for (Checkin *checkin in checkins) {
+		[self.checkinMapView.mapView addPinWithTitle:checkin.message 
+											subtitle:checkin.dateString 
+											latitude:checkin.latitude 
+										   longitude:checkin.longitude 
+											  object:checkin
+											pinColor:MKPinAnnotationColorRed];
+	}
+	[self.checkinMapView.mapView resizeRegionToFitAllPins:NO animated:YES];	
 }
 
 #pragma mark -
@@ -216,11 +280,12 @@ typedef enum {
     [super viewDidUnload];
 	self.addIncidentViewController = nil;
 	self.viewIncidentViewController = nil;
-	self.mapView = nil;
 	self.tableSort = nil;
 	self.mapType = nil;
+	self.viewMode = nil;
 	self.incidentTableView = nil;
 	self.incidentMapView = nil;
+	self.checkinMapView = nil;
 	self.pending = nil;
 	self.itemPicker = nil;
 }
@@ -272,11 +337,25 @@ typedef enum {
 			self.incidentMapView.filterButton.enabled = [self.categories count] > 0;
 		}
 		else if (self.incidentMapView.superview != nil) {
-			[self populateMapPins:YES];
+			[self populateReportPins:YES];
 		}
 	}
 	if (animated) {
 		[[Settings sharedSettings] setLastIncident:nil];
+	}
+	if ([[Ushahidi sharedUshahidi] deploymentSupportsCheckins]) {
+		if ([self.viewMode numberOfSegments] != ViewModeCheckin + 1) {
+			[self.viewMode insertSegmentWithImage:[UIImage imageNamed:@"checkin.png"] atIndex:ViewModeCheckin animated:NO];
+			CGRect rect = self.viewMode.frame;
+			rect.size.width = 120;
+			self.viewMode.frame = rect;
+		}
+	}
+	else {
+		[self.viewMode removeSegmentAtIndex:ViewModeCheckin animated:NO];
+		CGRect rect = self.viewMode.frame;
+		rect.size.width = 85;
+		self.viewMode.frame = rect;
 	}
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
@@ -298,14 +377,17 @@ typedef enum {
 - (void)dealloc {
 	[addIncidentViewController release];
 	[viewIncidentViewController release];
-	[mapView release];
 	[deployment release];
 	[tableSort release];
 	[mapType release];
+	[viewMode release];
 	[pending release];
 	[itemPicker release];
 	[categories release];
 	[category release];
+	[incidentTableView release];
+	[incidentMapView release];
+	[checkinMapView release];
     [super dealloc];
 }
 
@@ -434,7 +516,7 @@ typedef enum {
 		}
 	}
 	else if (self.incidentMapView.superview != nil) {
-		[self populateMapPins:reload];
+		[self populateReportPins:reload];
 	}
 } 
 
@@ -499,7 +581,7 @@ typedef enum {
 			[self.tableView flashScrollIndicators];	
 		}
 		else if (self.incidentMapView.superview != nil) {
-			[self populateMapPins:YES];
+			[self populateReportPins:YES];
 		}
 		DLog(@"Re-Adding Incidents");
 	}
@@ -622,6 +704,34 @@ typedef enum {
 
 - (void) photoQueueFinished {
 	DLog(@"");
+}
+
+- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins {
+	[self.loadingView showWithMessage:NSLocalizedString(@"Checkins...", nil)];
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges {
+	if (error != nil) {
+		DLog(@"error: %d %@", [error code], [error localizedDescription]);
+	}
+	else if (hasChanges) {
+		DLog(@"Re-Adding Checkins: %d", [checkins count]);
+		[self.checkinMapView.mapView removeAllPins];
+		for (Checkin *checkin in checkins) {
+			[self.checkinMapView.mapView addPinWithTitle:checkin.message 
+												subtitle:checkin.dateString 
+												latitude:checkin.latitude 
+											   longitude:checkin.longitude 
+												  object:checkin
+												pinColor:MKPinAnnotationColorRed];
+		}
+		[self.checkinMapView.mapView resizeRegionToFitAllPins:NO animated:YES];
+	}
+	else {
+		DLog(@"No Changes Checkins");
+	}
+	[self.loadingView hide];
+	self.checkinMapView.refreshButton.enabled = YES;
 }
 
 #pragma mark -

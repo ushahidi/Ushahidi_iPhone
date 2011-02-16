@@ -34,6 +34,7 @@
 @class Category;
 @class IncidentTableView;
 @class IncidentMapView;
+@class CheckinMapView;
 
 @interface IncidentsViewController : TableViewController<UshahidiDelegate, 
 														 MKMapViewDelegate, 
@@ -42,12 +43,13 @@
 @public
 	AddIncidentViewController *addIncidentViewController;
 	ViewIncidentViewController *viewIncidentViewController;
-	MKMapView *mapView;
 	Deployment *deployment;
 	UISegmentedControl *tableSort;
 	UISegmentedControl *mapType;
+	UISegmentedControl *viewMode;
 	IncidentTableView *incidentTableView;
 	IncidentMapView *incidentMapView;
+	CheckinMapView *checkinMapView;														
 															 
 @private
 	NSMutableArray *pending;
@@ -58,18 +60,27 @@
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
 @property(nonatomic,retain) IBOutlet ViewIncidentViewController *viewIncidentViewController;
-@property(nonatomic,retain) IBOutlet MKMapView *mapView;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *tableSort;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *viewMode;
 @property(nonatomic,retain) IBOutlet IncidentTableView *incidentTableView;
 @property(nonatomic,retain) IBOutlet IncidentMapView *incidentMapView;
+@property(nonatomic,retain) IBOutlet CheckinMapView *checkinMapView;
 @property(nonatomic,retain) Deployment *deployment;
 
-- (IBAction) add:(id)sender;
-- (IBAction) refresh:(id)sender;
+- (IBAction) addReport:(id)sender;
+- (IBAction) addCheckin:(id)sender;
+
+- (IBAction) refreshReports:(id)sender;
+- (IBAction) refreshCheckins:(id)sender;
+
 - (IBAction) viewModeChanged:(id)sender;
 - (IBAction) tableSortChanged:(id)sender;
-- (IBAction) mapTypeChanged:(id)sender;
-- (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
+
+- (IBAction) reportsMapTypeChanged:(id)sender;
+- (IBAction) checkinsMapTypeChanged:(id)sender;
+
+- (IBAction) reportsFilterChanged:(id)sender event:(UIEvent*)event;
+- (IBAction) checkinsFilterChanged:(id)sender event:(UIEvent*)event;
 
 @end

@@ -18,25 +18,25 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <MapKit/MKAnnotation.h>
 
-@interface Location : NSObject<NSCoding> {
+@interface CheckinMapView : UIView {
 
-@public 
-	NSString *identifier;
-	NSString *name;
-	NSString *latitude;
-	NSString *longitude;
+@public
+	UIBarButtonItem *refreshButton;
+	UIBarButtonItem *filterButton;
+	UILabel *filterLabel;
+	MKMapView *mapView;
 }
 
-@property(nonatomic,retain)	NSString *identifier;
-@property(nonatomic,retain) NSString *name;
-@property(nonatomic,retain) NSString *latitude;
-@property(nonatomic,retain) NSString *longitude;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
+@property(nonatomic,retain) IBOutlet UILabel *filterLabel;
+@property(nonatomic,retain) IBOutlet MKMapView *mapView;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
-- (BOOL) matchesString:(NSString *)string;
-- (NSComparisonResult)compareByName:(Location *)location;
-- (BOOL) equals:(NSString *)name latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) setLabel:(NSString *)label;
 
 @end

@@ -33,7 +33,7 @@
 @implementation Deployment
 
 @synthesize identifier, name, description, url, domain;
-@synthesize categories, locations, incidents;
+@synthesize categories, locations, incidents, checkins;
 @synthesize discovered, synced, added, sinceID, pending;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
@@ -117,6 +117,9 @@
 	[NSKeyedArchiver archiveObject:self.incidents forPath:path andKey:@"incidents"];
 	DLog(@"incidents: %d", [self.incidents count]);
 	
+	[NSKeyedArchiver archiveObject:self.checkins forPath:path andKey:@"checkins"];
+	DLog(@"checkins: %d", [self.checkins count]);
+	
 	[NSKeyedArchiver archiveObject:self.pending forPath:path andKey:@"pending"];
 	DLog(@"pending: %d", [self.pending count]);
 }
@@ -125,6 +128,7 @@
 	[self.categories removeAllObjects];
 	[self.locations removeAllObjects];
 	[self.incidents removeAllObjects];
+	[self.checkins removeAllObjects];
 	[self.pending removeAllObjects];
 }
 
@@ -144,6 +148,10 @@
 	if (self.incidents == nil) self.incidents = [[NSMutableDictionary alloc] init];
 	DLog(@"incidents: %d", [self.incidents count]);
 	
+	self.checkins = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"checkins"];
+	if (self.checkins == nil) self.checkins = [[NSMutableDictionary alloc] init];
+	DLog(@"checkins: %d", [self.checkins count]);
+	
 	self.pending = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"pending"];
 	if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 	DLog(@"pending: %d", [self.pending count]);
@@ -151,6 +159,11 @@
 
 - (NSString *) archiveFolder {
 	return [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:self.domain];
+}
+
+- (BOOL) supportsCheckins {
+	//TODO check deployment version
+	return [self.url hasPrefix:@"http://checkin.crdmp.com"];
 }
 
 - (BOOL) matchesString:(NSString *)string {
@@ -188,12 +201,20 @@
 	[categories release];
 	[locations release];
 	[incidents release];
+	[checkins release];
 	[pending release];
 	[sinceID release];
 	[synced release];
 	[added release];
 	[discovered release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Categories
+
+- (NSString *) getCheckins {
+	return [self.url appendUrlStringWithFormat:@"api/?task=checkin&action=get_ci"];
 }
 
 #pragma mark -

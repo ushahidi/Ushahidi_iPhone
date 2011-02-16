@@ -22,7 +22,7 @@
 
 @implementation IncidentMapView
 
-@synthesize refreshButton, filterButton, filterLabel;
+@synthesize refreshButton, filterButton, filterLabel, mapView;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -40,6 +40,7 @@
 	[refreshButton release];
 	[filterButton release];
 	[filterLabel release];
+	[mapView release];
     [super dealloc];
 }
 

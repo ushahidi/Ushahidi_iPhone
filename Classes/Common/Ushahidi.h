@@ -29,6 +29,7 @@
 @class Location;
 @class Category;
 @class Photo;
+@class Checkin;
 
 #define kMainQueueFinished @"mainQueueFinished"
 #define kMapQueueFinished @"mapQueueFinished"
@@ -66,6 +67,10 @@
 - (BOOL) uploadIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 
+- (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate;
+- (void) uploadCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
+- (BOOL) deploymentSupportsCheckins;
+
 - (BOOL) hasCategories;
 - (NSArray *) getCategories;
 - (NSArray *) getCategoriesForDelegate:(id<UshahidiDelegate>)delegate;
@@ -90,6 +95,7 @@
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending;
+- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins;
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi maps:(NSArray *)maps error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi deployments:(NSArray *)deployments error:(NSError *)error hasChanges:(BOOL)hasChanges;
@@ -98,8 +104,10 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident photo:(Photo *)photo;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges;
 
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error;
+- (void) uploadedToUshahidi:(Ushahidi *)ushahidi checkin:(Checkin *)checkin;
 
 @end

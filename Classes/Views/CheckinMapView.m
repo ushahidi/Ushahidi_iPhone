@@ -18,25 +18,33 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "CheckinMapView.h"
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <MapKit/MKAnnotation.h>
 
-@interface Location : NSObject<NSCoding> {
+@implementation CheckinMapView
 
-@public 
-	NSString *identifier;
-	NSString *name;
-	NSString *latitude;
-	NSString *longitude;
+@synthesize refreshButton, filterButton, filterLabel, mapView;
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+		
+    }
+    return self;
 }
 
-@property(nonatomic,retain)	NSString *identifier;
-@property(nonatomic,retain) NSString *name;
-@property(nonatomic,retain) NSString *latitude;
-@property(nonatomic,retain) NSString *longitude;
+- (void) setLabel:(NSString *)label {
+	filterLabel.text = label;
+}
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
-- (BOOL) matchesString:(NSString *)string;
-- (NSComparisonResult)compareByName:(Location *)location;
-- (BOOL) equals:(NSString *)name latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void)dealloc {
+	[refreshButton release];
+	[filterButton release];
+	[filterLabel release];
+	[mapView release];
+    [super dealloc];
+}
 
 @end

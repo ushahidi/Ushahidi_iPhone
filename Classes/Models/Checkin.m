@@ -18,21 +18,33 @@
  **
  *****************************************************************************/
 
-#import "Location.h"
+#import "Checkin.h"
+#import "NSDictionary+Extension.h"
 #import "NSString+Extension.h"
+#import "NSDate+Extension.h"
+#import "Photo.h"
 
-@implementation Location
+@implementation Checkin
 
-@synthesize identifier, name, latitude, longitude;
+@synthesize identifier, message, date, latitude, longitude, location, photos;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
 		//DLog(@"dictionary: %@", dictionary);
 		if (dictionary != nil) {
-			self.identifier = [dictionary objectForKey:@"id"];
-			self.name = [dictionary objectForKey:@"name"];
-			self.latitude = [dictionary objectForKey:@"latitude"];
-			self.longitude = [dictionary objectForKey:@"longitude"];
+			self.identifier = [dictionary stringForKey:@"id"];
+			self.message = [dictionary stringForKey:@"msg"];
+			self.latitude = [dictionary stringForKey:@"lat"];
+			self.longitude = [dictionary stringForKey:@"lon"];
+			self.date = [dictionary dateForKey:@"date"];
+			NSArray *media = [dictionary objectForKey:@"media"];
+			if (media != nil && [media isKindOfClass:[NSArray class]]) {
+				for (NSDictionary *item in media) {
+					Photo *photo = [[Photo alloc] initWithDictionary:item];
+					[self.photos addObject:photo];
+					[photo release];
+				}
+			}
 		}
 	}
 	return self;
@@ -40,40 +52,46 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.identifier forKey:@"identifier"];
-	[encoder encodeObject:self.name forKey:@"name"];
+	[encoder encodeObject:self.message forKey:@"message"];
 	[encoder encodeObject:self.latitude forKey:@"latitude"];
 	[encoder encodeObject:self.longitude forKey:@"longitude"];
+	[encoder encodeObject:self.date forKey:@"date"];
+	[encoder encodeObject:self.photos forKey:@"photos"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if (self = [super init]) {
 		self.identifier = [decoder decodeObjectForKey:@"identifier"];
-		self.name = [decoder decodeObjectForKey:@"name"];
+		self.message = [decoder decodeObjectForKey:@"message"];
 		self.latitude = [decoder decodeObjectForKey:@"latitude"];
 		self.longitude = [decoder decodeObjectForKey:@"longitude"];
+		self.date = [decoder decodeObjectForKey:@"date"];
+		self.photos = [decoder decodeObjectForKey:@"photos"];
+		if (self.photos == nil) self.photos = [NSMutableArray array];
 	}
 	return self;
 }
 
-- (BOOL) matchesString:(NSString *)string {
-	return self.name != nil && [self.name anyWordHasPrefix:string];
+- (NSString *) dateTimeString {
+	return self.date != nil ? [self.date dateToString:@"h:mm a, ccc, MMM d, yyyy"] : nil;
 }
 
-- (NSComparisonResult)compareByName:(Location *)location {
-	return [self.name localizedCaseInsensitiveCompare:location.name];
+- (NSString *) dateString {
+	return self.date != nil ? [self.date dateToString:@"cccc, MMMM d, yyyy"] : nil;
 }
 
-- (BOOL) equals:(NSString *)theName latitude:(NSString *)theLatitude longitude:(NSString *)theLongitude {
-	return [self.name isEqualToString:theName] &&
-			[self.latitude isEqualToString:theLatitude] &&
-			[self.longitude isEqualToString:theLongitude];
+- (NSString *) timeString {
+	return self.date != nil ? [self.date dateToString:@"h:mm a"] : nil;
 }
 
 - (void)dealloc {
 	[identifier release];
-	[name release];
+	[message release];
 	[latitude release];
 	[longitude release];
+	[location release];
+	[photos release];
+	[date release];
     [super dealloc];
 }
 

@@ -36,6 +36,10 @@
 		3E244E72128DFDE400B36DB6 /* NSURL+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E244E71128DFDE400B36DB6 /* NSURL+Extension.m */; };
 		3E2E853812787E7F00ADA49B /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3E30492912874F3600E3C942 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E30492812874F3600E3C942 /* NSObject+Extension.m */; };
+		3E466F5B130C62BF00EE685B /* checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E466F59130C62BF00EE685B /* checkin.png */; };
+		3E466F5C130C62BF00EE685B /* checkin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E466F5A130C62BF00EE685B /* checkin@2x.png */; };
+		3E466F72130C643500EE685B /* CheckinMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E466F71130C643500EE685B /* CheckinMapView.m */; };
+		3E466FAD130C686A00EE685B /* Checkin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E466FAC130C686A00EE685B /* Checkin.m */; };
 		3E4A006F1271F26C0017AED4 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
 		3E4A00711271F26C0017AED4 /* reports.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006E1271F26C0017AED4 /* reports.png */; };
 		3E4A022712720E280017AED4 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
@@ -294,6 +298,12 @@
 		3E2E853712787E7F00ADA49B /* MotionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionWindow.m; sourceTree = "<group>"; };
 		3E30492712874F3600E3C942 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
 		3E30492812874F3600E3C942 /* NSObject+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Extension.m"; sourceTree = "<group>"; };
+		3E466F59130C62BF00EE685B /* checkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkin.png; sourceTree = "<group>"; };
+		3E466F5A130C62BF00EE685B /* checkin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkin@2x.png"; sourceTree = "<group>"; };
+		3E466F70130C643500EE685B /* CheckinMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckinMapView.h; sourceTree = "<group>"; };
+		3E466F71130C643500EE685B /* CheckinMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinMapView.m; sourceTree = "<group>"; };
+		3E466FAB130C686A00EE685B /* Checkin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checkin.h; sourceTree = "<group>"; };
+		3E466FAC130C686A00EE685B /* Checkin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checkin.m; sourceTree = "<group>"; };
 		3E4A006C1271F26C0017AED4 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		3E4A006E1271F26C0017AED4 /* reports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reports.png; sourceTree = "<group>"; };
 		3E4A022512720E280017AED4 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
@@ -836,6 +846,8 @@
 				3E119D6F126FAF0B00C3DCBB /* Sound.m */,
 				3E119D71126FAF1300C3DCBB /* Video.h */,
 				3E119D72126FAF1300C3DCBB /* Video.m */,
+				3E466FAB130C686A00EE685B /* Checkin.h */,
+				3E466FAC130C686A00EE685B /* Checkin.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -891,6 +903,8 @@
 				3EF58727129AC37E00489AF8 /* IncidentMapView.m */,
 				3EF58723129AC37100489AF8 /* IncidentTableView.h */,
 				3EF58724129AC37100489AF8 /* IncidentTableView.m */,
+				3E466F70130C643500EE685B /* CheckinMapView.h */,
+				3E466F71130C643500EE685B /* CheckinMapView.m */,
 				3E4C659912AD774F001ED08A /* MoviePlayer.h */,
 				3E4C659A12AD774F001ED08A /* MoviePlayer.m */,
 			);
@@ -994,6 +1008,8 @@
 				3E72984A12EE4F9D00FDED00 /* sort_alphabetical@2x.png */,
 				3E84E7001282931400A55292 /* sort_date.png */,
 				3E72984B12EE4F9D00FDED00 /* sort_date@2x.png */,
+				3E466F59130C62BF00EE685B /* checkin.png */,
+				3E466F5A130C62BF00EE685B /* checkin@2x.png */,
 				3E809135129B2F8E00CF273F /* filter.png */,
 				3E72983E12EE4F9D00FDED00 /* filter@2x.png */,
 				3ECFF35C12AFE9AD00DE75D7 /* radar.png */,
@@ -1476,6 +1492,8 @@
 				3E72996C12EF30C500FDED00 /* selected@2x.png in Resources */,
 				3E72996E12EF30D100FDED00 /* unselected@2x.png in Resources */,
 				3E91383E12F73F4800F8369F /* Localizable.strings in Resources */,
+				3E466F5B130C62BF00EE685B /* checkin.png in Resources */,
+				3E466F5C130C62BF00EE685B /* checkin@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1612,6 +1630,8 @@
 				3EBBD75F12DCAC48007ECE4B /* SFHFKeychainUtils.m in Sources */,
 				3ED9827212ECD7DC0065A324 /* ASIHTTPRequest+Extension.m in Sources */,
 				3E72978512EDEBD500FDED00 /* MapDialog.m in Sources */,
+				3E466F72130C643500EE685B /* CheckinMapView.m in Sources */,
+				3E466FAD130C686A00EE685B /* Checkin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

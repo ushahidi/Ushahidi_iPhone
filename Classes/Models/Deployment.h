@@ -38,6 +38,7 @@
 	NSMutableDictionary *categories;
 	NSMutableDictionary *locations;
 	NSMutableDictionary *incidents;
+	NSMutableDictionary *checkins;
 	NSMutableArray *pending;
 }
 
@@ -54,7 +55,10 @@
 @property(nonatomic, retain) NSMutableDictionary *categories;
 @property(nonatomic, retain) NSMutableDictionary *locations;
 @property(nonatomic, retain) NSMutableDictionary *incidents;
+@property(nonatomic, retain) NSMutableDictionary *checkins;
 @property(nonatomic, retain) NSMutableArray *pending;
+
+@property(nonatomic, readonly) BOOL supportsCheckins;
 
 - (id) initWithDictionary:(NSDictionary *)dictionary;
 - (id) initWithName:(NSString *)name url:(NSString *)url;
@@ -66,6 +70,8 @@
 
 - (BOOL) matchesString:(NSString *)string;
 - (BOOL) containsLocation:(Location *)location;
+
+- (NSString *) getCheckins;
 
 - (NSString *) getCategories;
 - (NSString *) getCategoryByID:(NSString *)categoryID;

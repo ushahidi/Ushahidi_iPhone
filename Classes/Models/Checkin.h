@@ -20,23 +20,31 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Location : NSObject<NSCoding> {
+@class Location;
+
+@interface Checkin : NSObject<NSCoding> {
 
 @public 
 	NSString *identifier;
-	NSString *name;
+	NSString *message;
 	NSString *latitude;
 	NSString *longitude;
+	NSDate *date;
+	Location *location;
+	NSMutableArray *photos;
 }
 
 @property(nonatomic,retain)	NSString *identifier;
-@property(nonatomic,retain) NSString *name;
+@property(nonatomic,retain) NSString *message;
 @property(nonatomic,retain) NSString *latitude;
 @property(nonatomic,retain) NSString *longitude;
+@property(nonatomic,retain) NSDate *date;
+@property(nonatomic,retain) Location *location;
+@property(nonatomic,retain) NSMutableArray *photos;
+@property(nonatomic,readonly) NSString *dateString;
+@property(nonatomic,readonly) NSString *timeString;
+@property(nonatomic,readonly) NSString *dateTimeString;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-- (BOOL) matchesString:(NSString *)string;
-- (NSComparisonResult)compareByName:(Location *)location;
-- (BOOL) equals:(NSString *)name latitude:(NSString *)latitude longitude:(NSString *)longitude;
 
 @end

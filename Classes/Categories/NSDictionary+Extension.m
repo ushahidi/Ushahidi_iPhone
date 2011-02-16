@@ -24,8 +24,18 @@
 
 - (NSString *) stringForKey:(NSString *)key {
 	NSObject *object = [self objectForKey:key];
-	if (object != nil && [object isKindOfClass:[NSString class]]) {
-		return (NSString *)object;
+	if (object != nil) {
+		if ([object isKindOfClass:[NSString class]]) {
+			return (NSString *)object;
+		}
+		if ([object isKindOfClass:[NSNumber class]]) {
+			NSNumber *number = (NSNumber *)object;
+			return [number stringValue];
+		}
+		if ([object isKindOfClass:[NSDecimalNumber class]]) {
+			NSDecimalNumber *number = (NSDecimalNumber *)object;
+			return [number stringValue];
+		}
 	}
 	return @"";
 }

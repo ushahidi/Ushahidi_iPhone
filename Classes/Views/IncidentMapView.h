@@ -29,11 +29,13 @@
 	UIBarButtonItem *refreshButton;
 	UIBarButtonItem *filterButton;
 	UILabel *filterLabel;
+	MKMapView *mapView;
 }
 
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
 @property(nonatomic,retain) IBOutlet UILabel *filterLabel;
+@property(nonatomic,retain) IBOutlet MKMapView *mapView;
 
 - (void) setLabel:(NSString *)label;
 

@@ -41,8 +41,20 @@ NSInteger const kMaxThumbnaiHeight = 80;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super initWithDictionary:dictionary]) {
-		self.imageURL = [dictionary stringForKey:@"link_url"];
-		self.thumbnailURL = [dictionary stringForKey:@"thumb_url"];
+		NSString *link_url = [dictionary stringForKey:@"link_url"];
+		if ([NSString isNilOrEmpty:link_url] == NO) {
+			self.imageURL = link_url;
+		}
+		else {
+			self.imageURL = [dictionary stringForKey:@"link"];
+		}
+		NSString *thumb_url = [dictionary stringForKey:@"thumb_url"];
+		if ([NSString isNilOrEmpty:thumb_url] == NO) {
+			self.thumbnailURL = thumb_url;
+		}
+		else {
+			self.thumbnailURL = [dictionary stringForKey:@"thumb"];
+		}
 	}
 	return self;
 }

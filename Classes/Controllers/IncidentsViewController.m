@@ -53,6 +53,7 @@
 @property(nonatomic,retain) ItemPicker *itemPicker;
 @property(nonatomic,retain) NSMutableArray *categories;
 @property(nonatomic,retain) Category *category;
+@property(nonatomic,retain) NSMutableArray *checkins;
 @property(nonatomic,retain) NSMutableArray *users;
 @property(nonatomic,retain) User *user;
 
@@ -72,7 +73,7 @@
 
 @synthesize addIncidentViewController, viewIncidentViewController, checkinViewController;
 @synthesize deployment, tableSort, mapType, viewMode, pending;
-@synthesize itemPicker, categories, category, users, user;
+@synthesize itemPicker, categories, category, users, user, checkins;
 @synthesize incidentTableView, incidentMapView, checkinMapView;
 
 typedef enum {
@@ -281,9 +282,10 @@ typedef enum {
 }
 
 - (void) populateCheckinPins:(BOOL)resizeMap {
-	NSArray *checkins = [[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
+	[self.checkins removeAllObjects];
 	[self.checkinMapView.mapView removeAllPins];
-	for (Checkin *checkin in checkins) {
+	[self.checkins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
+	for (Checkin *checkin in self.checkins) {
 		[self.checkinMapView.mapView addPinWithTitle:checkin.message 
 											subtitle:checkin.dateString 
 											latitude:checkin.latitude 
@@ -300,6 +302,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
+	self.checkins = [[NSMutableArray alloc] initWithCapacity:0];
 	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
@@ -313,6 +316,7 @@ typedef enum {
     [super viewDidUnload];
 	self.addIncidentViewController = nil;
 	self.viewIncidentViewController = nil;
+	self.checkins = nil;
 	self.tableSort = nil;
 	self.mapType = nil;
 	self.viewMode = nil;
@@ -435,6 +439,9 @@ typedef enum {
 	[incidentTableView release];
 	[incidentMapView release];
 	[checkinMapView release];
+	[checkins release];
+	[users release];
+	[user release];
     [super dealloc];
 }
 
@@ -744,14 +751,16 @@ typedef enum {
 	[self.loadingView showWithMessage:NSLocalizedString(@"Checkins...", nil)];
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)theCheckins error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 	}
 	else if (hasChanges) {
 		DLog(@"Re-Adding Checkins: %d", [checkins count]);
+		[self.checkins removeAllObjects];
+		[self.checkins addObjectsFromArray:theCheckins];
 		[self.checkinMapView.mapView removeAllPins];
-		for (Checkin *checkin in checkins) {
+		for (Checkin *checkin in self.checkins) {
 			[self.checkinMapView.mapView addPinWithTitle:checkin.message 
 												subtitle:checkin.dateString 
 												latitude:checkin.latitude 
@@ -883,18 +892,18 @@ typedef enum {
 		else {
 			[self.checkinMapView setLabel:NSLocalizedString(@"All Users", nil)];
 		}
-		//[self.checkinMapView.mapView removeAllPins];
-//		for (Checkin *checkin in checkins) {
-//			if (self.user == nil || [self.user.identifier isEqualToString:[checkin user]]) {
-//				[self.checkinMapView.mapView addPinWithTitle:checkin.message 
-//													subtitle:checkin.dateString 
-//													latitude:checkin.latitude 
-//												   longitude:checkin.longitude 
-//													  object:checkin
-//													pinColor:MKPinAnnotationColorRed];	
-//			}
-//		}
-//		[self.checkinMapView.mapView resizeRegionToFitAllPins:NO animated:YES];
+		[self.checkinMapView.mapView removeAllPins];
+		for (Checkin *checkin in self.checkins) {
+			if (self.user == nil || [self.user.identifier isEqualToString:[checkin user]]) {
+				[self.checkinMapView.mapView addPinWithTitle:checkin.message 
+													subtitle:checkin.dateString 
+													latitude:checkin.latitude 
+												   longitude:checkin.longitude 
+													  object:checkin
+													pinColor:MKPinAnnotationColorRed];	
+			}
+		}
+		[self.checkinMapView.mapView resizeRegionToFitAllPins:NO animated:YES];
 	}
 }
 

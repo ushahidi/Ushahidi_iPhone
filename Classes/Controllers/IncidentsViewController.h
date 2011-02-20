@@ -61,6 +61,7 @@
 	ItemPicker *itemPicker;
 	NSMutableArray *categories;
 	Category *category;
+	NSMutableArray *checkins;
 	NSMutableArray *users;
 	User *user;
 }

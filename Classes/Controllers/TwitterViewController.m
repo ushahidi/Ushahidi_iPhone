@@ -63,6 +63,9 @@ typedef enum {
 	TableSectionPassword
 } TableSection;
 
+#pragma mark -
+#pragma mark Handlers
+
 - (IBAction) cancel:(id)sender {
 	DLog(@"");
 	[self.loadingView hide];

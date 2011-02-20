@@ -33,7 +33,7 @@
 @implementation Deployment
 
 @synthesize identifier, name, description, url, domain;
-@synthesize categories, locations, incidents, checkins;
+@synthesize categories, locations, incidents, checkins, users;
 @synthesize discovered, synced, added, sinceID, pending;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
@@ -120,6 +120,9 @@
 	[NSKeyedArchiver archiveObject:self.checkins forPath:path andKey:@"checkins"];
 	DLog(@"checkins: %d", [self.checkins count]);
 	
+	[NSKeyedArchiver archiveObject:self.users forPath:path andKey:@"users"];
+	DLog(@"users: %d", [self.users count]);
+	
 	[NSKeyedArchiver archiveObject:self.pending forPath:path andKey:@"pending"];
 	DLog(@"pending: %d", [self.pending count]);
 }
@@ -129,6 +132,7 @@
 	[self.locations removeAllObjects];
 	[self.incidents removeAllObjects];
 	[self.checkins removeAllObjects];
+	[self.users removeAllObjects];
 	[self.pending removeAllObjects];
 }
 
@@ -151,6 +155,10 @@
 	self.checkins = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"checkins"];
 	if (self.checkins == nil) self.checkins = [[NSMutableDictionary alloc] init];
 	DLog(@"checkins: %d", [self.checkins count]);
+	
+	self.users = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"users"];
+	if (self.users == nil) self.users = [[NSMutableDictionary alloc] init];
+	DLog(@"users: %d", [self.users count]);
 	
 	self.pending = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"pending"];
 	if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
@@ -321,6 +329,10 @@
 
 - (NSString *) getPostPhoto {
 	return [self.url appendUrlStringWithFormat:@"api?task=tagphoto&resp=json"];
+}
+
+- (NSString *) getPostCheckin {
+	return [self.url appendUrlStringWithFormat:@"api?task=checkin&action=ci"];
 }
 
 @end

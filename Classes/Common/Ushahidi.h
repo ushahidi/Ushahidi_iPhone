@@ -34,6 +34,7 @@
 #define kMainQueueFinished @"mainQueueFinished"
 #define kMapQueueFinished @"mapQueueFinished"
 #define kPhotoQueueFinished @"photoQueueFinished"
+#define kUploadQueueFinished @"uploadQueueFinished"
 
 @interface Ushahidi : NSObject<ASIHTTPRequestDelegate> {
 	
@@ -44,6 +45,7 @@
 	NSOperationQueue *mainQueue;
 	NSOperationQueue *mapQueue;
 	NSOperationQueue *photoQueue;
+	NSOperationQueue *uploadQueue;
 	NSString *mapDistance;
 }
 
@@ -53,6 +55,9 @@
 
 - (NSArray *) getMaps;
 - (NSArray *) getMapsForDelegate:(id<UshahidiDelegate>)delegate latitude:(NSString *)latitude longitude:(NSString *)longitude distance:(NSString *)distance;
+
+- (BOOL) hasUsers;
+- (NSArray *) getUsers;
 
 - (NSArray *) getDeploymentsUsingSorter:(SEL)sorter;
 - (void) loadDeployment:(Deployment *)deployment inBackground:(BOOL)inBackground;
@@ -68,7 +73,7 @@
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate;
-- (void) uploadCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
+- (BOOL) uploadCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) deploymentSupportsCheckins;
 
 - (BOOL) hasCategories;
@@ -105,9 +110,12 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident photo:(Photo *)photo;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)users hasChanges:(BOOL)hasChanges;
 
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error;
-- (void) uploadedToUshahidi:(Ushahidi *)ushahidi checkin:(Checkin *)checkin;
+
+- (void) uploadingToUshahidi:(Ushahidi *)ushahidi checkin:(Checkin *)checkin;
+- (void) uploadedToUshahidi:(Ushahidi *)ushahidi checkin:(Checkin *)checkin error:(NSError *)error;
 
 @end

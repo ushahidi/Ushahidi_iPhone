@@ -29,12 +29,16 @@
 
 @class AddIncidentViewController;
 @class ViewIncidentViewController;
+@class CheckinViewController;
 @class MapViewController;
 @class Deployment;
 @class Category;
+@class User;
 @class IncidentTableView;
 @class IncidentMapView;
 @class CheckinMapView;
+
+@protocol ItemPickerDelegate;
 
 @interface IncidentsViewController : TableViewController<UshahidiDelegate, 
 														 MKMapViewDelegate, 
@@ -43,6 +47,7 @@
 @public
 	AddIncidentViewController *addIncidentViewController;
 	ViewIncidentViewController *viewIncidentViewController;
+	CheckinViewController *checkinViewController;
 	Deployment *deployment;
 	UISegmentedControl *tableSort;
 	UISegmentedControl *mapType;
@@ -56,10 +61,13 @@
 	ItemPicker *itemPicker;
 	NSMutableArray *categories;
 	Category *category;
+	NSMutableArray *users;
+	User *user;
 }
 
 @property(nonatomic,retain) IBOutlet AddIncidentViewController *addIncidentViewController;
 @property(nonatomic,retain) IBOutlet ViewIncidentViewController *viewIncidentViewController;
+@property(nonatomic,retain) IBOutlet CheckinViewController *checkinViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *tableSort;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *viewMode;

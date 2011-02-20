@@ -43,7 +43,7 @@
 @property (nonatomic, assign) BOOL showRightCallout;
 @property (nonatomic, retain) NSString *location;
 
-- (id)initForDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (id) initForDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setMapType:(MKMapType)mapType;
 - (void) setScrollable:(BOOL)scrollable;
 - (void) setZoomable:(BOOL)zoomable;
@@ -52,6 +52,10 @@
 - (void) removeAllPins;
 - (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
 - (void) resizeRegionToFitAllPins:(BOOL)animated;
+- (void) showUserLocation:(BOOL)show;
+- (BOOL) hasUserLocation;
+- (NSString *) userLatitude;
+- (NSString *) userLongitude;
 
 @end
 
@@ -59,6 +63,7 @@
 
 @optional
 
-- (void) mapTableCell:(MapTableCell *)mapTableCell pinSelectedAtIndex:(NSInteger)index;
+- (void) mapTableCell:(MapTableCell *)mapTableCell pinSelectedAtIndex:(NSIndexPath *)indexPath;
+- (void) mapTableCell:(MapTableCell *)mapTableCell locatedAtLatitude:(NSString *)latitude longitude:(NSString *)longitude;
 
 @end

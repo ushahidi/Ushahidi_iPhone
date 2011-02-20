@@ -22,6 +22,7 @@
 #import "Incident.h"
 #import "Ushahidi.h"
 #import "Photo.h"
+#import "Checkin.h"
 
 @implementation ASIHTTPRequest (Extension)
 
@@ -35,6 +36,10 @@
 
 - (Photo *) getPhoto {
 	return [self.userInfo objectForKey:@"photo"];
+}
+
+- (Checkin *) getCheckin {
+	return [self.userInfo objectForKey:@"checkin"];
 }
 
 @end

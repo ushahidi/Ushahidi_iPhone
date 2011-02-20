@@ -53,6 +53,10 @@
 		3E4C659B12AD774F001ED08A /* MoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C659A12AD774F001ED08A /* MoviePlayer.m */; };
 		3E4C65BF12AD77DA001ED08A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4C65BE12AD77DA001ED08A /* MediaPlayer.framework */; };
 		3E4C69C712ADBB94001ED08A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4C69C612ADBB94001ED08A /* Default@2x.png */; };
+		3E5BB9EA131056A40073E4F8 /* CheckinViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E5BB9E9131056A40073E4F8 /* CheckinViewController_iPhone.xib */; };
+		3E5BB9EC131056B30073E4F8 /* CheckinViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E5BB9EB131056B30073E4F8 /* CheckinViewController_iPad.xib */; };
+		3E5BB9F0131056C90073E4F8 /* CheckinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9EF131056C90073E4F8 /* CheckinViewController.m */; };
+		3E5BBBB61310A6150073E4F8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BBBB51310A6150073E4F8 /* User.m */; };
 		3E72978512EDEBD500FDED00 /* MapDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E72978412EDEBD500FDED00 /* MapDialog.m */; };
 		3E72984F12EE4F9D00FDED00 /* arrow_next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72983912EE4F9D00FDED00 /* arrow_next@2x.png */; };
 		3E72985012EE4F9D00FDED00 /* arrow_previous@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72983A12EE4F9D00FDED00 /* arrow_previous@2x.png */; };
@@ -322,6 +326,12 @@
 		3E4C659A12AD774F001ED08A /* MoviePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePlayer.m; sourceTree = "<group>"; };
 		3E4C65BE12AD77DA001ED08A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3E4C69C612ADBB94001ED08A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		3E5BB9E9131056A40073E4F8 /* CheckinViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E5BB9EB131056B30073E4F8 /* CheckinViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinViewController_iPad.xib; sourceTree = "<group>"; };
+		3E5BB9EE131056C90073E4F8 /* CheckinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckinViewController.h; sourceTree = "<group>"; };
+		3E5BB9EF131056C90073E4F8 /* CheckinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinViewController.m; sourceTree = "<group>"; };
+		3E5BBBB41310A6150073E4F8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		3E5BBBB51310A6150073E4F8 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		3E72978312EDEBD500FDED00 /* MapDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapDialog.h; sourceTree = "<group>"; };
 		3E72978412EDEBD500FDED00 /* MapDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapDialog.m; sourceTree = "<group>"; };
 		3E72983912EE4F9D00FDED00 /* arrow_next@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_next@2x.png"; sourceTree = "<group>"; };
@@ -846,6 +856,8 @@
 				3E119D6F126FAF0B00C3DCBB /* Sound.m */,
 				3E119D71126FAF1300C3DCBB /* Video.h */,
 				3E119D72126FAF1300C3DCBB /* Video.m */,
+				3E5BBBB41310A6150073E4F8 /* User.h */,
+				3E5BBBB51310A6150073E4F8 /* User.m */,
 				3E466FAB130C686A00EE685B /* Checkin.h */,
 				3E466FAC130C686A00EE685B /* Checkin.m */,
 			);
@@ -952,6 +964,8 @@
 				3E4C630912AD4D05001ED08A /* NewsViewController.m */,
 				3EEFE0F312DB81600076ABA1 /* TwitterViewController.h */,
 				3EEFE0F412DB81600076ABA1 /* TwitterViewController.m */,
+				3E5BB9EE131056C90073E4F8 /* CheckinViewController.h */,
+				3E5BB9EF131056C90073E4F8 /* CheckinViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1091,6 +1105,8 @@
 				3E15F78312BFF95000CC4D16 /* DeploymentTableCell_iPad.xib */,
 				3E119AC7126F64BA00C3DCBB /* IncidentTableCell_iPhone.xib */,
 				3E05350812958069000C7EB0 /* IncidentTableCell_iPad.xib */,
+				3E5BB9E9131056A40073E4F8 /* CheckinViewController_iPhone.xib */,
+				3E5BB9EB131056B30073E4F8 /* CheckinViewController_iPad.xib */,
 			);
 			path = NIBs;
 			sourceTree = "<group>";
@@ -1494,6 +1510,8 @@
 				3E91383E12F73F4800F8369F /* Localizable.strings in Resources */,
 				3E466F5B130C62BF00EE685B /* checkin.png in Resources */,
 				3E466F5C130C62BF00EE685B /* checkin@2x.png in Resources */,
+				3E5BB9EA131056A40073E4F8 /* CheckinViewController_iPhone.xib in Resources */,
+				3E5BB9EC131056B30073E4F8 /* CheckinViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1632,6 +1650,8 @@
 				3E72978512EDEBD500FDED00 /* MapDialog.m in Sources */,
 				3E466F72130C643500EE685B /* CheckinMapView.m in Sources */,
 				3E466FAD130C686A00EE685B /* Checkin.m in Sources */,
+				3E5BB9F0131056C90073E4F8 /* CheckinViewController.m in Sources */,
+				3E5BBBB61310A6150073E4F8 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

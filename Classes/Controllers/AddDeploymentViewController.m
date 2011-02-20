@@ -81,10 +81,10 @@ typedef enum {
 	if (event != nil) {
 		UIView *toolbar = [[event.allTouches anyObject] view];
 		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
-		[self.itemPicker showWithItems:items withSelected:selected forRect:rect];
+		[self.itemPicker showWithItems:items withSelected:selected forRect:rect tag:0];
 	}
 	else {
-		[self.itemPicker showWithItems:items withSelected:selected forRect:CGRectMake(100, self.view.frame.size.height, 0, 0)];	
+		[self.itemPicker showWithItems:items withSelected:selected forRect:CGRectMake(100, self.view.frame.size.height, 0, 0) tag:0];	
 	}
 }
 

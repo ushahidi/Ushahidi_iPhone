@@ -18,17 +18,41 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import "User.h"
+#import "NSDictionary+Extension.h"
 
-@interface Device : NSObject {
+@implementation User
 
+@synthesize identifier, name;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+	if (self = [super init]) {
+		DLog(@"dictionary: %@", dictionary);
+		if (dictionary != nil) {
+			self.identifier = [dictionary stringForKey:@"id"];
+			self.name = [dictionary stringForKey:@"name"];
+		}
+	}
+	return self;
 }
 
-+ (BOOL) isIPad;
-+ (BOOL) isGestureSupported;
-+ (NSString *) appVersion;
-+ (NSString *) deviceVersion;
-+ (NSString *) deviceModel;
-+ (NSString *) deviceIdentifier;
+- (void)encodeWithCoder:(NSCoder *)encoder {
+	[encoder encodeObject:self.identifier forKey:@"identifier"];
+	[encoder encodeObject:self.name forKey:@"name"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+	if (self = [super init]) {
+		self.identifier = [decoder decodeObjectForKey:@"identifier"];
+		self.name = [decoder decodeObjectForKey:@"name"];
+	}
+	return self;
+}
+
+- (void)dealloc {
+	[identifier release];
+	[name release];
+    [super dealloc];
+}
 
 @end

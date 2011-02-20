@@ -24,6 +24,7 @@
 @class Ushahidi;
 @class Incident;
 @class Photo;
+@class Checkin;
 @protocol UshahidiDelegate;
 
 @interface ASIHTTPRequest (Extension) 
@@ -31,5 +32,6 @@
 - (id<UshahidiDelegate>) getDelegate;
 - (Incident *) getIncident;
 - (Photo *) getPhoto;
+- (Checkin *) getCheckin;
 
 @end

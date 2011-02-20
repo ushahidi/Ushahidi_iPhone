@@ -18,37 +18,41 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "TextViewTableCell.h"
+#import "MapTableCell.h"
+#import "ImagePickerController.h"
+#import "Ushahidi.h"
+#import "Locator.h"
 
-@class Location;
 @class Photo;
 
-@interface Checkin : NSObject<NSCoding> {
+@interface CheckinViewController : TableViewController<TextViewTableCellDelegate, 
+													   MapTableCellDelegate, 
+													   ImagePickerDelegate, 
+													   UshahidiDelegate,
+													   LocatorDelegate,
+													   UIActionSheetDelegate> {
 
-@public 
-	NSString *identifier;
+@public
+	UIBarButtonItem *cancelButton;
+	UIBarButtonItem *doneButton;
+	ImagePickerController *imagePickerController;
+														   
+@private 
 	NSString *message;
 	NSString *latitude;
 	NSString *longitude;
-	NSDate *date;
-	NSString *user;
-	Location *location;
-	NSMutableArray *photos;
+	Photo *photo;
+														   
 }
 
-@property(nonatomic,retain)	NSString *identifier;
-@property(nonatomic,retain) NSString *message;
-@property(nonatomic,retain) NSString *latitude;
-@property(nonatomic,retain) NSString *longitude;
-@property(nonatomic,retain) NSDate *date;
-@property(nonatomic,retain) NSString *user;
-@property(nonatomic,retain) Location *location;
-@property(nonatomic,retain) NSMutableArray *photos;
-@property(nonatomic,readonly) NSString *dateString;
-@property(nonatomic,readonly) NSString *timeString;
-@property(nonatomic,readonly) NSString *dateTimeString;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic, retain) ImagePickerController *imagePickerController;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
-- (id)initWithMessage:(NSString *)message latitude:(NSString *)latitude longitude:(NSString *)longitude photo:(Photo *)photo;
+- (IBAction) cancel:(id)sender;
+- (IBAction) done:(id)sender;
 
 @end

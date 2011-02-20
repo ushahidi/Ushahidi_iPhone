@@ -20,7 +20,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @protocol ItemPickerDelegate;
 
 @interface ItemPicker : NSObject<UIPickerViewDelegate, UIActionSheetDelegate, UIPickerViewDataSource, UIPopoverControllerDelegate> {
@@ -28,7 +27,8 @@
 @public
 	NSString *item;
 	NSArray *items;
-
+	NSInteger tag;
+	
 @private
 	UIViewController *controller;
 	id<ItemPickerDelegate> delegate;
@@ -37,9 +37,10 @@
 
 @property (nonatomic, retain) NSString *item;
 @property (nonatomic, retain) NSArray *items;
+@property (nonatomic, assign) NSInteger tag;
 
 - (id) initWithDelegate:(id<ItemPickerDelegate>)delegate forController:(UIViewController *)controller;
-- (void) showWithItems:(NSArray *)items withSelected:(NSString *)item forRect:(CGRect)rect;
+- (void) showWithItems:(NSArray *)items withSelected:(NSString *)item forRect:(CGRect)rect tag:(NSInteger)tag;
 
 @end
 

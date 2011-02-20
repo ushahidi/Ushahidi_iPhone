@@ -489,29 +489,6 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark LocatorDelegate
-
-- (void) locatorFinished:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
-	DLog(@"locator: %@, %@", latitude, longitude);
-	if ([NSString isNilOrEmpty:self.incident.location] || [NSString isNilOrEmpty:self.incident.longitude]) {
-		self.incident.latitude = latitude;
-		self.incident.longitude = longitude;
-	}
-	[self setFooter:nil atSection:TableSectionLocation];
-	if (self.editing == NO) {
-		[self.tableView reloadData];
-	}
-}
-
-- (void) locatorFailed:(Locator *)locator error:(NSError *)error {
-	DLog(@"error: %@", [error localizedDescription]);
-	[self setFooter:NSLocalizedString(@"Error Detecting Location", nil) atSection:TableSectionLocation];
-	if (self.editing == NO) {
-		[self.tableView reloadData];
-	}
-}
-
-#pragma mark -
 #pragma mark UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)theAlertView clickedButtonAtIndex:(NSInteger)buttonIndex {

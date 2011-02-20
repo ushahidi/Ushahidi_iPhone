@@ -21,6 +21,7 @@
 #import "MapTableCell.h"
 #import "MapAnnotation.h"
 #import "MKMapView+Extension.h"
+#import "NSObject+Extension.h"
 
 @interface MapTableCell ()
 
@@ -65,13 +66,29 @@
 	[self.mapView resizeRegionToFitAllPins:NO animated:animated];
 }
 
+- (void) showUserLocation:(BOOL)show {
+	self.mapView.showsUserLocation = show;
+}
+
+- (BOOL) hasUserLocation {
+	return self.mapView.userLocation != nil;
+}
+
+- (NSString *) userLatitude {
+	return self.mapView.userLocation != nil ? [NSString stringWithFormat:@"%f", self.mapView.userLocation.coordinate.latitude] : nil;
+}
+
+- (NSString *) userLongitude {
+	return self.mapView.userLocation != nil ? [NSString stringWithFormat:@"%f", self.mapView.userLocation.coordinate.longitude] : nil;
+}
+
 #pragma mark -
 #pragma mark UITableViewCell
 
 - (id)initForDelegate:(id<MapTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.delegate = theDelegate;
-        self.mapView = [[MKMapView alloc] initWithFrame:self.contentView.frame];
+		self.mapView = [[MKMapView alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 10)];
 		self.mapView.delegate = self;
 		self.mapView.mapType = MKMapTypeStandard;
 		self.mapView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
@@ -123,14 +140,17 @@
 }
 
 - (void) annotationClicked:(UIButton *)button {
-	SEL selector = @selector(mapTableCell:pinSelectedAtIndex:);
-	if (self.delegate != nil && [self.delegate respondsToSelector:selector]) {
-		//TODO fix this to use actual index
-		[self.delegate mapTableCell:self pinSelectedAtIndex:0];
-	}
-	else {
-		DLog(@"delegate %@ does not respond to selector", self.delegate);
-	}
+	[self dispatchSelector:@selector(mapTableCell:pinSelectedAtIndex:) 
+					target:self.delegate 
+				   objects:self, indexPath, nil];
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+	[self.mapView resizeRegionToFitAllPins:YES animated:YES];
+	[self dispatchSelector:@selector(mapTableCell:locatedAtLatitude:longitude:) 
+					target:self.delegate 
+				   objects:self, [NSString stringWithFormat:@"%f", userLocation.coordinate.latitude], 
+								 [NSString stringWithFormat:@"%f", userLocation.coordinate.longitude], nil];
 }
 
 @end

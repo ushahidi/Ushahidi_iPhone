@@ -39,6 +39,7 @@
 
 + (Locator *) sharedLocator;
 - (void)detectLocationForDelegate:(id<LocatorDelegate>)delegate;
+- (BOOL) hasLocation;
 
 @end
 

@@ -20,15 +20,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Device : NSObject {
+@interface User : NSObject<NSCoding> {
 
+@public
+	NSString *identifier;
+	NSString *name;
 }
 
-+ (BOOL) isIPad;
-+ (BOOL) isGestureSupported;
-+ (NSString *) appVersion;
-+ (NSString *) deviceVersion;
-+ (NSString *) deviceModel;
-+ (NSString *) deviceIdentifier;
+@property(nonatomic,retain)	NSString *identifier;
+@property(nonatomic,retain) NSString *name;
 
 @end

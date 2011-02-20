@@ -32,7 +32,7 @@
 
 @implementation ItemPicker
 
-@synthesize delegate, controller, item, items, popoverController;
+@synthesize delegate, controller, item, items, popoverController, tag;
 
 - (id) initWithDelegate:(id<ItemPickerDelegate>)theDelegate forController:(UIViewController *)theController {
 	if (self = [super init]) {
@@ -42,9 +42,10 @@
     return self;
 }
 
-- (void) showWithItems:(NSArray *)theItems withSelected:(NSString *)theItem forRect:(CGRect)rect {
+- (void) showWithItems:(NSArray *)theItems withSelected:(NSString *)theItem forRect:(CGRect)rect tag:(NSInteger)theTag {
 	self.items = theItems;
 	self.item = theItem;
+	self.tag = theTag;
 	
 	UIPickerView *pickerView = [[[UIPickerView alloc] init] autorelease];
 	pickerView.delegate = self;

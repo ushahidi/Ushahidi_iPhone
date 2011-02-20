@@ -56,7 +56,7 @@
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property(nonatomic, retain) IBOutlet ImagePickerController *imagePickerController;
+@property(nonatomic, retain) ImagePickerController *imagePickerController;
 @property(nonatomic, retain) IBOutlet CategoriesViewController *categoriesViewController;
 @property(nonatomic, retain) IBOutlet LocationsViewController *locationsViewController;
 @property(nonatomic, retain) IBOutlet IncidentsViewController *incidentsViewController;

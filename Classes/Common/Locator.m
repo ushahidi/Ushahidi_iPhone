@@ -52,6 +52,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 	[super dealloc];
 }
 
+- (BOOL) hasLocation {
+	return self.latitude != nil && self.longitude != nil;
+}
+
 - (void)detectLocationForDelegate:(id<LocatorDelegate>)theDelegate {
 	self.delegate = theDelegate;
 	if (self.latitude != nil && self.longitude != nil) {

@@ -50,4 +50,8 @@
 	return [[UIDevice currentDevice] model];
 }
 
++ (NSString *) deviceIdentifier {
+	return [[UIDevice currentDevice] uniqueIdentifier];
+}
+
 @end

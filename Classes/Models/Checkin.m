@@ -26,7 +26,7 @@
 
 @implementation Checkin
 
-@synthesize identifier, message, date, latitude, longitude, location, photos;
+@synthesize identifier, message, date, user, latitude, longitude, location, photos;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
@@ -36,7 +36,9 @@
 			self.message = [dictionary stringForKey:@"msg"];
 			self.latitude = [dictionary stringForKey:@"lat"];
 			self.longitude = [dictionary stringForKey:@"lon"];
+			self.user = [dictionary stringForKey:@"user"];
 			self.date = [dictionary dateForKey:@"date"];
+			self.photos = [NSMutableArray arrayWithCapacity:0];
 			NSArray *media = [dictionary objectForKey:@"media"];
 			if (media != nil && [media isKindOfClass:[NSArray class]]) {
 				for (NSDictionary *item in media) {
@@ -50,6 +52,20 @@
 	return self;
 }
 
+- (id)initWithMessage:(NSString *)theMessage latitude:(NSString *)theLatitude longitude:(NSString *)theLongitude photo:(Photo *)thePhoto {
+	if (self = [super init]) {
+		self.message = theMessage;
+		self.latitude = theLatitude;
+		self.longitude = theLongitude;
+		self.date = [NSDate date];
+		self.photos = [NSMutableArray arrayWithCapacity:0];
+		if (thePhoto != nil) {
+			[self.photos addObject:thePhoto];
+		}
+	}
+	return self;
+}
+
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.identifier forKey:@"identifier"];
 	[encoder encodeObject:self.message forKey:@"message"];
@@ -57,6 +73,7 @@
 	[encoder encodeObject:self.longitude forKey:@"longitude"];
 	[encoder encodeObject:self.date forKey:@"date"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
+	[encoder encodeObject:self.user forKey:@"user"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -66,6 +83,7 @@
 		self.latitude = [decoder decodeObjectForKey:@"latitude"];
 		self.longitude = [decoder decodeObjectForKey:@"longitude"];
 		self.date = [decoder decodeObjectForKey:@"date"];
+		self.user = [decoder decodeObjectForKey:@"user"];
 		self.photos = [decoder decodeObjectForKey:@"photos"];
 		if (self.photos == nil) self.photos = [NSMutableArray array];
 	}
@@ -92,6 +110,7 @@
 	[location release];
 	[photos release];
 	[date release];
+	[user release];
     [super dealloc];
 }
 

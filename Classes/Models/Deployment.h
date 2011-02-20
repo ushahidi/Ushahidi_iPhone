@@ -39,6 +39,7 @@
 	NSMutableDictionary *locations;
 	NSMutableDictionary *incidents;
 	NSMutableDictionary *checkins;
+	NSMutableDictionary *users;
 	NSMutableArray *pending;
 }
 
@@ -56,6 +57,7 @@
 @property(nonatomic, retain) NSMutableDictionary *locations;
 @property(nonatomic, retain) NSMutableDictionary *incidents;
 @property(nonatomic, retain) NSMutableDictionary *checkins;
+@property(nonatomic, retain) NSMutableDictionary *users;
 @property(nonatomic, retain) NSMutableArray *pending;
 
 @property(nonatomic, readonly) BOOL supportsCheckins;
@@ -95,6 +97,7 @@
 - (NSString *) getPostNews;
 - (NSString *) getPostVideo;
 - (NSString *) getPostPhoto;
+- (NSString *) getPostCheckin;
 
 - (NSComparisonResult)compareByName:(Deployment *)deployment;
 - (NSComparisonResult)compareByDate:(Deployment *)deployment;

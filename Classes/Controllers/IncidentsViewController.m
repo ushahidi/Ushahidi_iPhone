@@ -21,6 +21,7 @@
 #import "IncidentsViewController.h"
 #import "AddIncidentViewController.h"
 #import "ViewIncidentViewController.h"
+#import "checkinViewController.h"
 #import "MapViewController.h"
 #import "IncidentTableCell.h"
 #import "TableCellFactory.h"
@@ -34,6 +35,7 @@
 #import "Category.h"
 #import "MKMapView+Extension.h"
 #import "MKPinAnnotationView+Extension.h"
+#import "NSString+Extension.h"
 #import "MapAnnotation.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
@@ -42,6 +44,7 @@
 #import "CheckinMapView.h"
 #import "Internet.h"
 #import "Checkin.h"
+#import "User.h"
 
 @interface IncidentsViewController ()
 
@@ -49,6 +52,8 @@
 @property(nonatomic,retain) ItemPicker *itemPicker;
 @property(nonatomic,retain) NSMutableArray *categories;
 @property(nonatomic,retain) Category *category;
+@property(nonatomic,retain) NSMutableArray *users;
+@property(nonatomic,retain) User *user;
 
 - (void) updateSyncedLabel;
 - (void) pushViewIncidentsViewController;
@@ -58,14 +63,15 @@
 - (void) mainQueueFinished;
 - (void) mapQueueFinished;
 - (void) photoQueueFinished;
+- (void) uploadQueueFinished;
 
 @end
 
 @implementation IncidentsViewController
 
-@synthesize addIncidentViewController, viewIncidentViewController;
+@synthesize addIncidentViewController, viewIncidentViewController, checkinViewController;
 @synthesize deployment, tableSort, mapType, viewMode, pending;
-@synthesize itemPicker, categories, category;
+@synthesize itemPicker, categories, category, users, user;
 @synthesize incidentTableView, incidentMapView, checkinMapView;
 
 typedef enum {
@@ -85,6 +91,11 @@ typedef enum {
 	TableSortVerified
 } TableSort;
 
+typedef enum {
+	ItemPickerCategories,
+	ItemPickerUsers
+} ItemPickerEnum;
+
 #pragma mark -
 #pragma mark Handlers
 
@@ -95,6 +106,7 @@ typedef enum {
 
 - (IBAction) addCheckin:(id)sender {
 	DLog(@"");
+	[self presentModalViewController:self.checkinViewController animated:YES];
 }
 
 - (IBAction) refreshReports:(id)sender {
@@ -184,30 +196,50 @@ typedef enum {
 }
 
 - (IBAction) reportsFilterChanged:(id)sender event:(UIEvent*)event {
+	DLog(@"");
 	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", nil)];
 	for (Category *theCategory in self.categories) {
+		if ([NSString isNilOrEmpty:[theCategory title]] == NO) {
 		[items addObject:theCategory.title];
+		}
 	}
 	if (event != nil) {
 		UIView *toolbar = [[event.allTouches anyObject] view];
 		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
-		[self.itemPicker showWithItems:items withSelected:[self.category title] forRect:rect];
+		[self.itemPicker showWithItems:items 
+						  withSelected:[self.category title] 
+							   forRect:rect 
+								   tag:ItemPickerCategories];
 	}
 	else {
-		[self.itemPicker showWithItems:items withSelected:[self.category title] forRect:CGRectMake(100, self.view.frame.size.height, 0, 0)];	
+		[self.itemPicker showWithItems:items 
+						  withSelected:[self.category title] 
+							   forRect:CGRectMake(100, self.view.frame.size.height, 0, 0) 
+								   tag:ItemPickerCategories];	
 	}
 }
 
 - (IBAction) checkinsFilterChanged:(id)sender event:(UIEvent*)event {
-	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CHECKINS --- ", nil)];
-	//TODO populate with user names
+	DLog(@"");
+	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL USERS --- ", nil)];
+	for (User *theUser in self.users) {
+		if ([NSString isNilOrEmpty:[theUser name]] == NO) {
+			[items addObject:[theUser name]];
+		}
+	}
 	if (event != nil) {
 		UIView *toolbar = [[event.allTouches anyObject] view];
 		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
-		[self.itemPicker showWithItems:items withSelected:nil forRect:rect];
+		[self.itemPicker showWithItems:items 
+						  withSelected:[self.user name] 
+							   forRect:rect 
+								   tag:ItemPickerUsers];
 	}
 	else {
-		[self.itemPicker showWithItems:items withSelected:nil forRect:CGRectMake(100, self.view.frame.size.height, 0, 0)];	
+		[self.itemPicker showWithItems:items 
+						  withSelected:[self.user name] 
+							   forRect:CGRectMake(100, self.view.frame.size.height, 0, 0) 
+								   tag:ItemPickerUsers];	
 	}
 }
 
@@ -267,7 +299,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
-	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
+	//self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiDarkTan];
@@ -293,7 +325,9 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	DLog(@"willBePushed: %d", self.willBePushed);
-	if (self.incidentTableView.superview == nil && self.incidentMapView.superview == nil) {
+	if (self.incidentTableView.superview == nil && 
+		self.incidentMapView.superview == nil && 
+		self.checkinMapView.superview == nil) {
 		self.incidentTableView.frame = self.view.frame;
 		self.incidentMapView.frame = self.view.frame;
 		[self.view addSubview:self.incidentTableView];
@@ -310,6 +344,12 @@ typedef enum {
 		}
 		else {
 			self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+		}
+		if ([[Ushahidi sharedUshahidi] hasUsers]) {
+			self.users = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getUsers]];
+		}
+		else {
+			self.users = [NSMutableArray arrayWithCapacity:0];
 		}
 		if ([[Ushahidi sharedUshahidi] hasLocations]) {
 			//DO NOTHING
@@ -339,6 +379,9 @@ typedef enum {
 		else if (self.incidentMapView.superview != nil) {
 			[self populateReportPins:YES];
 		}
+		else if (self.checkinMapView.superview != nil) {
+			[self populateCheckinPins:YES];
+		}
 	}
 	if (animated) {
 		[[Settings sharedSettings] setLastIncident:nil];
@@ -347,19 +390,20 @@ typedef enum {
 		if ([self.viewMode numberOfSegments] != ViewModeCheckin + 1) {
 			[self.viewMode insertSegmentWithImage:[UIImage imageNamed:@"checkin.png"] atIndex:ViewModeCheckin animated:NO];
 			CGRect rect = self.viewMode.frame;
-			rect.size.width = 120;
+			rect.size.width = 115;
 			self.viewMode.frame = rect;
 		}
 	}
 	else {
 		[self.viewMode removeSegmentAtIndex:ViewModeCheckin animated:NO];
 		CGRect rect = self.viewMode.frame;
-		rect.size.width = 85;
+		rect.size.width = 80;
 		self.viewMode.frame = rect;
 	}
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoQueueFinished) name:kPhotoQueueFinished object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadQueueFinished) name:kUploadQueueFinished object:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -372,11 +416,13 @@ typedef enum {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMainQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMapQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kPhotoQueueFinished object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kUploadQueueFinished object:nil];
 }
 
 - (void)dealloc {
 	[addIncidentViewController release];
 	[viewIncidentViewController release];
+	[checkinViewController release];
 	[deployment release];
 	[tableSort release];
 	[mapType release];
@@ -693,19 +739,6 @@ typedef enum {
 	self.incidentMapView.filterButton.enabled = [self.categories count] > 0;
 }
 
-- (void) mainQueueFinished {
-	DLog(@"");
-	[self.loadingView hideAfterDelay:1.0];
-}
-
-- (void) mapQueueFinished {
-	DLog(@"");
-}
-
-- (void) photoQueueFinished {
-	DLog(@"");
-}
-
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins {
 	[self.loadingView showWithMessage:NSLocalizedString(@"Checkins...", nil)];
 }
@@ -732,6 +765,35 @@ typedef enum {
 	}
 	[self.loadingView hide];
 	self.checkinMapView.refreshButton.enabled = YES;
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)theUsers hasChanges:(BOOL)hasChanges {
+	if (hasChanges) {
+		DLog(@"Re-Adding Users: %d", [theUsers count]);
+		[self.users removeAllObjects];
+		[self.users addObjectsFromArray:theUsers];
+	}
+	else {
+		DLog(@"No Changes Users");
+	}
+	self.checkinMapView.filterButton.enabled = YES;
+}
+
+- (void) mainQueueFinished {
+	DLog(@"");
+	[self.loadingView hideAfterDelay:1.0];
+}
+
+- (void) mapQueueFinished {
+	DLog(@"");
+}
+
+- (void) photoQueueFinished {
+	DLog(@"");
+}
+
+- (void) uploadQueueFinished {
+	DLog(@"");
 }
 
 #pragma mark -
@@ -780,33 +842,59 @@ typedef enum {
 #pragma mark -
 #pragma mark ItemPickerDelegate
 		 
-- (void) itemPickerReturned:(ItemPicker *)itemPicker item:(NSString *)item {
+- (void) itemPickerReturned:(ItemPicker *)theItemPicker item:(NSString *)item {
 	DLog(@"itemPickerReturned: %@", item);
-	self.category = nil;
-	for (Category *theCategory in self.categories) {
-		if ([theCategory.title isEqualToString:item]) {
-			self.category = theCategory;
-			DLog(@"Category: %@", theCategory.title);
-			break;
+	if (theItemPicker.tag == ItemPickerCategories) {
+		self.category = nil;
+		for (Category *theCategory in self.categories) {
+			if ([theCategory.title isEqualToString:item]) {
+				self.category = theCategory;
+				DLog(@"Category: %@", theCategory.title);
+				break;
+			}
 		}
+		if (self.category != nil) {
+			[self setHeader:self.category.title atSection:TableSectionIncidents];
+			[self.incidentMapView setLabel:self.category.title];
+		}
+		else {
+			[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
+			[self.incidentMapView setLabel:NSLocalizedString(@"All Categories", nil)];
+		}
+		[self filterRows:YES];
+		if ([self.filteredRows count] == 0) {
+			[self.loadingView showWithMessage:NSLocalizedString(@"No Reports", nil)];
+			[self.loadingView hideAfterDelay:1.0];					 
+		}	
 	}
-	if (self.category != nil) {
-		[self setHeader:self.category.title atSection:TableSectionIncidents];
-		[self.incidentMapView setLabel:self.category.title];
+	else if (theItemPicker.tag == ItemPickerUsers) {
+		self.user = nil;
+		for (User *theUser in self.users) {
+			if ([theUser.name isEqualToString:item]) {
+				self.user = theUser;
+				DLog(@"User: %@", theUser.name);
+				break;
+			}
+		}
+		if (self.user != nil) {
+			[self.checkinMapView setLabel:self.user.name];
+		}
+		else {
+			[self.checkinMapView setLabel:NSLocalizedString(@"All Users", nil)];
+		}
+		//[self.checkinMapView.mapView removeAllPins];
+//		for (Checkin *checkin in checkins) {
+//			if (self.user == nil || [self.user.identifier isEqualToString:[checkin user]]) {
+//				[self.checkinMapView.mapView addPinWithTitle:checkin.message 
+//													subtitle:checkin.dateString 
+//													latitude:checkin.latitude 
+//												   longitude:checkin.longitude 
+//													  object:checkin
+//													pinColor:MKPinAnnotationColorRed];	
+//			}
+//		}
+//		[self.checkinMapView.mapView resizeRegionToFitAllPins:NO animated:YES];
 	}
-	else {
-		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
-		[self.incidentMapView setLabel:NSLocalizedString(@"All Categories", nil)];
-	}
-	[self filterRows:YES];
-	if ([self.filteredRows count] == 0) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"No Reports", nil)];
-		[self.loadingView hideAfterDelay:1.0];					 
-	}
-}
-
-- (void) itemPickerCancelled:(ItemPicker *)itemPicker {
-	DLog(@"itemPickerCancelled");
 }
 
 @end

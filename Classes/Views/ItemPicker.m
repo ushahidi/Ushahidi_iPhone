@@ -43,6 +43,7 @@
 }
 
 - (void) showWithItems:(NSArray *)theItems withSelected:(NSString *)theItem forRect:(CGRect)rect tag:(NSInteger)theTag {
+	DLog(@"item:%@ tag:%d", theItem, theTag);
 	self.items = theItems;
 	self.item = theItem;
 	self.tag = theTag;

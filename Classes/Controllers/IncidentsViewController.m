@@ -45,6 +45,7 @@
 #import "Internet.h"
 #import "Checkin.h"
 #import "User.h"
+#import "ItemPicker.h"
 
 @interface IncidentsViewController ()
 
@@ -299,7 +300,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
-	//self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
+	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
 	self.evenRowColor = [UIColor ushahidiDarkTan];
@@ -844,7 +845,7 @@ typedef enum {
 		 
 - (void) itemPickerReturned:(ItemPicker *)theItemPicker item:(NSString *)item {
 	DLog(@"itemPickerReturned: %@", item);
-	if (theItemPicker.tag == ItemPickerCategories) {
+	if (itemPicker.tag == ItemPickerCategories) {
 		self.category = nil;
 		for (Category *theCategory in self.categories) {
 			if ([theCategory.title isEqualToString:item]) {
@@ -867,7 +868,7 @@ typedef enum {
 			[self.loadingView hideAfterDelay:1.0];					 
 		}	
 	}
-	else if (theItemPicker.tag == ItemPickerUsers) {
+	else if (itemPicker.tag == ItemPickerUsers) {
 		self.user = nil;
 		for (User *theUser in self.users) {
 			if ([theUser.name isEqualToString:item]) {
@@ -877,7 +878,7 @@ typedef enum {
 			}
 		}
 		if (self.user != nil) {
-			[self.checkinMapView setLabel:self.user.name];
+			[self.checkinMapView setLabel:[NSString stringWithFormat:@"%@ : %@", NSLocalizedString(@"Checkins", nil), self.user.name]];
 		}
 		else {
 			[self.checkinMapView setLabel:NSLocalizedString(@"All Users", nil)];

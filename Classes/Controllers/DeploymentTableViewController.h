@@ -19,21 +19,34 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "Ushahidi.h"
 
-@class DeploymentTableViewController;
 @class IncidentTabViewController;
-@class IncidentDetailsViewController;
+@class DeploymentAddViewController;
+@class SettingsViewController;
 
-@interface SplashViewController : UIViewController {
+@interface DeploymentTableViewController : TableViewController<UshahidiDelegate> {
 	
 @public
-	IBOutlet DeploymentTableViewController *deploymentTableViewController;
 	IBOutlet IncidentTabViewController *incidentTabViewController;
-	IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
+	IBOutlet DeploymentAddViewController *deploymentAddViewController;
+	IBOutlet SettingsViewController *settingsViewController;
+	IBOutlet UIBarButtonItem *editButton;
+	IBOutlet UIBarButtonItem *refreshButton;
+	IBOutlet UISegmentedControl *tableSort;
 }
 
-@property(nonatomic, retain) DeploymentTableViewController *deploymentTableViewController;
 @property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
-@property(nonatomic, retain) IncidentDetailsViewController *incidentDetailsViewController;
+@property(nonatomic, retain) DeploymentAddViewController *deploymentAddViewController;
+@property(nonatomic, retain) SettingsViewController *settingsViewController;
+@property(nonatomic, retain) UIBarButtonItem *editButton;
+@property(nonatomic, retain) UIBarButtonItem *refreshButton;
+@property(nonatomic, retain) UISegmentedControl *tableSort;
+
+- (IBAction) add:(id)sender;
+- (IBAction) edit:(id)sender;
+- (IBAction) refresh:(id)sender;
+- (IBAction) tableSortChanged:(id)sender;
 
 @end

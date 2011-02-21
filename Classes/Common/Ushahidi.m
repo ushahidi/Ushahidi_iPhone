@@ -407,6 +407,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	return [self.deployment supportsCheckins];
 }
 
+- (NSArray *) getCheckins {
+	return [self.deployment.checkins allValues];
+}
+
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate {
 	[self queueAsynchronousRequest:[self.deployment getCheckins] 
 					   forDelegate:delegate
@@ -519,6 +523,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[post addPostValue:checkin.longitude forKey:@"lon"];
 		[post addPostValue:checkin.message forKey:@"message"];
 		[post addPostValue:[Device deviceIdentifier] forKey:@"mobileid"];
+		[post addPostValue:[[Settings sharedSettings] firstName] forKey:@"firstname"];
+		[post addPostValue:[[Settings sharedSettings] lastName] forKey:@"lastname"];
+		[post addPostValue:[[Settings sharedSettings] email] forKey:@"email"];
 		NSInteger filename = 1;
 		for(Photo *photo in checkin.photos) {
 			if (photo != nil && photo.image != nil && photo.image.size.width > 0 && photo.image.size.height > 0) {
@@ -619,7 +626,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			incident.identifier = [NSString getUUID];
 		}
 		[self.deployment.pending addObject:incident];
-		return [self uploadIncident:incident forDelegate:delegate];
+		return YES;
 	}
 	return NO;
 }

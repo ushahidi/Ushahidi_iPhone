@@ -52,6 +52,12 @@
     return self;
 }
 
+- (BOOL) isUUID {
+	NSString *guidRegex = @"^(\\{){0,1}[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}(\\}){0,1}$"; 
+    NSPredicate *guidTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", guidRegex]; 
+    return [guidTest evaluateWithObject:self];
+}
+
 - (BOOL) isValidEmail {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"; 
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex]; 

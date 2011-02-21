@@ -102,6 +102,8 @@
 - (void) addCategory:(Category *)category;
 - (void) removeCategory:(Category *)category;
 - (BOOL) hasCategory:(Category *)category;
+- (BOOL) hasValidIdentifer;
+
 - (NSString *) categoryIDs;
 - (NSString *) categoryNames;
 - (NSString *) categoryNamesWithDefaultText:(NSString *)defaultText;

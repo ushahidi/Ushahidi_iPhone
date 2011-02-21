@@ -19,21 +19,26 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "Ushahidi.h"
+#import "CheckBoxTableCell.h"
 
-@class DeploymentTableViewController;
-@class IncidentTabViewController;
-@class IncidentDetailsViewController;
+@class Incident;
 
-@interface SplashViewController : UIViewController {
-	
+@interface CategoryTableViewController : TableViewController<UshahidiDelegate,
+														     CheckBoxTableCellDelegate> {
+
 @public
-	IBOutlet DeploymentTableViewController *deploymentTableViewController;
-	IBOutlet IncidentTabViewController *incidentTabViewController;
-	IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
+	UIBarButtonItem *cancelButton;
+	UIBarButtonItem *doneButton;
+	Incident *incident;
 }
 
-@property(nonatomic, retain) DeploymentTableViewController *deploymentTableViewController;
-@property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
-@property(nonatomic, retain) IncidentDetailsViewController *incidentDetailsViewController;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property(nonatomic, retain) Incident *incident;
+
+- (IBAction) cancel:(id)sender;
+- (IBAction) done:(id)sender;
 
 @end

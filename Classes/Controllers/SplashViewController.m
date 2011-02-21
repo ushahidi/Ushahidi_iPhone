@@ -19,9 +19,9 @@
  *****************************************************************************/
 
 #import "SplashViewController.h"
-#import "DeploymentsViewController.h"
-#import "IncidentsViewController.h"
-#import "ViewIncidentViewController.h"
+#import "DeploymentTableViewController.h"
+#import "IncidentTabViewController.h"
+#import "IncidentDetailsViewController.h"
 #import "Settings.h"
 #import "NSString+Extension.h"
 
@@ -33,7 +33,7 @@
 
 @implementation SplashViewController
 
-@synthesize deploymentsViewController, incidentsViewController, viewIncidentViewController;
+@synthesize deploymentTableViewController, incidentTabViewController, incidentDetailsViewController;
 
 #pragma mark -
 #pragma mark private
@@ -43,33 +43,33 @@
 	if ([NSString isNilOrEmpty:lastDeployment] == NO) {
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
 		if (deployment != nil) {
-			[self.navigationController pushViewController:self.deploymentsViewController animated:NO];
+			[self.navigationController pushViewController:self.deploymentTableViewController animated:NO];
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
-			self.incidentsViewController.deployment = deployment;
+			self.incidentTabViewController.deployment = deployment;
 			
 			NSString *lastIncident = [[Settings sharedSettings] lastIncident];
 			if ([NSString isNilOrEmpty:lastIncident] == NO) {
 				Incident *incident = [[Ushahidi sharedUshahidi] getIncidentWithIdentifer:lastIncident];
 				if (incident != nil) {
-					[self.navigationController pushViewController:self.incidentsViewController animated:NO];
-					self.viewIncidentViewController.incident = incident;
-					self.viewIncidentViewController.incidents = [[Ushahidi sharedUshahidi] getIncidents];
-					[self.navigationController pushViewController:self.viewIncidentViewController animated:YES];
+					[self.navigationController pushViewController:self.incidentTabViewController animated:NO];
+					self.incidentDetailsViewController.incident = incident;
+					self.incidentDetailsViewController.incidents = [[Ushahidi sharedUshahidi] getIncidents];
+					[self.navigationController pushViewController:self.incidentDetailsViewController animated:YES];
 				}
 				else {
-					[self.navigationController pushViewController:self.incidentsViewController animated:YES];
+					[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
 				}
 			}
 			else {
-				[self.navigationController pushViewController:self.incidentsViewController animated:YES];			
+				[self.navigationController pushViewController:self.incidentTabViewController animated:YES];			
 			}
 		}
 		else {
-			[self.navigationController pushViewController:self.deploymentsViewController animated:YES];
+			[self.navigationController pushViewController:self.deploymentTableViewController animated:YES];
 		}
 	}
 	else {
-		[self.navigationController pushViewController:self.deploymentsViewController animated:YES];
+		[self.navigationController pushViewController:self.deploymentTableViewController animated:YES];
 	}	
 }
 
@@ -78,9 +78,9 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.deploymentsViewController = nil;
-	self.incidentsViewController = nil;
-	self.viewIncidentViewController = nil;
+	self.deploymentTableViewController = nil;
+	self.incidentTabViewController = nil;
+	self.incidentDetailsViewController = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -109,9 +109,9 @@
 }
 
 - (void)dealloc {
-	[deploymentsViewController release];
-	[incidentsViewController release];
-	[viewIncidentViewController release];
+	[deploymentTableViewController release];
+	[incidentTabViewController release];
+	[incidentDetailsViewController release];
     [super dealloc];
 }
 

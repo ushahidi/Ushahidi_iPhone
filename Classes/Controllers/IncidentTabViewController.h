@@ -19,21 +19,29 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@class DeploymentTableViewController;
-@class IncidentTabViewController;
-@class IncidentDetailsViewController;
+@class IncidentTableViewController;
+@class IncidentMapViewController;
+@class CheckinMapViewController;
+@class Deployment;
 
-@interface SplashViewController : UIViewController {
-	
+@interface IncidentTabViewController : BaseViewController {
+
 @public
-	IBOutlet DeploymentTableViewController *deploymentTableViewController;
-	IBOutlet IncidentTabViewController *incidentTabViewController;
-	IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
+	IncidentTableViewController *incidentTableViewController;
+	IncidentMapViewController *incidentMapViewController;
+	CheckinMapViewController *checkinMapViewController;
+	Deployment *deployment;
+	UISegmentedControl *viewMode;
 }
 
-@property(nonatomic, retain) DeploymentTableViewController *deploymentTableViewController;
-@property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
-@property(nonatomic, retain) IncidentDetailsViewController *incidentDetailsViewController;
+@property(nonatomic,retain) IBOutlet IncidentTableViewController *incidentTableViewController;
+@property(nonatomic,retain) IBOutlet IncidentMapViewController *incidentMapViewController;
+@property(nonatomic,retain) IBOutlet CheckinMapViewController *checkinMapViewController;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *viewMode;
+@property(nonatomic,retain) Deployment *deployment;
+
+- (IBAction) viewModeChanged:(id)sender;
 
 @end

@@ -19,21 +19,31 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "TextFieldTableCell.h"
+#import "BooleanTableCell.h"
+#import "SliderTableCell.h"
+#import "Email.h"
 
-@class DeploymentTableViewController;
-@class IncidentTabViewController;
-@class IncidentDetailsViewController;
+@class Email;
 
-@interface SplashViewController : UIViewController {
+@interface SettingsViewController : TableViewController<TextFieldTableCellDelegate, 
+														BooleanTableCellDelegate, 
+														SliderTableCellDelegate,
+														UIAlertViewDelegate> {
 	
-@public
-	IBOutlet DeploymentTableViewController *deploymentTableViewController;
-	IBOutlet IncidentTabViewController *incidentTabViewController;
-	IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
+@private
+	NSString *userEmail;
+	NSString *firstName;
+	NSString *lastName;
+	BOOL downloadMaps;
+	BOOL becomeDiscrete;
+	NSInteger mapZoomLevel;
+	CGFloat imageWidth;
+	Email *email;
 }
 
-@property(nonatomic, retain) DeploymentTableViewController *deploymentTableViewController;
-@property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
-@property(nonatomic, retain) IncidentDetailsViewController *incidentDetailsViewController;
+- (IBAction) cancel:(id)sender;
+- (IBAction) done:(id)sender;
 
 @end

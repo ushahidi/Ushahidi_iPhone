@@ -135,6 +135,10 @@
 	return self;
 }
 
+- (BOOL) hasValidIdentifer {
+	return self.identifier != nil && [self.identifier isUUID] == NO;
+}
+
 - (BOOL) matchesString:(NSString *)string {
 	if (self.title != nil && [self.title anyWordHasPrefix:string]) {
 		return YES;

@@ -19,21 +19,37 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "Ushahidi.h"
+#import "MapDialog.h"
+#import "Locator.h"
+#import "ItemPicker.h"
 
-@class DeploymentTableViewController;
-@class IncidentTabViewController;
-@class IncidentDetailsViewController;
-
-@interface SplashViewController : UIViewController {
+@interface DeploymentAddViewController : TableViewController<UshahidiDelegate, 
+															 MapDialogDelegate, 
+															 LocatorDelegate, 
+															 ItemPickerDelegate> {
 	
 @public
-	IBOutlet DeploymentTableViewController *deploymentTableViewController;
-	IBOutlet IncidentTabViewController *incidentTabViewController;
-	IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
+	UIBarButtonItem *cancelButton;
+	UIBarButtonItem *refreshButton;
+	UISegmentedControl *tableSort;
+	
+@private
+	NSString *name;
+	NSString *url;
+	MapDialog *mapDialog;
+	ItemPicker *itemPicker;
+	NSString *mapDistance;
 }
 
-@property(nonatomic, retain) DeploymentTableViewController *deploymentTableViewController;
-@property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
-@property(nonatomic, retain) IncidentDetailsViewController *incidentDetailsViewController;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic, retain) IBOutlet UISegmentedControl *tableSort;
+
+- (IBAction) cancel:(id)sender;
+- (IBAction) add:(id)sender;
+- (IBAction) refresh:(id)sender event:(UIEvent*)event;
+- (IBAction) tableSortChanged:(id)sender;
 
 @end

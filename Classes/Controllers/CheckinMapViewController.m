@@ -141,6 +141,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.checkins = [[NSMutableArray alloc] initWithCapacity:0];
+	self.users = [[NSMutableArray alloc] initWithCapacity:0];
 	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 }
 
@@ -149,6 +150,7 @@
 	self.incidentTabViewController = nil;
 	self.checkinAddViewController = nil;
 	self.checkins = nil;
+	self.users = nil;
 	self.mapType = nil;
 	self.itemPicker = nil;
 	self.refreshButton = nil;
@@ -161,6 +163,11 @@
 	
 	[self.checkins removeAllObjects];
 	[self.checkins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
+	
+	[self.users removeAllObjects];
+	if ([[Ushahidi sharedUshahidi] hasUsers]) {
+		[self.users addObjectsFromArray:[[Ushahidi sharedUshahidi] getUsers]];
+	}
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
@@ -217,8 +224,11 @@
 	self.refreshButton.enabled = YES;
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)theUsers hasChanges:(BOOL)hasChanges {
-	if (hasChanges) {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)theUsers error:(NSError *)error hasChanges:(BOOL)hasChanges {
+	if (error != nil) {
+		DLog(@"error: %d %@", [error code], [error localizedDescription]);
+	}
+	else if (hasChanges) {
 		DLog(@"Re-Adding Users: %d", [theUsers count]);
 		[self.users removeAllObjects];
 		[self.users addObjectsFromArray:theUsers];

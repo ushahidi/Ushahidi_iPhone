@@ -31,6 +31,8 @@
 		3E1501171278D82500036A0F /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
 		3E15F74E12BFCD2000CC4D16 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15F74D12BFCD2000CC4D16 /* Icon-57.png */; };
 		3E15F78412BFF95000CC4D16 /* DeploymentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E15F78312BFF95000CC4D16 /* DeploymentTableCell_iPad.xib */; };
+		3E1A72001314259400F3FAC8 /* SliderTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1A71FF1314259400F3FAC8 /* SliderTableCell_iPhone.xib */; };
+		3E1A7204131425A200F3FAC8 /* SliderTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1A7203131425A200F3FAC8 /* SliderTableCell_iPad.xib */; };
 		3E236397128C7DB400CF804A /* IndexedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E236396128C7DB400CF804A /* IndexedTableCell.m */; };
 		3E236798128CAAC700CF804A /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */; };
 		3E244E72128DFDE400B36DB6 /* NSURL+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E244E71128DFDE400B36DB6 /* NSURL+Extension.m */; };
@@ -298,6 +300,8 @@
 		3E1501161278D82500036A0F /* SliderTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderTableCell.m; sourceTree = "<group>"; };
 		3E15F74D12BFCD2000CC4D16 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
 		3E15F78312BFF95000CC4D16 /* DeploymentTableCell_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
+		3E1A71FF1314259400F3FAC8 /* SliderTableCell_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
+		3E1A7203131425A200F3FAC8 /* SliderTableCell_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableCell_iPad.xib; sourceTree = "<group>"; };
 		3E236395128C7DB400CF804A /* IndexedTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedTableCell.h; sourceTree = "<group>"; };
 		3E236396128C7DB400CF804A /* IndexedTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedTableCell.m; sourceTree = "<group>"; };
 		3E244E70128DFDE400B36DB6 /* NSURL+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Extension.h"; sourceTree = "<group>"; };
@@ -1125,6 +1129,8 @@
 				3E15F78312BFF95000CC4D16 /* DeploymentTableCell_iPad.xib */,
 				3E119AC7126F64BA00C3DCBB /* IncidentTableCell_iPhone.xib */,
 				3E05350812958069000C7EB0 /* IncidentTableCell_iPad.xib */,
+				3E1A71FF1314259400F3FAC8 /* SliderTableCell_iPhone.xib */,
+				3E1A7203131425A200F3FAC8 /* SliderTableCell_iPad.xib */,
 			);
 			path = NIBs;
 			sourceTree = "<group>";
@@ -1536,6 +1542,8 @@
 				3EEE8F0313119CCD0096CBEA /* CheckinMapViewController_iPad.xib in Resources */,
 				3E6E2B581312B79400B9E331 /* IncidentTabViewController_iPhone.xib in Resources */,
 				3E6E2B5A1312B7A000B9E331 /* IncidentTabViewController_iPad.xib in Resources */,
+				3E1A72001314259400F3FAC8 /* SliderTableCell_iPhone.xib in Resources */,
+				3E1A7204131425A200F3FAC8 /* SliderTableCell_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

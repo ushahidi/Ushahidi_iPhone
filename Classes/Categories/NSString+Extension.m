@@ -52,6 +52,13 @@
     return self;
 }
 
+- (NSString *) stringWithMaxLength:(NSInteger)maxLength {
+	if (self.length > maxLength) {
+		return [self substringToIndex:maxLength];
+	}
+	return self;
+}
+
 - (BOOL) isUUID {
 	NSString *guidRegex = @"^(\\{){0,1}[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}(\\}){0,1}$"; 
     NSPredicate *guidTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", guidRegex]; 

@@ -25,15 +25,29 @@
 
 @interface SliderTableCell : IndexedTableCell {
 
-@private
+@public 
+	IBOutlet UISlider *slider;
+	IBOutlet UILabel *textLabel;
+	IBOutlet UILabel *valueLabel;
 	id<SliderTableCellDelegate>	delegate;
+	
 }
 
-- (id)initForDelegate:(id<SliderTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+@property (nonatomic, retain) UISlider *slider;
+@property (nonatomic, retain) UILabel *textLabel;
+@property (nonatomic, retain) UILabel *valueLabel;
+@property (nonatomic, assign) id<SliderTableCellDelegate> delegate;
 
 - (void) setMinimum:(CGFloat)minimum;
 - (void) setMaximum:(CGFloat)maximum;
+
 - (void) setValue:(CGFloat)value;
+- (CGFloat) getValue;
+
+- (void) setEnabled:(BOOL)enabled;
+- (BOOL) getEnabled;
+
+- (IBAction) sliderValueChanged:(id)sender;
 
 @end
 

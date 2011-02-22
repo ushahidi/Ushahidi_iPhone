@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="58"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -381,11 +382,21 @@
 			</object>
 			<object class="IBUIViewController" id="906486659">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="996893678">
+					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Map</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="987001369">
 						<string key="IBUITitle">Back</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="186129977">
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">location.png</string>
+						</object>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<reference key="IBUINavigationItem" ref="996893678"/>
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
@@ -976,6 +987,14 @@
 					</object>
 					<int key="connectionID">176</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">findLocation:</string>
+						<reference key="source" ref="186129977"/>
+						<reference key="destination" ref="906486659"/>
+					</object>
+					<int key="connectionID">178</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1127,6 +1146,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="987001369"/>
+							<reference ref="186129977"/>
 						</object>
 						<reference key="parent" ref="906486659"/>
 					</object>
@@ -1332,6 +1352,11 @@
 						<reference key="object" ref="268590964"/>
 						<reference key="parent" ref="5652634"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">177</int>
+						<reference key="object" ref="186129977"/>
+						<reference key="parent" ref="996893678"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1371,6 +1396,7 @@
 					<string>152.IBEditorWindowLastContentRect</string>
 					<string>152.IBPluginDependency</string>
 					<string>153.IBPluginDependency</string>
+					<string>177.IBPluginDependency</string>
 					<string>2.CustomClassName</string>
 					<string>2.IBAttributePlaceholdersKey</string>
 					<string>2.IBEditorWindowLastContentRect</string>
@@ -1454,6 +1480,7 @@
 					<string>{{614, 354}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>MotionWindow</string>
 					<object class="NSMutableDictionary">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1525,7 +1552,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">176</int>
+			<int key="maxID">178</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2070,25 +2097,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ImagePickerController</string>
-					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">delegate</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">delegate</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">delegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Controllers/ImagePickerController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">ImageViewController</string>
 					<string key="superclassName">BaseViewController</string>
 					<object class="NSMutableDictionary" key="actions">
@@ -2244,7 +2252,6 @@
 							<string>cancelButton</string>
 							<string>categoryTableViewController</string>
 							<string>doneButton</string>
-							<string>imagePickerController</string>
 							<string>locationTableViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -2252,7 +2259,6 @@
 							<string>UIBarButtonItem</string>
 							<string>CategoryTableViewController</string>
 							<string>UIBarButtonItem</string>
-							<string>ImagePickerController</string>
 							<string>LocationTableViewController</string>
 						</object>
 					</object>
@@ -2263,7 +2269,6 @@
 							<string>cancelButton</string>
 							<string>categoryTableViewController</string>
 							<string>doneButton</string>
-							<string>imagePickerController</string>
 							<string>locationTableViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -2279,10 +2284,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">doneButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">imagePickerController</string>
-								<string key="candidateClassName">ImagePickerController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">locationTableViewController</string>
@@ -3657,6 +3658,7 @@
 				<string>arrow_next.png</string>
 				<string>arrow_previous.png</string>
 				<string>arrow_up.png</string>
+				<string>location.png</string>
 				<string>map.png</string>
 				<string>reports.png</string>
 			</object>
@@ -3666,6 +3668,7 @@
 				<string>{7, 14}</string>
 				<string>{7, 14}</string>
 				<string>{15, 13}</string>
+				<string>{18, 18}</string>
 				<string>{26, 21}</string>
 				<string>{20, 20}</string>
 			</object>

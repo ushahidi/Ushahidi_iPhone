@@ -111,7 +111,7 @@ typedef enum {
 - (IBAction) sendTweet:(id)sender {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
-	if ([self.incident hasValidIdentifer]) {
+	if ([self.incident hasURL]) {
 		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
 		[message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
 	}
@@ -124,7 +124,7 @@ typedef enum {
 
 - (IBAction) sendSMS:(id)sender {
 	DLog(@"");
-	if ([self.incident hasValidIdentifer]) {
+	if ([self.incident hasURL]) {
 		[self.loadingView showWithMessage:NSLocalizedString(@"Shortening...", nil)];
 		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
 		[self.bitly shortenUrl:[link absoluteString] forDelegate:self];
@@ -138,7 +138,7 @@ typedef enum {
 - (IBAction) sendEmail:(id)sender {
 	DLog(@"");
 	NSMutableString *message = [NSMutableString string];
-	if ([self.incident hasValidIdentifer]) {
+	if ([self.incident hasURL]) {
 		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
 		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", nil), [link absoluteString], self.incident.title];
 	}
@@ -223,9 +223,8 @@ typedef enum {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];	
-	self.smsButton.enabled = [self.sms canSend] && [self.incident hasValidIdentifer];
+	self.smsButton.enabled = [self.sms canSend];
 	self.emailButton.enabled = [self.email canSend];
-	self.tweetButton.enabled = [self.incident hasValidIdentifer];
 	[[Settings sharedSettings] setLastIncident:self.incident.identifier];
 }
 
@@ -481,7 +480,7 @@ typedef enum {
 			self.imageViewController.title = self.incident.location;
 			self.imageViewController.image = self.incident.map;
 			self.imageViewController.images = nil;
-			self.imageViewController.pending = [self.incident hasValidIdentifer] == NO;
+			self.imageViewController.pending = [self.incident hasURL] == NO;
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}
 		else {

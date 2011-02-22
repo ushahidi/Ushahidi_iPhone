@@ -22,54 +22,56 @@
 
 @interface SliderTableCell()
 
-@property (nonatomic, assign) id<SliderTableCellDelegate> delegate;
-
 @end
 
 @implementation SliderTableCell
 
-@synthesize delegate;
+@synthesize slider, delegate, textLabel, valueLabel;
 
-- (id)initForDelegate:(id<SliderTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
-        self.delegate = theDelegate;
-		UISlider *slider = [[UISlider alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 10)];
-		slider.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-		slider.continuous = YES;
-		[slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-		[slider setBackgroundColor:[UIColor clearColor]];
-		[self.contentView addSubview:slider];
-		self.accessoryType = UITableViewCellAccessoryNone;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
+		self.accessoryType = UITableViewCellAccessoryNone;
     }
     return self;
 }
 
 - (void) setMinimum:(CGFloat)minimum {
-	UISlider *slider = [self.contentView.subviews objectAtIndex:0];
-	slider.minimumValue = minimum;
+	self.slider.minimumValue = minimum;
 }
 
 - (void) setMaximum:(CGFloat)maximum {
-	UISlider *slider = [self.contentView.subviews objectAtIndex:0];
-	slider.maximumValue = maximum;
+	self.slider.maximumValue = maximum;
 }
 
 - (void) setValue:(CGFloat)value {
-	UISlider *slider = [self.contentView.subviews objectAtIndex:0];
-	slider.value = value;
+	self.slider.value = value;
 }
 
-- (void) sliderValueChanged:(id)sender {
-	UISlider *slider = (UISlider *)sender;
+- (CGFloat) getValue {
+	return self.slider.value;
+}
+
+- (void) setEnabled:(BOOL)enabled {
+	self.slider.enabled = enabled;
+}
+
+- (BOOL) getEnabled {
+	return self.slider.enabled;
+}
+
+- (IBAction) sliderValueChanged:(id)sender {
 	SEL selector = @selector(sliderCellChanged:value:);
 	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
-		[self.delegate sliderCellChanged:self value:slider.value];
+		[self.delegate sliderCellChanged:self value:self.slider.value];
 	}
 }
 
 - (void)dealloc {
 	delegate = nil;
+	[slider release];
+	[textLabel release];
+	[valueLabel release];
     [super dealloc];
 }
 

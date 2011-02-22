@@ -23,57 +23,56 @@
 @interface BooleanTableCell ()
 
 @property (nonatomic, assign) id<BooleanTableCellDelegate> delegate;
+@property (nonatomic, retain) UISwitch *yesNo;
 
 @end
 
-
 @implementation BooleanTableCell
 
-typedef enum {
-	SegmentTrue,
-	SegmentFalse
-} Segment;
-
-@synthesize delegate, segmentControl;
+@synthesize delegate, yesNo;
 
 - (id)initForDelegate:(id<BooleanTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.delegate = theDelegate;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 		self.accessoryType = UITableViewCellAccessoryNone;
-		self.segmentControl = [[UISegmentedControl alloc] initWithFrame:CGRectMake(-1.0f, -1.0f, self.contentView.frame.size.width + 1, 48.0f)];
-		self.segmentControl.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-		[self.segmentControl insertSegmentWithTitle:@"Yes" atIndex:SegmentTrue animated:NO];
-		[self.segmentControl insertSegmentWithTitle:@"No" atIndex:SegmentFalse animated:NO];
-		[self.segmentControl addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
-		[self.contentView addSubview:self.segmentControl];
+		
+		self.yesNo = [[UISwitch alloc] initWithFrame:CGRectZero];
+		[self.yesNo addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+
+		self.textLabel.font = [UIFont systemFontOfSize:16];
+		
+		self.accessoryView = self.yesNo;
 	}
     return self;
 }
 
-- (void) setChecked:(BOOL)checked {
-	if (checked) {
-		self.segmentControl.selectedSegmentIndex = SegmentTrue;
-	}
-	else {
-		self.segmentControl.selectedSegmentIndex = SegmentFalse;
-	}
+- (void) setValue:(BOOL)value {
+	self.yesNo.on = value;
 }
 
-- (BOOL) getChecked {
-	return self.segmentControl.selectedSegmentIndex == SegmentTrue;
+- (BOOL) getValue {
+	return self.yesNo.on;
+}
+
+- (void) setText:(NSString *)theText {
+	self.textLabel.text = theText;
+}
+
+- (NSString *) getText {
+	return self.textLabel.text;
 }
 
 - (void) valueChanged:(id)sender {
-	SEL selector = @selector(booleanCellChanged:checked:);
+	SEL selector = @selector(booleanCellChanged:value:);
 	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
-		[self.delegate booleanCellChanged:self checked:(self.segmentControl.selectedSegmentIndex == SegmentTrue)];
+		[self.delegate booleanCellChanged:self value:self.yesNo.on];
 	}
 }
 
 - (void)dealloc {
 	delegate = nil;
-	[segmentControl release];
+	[yesNo release];
     [super dealloc];
 }
 

@@ -60,5 +60,11 @@
 	<string>muqzQTP4YkXi0ncI39s0Jw</string>
 	<key>TwitterSecret</key>
 	<string>3uOGt2Hjj777rTOI76tOu1eFEvkgtbTWOvYcHiBqsE</string>
+	<key>UshahidiWebsite</key>
+	<string>http://www.ushahidi.com</string>
+	<key>UshahidiEmail</key>
+	<string>support@ushahidi.com</string>
+	<key>UshahidiAppStore</key>
+	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
 </dict>
 </plist>

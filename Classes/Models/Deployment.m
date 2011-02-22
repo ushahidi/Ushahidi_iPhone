@@ -32,7 +32,7 @@
 
 @implementation Deployment
 
-@synthesize identifier, name, description, url, domain;
+@synthesize identifier, name, description, url, domain, version;
 @synthesize categories, locations, incidents, checkins, users;
 @synthesize discovered, synced, added, sinceID, pending;
 
@@ -87,6 +87,7 @@
 	[encoder encodeObject:self.synced forKey:@"synced"];
 	[encoder encodeObject:self.added forKey:@"added"];
 	[encoder encodeObject:self.discovered forKey:@"discovered"];
+	[encoder encodeObject:self.version forKey:@"version"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -100,6 +101,7 @@
 		self.synced = [decoder decodeObjectForKey:@"synced"];
 		self.added = [decoder decodeObjectForKey:@"added"];
 		self.discovered = [decoder decodeObjectForKey:@"discovered"];
+		self.version = [decoder decodeObjectForKey:@"version"];
 	}
 	return self;
 }
@@ -215,6 +217,7 @@
 	[synced release];
 	[added release];
 	[discovered release];
+	[version release];
     [super dealloc];
 }
 

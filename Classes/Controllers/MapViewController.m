@@ -23,6 +23,7 @@
 #import "AlertView.h"
 #import "InputView.h"
 #import "MKMapView+Extension.h"
+#import "NSString+Extension.h"
 #import "MKPinAnnotationView+Extension.h"
 
 typedef enum {
@@ -116,7 +117,7 @@ typedef enum {
 	}
 	[self.mapView removeAllPins];
 	[self.mapView addPinWithTitle:self.locationName 
-						 subtitle:[NSString stringWithFormat:@"%f,%f", self.locationLatitude, self.locationLongitude] 
+						 subtitle:[NSString stringWithFormat:@"%@, %@", [self.locationLatitude stringWithMaxLength:10], [self.locationLongitude stringWithMaxLength:10]] 
 						 latitude:self.locationLatitude 
 						longitude:self.locationLongitude];
 	[self.mapView resizeRegionToFitAllPins:NO animated:NO];
@@ -155,28 +156,5 @@ typedef enum {
 	[self.loadingView hide];
 	[self.mapView resizeRegionToFitAllPins:YES animated:YES];
 }
-
-#pragma mark -
-#pragma mark UISearchBarDelegate
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
-	theSearchBar.showsCancelButton = YES;
-}   
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)theSearchBar {
-	theSearchBar.showsCancelButton = NO;
-}   
-
-- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
-	DLog(@"searchText: %@", searchText);
-}   
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)theSearchBar {
-	[self showSearchBar:NO animated:YES];
-}   
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)theSearchBar {
-	[self showSearchBar:NO animated:YES];
-} 
 
 @end

@@ -388,6 +388,15 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="203014307">
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">location.png</string>
+						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIStyle">1</int>
+						<reference key="IBUINavigationItem" ref="658501258"/>
+					</object>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				</object>
 				<string key="IBUINibName">MapViewController_iPad</string>
@@ -975,6 +984,14 @@
 					</object>
 					<int key="connectionID">130</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">findLocation:</string>
+						<reference key="source" ref="203014307"/>
+						<reference key="destination" ref="920892568"/>
+					</object>
+					<int key="connectionID">132</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1075,6 +1092,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="973547656"/>
+							<reference ref="203014307"/>
 						</object>
 						<reference key="parent" ref="920892568"/>
 					</object>
@@ -1327,6 +1345,11 @@
 						<reference key="object" ref="1005714770"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">131</int>
+						<reference key="object" ref="203014307"/>
+						<reference key="parent" ref="658501258"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1356,6 +1379,7 @@
 					<string>13.CustomClassName</string>
 					<string>13.IBEditorWindowLastContentRect</string>
 					<string>13.IBPluginDependency</string>
+					<string>131.IBPluginDependency</string>
 					<string>14.CustomClassName</string>
 					<string>14.IBEditorWindowLastContentRect</string>
 					<string>14.IBPluginDependency</string>
@@ -1437,6 +1461,7 @@
 					<string>IncidentTabViewController</string>
 					<string>{{2152, -168}, {768, 1024}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>IncidentAddViewController</string>
 					<string>{{2407, -252}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1447,7 +1472,7 @@
 					<string>{{3168, -250}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>MapViewController</string>
-					<string>{{614, 365}, {320, 480}}</string>
+					<string>{{614, 4}, {783, 852}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>MotionWindow</string>
@@ -1510,7 +1535,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">130</int>
+			<int key="maxID">132</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3616,6 +3641,7 @@
 				<string>arrow_next.png</string>
 				<string>arrow_previous.png</string>
 				<string>arrow_up.png</string>
+				<string>location.png</string>
 				<string>map.png</string>
 				<string>reports.png</string>
 			</object>
@@ -3625,6 +3651,7 @@
 				<string>{7, 14}</string>
 				<string>{7, 14}</string>
 				<string>{15, 13}</string>
+				<string>{20, 20}</string>
 				<string>{26, 21}</string>
 				<string>{20, 20}</string>
 			</object>

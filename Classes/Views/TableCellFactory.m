@@ -133,8 +133,10 @@
 										  indexPath:(NSIndexPath *)indexPath  {
 	SliderTableCell *cell = (SliderTableCell *)[tableView dequeueReusableCellWithIdentifier:@"SliderTableCell"];
 	if (cell == nil) {
-		cell = [[[SliderTableCell alloc] initForDelegate:delegate reuseIdentifier:@"SliderTableCell"] autorelease];
+		NSString *nibName = [Device isIPad] ? @"SliderTableCell_iPad" : @"SliderTableCell_iPhone";
+		cell = (SliderTableCell *)[TableCellFactory getTableViewCellFromNib:nibName];
 	}
+	cell.delegate = delegate;
 	cell.indexPath = indexPath;
 	return cell;
 }

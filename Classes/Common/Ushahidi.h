@@ -75,7 +75,7 @@
 - (NSArray *) getCheckins;
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) uploadCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
-- (BOOL) deploymentSupportsCheckins;
+- (BOOL) supportsCheckins:(Deployment *)deployment;
 
 - (BOOL) hasCategories;
 - (NSArray *) getCategories;
@@ -108,10 +108,11 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges;
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)users error:(NSError *)error hasChanges:(BOOL)hasChanges;
+
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident photo:(Photo *)photo;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges;
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)users hasChanges:(BOOL)hasChanges;
 
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error;

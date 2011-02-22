@@ -403,8 +403,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Checkins
 
-- (BOOL) deploymentSupportsCheckins {
-	return [self.deployment supportsCheckins];
+- (BOOL) supportsCheckins:(Deployment *)theDeployment {
+	return [theDeployment supportsCheckins];
 }
 
 - (NSArray *) getCheckins {
@@ -483,9 +483,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				if (hasCheckinChanges) {
 					DLog(@"Has New Users");
 				}
-				[self dispatchSelector:@selector(downloadedFromUshahidi:users:hasChanges:)
+				[self dispatchSelector:@selector(downloadedFromUshahidi:users:error:hasChanges:)
 								target:[request getDelegate] 
-							   objects:self, [self.deployment.users allValues], hasUserChanges, nil];
+							   objects:self, [self.deployment.users allValues], nil, hasUserChanges, nil];
 			}
 			else {
 				NSError *error = [NSError errorWithDomain:self.deployment.domain 

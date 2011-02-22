@@ -135,7 +135,7 @@
 	return self;
 }
 
-- (BOOL) hasValidIdentifer {
+- (BOOL) hasURL {
 	return self.identifier != nil && [self.identifier isUUID] == NO;
 }
 

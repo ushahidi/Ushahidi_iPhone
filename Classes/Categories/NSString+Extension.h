@@ -26,6 +26,7 @@
 + (BOOL) isNilOrEmpty:(NSString *)string;
 - (BOOL) anyWordHasPrefix:(NSString *)prefix;
 - (NSString *)stringByTrimmingSuffix:(NSString *)suffix;
+- (NSString *) stringWithMaxLength:(NSInteger)maxLength;
 - (BOOL) isUUID;
 - (BOOL) isValidEmail;
 - (BOOL) isValidURL;

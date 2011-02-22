@@ -39,8 +39,11 @@
 	BOOL downloadMaps;
 	BOOL becomeDiscrete;
 	NSInteger mapZoomLevel;
-	CGFloat imageWidth;
+	NSInteger imageWidth;
 	Email *email;
+	NSString *website;
+	NSString *support;
+	NSString *download;
 }
 
 - (IBAction) cancel:(id)sender;

@@ -24,7 +24,7 @@
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
 
-@interface MapViewController : BaseViewController<MKMapViewDelegate, UISearchBarDelegate> {
+@interface MapViewController : BaseViewController<MKMapViewDelegate> {
 	
 @public
 	MKMapView *mapView;

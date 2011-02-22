@@ -102,7 +102,7 @@
 - (void) addCategory:(Category *)category;
 - (void) removeCategory:(Category *)category;
 - (BOOL) hasCategory:(Category *)category;
-- (BOOL) hasValidIdentifer;
+- (BOOL) hasURL;
 
 - (NSString *) categoryIDs;
 - (NSString *) categoryNames;

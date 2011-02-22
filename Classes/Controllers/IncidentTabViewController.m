@@ -148,6 +148,22 @@ typedef enum {
 	if (animated) {
 		[[Settings sharedSettings] setLastIncident:nil];
 	}
+	if ([[Ushahidi sharedUshahidi] supportsCheckins:self.deployment]) {
+		if ([self.viewMode numberOfSegments] < ViewModeCheckin + 1) {
+			[self.viewMode insertSegmentWithImage:[UIImage imageNamed:@"checkin.png"] 
+										  atIndex:ViewModeCheckin 
+										 animated:NO];
+			CGRect rect = self.viewMode.frame;
+			rect.size.width = 115;
+			self.viewMode.frame = rect;
+		}
+	}
+	else {
+		[self.viewMode removeSegmentAtIndex:ViewModeCheckin animated:NO];
+		CGRect rect = self.viewMode.frame;
+		rect.size.width = 80;
+		self.viewMode.frame = rect;
+	}
 }
 
 - (void)dealloc {

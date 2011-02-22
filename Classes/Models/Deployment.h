@@ -34,6 +34,7 @@
 	NSDate *synced;
 	NSDate *added;
 	NSDate *discovered;
+	NSString *version;
 	
 	NSMutableDictionary *categories;
 	NSMutableDictionary *locations;
@@ -52,6 +53,7 @@
 @property(nonatomic, retain) NSDate *synced;
 @property(nonatomic, retain) NSDate *added;
 @property(nonatomic, retain) NSDate *discovered;
+@property(nonatomic, retain) NSString *version;
 
 @property(nonatomic, retain) NSMutableDictionary *categories;
 @property(nonatomic, retain) NSMutableDictionary *locations;

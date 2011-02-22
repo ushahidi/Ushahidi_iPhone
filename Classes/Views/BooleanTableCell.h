@@ -24,20 +24,19 @@
 @protocol BooleanTableCellDelegate;
 
 @interface BooleanTableCell : IndexedTableCell {
-
-@public
-	UISegmentedControl *segmentControl;
 	
 @private 	
+	UISwitch *yesNo;
 	id<BooleanTableCellDelegate> delegate;
 }
 
-@property (nonatomic, retain) UISegmentedControl *segmentControl;
-
 - (id)initForDelegate:(id<BooleanTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 
-- (void) setChecked:(BOOL)completed;
-- (BOOL) getChecked;
+- (void) setValue:(BOOL)value;
+- (BOOL) getValue;
+
+- (void) setText:(NSString *)text;
+- (NSString *) getText;
 
 @end
 
@@ -45,6 +44,6 @@
 
 @optional
 
-- (void) booleanCellChanged:(BooleanTableCell *)cell checked:(BOOL)checked;
+- (void) booleanCellChanged:(BooleanTableCell *)cell value:(BOOL)value;
 
 @end

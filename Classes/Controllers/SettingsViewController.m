@@ -36,9 +36,12 @@
 @property(nonatomic, retain) NSString *lastName;
 @property(nonatomic, assign) BOOL downloadMaps;
 @property(nonatomic, assign) BOOL becomeDiscrete;
-@property(nonatomic, assign) CGFloat imageWidth;
+@property(nonatomic, assign) NSInteger imageWidth;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
 @property(nonatomic, retain) Email *email;
+@property(nonatomic, retain) NSString *website;
+@property(nonatomic, retain) NSString *support;
+@property(nonatomic, retain) NSString *download;
 
 - (void) dismissModalView;
 
@@ -46,23 +49,44 @@
 
 @implementation SettingsViewController
 
-NSString * const kUshahidiWebsite = @"http://www.ushahidi.com";
+@synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, email, website, support, download;
+
+#pragma mark -
+#pragma mark Enums
 
 typedef enum {
-	TableSectionEmail,
-	TableSectionFirstName,
-	TableSectionLastName,
-	TableSectionImageWidth,
-	TableSectionDownloadMaps,
-	TableSectionMapZoomLevel,
-	TableSectionBecomeDiscrete,
-	TableSectionShare,
-	TableSectionSupport,
-	TableSectionWebsite,
-	TableSectionVersion
+	TableSectionContact,
+	TableSectionPhoto,
+	TableSectionMap,
+	TableSectionPrivacy,
+	TableSectionApp
 } TableSection;
 
-@synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, email;
+typedef enum {
+	TableRowContactFirst,
+	TableRowContactLast,
+	TableRowContactEmail
+} TableRowContact;
+
+typedef enum {
+	TableRowPhotoSize
+} TableRowPhoto;
+
+typedef enum {
+	TableRowMapDownload,
+	TableRowMapSize
+} TableRowMap;
+
+typedef enum {
+	TableRowPrivacyShake
+} TableRowPrivacy;
+
+typedef enum {
+	TableRowAppVersion,
+	TableRowAppShare,
+	TableRowAppEmail,
+	TableRowAppWebsite
+} TableRowApp;
 
 #pragma mark -
 #pragma mark Handlers
@@ -113,22 +137,22 @@ typedef enum {
     [super viewDidLoad];
 	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	self.email = [[Email alloc] initWithController:self];
-	[self setHeader:NSLocalizedString(@"Email", nil) atSection:TableSectionEmail];
-	[self setHeader:NSLocalizedString(@"First Name", nil) atSection:TableSectionFirstName];
-	[self setHeader:NSLocalizedString(@"Last Name", nil) atSection:TableSectionLastName];
-	[self setHeader:NSLocalizedString(@"Resized Image Width", nil) atSection:TableSectionImageWidth];
-	[self setHeader:NSLocalizedString(@"Download Maps For Offline Viewing", nil) atSection:TableSectionDownloadMaps];
-	[self setHeader:NSLocalizedString(@"Downloaded Map Zoom Level", nil) atSection:TableSectionMapZoomLevel];
-	[self setHeader:NSLocalizedString(@"Discrete Mode On Shake", nil) atSection:TableSectionBecomeDiscrete];
-	[self setHeader:NSLocalizedString(@"Share", nil) atSection:TableSectionShare];
-	[self setHeader:NSLocalizedString(@"Contact", nil) atSection:TableSectionSupport];
-	[self setHeader:NSLocalizedString(@"Website", nil) atSection:TableSectionWebsite];
-	[self setHeader:NSLocalizedString(@"Version", nil) atSection:TableSectionVersion];
+	self.website = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiWebsite"];
+	self.support = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiEmail"];
+	self.download = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiAppStore"];
+	[self setHeader:NSLocalizedString(@"Contact Settings", nil) atSection:TableSectionContact];
+	[self setHeader:NSLocalizedString(@"Photo Settings", nil) atSection:TableSectionPhoto];
+	[self setHeader:NSLocalizedString(@"Map Settings", nil) atSection:TableSectionMap];
+	[self setHeader:NSLocalizedString(@"Privacy Settings", nil) atSection:TableSectionPrivacy];
+	[self setHeader:NSLocalizedString(@"App Settings", nil) atSection:TableSectionApp];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.email = nil;
+	self.website = nil;
+	self.support = nil;
+	self.download = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -140,16 +164,12 @@ typedef enum {
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
 	self.imageWidth = [[Settings sharedSettings] imageWidth];
 	self.mapZoomLevel = [[Settings sharedSettings] mapZoomLevel];
-	[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", nil)]
-		  atSection:TableSectionImageWidth];
-	[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", nil)]
-		  atSection:TableSectionMapZoomLevel];
 	[self.tableView reloadData];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Enable Discrete Mode to hide your current activity, or Download Maps so you can view map images offline.", nil)];
+	//[self.alertView showInfoOnceOnly:NSLocalizedString(@"Enable Discrete Mode to hide your current activity, or Download Maps so you can view map images offline.", nil)];
 }
 
 - (void)dealloc {
@@ -157,6 +177,8 @@ typedef enum {
 	[firstName release];
 	[lastName release];
 	[email release];
+	[website release];
+	[support release];
     [super dealloc];
 }
 
@@ -164,118 +186,156 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 11;
+	return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	return 1;
+	if (section == TableSectionContact) {
+		return 3;
+	}
+	if (section == TableSectionPhoto) {
+		return 1;
+	}
+	if (section == TableSectionMap) {
+		return 2;
+	}
+	if (section == TableSectionPrivacy) {
+		return 1;
+	}
+	if (section == TableSectionApp) {
+		return 4;
+	}
+	return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionDownloadMaps || 
-		indexPath.section == TableSectionBecomeDiscrete) {
-		return 35;
+	if (indexPath.section == TableSectionPhoto &&
+		indexPath.row == TableRowPhotoSize) {
+		return 60;
+	}
+	if (indexPath.section == TableSectionMap &&
+		indexPath.row == TableRowMapSize) {
+		return 60;
 	}
 	return 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionDownloadMaps) {
-		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView indexPath:indexPath];
-		[cell setChecked:self.downloadMaps];
-		return cell;
-	}
-	else if (indexPath.section == TableSectionBecomeDiscrete) {
-		BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView indexPath:indexPath];
-		[cell setChecked:self.becomeDiscrete];
-		return cell;
-	}
-	else if (indexPath.section == TableSectionImageWidth) {
-		SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView indexPath:indexPath];
-		[cell setMaximum:1024];
-		[cell setMinimum:200];
-		[cell setValue:self.imageWidth];
-		return cell;
-	}
-	else if (indexPath.section == TableSectionMapZoomLevel) {
-		SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView indexPath:indexPath];
-		[cell setMaximum:21];
-		[cell setMinimum:5];
-		[cell setValue:self.mapZoomLevel];
-		return cell;
-	}
-	else if (indexPath.section == TableSectionSupport) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-		[cell setText:NSLocalizedString(@"Email Ushahidi Support", nil)];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		return cell;
-	}
-	else if (indexPath.section == TableSectionShare) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-		[cell setText:NSLocalizedString(@"Share Ushahidi iOS", nil)];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		return cell;
-	}
-	else if (indexPath.section == TableSectionWebsite) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-		[cell setText:kUshahidiWebsite];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		return cell;
-	}
-	else if (indexPath.section == TableSectionVersion) {
-		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-		[cell setText:[Device appVersion]];
-		cell.accessoryType = UITableViewCellAccessoryNone;
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-		return cell;
-	}
-	else {
+	if (indexPath.section == TableSectionContact) {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
-		if (indexPath.section == TableSectionEmail) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
-			[cell setText:self.userEmail];
-			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
-			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
-			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-		}
-		else if (indexPath.section == TableSectionFirstName) {
+		if (indexPath.row == TableRowContactFirst) {
 			[cell setPlaceholder:NSLocalizedString(@"Enter first name", nil)];
 			[cell setText:self.firstName];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
-		else if (indexPath.section == TableSectionLastName) {
+		else if (indexPath.row == TableRowContactLast) {
 			[cell setPlaceholder:NSLocalizedString(@"Enter last name", nil)];
 			[cell setText:self.lastName];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
+		else if (indexPath.row == TableRowContactEmail) {
+			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
+			[cell setText:self.userEmail];
+			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+		}
 		return cell;	
+	}
+	else if (indexPath.section == TableSectionPhoto) {
+		if (indexPath.row == TableRowPhotoSize) {
+			SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView indexPath:indexPath];
+			cell.textLabel.text = NSLocalizedString(@"Resized Image Width", nil);
+			cell.valueLabel.text = [NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", nil)];
+			[cell setMaximum:1024];
+			[cell setMinimum:200];
+			[cell setValue:self.imageWidth];
+			[cell setEnabled:YES];
+			return cell;
+		}
+	}
+	else if (indexPath.section == TableSectionMap) {
+		if (indexPath.row == TableRowMapDownload) {
+			BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView indexPath:indexPath];
+			[cell setText:NSLocalizedString(@"Downloaded Map Zoom Level", nil)];
+			[cell setText:NSLocalizedString(@"Download Offline Maps", nil)];
+			[cell setValue:self.downloadMaps];
+			return cell;
+		}
+		else if (indexPath.row == TableRowMapSize) {
+			SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView indexPath:indexPath];
+			cell.textLabel.text = NSLocalizedString(@"Map Zoom Level", nil);
+			cell.valueLabel.text = [NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom", nil)];
+			[cell setMaximum:21];
+			[cell setMinimum:5];
+			[cell setValue:self.mapZoomLevel];
+			[cell setEnabled:self.downloadMaps];
+			return cell;
+		}
+	}
+	else if (indexPath.section == TableSectionPrivacy) {
+		if (indexPath.row == TableRowPrivacyShake) {
+			BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView indexPath:indexPath];
+			[cell setText:NSLocalizedString(@"Discrete Mode On Shake", nil)];
+			[cell setValue:self.becomeDiscrete];
+			return cell;
+		}
+	}
+	else if (indexPath.section == TableSectionApp) {
+		if (indexPath.row == TableRowAppVersion) {
+			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+			[cell setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"App Version", nil), [Device appVersion]]];
+			cell.accessoryType = UITableViewCellAccessoryNone;
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+			return cell;
+		}
+		else if (indexPath.row == TableRowAppShare) {
+			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+			[cell setText:NSLocalizedString(@"Share Ushahidi iOS", nil)];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+			return cell;
+		}
+		else if (indexPath.row == TableRowAppEmail) {
+			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+			[cell setText:self.support];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+			return cell;
+		}
+		else if (indexPath.row == TableRowAppWebsite) {
+			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+			[cell setText:self.website];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+			return cell;
+		}
 	}
 	return nil;
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionSupport) {
-		NSMutableString *message =[NSMutableString string];
-		[message appendFormat:@"App Version: %@<br/>", [Device appVersion]]; 
-		[message appendFormat:@"Device Model: %@<br/>", [Device deviceModel]]; 
-		[message appendFormat:@"Device Version: %@<br/>", [Device deviceVersion]]; 
-		[self.email sendToRecipients:[NSArray arrayWithObject:@"support@ushahidi.com"] withMessage:message withSubject:nil];
+	if (indexPath.section == TableSectionApp) {
+		if (indexPath.row == TableRowAppShare) {
+			NSString *message = [NSString stringWithFormat:@"<a href='%@'>%@</a>", self.download, self.download];
+			[self.email sendToRecipients:nil withMessage:message withSubject:@"Ushahidi iOS"];
+		}
+		else if (indexPath.row == TableRowAppEmail) {
+			NSMutableString *message =[NSMutableString string];
+			[message appendFormat:@"App Version: %@<br/>", [Device appVersion]]; 
+			[message appendFormat:@"Device Model: %@<br/>", [Device deviceModel]]; 
+			[message appendFormat:@"Device Version: %@<br/>", [Device deviceVersion]]; 
+			[self.email sendToRecipients:[NSArray arrayWithObject:self.support] withMessage:message withSubject:nil];
+		}
+		else if (indexPath.row == TableRowAppWebsite) {
+			[self.alertView showYesNoWithTitle:NSLocalizedString(@"Open In Safari?", nil) andMessage:self.website];
+		}
 	}
-	else if (indexPath.section == TableSectionWebsite) {
-		[self.alertView showYesNoWithTitle:NSLocalizedString(@"Open In Safari?", nil) andMessage:kUshahidiWebsite];
-	}
-	else if (indexPath.section == TableSectionShare) {
-		NSString *url = @"http://itunes.apple.com/app/ushahidi-ios/id410609585";
-		NSString *message = [NSString stringWithFormat:@"<a href='%@'>%@</a>", url, url];
-		[self.email sendToRecipients:nil withMessage:message withSubject:@"Ushahidi iOS"];
-	}
+	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark -
@@ -287,41 +347,46 @@ typedef enum {
 }
 
 - (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
-	if (indexPath.section == TableSectionEmail) {
-		self.userEmail = text;
-	}
-	else if (indexPath.section == TableSectionFirstName) {
-		self.firstName = text;
-	}
-	else if (indexPath.section == TableSectionLastName) {
-		self.lastName = text;
+	if (indexPath.section == TableSectionContact) {
+		if (indexPath.row == TableRowContactFirst) {
+			self.firstName = text;
+		}
+		else if (indexPath.row == TableRowContactLast) {
+			self.lastName = text;
+		}
+		else if (indexPath.row == TableRowContactEmail) {
+			self.userEmail = text;
+		}
 	}
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	DLog(@"indexPath:[%d, %d] text: %@", indexPath.section, indexPath.row, text);
-	if (indexPath.section == TableSectionEmail) {
-		self.userEmail = text;
-	}
-	else if (indexPath.section == TableSectionFirstName) {
-		self.firstName = text;
-	}
-	else if (indexPath.section == TableSectionLastName) {
-		self.lastName = text;
+	if (indexPath.section == TableSectionContact) {
+		if (indexPath.row == TableRowContactFirst) {
+			self.firstName = text;
+		}
+		else if (indexPath.row == TableRowContactLast) {
+			self.lastName = text;
+		}
+		else if (indexPath.row == TableRowContactEmail) {
+			self.userEmail = text;
+		}
 	}
 }
 
 #pragma mark -
 #pragma mark BooleanTableCellDelegate
 		 
-- (void) booleanCellChanged:(BooleanTableCell *)cell checked:(BOOL)checked {
-	DLog(@"checked: %d", checked);
-	if (cell.indexPath.section == TableSectionBecomeDiscrete) {
-		self.becomeDiscrete = checked;
+- (void) booleanCellChanged:(BooleanTableCell *)cell value:(BOOL)value {
+	DLog(@"checked: %d", value);
+	if (cell.indexPath.section == TableSectionPrivacy && 
+		cell.indexPath.row == TableRowPrivacyShake) {
+		self.becomeDiscrete = value;
 	}
-	else if (cell.indexPath.section == TableSectionDownloadMaps) {
-		self.downloadMaps = checked;
+	else if (cell.indexPath.section == TableSectionMap &&
+			 cell.indexPath.row == TableRowMapDownload) {
+		self.downloadMaps = value;
+		[self.tableView reloadData];
 	}
 }
 
@@ -329,16 +394,15 @@ typedef enum {
 #pragma mark SliderTableCellDelegate
 
 - (void) sliderCellChanged:(SliderTableCell *)cell value:(CGFloat)value {
-	DLog(@"sliderCellChanged: %f", value);
-	if (cell.indexPath.section == TableSectionImageWidth) {
+	if (cell.indexPath.section == TableSectionPhoto &&
+		cell.indexPath.row == TableRowPhotoSize) {
 		self.imageWidth = value;
-		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", nil)]
-			  atSection:TableSectionImageWidth];
+		cell.valueLabel.text = [NSString stringWithFormat:@"%d %@", (int)value, NSLocalizedString(@"pixels", nil)];
 	}
-	else if (cell.indexPath.section == TableSectionMapZoomLevel) {
+	else if (cell.indexPath.section == TableSectionMap &&
+			 cell.indexPath.row == TableRowMapSize) {
 		self.mapZoomLevel = value;
-		[self setFooter:[NSString stringWithFormat:@"%d %@", (int)self.mapZoomLevel, NSLocalizedString(@"zoom level", nil)]
-			  atSection:TableSectionMapZoomLevel];
+		cell.valueLabel.text = [NSString stringWithFormat:@"%d %@", (int)value, NSLocalizedString(@"zoom", nil)];
 	}
 }
 
@@ -347,7 +411,7 @@ typedef enum {
 
 - (void)alertView:(UIAlertView *)theAlertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (buttonIndex != [theAlertView cancelButtonIndex]) {
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:kUshahidiWebsite]];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.website]];
 	}
 }
 

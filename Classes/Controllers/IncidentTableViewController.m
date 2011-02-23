@@ -46,7 +46,10 @@
 @property(nonatomic,retain) Category *category;
 
 - (void) updateSyncedLabel;
-- (void) pushViewIncidentsViewController;
+
+
+- (void) pushViewController:(UIViewController *)viewController;
+- (void) presentModalViewController:(UIViewController *)viewController;
 
 - (void) mainQueueFinished;
 - (void) mapQueueFinished;
@@ -80,6 +83,7 @@ typedef enum {
 
 - (IBAction) addReport:(id)sender {
 	DLog(@"");
+	self.incidentAddViewController.incident = nil;
 	[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
 }
 
@@ -213,13 +217,13 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self updateSyncedLabel];
 	if ([self.pending count] > 0 ) {
 		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Refresh button to upload pending reports.", nil)];
 	}
 	else {
 		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
 	}
+	[self updateSyncedLabel];	
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -319,23 +323,33 @@ typedef enum {
 	if (indexPath.section == TableSectionIncidents) {
 		self.incidentDetailsViewController.incident = [self filteredRowAtIndexPath:indexPath];
 		self.incidentDetailsViewController.incidents = self.filteredRows;
+		self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Reports", nil);
+		if (self.editing) {
+			[self.view endEditing:YES];
+			[self performSelector:@selector(pushViewController:) withObject:self.incidentDetailsViewController afterDelay:0.1];
+		}
+		else {
+			[self pushViewController:self.incidentDetailsViewController];
+		}
 	}
 	else {
-		self.incidentDetailsViewController.incident = [self.pending objectAtIndex:indexPath.row];
-		self.incidentDetailsViewController.incidents = self.pending;
-	}
-	if (self.editing) {
-		[self.view endEditing:YES];
-		[self performSelector:@selector(pushViewIncidentsViewController) withObject:nil afterDelay:0.1];
-	}
-	else {
-		[self pushViewIncidentsViewController];
-	}
+		self.incidentAddViewController.incident = [self.pending objectAtIndex:indexPath.row];
+		if (self.editing) {
+			[self.view endEditing:YES];
+			[self performSelector:@selector(presentModalViewController:) withObject:self.incidentAddViewController afterDelay:0.1];
+		}
+		else {
+			[self presentModalViewController:self.incidentAddViewController];
+		}
+	}	
 }
 
-- (void) pushViewIncidentsViewController {
-	self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Reports", nil);
+- (void) pushViewController:(UIViewController *)viewController {
 	[self.incidentTabViewController.navigationController pushViewController:self.incidentDetailsViewController animated:YES];
+}
+
+- (void) presentModalViewController:(UIViewController *)viewController {
+	[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
 }
 
 #pragma mark -

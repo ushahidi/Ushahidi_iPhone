@@ -39,7 +39,7 @@
 
 @synthesize identifier, title, description, date;
 @synthesize map;
-@synthesize active, verified, uploading;
+@synthesize active, verified, uploading, pending;
 @synthesize news, photos, sounds, videos, categories;
 @synthesize location, latitude, longitude;
 @synthesize errors;
@@ -86,6 +86,7 @@
 	[encoder encodeObject:self.date forKey:@"date"];
 	[encoder encodeBool:self.active forKey:@"active"];
 	[encoder encodeBool:self.verified forKey:@"verified"];
+	[encoder encodeBool:self.pending forKey:@"pending"];
 	[encoder encodeObject:self.news forKey:@"news"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
 	[encoder encodeObject:self.sounds forKey:@"sounds"];
@@ -110,6 +111,7 @@
 		self.date = [decoder decodeObjectForKey:@"date"];
 		self.active = [decoder decodeBoolForKey:@"active"];
 		self.verified = [decoder decodeBoolForKey:@"verified"];
+		self.pending = [decoder decodeBoolForKey:@"pending"];
 		self.location = [decoder decodeObjectForKey:@"location"];
 		self.latitude = [decoder decodeObjectForKey:@"latitude"];
 		self.longitude = [decoder decodeObjectForKey:@"longitude"];

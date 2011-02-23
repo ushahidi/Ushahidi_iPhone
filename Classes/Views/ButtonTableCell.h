@@ -18,22 +18,27 @@
  **
  *****************************************************************************/
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
-@interface AlertView : NSObject {
+@protocol ButtonTableCellDelegate;
 
-@private
-	UIViewController *controller;
+@interface ButtonTableCell : IndexedTableCell {
+
+@private 	
+	id<ButtonTableCellDelegate> delegate;
 }
 
-- (id) initWithController:(UIViewController *)controller;
+- (id)initForDelegate:(id<ButtonTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
+- (void) setText:(NSString *)text;
+- (void) setColor:(UIColor *)color;
 
-- (void) showOkWithTitle:(NSString *)title andMessage:(NSString *)message;
-- (void) showOkWithTitle:(NSString *)title andMessage:(NSString *)message forTag:(NSInteger)tag;
+@end
 
-- (void) showYesNoWithTitle:(NSString *)title andMessage:(NSString *)message;
-- (void) showYesNoWithTitle:(NSString *)title andMessage:(NSString *)message forTag:(NSInteger)tag;
+@protocol ButtonTableCellDelegate <NSObject>
 
-- (BOOL) showInfoOnceOnly:(NSString *)info;
+@optional
+
+- (void) buttonCellClicked:(ButtonTableCell *)cell;
 
 @end

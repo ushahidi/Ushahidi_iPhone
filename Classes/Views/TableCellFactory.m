@@ -26,6 +26,7 @@
 #import "TextFieldTableCell.h"
 #import "TextViewTableCell.h"
 #import "BooleanTableCell.h"
+#import "ButtonTableCell.h"
 #import "CheckBoxTableCell.h"
 #import "ImageTableCell.h"
 #import "MapTableCell.h"
@@ -51,6 +52,20 @@
 		}
 	}
 	return nil;
+}
+
+#pragma mark -
+#pragma mark ButtonTableCell
+
++ (ButtonTableCell *) getButtonTableCellForDelegate:(id<ButtonTableCellDelegate>)delegate
+											  table:(UITableView *)tableView 
+										  indexPath:(NSIndexPath *)indexPath {
+	ButtonTableCell *cell = (ButtonTableCell *)[tableView dequeueReusableCellWithIdentifier:@"ButtonTableCell"];
+	if (cell == nil) {
+		cell = [[[ButtonTableCell alloc] initForDelegate:delegate reuseIdentifier:@"ButtonTableCell"] autorelease];
+	}
+	cell.indexPath = indexPath;
+	return cell;
 }
 
 #pragma mark -

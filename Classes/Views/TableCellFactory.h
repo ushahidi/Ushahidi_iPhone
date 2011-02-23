@@ -34,6 +34,7 @@
 @class DeploymentTableCell;
 @class IncidentTableCell;
 @class SliderTableCell;
+@class ButtonTableCell;
 
 @protocol TextTableCellDelegate;
 @protocol SearchTableCellDelegate;
@@ -44,10 +45,15 @@
 @protocol MapTableCellDelegate;
 @protocol DateTableCellDelegate;
 @protocol SliderTableCellDelegate;
+@protocol ButtonTableCellDelegate;
 
 @interface TableCellFactory : NSObject {
 
 }
+
++ (ButtonTableCell *) getButtonTableCellForDelegate:(id<ButtonTableCellDelegate>)delegate
+											  table:(UITableView *)tableView 
+										  indexPath:(NSIndexPath *)indexPath;
 
 + (DeploymentTableCell *) getDeploymentTableCellForTable:(UITableView *)tableView 
 											   indexPath:(NSIndexPath *)indexPath;

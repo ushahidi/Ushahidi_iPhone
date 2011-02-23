@@ -53,6 +53,8 @@
 }
 
 - (void) setEnabled:(BOOL)enabled {
+	self.textLabel.textColor = enabled ? [UIColor blackColor] : [UIColor grayColor];
+	self.valueLabel.textColor = enabled ? [UIColor blackColor] : [UIColor grayColor];
 	self.slider.enabled = enabled;
 }
 

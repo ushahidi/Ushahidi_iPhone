@@ -38,21 +38,31 @@
 }
 
 - (void) showOkWithTitle:(NSString *)title andMessage:(NSString *)message {
+	[self showOkWithTitle:title andMessage:message forTag:0];
+}
+
+- (void) showOkWithTitle:(NSString *)title andMessage:(NSString *)message forTag:(NSInteger)tag {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title 
 													message:message
 												   delegate:self.controller 
 										  cancelButtonTitle:NSLocalizedString(@"OK", nil) 
 										  otherButtonTitles:nil];
+	[alert setTag:tag];
 	[alert show];
 	[alert release];
 }
 
 - (void) showYesNoWithTitle:(NSString *)title andMessage:(NSString *)message {
+	[self showYesNoWithTitle:title andMessage:message forTag:0];
+}
+
+- (void) showYesNoWithTitle:(NSString *)title andMessage:(NSString *)message forTag:(NSInteger)tag {
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title 
 													message:message
 												   delegate:self.controller 
 										  cancelButtonTitle:NSLocalizedString(@"No", nil) 
 										  otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
+	[alert setTag:tag];
 	[alert show];
 	[alert release];
 }

@@ -71,6 +71,7 @@
 - (BOOL) addIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) uploadIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
+- (BOOL) removeIncident:(Incident *)incident;
 
 - (NSArray *) getCheckins;
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate;

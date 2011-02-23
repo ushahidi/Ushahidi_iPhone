@@ -70,6 +70,7 @@
 
 - (IBAction) addReport:(id)sender {
 	DLog(@"");
+	self.incidentAddViewController.incident = nil;
 	[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
 }
 
@@ -370,16 +371,17 @@
 	}
 	else {
 		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
-		if (mapAnnotation.pinColor == MKPinAnnotationColorRed) {
-			self.incidentDetailsViewController.incident = (Incident *)mapAnnotation.object; 
-			self.incidentDetailsViewController.incidents = self.incidents;	
+		Incident *incident = (Incident *)mapAnnotation.object; 
+		if (incident.pending) {
+			self.incidentAddViewController.incident = incident;
+			[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
 		}
 		else {
 			self.incidentDetailsViewController.incident = (Incident *)mapAnnotation.object; 
-			self.incidentDetailsViewController.incidents = self.pending;
+			self.incidentDetailsViewController.incidents = self.incidents;
+			self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Reports", nil);
+			[self.incidentTabViewController.navigationController pushViewController:self.incidentDetailsViewController animated:YES];
 		}
-		self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Reports", nil);
-		[self.incidentTabViewController.navigationController pushViewController:self.incidentDetailsViewController animated:YES];	
 	}
 }
 

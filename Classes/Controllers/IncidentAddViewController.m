@@ -35,6 +35,7 @@
 #import "Photo.h"
 #import "News.h"
 #import "ImageTableCell.h"
+#import "ButtonTableCell.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
 #import "NSString+Extension.h"
@@ -42,7 +43,6 @@
 @interface IncidentAddViewController ()
 
 @property(nonatomic, retain) DatePicker *datePicker;
-@property(nonatomic, retain) Incident *incident;
 @property(nonatomic, retain) NSString *news;
 
 - (void) dismissModalView;
@@ -65,7 +65,8 @@ typedef enum {
 	TableSectionDate,
 	TableSectionLocation,
 	TableSectionPhotos,
-	TableSectionNews
+	TableSectionNews,
+	TableSectionDelete
 } TableSection;
 
 typedef enum {
@@ -78,13 +79,19 @@ typedef enum {
 	TableSectionLocationCoordinates
 } TableSectionLocationRow;
 
+typedef enum {
+	AlertViewUnsaved,
+	AlertViewDelete
+} AlertViewType;
+
 #pragma mark -
 #pragma mark Handlers
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
 	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Unsaved Changes", nil) 
-							andMessage:NSLocalizedString(@"Are you sure you want to cancel?", nil)];
+							andMessage:NSLocalizedString(@"Are you sure you want to cancel?", nil) 
+								forTag:AlertViewUnsaved];
 }
 
 - (IBAction) done:(id)sender {
@@ -163,19 +170,21 @@ typedef enum {
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	if (self.modalViewController == nil) {
-		self.incident = [[Incident alloc] initWithDefaultValues];
-		self.news = nil;
-		self.willBePushed = NO;
-		if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
-			[[Locator sharedLocator] detectLocationForDelegate:self];
-			[self setFooter:NSLocalizedString(@"Detecting Location...", nil) 
-				  atSection:TableSectionLocation];	
-		}
-		else {
-			self.incident.latitude = [Locator sharedLocator].latitude;
-			self.incident.longitude = [Locator sharedLocator].longitude;
-			[self setFooter:[NSString stringWithFormat:@"%@, %@", self.incident.latitude, self.incident.longitude] 
-				  atSection:TableSectionLocation];
+		if (self.incident == nil) {
+			self.incident = [[Incident alloc] initWithDefaultValues];
+			self.news = nil;
+			self.willBePushed = NO;
+			if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
+				[[Locator sharedLocator] detectLocationForDelegate:self];
+				[self setFooter:NSLocalizedString(@"Detecting Location...", nil) 
+					  atSection:TableSectionLocation];	
+			}
+			else {
+				self.incident.latitude = [Locator sharedLocator].latitude;
+				self.incident.longitude = [Locator sharedLocator].longitude;
+				[self setFooter:[NSString stringWithFormat:@"%@, %@", self.incident.latitude, self.incident.longitude] 
+					  atSection:TableSectionLocation];
+			}	
 		}
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 	}
@@ -197,7 +206,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 7;
+	return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -212,6 +221,9 @@ typedef enum {
 	}
 	if (section == TableSectionPhotos) {
 		return [self.incident.photos count] + 1;
+	}
+	if (section == TableSectionDelete) {
+		return self.incident.pending ? 1 : 0;
 	}
 	return 1;
 }
@@ -319,6 +331,12 @@ typedef enum {
 			[cell setText:NSLocalizedString(@"Select category", nil)];
 			[cell setTextColor:[UIColor lightGrayColor]];
 		}
+		return cell;
+	}
+	else if (indexPath.section == TableSectionDelete) {
+		ButtonTableCell *cell = [TableCellFactory getButtonTableCellForDelegate:self table:theTableView indexPath:indexPath];
+		[cell setText:NSLocalizedString(@"Delete Report", nil)];
+		[cell setColor:[UIColor redColor]];
 		return cell;
 	}
 	else {
@@ -491,22 +509,6 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)theAlertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (buttonIndex != theAlertView.cancelButtonIndex) {
-		[self.incident release];
-		if (self.editing) {
-			[self.view endEditing:YES];
-			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];	
-		}
-		else {
-			[self dismissModalView];
-		}
-	}
-}
-
-#pragma mark -
 #pragma mark LocatorDelegate
 
 - (void) locatorFinished:(Locator *)locator latitude:(NSString *)userLatitude longitude:(NSString *)userLongitude {
@@ -524,6 +526,46 @@ typedef enum {
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
+}
+
+#pragma mark -
+#pragma mark ButtonTableCellDelegate
+
+- (void) buttonCellClicked:(ButtonTableCell *)cell {
+	DLog(@"");
+	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Delete Report", nil) 
+							andMessage:NSLocalizedString(@"Are you sure you want to delete?", nil)
+								forTag:AlertViewDelete];
+}
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)theAlertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex != theAlertView.cancelButtonIndex) {
+		if (theAlertView.tag == AlertViewUnsaved) {
+			self.incident = nil;
+			if (self.editing) {
+				[self.view endEditing:YES];
+				[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];	
+			}
+			else {
+				[self dismissModalView];
+			}	
+		}
+		else if (theAlertView.tag == AlertViewDelete){
+			DLog(@"DELETE");
+			[[Ushahidi sharedUshahidi] removeIncident:self.incident];
+			self.incident = nil;
+			if (self.editing) {
+				[self.view endEditing:YES];
+				[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];	
+			}
+			else {
+				[self dismissModalView];
+			}	
+		}
+	}
 }
 
 @end

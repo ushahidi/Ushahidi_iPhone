@@ -393,7 +393,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark Users
 
 - (BOOL) hasUsers {
-	return [self.deployment users] != nil;
+	return [self.deployment users] != nil && [self.deployment.users count] > 0;
 }
 
 - (NSArray *) getUsers {
@@ -523,8 +523,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 											   startSelector:@selector(uploadCheckinStarted:) 
 											  finishSelector:@selector(uploadCheckinFinished:) 
 												failSelector:@selector(uploadCheckinFailed:)];
-		[post setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:delegate, @"delegate",
-																	 checkin, @"checkin", nil]];
+		NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:2];
+		if (delegate != nil) {
+			[userInfo setObject:delegate forKey:@"delegate"];
+		}
+		if (checkin != nil) {
+			[userInfo setObject:checkin forKey:@"checkin"];
+		}
+		[post setUserInfo:userInfo];
 		[post addPostValue:@"checkin" forKey:@"task"];
 		[post addPostValue:@"ci" forKey:@"action"];
 		[post addPostValue:checkin.latitude forKey:@"lat"];
@@ -632,10 +638,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		if (incident.identifier == nil) {
 			incident.identifier = [NSString getUUID];
 		}
-		[self.deployment.pending addObject:incident];
+		incident.pending = YES;
+		if ([self.deployment.pending containsObject:incident] == NO) {
+			[self.deployment.pending addObject:incident];
+		}
 		return YES;
 	}
 	return NO;
+}
+
+- (BOOL) removeIncident:(Incident *)incident {
+	[self.deployment.pending removeObject:incident];
+	return YES;
 }
 
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate {
@@ -653,8 +667,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 											   startSelector:@selector(uploadIncidentStarted:) 
 											  finishSelector:@selector(uploadIncidentFinished:) 
 												failSelector:@selector(uploadIncidentFailed:)];
-		[post setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:delegate, @"delegate",
-																	 incident, @"incident", nil]];
+		NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:2];
+		if (delegate != nil) {
+			[userInfo setObject:delegate forKey:@"delegate"];
+		}
+		if (incident != nil) {
+			[userInfo setObject:incident forKey:@"incident"];
+		}
+		[post setUserInfo:userInfo];
 		[post addPostValue:@"report" forKey:@"task"];
 		[post addPostValue:@"json" forKey:@"resp"];
 		[post addPostValue:[incident title] forKey:@"incident_title"];
@@ -746,8 +766,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			DLog(@"RESPONSE: %@", payload);
 			incident.uploading = NO;
 			if ([@"true" isEqualToString:[payload objectForKey:@"success"]]) {
-				incident.errors = nil;
 				DLog(@"Incident Uploaded: %@", incident.title);
+				incident.errors = nil;
+				incident.pending = NO;
 				[self.deployment.incidents setObject:incident forKey:incident.identifier];
 				[self.deployment.pending removeObject:incident];
 				[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 

@@ -22,6 +22,7 @@
 #import "TableViewController.h"
 #import "TextFieldTableCell.h"
 #import "TextViewTableCell.h"
+#import "ButtonTableCell.h"
 #import "ImagePickerController.h"
 #import "Ushahidi.h"
 #import "DatePicker.h"
@@ -37,7 +38,8 @@
 														   DatePickerDelegate,
 														   ImagePickerDelegate,
 														   UIActionSheetDelegate, 
-														   LocatorDelegate, 
+														   LocatorDelegate,
+														   ButtonTableCellDelegate,
 														   UshahidiDelegate>  {
 																
 @public
@@ -46,10 +48,10 @@
 	ImagePickerController *imagePickerController;
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
+	Incident *incident;
 																
 @private
 	DatePicker *datePicker;
-	Incident *incident;
 	NSString *news;
 }
 
@@ -58,6 +60,7 @@
 @property(nonatomic, retain) IBOutlet CategoryTableViewController *categoryTableViewController;
 @property(nonatomic, retain) IBOutlet LocationTableViewController *locationTableViewController;
 @property(nonatomic, retain) ImagePickerController *imagePickerController;
+@property(nonatomic, retain) Incident *incident;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;

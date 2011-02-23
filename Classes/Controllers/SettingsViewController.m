@@ -164,6 +164,7 @@ typedef enum {
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
 	self.imageWidth = [[Settings sharedSettings] imageWidth];
 	self.mapZoomLevel = [[Settings sharedSettings] mapZoomLevel];
+	[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	[self.tableView reloadData];
 }
 

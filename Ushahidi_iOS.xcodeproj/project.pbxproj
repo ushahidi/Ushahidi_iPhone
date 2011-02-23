@@ -183,6 +183,11 @@
 		3E8635E112244A54001DE141 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8635E012244A54001DE141 /* MapAnnotation.m */; };
 		3E8637E612246A64001DE141 /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8637E512246A64001DE141 /* NSDictionary+Extension.m */; };
 		3E8638C412247BAC001DE141 /* MKMapView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8638C312247BAC001DE141 /* MKMapView+Extension.m */; };
+		3E8F02F11315565F0011E423 /* ButtonTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F02F01315565F0011E423 /* ButtonTableCell.m */; };
+		3E8F03BC131566140011E423 /* button_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03BA131566140011E423 /* button_red.png */; };
+		3E8F03BD131566140011E423 /* button_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03BB131566140011E423 /* button_red@2x.png */; };
+		3E8F03EC131568AE0011E423 /* button_red_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03EA131568AE0011E423 /* button_red_selected.png */; };
+		3E8F03ED131568AE0011E423 /* button_red_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03EB131568AE0011E423 /* button_red_selected@2x.png */; };
 		3E8F5B7312B2C82C0087A64D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F5B7212B2C82C0087A64D /* iTunesArtwork */; };
 		3E91383E12F73F4800F8369F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E91383C12F73F4800F8369F /* Localizable.strings */; };
 		3E91985A1293A81F005AC005 /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9198591293A81F005AC005 /* Locator.m */; };
@@ -537,6 +542,12 @@
 		3E8637E512246A64001DE141 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
 		3E8638C212247BAC001DE141 /* MKMapView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Extension.h"; sourceTree = "<group>"; };
 		3E8638C312247BAC001DE141 /* MKMapView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Extension.m"; sourceTree = "<group>"; };
+		3E8F02EF1315565F0011E423 /* ButtonTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonTableCell.h; sourceTree = "<group>"; };
+		3E8F02F01315565F0011E423 /* ButtonTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonTableCell.m; sourceTree = "<group>"; };
+		3E8F03BA131566140011E423 /* button_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red.png; sourceTree = "<group>"; };
+		3E8F03BB131566140011E423 /* button_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_red@2x.png"; sourceTree = "<group>"; };
+		3E8F03EA131568AE0011E423 /* button_red_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red_selected.png; sourceTree = "<group>"; };
+		3E8F03EB131568AE0011E423 /* button_red_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_red_selected@2x.png"; sourceTree = "<group>"; };
 		3E8F5B7212B2C82C0087A64D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		3E91383D12F73F4800F8369F /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E9198581293A81F005AC005 /* Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locator.h; sourceTree = "<group>"; };
@@ -898,6 +909,8 @@
 				3E862A1F1222BCE5001DE141 /* BooleanTableCell.m */,
 				3E862A201222BCE5001DE141 /* CheckBoxTableCell.h */,
 				3E862A211222BCE5001DE141 /* CheckBoxTableCell.m */,
+				3E8F02EF1315565F0011E423 /* ButtonTableCell.h */,
+				3E8F02F01315565F0011E423 /* ButtonTableCell.m */,
 				3E862A221222BCE5001DE141 /* ImageTableCell.h */,
 				3E862A231222BCE5001DE141 /* ImageTableCell.m */,
 				3E862A241222BCE5001DE141 /* MapTableCell.h */,
@@ -1087,6 +1100,10 @@
 				3E72996D12EF30D100FDED00 /* unselected@2x.png */,
 				3EFC1C3A1295D92A00163B36 /* photo_save.png */,
 				3E72984412EE4F9D00FDED00 /* photo_save@2x.png */,
+				3E8F03BA131566140011E423 /* button_red.png */,
+				3E8F03BB131566140011E423 /* button_red@2x.png */,
+				3E8F03EA131568AE0011E423 /* button_red_selected.png */,
+				3E8F03EB131568AE0011E423 /* button_red_selected@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1557,6 +1574,10 @@
 				3E1A7204131425A200F3FAC8 /* SliderTableCell_iPad.xib in Resources */,
 				3E1A733813143F8800F3FAC8 /* CheckinDetailsViewController_iPhone.xib in Resources */,
 				3E1A733C13143F9400F3FAC8 /* CheckinDetailsViewController_iPad.xib in Resources */,
+				3E8F03BC131566140011E423 /* button_red.png in Resources */,
+				3E8F03BD131566140011E423 /* button_red@2x.png in Resources */,
+				3E8F03EC131568AE0011E423 /* button_red_selected.png in Resources */,
+				3E8F03ED131568AE0011E423 /* button_red_selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1698,6 +1719,7 @@
 				3EEE8E2E131188AF0096CBEA /* CheckinMapViewController.m in Sources */,
 				3E6E2B461312B38E00B9E331 /* IncidentTabViewController.m in Sources */,
 				3E1A733613143F4E00F3FAC8 /* CheckinDetailsViewController.m in Sources */,
+				3E8F02F11315565F0011E423 /* ButtonTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

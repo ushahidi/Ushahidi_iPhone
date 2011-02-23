@@ -26,7 +26,7 @@
 
 @implementation Checkin
 
-@synthesize identifier, message, date, user, latitude, longitude, location, photos;
+@synthesize identifier, message, date, user, name, latitude, longitude, location, photos;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
@@ -72,8 +72,9 @@
 	[encoder encodeObject:self.latitude forKey:@"latitude"];
 	[encoder encodeObject:self.longitude forKey:@"longitude"];
 	[encoder encodeObject:self.date forKey:@"date"];
-	[encoder encodeObject:self.photos forKey:@"photos"];
 	[encoder encodeObject:self.user forKey:@"user"];
+	[encoder encodeObject:self.name forKey:@"name"];
+	[encoder encodeObject:self.photos forKey:@"photos"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -84,6 +85,7 @@
 		self.longitude = [decoder decodeObjectForKey:@"longitude"];
 		self.date = [decoder decodeObjectForKey:@"date"];
 		self.user = [decoder decodeObjectForKey:@"user"];
+		self.name = [decoder decodeObjectForKey:@"name"];
 		self.photos = [decoder decodeObjectForKey:@"photos"];
 		if (self.photos == nil) self.photos = [NSMutableArray array];
 	}
@@ -102,6 +104,34 @@
 	return self.date != nil ? [self.date dateToString:@"h:mm a"] : nil;
 }
 
+- (BOOL) hasPhotos {
+	return self.photos != nil && [self.photos count] > 0;
+}
+
+- (BOOL) hasName {
+	return [NSString isNilOrEmpty:self.name] == NO;
+}
+
+- (BOOL) hasDate {
+	return self.date != nil;
+}
+
+- (BOOL) hasMessage {
+	return [NSString isNilOrEmpty:self.message] == NO;
+}
+
+- (BOOL) hasLocation {
+	return [NSString isNilOrEmpty:self.latitude] == NO && [NSString isNilOrEmpty:self.longitude] == NO;
+}
+
+- (NSArray *) photoImages {
+	NSMutableArray *images = [NSMutableArray arrayWithCapacity:[self.photos count]];
+	for (Photo *photo in self.photos) {
+		[images addObject:photo.image];
+	}
+	return images;
+}
+
 - (void)dealloc {
 	[identifier release];
 	[message release];
@@ -111,6 +141,7 @@
 	[photos release];
 	[date release];
 	[user release];
+	[name release];
     [super dealloc];
 }
 

@@ -59,7 +59,7 @@
 
 - (BOOL) showInfoOnceOnly:(NSString *)info {
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:info] == 0) {
-		[self showOkWithTitle:NSLocalizedString(@"Info", nil) andMessage:info];
+		[self showOkWithTitle:nil andMessage:info];
 		[[NSUserDefaults standardUserDefaults] setInteger:1 forKey:info];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 		return YES;

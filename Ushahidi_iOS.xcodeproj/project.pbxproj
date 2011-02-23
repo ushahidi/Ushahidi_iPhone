@@ -33,6 +33,9 @@
 		3E15F78412BFF95000CC4D16 /* DeploymentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E15F78312BFF95000CC4D16 /* DeploymentTableCell_iPad.xib */; };
 		3E1A72001314259400F3FAC8 /* SliderTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1A71FF1314259400F3FAC8 /* SliderTableCell_iPhone.xib */; };
 		3E1A7204131425A200F3FAC8 /* SliderTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1A7203131425A200F3FAC8 /* SliderTableCell_iPad.xib */; };
+		3E1A733613143F4E00F3FAC8 /* CheckinDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1A733513143F4E00F3FAC8 /* CheckinDetailsViewController.m */; };
+		3E1A733813143F8800F3FAC8 /* CheckinDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1A733713143F8800F3FAC8 /* CheckinDetailsViewController_iPhone.xib */; };
+		3E1A733C13143F9400F3FAC8 /* CheckinDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E1A733B13143F9400F3FAC8 /* CheckinDetailsViewController_iPad.xib */; };
 		3E236397128C7DB400CF804A /* IndexedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E236396128C7DB400CF804A /* IndexedTableCell.m */; };
 		3E236798128CAAC700CF804A /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A6C1222BD1D001DE141 /* MainWindow_iPad.xib */; };
 		3E244E72128DFDE400B36DB6 /* NSURL+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E244E71128DFDE400B36DB6 /* NSURL+Extension.m */; };
@@ -302,6 +305,10 @@
 		3E15F78312BFF95000CC4D16 /* DeploymentTableCell_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
 		3E1A71FF1314259400F3FAC8 /* SliderTableCell_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
 		3E1A7203131425A200F3FAC8 /* SliderTableCell_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableCell_iPad.xib; sourceTree = "<group>"; };
+		3E1A733413143F4E00F3FAC8 /* CheckinDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckinDetailsViewController.h; sourceTree = "<group>"; };
+		3E1A733513143F4E00F3FAC8 /* CheckinDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinDetailsViewController.m; sourceTree = "<group>"; };
+		3E1A733713143F8800F3FAC8 /* CheckinDetailsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E1A733B13143F9400F3FAC8 /* CheckinDetailsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinDetailsViewController_iPad.xib; sourceTree = "<group>"; };
 		3E236395128C7DB400CF804A /* IndexedTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexedTableCell.h; sourceTree = "<group>"; };
 		3E236396128C7DB400CF804A /* IndexedTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedTableCell.m; sourceTree = "<group>"; };
 		3E244E70128DFDE400B36DB6 /* NSURL+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Extension.h"; sourceTree = "<group>"; };
@@ -966,6 +973,8 @@
 				3EEE8E2D131188AF0096CBEA /* CheckinMapViewController.m */,
 				3E5BB9EE131056C90073E4F8 /* CheckinAddViewController.h */,
 				3E5BB9EF131056C90073E4F8 /* CheckinAddViewController.m */,
+				3E1A733413143F4E00F3FAC8 /* CheckinDetailsViewController.h */,
+				3E1A733513143F4E00F3FAC8 /* CheckinDetailsViewController.m */,
 				3EBB0EFE12767882007D7930 /* CategoryTableViewController.h */,
 				3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */,
 				3EBB10F412768DAA007D7930 /* LocationTableViewController.h */,
@@ -1109,6 +1118,8 @@
 				3EEE8F0213119CCD0096CBEA /* CheckinMapViewController_iPad.xib */,
 				3E5BB9E9131056A40073E4F8 /* CheckinAddViewController_iPhone.xib */,
 				3E5BB9EB131056B30073E4F8 /* CheckinAddViewController_iPad.xib */,
+				3E1A733713143F8800F3FAC8 /* CheckinDetailsViewController_iPhone.xib */,
+				3E1A733B13143F9400F3FAC8 /* CheckinDetailsViewController_iPad.xib */,
 				3EBB0F07127678D2007D7930 /* CategoryTableViewController_iPhone.xib */,
 				3EBB0F0B127678DF007D7930 /* CategoryTableViewController_iPad.xib */,
 				3EBB10E512768D69007D7930 /* LocationTableViewController_iPhone.xib */,
@@ -1544,6 +1555,8 @@
 				3E6E2B5A1312B7A000B9E331 /* IncidentTabViewController_iPad.xib in Resources */,
 				3E1A72001314259400F3FAC8 /* SliderTableCell_iPhone.xib in Resources */,
 				3E1A7204131425A200F3FAC8 /* SliderTableCell_iPad.xib in Resources */,
+				3E1A733813143F8800F3FAC8 /* CheckinDetailsViewController_iPhone.xib in Resources */,
+				3E1A733C13143F9400F3FAC8 /* CheckinDetailsViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1684,6 +1697,7 @@
 				3EEE8E2B131188970096CBEA /* IncidentMapViewController.m in Sources */,
 				3EEE8E2E131188AF0096CBEA /* CheckinMapViewController.m in Sources */,
 				3E6E2B461312B38E00B9E331 /* IncidentTabViewController.m in Sources */,
+				3E1A733613143F4E00F3FAC8 /* CheckinDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

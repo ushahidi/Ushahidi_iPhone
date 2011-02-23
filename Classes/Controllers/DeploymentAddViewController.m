@@ -170,7 +170,7 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Select an existing map from the list, or click the Plus button to manually add your own map.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Select an existing map from the list, click the Refresh button to locate maps near you or the Plus button to add your own map.", nil)];
 }
 
 - (void)dealloc {

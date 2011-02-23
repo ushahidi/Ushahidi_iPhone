@@ -23,5 +23,7 @@
 @interface UIView (Extension)
 
 - (UIView *)findFirstResponder;
+- (void) setFrameWidth:(CGFloat)width;
+- (void) setFrameHeight:(CGFloat)height;
 
 @end

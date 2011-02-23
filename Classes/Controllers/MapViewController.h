@@ -31,6 +31,7 @@
 	UISearchBar *searchBar;
 	UISegmentedControl *mapType;
 	NSString *locationName;
+	NSString *locationDetails;
 	NSString *locationLatitude;
 	NSString *locationLongitude;
 }
@@ -39,6 +40,7 @@
 @property(nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property(nonatomic, retain) IBOutlet UISegmentedControl *mapType;
 @property(nonatomic, retain) NSString *locationName;
+@property(nonatomic, retain) NSString *locationDetails;
 @property(nonatomic, retain) NSString *locationLatitude;
 @property(nonatomic, retain) NSString *locationLongitude;
 

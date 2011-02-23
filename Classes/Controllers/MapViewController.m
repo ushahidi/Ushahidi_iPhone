@@ -40,7 +40,7 @@ typedef enum {
 
 @implementation MapViewController
 
-@synthesize mapView, searchBar, mapType, locationName, locationLatitude, locationLongitude;
+@synthesize mapView, searchBar, mapType, locationName, locationDetails, locationLatitude, locationLongitude;
 
 #pragma mark -
 #pragma mark Internal
@@ -111,13 +111,17 @@ typedef enum {
 	[super viewWillAppear:animated];
 	if (self.locationName != nil) {
 		self.title = self.locationName;
+		if (self.locationDetails == nil) {
+			self.locationDetails = [NSString stringWithFormat:@"%@, %@", self.locationLatitude, self.locationLongitude];
+		}
 	}
 	else {
 		self.title = NSLocalizedString(@"Map", nil);
+		self.locationName = [NSString stringWithFormat:@"%@, %@", self.locationLatitude, self.locationLongitude];
 	}
 	[self.mapView removeAllPins];
-	[self.mapView addPinWithTitle:self.locationName 
-						 subtitle:[NSString stringWithFormat:@"%@, %@", [self.locationLatitude stringWithMaxLength:10], [self.locationLongitude stringWithMaxLength:10]] 
+	[self.mapView addPinWithTitle:self.locationName
+	 					 subtitle:self.locationDetails 
 						 latitude:self.locationLatitude 
 						longitude:self.locationLongitude];
 	[self.mapView resizeRegionToFitAllPins:NO animated:NO];
@@ -125,6 +129,7 @@ typedef enum {
 
 - (void)dealloc {
 	[locationName release];
+	[locationDetails release];
 	[locationLatitude release];
 	[locationLongitude release];
 	[mapView release];

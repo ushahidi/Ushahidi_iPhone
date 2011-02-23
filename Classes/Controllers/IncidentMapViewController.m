@@ -163,6 +163,7 @@
 	if (resize) {
 		[self.mapView resizeRegionToFitAllPins:NO animated:YES];
 	}
+	self.filterButton.enabled = [self.categories count] > 0;
 }
 
 #pragma mark -
@@ -377,6 +378,7 @@
 			self.incidentDetailsViewController.incident = (Incident *)mapAnnotation.object; 
 			self.incidentDetailsViewController.incidents = self.pending;
 		}
+		self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Reports", nil);
 		[self.incidentTabViewController.navigationController pushViewController:self.incidentDetailsViewController animated:YES];	
 	}
 }

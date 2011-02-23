@@ -65,16 +65,28 @@
     return [guidTest evaluateWithObject:self];
 }
 
++ (BOOL) stringIsUUID:(NSString *)string {
+	return string != nil && [string isUUID];
+}
+
 - (BOOL) isValidEmail {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"; 
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex]; 
     return [emailTest evaluateWithObject:self];
 }
 
++ (BOOL) stringIsValidEmail:(NSString *)string {
+	return string != nil && [string isValidEmail];
+}
+
 - (BOOL) isValidURL {
 	NSString *urlRegex = @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+(:[0-9]+)?(/|/([\\w#!:\\.\\?\\+=&%@!\\-\\/\\(\\)]+))?";
     NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegex]; 
     return [urlTest evaluateWithObject:self];
+}
+
++ (BOOL) stringIsValidURL:(NSString *)string {
+	return string != nil && [string isValidURL];
 }
 
 + (NSString *)stringByAppendingPathComponents:(NSString *)string, ... {

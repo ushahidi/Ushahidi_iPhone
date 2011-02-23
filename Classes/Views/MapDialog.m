@@ -118,7 +118,22 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 	if ([string isEqualToString:@"\n"]) {
-		[textField resignFirstResponder];
+		if ([NSString isNilOrEmpty:self.nameField.text] == NO && [NSString isNilOrEmpty:self.urlField.text] == NO) {
+			[textField resignFirstResponder];
+			UIAlertView *alertView = (UIAlertView *)[textField superview];
+			if (alertView != nil && [alertView isKindOfClass:[UIAlertView class]]) {
+				[alertView dismissWithClickedButtonIndex:[alertView firstOtherButtonIndex] animated:YES];
+				[self dispatchSelector:@selector(mapDialogReturned:name:url:) 
+								target:self.delegate 
+							   objects:self, self.nameField.text, self.urlField.text, nil];
+			}			
+		}
+		else if (textField == self.nameField) {
+			[self.urlField becomeFirstResponder];
+		}
+		else if (textField == self.urlField) {
+			[self.nameField becomeFirstResponder];
+		}
 		return NO;
 	}
 	if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"]) {

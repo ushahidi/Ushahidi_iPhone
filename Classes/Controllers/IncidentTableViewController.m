@@ -166,6 +166,7 @@ typedef enum {
 	[self.pending removeAllObjects];
 	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
 	[self filterRows:YES];
+	self.filterButton.enabled = [self.categories count] > 0;
 }
 
 #pragma mark -
@@ -287,6 +288,10 @@ typedef enum {
 		if (image != nil) {
 			[cell setImage:image];
 		}
+		else if (incident.hasPhotos) {
+			Photo *photo = [incident.photos objectAtIndex:0];
+			[[Ushahidi sharedUshahidi] downloadPhoto:photo incident:incident forDelegate:self];
+		}
 		else if (incident.map != nil) {
 			[cell setImage:incident.map];
 		}
@@ -329,6 +334,7 @@ typedef enum {
 }
 
 - (void) pushViewIncidentsViewController {
+	self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Reports", nil);
 	[self.incidentTabViewController.navigationController pushViewController:self.incidentDetailsViewController animated:YES];
 }
 
@@ -481,7 +487,7 @@ typedef enum {
 	}
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident map:(UIImage *)map {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi map:(UIImage *)map incident:(Incident *)incident {
 	DLog(@"downloadedFromUshahidi:incident:map:");
 	NSInteger row = [self.filteredRows indexOfObject:incident];
 	if (row != NSNotFound) {
@@ -496,7 +502,7 @@ typedef enum {
 	}
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident photo:(Photo *)photo {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo incident:(Incident *)incident {
 	DLog(@"downloadedFromUshahidi:incident:photo:%@ indexPath:%@", [photo url], [photo indexPath]);
 	if (photo != nil && photo.indexPath != nil) {
 		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
@@ -504,10 +510,16 @@ typedef enum {
 			if (photo.thumbnail != nil) {
 				[cell setImage:photo.thumbnail];
 			}
-			else {
+			else if (photo.image != nil)  {
 				[cell setImage:photo.image];
 			}
-		}	
+			else {
+				[self.tableView reloadData];
+			}
+		}
+		else {
+			[self.tableView reloadData];
+		}
 	}
 	else {
 		[self.tableView reloadData];

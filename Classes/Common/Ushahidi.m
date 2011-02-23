@@ -449,24 +449,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		else {
 			NSDictionary *payload = [json objectForKey:@"payload"];
 			if (payload != nil) {
-				BOOL hasCheckinChanges = NO;
-				NSArray *checkins = [payload objectForKey:@"checkins"]; 
-				for (NSDictionary *dictionary in checkins) {
-					Checkin *checkin = [[Checkin alloc] initWithDictionary:dictionary];
-					if ([self.deployment.checkins objectForKey:checkin.identifier] == nil) {
-						[self.deployment.checkins setObject:checkin forKey:checkin.identifier];
-						hasCheckinChanges = YES;
-						DLog(@"CHECKIN: %@", dictionary);
-					}
-					[checkin release];
-				}
-				if (hasCheckinChanges) {
-					DLog(@"Has New Checkins");
-				}
-				[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:)
-								target:[request getDelegate]
-							   objects:self, [self.deployment.checkins allValues], nil, hasCheckinChanges, nil];
-				
 				BOOL hasUserChanges = NO;
 				NSArray *users = [payload objectForKey:@"users"]; 
 				for (NSDictionary *dictionary in users) {
@@ -480,12 +462,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					}
 					[user release];
 				}
-				if (hasCheckinChanges) {
+				if (hasUserChanges) {
 					DLog(@"Has New Users");
 				}
 				[self dispatchSelector:@selector(downloadedFromUshahidi:users:error:hasChanges:)
 								target:[request getDelegate] 
 							   objects:self, [self.deployment.users allValues], nil, hasUserChanges, nil];
+				
+				BOOL hasCheckinChanges = NO;
+				NSArray *checkins = [payload objectForKey:@"checkins"]; 
+				for (NSDictionary *dictionary in checkins) {
+					Checkin *checkin = [[Checkin alloc] initWithDictionary:dictionary];
+					if (checkin != nil) {
+						User *user = [self.deployment.users objectForKey:checkin.user];
+						Checkin *existing = [self.deployment.checkins objectForKey:checkin.identifier];
+						if (existing != nil) {
+							existing.name = [user name];
+						}
+						else {
+							checkin.name = [user name];
+							[self.deployment.checkins setObject:checkin forKey:checkin.identifier];
+							hasCheckinChanges = YES;
+							DLog(@"CHECKIN: %@", dictionary);
+						}	
+					}
+					[checkin release];
+				}
+				if (hasCheckinChanges) {
+					DLog(@"Has New Checkins");
+				}
+				[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:)
+								target:[request getDelegate]
+							   objects:self, [self.deployment.checkins allValues], nil, hasCheckinChanges, nil];
 			}
 			else {
 				NSError *error = [NSError errorWithDomain:self.deployment.domain 
@@ -572,10 +580,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					   objects:self, [request getCheckin], error, nil];
 	}
 	else {
-		DLog(@"RESPONSE: %@", [request responseString]);
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
-			//DLog(@"RESPONSE: %@", [request responseString]);
+			DLog(@"RESPONSE: %@", [request responseString]);
 			NSError *error = [NSError errorWithDomain:self.deployment.domain 
 												 code:HttpStatusInternalServerError 
 											  message:NSLocalizedString(@"Unable To Checkin", nil)];
@@ -1062,7 +1069,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 							Photo *photo = [[[Photo alloc] initWithDictionary:item] autorelease];
 							[incident addPhoto:photo];
 							if (photo.url != nil && photo.image == nil && photo.downloading == NO) {
-								[self downloadPhoto:incident photo:photo forDelegate:delegate];
+								[self downloadPhoto:photo incident:incident forDelegate:delegate];
 							}
 						}
 						else if (mediatype == MediaTypeVideo) {
@@ -1131,18 +1138,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Photo
 
-- (void) downloadPhoto:(Incident *)incident photo:(Photo *)photo forDelegate:(id<UshahidiDelegate>)delegate {
+- (void) downloadPhoto:(Photo *)photo incident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate {
 	if (photo.url != nil && photo.image == nil && photo.downloading == NO) {
 		photo.downloading = YES;
 		NSURL *url = nil;
-		if ([NSString isNilOrEmpty:photo.imageURL] == NO) {
+		if ([NSString stringIsValidURL:photo.imageURL]) {
 			url = [NSURL URLWithString:photo.imageURL];
 		}
-		else if ([[photo.url lowercaseString] hasPrefix:@"http://"] || [[photo.url lowercaseString] hasPrefix:@"https://"]) {
+		else if ([NSString stringIsValidURL:photo.url]) {
 			url = [NSURL URLWithString:photo.url];
 		}
 		else {
-			url = [NSURL URLWithStrings:self.deployment.url, @"/media/uploads/", photo.url, nil];
+			url = [NSURL URLWithStrings:self.deployment.url, @"media/uploads/", photo.url, nil];
 		}
 		DLog(@"downloadPhoto: %@", [url absoluteString]);
 		ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
@@ -1150,9 +1157,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[request setDidStartSelector:@selector(downloadPhotoStarted:)];
 		[request setDidFinishSelector:@selector(downloadPhotoFinished:)];
 		[request setDidFailSelector:@selector(downloadPhotoFailed:)];
-		[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:delegate, @"delegate",
-																		incident, @"incident",
-																		photo, @"photo", nil]];
+		NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
+		if (delegate != nil) {
+			[userInfo setObject:delegate forKey:@"delegate"];
+		}
+		if (incident != nil) {
+			[userInfo setObject:incident forKey:@"incident"];
+		}
+		if (photo != nil) {
+			[userInfo setObject:photo forKey:@"photo"];
+		}
+		[request setUserInfo:userInfo];
 		[self.photoQueue addOperation:request];
 	}
 }
@@ -1162,9 +1177,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void) downloadPhotoFinished:(ASIHTTPRequest *)request {
-	id<UshahidiDelegate> delegate = [request getDelegate];
-	Incident *incident = (Incident *)[request getIncident];
-	Photo *photo = (Photo *)[request getPhoto];
+	Photo *photo = [request getPhoto];
 	if (photo != nil) {
 		photo.downloading = NO;	
 	}
@@ -1174,9 +1187,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	else if ([request responseData] != nil) {
 		DLog(@"RESPONSE: BINARY IMAGE %@", [request.originalURL absoluteString]);
 		photo.image = [UIImage imageWithData:[request responseData]];
-		[self dispatchSelector:@selector(downloadedFromUshahidi:incident:photo:) 
-						target:delegate 
-					   objects:self, incident, photo, nil];
+		[self dispatchSelector:@selector(downloadedFromUshahidi:photo:incident:) 
+						target:[request getDelegate] 
+					   objects:self, photo, [request getIncident], nil];
 	}
 	else {
 		DLog(@"RESPONSE: %@", [request responseString]);
@@ -1217,8 +1230,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (void) downloadMapFinished:(ASIHTTPRequest *)request {
-	id<UshahidiDelegate> delegate = [request getDelegate];
-	Incident *incident = (Incident *)[request getIncident];
 	if ([request error] != nil) {
 		DLog(@"ERROR: %@", [[request error] localizedDescription]);
 	} 
@@ -1230,10 +1241,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			[self.mapQueue cancelAllOperations];	
 		}
 		else {
+			Incident *incident = [request getIncident];
 			incident.map = map;
-			[self dispatchSelector:@selector(downloadedFromUshahidi:incident:map:) 
-							target:delegate 
-						   objects:self, incident, incident.map, nil];
+			[self dispatchSelector:@selector(downloadedFromUshahidi:map:incident:) 
+							target:[request getDelegate] 
+						   objects:self, incident.map, incident, nil];
 		}
 	}
 	else {

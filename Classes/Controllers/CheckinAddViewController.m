@@ -49,7 +49,6 @@ typedef enum {
 	TableSectionPhoto
 } TableSection;
 
-
 #pragma mark -
 #pragma mark Handlers
 
@@ -120,7 +119,7 @@ typedef enum {
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"To checkin, enter optional message and photo, then click the Send button.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Enter optional message and photo for your checkin, then click the Send button.", nil)];
 }
 
 - (void)dealloc {

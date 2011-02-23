@@ -32,6 +32,7 @@
 	NSString *longitude;
 	NSDate *date;
 	NSString *user;
+	NSString *name;
 	Location *location;
 	NSMutableArray *photos;
 }
@@ -42,13 +43,21 @@
 @property(nonatomic,retain) NSString *longitude;
 @property(nonatomic,retain) NSDate *date;
 @property(nonatomic,retain) NSString *user;
+@property(nonatomic,retain) NSString *name;
 @property(nonatomic,retain) Location *location;
 @property(nonatomic,retain) NSMutableArray *photos;
 @property(nonatomic,readonly) NSString *dateString;
 @property(nonatomic,readonly) NSString *timeString;
 @property(nonatomic,readonly) NSString *dateTimeString;
 
+@property(nonatomic,readonly) BOOL hasName;
+@property(nonatomic,readonly) BOOL hasDate;
+@property(nonatomic,readonly) BOOL hasMessage;
+@property(nonatomic,readonly) BOOL hasLocation;
+@property(nonatomic,readonly) BOOL hasPhotos;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 - (id)initWithMessage:(NSString *)message latitude:(NSString *)latitude longitude:(NSString *)longitude photo:(Photo *)photo;
+- (NSArray *) photoImages;
 
 @end

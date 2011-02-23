@@ -22,6 +22,7 @@
 #import "IncidentTableViewController.h";
 #import "IncidentMapViewController.h";
 #import "CheckinMapViewController.h";
+#import "UIView+Extension.h"
 #import "Deployment.h"
 #import "Settings.h"
 
@@ -49,25 +50,27 @@ typedef enum {
 #pragma mark Handlers
 
 - (IBAction) viewModeChanged:(id)sender {
-	DLog(@"");
+	BOOL shouldPopulate = self.willBePushed;
+	BOOL shouldAnimate = self.wasPushed;
+	BOOL shouldResize = self.willBePushed;
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
 	if (segmentControl.selectedSegmentIndex == ViewModeTable) {
-		DLog(@"ViewModeTable");
+		DLog(@"ViewModeTable populate:%d animate:%d resize:%d", shouldPopulate, shouldAnimate, shouldResize);
 		self.incidentTableViewController.deployment = self.deployment;
-		[self showViewController:self.incidentTableViewController animated:YES];
-		[self.incidentTableViewController populate:NO];
+		[self showViewController:self.incidentTableViewController animated:shouldAnimate];
+		[self.incidentTableViewController populate:shouldPopulate];
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
-		DLog(@"ViewModeMap");
+		DLog(@"ViewModeMap populate:%d animate:%d resize:%d", shouldPopulate, shouldAnimate, shouldResize);
 		self.incidentMapViewController.deployment = self.deployment;
-		[self showViewController:self.incidentMapViewController animated:YES];
-		[self.incidentMapViewController populate:NO resize:NO];
+		[self showViewController:self.incidentMapViewController animated:shouldAnimate];
+		[self.incidentMapViewController populate:shouldPopulate resize:shouldResize];
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeCheckin) {
-		DLog(@"ViewModeCheckin");
+		DLog(@"ViewModeCheckin populate:%d animate:%d resize:%d", shouldPopulate, shouldAnimate, shouldResize);
 		self.checkinMapViewController.deployment = self.deployment;
-		[self showViewController:self.checkinMapViewController animated:YES];
-		[self.checkinMapViewController populate:NO resize:NO];
+		[self showViewController:self.checkinMapViewController animated:shouldAnimate];
+		[self.checkinMapViewController populate:shouldPopulate resize:shouldResize];
 	}
 }
 
@@ -112,10 +115,6 @@ typedef enum {
 #pragma mark -
 #pragma mark UIViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
 - (void)viewDidUnload {
     [super viewDidUnload];
 	incidentTableViewController = nil;
@@ -145,24 +144,23 @@ typedef enum {
 	else if (self.checkinMapViewController.view.superview != nil) {
 		[self.checkinMapViewController populate:self.willBePushed resize:self.willBePushed];	
 	}	
-	if (animated) {
-		[[Settings sharedSettings] setLastIncident:nil];
-	}
 	if ([[Ushahidi sharedUshahidi] supportsCheckins:self.deployment]) {
 		if ([self.viewMode numberOfSegments] < ViewModeCheckin + 1) {
 			[self.viewMode insertSegmentWithImage:[UIImage imageNamed:@"checkin.png"] 
 										  atIndex:ViewModeCheckin 
 										 animated:NO];
-			CGRect rect = self.viewMode.frame;
-			rect.size.width = 115;
-			self.viewMode.frame = rect;
+			[self.viewMode setFrameWidth:115];
 		}
 	}
 	else {
-		[self.viewMode removeSegmentAtIndex:ViewModeCheckin animated:NO];
-		CGRect rect = self.viewMode.frame;
-		rect.size.width = 80;
-		self.viewMode.frame = rect;
+		if ([self.viewMode numberOfSegments] > ViewModeMap + 1) {
+			[self.viewMode removeSegmentAtIndex:ViewModeCheckin animated:NO];
+			[self.viewMode setFrameWidth:80];
+			[self.viewMode setSelectedSegmentIndex:ViewModeTable];
+		}
+	}
+	if (animated) {
+		[[Settings sharedSettings] setLastIncident:nil];
 	}
 }
 

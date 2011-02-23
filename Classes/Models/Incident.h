@@ -94,6 +94,7 @@
 @property(nonatomic,readonly) BOOL hasCategory;
 @property(nonatomic,readonly) BOOL hasLocation;
 @property(nonatomic,readonly) BOOL hasDate;
+@property(nonatomic,readonly) BOOL hasPhotos;
 
 - (void) addPhoto:(Photo *)photo;
 - (void) addNews:(News *)news;

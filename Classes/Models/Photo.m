@@ -45,9 +45,6 @@ NSInteger const kMaxThumbnaiHeight = 80;
 		if ([NSString isNilOrEmpty:link_url] == NO) {
 			self.imageURL = link_url;
 		}
-		else {
-			self.imageURL = [dictionary stringForKey:@"link"];
-		}
 		NSString *thumb_url = [dictionary stringForKey:@"thumb_url"];
 		if ([NSString isNilOrEmpty:thumb_url] == NO) {
 			self.thumbnailURL = thumb_url;

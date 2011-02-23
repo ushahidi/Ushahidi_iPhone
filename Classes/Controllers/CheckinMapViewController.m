@@ -20,6 +20,7 @@
 
 #import "CheckinMapViewController.h"
 #import "CheckinAddViewController.h"
+#import "CheckinDetailsViewController.h"
 #import "IncidentTabViewController.h"
 #import "MapViewController.h"
 #import "IncidentTableCell.h"
@@ -54,7 +55,7 @@
 
 @implementation CheckinMapViewController
 
-@synthesize incidentTabViewController, checkinAddViewController;
+@synthesize incidentTabViewController, checkinAddViewController, checkinDetailsViewController;
 @synthesize deployment, users, user, checkins;
 @synthesize mapView, mapType, filterLabel, itemPicker, refreshButton, filterButton;
 
@@ -149,6 +150,7 @@
     [super viewDidUnload];
 	self.incidentTabViewController = nil;
 	self.checkinAddViewController = nil;
+	self.checkinDetailsViewController = nil;
 	self.checkins = nil;
 	self.users = nil;
 	self.mapType = nil;
@@ -191,6 +193,7 @@
 - (void)dealloc {
 	[incidentTabViewController release];
 	[checkinAddViewController release];
+	[checkinDetailsViewController release];
 	[deployment release];
 	[mapType release];
 	[itemPicker release];
@@ -277,6 +280,10 @@
 	}
 	else {
 		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
+		self.checkinDetailsViewController.checkin = (Checkin *)mapAnnotation.object; 
+		self.checkinDetailsViewController.checkins = self.checkins;
+		self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Checkins", nil);
+		[self.incidentTabViewController.navigationController pushViewController:self.checkinDetailsViewController animated:YES];
 	}
 }
 

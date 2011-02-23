@@ -37,7 +37,7 @@
 		self.textField = [[UITextField alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 10)];
 		self.textField.delegate = self;
 		self.textField.adjustsFontSizeToFitWidth = YES;
-		self.textField.textAlignment = UITextAlignmentCenter;
+		self.textField.textAlignment = UITextAlignmentLeft;
 		self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		self.textField.keyboardType = UIKeyboardTypeDefault;

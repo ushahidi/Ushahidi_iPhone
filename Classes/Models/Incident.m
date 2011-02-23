@@ -337,6 +337,10 @@
 	return self.categories != nil && self.categories.count > 0;
 }
 
+- (BOOL) hasPhotos {
+	return self.photos != nil && [self.photos count] > 0;
+}
+
 - (NSString *) coordinates {
 	return self.latitude != nil && self.longitude != nil 
 		? [NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude] : nil;

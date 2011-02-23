@@ -18,33 +18,31 @@
  **
  *****************************************************************************/
 
-#import "UIView+Extension.h"
+#import <UIKit/UIKit.h>
+#import "TableViewController.h"
+#import "MapTableCell.h"
+#import "Ushahidi.h"
 
-@implementation UIView (Extension)
+@class Checkin;
+@class ImageViewController;
+@class MapViewController;
 
-- (UIView *)findFirstResponder {
-    if (self.isFirstResponder) {        
-        return self;     
-    }
-    for (UIView *subView in self.subviews) {
-        UIView *firstResponder = [subView findFirstResponder];
-        if (firstResponder != nil) {
-            return firstResponder;
-        }
-    }	
-    return nil;
+@interface CheckinDetailsViewController : TableViewController<UshahidiDelegate, MapTableCellDelegate> {
+
+@public
+	ImageViewController *imageViewController;
+	MapViewController *mapViewController;
+	UISegmentedControl *nextPrevious;
+	Checkin *checkin;
+	NSArray *checkins;
 }
 
-- (void) setFrameWidth:(CGFloat)frameWidth {
-	CGRect rect = self.frame;
-	rect.size.width = frameWidth;
-	self.frame = rect;
-}
+@property(nonatomic,retain) IBOutlet ImageViewController *imageViewController;
+@property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;
+@property(nonatomic,retain) Checkin *checkin;
+@property(nonatomic,retain) NSArray *checkins;
 
-- (void) setFrameHeight:(CGFloat)height {
-	CGRect rect = self.frame;
-	rect.size.height = height;
-	self.frame = rect;
-}
+- (IBAction) nextPrevious:(id)sender;
 
 @end

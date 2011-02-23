@@ -37,12 +37,12 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 		self.textView = [[UITextView alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 10)];
 		self.textView.delegate = self;
-		self.textView.textAlignment = UITextAlignmentCenter;
+		self.textView.textAlignment = UITextAlignmentLeft;
+		self.textView.contentInset = UIEdgeInsetsMake(-4, -8, 0, 0);
 		self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		self.textView.keyboardType = UIKeyboardTypeDefault;
 		self.textView.userInteractionEnabled = YES;
-		self.textView.textAlignment = UITextAlignmentCenter;
 		self.textView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.textView.autocapitalizationType = UITextAutocapitalizationTypeSentences;

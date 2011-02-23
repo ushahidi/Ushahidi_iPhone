@@ -288,7 +288,7 @@ typedef enum {
 	else if (indexPath.section == TableSectionApp) {
 		if (indexPath.row == TableRowAppVersion) {
 			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-			[cell setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"App Version", nil), [Device appVersion]]];
+			[cell setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Version", nil), [Device appVersion]]];
 			cell.accessoryType = UITableViewCellAccessoryNone;
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 			return cell;

@@ -22,16 +22,24 @@
 
 @interface NSString (Extension) 
 
-+ (NSString *)getUUID;
 + (BOOL) isNilOrEmpty:(NSString *)string;
 - (BOOL) anyWordHasPrefix:(NSString *)prefix;
+
 - (NSString *)stringByTrimmingSuffix:(NSString *)suffix;
 - (NSString *) stringWithMaxLength:(NSInteger)maxLength;
+
++ (NSString *)getUUID;
+
 - (BOOL) isUUID;
 - (BOOL) isValidEmail;
 - (BOOL) isValidURL;
-+ (NSString *)stringByAppendingPathComponents:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
-- (NSString *)appendUrlStringWithFormat:(NSString *)format, ...;
+
++ (BOOL) stringIsUUID:(NSString *)string;
++ (BOOL) stringIsValidEmail:(NSString *)string;
++ (BOOL) stringIsValidURL:(NSString *)string;
+
++ (NSString *) stringByAppendingPathComponents:(NSString *)string, ... NS_REQUIRES_NIL_TERMINATION;
+- (NSString *) appendUrlStringWithFormat:(NSString *)format, ...;
 + (NSString *) stringByEscapingCharacters:(NSString *)string;
 
 @end

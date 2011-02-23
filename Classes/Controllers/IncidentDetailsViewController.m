@@ -319,7 +319,7 @@ typedef enum {
 			else {
 				[cell setImage:nil];
 				photo.indexPath = indexPath;
-				[[Ushahidi sharedUshahidi] downloadPhoto:self.incident photo:photo forDelegate:self];
+				[[Ushahidi sharedUshahidi] downloadPhoto:photo incident:self.incident forDelegate:self];
 			}
 		}
 		else {
@@ -510,7 +510,7 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo incident:(Incident *)theIncident {
 	DLog(@"downloadedFromUshahidi: %@", [photo url]);
 	if (photo != nil) {
 		ImageTableCell *cell = (ImageTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];

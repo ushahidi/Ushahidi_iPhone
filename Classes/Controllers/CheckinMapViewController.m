@@ -104,6 +104,7 @@
 }
 
 - (void) populate:(BOOL)refresh resize:(BOOL)resize {
+	DLog(@"refresh:%d resize:%d", refresh, resize);
 	if (refresh) {
 		[self.checkins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
 		if ([[Ushahidi sharedUshahidi] hasUsers]) {

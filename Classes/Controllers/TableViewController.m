@@ -293,7 +293,7 @@
 #pragma mark Keyboard
 
 -(void) keyboardWillShow:(NSNotification *)notification {
-	DLog(@"notification:%@", notification);
+	//DLog(@"notification:%@", notification);
 	NSTimeInterval duration = 0.3;
 	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
 	DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
@@ -315,7 +315,7 @@
 }
 
 -(void) keyboardWillHide:(NSNotification *)notification {
-	DLog(@"notification:%@", notification);
+	//DLog(@"notification:%@", notification);
 	NSTimeInterval duration = 0.3;
 	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
 	DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);

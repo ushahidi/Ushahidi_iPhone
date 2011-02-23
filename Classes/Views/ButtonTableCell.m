@@ -44,32 +44,14 @@
 		[button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
 		[button.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
 		[self.contentView addSubview:button];
-		
-//		UISegmentedControl *button = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:@""]];
-//		button.frame = CGRectMake(-1.0f, -1.0f, self.contentView.frame.size.width + 1, self.contentView.frame.size.height + 1);
-//		button.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-//		[button setSegmentedControlStyle:UISegmentedControlStyleBar];
-//		[button setMomentary:YES];
-//		[button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventValueChanged];
-//		[button.
-//		[self.contentView addSubview:button];
-//		[button release];
 	}
     return self;
 }
 
 - (void) setText:(NSString *)text {
-//	UISegmentedControl *button = [self.contentView.subviews objectAtIndex:0];
-//	[button setTitle:text forSegmentAtIndex:0];
-	
 	UIButton *button = [self.contentView.subviews objectAtIndex:0];
 	[button setTitle:text forState:UIControlStateNormal];
 	[button setTitle:text forState:UIControlStateSelected];
-}
-
-- (void) setColor:(UIColor *)tintColor {
-//	UISegmentedControl *button = [self.contentView.subviews objectAtIndex:0];
-//	[button setTintColor:tintColor];
 }
 
 - (void) buttonClicked:(id)sender {

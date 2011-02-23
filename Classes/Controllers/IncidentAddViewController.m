@@ -336,7 +336,6 @@ typedef enum {
 	else if (indexPath.section == TableSectionDelete) {
 		ButtonTableCell *cell = [TableCellFactory getButtonTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setText:NSLocalizedString(@"Delete Report", nil)];
-		[cell setColor:[UIColor redColor]];
 		return cell;
 	}
 	else {

@@ -113,6 +113,8 @@
 }
 
 - (void) populate:(BOOL)refresh resize:(BOOL)resize {
+	DLog(@"refresh:%d resize:%d", refresh, resize);
+	
 	[self.incidents removeAllObjects];
 	if (refresh) {
 		[self.incidents addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];

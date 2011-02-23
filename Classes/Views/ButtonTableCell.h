@@ -31,7 +31,6 @@
 
 - (id)initForDelegate:(id<ButtonTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 - (void) setText:(NSString *)text;
-- (void) setColor:(UIColor *)color;
 
 @end
 

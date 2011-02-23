@@ -145,15 +145,16 @@ typedef enum {
 }
 
 - (void) populate:(BOOL)refresh {
+	DLog(@"refresh:%d", refresh);
 	[self.allRows removeAllObjects];
 	if (refresh) {
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
 		[self.categories removeAllObjects];
 		if ([[Ushahidi sharedUshahidi] hasCategories]) {
-			self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategories]];
+			[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategories]];
 		}
 		else {
-			self.categories = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+			[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
 		}
 		self.category = nil;
 		if ([[Ushahidi sharedUshahidi] hasLocations] == NO) {
@@ -179,6 +180,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
+	self.categories = [[NSMutableArray alloc] initWithCapacity:0];
 	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
 	self.oddRowColor = [UIColor ushahidiLiteTan];
@@ -194,6 +196,7 @@ typedef enum {
 	self.incidentAddViewController = nil;
 	self.incidentDetailsViewController = nil;
 	self.tableSort = nil;
+	self.categories = nil;
 	self.pending = nil;
 	self.itemPicker = nil;
 }
@@ -220,7 +223,6 @@ typedef enum {
 	if ([self.pending count] > 0 ) {
 		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Refresh button to upload pending reports.", nil)];
 	}
-	[self updateSyncedLabel];	
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -376,8 +378,10 @@ typedef enum {
 		}
 	}
 	if (reload) {
+		[self setTableFooter:nil];
 		[self.tableView reloadData];	
 		[self.tableView flashScrollIndicators];	
+		[self updateSyncedLabel];	
 	}
 }
 

@@ -31,7 +31,8 @@
 - (UITextField *) getTextField:(CGRect)frame text:(NSString *)text 
 				   placeholder:(NSString *)placeholder 
 				  keyboardType:(UIKeyboardType)keyboardType 
-		autocapitalizationType:(UITextAutocapitalizationType) autocapitalizationType;
+		autocapitalizationType:(UITextAutocapitalizationType) autocapitalizationType
+			autocorrectionType:(UITextAutocorrectionType)autocorrectionType;
 @end
 
 @implementation MapDialog
@@ -65,14 +66,16 @@
 								   text:theName 
 							placeholder:NSLocalizedString(@"Enter name", nil) 
 						   keyboardType:UIKeyboardTypeDefault
-				 autocapitalizationType:UITextAutocapitalizationTypeWords];
+				 autocapitalizationType:UITextAutocapitalizationTypeWords
+					 autocorrectionType:UITextAutocorrectionTypeYes];
 	[alertView addSubview:self.nameField];
 	
 	self.urlField = [self getTextField:CGRectMake(12.0, 85.0, 260.0, 25.0)
 								  text:theUrl 
 						   placeholder:NSLocalizedString(@"Enter URL", nil) 
 						  keyboardType:UIKeyboardTypeURL
-				autocapitalizationType:UITextAutocapitalizationTypeNone];
+				autocapitalizationType:UITextAutocapitalizationTypeNone
+					autocorrectionType:UITextAutocorrectionTypeNo];
 	[alertView addSubview:self.urlField];
 	
 	[alertView show];
@@ -82,14 +85,15 @@
 - (UITextField *) getTextField:(CGRect)frame text:(NSString *)text 
 				   placeholder:(NSString *)placeholder 
 				  keyboardType:(UIKeyboardType)keyboardType 
-		autocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType {
+		autocapitalizationType:(UITextAutocapitalizationType)autocapitalizationType
+			autocorrectionType:(UITextAutocorrectionType)autocorrectionType {
 	UITextField *textField = [[UITextField alloc] initWithFrame:frame];
 	textField.backgroundColor = [UIColor whiteColor];
 	textField.delegate = self;
 	textField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	textField.adjustsFontSizeToFitWidth = YES;
 	textField.autocapitalizationType = autocapitalizationType;
-	textField.autocorrectionType = UITextAutocorrectionTypeYes;
+	textField.autocorrectionType = autocorrectionType;
 	textField.keyboardType = UIKeyboardTypeDefault;
 	textField.returnKeyType = UIReturnKeyDone;
 	textField.text = text;

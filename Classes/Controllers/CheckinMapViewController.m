@@ -67,25 +67,19 @@
 	[self.incidentTabViewController presentModalViewController:self.checkinAddViewController animated:YES];
 }
 
-- (IBAction) refreshCheckins:(id)sender {
+- (IBAction) refresh:(id)sender {
 	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
 }
 
-- (IBAction) reportsMapTypeChanged:(id)sender {
-	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-	DLog(@"reportsMapTypeChanged: %d", segmentedControl.selectedSegmentIndex);
-	self.mapView.mapType = segmentedControl.selectedSegmentIndex;
-}
-
-- (IBAction) checkinsMapTypeChanged:(id)sender {
+- (IBAction) mapTypeChanged:(id)sender {
 	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
 	DLog(@"checkinsMapTypeChanged: %d", segmentedControl.selectedSegmentIndex);
 	self.mapView.mapType = segmentedControl.selectedSegmentIndex;
 }
 
-- (IBAction) checkinsFilterChanged:(id)sender event:(UIEvent*)event {
+- (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
 	DLog(@"");
 	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL USERS --- ", nil)];
 	for (User *theUser in self.users) {

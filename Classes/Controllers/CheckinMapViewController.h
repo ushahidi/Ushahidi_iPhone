@@ -65,9 +65,9 @@
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) addCheckin:(id)sender;
-- (IBAction) refreshCheckins:(id)sender;
-- (IBAction) checkinsMapTypeChanged:(id)sender;
-- (IBAction) checkinsFilterChanged:(id)sender event:(UIEvent*)event;
+- (IBAction) refresh:(id)sender;
+- (IBAction) mapTypeChanged:(id)sender;
+- (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
 - (void) populate:(BOOL)refresh resize:(BOOL)resize;
 
 @end

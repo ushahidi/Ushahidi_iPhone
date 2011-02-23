@@ -60,8 +60,8 @@
 
 - (void) populate:(BOOL)refresh;
 - (IBAction) addReport:(id)sender;
-- (IBAction) refreshReports:(id)sender;
-- (IBAction) tableSortChanged:(id)sender;
-- (IBAction) reportsFilterChanged:(id)sender event:(UIEvent*)event;
+- (IBAction) refresh:(id)sender;
+- (IBAction) sortChanged:(id)sender;
+- (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
 
 @end

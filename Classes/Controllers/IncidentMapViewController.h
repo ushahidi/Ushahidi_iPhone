@@ -66,9 +66,9 @@
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) addReport:(id)sender;
-- (IBAction) refreshReports:(id)sender;
-- (IBAction) reportsMapTypeChanged:(id)sender;
-- (IBAction) reportsFilterChanged:(id)sender event:(UIEvent*)event;
+- (IBAction) refresh:(id)sender;
+- (IBAction) mapTypeChanged:(id)sender;
+- (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
 - (void) populate:(BOOL)refresh resize:(BOOL)resize;
 
 @end

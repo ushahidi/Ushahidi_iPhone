@@ -87,7 +87,7 @@ typedef enum {
 	[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
 }
 
-- (IBAction) refreshReports:(id)sender {
+- (IBAction) refresh:(id)sender {
 	DLog(@"");
 	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
@@ -95,7 +95,7 @@ typedef enum {
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 }
 
-- (IBAction) tableSortChanged:(id)sender {
+- (IBAction) sortChanged:(id)sender {
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
 	if (segmentControl.selectedSegmentIndex == TableSortDate) {
 		DLog(@"TableSortDate");
@@ -109,7 +109,7 @@ typedef enum {
 	[self filterRows:YES];
 }
 
-- (IBAction) reportsFilterChanged:(id)sender event:(UIEvent*)event {
+- (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
 	DLog(@"");
 	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", nil)];
 	for (Category *theCategory in self.categories) {
@@ -219,9 +219,6 @@ typedef enum {
 	[super viewDidAppear:animated];
 	if ([self.pending count] > 0 ) {
 		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Refresh button to upload pending reports.", nil)];
-	}
-	else {
-		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
 	}
 	[self updateSyncedLabel];	
 }

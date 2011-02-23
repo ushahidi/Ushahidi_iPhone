@@ -24,6 +24,7 @@
 #import "CheckinMapViewController.h";
 #import "UIView+Extension.h"
 #import "Deployment.h"
+#import "Device.h"
 #import "Settings.h"
 
 @interface IncidentTabViewController ()
@@ -149,19 +150,39 @@ typedef enum {
 			[self.viewMode insertSegmentWithImage:[UIImage imageNamed:@"checkin.png"] 
 										  atIndex:ViewModeCheckin 
 										 animated:NO];
+		}
+		if ([Device isIPad]) {
+			[self.viewMode setFrameWidth:225];
+		}
+		else {
 			[self.viewMode setFrameWidth:115];
 		}
 	}
 	else {
 		if ([self.viewMode numberOfSegments] > ViewModeMap + 1) {
 			[self.viewMode removeSegmentAtIndex:ViewModeCheckin animated:NO];
-			[self.viewMode setFrameWidth:80];
 			[self.viewMode setSelectedSegmentIndex:ViewModeTable];
+		}
+		if ([Device isIPad]) {
+			[self.viewMode setFrameWidth:150];
+		}
+		else {
+			[self.viewMode setFrameWidth:80];
 		}
 	}
 	if (animated) {
 		[[Settings sharedSettings] setLastIncident:nil];
 	}
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	if ([[Ushahidi sharedUshahidi] supportsCheckins:self.deployment]) {
+		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Pin button to view checkins, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
+	}
+	else {
+		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
+	}	
 }
 
 - (void)dealloc {

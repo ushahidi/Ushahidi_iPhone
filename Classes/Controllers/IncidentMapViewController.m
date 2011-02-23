@@ -74,7 +74,7 @@
 	[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
 }
 
-- (IBAction) refreshReports:(id)sender {
+- (IBAction) refresh:(id)sender {
 	DLog(@"");
 	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
@@ -82,13 +82,13 @@
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 }
 
-- (IBAction) reportsMapTypeChanged:(id)sender {
+- (IBAction) mapTypeChanged:(id)sender {
 	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
 	DLog(@"reportsMapTypeChanged: %d", segmentedControl.selectedSegmentIndex);
 	self.mapView.mapType = segmentedControl.selectedSegmentIndex;
 }
 
-- (IBAction) reportsFilterChanged:(id)sender event:(UIEvent*)event {
+- (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
 	DLog(@"");
 	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", nil)];
 	for (Category *theCategory in self.categories) {

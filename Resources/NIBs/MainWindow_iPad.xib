@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="133"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -223,6 +224,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="605466144">
+				<string key="IBUITitle">Add Report</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="160727568">
 					<string key="IBUITitle">Add Report</string>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -237,6 +239,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="597297605">
+				<string key="IBUITitle">Report Details</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="357798234">
 					<string key="IBUITitle">Report</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="369585251">
@@ -341,6 +344,7 @@
 			<object class="IBUIViewController" id="809644881">
 				<string key="IBUITitle">Checkin</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="761904546">
+					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Checkin</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="371447578">
 						<string key="IBUITitle">Checkin</string>
@@ -351,9 +355,10 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="238751300">
-							<nil key="NSNextResponder"/>
+							<reference key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{122, 144}, {170, 30}}</string>
+							<string key="NSFrame">{{690, 7}, {71, 30}}</string>
+							<reference key="NSSuperview"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBSegmentControlStyle">2</int>
@@ -392,6 +397,7 @@
 				</object>
 				<string key="IBUINibName">CheckinDetailsViewController_iPad</string>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
+					<int key="IBUIBarStyle">1</int>
 					<bool key="IBUIPrompted">NO</bool>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -1091,6 +1097,22 @@
 					</object>
 					<int key="connectionID">143</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">viewMode</string>
+						<reference key="source" ref="151845411"/>
+						<reference key="destination" ref="594887003"/>
+					</object>
+					<int key="connectionID">144</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">checkinDetailsViewController</string>
+						<reference key="source" ref="1005714770"/>
+						<reference key="destination" ref="809644881"/>
+					</object>
+					<int key="connectionID">145</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1605,7 +1627,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>CheckinDetailsViewController</string>
-					<string>{{614, 4}, {783, 852}}</string>
+					<string>{{1557, -74}, {783, 852}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1682,7 +1704,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">143</int>
+			<int key="maxID">145</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1964,9 +1986,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addCheckin:</string>
-							<string>checkinsFilterChanged:event:</string>
-							<string>checkinsMapTypeChanged:</string>
-							<string>refreshCheckins:</string>
+							<string>filterChanged:event:</string>
+							<string>mapTypeChanged:</string>
+							<string>refresh:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1981,9 +2003,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addCheckin:</string>
-							<string>checkinsFilterChanged:event:</string>
-							<string>checkinsMapTypeChanged:</string>
-							<string>refreshCheckins:</string>
+							<string>filterChanged:event:</string>
+							<string>mapTypeChanged:</string>
+							<string>refresh:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1992,15 +2014,15 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">checkinsFilterChanged:event:</string>
+								<string key="name">filterChanged:event:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">checkinsMapTypeChanged:</string>
+								<string key="name">mapTypeChanged:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">refreshCheckins:</string>
+								<string key="name">refresh:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -2627,9 +2649,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addReport:</string>
-							<string>refreshReports:</string>
-							<string>reportsFilterChanged:event:</string>
-							<string>reportsMapTypeChanged:</string>
+							<string>filterChanged:event:</string>
+							<string>mapTypeChanged:</string>
+							<string>refresh:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2644,9 +2666,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addReport:</string>
-							<string>refreshReports:</string>
-							<string>reportsFilterChanged:event:</string>
-							<string>reportsMapTypeChanged:</string>
+							<string>filterChanged:event:</string>
+							<string>mapTypeChanged:</string>
+							<string>refresh:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2655,15 +2677,15 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">refreshReports:</string>
+								<string key="name">filterChanged:event:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">reportsFilterChanged:event:</string>
+								<string key="name">mapTypeChanged:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">reportsMapTypeChanged:</string>
+								<string key="name">refresh:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>
@@ -2820,9 +2842,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addReport:</string>
-							<string>refreshReports:</string>
-							<string>reportsFilterChanged:event:</string>
-							<string>tableSortChanged:</string>
+							<string>filterChanged:event:</string>
+							<string>refresh:</string>
+							<string>sortChanged:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2837,9 +2859,9 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addReport:</string>
-							<string>refreshReports:</string>
-							<string>reportsFilterChanged:event:</string>
-							<string>tableSortChanged:</string>
+							<string>filterChanged:event:</string>
+							<string>refresh:</string>
+							<string>sortChanged:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2848,15 +2870,15 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">refreshReports:</string>
+								<string key="name">filterChanged:event:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">reportsFilterChanged:event:</string>
+								<string key="name">refresh:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">tableSortChanged:</string>
+								<string key="name">sortChanged:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

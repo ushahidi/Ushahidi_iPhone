@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "Device.h"
+#import "NSString+Extension.h"
 
 @implementation Device
 
@@ -52,6 +53,10 @@
 
 + (NSString *) deviceIdentifier {
 	return [[UIDevice currentDevice] uniqueIdentifier];
+}
+
++ (NSString *) deviceIdentifierHashed {
+	return [[[UIDevice currentDevice] uniqueIdentifier] MD5];
 }
 
 @end

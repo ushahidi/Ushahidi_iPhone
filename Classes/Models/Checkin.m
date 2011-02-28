@@ -26,7 +26,16 @@
 
 @implementation Checkin
 
-@synthesize identifier, message, date, user, name, latitude, longitude, location, photos;
+@synthesize identifier, message, date, latitude, longitude, location, photos, user, name, email, firstName, lastName, mobile;
+
+- (id)initWithDefaultValues {
+	if (self = [super init]) {
+		self.identifier = [NSString getUUID];
+		self.date = [NSDate date];
+		self.photos = [NSMutableArray arrayWithCapacity:0];
+	}
+	return self;
+}
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
@@ -52,29 +61,19 @@
 	return self;
 }
 
-- (id)initWithMessage:(NSString *)theMessage latitude:(NSString *)theLatitude longitude:(NSString *)theLongitude photo:(Photo *)thePhoto {
-	if (self = [super init]) {
-		self.message = theMessage;
-		self.latitude = theLatitude;
-		self.longitude = theLongitude;
-		self.date = [NSDate date];
-		self.photos = [NSMutableArray arrayWithCapacity:0];
-		if (thePhoto != nil) {
-			[self.photos addObject:thePhoto];
-		}
-	}
-	return self;
-}
-
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.identifier forKey:@"identifier"];
 	[encoder encodeObject:self.message forKey:@"message"];
 	[encoder encodeObject:self.latitude forKey:@"latitude"];
 	[encoder encodeObject:self.longitude forKey:@"longitude"];
 	[encoder encodeObject:self.date forKey:@"date"];
+	[encoder encodeObject:self.photos forKey:@"photos"];
 	[encoder encodeObject:self.user forKey:@"user"];
 	[encoder encodeObject:self.name forKey:@"name"];
-	[encoder encodeObject:self.photos forKey:@"photos"];
+	[encoder encodeObject:self.email forKey:@"email"];
+	[encoder encodeObject:self.firstName forKey:@"firstName"];
+	[encoder encodeObject:self.lastName forKey:@"lastName"];
+	[encoder encodeObject:self.mobile forKey:@"mobile"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -86,6 +85,10 @@
 		self.date = [decoder decodeObjectForKey:@"date"];
 		self.user = [decoder decodeObjectForKey:@"user"];
 		self.name = [decoder decodeObjectForKey:@"name"];
+		self.email = [decoder decodeObjectForKey:@"email"];
+		self.firstName = [decoder decodeObjectForKey:@"firstName"];
+		self.lastName = [decoder decodeObjectForKey:@"lastName"];
+		self.mobile = [decoder decodeObjectForKey:@"mobile"];
 		self.photos = [decoder decodeObjectForKey:@"photos"];
 		if (self.photos == nil) self.photos = [NSMutableArray array];
 	}
@@ -132,6 +135,14 @@
 	return images;
 }
 
+- (void) addPhoto:(Photo *)photo {
+	[self.photos addObject:photo];
+}
+
+- (void) removePhotos {
+	[self.photos removeAllObjects];
+}
+
 - (void)dealloc {
 	[identifier release];
 	[message release];
@@ -142,6 +153,10 @@
 	[date release];
 	[user release];
 	[name release];
+	[email release];
+	[firstName release];
+	[lastName release];
+	[mobile release];
     [super dealloc];
 }
 

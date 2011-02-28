@@ -43,7 +43,6 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
 	DLog(@"%@", self.nibName);
-	self.webViewController = nil;
 	self.loadingView = nil;
 	self.inputView = nil;
 	self.alertView = nil;

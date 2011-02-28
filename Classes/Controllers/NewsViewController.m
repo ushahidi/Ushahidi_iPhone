@@ -60,8 +60,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.webView = nil;
-	self.backForwardButton = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {

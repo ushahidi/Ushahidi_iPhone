@@ -53,7 +53,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUINavigationItem" id="101848928">
 								<reference key="IBUINavigationBar" ref="622662465"/>
-								<string key="IBUITitle">Checkin</string>
+								<string key="IBUITitle">Add Checkin</string>
 								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="393191163">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<int key="IBUIStyle">1</int>
@@ -259,7 +259,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>CheckinAddViewController</string>
 					<string>UIResponder</string>
-					<string>{{1580, -97}, {783, 852}}</string>
+					<string>{{1580, -168}, {768, 1024}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform"/>

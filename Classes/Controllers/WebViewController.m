@@ -88,13 +88,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.webView = nil;
-	self.refreshButton = nil;
-	self.backForwardButton = nil;
-	self.searchBar = nil;
-	self.activityIndicator = nil;
-	self.homePage = nil;
-	self.googleSearch = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {

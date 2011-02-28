@@ -32,32 +32,38 @@
 
 @interface CheckinAddViewController ()
 
-@property (nonatomic, retain) NSString *message;
-@property (nonatomic, retain) NSString *latitude;
-@property (nonatomic, retain) NSString *longitude;	
-@property (nonatomic, retain) Photo *photo;
+@property (nonatomic, retain) Checkin *checkin;
+
+- (void) dismissModalView;
 
 @end
 
 @implementation CheckinAddViewController
 
-@synthesize cancelButton, doneButton, message, latitude, longitude, photo, imagePickerController;
+@synthesize cancelButton, doneButton, imagePickerController, checkin;
+
+#pragma mark -
+#pragma mark Enums
 
 typedef enum {
 	TableSectionMessage,
 	TableSectionLocation,
-	TableSectionPhoto
+	TableSectionPhoto,
+	TableSectionContact
 } TableSection;
+
+typedef enum {
+	TableRowContactFirst,
+	TableRowContactLast,
+	TableRowContactEmail
+} TableRowContact;
 
 #pragma mark -
 #pragma mark Handlers
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"");
-	self.message = nil;
-	self.latitude = nil;
-	self.longitude = nil;
-	self.photo = nil;
+	self.checkin = nil;
 	[self.view endEditing:YES];
 	[self.loadingView hide];
 	[self dismissModalViewControllerAnimated:YES];
@@ -66,15 +72,13 @@ typedef enum {
 - (IBAction) done:(id)sender {
 	DLog(@"");
 	[self.view endEditing:YES];
-	Checkin *checkin = [[Checkin alloc] initWithMessage:self.message latitude:self.latitude longitude:self.longitude photo:self.photo];
-	if ([[Ushahidi sharedUshahidi] uploadCheckin:checkin forDelegate:self]) {
+	if ([[Ushahidi sharedUshahidi] uploadCheckin:self.checkin forDelegate:self]) {
 		[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nill)];
 	}
 	else {
 		[self.alertView showOkWithTitle:NSLocalizedString(@"Checkin Error", nil) 
 							 andMessage:NSLocalizedString(@"Unable to checkin, please try again later.", nil)];
 	}
-	[checkin release];
 }
 
 - (void) dismissModalView {
@@ -91,27 +95,33 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Message", nil) atSection:TableSectionMessage];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photo", nil) atSection:TableSectionPhoto];
-	DLog(@"%@", [Device deviceIdentifier]);
+	[self setHeader:NSLocalizedString(@"Contact", nil) atSection:TableSectionContact];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.imagePickerController = nil;
-	self.cancelButton = nil;
-	self.doneButton = nil;
-	self.message = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	if ([[Locator sharedLocator] hasLocation]) {
-		self.latitude = [[Locator sharedLocator] latitude];
-		self.longitude = [[Locator sharedLocator] longitude];
-		[self setFooter:[NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude] atSection:TableSectionLocation];
-	}
-	else {
-		[self setFooter:NSLocalizedString(@"Locating...", nil) atSection:TableSectionLocation];
-		[[Locator sharedLocator] detectLocationForDelegate:self];
+	DLog(@"Device %@ >> %@", [Device deviceIdentifier], [Device deviceIdentifierHashed]);
+	if (self.modalViewController == nil) {
+		self.checkin = [[Checkin alloc] initWithDefaultValues];
+		self.checkin.mobile = [Device deviceIdentifierHashed];
+		self.checkin.firstName = [[Settings sharedSettings] firstName];
+		self.checkin.lastName = [[Settings sharedSettings] lastName];
+		self.checkin.email = [[Settings sharedSettings] email];
+		if ([[Locator sharedLocator] hasLocation]) {
+			self.checkin.latitude = [[Locator sharedLocator] latitude];
+			self.checkin.longitude = [[Locator sharedLocator] longitude];
+			[self setFooter:[NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude] atSection:TableSectionLocation];
+		}
+		else {
+			[self setFooter:NSLocalizedString(@"Locating...", nil) atSection:TableSectionLocation];
+			[[Locator sharedLocator] detectLocationForDelegate:self];
+		}
+		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];
 	[self.loadingView hide];
@@ -119,17 +129,14 @@ typedef enum {
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Enter optional message and photo for your checkin, then click the Send button.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"To checkin, enter your message, contact information and optional photo then click the Send button.", nil)];
 }
 
 - (void)dealloc {
 	[imagePickerController release];
 	[cancelButton release];
 	[doneButton release];
-	[message release];
-	[latitude release];
-	[longitude release];
-	[photo release];
+	[checkin release];
 	[super dealloc];
 }
 
@@ -137,38 +144,55 @@ typedef enum {
 #pragma mark TableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (section == TableSectionMessage) {
+		return 1;	
+	}
+	if (section == TableSectionLocation) {
+		return 1;
+	}
+	if (section == TableSectionPhoto) {
+		return 1;
+	}
+	if (section == TableSectionContact) {
+		return 3;
+	}
+	return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionMessage) {
 		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setPlaceholder:NSLocalizedString(@"Enter message", nil)];
-		[cell setText:self.message];
+		[cell setText:self.checkin.message];
 		return cell;	
 	}
 	else if (indexPath.section == TableSectionLocation) {
 		MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setScrollable:YES];
 		[cell setZoomable:YES];
-		[cell removeAllPins];
-		if (self.latitude != nil && self.longitude != nil) {
-			[cell addPinWithTitle:NSLocalizedString(@"User Location", nill) 
-						 subtitle:[NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude] 
-						 latitude:self.latitude 
-						longitude:self.longitude];
-			[cell resizeRegionToFitAllPins:YES];
+		if (self.checkin.latitude != nil && self.checkin.longitude != nil) {
+			NSString *subtitle = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
+			if ([subtitle isEqualToString:cell.location] == NO) {
+				[cell removeAllPins];
+				[cell addPinWithTitle:NSLocalizedString(@"User Location", nill) 
+							 subtitle:subtitle 
+							 latitude:self.checkin.latitude 
+							longitude:self.checkin.longitude];
+				[cell resizeRegionToFitAllPins:YES];
+				cell.location = subtitle;
+			}
 		}
 		return cell;
 	}
 	else if (indexPath.section == TableSectionPhoto) {
-		if (self.photo) {
+		if (self.checkin.hasPhotos) {
 			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
-			[cell setImage:self.photo.image];
+			Photo *photo = [self.checkin.photos objectAtIndex:0];
+			[cell setImage:photo.image];
 			return cell;
 		}
 		else {
@@ -178,6 +202,31 @@ typedef enum {
 			[cell setText:NSLocalizedString(@"Select photo", nil)];
 			return cell;
 		}
+	}
+	else if (indexPath.section == TableSectionContact) {
+		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
+		if (indexPath.row == TableRowContactFirst) {
+			[cell setPlaceholder:NSLocalizedString(@"Enter first name", nil)];
+			[cell setText:self.checkin.firstName];
+			[cell setKeyboardType:UIKeyboardTypeDefault];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
+		}
+		else if (indexPath.row == TableRowContactLast) {
+			[cell setPlaceholder:NSLocalizedString(@"Enter last name", nil)];
+			[cell setText:self.checkin.lastName];
+			[cell setKeyboardType:UIKeyboardTypeDefault];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
+		}
+		else if (indexPath.row == TableRowContactEmail) {
+			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
+			[cell setText:self.checkin.email];
+			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+		}
+		return cell;
 	}
 	return nil;
 }
@@ -190,7 +239,17 @@ typedef enum {
 		return 150;
 	}
 	if (indexPath.section == TableSectionPhoto) {
-		return self.photo == nil ? 45 : 200;
+		if (self.checkin.hasPhotos) {
+			Photo *photo = [self.checkin.photos objectAtIndex:indexPath.row];
+			if (photo != nil && photo.image != nil) {
+				return theTableView.frame.size.width * photo.image.size.height / photo.image.size.width;
+			}
+			return 200;	
+		}
+		return 44;
+	}
+	if (indexPath.section == TableSectionContact) {
+		return 44;
 	}
 	return 0;
 }
@@ -198,7 +257,7 @@ typedef enum {
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	if (indexPath.section == TableSectionPhoto) {
-		if (self.photo) {
+		if ([self.checkin.photos count] > 0) {
 			UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																	 delegate:self 
 															cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
@@ -223,11 +282,37 @@ typedef enum {
 }
 
 - (void) textViewChanged:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	self.message = text;
+	if (indexPath.section == TableSectionContact) {
+		if (indexPath.row == TableRowContactFirst) {
+			self.checkin.firstName = text;
+		}
+		else if (indexPath.row == TableRowContactLast) {
+			self.checkin.lastName = text;
+		}
+		else if (indexPath.row == TableRowContactEmail) {
+			self.checkin.email = text;
+		}
+	}
+	else if (indexPath.section == TableSectionMessage) {
+		self.checkin.message = text;
+	}
 }
 
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	self.message = text;
+	if (indexPath.section == TableSectionContact) {
+		if (indexPath.row == TableRowContactFirst) {
+			self.checkin.firstName = text;
+		}
+		else if (indexPath.row == TableRowContactLast) {
+			self.checkin.lastName = text;
+		}
+		else if (indexPath.row == TableRowContactEmail) {
+			self.checkin.email = text;
+		}
+	}
+	else if (indexPath.section == TableSectionMessage) {
+		self.checkin.message = text;
+	}
 	[self.tableView reloadData];
 }
 
@@ -242,12 +327,11 @@ typedef enum {
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
 	DLog(@"");
 	if (image != nil && image.size.width > 0 && image.size.height > 0) {
-		self.photo = [Photo photoWithImage:image];
+		[self.checkin addPhoto:[Photo photoWithImage:image]];
 		[self.loadingView showWithMessage:NSLocalizedString(@"Resized", nil)];
 		[self.loadingView hideAfterDelay:1.0];
 	}
 	else {
-		self.photo = nil;
 		[self.loadingView hide];
 		[self.alertView showOkWithTitle:NSLocalizedString(@"Photo Error", nil) 
 							 andMessage:NSLocalizedString(@"There was a problem resizing the photo.", nil)];
@@ -262,21 +346,17 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) uploadingToUshahidi:(Ushahidi *)ushahidi checkin:(Checkin *)checkin {
+- (void) uploadingToUshahidi:(Ushahidi *)ushahidi checkin:(Checkin *)theCheckin {
 	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)];
 }
 
-- (void) uploadedToUshahidi:(Ushahidi *)ushahidi checkin:(Checkin *)checkin error:(NSError *)error {
+- (void) uploadedToUshahidi:(Ushahidi *)ushahidi checkin:(Checkin *)theCheckin error:(NSError *)error {
 	if (error != nil) {
 		[self.loadingView hide];
 		[self.alertView showOkWithTitle:NSLocalizedString(@"Checkin Error", nil) 
 							 andMessage:[error localizedDescription]];
 	}
 	else {
-		self.message = nil;
-		self.latitude = nil;
-		self.longitude = nil;
-		self.photo = nil;
 		[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
 		[self.loadingView hideAfterDelay:1.0];
 		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.2];
@@ -288,7 +368,7 @@ typedef enum {
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (actionSheet.cancelButtonIndex != buttonIndex) {
-		self.photo = nil;
+		[self.checkin removePhotos];
 		[self.tableView reloadData];	
 	}
 }
@@ -298,8 +378,8 @@ typedef enum {
 
 - (void) locatorFinished:(Locator *)locator latitude:(NSString *)userLatitude longitude:(NSString *)userLongitude {
 	DLog(@"locator: %@, %@", userLatitude, userLongitude);
-	self.latitude = userLatitude;
-	self.longitude = userLongitude;
+	self.checkin.latitude = userLatitude;
+	self.checkin.longitude = userLongitude;
 	[self setFooter:[NSString stringWithFormat:@"%@, %@", userLatitude, userLongitude] atSection:TableSectionLocation];
 	if (self.editing == NO) {
 		[self.tableView reloadData];
@@ -308,6 +388,12 @@ typedef enum {
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
+	[self setFooter:NSLocalizedString(@"Error Detecting Location", nil) atSection:TableSectionLocation];
+	if (self.editing == NO) {
+		[self.tableView reloadData];
+	}
+	[self.alertView showOkWithTitle:NSLocalizedString(@"Location Error", nil) 
+						 andMessage:NSLocalizedString(@"There was a problem detecting your location. Please ensure that Ushahidi is enabled in Settings > General > Location Services.", nil)];
 }
 
 @end

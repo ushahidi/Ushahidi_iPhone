@@ -80,6 +80,7 @@
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
+	[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
 }
 
 - (IBAction) mapTypeChanged:(id)sender {
@@ -114,7 +115,6 @@
 
 - (void) populate:(BOOL)refresh resize:(BOOL)resize {
 	DLog(@"refresh:%d resize:%d", refresh, resize);
-	
 	[self.incidents removeAllObjects];
 	if (refresh) {
 		[self.incidents addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
@@ -182,15 +182,7 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.incidentTabViewController = nil;
-	self.incidentAddViewController = nil;
-	self.incidentDetailsViewController = nil;
-	self.mapType = nil;
-	self.pending = nil;
 	self.itemPicker = nil;
-	self.incidents = nil;
-	self.pending = nil;
-	self.categories = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

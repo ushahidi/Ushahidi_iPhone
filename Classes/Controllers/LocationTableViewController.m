@@ -133,11 +133,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.cancelButton = nil;
-	self.doneButton = nil;
-	self.mapView = nil;
-	self.viewMode = nil;
-	self.containerView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

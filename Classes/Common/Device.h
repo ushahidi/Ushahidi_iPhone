@@ -30,5 +30,6 @@
 + (NSString *) deviceVersion;
 + (NSString *) deviceModel;
 + (NSString *) deviceIdentifier;
++ (NSString *) deviceIdentifierHashed;
 
 @end

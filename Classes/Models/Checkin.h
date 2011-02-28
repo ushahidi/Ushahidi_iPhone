@@ -31,8 +31,15 @@
 	NSString *latitude;
 	NSString *longitude;
 	NSDate *date;
+	
 	NSString *user;
 	NSString *name;
+	NSString *email;
+
+	NSString *firstName;
+	NSString *lastName;
+	NSString *mobile;
+	
 	Location *location;
 	NSMutableArray *photos;
 }
@@ -42,10 +49,19 @@
 @property(nonatomic,retain) NSString *latitude;
 @property(nonatomic,retain) NSString *longitude;
 @property(nonatomic,retain) NSDate *date;
+
 @property(nonatomic,retain) NSString *user;
 @property(nonatomic,retain) NSString *name;
+@property(nonatomic,retain) NSString *email;
+
+@property(nonatomic,retain) NSString *firstName;
+@property(nonatomic,retain) NSString *lastName;
+@property(nonatomic,retain) NSString *mobile;
+
 @property(nonatomic,retain) Location *location;
+
 @property(nonatomic,retain) NSMutableArray *photos;
+
 @property(nonatomic,readonly) NSString *dateString;
 @property(nonatomic,readonly) NSString *timeString;
 @property(nonatomic,readonly) NSString *dateTimeString;
@@ -57,7 +73,10 @@
 @property(nonatomic,readonly) BOOL hasPhotos;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-- (id)initWithMessage:(NSString *)message latitude:(NSString *)latitude longitude:(NSString *)longitude photo:(Photo *)photo;
+- (id)initWithDefaultValues;
+
 - (NSArray *) photoImages;
+- (void) addPhoto:(Photo *)photo;
+- (void) removePhotos;
 
 @end

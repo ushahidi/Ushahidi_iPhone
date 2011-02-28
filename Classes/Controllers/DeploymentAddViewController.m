@@ -127,10 +127,8 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.cancelButton = nil;
-	self.refreshButton = nil;
-	self.tableSort = nil;
 	self.mapDialog = nil;
+	self.mapDistance = nil;
 	self.itemPicker = nil;
 }
 
@@ -223,10 +221,14 @@ typedef enum {
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[self.view endEditing:YES];
-	[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
 	Deployment *map = [self filteredRowAtIndexPath:indexPath];
-	[[Ushahidi sharedUshahidi] addDeployment:map];
-	[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
+	if ([[Ushahidi sharedUshahidi] addDeployment:map]) {
+		[[Ushahidi sharedUshahidi] getVersionOfDeployment:map forDelegate:self];
+	}
+	else {
+		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -268,6 +270,12 @@ typedef enum {
 	self.refreshButton.enabled = YES;
 }
 
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi version:(Deployment *)deployment {
+	DLog(@"");
+	[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+	[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.5];
+}
+
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
@@ -301,9 +309,15 @@ typedef enum {
 	self.url = theUrl;
 	if (self.name != nil && [self.name length] > 0 && 
 		self.url != nil && [self.url isValidURL]) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
-		[[Ushahidi sharedUshahidi] addDeploymentByName:theName andUrl:theUrl];	
-		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
+		Deployment *deployment = [[Deployment alloc] initWithName:theName url:theUrl];
+		if ([[Ushahidi sharedUshahidi] addDeployment:deployment]) {
+			[[Ushahidi sharedUshahidi] getVersionOfDeployment:deployment forDelegate:self];
+		}
+		else {
+			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
+		}
+		[deployment release];
 	}
 	else {
 		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Map Details", nil) 

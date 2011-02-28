@@ -21,18 +21,20 @@
 #import <UIKit/UIKit.h>
 #import "TableViewController.h"
 #import "TextViewTableCell.h"
+#import "TextFieldTableCell.h"
 #import "MapTableCell.h"
 #import "ImagePickerController.h"
 #import "Ushahidi.h"
 #import "Locator.h"
 
-@class Photo;
+@class Checkin;
 
 @interface CheckinAddViewController : TableViewController<TextViewTableCellDelegate, 
 														  MapTableCellDelegate, 
 														  ImagePickerDelegate, 
 														  UshahidiDelegate,
 														  LocatorDelegate,
+														  TextFieldTableCellDelegate,
 														  UIActionSheetDelegate> {
 
 @public
@@ -40,12 +42,8 @@
 	UIBarButtonItem *doneButton;
 	ImagePickerController *imagePickerController;
 														   
-@private 
-	NSString *message;
-	NSString *latitude;
-	NSString *longitude;
-	Photo *photo;
-														   
+@private
+	Checkin *checkin;														   
 }
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;

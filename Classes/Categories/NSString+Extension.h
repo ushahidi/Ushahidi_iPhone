@@ -29,6 +29,7 @@
 - (NSString *) stringWithMaxLength:(NSInteger)maxLength;
 
 + (NSString *)getUUID;
+- (NSString *)MD5;
 
 - (BOOL) isUUID;
 - (BOOL) isValidEmail;

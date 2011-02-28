@@ -106,6 +106,7 @@
 - (void) populate:(BOOL)refresh resize:(BOOL)resize {
 	DLog(@"refresh:%d resize:%d", refresh, resize);
 	if (refresh) {
+		[self.checkins removeAllObjects];
 		[self.checkins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
 		if ([[Ushahidi sharedUshahidi] hasUsers]) {
 			self.users = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getUsers]];
@@ -115,9 +116,10 @@
 		}
 		[self.filterLabel setText:NSLocalizedString(@"All Users", nil)];
 	}
+	else if (self.user != nil){
+		[self.filterLabel setText:[NSString stringWithFormat:@"%@ : %@", NSLocalizedString(@"Checkins", nil), self.user.name]];
+	}
 	[self.mapView removeAllPins];
-	[self.checkins removeAllObjects];
-	[self.checkins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
 	for (Checkin *checkin in self.checkins) {
 		[self.mapView addPinWithTitle:checkin.message 
 											subtitle:checkin.dateString 
@@ -143,16 +145,7 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.incidentTabViewController = nil;
-	self.checkinAddViewController = nil;
-	self.checkinDetailsViewController = nil;
-	self.checkins = nil;
-	self.users = nil;
-	self.mapType = nil;
 	self.itemPicker = nil;
-	self.refreshButton = nil;
-	self.filterButton = nil;
-	self.filterLabel = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

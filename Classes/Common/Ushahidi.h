@@ -59,10 +59,12 @@
 - (BOOL) hasUsers;
 - (NSArray *) getUsers;
 
+- (void) getVersionsForDelegate:(id<UshahidiDelegate>)delegate;
+- (void) getVersionOfDeployment:(Deployment *)theDeployment forDelegate:(id<UshahidiDelegate>)delegate;
+
 - (NSArray *) getDeploymentsUsingSorter:(SEL)sorter;
 - (void) loadDeployment:(Deployment *)deployment inBackground:(BOOL)inBackground;
 - (BOOL) addDeployment:(Deployment *)deployment;
-- (BOOL) addDeploymentByName:(NSString *)name andUrl:(NSString *)url;
 - (BOOL) removeDeployment:(Deployment *)deployment;
 - (Deployment *) getDeploymentWithUrl:(NSString *)url;
 - (NSString *) deploymentName;
@@ -76,7 +78,6 @@
 - (NSArray *) getCheckins;
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) uploadCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
-- (BOOL) supportsCheckins:(Deployment *)deployment;
 
 - (BOOL) hasCategories;
 - (NSArray *) getCategories;
@@ -99,6 +100,7 @@
 
 @optional
 
+- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi version:(Deployment *)deployment;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending;
@@ -111,6 +113,8 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)users error:(NSError *)error hasChanges:(BOOL)hasChanges;
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi version:(Deployment *)deployment;
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi map:(UIImage *)map incident:(Incident *)incident;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo incident:(Incident *)incident;

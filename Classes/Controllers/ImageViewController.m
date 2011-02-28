@@ -102,12 +102,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.twitterViewController = nil;
-	self.imageView = nil;
-	self.nextPrevious = nil;
-	self.emailButton = nil;
-	self.saveButton = nil;
-	self.tweetButton = nil;
 	self.email = nil;
 }
 

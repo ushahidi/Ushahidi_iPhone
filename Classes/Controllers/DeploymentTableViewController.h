@@ -32,14 +32,19 @@
 	IBOutlet IncidentTabViewController *incidentTabViewController;
 	IBOutlet DeploymentAddViewController *deploymentAddViewController;
 	IBOutlet SettingsViewController *settingsViewController;
+	IBOutlet UIBarButtonItem *addButton;
 	IBOutlet UIBarButtonItem *editButton;
 	IBOutlet UIBarButtonItem *refreshButton;
 	IBOutlet UISegmentedControl *tableSort;
+	
+@private 
+	UIButton *settingsButton;
 }
 
 @property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
 @property(nonatomic, retain) DeploymentAddViewController *deploymentAddViewController;
 @property(nonatomic, retain) SettingsViewController *settingsViewController;
+@property(nonatomic, retain) UIBarButtonItem *addButton;
 @property(nonatomic, retain) UIBarButtonItem *editButton;
 @property(nonatomic, retain) UIBarButtonItem *refreshButton;
 @property(nonatomic, retain) UISegmentedControl *tableSort;

@@ -36,6 +36,8 @@
 	NSDate *discovered;
 	NSString *version;
 	
+	BOOL supportsCheckins;
+	
 	NSMutableDictionary *categories;
 	NSMutableDictionary *locations;
 	NSMutableDictionary *incidents;
@@ -62,7 +64,7 @@
 @property(nonatomic, retain) NSMutableDictionary *users;
 @property(nonatomic, retain) NSMutableArray *pending;
 
-@property(nonatomic, readonly) BOOL supportsCheckins;
+@property(nonatomic, assign) BOOL supportsCheckins;
 
 - (id) initWithDictionary:(NSDictionary *)dictionary;
 - (id) initWithName:(NSString *)name url:(NSString *)url;
@@ -75,31 +77,31 @@
 - (BOOL) matchesString:(NSString *)string;
 - (BOOL) containsLocation:(Location *)location;
 
-- (NSString *) getCheckins;
+- (NSString *) getUrlForCheckins;
 
-- (NSString *) getCategories;
-- (NSString *) getCategoryByID:(NSString *)categoryID;
+- (NSString *) getUrlForCategories;
+- (NSString *) getUrlForCategoryByID:(NSString *)categoryID;
 
-- (NSString *) getLocations;
-- (NSString *) getLocationByID:(NSString *)locationID;
-- (NSString *) getLocationsByCountryID:(NSString *)countryID;
+- (NSString *) getUrlForLocations;
+- (NSString *) getUrlForLocationByID:(NSString *)locationID;
+- (NSString *) getUrlForLocationsByCountryID:(NSString *)countryID;
 
-- (NSString *) getIncidents;
-- (NSString *) getIncidentsByCategoryID:(NSString *)categoryID;
-- (NSString *) getIncidentsByCategoryName:(NSString *)categoryName;
-- (NSString *) getIncidentsByLocationID:(NSString *)locationID;
-- (NSString *) getIncidentsByLocationName:(NSString *)locationName;
-- (NSString *) getIncidentsBySinceID:(NSString *)sinceID;
+- (NSString *) getUrlForIncidents;
+- (NSString *) getUrlForIncidentsByCategoryID:(NSString *)categoryID;
+- (NSString *) getUrlForIncidentsByCategoryName:(NSString *)categoryName;
+- (NSString *) getUrlForIncidentsByLocationID:(NSString *)locationID;
+- (NSString *) getUrlForIncidentsByLocationName:(NSString *)locationName;
+- (NSString *) getUrlForIncidentsBySinceID:(NSString *)sinceID;
 
-- (NSString *) getIncidentCount;
-- (NSString *) getGeoGraphicMidPoint;
-- (NSString *) getDeploymentVersion;
+- (NSString *) getUrlForIncidentCount;
+- (NSString *) getUrlForGeoGraphicMidPoint;
+- (NSString *) getUrlForDeploymentVersion;
 
-- (NSString *) getPostReport;
-- (NSString *) getPostNews;
-- (NSString *) getPostVideo;
-- (NSString *) getPostPhoto;
-- (NSString *) getPostCheckin;
+- (NSString *) getUrlForPostReport;
+- (NSString *) getUrlForPostNews;
+- (NSString *) getUrlForPostVideo;
+- (NSString *) getUrlForPostPhoto;
+- (NSString *) getUrlForPostCheckin;
 
 - (NSComparisonResult)compareByName:(Deployment *)deployment;
 - (NSComparisonResult)compareByDate:(Deployment *)deployment;

@@ -160,10 +160,6 @@ typedef enum {
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.imagePickerController = nil;
-	self.categoryTableViewController = nil;
-	self.locationTableViewController = nil;
-	self.cancelButton = nil;
-	self.doneButton = nil;
 	self.datePicker = nil;
 }
 
@@ -362,15 +358,15 @@ typedef enum {
 		return 120;
 	}
 	if (indexPath.section == TableSectionLocation) {
-		return 45;
+		return 44;
 	}
 	if (indexPath.section == TableSectionCategory) {
 		CGSize size = [TextTableCell getCellSizeForText:[self.incident categoryNames] forWidth:theTableView.contentSize.width];
-		if (size.height > 45) {
+		if (size.height > 44) {
 			return size.height;
 		}
 	}
-	return 45;
+	return 44;
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

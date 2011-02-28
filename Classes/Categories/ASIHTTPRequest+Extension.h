@@ -22,6 +22,7 @@
 #import "Ushahidi.h"
 
 @class Ushahidi;
+@class Deployment;
 @class Incident;
 @class Photo;
 @class Checkin;
@@ -30,8 +31,15 @@
 @interface ASIHTTPRequest (Extension) 
 
 - (id<UshahidiDelegate>) getDelegate;
+- (Deployment *) getDeployment;
 - (Incident *) getIncident;
 - (Photo *) getPhoto;
 - (Checkin *) getCheckin;
+
+- (void) attachDelegate:(id<UshahidiDelegate>)delegate;
+- (void) attachDeployment:(Deployment *)deployment;
+- (void) attachIncident:(Incident *)incident;
+- (void) attachPhoto:(Photo *)photo;
+- (void) attachCheckin:(Checkin *)checkin;
 
 @end

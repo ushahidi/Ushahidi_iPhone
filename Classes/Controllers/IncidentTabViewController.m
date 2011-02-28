@@ -103,6 +103,7 @@ typedef enum {
 	if (self.deployment != nil) {
 		self.title = self.deployment.name;
 	}
+	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.incidentTableViewController.view.superview == nil && 
 		self.incidentMapViewController.view.superview == nil && 
 		self.checkinMapViewController.view.superview == nil) {
@@ -114,12 +115,14 @@ typedef enum {
 		[self.incidentTableViewController populate:self.willBePushed];
 	}
 	else if(self.incidentMapViewController.view.superview != nil) {
-		[self.incidentMapViewController populate:self.willBePushed resize:self.willBePushed];
+		[self.incidentMapViewController populate:self.willBePushed 
+										  resize:self.willBePushed];
 	}
 	else if (self.checkinMapViewController.view.superview != nil) {
-		[self.checkinMapViewController populate:self.willBePushed resize:self.willBePushed];	
+		[self.checkinMapViewController populate:self.willBePushed 
+										 resize:self.willBePushed];	
 	}	
-	if ([[Ushahidi sharedUshahidi] supportsCheckins:self.deployment]) {
+	if (self.deployment.supportsCheckins) {
 		if ([self.viewMode numberOfSegments] < ViewModeCheckin + 1) {
 			[self.viewMode insertSegmentWithImage:[UIImage imageNamed:@"checkin.png"] 
 										  atIndex:ViewModeCheckin 
@@ -159,7 +162,7 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	if ([[Ushahidi sharedUshahidi] supportsCheckins:self.deployment]) {
+	if (self.deployment.supportsCheckins) {
 		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Pin button to view checkins, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
 	}
 	else {
@@ -169,10 +172,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	incidentTableViewController = nil;
-	incidentMapViewController = nil;
-	checkinMapViewController = nil;
-	viewMode = nil;
 }
 
 - (void)dealloc {

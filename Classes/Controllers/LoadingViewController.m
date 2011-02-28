@@ -57,9 +57,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.activityIndicator = nil;
-	self.activityIndicatorBackground = nil;
-	self.activityIndicatorLabel = nil;
 }
 
 - (void) show {

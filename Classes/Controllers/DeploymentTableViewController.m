@@ -33,11 +33,20 @@
 
 @interface DeploymentTableViewController ()
 
+@property(nonatomic, retain) UIButton *settingsButton;
+
+- (void) setTableEdit:(BOOL)edit;
+- (void) settings:(id)sender;
+
 @end
 
 @implementation DeploymentTableViewController
 
-@synthesize incidentTabViewController, deploymentAddViewController, settingsViewController, editButton, refreshButton, tableSort;
+@synthesize incidentTabViewController, deploymentAddViewController, settingsViewController;
+@synthesize addButton, editButton, refreshButton, settingsButton, tableSort;
+
+#pragma mark -
+#pragma mark Enums
 
 typedef enum {
 	TableSortDate,
@@ -49,50 +58,60 @@ typedef enum {
 
 - (IBAction) add:(id)sender {
 	DLog(@"");
-	self.tableView.editing = NO;
-	self.editButton.title = NSLocalizedString(@"Edit", nil);
 	[self presentModalViewController:self.deploymentAddViewController animated:YES];
 }
 
 - (IBAction) edit:(id)sender {
 	if (self.tableView.editing) {
-		self.tableView.editing = NO;
-		self.editButton.title = NSLocalizedString(@"Edit", nil);
+		[self setTableEdit:NO];
 	}
 	else {
-		self.tableView.editing = YES;
-		self.editButton.title = NSLocalizedString(@"Done", nil);
+		[self setTableEdit:YES];
 	}
 }
 
 - (IBAction) refresh:(id)sender {
 	DLog(@"");
-	self.tableView.editing = NO;
-	self.editButton.title = NSLocalizedString(@"Edit", nil);
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-	[self.loadingView performSelector:@selector(hide) withObject:nil afterDelay:0.6]; 
+	[[Ushahidi sharedUshahidi] getVersionsForDelegate:self];
 }
 
-- (void) info:(id)sender {
+- (void) settings:(id)sender {
 	DLog(@"");
-	self.tableView.editing = NO;
-	self.editButton.title = NSLocalizedString(@"Edit", nil);
 	self.settingsViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:self.settingsViewController animated:YES];
 }
 
 - (IBAction) tableSortChanged:(id)sender {
 	DLog(@"");
-	self.tableView.editing = NO;
-	self.editButton.title = NSLocalizedString(@"Edit", nil);
+	[self setTableEdit:NO];
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
 	if (segmentControl.selectedSegmentIndex == TableSortDate) {
 		DLog(@"TableSortDate");
 	}
 	else if (segmentControl.selectedSegmentIndex == TableSortName) {
-		DLog(@"TableSortTitle");
+		DLog(@"TableSortName");
 	}
 	[self filterRows:YES];
+}
+
+- (void) setTableEdit:(BOOL)tableEdit {
+	if (tableEdit) {
+		self.tableView.editing = YES;
+		self.editButton.title = NSLocalizedString(@"Done", nil);
+		self.refreshButton.enabled = NO;
+		self.tableSort.enabled = NO;
+		self.settingsButton.enabled = NO;
+		self.addButton.enabled = NO;
+	}
+	else {
+		self.tableView.editing = NO;
+		self.editButton.title = NSLocalizedString(@"Edit", nil);
+		self.refreshButton.enabled = YES;
+		self.tableSort.enabled = YES;
+		self.settingsButton.enabled = YES;
+		self.addButton.enabled = YES;
+	}
 }
 
 #pragma mark -
@@ -105,25 +124,19 @@ typedef enum {
 	self.evenRowColor = [UIColor ushahidiLiteBrown];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
 	
-	UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    [infoButton addTarget:self action:@selector(info:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
-    self.navigationItem.leftBarButtonItem = infoBarButton;
-    [infoBarButton release];
-}
+	self.settingsButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [self.settingsButton addTarget:self action:@selector(settings:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:self.settingsButton] autorelease];
+} 
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.incidentTabViewController = nil;
-	self.deploymentAddViewController = nil;
-	self.settingsViewController = nil;
-	self.editButton = nil;
-	self.refreshButton = nil;
-	self.tableSort = nil;
+	self.settingsButton = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	[self setTableEdit:NO];
 	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.willBePushed || self.modalViewController != nil) {
 		SEL sorter = self.tableSort.selectedSegmentIndex == TableSortDate
@@ -144,6 +157,7 @@ typedef enum {
 		[[Ushahidi sharedUshahidi] loadDeployment:nil inBackground:YES];
 	}
 	[self.tableView reloadData];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -154,6 +168,11 @@ typedef enum {
 - (void) viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[self.view endEditing:YES];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMainQueueFinished object:nil];
 }
 
 - (void)dealloc {
@@ -203,16 +222,14 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (self.tableView.editing) {
-		self.tableView.editing = NO;
-		self.editButton.title = NSLocalizedString(@"Edit", nil);
+	if (self.tableView.editing == NO) {
+		[self.view endEditing:YES];
+		[theTableView deselectRowAtIndexPath:indexPath animated:YES];
+		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
+		[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
+		self.incidentTabViewController.deployment = deployment;
+		[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
 	}
-	[self.view endEditing:YES];
-	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-	Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
-	[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
-	self.incidentTabViewController.deployment = deployment;
-	[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -276,6 +293,11 @@ typedef enum {
 	}
 	[self.loadingView hide];
 	self.refreshButton.enabled = YES;
+}
+
+- (void) mainQueueFinished {
+	DLog(@"");
+	[self.loadingView hideAfterDelay:1.0];
 }
 
 #pragma mark -

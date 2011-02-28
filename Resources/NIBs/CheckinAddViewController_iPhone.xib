@@ -103,7 +103,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUINavigationItem" id="159197307">
 								<reference key="IBUINavigationBar" ref="322069231"/>
-								<string key="IBUITitle">Checkin</string>
+								<string key="IBUITitle">Add Checkin</string>
 								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="217212705">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									<int key="IBUIStyle">1</int>
@@ -286,7 +286,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>CheckinViewController</string>
+					<string>CheckinAddViewController</string>
 					<string>UIResponder</string>
 					<string>{{942, 375}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -338,7 +338,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">CheckinViewController</string>
+					<string key="className">CheckinAddViewController</string>
 					<string key="superclassName">TableViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -406,7 +406,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Controllers/CheckinViewController.h</string>
+						<string key="minorKey">Classes/Controllers/CheckinAddViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

@@ -202,11 +202,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.mapViewController = nil;
-	self.imageViewController = nil;
-	self.newsViewController = nil;
-	self.twitterViewController = nil;
-	self.nextPrevious = nil;
 	self.email = nil;
 	self.sms = nil;
 	self.moviePlayer = nil;

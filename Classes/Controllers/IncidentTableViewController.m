@@ -93,6 +93,7 @@ typedef enum {
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
+	[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
 }
 
 - (IBAction) sortChanged:(id)sender {
@@ -166,6 +167,8 @@ typedef enum {
 		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
 	}
 	else {
+		[self.categories removeAllObjects];
+		[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategories]];
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
 	}
 	[self.pending removeAllObjects];
@@ -192,12 +195,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.incidentTabViewController = nil;
-	self.incidentAddViewController = nil;
-	self.incidentDetailsViewController = nil;
-	self.tableSort = nil;
-	self.categories = nil;
-	self.pending = nil;
 	self.itemPicker = nil;
 }
 
@@ -545,7 +542,7 @@ typedef enum {
 	if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 	}
-	else if(hasChanges) {
+	else if (hasChanges) {
 		[self.categories removeAllObjects];
 		for (Category *theCategory in theCategories) {
 			[self.categories addObject:theCategory];
@@ -562,7 +559,7 @@ typedef enum {
 	if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 	}
-	else if(hasChanges) {
+	else if (hasChanges) {
 		DLog(@"Re-Adding Locations");
 	}
 	else {

@@ -78,9 +78,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.deploymentTableViewController = nil;
-	self.incidentTabViewController = nil;
-	self.incidentDetailsViewController = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

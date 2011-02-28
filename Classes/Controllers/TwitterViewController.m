@@ -167,9 +167,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.cancelButton = nil;
-	self.doneButton = nil;
-	self.logoutButton = nil;
 	self.twitter = nil;
 	self.bitly = nil;
 }

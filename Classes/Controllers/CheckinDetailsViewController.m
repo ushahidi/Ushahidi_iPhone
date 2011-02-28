@@ -97,8 +97,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.imageViewController = nil;
-	self.mapViewController = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {

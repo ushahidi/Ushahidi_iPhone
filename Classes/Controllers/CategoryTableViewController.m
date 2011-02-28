@@ -53,8 +53,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.cancelButton = nil;
-	self.doneButton = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

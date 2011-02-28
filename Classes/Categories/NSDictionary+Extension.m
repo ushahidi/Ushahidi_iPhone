@@ -57,6 +57,10 @@
 		if ([object isKindOfClass:[NSString class]]) {
 			return [((NSString *)object) boolValue];
 		}
+		if ([object isKindOfClass:[NSNumber class]]) {
+			NSNumber *number = (NSNumber *)object;
+			return number != 0;
+		}
 		return ((NSInteger)object) == 1;
 	}
 	return NO;

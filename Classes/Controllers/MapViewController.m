@@ -102,9 +102,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.mapView = nil;
-	self.searchBar = nil;
-	self.mapType = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {

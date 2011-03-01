@@ -34,7 +34,7 @@
 
 @synthesize identifier, name, description, url, domain, version;
 @synthesize categories, locations, incidents, checkins, users;
-@synthesize discovered, synced, added, sinceID, pending;
+@synthesize discovered, synced, added, lastIncidentId, lastCheckinId, pending;
 @synthesize supportsCheckins;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
@@ -84,7 +84,8 @@
 	[encoder encodeObject:self.description forKey:@"description"];
 	[encoder encodeObject:self.url forKey:@"url"];
 	[encoder encodeObject:self.domain forKey:@"domain"];
-	[encoder encodeObject:self.sinceID forKey:@"sinceID"];
+	[encoder encodeObject:self.lastIncidentId forKey:@"lastIncidentId"];
+	[encoder encodeObject:self.lastCheckinId forKey:@"lastCheckinId"];
 	[encoder encodeObject:self.synced forKey:@"synced"];
 	[encoder encodeObject:self.added forKey:@"added"];
 	[encoder encodeObject:self.discovered forKey:@"discovered"];
@@ -99,7 +100,8 @@
 		self.description = [decoder decodeObjectForKey:@"description"];
 		self.url = [decoder decodeObjectForKey:@"url"];
 		self.domain = [decoder decodeObjectForKey:@"domain"];
-		self.sinceID = [decoder decodeObjectForKey:@"sinceID"];
+		self.lastIncidentId = [decoder decodeObjectForKey:@"lastIncidentId"];
+		self.lastCheckinId = [decoder decodeObjectForKey:@"lastCheckinId"];
 		self.synced = [decoder decodeObjectForKey:@"synced"];
 		self.added = [decoder decodeObjectForKey:@"added"];
 		self.discovered = [decoder decodeObjectForKey:@"discovered"];
@@ -211,7 +213,8 @@
 	[incidents release];
 	[checkins release];
 	[pending release];
-	[sinceID release];
+	[lastIncidentId release];
+	[lastCheckinId release];
 	[synced release];
 	[added release];
 	[discovered release];
@@ -220,10 +223,14 @@
 }
 
 #pragma mark -
-#pragma mark Categories
+#pragma mark Checkins
 
 - (NSString *) getUrlForCheckins {
 	return [self.url appendUrlStringWithFormat:@"api/?task=checkin&action=get_ci"];
+}
+
+- (NSString *) getUrlForCheckinsBySinceID:(NSString *)theSinceID {
+	return [self.url appendUrlStringWithFormat:@"api/?task=checkin&action=get_ci&sinceid=%@", theSinceID];
 }
 
 #pragma mark -

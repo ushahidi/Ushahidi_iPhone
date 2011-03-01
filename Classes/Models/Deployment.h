@@ -30,7 +30,8 @@
 	NSString *description;
 	NSString *url;
 	NSString *domain;
-	NSString *sinceID;
+	NSString *lastIncidentId;
+	NSString *lastCheckinId;
 	NSDate *synced;
 	NSDate *added;
 	NSDate *discovered;
@@ -51,7 +52,8 @@
 @property(nonatomic, retain) NSString *description;
 @property(nonatomic, retain) NSString *url;
 @property(nonatomic, retain) NSString *domain;
-@property(nonatomic, retain) NSString *sinceID;
+@property(nonatomic, retain) NSString *lastIncidentId;
+@property(nonatomic, retain) NSString *lastCheckinId;
 @property(nonatomic, retain) NSDate *synced;
 @property(nonatomic, retain) NSDate *added;
 @property(nonatomic, retain) NSDate *discovered;
@@ -78,6 +80,7 @@
 - (BOOL) containsLocation:(Location *)location;
 
 - (NSString *) getUrlForCheckins;
+- (NSString *) getUrlForCheckinsBySinceID:(NSString *)sinceID;
 
 - (NSString *) getUrlForCategories;
 - (NSString *) getUrlForCategoryByID:(NSString *)categoryID;

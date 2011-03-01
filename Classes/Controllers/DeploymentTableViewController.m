@@ -297,7 +297,7 @@ typedef enum {
 
 - (void) mainQueueFinished {
 	DLog(@"");
-	[self.loadingView hideAfterDelay:1.0];
+	[self.loadingView hideAfterDelay:0.0];
 }
 
 #pragma mark -

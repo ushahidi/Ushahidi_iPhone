@@ -459,7 +459,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate {
-	ASIHTTPRequest *request = [self getHTTPRequest:[self.deployment getUrlForCheckins] 
+	NSString *url = (self.deployment.lastCheckinId != nil)
+		? [self.deployment getUrlForCheckinsBySinceID:self.deployment.lastCheckinId]
+		: [self.deployment getUrlForCheckins];
+	ASIHTTPRequest *request = [self getHTTPRequest:url 
 									 startSelector:@selector(getCheckinsStarted:)
 									finishSelector:@selector(getCheckinsFinished:)
 									  failSelector:@selector(getCheckinsFailed:)];
@@ -533,6 +536,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 							hasCheckinChanges = YES;
 							DLog(@"CHECKIN: %@", dictionary);
 						}	
+					}
+					if (self.deployment.lastCheckinId == nil) {
+						self.deployment.lastCheckinId = checkin.identifier;
+					}
+					else if ([self.deployment.lastCheckinId intValue] < [checkin.identifier intValue]) {
+						self.deployment.lastCheckinId = checkin.identifier;
 					}
 					[checkin release];
 				}
@@ -1053,8 +1062,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			[self downloadMap:incident forDelegate:delegate];
 		}
 	}
-	NSString *url = (self.deployment.sinceID != nil)
-		? [self.deployment getUrlForIncidentsBySinceID:self.deployment.sinceID]
+	NSString *url = (self.deployment.lastIncidentId != nil)
+		? [self.deployment getUrlForIncidentsBySinceID:self.deployment.lastIncidentId]
 		: [self.deployment getUrlForIncidents];
 	ASIHTTPRequest *request = [self getHTTPRequest:url 
 									 startSelector:@selector(getIncidentsStarted:)
@@ -1111,11 +1120,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 						DLog(@"INCIDENT: %@", dictionary);
 						hasChanges = YES;
 					}
-					if (self.deployment.sinceID == nil) {
-						self.deployment.sinceID = incident.identifier;
+					if (self.deployment.lastIncidentId == nil) {
+						self.deployment.lastIncidentId = incident.identifier;
 					}
-					else if ([self.deployment.sinceID intValue] < [incident.identifier intValue]) {
-						self.deployment.sinceID = incident.identifier;
+					else if ([self.deployment.lastIncidentId intValue] < [incident.identifier intValue]) {
+						self.deployment.lastIncidentId = incident.identifier;
 					}
 				}
 				NSDictionary *media = [dictionary objectForKey:@"media"];

@@ -340,6 +340,14 @@ typedef enum {
 	}
 }
 
+- (void)mapView:(MKMapView *)theMapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
+	if (newState == MKAnnotationViewDragStateEnding) {
+		DLog("%f, %f", annotationView.annotation.coordinate.latitude, annotationView.annotation.coordinate.longitude);
+		self.latitude = [NSString stringWithFormat:@"%f", annotationView.annotation.coordinate.latitude];
+		self.longitude = [NSString stringWithFormat:@"%f", annotationView.annotation.coordinate.longitude];
+	}
+}
+
 - (void)mapViewDidFailLoadingMap:(MKMapView *)theMapView withError:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
 }
@@ -354,6 +362,7 @@ typedef enum {
 		self.location = nil;
 		self.latitude = [NSString stringWithFormat:@"%f", mapAnnotation.coordinate.latitude];
 		self.longitude = [NSString stringWithFormat:@"%f",mapAnnotation.coordinate.longitude];
+		annotationView.draggable = YES;
 	}
 	else {
 		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
@@ -361,6 +370,7 @@ typedef enum {
 		self.location = loc.name;
 		self.latitude = loc.latitude;
 		self.longitude = loc.longitude;
+		annotationView.draggable = NO;
 	}
 }
 

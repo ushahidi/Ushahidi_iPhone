@@ -33,7 +33,7 @@
 
 @implementation MapTableCell
 
-@synthesize delegate, mapView, animatesDrop, showRightCallout, location;
+@synthesize delegate, mapView, animatesDrop, draggable, showRightCallout, canShowCallout, location;
 
 #pragma mark -
 #pragma mark Public
@@ -124,7 +124,8 @@
 - (MKAnnotationView *) mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation {
 	MKPinAnnotationView *annotationView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MKPinAnnotationView"] autorelease];
 	annotationView.animatesDrop = self.animatesDrop;
-	annotationView.canShowCallout = YES;
+	annotationView.canShowCallout = self.canShowCallout;
+	annotationView.draggable = self.draggable;
 	if ([annotation class] == MKUserLocation.class) {
 		annotationView.pinColor = MKPinAnnotationColorGreen;
 	}
@@ -139,15 +140,24 @@
 	return annotationView;
 }
 
+- (void)mapView:(MKMapView *)theMapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState {
+	if (newState == MKAnnotationViewDragStateEnding) {
+		[self dispatchSelector:@selector(mapTableCellDragged:latitude:longitude:) 
+						target:self.delegate 
+					   objects:self, [NSString stringWithFormat:@"%f", annotationView.annotation.coordinate.latitude], 
+		 [NSString stringWithFormat:@"%f", annotationView.annotation.coordinate.longitude], nil];	
+	}
+}
+
 - (void) annotationClicked:(UIButton *)button {
-	[self dispatchSelector:@selector(mapTableCell:pinSelectedAtIndex:) 
+	[self dispatchSelector:@selector(mapTableCellSelected:indexPath:) 
 					target:self.delegate 
 				   objects:self, indexPath, nil];
 }
 
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+- (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
 	[self.mapView resizeRegionToFitAllPins:YES animated:YES];
-	[self dispatchSelector:@selector(mapTableCell:locatedAtLatitude:longitude:) 
+	[self dispatchSelector:@selector(mapTableCellLocated:latitude:longitude:) 
 					target:self.delegate 
 				   objects:self, [NSString stringWithFormat:@"%f", userLocation.coordinate.latitude], 
 								 [NSString stringWithFormat:@"%f", userLocation.coordinate.longitude], nil];

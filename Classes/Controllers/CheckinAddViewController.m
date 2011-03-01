@@ -174,6 +174,8 @@ typedef enum {
 		MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setScrollable:YES];
 		[cell setZoomable:YES];
+		[cell setCanShowCallout:YES];
+		[cell setDraggable:YES];
 		if (self.checkin.latitude != nil && self.checkin.longitude != nil) {
 			NSString *subtitle = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
 			if ([subtitle isEqualToString:cell.location] == NO) {
@@ -269,7 +271,9 @@ typedef enum {
 		}
 		else {
 			UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-			[self.imagePickerController showImagePickerForDelegate:self width:[[Settings sharedSettings] imageWidth] forRect:cell.frame];
+			[self.imagePickerController showImagePickerForDelegate:self
+															 width:[[Settings sharedSettings] imageWidth] 
+														   forRect:cell.frame];
 		}
 	}
 }
@@ -282,23 +286,26 @@ typedef enum {
 }
 
 - (void) textViewChanged:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	if (indexPath.section == TableSectionContact) {
-		if (indexPath.row == TableRowContactFirst) {
-			self.checkin.firstName = text;
-		}
-		else if (indexPath.row == TableRowContactLast) {
-			self.checkin.lastName = text;
-		}
-		else if (indexPath.row == TableRowContactEmail) {
-			self.checkin.email = text;
-		}
-	}
-	else if (indexPath.section == TableSectionMessage) {
+	if (indexPath.section == TableSectionMessage) {
 		self.checkin.message = text;
 	}
 }
 
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
+	if (indexPath.section == TableSectionMessage) {
+		self.checkin.message = text;
+	}
+	[self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark TextViewTableCellDelegate
+
+- (void) textFieldFocussed:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath {
+	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
+}
+
+- (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionContact) {
 		if (indexPath.row == TableRowContactFirst) {
 			self.checkin.firstName = text;
@@ -310,10 +317,34 @@ typedef enum {
 			self.checkin.email = text;
 		}
 	}
-	else if (indexPath.section == TableSectionMessage) {
-		self.checkin.message = text;
+}
+
+- (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
+	if (indexPath.section == TableSectionContact) {
+		if (indexPath.row == TableRowContactFirst) {
+			self.checkin.firstName = text;
+		}
+		else if (indexPath.row == TableRowContactLast) {
+			self.checkin.lastName = text;
+		}
+		else if (indexPath.row == TableRowContactEmail) {
+			self.checkin.email = text;
+		}
 	}
 	[self.tableView reloadData];
+}
+
+#pragma mark -
+#pragma mark MKMapViewDelegate
+
+- (void) mapTableCellDragged:(MapTableCell *)mapTableCell latitude:(NSString *)latitude longitude:(NSString *)longitude {
+	DLog(@"dragged: %@, %@", latitude, longitude);
+	self.checkin.latitude = latitude;
+	self.checkin.longitude = longitude;
+	[self setFooter:[NSString stringWithFormat:@"%@, %@", latitude, longitude] atSection:TableSectionLocation];
+	if (self.editing == NO) {
+		[self.tableView reloadData];
+	}
 }
 
 #pragma mark -
@@ -381,9 +412,9 @@ typedef enum {
 	self.checkin.latitude = userLatitude;
 	self.checkin.longitude = userLongitude;
 	[self setFooter:[NSString stringWithFormat:@"%@, %@", userLatitude, userLongitude] atSection:TableSectionLocation];
-	if (self.editing == NO) {
-		[self.tableView reloadData];
-	}
+//	if (self.editing == NO) {
+//		[self.tableView reloadData];
+//	}
 }
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {

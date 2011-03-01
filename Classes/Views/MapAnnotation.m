@@ -37,7 +37,6 @@
     return self;
 }
 
-
 - (void)dealloc {
 	[title release];
 	[subtitle release];

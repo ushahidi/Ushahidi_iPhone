@@ -30,11 +30,11 @@
 @class Checkin;
 
 @interface CheckinAddViewController : TableViewController<TextViewTableCellDelegate, 
+														  TextFieldTableCellDelegate,
 														  MapTableCellDelegate, 
 														  ImagePickerDelegate, 
 														  UshahidiDelegate,
 														  LocatorDelegate,
-														  TextFieldTableCellDelegate,
 														  UIActionSheetDelegate> {
 
 @public

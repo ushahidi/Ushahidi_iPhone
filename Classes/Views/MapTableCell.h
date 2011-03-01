@@ -31,7 +31,9 @@
 @public
 	MKMapView *mapView;
 	BOOL animatesDrop;
+	BOOL canShowCallout;
 	BOOL showRightCallout;
+	BOOL draggable;
 	NSString *location;
 	
 @private
@@ -41,6 +43,8 @@
 @property (nonatomic, retain) MKMapView *mapView;
 @property (nonatomic, assign) BOOL animatesDrop;
 @property (nonatomic, assign) BOOL showRightCallout;
+@property (nonatomic, assign) BOOL draggable;
+@property (nonatomic, assign) BOOL canShowCallout;
 @property (nonatomic, retain) NSString *location;
 
 - (id) initForDelegate:(id<MapTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
@@ -63,7 +67,8 @@
 
 @optional
 
-- (void) mapTableCell:(MapTableCell *)mapTableCell pinSelectedAtIndex:(NSIndexPath *)indexPath;
-- (void) mapTableCell:(MapTableCell *)mapTableCell locatedAtLatitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) mapTableCellSelected:(MapTableCell *)mapTableCell indexPath:(NSIndexPath *)indexPath;
+- (void) mapTableCellLocated:(MapTableCell *)mapTableCell latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) mapTableCellDragged:(MapTableCell *)mapTableCell latitude:(NSString *)latitude longitude:(NSString *)longitude;
 
 @end

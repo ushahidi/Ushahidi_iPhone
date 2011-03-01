@@ -291,7 +291,8 @@ typedef enum {
 			MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
 			[cell setScrollable:NO];
 			[cell setZoomable:NO];
-			NSString *subtitle = [NSString stringWithFormat:@"%@,%@", self.incident.latitude, self.incident.longitude];
+			[cell setCanShowCallout:YES];
+			NSString *subtitle = [NSString stringWithFormat:@"%@, %@", self.incident.latitude, self.incident.longitude];
 			if ([subtitle isEqualToString:cell.location] == NO) {
 				[cell removeAllPins];
 				[cell addPinWithTitle:self.incident.location 

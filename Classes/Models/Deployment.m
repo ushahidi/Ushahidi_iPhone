@@ -226,11 +226,11 @@
 #pragma mark Checkins
 
 - (NSString *) getUrlForCheckins {
-	return [self.url appendUrlStringWithFormat:@"api/?task=checkin&action=get_ci"];
+	return [self.url appendUrlStringWithFormat:@"api/?task=checkin&action=get_ci&sort=desc&sqllimit=100"];
 }
 
 - (NSString *) getUrlForCheckinsBySinceID:(NSString *)theSinceID {
-	return [self.url appendUrlStringWithFormat:@"api/?task=checkin&action=get_ci&sinceid=%@", theSinceID];
+	return [self.url appendUrlStringWithFormat:@"api/?task=checkin&action=get_ci&sort=desc&sqllimit=100&sinceid=%@", theSinceID];
 }
 
 #pragma mark -

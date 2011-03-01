@@ -105,6 +105,7 @@ typedef enum {
 	self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.checkins count]];
 	[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:index + 1 < [self.checkins count] forSegmentAtIndex:NavBarNext];
+	[self.tableView reloadData];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -188,6 +189,7 @@ typedef enum {
 				MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
 				[cell setScrollable:YES];
 				[cell setZoomable:YES];
+				[cell setCanShowCallout:YES];
 				NSString *subtitle = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
 				if ([subtitle isEqualToString:cell.location] == NO) {
 					[cell removeAllPins];

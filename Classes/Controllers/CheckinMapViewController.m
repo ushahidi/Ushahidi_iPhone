@@ -47,7 +47,8 @@
 @interface CheckinMapViewController ()
 
 @property(nonatomic,retain) ItemPicker *itemPicker;
-@property(nonatomic,retain) NSMutableArray *checkins;
+@property(nonatomic,retain) NSMutableArray *allCheckins;
+@property(nonatomic,retain) NSMutableArray *filteredCheckins;
 @property(nonatomic,retain) NSMutableArray *users;
 @property(nonatomic,retain) User *user;
 
@@ -56,7 +57,7 @@
 @implementation CheckinMapViewController
 
 @synthesize incidentTabViewController, checkinAddViewController, checkinDetailsViewController;
-@synthesize deployment, users, user, checkins;
+@synthesize deployment, users, user, allCheckins, filteredCheckins;
 @synthesize mapView, mapType, filterLabel, itemPicker, refreshButton, filterButton;
 
 #pragma mark -
@@ -106,8 +107,8 @@
 - (void) populate:(BOOL)refresh resize:(BOOL)resize {
 	DLog(@"refresh:%d resize:%d", refresh, resize);
 	if (refresh) {
-		[self.checkins removeAllObjects];
-		[self.checkins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
+		[self.allCheckins removeAllObjects];
+		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
 		if ([[Ushahidi sharedUshahidi] hasUsers]) {
 			self.users = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getUsers]];
 		}
@@ -119,8 +120,9 @@
 	else if (self.user != nil){
 		[self.filterLabel setText:[NSString stringWithFormat:@"%@ : %@", NSLocalizedString(@"Checkins", nil), self.user.name]];
 	}
-	[self.mapView removeAllPins];
-	for (Checkin *checkin in self.checkins) {
+	[self.filteredCheckins removeAllObjects];
+	[self.filteredCheckins addObjectsFromArray:self.allCheckins];
+	for (Checkin *checkin in self.allCheckins) {
 		[self.mapView addPinWithTitle:checkin.message 
 											subtitle:checkin.dateString 
 											latitude:checkin.latitude 
@@ -138,7 +140,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.checkins = [[NSMutableArray alloc] initWithCapacity:0];
+	self.allCheckins = [[NSMutableArray alloc] initWithCapacity:0];
+	self.filteredCheckins = [[NSMutableArray alloc] initWithCapacity:0];
 	self.users = [[NSMutableArray alloc] initWithCapacity:0];
 	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 }
@@ -151,8 +154,8 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-	[self.checkins removeAllObjects];
-	[self.checkins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
+	[self.allCheckins removeAllObjects];
+	[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
 	
 	[self.users removeAllObjects];
 	if ([[Ushahidi sharedUshahidi] hasUsers]) {
@@ -185,7 +188,8 @@
 	[deployment release];
 	[mapType release];
 	[itemPicker release];
-	[checkins release];
+	[allCheckins release];
+	[filteredCheckins release];
 	[users release];
 	[user release];
     [super dealloc];
@@ -203,9 +207,9 @@
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 	}
 	else if (hasChanges) {
-		DLog(@"Re-Adding Checkins: %d", [checkins count]);
-		[self.checkins removeAllObjects];
-		[self.checkins addObjectsFromArray:theCheckins];
+		DLog(@"Re-Adding Checkins: %d", [theCheckins count]);
+		[self.allCheckins removeAllObjects];
+		[self.allCheckins addObjectsFromArray:theCheckins];
 		[self populate:NO resize:YES];
 	}
 	else {
@@ -264,12 +268,13 @@
 	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[[button superview] superview];
 	MapAnnotation *mapAnnotation = (MapAnnotation *)annotationView.annotation;
 	if ([mapAnnotation class] == MKUserLocation.class) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"User Location", nil) andMessage:[NSString stringWithFormat:@"%f,%f", mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude]];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"User Location", nil) 
+							 andMessage:[NSString stringWithFormat:@"%f, %f", mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude]];
 	}
 	else {
 		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
 		self.checkinDetailsViewController.checkin = (Checkin *)mapAnnotation.object; 
-		self.checkinDetailsViewController.checkins = self.checkins;
+		self.checkinDetailsViewController.checkins = self.filteredCheckins;
 		self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Checkins", nil);
 		[self.incidentTabViewController.navigationController pushViewController:self.checkinDetailsViewController animated:YES];
 	}
@@ -306,7 +311,8 @@
 		[self.filterLabel setText:NSLocalizedString(@"All Users", nil)];
 	}
 	[self.mapView removeAllPins];
-	for (Checkin *checkin in self.checkins) {
+	[self.filteredCheckins removeAllObjects];
+	for (Checkin *checkin in self.allCheckins) {
 		if (self.user == nil || [self.user.identifier isEqualToString:[checkin user]]) {
 			[self.mapView addPinWithTitle:checkin.message 
 												subtitle:checkin.dateString 
@@ -314,6 +320,7 @@
 											   longitude:checkin.longitude 
 												  object:checkin
 												pinColor:MKPinAnnotationColorRed];	
+			[self.filteredCheckins addObject:checkin];
 		}
 	}
 	[self.mapView resizeRegionToFitAllPins:NO animated:YES];

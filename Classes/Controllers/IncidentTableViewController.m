@@ -167,8 +167,6 @@ typedef enum {
 		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
 	}
 	else {
-		[self.categories removeAllObjects];
-		[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategories]];
 		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
 	}
 	[self.pending removeAllObjects];

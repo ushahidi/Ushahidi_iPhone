@@ -49,7 +49,8 @@
    
 @private
 	ItemPicker *itemPicker;
-	NSMutableArray *checkins;
+	NSMutableArray *allCheckins;
+	NSMutableArray *filteredCheckins;
 	NSMutableArray *users;
 	User *user;
 }

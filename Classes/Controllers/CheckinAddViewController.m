@@ -412,9 +412,9 @@ typedef enum {
 	self.checkin.latitude = userLatitude;
 	self.checkin.longitude = userLongitude;
 	[self setFooter:[NSString stringWithFormat:@"%@, %@", userLatitude, userLongitude] atSection:TableSectionLocation];
-//	if (self.editing == NO) {
-//		[self.tableView reloadData];
-//	}
+	if (self.editing == NO) {
+		[self.tableView reloadData];
+	}
 }
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
@@ -424,7 +424,7 @@ typedef enum {
 		[self.tableView reloadData];
 	}
 	[self.alertView showOkWithTitle:NSLocalizedString(@"Location Error", nil) 
-						 andMessage:NSLocalizedString(@"There was a problem detecting your location. Please ensure that Ushahidi is enabled in Settings > General > Location Services.", nil)];
+						 andMessage:NSLocalizedString(@"There was a problem detecting your location. Please ensure that Location Services is enabled for Ushahidi in Settings > General > Location Services.", nil)];
 }
 
 @end

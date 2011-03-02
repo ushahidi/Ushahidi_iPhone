@@ -143,6 +143,10 @@
 	[self.photos removeAllObjects];
 }
 
+- (NSComparisonResult)compareByDate:(Checkin *)checkin {
+	return [checkin.date compare:self.date];
+}
+
 - (void)dealloc {
 	[identifier release];
 	[message release];

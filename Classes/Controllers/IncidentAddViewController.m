@@ -117,13 +117,24 @@ typedef enum {
 							 andMessage:[missingFields componentsJoinedByString:@", "]];
 	}
 	else {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
+		BOOL adding = [NSString isNilOrEmpty:self.incident.identifier];
+		if (adding) {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
+		}
+		else {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Saving...", nil)];
+		}
 		if (self.news != nil && [self.news isValidURL]) {
 			[self.incident addNews:[News newsWithUrl:self.news]];
 		}
 		[self.view endEditing:YES];
 		if ([[Ushahidi sharedUshahidi] addIncident:self.incident forDelegate:self]) {
-			[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+			if (adding) {
+				[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+			}
+			else {
+				[self.loadingView showWithMessage:NSLocalizedString(@"Saved", nil)];
+			}
 			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.0];
 		}
 		else {

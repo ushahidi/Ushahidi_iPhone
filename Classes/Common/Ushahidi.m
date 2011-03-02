@@ -271,8 +271,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (NSArray *) getDeploymentsUsingSorter:(SEL)sorter {
 	if ([self.deployments count] == 0) {
-		Deployment *demoDeployment = [[Deployment alloc] initWithName:NSLocalizedString(@"Ushahidi Demo", nil) url:@"http://demo.ushahidi.com"];
+		Deployment *demoDeployment = [[Deployment alloc] initWithName:NSLocalizedString(@"Ushahidi Demo", nil) 
+																  url:@"http://demo.ushahidi.com"];
 		[self addDeployment:demoDeployment];
+		[demoDeployment release];
 	}
 	return [[self.deployments allValues] sortedArrayUsingSelector:sorter];
 }
@@ -385,24 +387,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) getMapsFinished:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
-	id<UshahidiDelegate> delegate = [request getDelegate];
-	SEL callback = @selector(downloadedFromUshahidi:maps:error:hasChanges:);
+	NSError *error = nil;
+	BOOL hasChanges = NO;
 	if ([request responseStatusCode] != HttpStatusOK) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain 
-											 code:[request responseStatusCode] 
-										  message:[request responseStatusMessage]];
-		[self dispatchSelector:callback
-						target:delegate 
-					   objects:self, [self.maps allValues], error, nil];
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json != nil) {
-			if([self.mapDistance isEqualToString:[[Settings sharedSettings] mapDistance]] == NO) {
+			if ([self.mapDistance isEqualToString:[[Settings sharedSettings] mapDistance]] == NO) {
 				[[Settings sharedSettings] setMapDistance:self.mapDistance];
 				[self.maps removeAllObjects];
 			}
-			BOOL hasChanges = NO;
 			for (NSDictionary *dictionary in [json allValues]) {
 				NSString *url = [dictionary stringForKey:@"url"];
 				if ([self.maps count] == 0 || [self.maps objectForKey:url] == nil) {
@@ -415,20 +413,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					}
 				}
 			}
-			[self dispatchSelector:callback 
-							target:delegate 
-						   objects:self, [self.maps allValues], nil, hasChanges, nil];
 		}
 		else {
 			DLog(@"RESPONSE: %@", [request responseString]);
-			NSError *error = [NSError errorWithDomain:self.deployment.domain 
-												 code:[request responseStatusCode] 
-											  message:[request responseStatusMessage]];
-			[self dispatchSelector:callback 
-							target:delegate 
-						   objects:self, [self.maps allValues], error, NO, nil];
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:[request responseStatusCode] 
+									 message:[request responseStatusMessage]];
 		}
 	}
+	[self dispatchSelector:@selector(downloadedFromUshahidi:maps:error:hasChanges:) 
+					target:[request getDelegate] 
+				   objects:self, [self.maps allValues], error, hasChanges, nil];
 }
 
 - (void) getMapsFailed:(ASIHTTPRequest *)request {
@@ -478,24 +473,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) getCheckinsFinished:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
+	NSError *error = nil;
+	BOOL hasCheckinChanges = NO;
 	if ([request responseStatusCode] != HttpStatusOK) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain 
-											 code:[request responseStatusCode] 
-										  message:[request responseStatusMessage]];
-		[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:)
-						target:[request getDelegate] 
-					   objects:self, [self.deployment.checkins allValues], error, nil];
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
 			DLog(@"RESPONSE: %@", [request responseString]);
-			NSError *error = [NSError errorWithDomain:self.deployment.domain 
-												 code:HttpStatusInternalServerError 
-											  message:NSLocalizedString(@"Unable To Download Checkins", nil)];
-			[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:)
-							target:[request getDelegate] 
-						   objects:self, [self.deployment.checkins allValues], error, NO, nil];
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:NSLocalizedString(@"Unable To Download Checkins", nil)];
 		}
 		else {
 			NSDictionary *payload = [json objectForKey:@"payload"];
@@ -520,7 +511,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 								target:[request getDelegate] 
 							   objects:self, [self.deployment.users allValues], nil, hasUserChanges, nil];
 				
-				BOOL hasCheckinChanges = NO;
 				NSArray *checkins = [payload objectForKey:@"checkins"]; 
 				for (NSDictionary *dictionary in checkins) {
 					Checkin *checkin = [[Checkin alloc] initWithDictionary:dictionary];
@@ -545,23 +535,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					}
 					[checkin release];
 				}
-				if (hasCheckinChanges) {
-					DLog(@"Has New Checkins");
-				}
-				[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:)
-								target:[request getDelegate]
-							   objects:self, [self.deployment.checkins allValues], nil, hasCheckinChanges, nil];
 			}
 			else {
-				NSError *error = [NSError errorWithDomain:self.deployment.domain 
-													 code:HttpStatusInternalServerError 
-												  message:NSLocalizedString(@"Unable To Download Checkins", nil)];
-				[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:)
-								target:[request getDelegate] 
-							   objects:self, [self.deployment.checkins allValues], error, NO, nil];
+				error = [NSError errorWithDomain:self.deployment.domain 
+											code:HttpStatusInternalServerError 
+										 message:NSLocalizedString(@"Unable To Download Checkins", nil)];
 			}
 		}
 	}
+	if (hasCheckinChanges) {
+		DLog(@"Has New Checkins");
+	}
+	NSArray *checkins = [[self.deployment.checkins allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
+	[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:)
+					target:[request getDelegate]
+				   objects:self, checkins, error, hasCheckinChanges, nil];
 }
 
 - (void) getCheckinsFailed:(ASIHTTPRequest *)request {
@@ -625,50 +613,44 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void)uploadCheckinFinished:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
+	Checkin *checkin = [request getCheckin];
+	NSError *error = nil;
 	if ([request responseStatusCode] != HttpStatusOK) {
 		DLog(@"ERROR: %d %@", [request responseStatusCode], [request responseStatusMessage]);
 		DLog(@"RESPONSE: %@", [request responseString]);
-		NSError *error = [NSError errorWithDomain:self.deployment.domain 
-											 code:[request responseStatusCode] 
-										  message:[request responseStatusMessage]];
-		[self dispatchSelector:@selector(uploadedToUshahidi:checkin:error:) 
-						target:[request getDelegate] 
-					   objects:self, [request getCheckin], error, nil];
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
 			DLog(@"RESPONSE: %@", [request responseString]);
-			NSError *error = [NSError errorWithDomain:self.deployment.domain 
-												 code:HttpStatusInternalServerError 
-											  message:NSLocalizedString(@"Unable To Checkin", nil)];
-			[self dispatchSelector:@selector(uploadedToUshahidi:checkin:error:) 
-							target:[request getDelegate] 
-						   objects:self, [request getCheckin], error, nil];
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:NSLocalizedString(@"Unable To Checkin", nil)];
 		}
 		else {
 			NSDictionary *payload = [json objectForKey:@"payload"];
 			DLog(@"PAYLOAD: %@", payload);
-			if ([@"true" isEqualToString:[payload objectForKey:@"success"]]) {
-				[self dispatchSelector:@selector(uploadedToUshahidi:checkin:error:) 
-								target:[request getDelegate] 
-							   objects:self, [request getCheckin], nil, nil];
-			}
-			else if ([payload boolForKey:@"success"]) {
-				[self dispatchSelector:@selector(uploadedToUshahidi:checkin:error:) 
-								target:[request getDelegate] 
-							   objects:self, [request getCheckin], nil, nil];
+			if ([@"true" isEqualToString:[payload stringForKey:@"success"]] || [payload boolForKey:@"success"]) {
+				NSString *identifier = [payload stringForKey:@"checkin_id"];
+				if (identifier != nil) {
+					DLog(@"IDENTIFIER: %@", identifier);
+					checkin.identifier = identifier;
+					[self.deployment.checkins setObject:checkin forKey:identifier];
+				}
 			}
 			else {
-				NSError *error = [NSError errorWithDomain:self.deployment.domain 
-													 code:HttpStatusInternalServerError 
-												  message:[json objectForKey:@"error"]];
-				[self dispatchSelector:@selector(uploadedToUshahidi:checkin:error:) 
-								target:[request getDelegate] 
-							   objects:self, [request getCheckin], error, nil];
+				error = [NSError errorWithDomain:self.deployment.domain 
+											code:HttpStatusInternalServerError 
+										 message:[json objectForKey:@"error"]];
 			}
 		}
 	}
+	[self dispatchSelector:@selector(uploadedToUshahidi:checkin:error:) 
+					target:[request getDelegate] 
+				   objects:self, checkin, error, nil];
 }
 
 - (void)uploadCheckinFailed:(ASIHTTPRequest *)request {
@@ -780,29 +762,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
 	DLog(@"RESPONSE: %@", [request responseString]);
-	id<UshahidiDelegate> delegate = [request getDelegate];
 	Incident *incident = [request getIncident];
 	incident.uploading = NO;
+	NSError *error = nil;
 	if ([request responseStatusCode] != HttpStatusOK) {
 		incident.errors = [request responseStatusMessage];
-		NSError *error = [NSError errorWithDomain:self.deployment.domain 
-											 code:[request responseStatusCode] 
-										  message:[request responseStatusMessage]];
-		[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
-						target:delegate 
-					   objects:self, incident, error, nil];
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
 			DLog(@"RESPONSE: %@", [request responseString]);
 			incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
-			NSError *error = [NSError errorWithDomain:self.deployment.domain 
-												 code:HttpStatusInternalServerError 
-											  message:NSLocalizedString(@"Unable To Upload Report", nil)];
-			[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
-							target:delegate 
-						   objects:self, incident, error, nil];
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:NSLocalizedString(@"Unable To Upload Report", nil)];
 		}
 		else {
 			NSDictionary *payload = [json objectForKey:@"payload"];
@@ -815,7 +791,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				[self.deployment.incidents setObject:incident forKey:incident.identifier];
 				[self.deployment.pending removeObject:incident];
 				[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
-								target:delegate 
+								target:[request getDelegate] 
 							   objects:self, [self.deployment.incidents allValues], self.deployment.pending, nil, YES, nil];
 			}
 			else {
@@ -826,15 +802,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				else {
 					incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
 				}
-				NSError *error = [NSError errorWithDomain:self.deployment.domain 
-													 code:HttpStatusInternalServerError 
-												  message:incident.errors];
-				[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
-								target:delegate 
-							   objects:self, incident, error, nil];
+				error = [NSError errorWithDomain:self.deployment.domain 
+											code:HttpStatusInternalServerError 
+										 message:incident.errors];
 			}
 		}	
 	}
+	[self dispatchSelector:@selector(uploadedToUshahidi:incident:error:) 
+					target:[request getDelegate] 
+				   objects:self, incident, error, nil];
 }
 
 - (void)uploadIncidentFailed:(ASIHTTPRequest *)request {
@@ -881,29 +857,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) getCategoriesFinished:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
+	NSError *error = nil;
+	BOOL hasChanges = NO;
 	if ([request responseStatusCode] != HttpStatusOK) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain 
-											 code:[request responseStatusCode] 
-										  message:[request responseStatusMessage]];
-		[self dispatchSelector:@selector(downloadedFromUshahidi:categories:error:hasChanges:) 
-						target:[request getDelegate] 
-					   objects:self, [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)], error, NO, nil];
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
-			NSError *error = [NSError errorWithDomain:self.deployment.domain 
-												 code:HttpStatusInternalServerError 
-											  message:NSLocalizedString(@"Invalid Server Response", nil)];
-			[self dispatchSelector:@selector(downloadedFromUshahidi:categories:error:hasChanges:) 
-							target:[request getDelegate] 
-						   objects:self, [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)], error, NO, nil];
-			
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:NSLocalizedString(@"Invalid Server Response", nil)];
 		}
 		else {
 			NSDictionary *payload = [json objectForKey:@"payload"];
 			NSArray *categories = [payload objectForKey:@"categories"]; 
-			BOOL hasChanges = NO;
 			NSMutableDictionary *validCategories = [NSMutableDictionary dictionaryWithCapacity:0]; 
 			for (NSDictionary *dictionary in categories) {
 				Category *category = [[Category alloc] initWithDictionary:[dictionary objectForKey:@"category"]];
@@ -930,14 +900,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				}
 			}
 			[validCategories removeAllObjects];
-			if (hasChanges) {
-				DLog(@"Has New Categories");
-			}
-			[self dispatchSelector:@selector(downloadedFromUshahidi:categories:error:hasChanges:) 
-							target:[request getDelegate] 
-						   objects:self, [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)], nil, hasChanges, nil];
 		}		
 	}
+	if (hasChanges) {
+		DLog(@"Has New Categories");
+	}
+	NSArray *categories = [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)];
+	[self dispatchSelector:@selector(downloadedFromUshahidi:categories:error:hasChanges:) 
+					target:[request getDelegate] 
+				   objects:self, categories, error, hasChanges, nil];	
 }
 
 - (void) getCategoriesFailed:(ASIHTTPRequest *)request {
@@ -981,29 +952,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) getLocationsFinished:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
-	id<UshahidiDelegate> delegate = [request getDelegate];
+	NSError *error = nil;
+	BOOL hasChanges = NO;
 	if ([request responseStatusCode] != HttpStatusOK) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain 
-											 code:[request responseStatusCode] 
-										  message:[request responseStatusMessage]];
-		[self dispatchSelector:@selector(downloadedFromUshahidi:locations:error:hasChanges:)
-						target:delegate
-					   objects:self, [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)], error, NO, nil];
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
-			NSError *error = [NSError errorWithDomain:self.deployment.domain 
-												 code:HttpStatusInternalServerError 
-											  message:NSLocalizedString(@"Invalid server response", nil)];
-			[self dispatchSelector:@selector(downloadedFromUshahidi:locations:error:hasChanges:)
-							target:delegate
-						   objects:self, [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)], error, NO, nil];
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:NSLocalizedString(@"Invalid server response", nil)];
 		}
 		else {
 			NSDictionary *payload = [json objectForKey:@"payload"];
 			NSArray *locations = [payload objectForKey:@"locations"]; 
-			BOOL hasChanges = NO;
 			for (NSDictionary *dictionary in locations) {
 				Location *location = [[Location alloc] initWithDictionary:[dictionary objectForKey:@"location"]];
 				if ([self.deployment containsLocation:location] == NO) {
@@ -1013,14 +978,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				}
 				[location release];
 			}
-			if (hasChanges) {
-				DLog(@"Has New Locations");
-			}
-			[self dispatchSelector:@selector(downloadedFromUshahidi:locations:error:hasChanges:)
-							target:delegate
-						   objects:self, [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)], nil, hasChanges, nil];
 		}	
 	}
+	if (hasChanges) {
+		DLog(@"Has New Locations");
+	}
+	NSArray *locations = [[self.deployment.locations allValues] sortedArrayUsingSelector:@selector(compareByName:)];
+	[self dispatchSelector:@selector(downloadedFromUshahidi:locations:error:hasChanges:)
+					target:[request getDelegate]
+				   objects:self, locations, error, hasChanges, nil];
 }
 
 - (void) getLocationsFailed:(ASIHTTPRequest *)request {
@@ -1085,27 +1051,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) getIncidentsFinished:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
+	NSError *error = nil;
+	BOOL hasChanges = NO;
 	if ([request responseStatusCode] != HttpStatusOK) {
-		NSError *error = [NSError errorWithDomain:self.deployment.domain 
-											 code:[request responseStatusCode] 
-										  message:[request responseStatusMessage]];
-		[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
-						target:[request getDelegate] 
-					   objects:self, [self.deployment.incidents allValues], self.deployment.pending, error, NO, nil];
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
 			DLog(@"RESPONSE: %@", [request responseString]);
-			NSError *error = [NSError errorWithDomain:self.deployment.domain 
-												 code:HttpStatusInternalServerError 
-											  message:NSLocalizedString(@"Invalid Server Response", nil)];
-			[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
-							target:[request getDelegate] 
-						   objects:self, [self.deployment.incidents allValues], self.deployment.pending, error, NO, nil];
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:NSLocalizedString(@"Invalid Server Response", nil)];
 		}
 		else {
-			BOOL hasChanges = NO;
 			NSDictionary *payload = [json objectForKey:@"payload"];
 			NSArray *incidents = [payload objectForKey:@"incidents"]; 
 			for (NSDictionary *dictionary in incidents) {
@@ -1171,15 +1132,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				}
 				[incident release];
 			}
-			if (hasChanges) {
-				DLog(@"Has New Incidents");
-			}
 			self.deployment.synced = [NSDate date];
-			[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
-							target:[request getDelegate] 
-						   objects:self, [self.deployment.incidents allValues], self.deployment.pending, nil, hasChanges, nil];
 		}	
 	}
+	if (hasChanges) {
+		DLog(@"Has New Incidents");
+	}
+	[self dispatchSelector:@selector(downloadedFromUshahidi:incidents:pending:error:hasChanges:) 
+					target:[request getDelegate] 
+				   objects:self, [self.deployment.incidents allValues], self.deployment.pending, error, hasChanges, nil];
 }
 
 - (BOOL) isDuplicate:(Incident *)incident {

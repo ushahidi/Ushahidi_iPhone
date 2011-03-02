@@ -79,4 +79,6 @@
 - (void) addPhoto:(Photo *)photo;
 - (void) removePhotos;
 
+- (NSComparisonResult)compareByDate:(Checkin *)checkin;
+
 @end

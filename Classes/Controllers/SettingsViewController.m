@@ -164,13 +164,18 @@ typedef enum {
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
 	self.imageWidth = [[Settings sharedSettings] imageWidth];
 	self.mapZoomLevel = [[Settings sharedSettings] mapZoomLevel];
+	if ([NSString isNilOrEmpty:self.userEmail] || [self.userEmail isValidEmail]) {
+		[self setFooter:nil atSection:TableSectionContact];
+	}
+	else {
+		[self setFooter:NSLocalizedString(@"Invalid Email Address", nil) atSection:TableSectionContact];
+	}
 	[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	[self.tableView reloadData];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	//[self.alertView showInfoOnceOnly:NSLocalizedString(@"Enable Discrete Mode to hide your current activity, or Download Maps so you can view map images offline.", nil)];
 }
 
 - (void)dealloc {
@@ -225,22 +230,28 @@ typedef enum {
 	if (indexPath.section == TableSectionContact) {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.row == TableRowContactFirst) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter first name", nil)];
 			[cell setText:self.firstName];
+			[cell setLabel:NSLocalizedString(@"first name", nil)];
+			[cell setPlaceholder:NSLocalizedString(@"Enter first name", nil)];
+			[cell setReturnKeyType:UIReturnKeyNext];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
 		else if (indexPath.row == TableRowContactLast) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter last name", nil)];
 			[cell setText:self.lastName];
+			[cell setLabel:NSLocalizedString(@"last name", nil)];
+			[cell setPlaceholder:NSLocalizedString(@"Enter last name", nil)];
+			[cell setReturnKeyType:UIReturnKeyNext];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
 		else if (indexPath.row == TableRowContactEmail) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
 			[cell setText:self.userEmail];
+			[cell setLabel:NSLocalizedString(@"email", nil)];
+			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
+			[cell setReturnKeyType:UIReturnKeyDefault];
 			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
@@ -362,15 +373,29 @@ typedef enum {
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
+	DLog(@"%@", text);
 	if (indexPath.section == TableSectionContact) {
 		if (indexPath.row == TableRowContactFirst) {
 			self.firstName = text;
+			NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:TableRowContactLast inSection:TableSectionContact];
+			TextFieldTableCell *nextCell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:nextIndexPath];
+			[nextCell showKeyboard];
 		}
 		else if (indexPath.row == TableRowContactLast) {
 			self.lastName = text;
+			NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:TableRowContactEmail inSection:TableSectionContact];
+			TextFieldTableCell *nextCell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:nextIndexPath];
+			[nextCell showKeyboard];
 		}
 		else if (indexPath.row == TableRowContactEmail) {
 			self.userEmail = text;
+			if ([NSString isNilOrEmpty:text] || [text isValidEmail]) {
+				[self setFooter:nil atSection:TableSectionContact];
+			}
+			else {
+				[self setFooter:NSLocalizedString(@"Invalid Email Address", nil) atSection:TableSectionContact];
+			}
+			[self.tableView reloadData];
 		}
 	}
 }

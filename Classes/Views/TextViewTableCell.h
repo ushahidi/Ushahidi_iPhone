@@ -40,6 +40,7 @@
 @property (nonatomic, assign) UITextAutocorrectionType autocorrectionType;
 @property (nonatomic, assign) UITextAutocapitalizationType autocapitalizationType;
 @property (nonatomic, assign) UIKeyboardType keyboardType;
+@property (nonatomic, assign) UIReturnKeyType returnKeyType;
 
 - (id)initForDelegate:(id<TextViewTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 

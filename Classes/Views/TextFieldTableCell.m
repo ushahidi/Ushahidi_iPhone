@@ -19,33 +19,37 @@
  *****************************************************************************/
 
 #import "TextFieldTableCell.h"
+#import "UIColor+Extension.h"
 
 @interface TextFieldTableCell ()
 
 @property (nonatomic, assign) id<TextFieldTableCellDelegate> delegate;
+@property (nonatomic, retain) UITextField *textField;
+@property (nonatomic, retain) UILabel *labelField;
+
+- (UILabel *) getLabelWithFrame:(CGRect)rect;
+- (UITextField *) getTextFieldWithFrame:(CGRect)rect;
 
 @end
 
 @implementation TextFieldTableCell
 
-@synthesize delegate, textField;
+@synthesize delegate, textField, labelField;
 
 - (id)initForDelegate:(id<TextFieldTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
 		self.delegate = theDelegate;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-		self.textField = [[UITextField alloc] initWithFrame:CGRectInset(self.contentView.frame, 10, 10)];
-		self.textField.delegate = self;
-		self.textField.adjustsFontSizeToFitWidth = YES;
-		self.textField.textAlignment = UITextAlignmentLeft;
-		self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
-		self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-		self.textField.keyboardType = UIKeyboardTypeDefault;
-		self.textField.borderStyle = UITextBorderStyleNone;
-		self.textField.font = [UIFont systemFontOfSize:16];
-		self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-		self.textField.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-		self.textField.backgroundColor = self.contentView.backgroundColor;
+		self.accessoryType = UITableViewCellAccessoryNone;
+		
+		CGRect contentViewFrame = CGRectInset(self.contentView.frame, 10, 10);
+		
+		self.labelField = [self getLabelWithFrame:CGRectMake(contentViewFrame.origin.x, contentViewFrame.origin.y - 2, 60, contentViewFrame.size.height)];
+		self.labelField.backgroundColor = [UIColor clearColor];
+		[self.contentView addSubview:self.labelField];
+		
+		self.textField = [self getTextFieldWithFrame:contentViewFrame];
+		self.textField.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview:self.textField];
 	}
     return self;
@@ -54,7 +58,31 @@
 - (void)dealloc {
 	delegate = nil;
 	[textField release];
+	[labelField release];
     [super dealloc];
+}
+
+- (void) setLabel:(NSString *)label {
+	CGRect textFieldFrame = self.textField.frame;
+	if (label != nil && [label length] > 0) {
+		textFieldFrame.origin.x = self.labelField.frame.origin.x + self.labelField.frame.size.width + 10;
+		textFieldFrame.size.width = self.contentView.frame.size.width - (self.labelField.frame.origin.x + self.labelField.frame.size.width) - 10;
+		self.labelField.hidden = NO;
+	}
+	else {
+		textFieldFrame = CGRectInset(self.contentView.frame, 10, 10);
+		self.labelField.hidden = YES;
+	}
+	self.textField.frame = textFieldFrame;
+	self.labelField.text = label;
+}
+
+- (UIReturnKeyType) returnKeyType {
+	return self.textField.returnKeyType;
+}
+
+- (void) setReturnKeyType:(UIReturnKeyType)returnKeyType {
+	self.textField.returnKeyType = returnKeyType;
 }
 
 - (UIKeyboardType) keyboardType {
@@ -106,6 +134,33 @@
 }
 
 #pragma mark -
+#pragma mark Helpers
+
+- (UITextField *) getTextFieldWithFrame:(CGRect)rect {
+	UITextField *field = [[UITextField alloc] initWithFrame:rect];
+	field.delegate = self;
+	field.adjustsFontSizeToFitWidth = YES;
+	field.textAlignment = UITextAlignmentLeft;
+	field.autocorrectionType = UITextAutocorrectionTypeNo;
+	field.autocapitalizationType = UITextAutocapitalizationTypeNone;
+	field.keyboardType = UIKeyboardTypeDefault;
+	field.borderStyle = UITextBorderStyleNone;
+	field.font = [UIFont systemFontOfSize:16];
+	field.clearButtonMode = UITextFieldViewModeWhileEditing;
+	field.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+	field.backgroundColor = self.contentView.backgroundColor;
+	return [field autorelease];
+}
+
+- (UILabel *) getLabelWithFrame:(CGRect)rect {
+	UILabel *label = [[UILabel alloc] initWithFrame:rect];
+	label.font = [UIFont systemFontOfSize:12];
+	label.textColor = [UIColor darkGrayColor];
+	label.textAlignment = UITextAlignmentRight;
+	return [label autorelease];
+}
+
+#pragma mark -
 #pragma mark UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)theTextField {
@@ -114,16 +169,9 @@
 		[self.delegate textFieldFocussed:self indexPath:self.indexPath];
 	}
 }
- 
-- (void)textFieldDidEndEditing:(UITextField *)theTextField {
-	[theTextField resignFirstResponder];
-	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {
-		[self.delegate textFieldReturned:self indexPath:self.indexPath text:theTextField.text];
-	}
-}
- 
+
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-	[theTextField resignFirstResponder];
+	DLog(@"RETURN");
 	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {
 		[self.delegate textFieldReturned:self indexPath:self.indexPath text:theTextField.text];
 	}
@@ -132,10 +180,13 @@
  
 - (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 	if ([string isEqualToString:@"\n"]) {
-		[theTextField resignFirstResponder];
-		return YES;
+		DLog(@"RETURN");
+		if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {
+			[self.delegate textFieldReturned:self indexPath:self.indexPath text:theTextField.text];
+		}
+		return NO;
 	}
-	else if (theTextField.keyboardType == UIKeyboardTypeURL && 
+	if (theTextField.keyboardType == UIKeyboardTypeURL && 
 			 [theTextField.text isEqualToString:@"http://"] && 
 			 [string hasPrefix:@"http"]) {
 		[theTextField setText:string];

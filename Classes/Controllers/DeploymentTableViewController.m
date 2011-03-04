@@ -227,6 +227,7 @@ typedef enum {
 		[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
 		[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
+		
 		self.incidentTabViewController.deployment = deployment;
 		[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
 	}

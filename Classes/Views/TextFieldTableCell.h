@@ -25,23 +25,24 @@
 
 @interface TextFieldTableCell : IndexedTableCell<UITextFieldDelegate> {
 
-@public
-	UITextField	*textField;
-	
 @private
+	UITextField	*textField;
+	UILabel *labelField;
 	id<TextFieldTableCellDelegate> delegate;
 }
 
-@property (nonatomic, retain) UITextField *textField;
 @property (nonatomic, assign) UITextAutocorrectionType autocorrectionType;
 @property (nonatomic, assign) UITextAutocapitalizationType autocapitalizationType;
 @property (nonatomic, assign) UIKeyboardType keyboardType;
+@property (nonatomic, assign) UIReturnKeyType returnKeyType;
 
 - (id)initForDelegate:(id<TextFieldTableCellDelegate>)delegate reuseIdentifier:(NSString *)reuseIdentifier;
 
+- (void) setText:(NSString *)text;
+- (void) setLabel:(NSString *)label;
 - (void) setPlaceholder:(NSString *)placeholder;
 - (void) setIsPassword:(BOOL)isPassword;
-- (void) setText:(NSString *)text;
+
 - (NSString *) text;
 - (void) showKeyboard;
 - (void) hideKeyboard;

@@ -109,15 +109,15 @@
 	if (refresh) {
 		[self.allCheckins removeAllObjects];
 		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
+		[self.users removeAllObjects];
 		if ([[Ushahidi sharedUshahidi] hasUsers]) {
-			self.users = [NSMutableArray arrayWithArray:[[Ushahidi sharedUshahidi] getUsers]];
-		}
-		else {
-			self.users = [NSMutableArray arrayWithCapacity:0];
+			[self.users addObjectsFromArray:[[Ushahidi sharedUshahidi] getUsers]];
 		}
 		[self.filterLabel setText:NSLocalizedString(@"All Users", nil)];
 	}
-	else if (self.user != nil){
+	else if (self.user != nil) {
+		[self.allCheckins removeAllObjects];
+		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
 		[self.filterLabel setText:[NSString stringWithFormat:@"%@ : %@", NSLocalizedString(@"Checkins", nil), self.user.name]];
 	}
 	[self.filteredCheckins removeAllObjects];

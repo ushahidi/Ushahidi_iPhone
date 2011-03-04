@@ -29,6 +29,7 @@
 #import "Photo.h"
 #import "Settings.h"
 #import "Device.h"
+#import "NSString+Extension.h"
 
 @interface CheckinAddViewController ()
 
@@ -105,7 +106,6 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	DLog(@"Device %@ >> %@", [Device deviceIdentifier], [Device deviceIdentifierHashed]);
 	if (self.modalViewController == nil) {
 		self.checkin = [[Checkin alloc] initWithDefaultValues];
 		self.checkin.mobile = [Device deviceIdentifierHashed];
@@ -122,6 +122,12 @@ typedef enum {
 			[[Locator sharedLocator] detectLocationForDelegate:self];
 		}
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+	}
+	if ([NSString isNilOrEmpty:self.checkin.email] || [self.checkin.email isValidEmail]) {
+		[self setFooter:nil atSection:TableSectionContact];
+	}
+	else {
+		[self setFooter:NSLocalizedString(@"Invalid Email Address", nil) atSection:TableSectionContact];
 	}
 	[self.tableView reloadData];
 	[self.loadingView hide];
@@ -168,6 +174,9 @@ typedef enum {
 		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setPlaceholder:NSLocalizedString(@"Enter message", nil)];
 		[cell setText:self.checkin.message];
+		[cell setKeyboardType:UIKeyboardTypeDefault];
+		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+		[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
 		return cell;	
 	}
 	else if (indexPath.section == TableSectionLocation) {
@@ -208,22 +217,28 @@ typedef enum {
 	else if (indexPath.section == TableSectionContact) {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.row == TableRowContactFirst) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter first name", nil)];
 			[cell setText:self.checkin.firstName];
+			[cell setLabel:NSLocalizedString(@"first name", nil)];
+			[cell setPlaceholder:NSLocalizedString(@"Enter first name", nil)];
+			[cell setReturnKeyType:UIReturnKeyNext];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
 		else if (indexPath.row == TableRowContactLast) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter last name", nil)];
 			[cell setText:self.checkin.lastName];
+			[cell setLabel:NSLocalizedString(@"last name", nil)];
+			[cell setPlaceholder:NSLocalizedString(@"Enter last name", nil)];
+			[cell setReturnKeyType:UIReturnKeyNext];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 		}
 		else if (indexPath.row == TableRowContactEmail) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
 			[cell setText:self.checkin.email];
+			[cell setLabel:NSLocalizedString(@"email", nil)];
+			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
+			[cell setReturnKeyType:UIReturnKeyDefault];
 			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
@@ -235,10 +250,10 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionMessage) {
-		return 80;
+		return [Device isIPad] ? 150 : 80;
 	}
 	if (indexPath.section == TableSectionLocation) {
-		return 150;
+		return [Device isIPad] ? 450 : 150;
 	}
 	if (indexPath.section == TableSectionPhoto) {
 		if (self.checkin.hasPhotos) {
@@ -294,6 +309,10 @@ typedef enum {
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionMessage) {
 		self.checkin.message = text;
+		[cell hideKeyboard];
+	}
+	else {
+		[cell hideKeyboard];
 	}
 	[self.tableView reloadData];
 }
@@ -323,15 +342,33 @@ typedef enum {
 	if (indexPath.section == TableSectionContact) {
 		if (indexPath.row == TableRowContactFirst) {
 			self.checkin.firstName = text;
+			NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:TableRowContactLast inSection:TableSectionContact];
+			TextFieldTableCell *nextCell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:nextIndexPath];
+			[nextCell showKeyboard];
 		}
 		else if (indexPath.row == TableRowContactLast) {
 			self.checkin.lastName = text;
+			NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:TableRowContactEmail inSection:TableSectionContact];
+			TextFieldTableCell *nextCell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:nextIndexPath];
+			[nextCell showKeyboard];
 		}
 		else if (indexPath.row == TableRowContactEmail) {
 			self.checkin.email = text;
+			if ([NSString isNilOrEmpty:text] || [text isValidEmail]) {
+				[self setFooter:nil atSection:TableSectionContact];
+			}
+			else {
+				[self setFooter:NSLocalizedString(@"Invalid Email Address", nil) atSection:TableSectionContact];
+			}
+			[self.tableView reloadData];
+		}
+		else {
+			[cell hideKeyboard];
 		}
 	}
-	[self.tableView reloadData];
+	else {
+		[cell hideKeyboard];
+	}
 }
 
 #pragma mark -

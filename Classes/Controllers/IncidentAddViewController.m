@@ -178,6 +178,7 @@ typedef enum {
 	[super viewWillAppear:animated];
 	if (self.modalViewController == nil) {
 		if (self.incident == nil) {
+			self.cancelButton.enabled = YES;
 			self.incident = [[Incident alloc] initWithDefaultValues];
 			self.news = nil;
 			self.willBePushed = NO;
@@ -193,7 +194,10 @@ typedef enum {
 					  atSection:TableSectionLocation];
 			}	
 		}
-		[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
+		else {
+			self.cancelButton.enabled = NO;
+		}
+		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];
 }
@@ -240,6 +244,7 @@ typedef enum {
 		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setPlaceholder:@"Enter description"];
 		[cell setText:self.incident.description];
+		[cell setReturnKeyType:UIReturnKeyDefault];
 		[cell setKeyboardType:UIKeyboardTypeDefault];
 		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
@@ -268,21 +273,23 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionNews) {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
-		[cell setKeyboardType:UIKeyboardTypeURL];
-		[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
-		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		[cell setText:self.news];
 		[cell setPlaceholder:NSLocalizedString(@"Enter news URL", nil)];
+		[cell setKeyboardType:UIKeyboardTypeURL];
+		[cell setReturnKeyType:UIReturnKeyDefault];
+		[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
+		[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		return cell;
 	}
 	else if (indexPath.section == TableSectionLocation) {
 		if (indexPath.row == TableSectionLocationName) {
 			TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
+			[cell setText:self.incident.location];
+			[cell setPlaceholder:NSLocalizedString(@"Enter location name", nil)];
+			[cell setReturnKeyType:UIReturnKeyDefault];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
-			[cell setText:self.incident.location];
-			[cell setPlaceholder:NSLocalizedString(@"Enter location name", nil)];
 			return cell;
 		}
 		else {
@@ -348,8 +355,9 @@ typedef enum {
 	else {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionTitle) {
-			[cell setPlaceholder:NSLocalizedString(@"Enter title", nil)];
 			[cell setText:self.incident.title];
+			[cell setPlaceholder:NSLocalizedString(@"Enter title", nil)];
+			[cell setReturnKeyType:UIReturnKeyDefault];
 			[cell setKeyboardType:UIKeyboardTypeDefault];
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
@@ -366,7 +374,7 @@ typedef enum {
 		return [TextTableCell getCellSizeForText:NSLocalizedString(@"Add Photo", nil) forWidth:theTableView.contentSize.width].height;
 	}
 	if (indexPath.section == TableSectionDescription) {
-		return 120;
+		return [Device isIPad] ? 250 : 120;
 	}
 	if (indexPath.section == TableSectionLocation) {
 		return 44;
@@ -446,7 +454,15 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionNews) {
 		self.news = text;
+		if ([NSString isNilOrEmpty:text] || [text isValidURL]) {
+			[self setFooter:nil atSection:TableSectionNews];
+		}
+		else {
+			[self setFooter:NSLocalizedString(@"Invalid News URL", nil) atSection:TableSectionNews];
+		}
+		[self.tableView reloadData];
 	}
+	[cell hideKeyboard];
 }
 
 #pragma mark -
@@ -465,6 +481,7 @@ typedef enum {
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionDescription) {
 		self.incident.description = text;
+		[cell hideKeyboard];
 	}
 }
 

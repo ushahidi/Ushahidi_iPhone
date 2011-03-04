@@ -24,6 +24,7 @@
 
 @property (nonatomic, assign) id<TextViewTableCellDelegate>	delegate;
 @property (nonatomic, retain) NSString *placeholder_;
+
 @end
 
 
@@ -42,6 +43,7 @@
 		self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
 		self.textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		self.textView.keyboardType = UIKeyboardTypeDefault;
+		self.textView.returnKeyType = UIReturnKeyDefault;
 		self.textView.userInteractionEnabled = YES;
 		self.textView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -59,6 +61,14 @@
 	[indexPath release];
 	[placeholder_ release];
     [super dealloc];
+}
+
+- (UIReturnKeyType) returnKeyType {
+	return self.textView.returnKeyType;
+}
+
+- (void) setReturnKeyType:(UIReturnKeyType)returnKeyType {
+	self.textView.returnKeyType = returnKeyType;
 }
 
 - (UIKeyboardType) keyboardType {
@@ -90,6 +100,10 @@
 }
 
 - (void) hideKeyboard {
+	if ([self.textView.text isEqualToString:@""]) {
+		self.textView.text = self.placeholder_;
+		self.textView.textColor = [UIColor lightGrayColor];
+	}
 	[self.textView resignFirstResponder];
 }
 
@@ -112,21 +126,20 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)theTextView {
+	DLog(@"");
 	if ([self.textView.text isEqualToString:@""]) {
 		self.textView.text = self.placeholder_;
 		self.textView.textColor = [UIColor lightGrayColor];
-	}
-	[theTextView resignFirstResponder];
-	SEL selector = @selector(textViewReturned:indexPath:text:);
-	if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
-		[self.delegate textViewReturned:self indexPath:self.indexPath text:theTextView.text];
 	}
 }
 
 - (BOOL)textView:(UITextView *)theTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)string {
 	if ([string isEqualToString:@"\n"]) {
-		[theTextView resignFirstResponder];
-		return YES;
+		SEL selector = @selector(textViewReturned:indexPath:text:);
+		if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
+			[self.delegate textViewReturned:self indexPath:self.indexPath text:theTextView.text];
+		}
+		return NO;
 	}
 	NSString *message = [theTextView.text stringByReplacingCharactersInRange:range withString:string];
 	if (self.limit == 0 || self.limit >= [message length]) {
@@ -134,7 +147,7 @@
 		if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
 			[self.delegate textViewChanged:self indexPath:self.indexPath text:message];
 		}
-		return YES;	
+		return YES;		
 	}
 	else {
 		return NO;

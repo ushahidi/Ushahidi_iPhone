@@ -30,6 +30,7 @@
 #import "Checkin.h"
 #import "Ushahidi.h"
 #import "Incident.h"
+#import "Device.h"
 
 @interface CheckinDetailsViewController()
 
@@ -253,7 +254,7 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionLocation) {
 		if (indexPath.row == TableRowLocationMap && self.checkin.hasLocation) {
-			return 150;
+			return [Device isIPad] ? 300 : 150;
 		}
 	}
 	else if (indexPath.section == TableSectionName) {

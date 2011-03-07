@@ -168,7 +168,7 @@
 							</object>
 							<object class="IBUIBarButtonItem" id="8248813">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<int key="IBUIStyle">2</int>
+								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="509951787"/>
 								<int key="IBUISystemItemIdentifier">7</int>
 							</object>

@@ -22,6 +22,8 @@
 #import "DeploymentTableViewController.h"
 #import "IncidentTabViewController.h"
 #import "IncidentDetailsViewController.h"
+#import "CheckinMapViewController.h"
+#import "Deployment.h"
 #import "Settings.h"
 #import "NSString+Extension.h"
 
@@ -33,7 +35,7 @@
 
 @implementation SplashViewController
 
-@synthesize deploymentTableViewController, incidentTabViewController, incidentDetailsViewController;
+@synthesize deploymentTableViewController, incidentTabViewController, incidentDetailsViewController, checkinMapViewController;
 
 #pragma mark -
 #pragma mark private
@@ -45,23 +47,28 @@
 		if (deployment != nil) {
 			[self.navigationController pushViewController:self.deploymentTableViewController animated:NO];
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
-			self.incidentTabViewController.deployment = deployment;
-			
-			NSString *lastIncident = [[Settings sharedSettings] lastIncident];
-			if ([NSString isNilOrEmpty:lastIncident] == NO) {
-				Incident *incident = [[Ushahidi sharedUshahidi] getIncidentWithIdentifer:lastIncident];
-				if (incident != nil) {
-					[self.navigationController pushViewController:self.incidentTabViewController animated:NO];
-					self.incidentDetailsViewController.incident = incident;
-					self.incidentDetailsViewController.incidents = [[Ushahidi sharedUshahidi] getIncidents];
-					[self.navigationController pushViewController:self.incidentDetailsViewController animated:YES];
-				}
-				else {
-					[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
-				}
+			if (deployment.supportsCheckins) {
+				self.checkinMapViewController.deployment = deployment;
+				[self.navigationController pushViewController:self.checkinMapViewController animated:YES];	
 			}
 			else {
-				[self.navigationController pushViewController:self.incidentTabViewController animated:YES];			
+				self.incidentTabViewController.deployment = deployment;
+				NSString *lastIncident = [[Settings sharedSettings] lastIncident];
+				if ([NSString isNilOrEmpty:lastIncident] == NO) {
+					Incident *incident = [[Ushahidi sharedUshahidi] getIncidentWithIdentifer:lastIncident];
+					if (incident != nil) {
+						[self.navigationController pushViewController:self.incidentTabViewController animated:NO];
+						self.incidentDetailsViewController.incident = incident;
+						self.incidentDetailsViewController.incidents = [[Ushahidi sharedUshahidi] getIncidents];
+						[self.navigationController pushViewController:self.incidentDetailsViewController animated:YES];
+					}
+					else {
+						[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
+					}
+				}
+				else {
+					[self.navigationController pushViewController:self.incidentTabViewController animated:YES];			
+				}
 			}
 		}
 		else {

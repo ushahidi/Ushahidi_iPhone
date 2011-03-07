@@ -20,6 +20,7 @@
 
 #import "DeploymentTableViewController.h"
 #import "IncidentTabViewController.h"
+#import "CheckinMapViewController.h"
 #import "DeploymentAddViewController.h"
 #import "SettingsViewController.h"
 #import "DeploymentTableCell.h"
@@ -42,7 +43,7 @@
 
 @implementation DeploymentTableViewController
 
-@synthesize incidentTabViewController, deploymentAddViewController, settingsViewController;
+@synthesize incidentTabViewController, deploymentAddViewController, settingsViewController, checkinMapViewController;
 @synthesize addButton, editButton, refreshButton, settingsButton, tableSort;
 
 #pragma mark -
@@ -177,6 +178,7 @@ typedef enum {
 
 - (void)dealloc {
 	[incidentTabViewController release];
+	[checkinMapViewController release];
 	[deploymentAddViewController release];
 	[settingsViewController release];
 	[editButton release];
@@ -227,9 +229,14 @@ typedef enum {
 		[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
 		[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
-		
-		self.incidentTabViewController.deployment = deployment;
-		[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
+		if (deployment.supportsCheckins) {
+			self.checkinMapViewController.deployment = deployment;
+			[self.navigationController pushViewController:self.checkinMapViewController animated:YES];
+		}
+		else {
+			self.incidentTabViewController.deployment = deployment;
+			[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
+		}
 	}
 }
 

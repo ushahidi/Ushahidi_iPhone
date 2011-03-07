@@ -191,15 +191,15 @@ typedef enum {
 				[cell setScrollable:YES];
 				[cell setZoomable:YES];
 				[cell setCanShowCallout:YES];
-				NSString *subtitle = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
-				if ([subtitle isEqualToString:cell.location] == NO) {
+				NSString *location = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
+				if ([location isEqualToString:cell.location] == NO) {
 					[cell removeAllPins];
 					[cell addPinWithTitle:self.checkin.message 
-								 subtitle:subtitle
+								 subtitle:self.checkin.dateTimeString
 								 latitude:self.checkin.latitude 
 								longitude:self.checkin.longitude];
 					[cell resizeRegionToFitAllPins:NO];		
-					cell.location = subtitle;
+					cell.location = location;
 				}
 				return cell;	
 			}

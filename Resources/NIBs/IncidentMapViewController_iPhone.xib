@@ -191,7 +191,7 @@
 							</object>
 							<object class="IBUIBarButtonItem" id="973397904">
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">2</int>
+								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="532105605"/>
 								<int key="IBUISystemItemIdentifier">7</int>
 							</object>

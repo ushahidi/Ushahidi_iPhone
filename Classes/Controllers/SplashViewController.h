@@ -23,6 +23,7 @@
 @class DeploymentTableViewController;
 @class IncidentTabViewController;
 @class IncidentDetailsViewController;
+@class CheckinMapViewController;
 
 @interface SplashViewController : UIViewController {
 	
@@ -30,10 +31,12 @@
 	IBOutlet DeploymentTableViewController *deploymentTableViewController;
 	IBOutlet IncidentTabViewController *incidentTabViewController;
 	IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
+	IBOutlet CheckinMapViewController *checkinMapViewController;
 }
 
 @property(nonatomic, retain) DeploymentTableViewController *deploymentTableViewController;
 @property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
 @property(nonatomic, retain) IncidentDetailsViewController *incidentDetailsViewController;
+@property(nonatomic, retain) CheckinMapViewController *checkinMapViewController;
 
 @end

@@ -109,26 +109,54 @@
 	if (refresh) {
 		[self.allCheckins removeAllObjects];
 		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
-		[self.users removeAllObjects];
-		if ([[Ushahidi sharedUshahidi] hasUsers]) {
-			[self.users addObjectsFromArray:[[Ushahidi sharedUshahidi] getUsers]];
-		}
-		[self.filterLabel setText:NSLocalizedString(@"All Users", nil)];
+		[self.filterLabel setText:NSLocalizedString(@"Checkins By All Users", nil)];
 	}
 	else if (self.user != nil) {
 		[self.allCheckins removeAllObjects];
 		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
-		[self.filterLabel setText:[NSString stringWithFormat:@"%@ : %@", NSLocalizedString(@"Checkins", nil), self.user.name]];
+		[self.filterLabel setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Checkins By", nil), self.user.name]];
+	}
+	else {
+		[self.allCheckins removeAllObjects];
+		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
+		[self.filterLabel setText:NSLocalizedString(@"Checkins By All Users", nil)];
+	}
+	[self.users removeAllObjects];
+	if ([[Ushahidi sharedUshahidi] hasUsers]) {
+		[self.users addObjectsFromArray:[[Ushahidi sharedUshahidi] getUsers]];
 	}
 	[self.filteredCheckins removeAllObjects];
-	[self.filteredCheckins addObjectsFromArray:self.allCheckins];
-	for (Checkin *checkin in self.allCheckins) {
+	if (self.user == nil) {
+		NSMutableDictionary *checkins = [NSMutableDictionary dictionary];
+		for (Checkin *checkin in self.allCheckins) {
+			if ([NSString isNilOrEmpty:checkin.user] == NO) {
+				Checkin *existing = [checkins objectForKey:checkin.user];
+				if (existing == nil) {
+					[checkins setObject:checkin forKey:checkin.user];
+				}
+				else if ([checkin.date compare:existing.date] == NSOrderedDescending) {
+					[checkins setObject:checkin forKey:checkin.user];
+				}	
+			}
+		}	
+		[self.filteredCheckins addObjectsFromArray:[checkins allValues]];
+	}
+	else {
+		for (Checkin *checkin in self.allCheckins) {
+			if ([self.user.identifier isEqualToString:[checkin user]]) {
+				[self.filteredCheckins addObject:checkin];
+			}
+		}
+	}
+	[self.mapView removeAllPins];
+	for (Checkin *checkin in self.filteredCheckins) {
+		DLog(@"%@ said %@ on %@", [checkin user], checkin.message, checkin.dateString);
 		[self.mapView addPinWithTitle:checkin.message 
-											subtitle:checkin.dateString 
-											latitude:checkin.latitude 
-										   longitude:checkin.longitude 
-											  object:checkin
-											pinColor:MKPinAnnotationColorRed];
+							 subtitle:checkin.dateTimeString 
+							 latitude:checkin.latitude 
+							longitude:checkin.longitude 
+							   object:checkin
+							 pinColor:MKPinAnnotationColorRed];
 	}
 	if (resize) {
 		[self.mapView resizeRegionToFitAllPins:NO animated:YES];
@@ -153,32 +181,24 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	
-	[self.allCheckins removeAllObjects];
-	[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
-	
-	[self.users removeAllObjects];
-	if ([[Ushahidi sharedUshahidi] hasUsers]) {
-		[self.users addObjectsFromArray:[[Ushahidi sharedUshahidi] getUsers]];
+	if (self.deployment != nil) {
+		self.title = self.deployment.name;
 	}
-	
+	else {
+		self.title = NSLocalizedString(@"Checkins", nil);
+	}
+	[self populate:self.willBePushed resize:self.willBePushed];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoQueueFinished) name:kPhotoQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadQueueFinished) name:kUploadQueueFinished object:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"This map supports Checkins!\nClick the Filter button to only show checkins for a specific user or the Pin button to checkin now.", nil)];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMainQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMapQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kPhotoQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kUploadQueueFinished object:nil];
 }
 
 - (void)dealloc {
@@ -199,7 +219,7 @@
 #pragma mark UshahidiDelegate
 
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins {
-	[self.loadingView showWithMessage:NSLocalizedString(@"Checkins...", nil)];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 }
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)theCheckins error:(NSError *)error hasChanges:(BOOL)hasChanges {
@@ -239,18 +259,6 @@
 	[self.loadingView hideAfterDelay:1.0];
 }
 
-- (void) mapQueueFinished {
-	DLog(@"");
-}
-
-- (void) photoQueueFinished {
-	DLog(@"");
-}
-
-- (void) uploadQueueFinished {
-	DLog(@"");
-}
-
 #pragma mark -
 #pragma mark MKMapView
 
@@ -275,8 +283,7 @@
 		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
 		self.checkinDetailsViewController.checkin = (Checkin *)mapAnnotation.object; 
 		self.checkinDetailsViewController.checkins = self.filteredCheckins;
-		self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Checkins", nil);
-		[self.incidentTabViewController.navigationController pushViewController:self.checkinDetailsViewController animated:YES];
+		[self.navigationController pushViewController:self.checkinDetailsViewController animated:YES];
 	}
 }
 
@@ -304,26 +311,7 @@
 			break;
 		}
 	}
-	if (self.user != nil) {
-		[self.filterLabel setText:[NSString stringWithFormat:@"%@ : %@", NSLocalizedString(@"Checkins", nil), self.user.name]];
-	}
-	else {
-		[self.filterLabel setText:NSLocalizedString(@"All Users", nil)];
-	}
-	[self.mapView removeAllPins];
-	[self.filteredCheckins removeAllObjects];
-	for (Checkin *checkin in self.allCheckins) {
-		if (self.user == nil || [self.user.identifier isEqualToString:[checkin user]]) {
-			[self.mapView addPinWithTitle:checkin.message 
-												subtitle:checkin.dateString 
-												latitude:checkin.latitude 
-											   longitude:checkin.longitude 
-												  object:checkin
-												pinColor:MKPinAnnotationColorRed];	
-			[self.filteredCheckins addObject:checkin];
-		}
-	}
-	[self.mapView resizeRegionToFitAllPins:NO animated:YES];
+	[self populate:NO resize:YES];
 }
 
 @end

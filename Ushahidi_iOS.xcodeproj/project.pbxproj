@@ -525,7 +525,7 @@
 		3E86338212243248001DE141 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		3E86338312243248001DE141 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		3E86338512243255001DE141 /* Incident.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incident.h; sourceTree = "<group>"; };
-		3E86338612243255001DE141 /* Incident.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Incident.m; path = ../Models/Incident.m; sourceTree = "<group>"; };
+		3E86338612243255001DE141 /* Incident.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incident.m; sourceTree = "<group>"; };
 		3E8633D61224362A001DE141 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
 		3E8633D71224362A001DE141 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
 		3E8633DB12243647001DE141 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
@@ -854,7 +854,6 @@
 				3EF8785D12B29C1500E9D799 /* MKPinAnnotationView+Extension.h */,
 				3EF8785E12B29C1500E9D799 /* MKPinAnnotationView+Extension.m */,
 				3E4A022512720E280017AED4 /* NSString+Extension.h */,
-				3E86338612243255001DE141 /* Incident.m */,
 				3E4A022612720E280017AED4 /* NSString+Extension.m */,
 				3E30492712874F3600E3C942 /* NSObject+Extension.h */,
 				3E30492812874F3600E3C942 /* NSObject+Extension.m */,
@@ -874,6 +873,7 @@
 				3E86305D12231498001DE141 /* Deployment.h */,
 				3E86305E12231498001DE141 /* Deployment.m */,
 				3E86338512243255001DE141 /* Incident.h */,
+				3E86338612243255001DE141 /* Incident.m */,
 				3E862B271222C66E001DE141 /* Category.h */,
 				3E862B281222C66E001DE141 /* Category.m */,
 				3E86337B12243205001DE141 /* Country.h */,

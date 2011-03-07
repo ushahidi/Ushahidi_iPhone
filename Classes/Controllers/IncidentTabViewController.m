@@ -163,7 +163,7 @@ typedef enum {
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	if (self.deployment.supportsCheckins) {
-		[self.alertView showInfoOnceOnly:NSLocalizedString(@"This map supports Checkins! Click the Pin button to view the checkin map.", nil)];
+		[self.alertView showInfoOnceOnly:NSLocalizedString(@"This map supports Checkins! Click the Pin button to view the map.", nil)];
 	}
 	else {
 		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];

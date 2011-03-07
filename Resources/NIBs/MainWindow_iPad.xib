@@ -319,7 +319,20 @@
 			</object>
 			<object class="IBUIViewController" id="1005714770">
 				<string key="IBUITitle">Checkins</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="220257832">
+					<string key="IBUITitle">Checkins</string>
+					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="658770171">
+						<string key="IBUITitle">Maps</string>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIStyle">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				</object>
 				<string key="IBUINibName">CheckinMapViewController_iPad</string>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
+					<int key="IBUIBarStyle">1</int>
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>
 				</object>
@@ -1113,6 +1126,22 @@
 					</object>
 					<int key="connectionID">145</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">checkinMapViewController</string>
+						<reference key="source" ref="37201640"/>
+						<reference key="destination" ref="1005714770"/>
+					</object>
+					<int key="connectionID">146</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">checkinMapViewController</string>
+						<reference key="source" ref="417995747"/>
+						<reference key="destination" ref="1005714770"/>
+					</object>
+					<int key="connectionID">147</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1464,6 +1493,10 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">111</int>
 						<reference key="object" ref="1005714770"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="220257832"/>
+						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1509,6 +1542,20 @@
 						<reference key="object" ref="371447578"/>
 						<reference key="parent" ref="761904546"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">148</int>
+						<reference key="object" ref="220257832"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="658770171"/>
+						</object>
+						<reference key="parent" ref="1005714770"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">149</int>
+						<reference key="object" ref="658770171"/>
+						<reference key="parent" ref="220257832"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1547,6 +1594,7 @@
 					<string>14.CustomClassName</string>
 					<string>14.IBEditorWindowLastContentRect</string>
 					<string>14.IBPluginDependency</string>
+					<string>148.IBPluginDependency</string>
 					<string>15.CustomClassName</string>
 					<string>15.IBEditorWindowLastContentRect</string>
 					<string>15.IBPluginDependency</string>
@@ -1627,12 +1675,13 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>CheckinDetailsViewController</string>
-					<string>{{1557, -74}, {783, 852}}</string>
+					<string>{{1557, -168}, {768, 1024}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>IncidentAddViewController</string>
 					<string>{{2407, -252}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>IncidentDetailsViewController</string>
 					<string>{{657, 4}, {783, 852}}</string>
@@ -1704,7 +1753,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">145</int>
+			<int key="maxID">149</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2252,6 +2301,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addButton</string>
+							<string>checkinMapViewController</string>
 							<string>deploymentAddViewController</string>
 							<string>editButton</string>
 							<string>incidentTabViewController</string>
@@ -2261,6 +2312,8 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
+							<string>CheckinMapViewController</string>
 							<string>DeploymentAddViewController</string>
 							<string>UIBarButtonItem</string>
 							<string>IncidentTabViewController</string>
@@ -2273,6 +2326,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addButton</string>
+							<string>checkinMapViewController</string>
 							<string>deploymentAddViewController</string>
 							<string>editButton</string>
 							<string>incidentTabViewController</string>
@@ -2282,6 +2337,14 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">addButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">checkinMapViewController</string>
+								<string key="candidateClassName">CheckinMapViewController</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">deploymentAddViewController</string>
 								<string key="candidateClassName">DeploymentAddViewController</string>
@@ -3276,12 +3339,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>checkinMapViewController</string>
 							<string>deploymentTableViewController</string>
 							<string>incidentDetailsViewController</string>
 							<string>incidentTabViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>CheckinMapViewController</string>
 							<string>DeploymentTableViewController</string>
 							<string>IncidentDetailsViewController</string>
 							<string>IncidentTabViewController</string>
@@ -3291,12 +3356,17 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>checkinMapViewController</string>
 							<string>deploymentTableViewController</string>
 							<string>incidentDetailsViewController</string>
 							<string>incidentTabViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">checkinMapViewController</string>
+								<string key="candidateClassName">CheckinMapViewController</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">deploymentTableViewController</string>
 								<string key="candidateClassName">DeploymentTableViewController</string>

@@ -30,4 +30,8 @@
 @property(nonatomic,retain)	NSString *identifier;
 @property(nonatomic,retain) NSString *name;
 
+- (id)initWithIdentifier:(NSString *)identifier name:(NSString *)name;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (BOOL)updateWithDictionary:(NSDictionary *)dictionary;
+
 @end

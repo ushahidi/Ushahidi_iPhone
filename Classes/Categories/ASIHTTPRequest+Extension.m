@@ -55,31 +55,56 @@
 
 - (void) attachDelegate:(id<UshahidiDelegate>)theDelegate {
 	NSMutableDictionary *mutableUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
-	[mutableUserInfo setObject:theDelegate forKey:kDelegateKey];
+	if (theDelegate != nil) {
+		[mutableUserInfo setObject:theDelegate forKey:kDelegateKey];
+	}
+	else {
+		[mutableUserInfo removeObjectForKey:kDelegateKey];
+	}
 	self.userInfo = mutableUserInfo;
 }
 
 - (void) attachDeployment:(Deployment *)deployment {
 	NSMutableDictionary *mutableUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
-	[mutableUserInfo setObject:deployment forKey:kDeploymentKey];
+	if (deployment != nil) {
+		[mutableUserInfo setObject:deployment forKey:kDeploymentKey];
+	}
+	else {
+		[mutableUserInfo removeObjectForKey:kDeploymentKey];
+	}
 	self.userInfo = mutableUserInfo;
 }
 
 - (void) attachIncident:(Incident *)incident {
 	NSMutableDictionary *mutableUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
-	[mutableUserInfo setObject:incident forKey:kIncidentKey];
+	if (incident != nil) {
+		[mutableUserInfo setObject:incident forKey:kIncidentKey];
+	}
+	else {
+		[mutableUserInfo removeObjectForKey:kIncidentKey];
+	}
 	self.userInfo = mutableUserInfo;
 }
 
 - (void) attachPhoto:(Photo *)photo {
 	NSMutableDictionary *mutableUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
-	[mutableUserInfo setObject:photo forKey:kPhotoKey];
+	if (photo != nil) {
+		[mutableUserInfo setObject:photo forKey:kPhotoKey];
+	}
+	else {
+		[mutableUserInfo removeObjectForKey:kPhotoKey];
+	}
 	self.userInfo = mutableUserInfo;
 }
 
 - (void) attachCheckin:(Checkin *)checkin {
 	NSMutableDictionary *mutableUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
-	[mutableUserInfo setObject:checkin forKey:kCheckinKey];
+	if (checkin != nil) {
+		[mutableUserInfo setObject:checkin forKey:kCheckinKey];
+	}
+	else {
+		[mutableUserInfo removeObjectForKey:kCheckinKey];
+	}
 	self.userInfo = mutableUserInfo;
 }
 

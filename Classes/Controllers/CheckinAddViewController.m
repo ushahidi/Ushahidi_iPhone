@@ -135,7 +135,7 @@ typedef enum {
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"To checkin, enter your message, contact information and optional photo then click the Send button.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"To checkin, drag the map pin to a more accurate location, then click the Send button after entering an optional message, contact information and photo.", nil)];
 }
 
 - (void)dealloc {
@@ -186,15 +186,15 @@ typedef enum {
 		[cell setCanShowCallout:YES];
 		[cell setDraggable:YES];
 		if (self.checkin.latitude != nil && self.checkin.longitude != nil) {
-			NSString *subtitle = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
-			if ([subtitle isEqualToString:cell.location] == NO) {
+			NSString *location = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
+			if ([location isEqualToString:cell.location] == NO) {
 				[cell removeAllPins];
-				[cell addPinWithTitle:NSLocalizedString(@"User Location", nill) 
-							 subtitle:subtitle 
+				[cell addPinWithTitle:NSLocalizedString(@"User Location", nil) 
+							 subtitle:nil 
 							 latitude:self.checkin.latitude 
 							longitude:self.checkin.longitude];
 				[cell resizeRegionToFitAllPins:YES];
-				cell.location = subtitle;
+				cell.location = location;
 			}
 		}
 		return cell;
@@ -379,9 +379,6 @@ typedef enum {
 	self.checkin.latitude = latitude;
 	self.checkin.longitude = longitude;
 	[self setFooter:[NSString stringWithFormat:@"%@, %@", latitude, longitude] atSection:TableSectionLocation];
-	if (self.editing == NO) {
-		[self.tableView reloadData];
-	}
 }
 
 #pragma mark -
@@ -425,6 +422,7 @@ typedef enum {
 							 andMessage:[error localizedDescription]];
 	}
 	else {
+		DLog(@"Checkin: %@", theCheckin.identifier);
 		[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
 		[self.loadingView hideAfterDelay:1.0];
 		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.2];

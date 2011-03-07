@@ -23,9 +23,24 @@
 @implementation NSDate (Extension)
 
 - (NSString *) dateToString:(NSString *)dateFormat {
+	return [self dateToString:dateFormat fromTimeZone:nil];
+}
+
+- (NSString *) dateToString:(NSString *)dateFormat fromTimeZone:(NSString *)timeZone {
+	NSDate *sourceDate = self;
+	if (timeZone != nil) {
+		NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:timeZone];
+		NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+		
+		NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:self];
+		NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:self];
+		NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
+		
+		sourceDate = [NSDate dateWithTimeInterval:interval sinceDate:self];
+	}
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:dateFormat];
-	NSString *dateString = [formatter stringFromDate:self];
+	NSString *dateString = [formatter stringFromDate:sourceDate];
 	[formatter release];	
 	return dateString;
 }

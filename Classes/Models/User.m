@@ -25,15 +25,33 @@
 
 @synthesize identifier, name;
 
+- (id)initWithIdentifier:(NSString *)theIdentifier name:(NSString *)theName {
+	if (self = [super init]) {
+		self.identifier = theIdentifier;
+		self.name = theName;
+	}
+	return self;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
-		//DLog(@"dictionary: %@", dictionary);
+		DLog(@"%@", dictionary);
 		if (dictionary != nil) {
 			self.identifier = [dictionary stringForKey:@"id"];
 			self.name = [dictionary stringForKey:@"name"];
 		}
 	}
 	return self;
+}
+
+- (BOOL)updateWithDictionary:(NSDictionary *)dictionary {
+	DLog(@"%@", dictionary);
+	NSString *nameString = [dictionary stringForKey:@"name"];
+	if ([self.name isEqualToString:nameString] == NO) {
+		self.name = nameString;
+		return YES;
+	}
+	return NO;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {

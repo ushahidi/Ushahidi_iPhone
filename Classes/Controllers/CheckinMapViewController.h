@@ -27,7 +27,6 @@
 #import "Photo.h"
 #import "ItemPicker.h"
 
-@class IncidentTabViewController;
 @class CheckinAddViewController;
 @class CheckinDetailsViewController;
 @class Deployment;
@@ -37,7 +36,6 @@
 													     MKMapViewDelegate, 
 													     ItemPickerDelegate> {
 @public
-	IncidentTabViewController *incidentTabViewController;
 	CheckinAddViewController *checkinAddViewController;
 	CheckinDetailsViewController *checkinDetailsViewController;
 	Deployment *deployment;
@@ -55,7 +53,6 @@
 	User *user;
 }
 
-@property(nonatomic,retain) IBOutlet IncidentTabViewController *incidentTabViewController;
 @property(nonatomic,retain) IBOutlet CheckinAddViewController *checkinAddViewController;
 @property(nonatomic,retain) IBOutlet CheckinDetailsViewController *checkinDetailsViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;

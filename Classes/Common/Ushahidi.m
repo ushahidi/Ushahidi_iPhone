@@ -450,7 +450,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark Checkins
 
 - (NSArray *) getCheckins {
-	return [self.deployment.checkins allValues];
+	return [[self.deployment.checkins allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate {
@@ -463,7 +463,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 									  failSelector:@selector(getCheckinsFailed:)];
 	[request attachDelegate:delegate];
 	[self.mainQueue addOperation:request];
-	return [self.deployment.checkins allValues];
+	return [[self.deployment.checkins allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 - (void) getCheckinsStarted:(ASIHTTPRequest *)request {
@@ -493,16 +493,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			if (payload != nil) {
 				BOOL hasUserChanges = NO;
 				NSArray *users = [payload objectForKey:@"users"]; 
-				for (NSDictionary *dictionary in users) {
-					User *user = [[User alloc] initWithDictionary:dictionary];
-					if ([self.deployment.users objectForKey:user.identifier] == nil) {
-						if ([user name] != nil && [[user name] isEqualToString:@"Not Fully Registered Checkin User"] == NO) {
-							[self.deployment.users setObject:user forKey:user.identifier];
-							hasUserChanges = YES;
-							DLog(@"USER: %@", dictionary);
+				if (users != nil) {
+					for (NSDictionary *dictionary in users) {
+						User *user = [[User alloc] initWithDictionary:dictionary];
+						if (user != nil) {
+							User *existing = [self.deployment.users objectForKey:user.identifier];
+							if (existing != nil) {
+								if ([existing updateWithDictionary:dictionary]) {
+									hasUserChanges = YES;
+									DLog(@"USER: %@", dictionary);
+								}
+							}
+							else {
+								[self.deployment.users setObject:user forKey:user.identifier];
+								hasUserChanges = YES;
+								DLog(@"USER: %@", dictionary);
+							}
 						}
+						[user release];
 					}
-					[user release];
 				}
 				if (hasUserChanges) {
 					DLog(@"Has New Users");
@@ -512,28 +521,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 							   objects:self, [self.deployment.users allValues], nil, hasUserChanges, nil];
 				
 				NSArray *checkins = [payload objectForKey:@"checkins"]; 
-				for (NSDictionary *dictionary in checkins) {
-					Checkin *checkin = [[Checkin alloc] initWithDictionary:dictionary];
-					if (checkin != nil) {
-						User *user = [self.deployment.users objectForKey:checkin.user];
-						Checkin *existing = [self.deployment.checkins objectForKey:checkin.identifier];
-						if (existing != nil) {
-							existing.name = [user name];
+				if (checkins != nil) {
+					for (NSDictionary *dictionary in checkins) {
+						Checkin *checkin = [[Checkin alloc] initWithDictionary:dictionary];
+						if (checkin != nil) {
+							User *user = [self.deployment.users objectForKey:checkin.user];
+							Checkin *existing = [self.deployment.checkins objectForKey:checkin.identifier];
+							if (existing != nil) {
+								existing.name = [user name];
+							}
+							else {
+								checkin.name = [user name];
+								[self.deployment.checkins setObject:checkin forKey:checkin.identifier];
+								hasCheckinChanges = YES;
+								DLog(@"CHECKIN: %@", dictionary);
+							}	
 						}
-						else {
-							checkin.name = [user name];
-							[self.deployment.checkins setObject:checkin forKey:checkin.identifier];
-							hasCheckinChanges = YES;
-							DLog(@"CHECKIN: %@", dictionary);
-						}	
+						if (self.deployment.lastCheckinId == nil) {
+							self.deployment.lastCheckinId = checkin.identifier;
+						}
+						else if ([self.deployment.lastCheckinId intValue] < [checkin.identifier intValue]) {
+							self.deployment.lastCheckinId = checkin.identifier;
+						}
+						[checkin release];
 					}
-					if (self.deployment.lastCheckinId == nil) {
-						self.deployment.lastCheckinId = checkin.identifier;
-					}
-					else if ([self.deployment.lastCheckinId intValue] < [checkin.identifier intValue]) {
-						self.deployment.lastCheckinId = checkin.identifier;
-					}
-					[checkin release];
 				}
 			}
 			else {
@@ -556,9 +567,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
 	DLog(@"RESPONSE: %@", [request responseString]);
+	NSArray *checkins = [[self.deployment.checkins allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 	[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:) 
 					target:[request getDelegate] 
-				   objects:self, [self.deployment.checkins allValues], [request error], NO, nil];
+				   objects:self, checkins, [request error], NO, nil];
 }
 
 - (BOOL) uploadCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate {
@@ -634,11 +646,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			NSDictionary *payload = [json objectForKey:@"payload"];
 			DLog(@"PAYLOAD: %@", payload);
 			if ([@"true" isEqualToString:[payload stringForKey:@"success"]] || [payload boolForKey:@"success"]) {
-				NSString *identifier = [payload stringForKey:@"checkin_id"];
-				if (identifier != nil) {
-					DLog(@"IDENTIFIER: %@", identifier);
-					checkin.identifier = identifier;
-					[self.deployment.checkins setObject:checkin forKey:identifier];
+				NSString *userIdentifier = [payload stringForKey:@"user_id"];
+				DLog(@"USER: %@", userIdentifier);
+				if ([NSString isNilOrEmpty:userIdentifier] == NO) {
+					checkin.user = userIdentifier;
+					if ([self.deployment.users objectForKey:userIdentifier] == nil) {
+						NSMutableString *name = [NSMutableString string];
+						if (checkin.firstName != nil) {
+							[name appendFormat:@"%@", checkin.firstName];
+						}
+						if (checkin.lastName != nil) {
+							if ([name length] > 0) {
+								[name appendFormat:@" %@", checkin.lastName];
+							}
+							else {
+								[name appendFormat:@"%@", checkin.lastName];
+							}
+						}
+						User *user = [[User alloc] initWithIdentifier:userIdentifier name:name];
+						[self.deployment.users setObject:user forKey:userIdentifier];
+						[user release];
+						[self dispatchSelector:@selector(downloadedFromUshahidi:users:error:hasChanges:)
+										target:[request getDelegate] 
+									   objects:self, [self.deployment.users allValues], nil, YES, nil];
+					}
+					else {
+						DLog(@"Already Contains User: %@", userIdentifier);
+					}
+				}
+				NSString *checkinIdentifier = [payload stringForKey:@"checkin_id"];
+				DLog(@"IDENTIFIER: %@", checkinIdentifier);
+				if ([NSString isNilOrEmpty:checkinIdentifier] == NO) {
+					checkin.identifier = checkinIdentifier;
+					[self.deployment.checkins setObject:checkin forKey:checkinIdentifier];
 				}
 			}
 			else {

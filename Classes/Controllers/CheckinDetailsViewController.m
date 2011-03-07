@@ -111,7 +111,7 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through checkins, click Location to view map or tap a Photo to view full screen.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through checkins, click the Location to view a larger map or tap a Photo to view it full screen.", nil)];
 }
 
 - (void)dealloc {

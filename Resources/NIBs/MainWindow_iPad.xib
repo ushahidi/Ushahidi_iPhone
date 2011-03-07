@@ -1030,14 +1030,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">incidentTabViewController</string>
-						<reference key="source" ref="1005714770"/>
-						<reference key="destination" ref="151845411"/>
-					</object>
-					<int key="connectionID">127</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">webViewController</string>
 						<reference key="source" ref="177679496"/>
 						<reference key="destination" ref="260573970"/>
@@ -2084,7 +2076,6 @@
 							<string>checkinDetailsViewController</string>
 							<string>filterButton</string>
 							<string>filterLabel</string>
-							<string>incidentTabViewController</string>
 							<string>mapType</string>
 							<string>mapView</string>
 							<string>refreshButton</string>
@@ -2095,7 +2086,6 @@
 							<string>CheckinDetailsViewController</string>
 							<string>UIBarButtonItem</string>
 							<string>UILabel</string>
-							<string>IncidentTabViewController</string>
 							<string>UISegmentedControl</string>
 							<string>MKMapView</string>
 							<string>UIBarButtonItem</string>
@@ -2109,7 +2099,6 @@
 							<string>checkinDetailsViewController</string>
 							<string>filterButton</string>
 							<string>filterLabel</string>
-							<string>incidentTabViewController</string>
 							<string>mapType</string>
 							<string>mapView</string>
 							<string>refreshButton</string>
@@ -2131,10 +2120,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">filterLabel</string>
 								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">incidentTabViewController</string>
-								<string key="candidateClassName">IncidentTabViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">mapType</string>

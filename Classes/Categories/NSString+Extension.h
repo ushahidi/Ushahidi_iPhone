@@ -25,11 +25,11 @@
 + (BOOL) isNilOrEmpty:(NSString *)string;
 - (BOOL) anyWordHasPrefix:(NSString *)prefix;
 
-- (NSString *)stringByTrimmingSuffix:(NSString *)suffix;
+- (NSString *) stringByTrimmingSuffix:(NSString *)suffix;
 - (NSString *) stringWithMaxLength:(NSInteger)maxLength;
 
-+ (NSString *)getUUID;
-- (NSString *)MD5;
++ (NSString *) getUUID;
+- (NSString *) MD5;
 
 - (BOOL) isUUID;
 - (BOOL) isValidEmail;

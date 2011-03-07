@@ -96,15 +96,15 @@
 }
 
 - (NSString *) dateTimeString {
-	return self.date != nil ? [self.date dateToString:@"h:mm a, ccc, MMM d, yyyy"] : nil;
+	return self.date != nil ? [self.date dateToString:@"h:mm a, ccc, MMM d, yyyy" fromTimeZone:@"UTC"] : nil;
 }
 
 - (NSString *) dateString {
-	return self.date != nil ? [self.date dateToString:@"cccc, MMMM d, yyyy"] : nil;
+	return self.date != nil ? [self.date dateToString:@"cccc, MMMM d, yyyy" fromTimeZone:@"UTC"] : nil;
 }
 
 - (NSString *) timeString {
-	return self.date != nil ? [self.date dateToString:@"h:mm a"] : nil;
+	return self.date != nil ? [self.date dateToString:@"h:mm a" fromTimeZone:@"UTC"] : nil;
 }
 
 - (BOOL) hasPhotos {

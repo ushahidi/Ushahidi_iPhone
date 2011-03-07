@@ -21,7 +21,6 @@
 #import "CheckinMapViewController.h"
 #import "CheckinAddViewController.h"
 #import "CheckinDetailsViewController.h"
-#import "IncidentTabViewController.h"
 #import "MapViewController.h"
 #import "IncidentTableCell.h"
 #import "TableCellFactory.h"
@@ -56,7 +55,7 @@
 
 @implementation CheckinMapViewController
 
-@synthesize incidentTabViewController, checkinAddViewController, checkinDetailsViewController;
+@synthesize checkinAddViewController, checkinDetailsViewController;
 @synthesize deployment, users, user, allCheckins, filteredCheckins;
 @synthesize mapView, mapType, filterLabel, itemPicker, refreshButton, filterButton;
 
@@ -65,7 +64,7 @@
 
 - (IBAction) addCheckin:(id)sender {
 	DLog(@"");
-	[self.incidentTabViewController presentModalViewController:self.checkinAddViewController animated:YES];
+	[self presentModalViewController:self.checkinAddViewController animated:YES];
 }
 
 - (IBAction) refresh:(id)sender {
@@ -136,7 +135,7 @@
 				}
 				else if ([checkin.date compare:existing.date] == NSOrderedDescending) {
 					[checkins setObject:checkin forKey:checkin.user];
-				}	
+				}
 			}
 		}	
 		[self.filteredCheckins addObjectsFromArray:[checkins allValues]];
@@ -150,7 +149,12 @@
 	}
 	[self.mapView removeAllPins];
 	for (Checkin *checkin in self.filteredCheckins) {
-		DLog(@"%@ said %@ on %@", [checkin user], checkin.message, checkin.dateString);
+		for (User *theUser in self.users) {
+			if ([theUser.identifier isEqualToString:checkin.user]) {
+				//DLog(@"%@ %@ by %@ on %@", checkin.identifier, checkin.message, theUser.name, checkin.dateTimeString);
+				break;
+			}
+		}
 		[self.mapView addPinWithTitle:checkin.message 
 							 subtitle:checkin.dateTimeString 
 							 latitude:checkin.latitude 
@@ -202,7 +206,6 @@
 }
 
 - (void)dealloc {
-	[incidentTabViewController release];
 	[checkinAddViewController release];
 	[checkinDetailsViewController release];
 	[deployment release];

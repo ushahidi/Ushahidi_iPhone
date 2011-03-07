@@ -45,6 +45,7 @@
 #import "Bitly.h"
 #import "Settings.h"
 #import "Ushahidi.h"
+#import "Device.h"
 
 @interface IncidentDetailsViewController ()
 
@@ -413,8 +414,10 @@ typedef enum {
 		if (indexPath.row == 0) {
 			return [TextTableCell getCellSizeForText:self.incident.location forWidth:theTableView.contentSize.width].height;
 		}
-		return self.incident.map != nil
-			? self.incident.map.size.height : 150;
+		if (self.incident.map != nil) {
+			return self.incident.map.size.height;
+		}
+		return [Device isIPad] ? 225 : 150;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
 		if ([self.incident.photos count] > 0) {

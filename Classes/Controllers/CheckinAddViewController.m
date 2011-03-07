@@ -72,6 +72,10 @@ typedef enum {
 
 - (IBAction) done:(id)sender {
 	DLog(@"");
+	[[Settings sharedSettings] setFirstName:self.checkin.firstName];
+	[[Settings sharedSettings] setLastName:self.checkin.lastName];
+	[[Settings sharedSettings] setEmail:self.checkin.email];
+	
 	[self.view endEditing:YES];
 	if ([[Ushahidi sharedUshahidi] uploadCheckin:self.checkin forDelegate:self]) {
 		[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nill)];

@@ -290,6 +290,8 @@ typedef enum {
 			[cell setText:NSLocalizedString(@"Downloaded Map Zoom Level", nil)];
 			[cell setText:NSLocalizedString(@"Download Offline Maps", nil)];
 			[cell setValue:self.downloadMaps];
+			DLog(@"BooleanTableCell.backgroundColor:%@", cell.backgroundColor);
+			DLog(@"BooleanTableCell.backgroundView.backgroundColor:%@", cell.backgroundView.backgroundColor);
 			return cell;
 		}
 		else if (indexPath.row == TableRowMapSize) {
@@ -300,6 +302,8 @@ typedef enum {
 			[cell setMinimum:5];
 			[cell setValue:self.mapZoomLevel];
 			[cell setEnabled:self.downloadMaps];
+			DLog(@"SliderTableCell.backgroundColor:%@", cell.backgroundColor);
+			DLog(@"SliderTableCell.backgroundView.backgroundColor:%@", cell.backgroundView.backgroundColor);
 			return cell;
 		}
 	}
@@ -317,6 +321,8 @@ typedef enum {
 			[cell setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Version", nil), [Device appVersion]]];
 			cell.accessoryType = UITableViewCellAccessoryNone;
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+			DLog(@"TextTableCell.backgroundColor:%@", cell.backgroundColor);
+			DLog(@"TextTableCell.backgroundView.backgroundColor:%@", cell.backgroundView.backgroundColor);
 			return cell;
 		}
 		else if (indexPath.row == TableRowAppShare) {

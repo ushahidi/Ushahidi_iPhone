@@ -119,7 +119,10 @@
 				</object>
 				<string key="NSFrameSize">{768, 60}</string>
 				<reference key="NSSuperview"/>
-				<reference key="IBUIBackgroundColor" ref="196837969"/>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC45Njg2Mjc0NTEgMC45Njg2Mjc0NTEgMC45Njg2Mjc0NTEAA</bytes>
+				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<int key="IBUISeparatorStyle">1</int>
 				<reference key="IBUIContentView" ref="841586262"/>

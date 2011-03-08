@@ -21,6 +21,7 @@
 #import "SettingsViewController.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
+#import "ImageTableCell.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
 #import "TextTableCell.h"
@@ -42,6 +43,7 @@
 @property(nonatomic, retain) NSString *website;
 @property(nonatomic, retain) NSString *support;
 @property(nonatomic, retain) NSString *download;
+@property(nonatomic, retain) UIImage *logo;
 
 - (void) dismissModalView;
 
@@ -49,7 +51,7 @@
 
 @implementation SettingsViewController
 
-@synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, email, website, support, download;
+@synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, email, website, support, download, logo;
 
 #pragma mark -
 #pragma mark Enums
@@ -85,7 +87,8 @@ typedef enum {
 	TableRowAppVersion,
 	TableRowAppShare,
 	TableRowAppEmail,
-	TableRowAppWebsite
+	TableRowAppWebsite,
+	TableRowAppLogo
 } TableRowApp;
 
 #pragma mark -
@@ -140,6 +143,7 @@ typedef enum {
 	self.website = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiWebsite"];
 	self.support = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiEmail"];
 	self.download = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiAppStore"];
+	self.logo = [Device isIPad] ? [UIImage imageNamed:@"Logo_iPad.png"] : [UIImage imageNamed:@"Logo_iPhone.png"];
 	[self setHeader:NSLocalizedString(@"Contact Settings", nil) atSection:TableSectionContact];
 	[self setHeader:NSLocalizedString(@"Photo Settings", nil) atSection:TableSectionPhoto];
 	[self setHeader:NSLocalizedString(@"Map Settings", nil) atSection:TableSectionMap];
@@ -153,6 +157,7 @@ typedef enum {
 	self.website = nil;
 	self.support = nil;
 	self.download = nil;
+	self.logo = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -178,6 +183,10 @@ typedef enum {
 	[super viewDidAppear:animated];
 }
 
+- (void) viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
+}
+
 - (void)dealloc {
 	[userEmail release];
 	[firstName release];
@@ -185,6 +194,7 @@ typedef enum {
 	[email release];
 	[website release];
 	[support release];
+	[logo release];
     [super dealloc];
 }
 
@@ -209,7 +219,7 @@ typedef enum {
 		return 1;
 	}
 	if (section == TableSectionApp) {
-		return 4;
+		return 5;
 	}
 	return 0;
 }
@@ -222,6 +232,10 @@ typedef enum {
 	if (indexPath.section == TableSectionMap &&
 		indexPath.row == TableRowMapSize) {
 		return 60;
+	}
+	if (indexPath.section == TableSectionApp &&
+		indexPath.row == TableRowAppLogo) {
+		return theTableView.frame.size.width * self.logo.size.height / self.logo.size.width;
 	}
 	return 40;
 }
@@ -326,6 +340,11 @@ typedef enum {
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 			return cell;
 		}
+		else if (indexPath.row == TableRowAppLogo) {
+			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:self.logo table:theTableView indexPath:indexPath];
+			[cell setImage:self.logo];
+			return cell;
+		}
 	}
 	return nil;
 }
@@ -343,7 +362,8 @@ typedef enum {
 			[message appendFormat:@"Device Version: %@<br/>", [Device deviceVersion]]; 
 			[self.email sendToRecipients:[NSArray arrayWithObject:self.support] withMessage:message withSubject:nil];
 		}
-		else if (indexPath.row == TableRowAppWebsite) {
+		else if (indexPath.row == TableRowAppWebsite ||
+				 indexPath.row == TableRowAppLogo) {
 			[self.alertView showYesNoWithTitle:NSLocalizedString(@"Open In Safari?", nil) andMessage:self.website];
 		}
 	}

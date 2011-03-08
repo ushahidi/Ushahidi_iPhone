@@ -44,6 +44,7 @@
 	NSString *website;
 	NSString *support;
 	NSString *download;
+	UIImage *logo;
 }
 
 - (IBAction) cancel:(id)sender;

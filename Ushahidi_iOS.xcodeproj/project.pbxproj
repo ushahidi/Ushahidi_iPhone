@@ -57,6 +57,7 @@
 		3E4C659B12AD774F001ED08A /* MoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C659A12AD774F001ED08A /* MoviePlayer.m */; };
 		3E4C65BF12AD77DA001ED08A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4C65BE12AD77DA001ED08A /* MediaPlayer.framework */; };
 		3E4C69C712ADBB94001ED08A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4C69C612ADBB94001ED08A /* Default@2x.png */; };
+		3E4CE7AE1325BD37003908D7 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4CE7AD1325BD37003908D7 /* Logo.png */; };
 		3E5BB9EA131056A40073E4F8 /* CheckinAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E5BB9E9131056A40073E4F8 /* CheckinAddViewController_iPhone.xib */; };
 		3E5BB9EC131056B30073E4F8 /* CheckinAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E5BB9EB131056B30073E4F8 /* CheckinAddViewController_iPad.xib */; };
 		3E5BB9F0131056C90073E4F8 /* CheckinAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9EF131056C90073E4F8 /* CheckinAddViewController.m */; };
@@ -346,6 +347,7 @@
 		3E4C659A12AD774F001ED08A /* MoviePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePlayer.m; sourceTree = "<group>"; };
 		3E4C65BE12AD77DA001ED08A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3E4C69C612ADBB94001ED08A /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		3E4CE7AD1325BD37003908D7 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		3E5BB9E9131056A40073E4F8 /* CheckinAddViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinAddViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E5BB9EB131056B30073E4F8 /* CheckinAddViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinAddViewController_iPad.xib; sourceTree = "<group>"; };
 		3E5BB9EE131056C90073E4F8 /* CheckinAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckinAddViewController.h; sourceTree = "<group>"; };
@@ -1049,6 +1051,7 @@
 				3E002FB412949270003452A6 /* Default-Portrait.png */,
 				3E8F5B7212B2C82C0087A64D /* iTunesArtwork */,
 				3E72983F12EE4F9D00FDED00 /* iTunesArtwork.png */,
+				3E4CE7AD1325BD37003908D7 /* Logo.png */,
 				3E15006E1278C37A00036A0F /* empty.png */,
 				3ECFF3DC12AFF52400DE75D7 /* hybrid.png */,
 				3E72990B12EE5CCD00FDED00 /* hybrid@2x.png */,
@@ -1578,6 +1581,7 @@
 				3E8F03BD131566140011E423 /* button_red@2x.png in Resources */,
 				3E8F03EC131568AE0011E423 /* button_red_selected.png in Resources */,
 				3E8F03ED131568AE0011E423 /* button_red_selected@2x.png in Resources */,
+				3E4CE7AE1325BD37003908D7 /* Logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

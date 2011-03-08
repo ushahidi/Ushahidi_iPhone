@@ -108,17 +108,17 @@
 	if (refresh) {
 		[self.allCheckins removeAllObjects];
 		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
-		[self.filterLabel setText:NSLocalizedString(@"Checkins By All Users", nil)];
+		[self.filterLabel setText:NSLocalizedString(@"Last Checkin For Each User", nil)];
 	}
 	else if (self.user != nil) {
 		[self.allCheckins removeAllObjects];
 		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
-		[self.filterLabel setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Checkins By", nil), self.user.name]];
+		[self.filterLabel setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"All Checkins By", nil), self.user.name]];
 	}
 	else {
 		[self.allCheckins removeAllObjects];
 		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
-		[self.filterLabel setText:NSLocalizedString(@"Checkins By All Users", nil)];
+		[self.filterLabel setText:NSLocalizedString(@"Last Checkin For Each User", nil)];
 	}
 	[self.users removeAllObjects];
 	if ([[Ushahidi sharedUshahidi] hasUsers]) {

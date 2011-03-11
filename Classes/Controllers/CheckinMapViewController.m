@@ -191,7 +191,7 @@
 	else {
 		self.title = NSLocalizedString(@"Checkins", nil);
 	}
-	[self populate:self.willBePushed resize:self.willBePushed];
+	[self populate:self.willBePushed resize:YES];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 }
 

@@ -257,7 +257,7 @@ typedef enum {
 		return [Device isIPad] ? 150 : 80;
 	}
 	if (indexPath.section == TableSectionLocation) {
-		return [Device isIPad] ? 450 : 150;
+		return [Device isIPad] ? 450 : 235;
 	}
 	if (indexPath.section == TableSectionPhoto) {
 		if (self.checkin.hasPhotos) {

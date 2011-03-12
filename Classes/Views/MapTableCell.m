@@ -28,6 +28,7 @@
 @property (nonatomic, assign) id<MapTableCellDelegate> delegate;
 
 - (void) annotationClicked:(UIButton *)button;
+- (void) doubleTapped:(id)sender;
 
 @end
 
@@ -58,8 +59,17 @@
 	[self.mapView removeAllPins];
 }
 
-- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude {
-	[self.mapView addPinWithTitle:title subtitle:subtitle latitude:latitude longitude:longitude];
+- (MapAnnotation *) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude {
+	return [self.mapView addPinWithTitle:title subtitle:subtitle latitude:latitude longitude:longitude];
+}
+
+- (void) selectAnnotation:(MapAnnotation *)annotation animated:(BOOL)animated {
+	for (id<MKAnnotation> currentAnnotation in self.mapView.annotations) {       
+		if ([currentAnnotation isEqual:annotation]) {
+			[self.mapView selectAnnotation:currentAnnotation animated:animated];
+			break;
+		}
+	}
 }
 
 - (void) resizeRegionToFitAllPins:(BOOL)animated {
@@ -80,6 +90,34 @@
 
 - (NSString *) userLongitude {
 	return self.mapView.userLocation != nil ? [NSString stringWithFormat:@"%f", self.mapView.userLocation.coordinate.longitude] : nil;
+}
+
+- (void) setTappable:(BOOL)tappable {
+	if (tappable) {
+		[self.mapView removeTapRecognizers];
+		[self.mapView addTapRecognizer:self action:@selector(doubleTapped:) taps:2];
+	}
+	else {
+		[self.mapView removeTapRecognizers];
+	}
+}
+
+- (void) doubleTapped:(id)sender {
+	UITapGestureRecognizer *tapGesture = (UITapGestureRecognizer *)sender;
+	if (tapGesture.state == UIGestureRecognizerStateEnded) {
+		CGPoint point = [tapGesture locationInView:self.mapView];
+		CLLocationCoordinate2D coordinate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+		DLog(@"Latitude:%f, Longitude:%f", coordinate.latitude, coordinate.longitude);
+		NSString *latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
+		NSString *longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
+		if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(mapTableCellTapped:latitude:longitude:)]) {
+			[self.delegate mapTableCellTapped:self latitude:latitude longitude:longitude];
+		}
+		//TODO fix bug in dispatchSelector not sending actual MapTableCell
+		//	[self dispatchSelector:@selector(mapTableCellTapped:latitude:longitude:) 
+		//					target:self.delegate 
+		//				   objects:self, latitude, longitude, nil];	
+	}
 }
 
 #pragma mark -
@@ -126,6 +164,7 @@
 	annotationView.animatesDrop = self.animatesDrop;
 	annotationView.canShowCallout = self.canShowCallout;
 	annotationView.draggable = self.draggable;
+	annotationView.multipleTouchEnabled = NO;
 	if ([annotation class] == MKUserLocation.class) {
 		annotationView.pinColor = MKPinAnnotationColorGreen;
 	}
@@ -161,6 +200,17 @@
 					target:self.delegate 
 				   objects:self, [NSString stringWithFormat:@"%f", userLocation.coordinate.latitude], 
 								 [NSString stringWithFormat:@"%f", userLocation.coordinate.longitude], nil];
+}
+
+
+- (BOOL)canBePreventedByGestureRecognizer:(UIGestureRecognizer *)preventingGestureRecognizer {
+	DLog(@"");
+	return NO;
+}
+
+- (BOOL)canPreventGestureRecognizer:(UIGestureRecognizer *)preventedGestureRecognizer {
+	DLog(@"");
+	return NO;
 }
 
 @end

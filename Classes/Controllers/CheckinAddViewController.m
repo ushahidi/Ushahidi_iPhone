@@ -30,6 +30,7 @@
 #import "Settings.h"
 #import "Device.h"
 #import "NSString+Extension.h"
+#import "MapAnnotation.h"
 
 @interface CheckinAddViewController ()
 
@@ -123,8 +124,8 @@ typedef enum {
 		}
 		else {
 			[self setFooter:NSLocalizedString(@"Locating...", nil) atSection:TableSectionLocation];
-			[[Locator sharedLocator] detectLocationForDelegate:self];
 		}
+		[[Locator sharedLocator] detectLocationForDelegate:self];
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	if ([NSString isNilOrEmpty:self.checkin.email] || [self.checkin.email isValidEmail]) {
@@ -187,8 +188,10 @@ typedef enum {
 		MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setScrollable:YES];
 		[cell setZoomable:YES];
+		[cell setAnimatesDrop:YES];
 		[cell setCanShowCallout:YES];
 		[cell setDraggable:YES];
+		//[cell setTappable:YES];
 		if (self.checkin.latitude != nil && self.checkin.longitude != nil) {
 			NSString *location = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
 			if ([location isEqualToString:cell.location] == NO) {
@@ -378,10 +381,29 @@ typedef enum {
 #pragma mark -
 #pragma mark MKMapViewDelegate
 
-- (void) mapTableCellDragged:(MapTableCell *)mapTableCell latitude:(NSString *)latitude longitude:(NSString *)longitude {
-	DLog(@"dragged: %@, %@", latitude, longitude);
+- (void) mapTableCellDragged:(MapTableCell *)cell latitude:(NSString *)latitude longitude:(NSString *)longitude {
+	DLog(@"dragged:%@ %@, %@", [cell class], latitude, longitude);
 	self.checkin.latitude = latitude;
 	self.checkin.longitude = longitude;
+	[self setFooter:[NSString stringWithFormat:@"%@, %@", latitude, longitude] atSection:TableSectionLocation];
+}
+
+- (void) mapTableCellTapped:(MapTableCell *)cell latitude:(NSString *)latitude longitude:(NSString *)longitude {
+	DLog(@"tapped:%@ %@, %@", [cell class], latitude, longitude);
+	self.checkin.latitude = latitude;
+	self.checkin.longitude = longitude;
+	if ([cell isKindOfClass:[MapTableCell class]]) {
+		[cell removeAllPins];
+		[cell addPinWithTitle:NSLocalizedString(@"User Location", nil) 
+													subtitle:nil 
+													latitude:self.checkin.latitude 
+												   longitude:self.checkin.longitude];
+		[cell setLocation:[NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude]];
+		
+	}
+	else {
+		[self.tableView reloadData];
+	}
 	[self setFooter:[NSString stringWithFormat:@"%@, %@", latitude, longitude] atSection:TableSectionLocation];
 }
 

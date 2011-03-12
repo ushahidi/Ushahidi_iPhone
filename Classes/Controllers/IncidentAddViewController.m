@@ -184,7 +184,7 @@ typedef enum {
 			self.willBePushed = NO;
 			if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
 				[[Locator sharedLocator] detectLocationForDelegate:self];
-				[self setFooter:NSLocalizedString(@"Detecting Location...", nil) 
+				[self setFooter:NSLocalizedString(@"Locating...", nil) 
 					  atSection:TableSectionLocation];	
 			}
 			else {
@@ -512,7 +512,8 @@ typedef enum {
 	else {
 		[self.loadingView hide];
 		[self.tableView reloadData];
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Photo Error", nil) andMessage:NSLocalizedString(@"There was a problem adding the photo.", nil)];
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Photo Error", nil) 
+							 andMessage:NSLocalizedString(@"There was a problem adding the photo.", nil)];
 	}
 }
 

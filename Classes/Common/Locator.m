@@ -78,6 +78,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+	[self.locationManager stopUpdatingLocation];
 	[self dispatchSelector:@selector(locatorFailed:error:)
 					target:self.delegate 
 				   objects:self, error, nil];

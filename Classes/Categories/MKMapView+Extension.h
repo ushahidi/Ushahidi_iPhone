@@ -48,5 +48,7 @@
 - (void) resizeRegionToFitAllPins:(BOOL)includeUserLocation animated:(BOOL)animated;
 - (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta;
 - (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta animated:(BOOL)animated;
+- (UIGestureRecognizer *) addTapRecognizer:(id)target action:(SEL)action taps:(NSInteger)numberOfTaps;
+- (void) removeTapRecognizers;
 
 @end

@@ -56,13 +56,13 @@
 	CLLocationCoordinate2D coordinate;
 	coordinate.latitude = [latitude floatValue];
 	coordinate.longitude = [longitude floatValue];
-	MapAnnotation *mapAnnotation = [[[MapAnnotation alloc] initWithTitle:title 
+	MapAnnotation *mapAnnotation = [[MapAnnotation alloc] initWithTitle:title 
 															   subtitle:subtitle 
 															 coordinate:coordinate
-															   pinColor:pinColor] autorelease];
+															   pinColor:pinColor];
 	[mapAnnotation setObject:object];
 	[self addAnnotation:mapAnnotation];
-	return mapAnnotation;
+	return [mapAnnotation autorelease];
 }
 
 - (void) removeAllPins {
@@ -125,6 +125,28 @@
 		region.span.longitudeDelta = fabs(bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 1.1; 
 		
 		[self setRegion:[self regionThatFits:region] animated:animated];	
+	}
+}
+
+- (UIGestureRecognizer *) addTapRecognizer:(id)target action:(SEL)action taps:(NSInteger)numberOfTaps {
+//	UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:target action:action];
+//	gestureRecognizer.minimumPressDuration = 2.0;
+	
+	UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
+	gestureRecognizer.numberOfTapsRequired = numberOfTaps;
+	gestureRecognizer.numberOfTouchesRequired = 1;
+	
+	gestureRecognizer.cancelsTouchesInView = NO;
+	gestureRecognizer.delaysTouchesBegan = NO;
+	gestureRecognizer.delaysTouchesEnded = NO;
+	
+	[self addGestureRecognizer:gestureRecognizer];
+	return [gestureRecognizer autorelease];
+}
+
+- (void) removeTapRecognizers {
+	for (UIGestureRecognizer *gestureRecognizer in self.gestureRecognizers) {
+		[self removeGestureRecognizer:gestureRecognizer];
 	}
 }
 

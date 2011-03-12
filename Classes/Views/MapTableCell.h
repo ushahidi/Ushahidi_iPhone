@@ -23,6 +23,7 @@
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
 #import "IndexedTableCell.h"
+#import "MapAnnotation.h"
 
 @protocol MapTableCellDelegate;
 
@@ -51,15 +52,17 @@
 - (void) setMapType:(MKMapType)mapType;
 - (void) setScrollable:(BOOL)scrollable;
 - (void) setZoomable:(BOOL)zoomable;
+- (void) setTappable:(BOOL)tappable;
 
 - (NSInteger) numberOfPins;
 - (void) removeAllPins;
-- (void) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (MapAnnotation *) addPinWithTitle:(NSString *)title subtitle:(NSString *)subtitle latitude:(NSString *)latitude longitude:(NSString *)longitude;
 - (void) resizeRegionToFitAllPins:(BOOL)animated;
 - (void) showUserLocation:(BOOL)show;
 - (BOOL) hasUserLocation;
 - (NSString *) userLatitude;
 - (NSString *) userLongitude;
+- (void) selectAnnotation:(MapAnnotation *)annotation animated:(BOOL)animated;
 
 @end
 
@@ -70,5 +73,6 @@
 - (void) mapTableCellSelected:(MapTableCell *)mapTableCell indexPath:(NSIndexPath *)indexPath;
 - (void) mapTableCellLocated:(MapTableCell *)mapTableCell latitude:(NSString *)latitude longitude:(NSString *)longitude;
 - (void) mapTableCellDragged:(MapTableCell *)mapTableCell latitude:(NSString *)latitude longitude:(NSString *)longitude;
+- (void) mapTableCellTapped:(MapTableCell *)mapTableCell latitude:(NSString *)latitude longitude:(NSString *)longitude;
 
 @end

@@ -37,6 +37,7 @@
 @property(nonatomic, retain) NSString *currentLongitude;
 
 - (void) populateMapPins:(BOOL)centerMap;
+- (void) doubleTapped:(id)sender;
 
 @end
 
@@ -120,6 +121,17 @@ typedef enum {
 	}
 }
 
+- (void) doubleTapped:(id)sender {
+	UITapGestureRecognizer *tapGesture = (UITapGestureRecognizer *)sender;
+	CGPoint point = [tapGesture locationInView:self.mapView];
+	CLLocationCoordinate2D coordinate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+	DLog(@"Latitude:%f, Longitude:%f", coordinate.latitude, coordinate.longitude);
+	self.currentLatitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
+	self.currentLongitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
+	[self.tableView reloadData];
+	
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -140,6 +152,13 @@ typedef enum {
 	self.location = self.incident.location;
 	self.latitude = self.incident.latitude;
 	self.longitude = self.incident.longitude;
+//	if (self.location != nil) {
+//		[self.mapView removeTapRecognizers];
+//	}
+//	else {
+//		[self.mapView removeTapRecognizers];
+//		[self.mapView addTapRecognizer:self action:@selector(doubleTapped:) taps:2];
+//	}
 	[self.allRows removeAllObjects];
 	[self.filteredRows removeAllObjects];
 	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsForDelegate:self]];
@@ -248,8 +267,11 @@ typedef enum {
 		self.location = nil;
 		self.latitude = self.currentLatitude;
 		self.longitude = self.currentLongitude;
+		//[self.mapView removeTapRecognizers];
+		//[self.mapView addTapRecognizer:self action:@selector(doubleTapped:) taps:2];
 	}
 	else {
+		//[self.mapView removeTapRecognizers];
 		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
 		DLog(@"checkBoxTableCellChanged:%@ index:[%d, %d] checked:%d", theLocation.name, indexPath.section, indexPath.row, checked)
 		if (checked) {

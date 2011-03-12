@@ -59,7 +59,7 @@
 		}
 		if ([object isKindOfClass:[NSNumber class]]) {
 			NSNumber *number = (NSNumber *)object;
-			return number != 0;
+			return [number intValue] == 1;
 		}
 		return ((NSInteger)object) == 1;
 	}

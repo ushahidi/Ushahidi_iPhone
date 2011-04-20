@@ -108,7 +108,7 @@
 
 - (BOOL) isDuplicate:(Incident *)incident;
 
-- (void) loadDeployment:(Deployment *)theDeployment;
+- (void) loadDeploymentWithDictionary:(NSDictionary *)dict;
 - (void) loadDeploymentInBackground:(Deployment *)theDeployment;
 
 @end
@@ -186,13 +186,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
-- (void) loadDeployment:(Deployment *)theDeployment inBackground:(BOOL)inBackground {
-	if (inBackground) {
-		[self performSelectorInBackground:@selector(loadDeploymentInBackground:) withObject:theDeployment];
-	}
-	else {
-		[self loadDeployment:theDeployment];
-	}
+- (void) loadDeployment:(Deployment *)theDeployment forDelegate:(id<UshahidiDelegate>)delegate {
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:theDeployment, @"deployment", delegate, @"delegate", nil]; 
+	[self performSelectorInBackground:@selector(loadDeploymentWithDictionary:) withObject:dictionary];
+}
+
+- (void) unloadDeployment {
+	[self performSelectorInBackground:@selector(loadDeploymentInBackground:) withObject:nil];
 }
 
 - (void) loadDeployment:(Deployment *)theDeployment {
@@ -210,12 +210,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		[[Settings sharedSettings] setLastDeployment:nil];
 		self.deployment = nil;
 	}
-	[[Settings sharedSettings] save];
+	[self.mapQueue cancelAllOperations];
+	[self.photoQueue cancelAllOperations];
+	[self.mainQueue cancelAllOperations];
+	[[Settings sharedSettings] save];	
 }
 
 - (void) loadDeploymentInBackground:(Deployment *)theDeployment {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	[self loadDeployment:theDeployment];
+	[pool release];
+}
+
+- (void) loadDeploymentWithDictionary:(NSDictionary *)dictionary {
+	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+	Deployment *theDeployment = [dictionary objectForKey:@"deployment"];
+	[self loadDeployment:theDeployment];
+	[self dispatchSelector:@selector(loadedFromUshahidi:deployment:)
+					target:[dictionary objectForKey:@"delegate"] 
+				   objects:self, theDeployment, nil];
 	[pool release];
 }
 

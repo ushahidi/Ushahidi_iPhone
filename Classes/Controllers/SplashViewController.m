@@ -46,7 +46,7 @@
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
 		if (deployment != nil) {
 			[self.navigationController pushViewController:self.deploymentTableViewController animated:NO];
-			[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
+			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 			if (deployment.supportsCheckins) {
 				self.checkinMapViewController.deployment = deployment;
 				[self.navigationController pushViewController:self.checkinMapViewController animated:YES];	

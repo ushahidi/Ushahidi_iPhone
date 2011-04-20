@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 	if ((self = [super init])) {
 		self.locationManager = [[CLLocationManager alloc] init];
 		self.locationManager.delegate = self;
-		self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 	}
 	return self;
 }

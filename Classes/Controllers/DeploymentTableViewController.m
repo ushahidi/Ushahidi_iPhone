@@ -115,6 +115,18 @@ typedef enum {
 	}
 }
 
+- (void) loadedFromUshahidi:(Ushahidi *)ushahidi deployment:(Deployment *)deployment {
+	DLog(@"");
+	if (deployment.supportsCheckins) {
+		self.checkinMapViewController.deployment = deployment;
+		[self.navigationController pushViewController:self.checkinMapViewController animated:YES];
+	}
+	else {
+		self.incidentTabViewController.deployment = deployment;
+		[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
+	}
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -155,10 +167,11 @@ typedef enum {
 		DLog(@"Re-Adding Rows: %d", [deployments count]);
 	}
 	if (animated) {
-		[[Ushahidi sharedUshahidi] loadDeployment:nil inBackground:YES];
+		[[Ushahidi sharedUshahidi] unloadDeployment];
 	}
 	[self.tableView reloadData];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
+	[self.loadingView hide];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -227,16 +240,9 @@ typedef enum {
 	if (self.tableView.editing == NO) {
 		[self.view endEditing:YES];
 		[theTableView deselectRowAtIndexPath:indexPath animated:YES];
+		[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
-		[[Ushahidi sharedUshahidi] loadDeployment:deployment inBackground:NO];
-		if (deployment.supportsCheckins) {
-			self.checkinMapViewController.deployment = deployment;
-			[self.navigationController pushViewController:self.checkinMapViewController animated:YES];
-		}
-		else {
-			self.incidentTabViewController.deployment = deployment;
-			[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
-		}
+		[[Ushahidi sharedUshahidi] loadDeployment:deployment forDelegate:self];
 	}
 }
 

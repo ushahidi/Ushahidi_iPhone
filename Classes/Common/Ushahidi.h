@@ -63,7 +63,11 @@
 - (void) getVersionOfDeployment:(Deployment *)theDeployment forDelegate:(id<UshahidiDelegate>)delegate;
 
 - (NSArray *) getDeploymentsUsingSorter:(SEL)sorter;
-- (void) loadDeployment:(Deployment *)deployment inBackground:(BOOL)inBackground;
+
+- (void) unloadDeployment;
+- (void) loadDeployment:(Deployment *)deployment;
+- (void) loadDeployment:(Deployment *)deployment forDelegate:(id<UshahidiDelegate>)delegate;
+
 - (BOOL) addDeployment:(Deployment *)deployment;
 - (BOOL) removeDeployment:(Deployment *)deployment;
 - (Deployment *) getDeploymentWithUrl:(NSString *)url;
@@ -99,6 +103,8 @@
 @protocol UshahidiDelegate <NSObject>
 
 @optional
+
+- (void) loadedFromUshahidi:(Ushahidi *)ushahidi deployment:(Deployment *)deployment;
 
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi version:(Deployment *)deployment;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)categories;

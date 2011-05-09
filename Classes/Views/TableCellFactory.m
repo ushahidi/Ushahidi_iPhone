@@ -34,6 +34,7 @@
 #import "DeploymentTableCell.h"
 #import "IncidentTableCell.h"
 #import "SliderTableCell.h"
+#import "Settings.h"
 #import "Device.h"
 
 @interface TableCellFactory ()
@@ -77,7 +78,7 @@
 	if (cell == nil) {
 		NSString *nibName = [Device isIPad] ? @"DeploymentTableCell_iPad" : @"DeploymentTableCell_iPhone";
 		cell = (DeploymentTableCell *)[TableCellFactory getTableViewCellFromNib:nibName];
-		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
+		[cell setSelectedColor:[[Settings sharedSettings] tableSelectRowColor]];
 	}
 	cell.indexPath = indexPath;
 	return cell;
@@ -92,7 +93,7 @@
 	if (cell == nil) {
 		NSString *nibName = [Device isIPad] ? @"IncidentTableCell_iPad" : @"IncidentTableCell_iPhone";
 		cell = (IncidentTableCell *)[TableCellFactory getTableViewCellFromNib:nibName];
-		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
+		[cell setSelectedColor:[[Settings sharedSettings] tableSelectRowColor]];
 	}
 	cell.indexPath = indexPath;
 	return cell;
@@ -120,7 +121,7 @@
 	TextTableCell *cell = (TextTableCell *)[tableView dequeueReusableCellWithIdentifier:@"TextTableCell"];
 	if (cell == nil) {
 		cell = [[TextTableCell alloc] initWithReuseIdentifier:@"TextTableCell"];
-		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
+		[cell setSelectedColor:[[Settings sharedSettings] tableSelectRowColor]];
 	}
 	cell.indexPath = indexPath;
 	return cell;
@@ -134,7 +135,7 @@
 	SubtitleTableCell *cell = (SubtitleTableCell *)[tableView dequeueReusableCellWithIdentifier:@"SubtitleTableCell"];
 	if (cell == nil) {
 		cell = [[[SubtitleTableCell alloc] initWithIdentifier:@"SubtitleTableCell"] autorelease];
-		cell.selectedColor = [UIColor ushahidiDarkBrown];
+		cell.selectedColor = [[Settings sharedSettings] tableSelectRowColor];
 	}
 	cell.indexPath = indexPath;
 	return cell;
@@ -209,7 +210,7 @@
 		cell = [[[CheckBoxTableCell alloc] initForDelegate:delegate reuseIdentifier:@"CheckBoxTableCell"] autorelease];
 		cell.checkedImage = [UIImage imageNamed:@"selected.png"];
 		cell.uncheckedImage = [UIImage imageNamed:@"unselected.png"];
-		[cell setSelectedColor:[UIColor ushahidiDarkBrown]];
+		[cell setSelectedColor:[[Settings sharedSettings] tableSelectRowColor]];
 	}
 	cell.indexPath = indexPath;
 	return cell;

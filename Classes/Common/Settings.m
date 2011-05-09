@@ -20,6 +20,7 @@
 
 #import "Settings.h"
 #import "SynthesizeSingleton.h"
+#import "UIColor+Extension.h"
 
 @interface Settings ()
 
@@ -30,6 +31,7 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
 @synthesize email, firstName, lastName, lastDeployment, lastIncident, mapDistance, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
+@synthesize mapName, mapURL, navBarTintColor, toolBarTintColor, searchBarTintColor, tablePlainBackColor, tableGroupedBackColor, tableOddRowColor, tableEvenRowColor, tableSelectRowColor, tableHeaderBackColor, tableHeaderTextColor, verifiedTextColor, unverifiedTextColor, darkTextColor, liteTextColor;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -46,6 +48,27 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		if (self.mapZoomLevel == 0) self.mapZoomLevel = 12;
 		self.mapDistance = [[NSUserDefaults standardUserDefaults] stringForKey:@"mapDistance"];
 		if (self.mapDistance == nil) self.mapDistance = @"500";
+		
+		NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+		NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:filePath];
+		self.mapName = [settings objectForKey:@"MapURL"];
+		self.mapURL = [settings objectForKey:@"MapURL"];
+		
+		self.navBarTintColor = [UIColor colorFromHexString:[settings objectForKey:@"NavBarTintColor"]];
+		self.toolBarTintColor = [UIColor colorFromHexString:[settings objectForKey:@"ToolBarTintColor"]];
+		self.searchBarTintColor = [UIColor colorFromHexString:[settings objectForKey:@"SearchBarTintColor"]];
+		
+		self.tablePlainBackColor = [UIColor colorFromHexString:[settings objectForKey:@"TablePlainBackColor"]];
+		self.tableGroupedBackColor = [UIColor colorFromHexString:[settings objectForKey:@"TableGroupedBackColor"]];
+		self.tableOddRowColor = [UIColor colorFromHexString:[settings objectForKey:@"TableOddRowColor"]];
+		self.tableEvenRowColor = [UIColor colorFromHexString:[settings objectForKey:@"TableEvenRowColor"]];
+		self.tableSelectRowColor = [UIColor colorFromHexString:[settings objectForKey:@"TableSelectRowColor"]];
+		self.tableHeaderBackColor = [UIColor colorFromHexString:[settings objectForKey:@"TableHeaderBackColor"]];
+		self.tableHeaderTextColor = [UIColor colorFromHexString:[settings objectForKey:@"TableHeaderTextColor"]];
+		self.verifiedTextColor = [UIColor colorFromHexString:[settings objectForKey:@"VerifiedTextColor"]];
+		self.unverifiedTextColor = [UIColor colorFromHexString:[settings objectForKey:@"UnverifiedTextColor"]];
+		self.darkTextColor = [UIColor colorFromHexString:[settings objectForKey:@"DarkTextColor"]];
+		self.liteTextColor = [UIColor colorFromHexString:[settings objectForKey:@"LiteTextColor"]];
 	}
 	return self;
 }
@@ -57,6 +80,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[lastDeployment release];
 	[lastIncident release];
 	[mapDistance release];
+	[mapURL release];
+	[mapName release];
 	[super dealloc];
 }
 

@@ -79,6 +79,11 @@ typedef enum {
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	[self.webView stopLoading];
+}
+
 - (void)dealloc {
 	[webView release];
 	[backForwardButton release];

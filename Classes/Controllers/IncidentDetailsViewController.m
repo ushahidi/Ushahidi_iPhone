@@ -179,9 +179,8 @@ typedef enum {
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
-	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
-	self.oddRowColor = [UIColor ushahidiLiteTan];
-	self.evenRowColor = [UIColor ushahidiLiteTan];
+	self.oddRowColor = [[Settings sharedSettings] tableOddRowColor];
+	self.evenRowColor = [[Settings sharedSettings] tableOddRowColor];
 	self.email = [[Email alloc] initWithController:self];
 	self.sms = [[SMS alloc] initWithController:self];
 	self.moviePlayer = [[MoviePlayer alloc] initWithController:self];

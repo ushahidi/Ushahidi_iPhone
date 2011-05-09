@@ -34,6 +34,23 @@
 	CGFloat imageWidth;
 	NSInteger mapZoomLevel;
 	
+	NSString *mapName;
+	NSString *mapURL;
+	UIColor *navBarTintColor;
+	UIColor *toolBarTintColor;
+	UIColor *searchBarTintColor;
+	UIColor *tablePlainBackColor;
+	UIColor *tableGroupedBackColor;
+	UIColor *tableOddRowColor;
+	UIColor *tableEvenRowColor;
+	UIColor *tableSelectRowColor;
+	UIColor *tableHeaderBackColor;
+	UIColor *tableHeaderTextColor;
+	UIColor *verifiedTextColor;
+	UIColor *unverifiedTextColor;
+	UIColor *darkTextColor;
+	UIColor *liteTextColor;
+	
 }
 
 @property(nonatomic, retain) NSString *email;
@@ -46,6 +63,25 @@
 @property(nonatomic, assign) BOOL becomeDiscrete;
 @property(nonatomic, assign) CGFloat imageWidth;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
+
+@property(nonatomic, retain) NSString *mapName;
+@property(nonatomic, retain) NSString *mapURL;
+
+@property(nonatomic, retain) UIColor *navBarTintColor;
+@property(nonatomic, retain) UIColor *toolBarTintColor;
+@property(nonatomic, retain) UIColor *searchBarTintColor;
+
+@property(nonatomic, retain) UIColor *tablePlainBackColor;
+@property(nonatomic, retain) UIColor *tableGroupedBackColor;
+@property(nonatomic, retain) UIColor *tableOddRowColor;
+@property(nonatomic, retain) UIColor *tableEvenRowColor;
+@property(nonatomic, retain) UIColor *tableSelectRowColor;
+@property(nonatomic, retain) UIColor *tableHeaderBackColor;
+@property(nonatomic, retain) UIColor *tableHeaderTextColor;
+@property(nonatomic, retain) UIColor *verifiedTextColor;
+@property(nonatomic, retain) UIColor *unverifiedTextColor;
+@property(nonatomic, retain) UIColor *darkTextColor;
+@property(nonatomic, retain) UIColor *liteTextColor;
 
 + (Settings *) sharedSettings;
 

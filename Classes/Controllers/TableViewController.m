@@ -23,6 +23,7 @@
 #import "UIView+Extension.h"
 #import "TableHeaderView.h"
 #import "UIColor+Extension.h"
+#import "Settings.h"
 #import "Device.h"
 
 @interface TableViewController ()
@@ -43,7 +44,7 @@
 
 @implementation TableViewController
 
-@synthesize tableView, toolBar, allRows, filteredRows, oddRowColor, evenRowColor, shouldBeginEditing, headers, footers, editing;
+@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, shouldBeginEditing, headers, footers, editing;
 
 - (void) hideSearchBar {
 	if (self.tableView.tableHeaderView != nil) {
@@ -63,6 +64,7 @@
 	searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	searchBar.barStyle = UIBarStyleBlack;
 	searchBar.placeholder = placeholder;
+	searchBar.tintColor = [[Settings sharedSettings] searchBarTintColor];
 	[searchBar sizeToFit];
 	[self.tableView setTableHeaderView:searchBar];
 	[searchBar release];
@@ -165,6 +167,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	DLog(@"%@", self.nibName);
+	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 	self.allRows = [NSMutableArray arrayWithCapacity:0];
 	self.filteredRows = [NSMutableArray arrayWithCapacity:0];
 	self.headers = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -173,7 +176,17 @@
 	if ([Device isIPad]) {
 		[self.tableView setBackgroundView:nil];
 		[self.tableView setBackgroundView:[[[UIView alloc] init] autorelease]];
-		[self.tableView setBackgroundColor:[UIColor ushahidiLiteTan]];	
+		[self.tableView setBackgroundColor:[[Settings sharedSettings] tableGroupedBackColor]];	
+	}
+	if (self.tableView.style == UITableViewStyleGrouped) {
+		self.tableView.backgroundColor = [[Settings sharedSettings] tableGroupedBackColor];
+		self.oddRowColor = [UIColor whiteColor];
+		self.evenRowColor = [UIColor whiteColor];
+	}
+	else {
+		self.tableView.backgroundColor = [[Settings sharedSettings] tablePlainBackColor];
+		self.oddRowColor = [[Settings sharedSettings] tableOddRowColor];
+		self.evenRowColor = [[Settings sharedSettings] tableEvenRowColor];
 	}
 }
 
@@ -220,7 +233,6 @@
 	[allRows release];
 	[filteredRows release];
 	[tableView release];
-	[toolBar release];
 	[oddRowColor release];
 	[evenRowColor release];
 	[headers release];
@@ -260,10 +272,10 @@
 	if ([self.headers count] > section) {
 		NSString *header = [self.headers objectForKey:[NSString stringWithFormat:@"%d", section]];
 		if (self.tableView.style == UITableViewStyleGrouped) {
-			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor clearColor]];
+			return [TableHeaderView headerForTable:theTableView text:header textColor:[[Settings sharedSettings] tableHeaderTextColor] backgroundColor:[UIColor clearColor]];
 		}
 		else {
-			return [TableHeaderView headerForTable:theTableView text:header textColor:[UIColor ushahidiRed] backgroundColor:[UIColor ushahidiDarkBrown]];
+			return [TableHeaderView headerForTable:theTableView text:header textColor:[[Settings sharedSettings] tableHeaderTextColor] backgroundColor:[[Settings sharedSettings] tableHeaderBackColor]];
 		}
 	}
 	return nil;

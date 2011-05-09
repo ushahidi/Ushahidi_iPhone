@@ -24,6 +24,7 @@
 @class IncidentTableViewController;
 @class IncidentMapViewController;
 @class CheckinMapViewController;
+@class SettingsViewController;
 @class Deployment;
 
 @interface IncidentTabViewController : BaseViewController {
@@ -32,13 +33,18 @@
 	IncidentTableViewController *incidentTableViewController;
 	IncidentMapViewController *incidentMapViewController;
 	CheckinMapViewController *checkinMapViewController;
+	SettingsViewController *settingsViewController;
 	Deployment *deployment;
 	UISegmentedControl *viewMode;
+	
+@private 
+	UIButton *settingsButton;
 }
 
 @property(nonatomic,retain) IBOutlet IncidentTableViewController *incidentTableViewController;
 @property(nonatomic,retain) IBOutlet IncidentMapViewController *incidentMapViewController;
 @property(nonatomic,retain) IBOutlet CheckinMapViewController *checkinMapViewController;
+@property(nonatomic,retain) IBOutlet SettingsViewController *settingsViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *viewMode;
 @property(nonatomic,retain) Deployment *deployment;
 

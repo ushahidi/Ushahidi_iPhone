@@ -116,9 +116,6 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
-	self.oddRowColor = [UIColor ushahidiDarkTan];
-	self.evenRowColor = [UIColor ushahidiLiteBrown];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
 	self.mapDialog = [[MapDialog alloc] initForDelegate:self];
 	self.mapDistance = [[Settings sharedSettings] mapDistance];

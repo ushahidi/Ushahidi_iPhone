@@ -29,6 +29,7 @@
 
 @class CheckinAddViewController;
 @class CheckinDetailsViewController;
+@class SettingsViewController;
 @class Deployment;
 @class User;
 
@@ -38,6 +39,7 @@
 @public
 	CheckinAddViewController *checkinAddViewController;
 	CheckinDetailsViewController *checkinDetailsViewController;
+	SettingsViewController *settingsViewController;
 	Deployment *deployment;
 	UIBarButtonItem *refreshButton;
 	UIBarButtonItem *filterButton;
@@ -55,6 +57,7 @@
 
 @property(nonatomic,retain) IBOutlet CheckinAddViewController *checkinAddViewController;
 @property(nonatomic,retain) IBOutlet CheckinDetailsViewController *checkinDetailsViewController;
+@property(nonatomic,retain) IBOutlet SettingsViewController *settingsViewController;
 @property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;

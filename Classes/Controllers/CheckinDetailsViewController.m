@@ -31,6 +31,7 @@
 #import "Ushahidi.h"
 #import "Incident.h"
 #import "Device.h"
+#import "Settings.h"
 
 @interface CheckinDetailsViewController()
 
@@ -86,9 +87,8 @@ typedef enum {
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
-	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
-	self.oddRowColor = [UIColor ushahidiLiteTan];
-	self.evenRowColor = [UIColor ushahidiLiteTan];
+	self.oddRowColor = [[Settings sharedSettings] tableOddRowColor];
+	self.evenRowColor = [[Settings sharedSettings] tableOddRowColor];
 	[self setHeader:NSLocalizedString(@"Name", nil) atSection:TableSectionName];
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDate];
 	[self setHeader:NSLocalizedString(@"Message", nil) atSection:TableSectionMessage];

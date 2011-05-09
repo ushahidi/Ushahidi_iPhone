@@ -138,7 +138,6 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	self.email = [[Email alloc] initWithController:self];
 	self.website = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiWebsite"];
 	self.support = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiEmail"];

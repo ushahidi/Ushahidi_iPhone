@@ -183,9 +183,6 @@ typedef enum {
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
 	self.categories = [[NSMutableArray alloc] initWithCapacity:0];
 	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
-	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
-	self.oddRowColor = [UIColor ushahidiLiteTan];
-	self.evenRowColor = [UIColor ushahidiDarkTan];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", nil)];
 	[self setHeader:NSLocalizedString(@"Pending Upload", nil) atSection:TableSectionPending];
 	[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];

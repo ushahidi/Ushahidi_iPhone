@@ -31,6 +31,7 @@
 #import "InputView.h"
 #import "Deployment.h"
 #import "NSString+Extension.h"
+#import "Settings.h"
 
 @interface DeploymentTableViewController ()
 
@@ -132,9 +133,6 @@ typedef enum {
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.tableView.backgroundColor = [UIColor ushahidiLiteTan];
-	self.oddRowColor = [UIColor ushahidiDarkTan];
-	self.evenRowColor = [UIColor ushahidiLiteBrown];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
 	
 	self.settingsButton = [UIButton buttonWithType:UIButtonTypeInfoLight];

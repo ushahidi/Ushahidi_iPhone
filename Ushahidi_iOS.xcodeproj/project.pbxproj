@@ -253,6 +253,7 @@
 		3EE0CBB0132678DC009FB883 /* Logo_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE0CBAC132678DC009FB883 /* Logo_iPad@2x.png */; };
 		3EE0CBB1132678DC009FB883 /* Logo_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE0CBAD132678DC009FB883 /* Logo_iPhone.png */; };
 		3EE0CBB2132678DC009FB883 /* Logo_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE0CBAE132678DC009FB883 /* Logo_iPhone@2x.png */; };
+		3EE3A4BA137883C600DBF109 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3A4B9137883C600DBF109 /* Settings.plist */; };
 		3EE3EDDD12B7EDF600782581 /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3EDDC12B7EDF600782581 /* sms.png */; };
 		3EEE8E281311888B0096CBEA /* IncidentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE8E271311888B0096CBEA /* IncidentTableViewController.m */; };
 		3EEE8E2B131188970096CBEA /* IncidentMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE8E2A131188970096CBEA /* IncidentMapViewController.m */; };
@@ -322,8 +323,8 @@
 		3E236396128C7DB400CF804A /* IndexedTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedTableCell.m; sourceTree = "<group>"; };
 		3E244E70128DFDE400B36DB6 /* NSURL+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Extension.h"; sourceTree = "<group>"; };
 		3E244E71128DFDE400B36DB6 /* NSURL+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Extension.m"; sourceTree = "<group>"; };
-		3E24638B128DAD1A00C01DF6 /* Ushahidi_iOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ushahidi_iOS_Prefix.pch; sourceTree = "<group>"; };
-		3E24638C128DAD1A00C01DF6 /* Ushahidi_iOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ushahidi_iOS-Info.plist"; sourceTree = "<group>"; };
+		3E24638B128DAD1A00C01DF6 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		3E24638C128DAD1A00C01DF6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E2E853612787E7F00ADA49B /* MotionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionWindow.h; sourceTree = "<group>"; };
 		3E2E853712787E7F00ADA49B /* MotionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionWindow.m; sourceTree = "<group>"; };
 		3E30492712874F3600E3C942 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
@@ -690,6 +691,7 @@
 		3EE0CBAC132678DC009FB883 /* Logo_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPad@2x.png"; sourceTree = "<group>"; };
 		3EE0CBAD132678DC009FB883 /* Logo_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPhone.png; sourceTree = "<group>"; };
 		3EE0CBAE132678DC009FB883 /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
+		3EE3A4B9137883C600DBF109 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		3EE3EDDC12B7EDF600782581 /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
 		3EEE8E261311888B0096CBEA /* IncidentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentTableViewController.h; sourceTree = "<group>"; };
 		3EEE8E271311888B0096CBEA /* IncidentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentTableViewController.m; sourceTree = "<group>"; };
@@ -779,8 +781,9 @@
 			isa = PBXGroup;
 			children = (
 				3E98EF171211BC9800C35F36 /* main.m */,
-				3E24638B128DAD1A00C01DF6 /* Ushahidi_iOS_Prefix.pch */,
-				3E24638C128DAD1A00C01DF6 /* Ushahidi_iOS-Info.plist */,
+				3E24638B128DAD1A00C01DF6 /* Prefix.pch */,
+				3E24638C128DAD1A00C01DF6 /* Info.plist */,
+				3EE3A4B9137883C600DBF109 /* Settings.plist */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -1594,6 +1597,7 @@
 				3EE0CBB0132678DC009FB883 /* Logo_iPad@2x.png in Resources */,
 				3EE0CBB1132678DC009FB883 /* Logo_iPhone.png in Resources */,
 				3EE0CBB2132678DC009FB883 /* Logo_iPhone@2x.png in Resources */,
+				3EE3A4BA137883C600DBF109 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1762,8 +1766,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
-				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
+				GCC_PREFIX_HEADER = Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -1780,8 +1784,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
-				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
+				GCC_PREFIX_HEADER = Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -1817,8 +1821,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
-				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
+				GCC_PREFIX_HEADER = Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -1854,8 +1858,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Ushahidi_iOS_Prefix.pch;
-				INFOPLIST_FILE = "Ushahidi_iOS-Info.plist";
+				GCC_PREFIX_HEADER = Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",

@@ -27,6 +27,7 @@
 #import "TextFieldTableCell.h"
 #import "NSString+Extension.h"
 #import "MGTwitterEngine.h"
+#import "Settings.h"
 #import "OAToken.h"
 
 @interface TwitterViewController ()
@@ -137,8 +138,6 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
-	//Twitter API
 	self.twitter = [[MGTwitterEngine alloc] initWithDelegate:self];
 	
 	NSString *twitterKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterKey];

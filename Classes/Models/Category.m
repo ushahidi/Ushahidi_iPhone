@@ -33,7 +33,7 @@
 			self.identifier = [dictionary objectForKey:@"id"];
 			self.title = [dictionary objectForKey:@"title"];
 			self.description = [dictionary objectForKey:@"description"];
-			self.color = [UIColor colorWithHexString:[dictionary objectForKey:@"color"]];
+			self.color = [UIColor colorFromHexString:[dictionary objectForKey:@"color"]];
 		}
 	}
 	return self;
@@ -51,7 +51,7 @@
 		self.description = newDecription;
 		hasChanges = YES;
 	}
-	UIColor *newColor = [UIColor colorWithHexString:[dictionary objectForKey:@"color"]];
+	UIColor *newColor = [UIColor colorFromHexString:[dictionary objectForKey:@"color"]];
 	if ([self.color isEqualToColor:newColor] == NO) {
 		self.color = newColor;
 		hasChanges = YES;

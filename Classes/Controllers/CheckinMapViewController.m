@@ -21,6 +21,7 @@
 #import "CheckinMapViewController.h"
 #import "CheckinAddViewController.h"
 #import "CheckinDetailsViewController.h"
+#import "SettingsViewController.h"
 #import "MapViewController.h"
 #import "IncidentTableCell.h"
 #import "TableCellFactory.h"
@@ -55,7 +56,7 @@
 
 @implementation CheckinMapViewController
 
-@synthesize checkinAddViewController, checkinDetailsViewController;
+@synthesize checkinAddViewController, checkinDetailsViewController, settingsViewController;
 @synthesize deployment, users, user, allCheckins, filteredCheckins;
 @synthesize mapView, mapType, filterLabel, itemPicker, refreshButton, filterButton;
 
@@ -71,6 +72,12 @@
 	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
+}
+
+- (void) settings:(id)sender {
+	DLog(@"");
+	self.settingsViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:self.settingsViewController animated:YES];
 }
 
 - (IBAction) mapTypeChanged:(id)sender {
@@ -208,6 +215,7 @@
 - (void)dealloc {
 	[checkinAddViewController release];
 	[checkinDetailsViewController release];
+	[settingsViewController release];
 	[deployment release];
 	[mapType release];
 	[itemPicker release];

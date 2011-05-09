@@ -31,6 +31,8 @@
 
 @public 
 	IBOutlet WebViewController *webViewController;
+	IBOutlet UINavigationBar *navigationBar;
+	IBOutlet UIToolbar *toolBar;
 	
 @protected
 	LoadingViewController *loadingView;
@@ -41,6 +43,8 @@
 }
 
 @property(nonatomic, retain) WebViewController *webViewController;
+@property(nonatomic, retain) UINavigationBar *navigationBar;
+@property(nonatomic, retain) UIToolbar *toolBar;
 @property(nonatomic, retain) LoadingViewController *loadingView;
 @property(nonatomic, retain) InputView *inputView;
 @property(nonatomic, retain) AlertView *alertView;

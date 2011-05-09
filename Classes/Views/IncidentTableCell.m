@@ -21,6 +21,7 @@
 #import "IncidentTableCell.h"
 #import "UIColor+Extension.h"
 #import "Device.h"
+#import "Settings.h"
 
 @implementation IncidentTableCell
 
@@ -129,12 +130,12 @@ typedef enum {
 - (void) setVerified:(BOOL) verified {
 	if (verified) {
 		self.verifiedLabel.text = NSLocalizedString(@"Verified", nil);
-		self.verifiedLabel.textColor = [UIColor ushahidiVerified];
+		self.verifiedLabel.textColor = [[Settings sharedSettings] verifiedTextColor];
 		self.verifiedLabel.tag = VerifiedYes;
 	}
 	else {
 		self.verifiedLabel.text = NSLocalizedString(@"Unverified", nil);
-		self.verifiedLabel.textColor = [UIColor ushahidiUnverified];
+		self.verifiedLabel.textColor = [[Settings sharedSettings] unverifiedTextColor];
 		self.verifiedLabel.tag = VerifiedNo;
 	}
 }

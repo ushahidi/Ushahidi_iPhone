@@ -41,8 +41,26 @@
 #pragma mark private
 
 - (void) pushNextViewController {
+	NSString *mapURL = [[Settings sharedSettings] mapURL];
+	NSString *mapName = [[Settings sharedSettings] mapName];
 	NSString *lastDeployment = [[Settings sharedSettings] lastDeployment];
-	if ([NSString isNilOrEmpty:lastDeployment] == NO) {
+	if ([NSString isNilOrEmpty:mapURL] == NO && [NSString isNilOrEmpty:mapName] == NO) {
+		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:mapURL];
+		if (deployment == nil) {
+			deployment = [[[Deployment alloc] initWithName:mapName url:mapURL] autorelease];
+			[[Ushahidi sharedUshahidi] addDeployment:deployment];
+			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
+		}
+		if (deployment.supportsCheckins) {
+			self.checkinMapViewController.deployment = deployment;
+			[self.navigationController pushViewController:self.checkinMapViewController animated:YES];	
+		}
+		else {
+			self.incidentTabViewController.deployment = deployment;
+			[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
+		}
+	}
+	else if ([NSString isNilOrEmpty:lastDeployment] == NO) {
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
 		if (deployment != nil) {
 			[self.navigationController pushViewController:self.deploymentTableViewController animated:NO];

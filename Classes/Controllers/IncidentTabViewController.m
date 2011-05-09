@@ -22,12 +22,16 @@
 #import "IncidentTableViewController.h";
 #import "IncidentMapViewController.h";
 #import "CheckinMapViewController.h";
+#import "SettingsViewController.h"
+#import "NSString+Extension.h"
 #import "UIView+Extension.h"
 #import "Deployment.h"
 #import "Device.h"
 #import "Settings.h"
 
 @interface IncidentTabViewController ()
+
+@property(nonatomic, retain) UIButton *settingsButton;
 
 - (void) showViewController:(UIViewController *)viewController animated:(BOOL)animated;
 - (UIViewController *) getViewControllerForView:(UIView *)view;
@@ -36,7 +40,8 @@
 
 @implementation IncidentTabViewController
 
-@synthesize incidentTableViewController, incidentMapViewController, checkinMapViewController, viewMode, deployment;
+@synthesize incidentTableViewController, incidentMapViewController, checkinMapViewController, settingsViewController;
+@synthesize viewMode, deployment, settingsButton;
 
 #pragma mark -
 #pragma mark Enums
@@ -95,8 +100,29 @@ typedef enum {
 	}
 }
 
+- (void) settings:(id)sender {
+	DLog(@"");
+	self.settingsViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:self.settingsViewController animated:YES];
+}
+
 #pragma mark -
 #pragma mark UIViewController
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	if ([NSString isNilOrEmpty:[[Settings sharedSettings] mapURL]] == NO && 
+		[NSString isNilOrEmpty:[[Settings sharedSettings] mapName]] == NO) {
+		self.settingsButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+		[self.settingsButton addTarget:self action:@selector(settings:) forControlEvents:UIControlEventTouchUpInside];
+		self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:self.settingsButton] autorelease];
+	}
+} 
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+	self.settingsButton = nil;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
@@ -170,16 +196,14 @@ typedef enum {
 	}	
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
 - (void)dealloc {
 	[incidentTableViewController release];
 	[incidentMapViewController release];
 	[checkinMapViewController release];
+	[settingsViewController release];
 	[viewMode release];
 	[deployment release];
+	[settingsButton release];
     [super dealloc];
 }
 

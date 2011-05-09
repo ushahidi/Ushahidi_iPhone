@@ -155,8 +155,6 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.view.backgroundColor = [UIColor ushahidiDarkTan];
-	self.tableView.backgroundColor = [UIColor ushahidiDarkTan];
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
 	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];

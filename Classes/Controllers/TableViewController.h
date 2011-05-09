@@ -28,7 +28,6 @@
 	
 @public
 	IBOutlet UITableView *tableView;
-	IBOutlet UIToolbar *toolBar;
 	
 @protected
 	NSMutableArray *allRows;
@@ -44,7 +43,6 @@
 }
 
 @property(nonatomic,retain) UITableView *tableView;
-@property(nonatomic,retain) UIToolbar *toolBar;
 @property(nonatomic,retain) NSMutableArray *allRows;
 @property(nonatomic,retain) NSMutableArray *filteredRows;
 @property(nonatomic,retain) UIColor *oddRowColor;

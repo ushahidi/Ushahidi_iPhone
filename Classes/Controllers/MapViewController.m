@@ -24,6 +24,7 @@
 #import "InputView.h"
 #import "MKMapView+Extension.h"
 #import "NSString+Extension.h"
+#import "Settings.h"
 #import "MKPinAnnotationView+Extension.h"
 
 typedef enum {
@@ -46,6 +47,7 @@ typedef enum {
 #pragma mark Internal
 
 - (void) showSearchBar:(BOOL)show animated:(BOOL)animated {
+	self.searchBar.tintColor = [[Settings sharedSettings] searchBarTintColor];
 	if (animated) {
 		[UIView beginAnimations:@"SearchBarVisibility" context:NULL];
 		[UIView setAnimationDuration:0.3];

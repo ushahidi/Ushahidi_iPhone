@@ -31,11 +31,13 @@
 
 @implementation BaseViewController
 
-@synthesize loadingView, inputView, alertView, willBePushed, wasPushed, webViewController;
+@synthesize loadingView, inputView, alertView, willBePushed, wasPushed, webViewController, navigationBar, toolBar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.loadingView = [[LoadingViewController alloc] initWithController:self];
+	self.navigationController.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];
+	self.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];
 	self.alertView = [[AlertView alloc] initWithController:self];
 	self.inputView = [[InputView alloc] initForDelegate:self];
 }
@@ -50,9 +52,11 @@
 
 - (void)dealloc {
 	[webViewController release];
+	[navigationBar release];
 	[loadingView release];
 	[inputView release];
 	[alertView release];
+	[toolBar release];
     [super dealloc];
 }
 

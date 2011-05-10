@@ -2,12 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<key>CFBundleVersion</key>
+	<string>1.6</string>
+	<key>CFBundleName</key>
+	<string>Ushahidi</string>
 	<key>CFBundleDisplayName</key>
 	<string>Ushahidi</string>
-	<key>CFBundleExecutable</key>
-	<string>${EXECUTABLE_NAME}</string>
+	<key>UshahidiWebsite</key>
+	<string>http://www.ushahidi.com</string>
+	<key>UshahidiEmail</key>
+	<string>support@ushahidi.com</string>
+	<key>UshahidiAppStore</key>
+	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon.png</string>
@@ -17,30 +23,6 @@
 		<string>Icon-Small.png</string>
 		<string>Icon-Small@2x.png</string>
 	</array>
-	<key>CFBundleIdentifier</key>
-	<string>com.ushahidi.ios.app</string>
-	<key>UILaunchImageFile</key>
-	<string>Default</string>
-	<key>UILaunchImageFile~ipad</key>
-	<string>Default-Portrait</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>Ushahidi</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1.6</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSMainNibFile</key>
-	<string>MainWindow_iPhone</string>
-	<key>NSMainNibFile~ipad</key>
-	<string>MainWindow_iPad</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -52,6 +34,30 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UILaunchImageFile</key>
+	<string>Default</string>
+	<key>UILaunchImageFile~ipad</key>
+	<string>Default-Portrait</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.ushahidi.ios.app</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSMainNibFile</key>
+	<string>MainWindow_iPhone</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>MainWindow_iPad</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>BitlyLogin</key>
 	<string>ushahidiios</string>
 	<key>BitlyApiKey</key>
@@ -60,11 +66,5 @@
 	<string>muqzQTP4YkXi0ncI39s0Jw</string>
 	<key>TwitterSecret</key>
 	<string>3uOGt2Hjj777rTOI76tOu1eFEvkgtbTWOvYcHiBqsE</string>
-	<key>UshahidiWebsite</key>
-	<string>http://www.ushahidi.com</string>
-	<key>UshahidiEmail</key>
-	<string>support@ushahidi.com</string>
-	<key>UshahidiAppStore</key>
-	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
 </dict>
 </plist>

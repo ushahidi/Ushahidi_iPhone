@@ -31,7 +31,7 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
 @synthesize email, firstName, lastName, lastDeployment, lastIncident, mapDistance, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
-@synthesize mapName, mapURL, navBarTintColor, toolBarTintColor, searchBarTintColor, tablePlainBackColor, tableGroupedBackColor, tableOddRowColor, tableEvenRowColor, tableSelectRowColor, tableHeaderBackColor, tableHeaderTextColor, verifiedTextColor, unverifiedTextColor, darkTextColor, liteTextColor;
+@synthesize mapName, mapURL, navBarTintColor, toolBarTintColor, searchBarTintColor, tablePlainBackColor, tableGroupedBackColor, tableOddRowColor, tableEvenRowColor, tableSelectRowColor, tableHeaderBackColor, tableHeaderTextColor, verifiedTextColor, unverifiedTextColor;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -51,7 +51,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		
 		NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
 		NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:filePath];
-		self.mapName = [settings objectForKey:@"MapURL"];
+		self.mapName = [settings objectForKey:@"MapName"];
 		self.mapURL = [settings objectForKey:@"MapURL"];
 		
 		self.navBarTintColor = [UIColor colorFromHexString:[settings objectForKey:@"NavBarTintColor"]];
@@ -67,8 +67,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		self.tableHeaderTextColor = [UIColor colorFromHexString:[settings objectForKey:@"TableHeaderTextColor"]];
 		self.verifiedTextColor = [UIColor colorFromHexString:[settings objectForKey:@"VerifiedTextColor"]];
 		self.unverifiedTextColor = [UIColor colorFromHexString:[settings objectForKey:@"UnverifiedTextColor"]];
-		self.darkTextColor = [UIColor colorFromHexString:[settings objectForKey:@"DarkTextColor"]];
-		self.liteTextColor = [UIColor colorFromHexString:[settings objectForKey:@"LiteTextColor"]];
 	}
 	return self;
 }

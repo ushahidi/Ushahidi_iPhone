@@ -30,9 +30,5 @@
 	<string>#99CC99</string>
 	<key>UnverifiedTextColor</key>
 	<string>#CC6666</string>
-	<key>DarkTextColor</key>
-	<string>#000000</string>
-	<key>LiteTextColor</key>
-	<string>#78695e</string>
 </dict>
 </plist>

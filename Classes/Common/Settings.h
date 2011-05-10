@@ -48,8 +48,6 @@
 	UIColor *tableHeaderTextColor;
 	UIColor *verifiedTextColor;
 	UIColor *unverifiedTextColor;
-	UIColor *darkTextColor;
-	UIColor *liteTextColor;
 	
 }
 
@@ -80,8 +78,6 @@
 @property(nonatomic, retain) UIColor *tableHeaderTextColor;
 @property(nonatomic, retain) UIColor *verifiedTextColor;
 @property(nonatomic, retain) UIColor *unverifiedTextColor;
-@property(nonatomic, retain) UIColor *darkTextColor;
-@property(nonatomic, retain) UIColor *liteTextColor;
 
 + (Settings *) sharedSettings;
 

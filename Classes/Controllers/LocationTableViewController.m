@@ -27,6 +27,7 @@
 #import "MKPinAnnotationView+Extension.h"
 #import "MapAnnotation.h"
 #import "NSString+Extension.h"
+#import "Settings.h"
 
 @interface LocationTableViewController ()
 
@@ -137,6 +138,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search locations...", nil)];
 	[self setHeader:NSLocalizedString(@"New Location", nil) atSection:TableSectionNewLocation];
 	[self setHeader:NSLocalizedString(@"Existing Location", nil) atSection:TableSectionExistingLocations];

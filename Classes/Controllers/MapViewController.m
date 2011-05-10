@@ -99,6 +99,7 @@ typedef enum {
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
+	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 	[self showSearchBar:NO animated:NO];
 }
 

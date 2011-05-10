@@ -25,7 +25,7 @@ To Create A Custom White-Labeled App For A Specific Map:
 * Replace each image with a more appropriate graphic for your map (maintaining file name and image dimensions)
 * Note, you can use the /Themes/MapATL as an example of a custom white-labeled map
 * Edit Info.plist Bundle Name and Bundle Display Name to what you'd like to see below your app icon
-* Optionally edit Info.plist UshahidiWebsite and UshahidiEmail if you want point to your own map and support email
+* Optionally edit Info.plist UshahidiWebsite and UshahidiEmail if you want point to your own map and use your own support email
 
 ### Technique #2 (Advanced) ###
 * Create a duplicate copy of the /Themes/Default folder with a new name, for example MyMap
@@ -39,4 +39,4 @@ To Create A Custom White-Labeled App For A Specific Map:
 * IMPORTANT Remove the Default folder from Ushahidi_iOS target (right-click Default -> Get Info -> Targets tab -> uncheck)
 * IMPORTANT Add the MyMap folder to the Ushahidi_iOS target (right-click Default -> Get Info -> Targets tab -> check)
 * Edit Info.plist Bundle Name and Bundle Display Name to what you'd like to see below your app icon
-* Optionally edit Info.plist UshahidiWebsite and UshahidiEmail if you want point to your own map and support email
+* Optionally edit Info.plist UshahidiWebsite and UshahidiEmail if you want point to your own map and use your own support email

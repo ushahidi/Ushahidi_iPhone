@@ -6,6 +6,13 @@ The iPhone and iPad app synchronizes with any Ushahidi deployment allowing viewi
 
 The app supports loading of multiple deployments at one time, quick filtering through incident reports, exploring incident locations on the map, viewing incident photos, news article, media as well as sharing incident reports via email, SMS or Twitter. Once the data has been downloaded, the app can function without an internet connection, allowing accurate collection of data utilizing the device's camera and GPS capabilities.
 
+For more information visit:
+
+* [About Ushahidi](http://www.ushahidi.com)
+* [Issue Tracker](http://dev.ushahidi.com/projects/roadmap/Ushahidi_iPhone)
+* [API Documentation](http://wiki.ushahidi.com/doku.php?id=ushahidi_api)
+* [Code Repository](http://github.com/ushahidi/Ushahidi_iPhone)
+
 ## White-Labeled App ##
 
 To Create A Custom White-Labeled App For A Specific Map:
@@ -33,10 +40,3 @@ To Create A Custom White-Labeled App For A Specific Map:
 * IMPORTANT Add the MyMap folder to the Ushahidi_iOS target (right-click Default -> Get Info -> Targets tab -> check)
 * Edit Info.plist Bundle Name and Bundle Display Name to what you'd like to see below your app icon
 * Optionally edit Info.plist UshahidiWebsite and UshahidiEmail if you want point to your own map and support email
-
-For more information visit:
-
-* [About Ushahidi](http://www.ushahidi.com)
-* [Issue Tracker](http://dev.ushahidi.com/projects/roadmap/Ushahidi_iPhone)
-* [API Documentation](http://wiki.ushahidi.com/doku.php?id=ushahidi_api)
-* [Code Repository](http://github.com/ushahidi/Ushahidi_iPhone)

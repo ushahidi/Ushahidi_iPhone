@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MapURL</key>
+	<string>http://crime.mapatl.com</string>
+	<key>MapName</key>
+	<string>MapATL</string>
+	<key>NavBarTintColor</key>
+	<string>#154868</string>
+	<key>ToolBarTintColor</key>
+	<string>#154868</string>
+	<key>SearchBarTintColor</key>
+	<string>#154868</string>
+	<key>TablePlainBackColor</key>
+	<string>#dcebec</string>
+	<key>TableGroupedBackColor</key>
+	<string>#dcebec</string>
+	<key>TableOddRowColor</key>
+	<string>#95cae9</string>
+	<key>TableEvenRowColor</key>
+	<string>#c8e2eb</string>
+	<key>TableSelectRowColor</key>
+	<string>#66abcc</string>
+	<key>TableHeaderBackColor</key>
+	<string>#afd776</string>
+	<key>TableHeaderTextColor</key>
+	<string>#FFFFFF</string>
+	<key>VerifiedTextColor</key>
+	<string>#99CC99</string>
+	<key>UnverifiedTextColor</key>
+	<string>#CC6666</string>
+</dict>
+</plist>

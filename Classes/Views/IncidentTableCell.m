@@ -108,7 +108,7 @@ typedef enum {
 		self.imageView.image = image;
 	} 
 	else {
-		self.imageView.image = [UIImage imageNamed:@"no_image.png"];
+		self.imageView.image = [UIImage imageNamed:@"placeholder.png"];
 	}
 }
 

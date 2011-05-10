@@ -43,6 +43,7 @@
 #import "Checkin.h"
 #import "User.h"
 #import "ItemPicker.h"
+#import "Settings.h"
 
 @interface IncidentMapViewController ()
 
@@ -174,6 +175,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 	self.incidents = [[NSMutableArray alloc] initWithCapacity:0];
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
 	self.categories = [[NSMutableArray alloc] initWithCapacity:0];

@@ -21,6 +21,7 @@
 #import "ImageViewController.h"
 #import "LoadingViewController.h"
 #import "TwitterViewController.h"
+#import "Settings.h"
 #import "Email.h"
 
 @interface ImageViewController ()
@@ -96,6 +97,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 	self.email = [[Email alloc] initWithController:self];
 	self.emailButton.enabled = [self.email canSend];
 }

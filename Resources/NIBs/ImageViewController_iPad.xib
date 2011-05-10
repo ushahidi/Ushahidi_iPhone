@@ -171,7 +171,7 @@
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="673686198"/>
 					</object>
-					<int key="connectionID">19</int>
+					<int key="connectionID">20</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -292,7 +292,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">19</int>
+			<int key="maxID">20</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

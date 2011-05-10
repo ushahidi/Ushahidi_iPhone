@@ -44,7 +44,7 @@
 		
 		CGRect contentViewFrame = CGRectInset(self.contentView.frame, 10, 10);
 		
-		self.labelField = [self getLabelWithFrame:CGRectMake(contentViewFrame.origin.x, contentViewFrame.origin.y - 2, 60, contentViewFrame.size.height)];
+		self.labelField = [self getLabelWithFrame:CGRectMake(contentViewFrame.origin.x, contentViewFrame.origin.y - 2, 75, contentViewFrame.size.height)];
 		self.labelField.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview:self.labelField];
 		
@@ -154,7 +154,7 @@
 
 - (UILabel *) getLabelWithFrame:(CGRect)rect {
 	UILabel *label = [[UILabel alloc] initWithFrame:rect];
-	label.font = [UIFont systemFontOfSize:12];
+	label.font = [UIFont systemFontOfSize:14];
 	label.textColor = [UIColor darkGrayColor];
 	label.textAlignment = UITextAlignmentRight;
 	return [label autorelease];

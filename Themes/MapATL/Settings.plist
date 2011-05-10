@@ -15,7 +15,7 @@
 	<key>TablePlainBackColor</key>
 	<string>#dcebec</string>
 	<key>TableGroupedBackColor</key>
-	<string>#dcebec</string>
+	<string>#c8e2eb</string>
 	<key>TableOddRowColor</key>
 	<string>#95cae9</string>
 	<key>TableEvenRowColor</key>
@@ -25,9 +25,9 @@
 	<key>TableHeaderBackColor</key>
 	<string>#afd776</string>
 	<key>TableHeaderTextColor</key>
-	<string>#FFFFFF</string>
+	<string>#000000</string>
 	<key>VerifiedTextColor</key>
-	<string>#99CC99</string>
+	<string>#0B610B</string>
 	<key>UnverifiedTextColor</key>
 	<string>#CC6666</string>
 </dict>

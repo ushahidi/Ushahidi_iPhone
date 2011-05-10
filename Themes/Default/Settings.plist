@@ -17,9 +17,9 @@
 	<key>TableGroupedBackColor</key>
 	<string>#f2eddc</string>
 	<key>TableOddRowColor</key>
-	<string>#f6f6ee</string>
-	<key>TableEvenRowColor</key>
 	<string>#f2eddc</string>
+	<key>TableEvenRowColor</key>
+	<string>#f0f0e4</string>
 	<key>TableSelectRowColor</key>
 	<string>#e6ddbe</string>
 	<key>TableHeaderBackColor</key>

@@ -179,8 +179,8 @@ typedef enum {
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
-	self.oddRowColor = [[Settings sharedSettings] tableOddRowColor];
-	self.evenRowColor = [[Settings sharedSettings] tableOddRowColor];
+	self.oddRowColor = [[Settings sharedSettings] tableEvenRowColor];
+	self.evenRowColor = [[Settings sharedSettings] tableEvenRowColor];
 	self.email = [[Email alloc] initWithController:self];
 	self.sms = [[SMS alloc] initWithController:self];
 	self.moviePlayer = [[MoviePlayer alloc] initWithController:self];

@@ -257,13 +257,13 @@
 
 - (void)tableView:(UITableView *)theTableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.row % 2) {
-		if (self.oddRowColor != nil) {
-			cell.backgroundColor = self.oddRowColor;
+		if (self.evenRowColor != nil) {
+			cell.backgroundColor = self.evenRowColor;
 		}
 	}
 	else {
-		if (self.evenRowColor != nil) {
-			cell.backgroundColor = self.evenRowColor;
+		if (self.oddRowColor != nil) {
+			cell.backgroundColor = self.oddRowColor;
 		}
 	}
 }

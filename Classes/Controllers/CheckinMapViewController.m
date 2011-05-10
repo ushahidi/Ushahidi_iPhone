@@ -179,6 +179,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 	self.allCheckins = [[NSMutableArray alloc] initWithCapacity:0];
 	self.filteredCheckins = [[NSMutableArray alloc] initWithCapacity:0];
 	self.users = [[NSMutableArray alloc] initWithCapacity:0];

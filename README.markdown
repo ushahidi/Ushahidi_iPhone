@@ -18,10 +18,15 @@ For more information visit:
 To Create A Custom White-Labeled App For A Specific Map:
 
 ### Technique #1 (Simple) ###
+* Duplicate the /Themes/Ushahidi folder using the name of your map (ex MapATL)
+* Replace each image in the folder with your own custom graphic, maintaining the image dimensions and filenames
+* Duplicate the Ushahidi.plist file using the name of your map (ex MapATL.plist)
+* 
+
 * Open /Themes/Default/Settings.plist in XCode or Property List Editor
 * Specify the MapURL with the web address of your map
 * Specify the MapName with the name of your map
-* Change the color code properties (NavBarTintColor, TableOddRowColor...) according to the styling of your map
+* Change the color code properties (NavBarColor, TableOddRowColor...) according to the styling of your map
 * Replace each image with a more appropriate graphic for your map (maintaining file name and image dimensions)
 * Note, you can use the /Themes/MapATL as an example of a custom white-labeled map
 * Edit Info.plist Bundle Name and Bundle Display Name to what you'd like to see below your app icon

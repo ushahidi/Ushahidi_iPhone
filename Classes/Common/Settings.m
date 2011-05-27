@@ -24,6 +24,9 @@
 
 @interface Settings ()
 
+- (void) loadUserDefaults;
+- (void) loadInfoDictionary;
+
 @end
 
 @implementation Settings
@@ -35,40 +38,47 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
 - (id) init {
 	if ((self = [super init])) {
-		self.email = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
-		self.firstName = [[NSUserDefaults standardUserDefaults] stringForKey:@"firstName"];
-		self.lastName = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastName"];
-		self.lastDeployment = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastDeployment"];
-		self.lastIncident = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastIncident"];
-		self.downloadMaps = [[NSUserDefaults standardUserDefaults] boolForKey:@"downloadMaps"];
-		self.becomeDiscrete = [[NSUserDefaults standardUserDefaults] boolForKey:@"becomeDiscrete"];
-		self.imageWidth = [[NSUserDefaults standardUserDefaults] floatForKey:@"imageWidth"];
-		if (self.imageWidth == 0) self.imageWidth = 600;
-		self.mapZoomLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"mapZoomLevel"];
-		if (self.mapZoomLevel == 0) self.mapZoomLevel = 12;
-		self.mapDistance = [[NSUserDefaults standardUserDefaults] stringForKey:@"mapDistance"];
-		if (self.mapDistance == nil) self.mapDistance = @"500";
-		
-		NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-		NSDictionary *settings = [NSDictionary dictionaryWithContentsOfFile:filePath];
-		self.mapName = [settings objectForKey:@"MapName"];
-		self.mapURL = [settings objectForKey:@"MapURL"];
-		
-		self.navBarTintColor = [UIColor colorFromHexString:[settings objectForKey:@"NavBarTintColor"]];
-		self.toolBarTintColor = [UIColor colorFromHexString:[settings objectForKey:@"ToolBarTintColor"]];
-		self.searchBarTintColor = [UIColor colorFromHexString:[settings objectForKey:@"SearchBarTintColor"]];
-		
-		self.tablePlainBackColor = [UIColor colorFromHexString:[settings objectForKey:@"TablePlainBackColor"]];
-		self.tableGroupedBackColor = [UIColor colorFromHexString:[settings objectForKey:@"TableGroupedBackColor"]];
-		self.tableOddRowColor = [UIColor colorFromHexString:[settings objectForKey:@"TableOddRowColor"]];
-		self.tableEvenRowColor = [UIColor colorFromHexString:[settings objectForKey:@"TableEvenRowColor"]];
-		self.tableSelectRowColor = [UIColor colorFromHexString:[settings objectForKey:@"TableSelectRowColor"]];
-		self.tableHeaderBackColor = [UIColor colorFromHexString:[settings objectForKey:@"TableHeaderBackColor"]];
-		self.tableHeaderTextColor = [UIColor colorFromHexString:[settings objectForKey:@"TableHeaderTextColor"]];
-		self.verifiedTextColor = [UIColor colorFromHexString:[settings objectForKey:@"VerifiedTextColor"]];
-		self.unverifiedTextColor = [UIColor colorFromHexString:[settings objectForKey:@"UnverifiedTextColor"]];
+		[self loadUserDefaults];
+		[self loadInfoDictionary];
 	}
 	return self;
+}
+
+- (void) loadUserDefaults {
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	self.email = [userDefaults stringForKey:@"email"];
+	self.firstName = [userDefaults stringForKey:@"firstName"];
+	self.lastName = [userDefaults stringForKey:@"lastName"];
+	self.lastDeployment = [userDefaults stringForKey:@"lastDeployment"];
+	self.lastIncident = [userDefaults stringForKey:@"lastIncident"];
+	self.downloadMaps = [userDefaults boolForKey:@"downloadMaps"];
+	self.becomeDiscrete = [userDefaults boolForKey:@"becomeDiscrete"];
+	self.imageWidth = [userDefaults floatForKey:@"imageWidth"];
+	if (self.imageWidth == 0) self.imageWidth = 600;
+	self.mapZoomLevel = [userDefaults integerForKey:@"mapZoomLevel"];
+	if (self.mapZoomLevel == 0) self.mapZoomLevel = 12;
+	self.mapDistance = [userDefaults stringForKey:@"mapDistance"];
+	if (self.mapDistance == nil) self.mapDistance = @"500";
+}
+
+- (void) loadInfoDictionary {
+	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+	self.mapName = [infoDictionary objectForKey:@"CFBundleName"];
+	self.mapURL = [infoDictionary objectForKey:@"MapURL"];
+	
+	self.navBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"NavBarColor"]];
+	self.toolBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"ToolBarColor"]];
+	self.searchBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"SearchBarColor"]];
+	
+	self.tablePlainBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TablePlainBackColor"]];
+	self.tableGroupedBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableGroupedColor"]];
+	self.tableOddRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableOddRowColor"]];
+	self.tableEvenRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableEvenRowColor"]];
+	self.tableSelectRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableSelectedColor"]];
+	self.tableHeaderBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableHeaderColor"]];
+	self.tableHeaderTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableHeaderTextColor"]];
+	self.verifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"VerifiedTextColor"]];
+	self.unverifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"UnverifiedTextColor"]];
 }
 
 - (void)dealloc {

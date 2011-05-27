@@ -139,9 +139,9 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.email = [[Email alloc] initWithController:self];
-	self.website = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiWebsite"];
-	self.support = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiEmail"];
-	self.download = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UshahidiAppStore"];
+	self.website = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"SupportURL"];
+	self.support = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"SupportEmail"];
+	self.download = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"AppStoreURL"];
 	self.logo = [Device isIPad] ? [UIImage imageNamed:@"Logo_iPad.png"] : [UIImage imageNamed:@"Logo_iPhone.png"];
 	[self setHeader:NSLocalizedString(@"Contact Settings", nil) atSection:TableSectionContact];
 	[self setHeader:NSLocalizedString(@"Photo Settings", nil) atSection:TableSectionPhoto];

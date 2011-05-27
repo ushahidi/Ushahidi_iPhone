@@ -50,7 +50,6 @@
 			deployment = [[[Deployment alloc] initWithName:mapName url:mapURL] autorelease];
 			[[Ushahidi sharedUshahidi] addDeployment:deployment];
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
-			[[Ushahidi sharedUshahidi] archive];
 		}
 		if (deployment.supportsCheckins) {
 			self.checkinMapViewController.deployment = deployment;

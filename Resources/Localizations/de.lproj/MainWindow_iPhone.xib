@@ -12,9 +12,6 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="153"/>
-			<integer value="116"/>
-			<integer value="139"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -99,7 +96,7 @@
 				</object>
 			</object>
 			<object class="IBUIViewController" id="294103661">
-				<string key="IBUITitle">Settings</string>
+				<string key="IBUITitle">Paramtres</string>
 				<string key="IBUINibName">SettingsViewController_iPhone</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
@@ -118,7 +115,7 @@
 						<int key="IBUIStyle">1</int>
 					</object>
 					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="941724123">
-						<string key="IBUITitle">Edit</string>
+						<string key="IBUITitle">Modifikator</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<reference key="IBUINavigationItem" ref="995128150"/>
@@ -140,7 +137,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="21608067">
-				<string key="IBUITitle">Add Map</string>
+				<string key="IBUITitle">Ajouter Karte</string>
 				<string key="IBUINibName">DeploymentAddViewController_iPhone</string>
 				<reference key="IBUISimulatedTopBarMetrics" ref="788844757"/>
 				<reference key="IBUISimulatedStatusBarMetrics" ref="1053909342"/>
@@ -152,10 +149,9 @@
 			</object>
 			<object class="IBUIViewController" id="1022975816">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="910909503">
-					<reference key="IBUINavigationBar"/>
-					<string key="IBUITitle">Reports</string>
+					<string key="IBUITitle">Rapports</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="139772281">
-						<string key="IBUITitle">Reports</string>
+						<string key="IBUITitle">Rapports</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -163,10 +159,9 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="268590964">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{225, 7}, {90, 30}}</string>
-							<reference key="NSSuperview"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<int key="IBSegmentControlStyle">2</int>
@@ -223,7 +218,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="495640112">
-				<string key="IBUITitle">Reports</string>
+				<string key="IBUITitle">Rapports</string>
 				<string key="IBUINibName">IncidentTableViewController_iPhone</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
@@ -233,7 +228,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="68989010">
-				<string key="IBUITitle">Reports</string>
+				<string key="IBUITitle">Rapports</string>
 				<string key="IBUINibName">IncidentMapViewController_iPhone</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
@@ -244,7 +239,7 @@
 			</object>
 			<object class="IBUIViewController" id="352634897">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="386622561">
-					<string key="IBUITitle">Add Report</string>
+					<string key="IBUITitle">Ajouter un rapport</string>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
 				<string key="IBUINibName">IncidentAddViewController_iPhone</string>
@@ -258,9 +253,9 @@
 			</object>
 			<object class="IBUIViewController" id="652899661">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="345076606">
-					<string key="IBUITitle">Report</string>
+					<string key="IBUITitle">Rapport</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="599071056">
-						<string key="IBUITitle">Report</string>
+						<string key="IBUITitle">Rapport</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -322,9 +317,9 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="1041512806">
-				<string key="IBUITitle">Checkins</string>
+				<string key="IBUITitle">Archivages</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="765820554">
-					<string key="IBUITitle">Checkins</string>
+					<string key="IBUITitle">Archivages</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="1027608156">
 						<string key="IBUITitle">Maps</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -347,7 +342,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="747050329">
-				<string key="IBUITitle">Checkin</string>
+				<string key="IBUITitle">Entre</string>
 				<string key="IBUINibName">CheckinAddViewController_iPhone</string>
 				<reference key="IBUISimulatedStatusBarMetrics" ref="360104260"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
@@ -357,11 +352,11 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="685228346">
-				<string key="IBUITitle">Checkin</string>
+				<string key="IBUITitle">Entre</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="375878357">
-					<string key="IBUITitle">Checkin</string>
+					<string key="IBUITitle">Entre</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="819274114">
-						<string key="IBUITitle">Checkin</string>
+						<string key="IBUITitle">Entre</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -422,7 +417,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="1013297058">
-				<string key="IBUITitle">Categories</string>
+				<string key="IBUITitle">Rubriken</string>
 				<string key="IBUINibName">CategoryTableViewController_iPhone</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
@@ -432,7 +427,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="774316045">
-				<string key="IBUITitle">Locations</string>
+				<string key="IBUITitle">Stellplätze</string>
 				<string key="IBUINibName">LocationTableViewController_iPhone</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
@@ -445,7 +440,7 @@
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="845180324">
 					<string key="IBUITitle">Web</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="505751708">
-						<string key="IBUITitle">Back</string>
+						<string key="IBUITitle">Retour</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -462,9 +457,9 @@
 			</object>
 			<object class="IBUIViewController" id="906486659">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="996893678">
-					<string key="IBUITitle">Map</string>
+					<string key="IBUITitle">Carte</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="987001369">
-						<string key="IBUITitle">Back</string>
+						<string key="IBUITitle">Retour</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -560,10 +555,9 @@
 			</object>
 			<object class="IBUIViewController" id="407784374">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="397214988">
-					<reference key="IBUINavigationBar"/>
-					<string key="IBUITitle">News</string>
+					<string key="IBUITitle">Nouvelles</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="110699846">
-						<string key="IBUITitle">Back</string>
+						<string key="IBUITitle">Retour</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 					</object>
@@ -571,10 +565,9 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="587986711">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
-							<reference key="NSSuperview"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<int key="IBSegmentControlStyle">2</int>

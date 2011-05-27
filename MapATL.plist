@@ -63,7 +63,7 @@
 	<key>## DO NOT EDIT BELOW THIS LINE ##</key>
 	<string>########################## DO NOT EDIT BELOW THIS LINE ##########################</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

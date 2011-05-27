@@ -13,35 +13,16 @@ For more information visit:
 * [API Documentation](http://wiki.ushahidi.com/doku.php?id=ushahidi_api)
 * [Code Repository](http://github.com/ushahidi/Ushahidi_iPhone)
 
-## White-Labeled App ##
-
-To Create A Custom White-Labeled App For A Specific Map:
-
-### Technique #1 (Simple) ###
-* Duplicate the /Themes/Ushahidi folder using the name of your map (ex MapATL)
+### How To White-Label The App ###
+* Duplicate the Ushahidi target with the name of your map (ex MapATL)
+* Duplicate the /Themes/Ushahidi folder with the name of your map as folder name (ex /Themes/MapATL)
 * Replace each image in the folder with your own custom graphic, maintaining the image dimensions and filenames
-* Duplicate the Ushahidi.plist file using the name of your map (ex MapATL.plist)
-* 
-
-* Open /Themes/Default/Settings.plist in XCode or Property List Editor
-* Specify the MapURL with the web address of your map
-* Specify the MapName with the name of your map
-* Change the color code properties (NavBarColor, TableOddRowColor...) according to the styling of your map
-* Replace each image with a more appropriate graphic for your map (maintaining file name and image dimensions)
-* Note, you can use the /Themes/MapATL as an example of a custom white-labeled map
-* Edit Info.plist Bundle Name and Bundle Display Name to what you'd like to see below your app icon
-* Optionally edit Info.plist UshahidiWebsite and UshahidiEmail if you want point to your own map and use your own support email
-
-### Technique #2 (Advanced) ###
-* Create a duplicate copy of the /Themes/Default folder with a new name, for example MyMap
-* Open /Themes/MyMap/Settings.plist in XCode or Property List Editor
-* Specify the MapURL with the web address of your map
-* Specify the MapName with the name of your map
-* Change the color code properties (NavBarTintColor, TableOddRowColor...) according to the styling of your map
-* Replace each image with a more appropriate graphic for your map (maintaining file name and image dimensions)
-* Note, you can use the /Themes/MapATL as an example of a custom white-labeled map
-* Drag your MyMap theme folder into XCode under the Themes group
-* IMPORTANT Remove the Default folder from Ushahidi_iOS target (right-click Default -> Get Info -> Targets tab -> uncheck)
-* IMPORTANT Add the MyMap folder to the Ushahidi_iOS target (right-click Default -> Get Info -> Targets tab -> check)
-* Edit Info.plist Bundle Name and Bundle Display Name to what you'd like to see below your app icon
-* Optionally edit Info.plist UshahidiWebsite and UshahidiEmail if you want point to your own map and use your own support email
+* In XCode, on your new theme folder (ex /Themes/MapATL) Right-Click > Get Info > Targets tab, uncheck Ushahidi and check your new target (ex MapATL)
+* Duplicate the Ushahidi.plist file using the name of your map as filename (ex MapATL.plist)
+* Edit BUNDLE NAME AND VERSION section with name of your map and an unique Bundle Indentifer (ex com.ushahidi.ios.mapatl)
+* Edit SUPPORT INFORMATION section with email and website for your map
+* Edit SINGLE DEPLOYMENT URL section with the URL for your map
+* Edit STYLING COLOR CODES section with various HEX color codes to match your map styling
+* Optionally edit BITLY AND TWITTER API KEYS if you have your own API keys for these services
+* In Xcode, Right-Click target (ex MapATL) > Get Info > Targets tab, edit the Info.plist File to your new plist file (ex MapATL.plist)
+* You should now be able to deploy your white-labelled version of the app to the Simulator for testing, enjoy!

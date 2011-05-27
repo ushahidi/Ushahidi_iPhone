@@ -341,6 +341,18 @@ typedef enum {
 	DLog(@"error: %@", [error localizedDescription]);
 }
 
+- (void) lookupFinished:(Locator *)locator address:(NSString *)address {
+	DLog(@"address:%@", address);
+	if ([NSString isNilOrEmpty:self.location]) {
+		self.location = address;
+	}
+	[self.tableView reloadData];
+}
+
+- (void) lookupFailed:(Locator *)locator error:(NSError *)error {
+	DLog(@"error: %@", [error localizedDescription]);
+}
+
 #pragma mark -
 #pragma mark MKMapView
 

@@ -180,17 +180,25 @@ typedef enum {
 			self.incident = [[Incident alloc] initWithDefaultValues];
 			self.news = nil;
 			self.willBePushed = NO;
-			if ([Locator sharedLocator].latitude == nil && [Locator sharedLocator].longitude == nil) {
-				[[Locator sharedLocator] detectLocationForDelegate:self];
-				[self setFooter:NSLocalizedString(@"Locating...", nil) 
-					  atSection:TableSectionLocation];	
+			if ([[Locator sharedLocator] hasLocation] &&
+				[[Locator sharedLocator] hasAddress]) {
+				self.incident.latitude = [Locator sharedLocator].latitude;
+				self.incident.longitude = [Locator sharedLocator].longitude;
+				self.incident.location = [Locator sharedLocator].address;
+				[self setFooter:[Locator sharedLocator].address 
+					  atSection:TableSectionLocation];
 			}
-			else {
+			else if ([[Locator sharedLocator] hasLocation]) {
 				self.incident.latitude = [Locator sharedLocator].latitude;
 				self.incident.longitude = [Locator sharedLocator].longitude;
 				[self setFooter:[NSString stringWithFormat:@"%@, %@", self.incident.latitude, self.incident.longitude] 
 					  atSection:TableSectionLocation];
-			}	
+			}
+			else {
+				[[Locator sharedLocator] detectLocationForDelegate:self];
+				[self setFooter:NSLocalizedString(@"Locating...", nil) 
+					  atSection:TableSectionLocation];
+			}
 		}
 		else {
 			self.cancelButton.enabled = NO;
@@ -539,6 +547,7 @@ typedef enum {
 		self.incident.latitude = userLatitude;
 		self.incident.longitude = userLongitude;
 	}
+	[[Locator sharedLocator] lookupAddressForDelegate:self];
 	[self setFooter:[NSString stringWithFormat:@"%@, %@", userLatitude, userLongitude] 
 		  atSection:TableSectionLocation];
 	if (self.editing == NO) {
@@ -547,6 +556,21 @@ typedef enum {
 }
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
+	DLog(@"error: %@", [error localizedDescription]);
+}
+
+- (void) lookupFinished:(Locator *)locator address:(NSString *)address {
+	DLog(@"address:%@", address);
+	[self setFooter:address atSection:TableSectionLocation];
+	if ([NSString isNilOrEmpty:self.incident.location]) {
+		self.incident.location = address;
+	}
+	if (self.editing == NO) {
+		[self.tableView reloadData];
+	}
+}
+
+- (void) lookupFailed:(Locator *)locator error:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
 }
 

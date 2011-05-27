@@ -468,13 +468,14 @@ typedef enum {
 #pragma mark LocatorDelegate
 
 - (void) locatorFinished:(Locator *)locator latitude:(NSString *)userLatitude longitude:(NSString *)userLongitude {
-	DLog(@"locator: %@, %@", userLatitude, userLongitude);
+	DLog(@"latitude:%@ longitude:%@", userLatitude, userLongitude);
 	self.checkin.latitude = userLatitude;
 	self.checkin.longitude = userLongitude;
 	[self setFooter:[NSString stringWithFormat:@"%@, %@", userLatitude, userLongitude] atSection:TableSectionLocation];
 	if (self.editing == NO) {
 		[self.tableView reloadData];
 	}
+	[[Locator sharedLocator] lookupAddressForDelegate:self];
 }
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
@@ -485,6 +486,21 @@ typedef enum {
 	}
 	[self.alertView showOkWithTitle:NSLocalizedString(@"Location Error", nil) 
 						 andMessage:NSLocalizedString(@"There was a problem detecting your location. Please ensure that Location Services is enabled for Ushahidi in Settings > General > Location Services.", nil)];
+}
+
+- (void) lookupFinished:(Locator *)locator address:(NSString *)address {
+	DLog(@"address:%@", address);
+	[self setFooter:address atSection:TableSectionLocation];
+	if ([NSString isNilOrEmpty:self.checkin.message]) {
+		self.checkin.message = address;
+	}
+	if (self.editing == NO) {
+		[self.tableView reloadData];
+	}
+}
+
+- (void) lookupFailed:(Locator *)locator error:(NSError *)error {
+	DLog(@"error: %@", [error localizedDescription]);
 }
 
 @end

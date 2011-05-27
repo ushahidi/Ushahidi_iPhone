@@ -39,7 +39,7 @@
 	<key>TableOddRowColor</key>
 	<string>#f2eddc</string>
 	<key>TableEvenRowColor</key>
-	<string>#f0f0e4</string>
+	<string>#f9f6ee</string>
 	<key>TableSelectedRowColor</key>
 	<string>#e6ddbe</string>
 	<key>TableHeaderColor</key>

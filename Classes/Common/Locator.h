@@ -20,26 +20,35 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <MapKit/MKAnnotation.h>
+#import <MapKit/MKReverseGeocoder.h>
+#import "ASIHTTPRequest.h"
 
 @protocol LocatorDelegate;
 
-@interface Locator : NSObject<CLLocationManagerDelegate> {
+@interface Locator : NSObject<CLLocationManagerDelegate, MKReverseGeocoderDelegate> {
 
 @public
 	NSString *latitude;
 	NSString *longitude;
+	NSString *address;
 	
 @private
 	CLLocationManager *locationManager;
+	MKReverseGeocoder *reverseGeocoder;
 	id<LocatorDelegate> delegate;
 }
 
 @property(nonatomic, retain) NSString *latitude;
 @property(nonatomic, retain) NSString *longitude;
+@property(nonatomic, retain) NSString *address;
 
 + (Locator *) sharedLocator;
-- (void)detectLocationForDelegate:(id<LocatorDelegate>)delegate;
+- (void) detectLocationForDelegate:(id<LocatorDelegate>)delegate;
+- (void) lookupAddressForDelegate:(id<LocatorDelegate>)delegate;
 - (BOOL) hasLocation;
+- (BOOL) hasAddress;
 
 @end
 
@@ -49,5 +58,8 @@
 
 - (void) locatorFinished:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude;
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error;
+
+- (void) lookupFinished:(Locator *)locator address:(NSString *)address;
+- (void) lookupFailed:(Locator *)locator error:(NSError *)error;
 
 @end

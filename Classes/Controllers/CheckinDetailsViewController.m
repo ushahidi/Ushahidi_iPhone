@@ -87,6 +87,7 @@ typedef enum {
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
+	[self setBackButtonTitle:NSLocalizedString(@"Checkin", nil)];
 	self.oddRowColor = [[Settings sharedSettings] tableOddRowColor];
 	self.evenRowColor = [[Settings sharedSettings] tableOddRowColor];
 	[self setHeader:NSLocalizedString(@"Name", nil) atSection:TableSectionName];

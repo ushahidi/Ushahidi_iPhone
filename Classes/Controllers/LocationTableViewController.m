@@ -44,7 +44,8 @@
 
 @implementation LocationTableViewController
 
-@synthesize cancelButton, doneButton, incident, location, latitude, longitude, currentLatitude, currentLongitude;
+@synthesize cancelButton, doneButton, refreshButton;
+@synthesize incident, location, latitude, longitude, currentLatitude, currentLongitude;
 @synthesize mapView, viewMode, containerView;
 
 typedef enum {
@@ -130,7 +131,12 @@ typedef enum {
 	self.currentLatitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
 	self.currentLongitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
 	[self.tableView reloadData];
-	
+}
+
+- (void) refresh:(id)sender {
+	[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
+	self.refreshButton.enabled = NO;
+	[[Locator sharedLocator] detectLocationForDelegate:self];
 }
 
 #pragma mark -
@@ -145,22 +151,13 @@ typedef enum {
 	[self.containerView addSubview:self.tableView];
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
 - (void)viewWillAppear:(BOOL)animated {
-	[[Locator sharedLocator] detectLocationForDelegate:self];
+	[super viewWillAppear:animated];
 	self.location = self.incident.location;
 	self.latitude = self.incident.latitude;
 	self.longitude = self.incident.longitude;
-//	if (self.location != nil) {
-//		[self.mapView removeTapRecognizers];
-//	}
-//	else {
-//		[self.mapView removeTapRecognizers];
-//		[self.mapView addTapRecognizer:self action:@selector(doubleTapped:) taps:2];
-//	}
+	self.currentLatitude = [[Locator sharedLocator] latitude];
+	self.currentLongitude = [[Locator sharedLocator] longitude];
 	[self.allRows removeAllObjects];
 	[self.filteredRows removeAllObjects];
 	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsForDelegate:self]];
@@ -175,6 +172,7 @@ typedef enum {
 - (void)dealloc {
 	[cancelButton release];
 	[doneButton release];
+	[refreshButton release];
 	[incident release];
 	[location release];
 	[currentLatitude release];
@@ -209,21 +207,22 @@ typedef enum {
 		else {
 			[cell setDescription:@""];
 		}
-		[cell setChecked:self.location == nil];
+		if ([self.latitude isEqualToString:self.currentLatitude] &&
+			[self.longitude isEqualToString:self.currentLongitude]) {
+			[cell setChecked:YES];
+		}
+		else {
+			[cell setChecked:NO];
+		}
 	}
 	else {
 		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
 		if (theLocation != nil) {
 			[cell setTitle:theLocation.name];	
 			[cell setDescription:[NSString stringWithFormat:@"%@, %@", theLocation.latitude, theLocation.longitude]];
-			if (self.location == nil) {
-				[cell setChecked:NO];
-			}
-			else {
-				[cell setChecked:[theLocation equals:self.location
-											latitude:self.latitude
-										   longitude:self.longitude]];
-			}
+			[cell setChecked:[theLocation equals:self.location
+										latitude:self.latitude
+									   longitude:self.longitude]];
 		}
 		else {
 			[cell setTitle:nil];
@@ -246,7 +245,7 @@ typedef enum {
 	else {
 		[cell setChecked:YES];
 		if (indexPath.section == TableSectionNewLocation) {
-			self.location = nil;
+			self.location = [[Locator sharedLocator] address];
 			self.latitude = self.currentLatitude;
 			self.longitude = self.currentLongitude;
 		}
@@ -266,14 +265,11 @@ typedef enum {
 
 - (void) checkBoxTableCellChanged:(CheckBoxTableCell *)cell index:(NSIndexPath *)indexPath checked:(BOOL)checked {
 	if (indexPath.section == TableSectionNewLocation) {
-		self.location = nil;
+		self.location = [[Locator sharedLocator] address];
 		self.latitude = self.currentLatitude;
 		self.longitude = self.currentLongitude;
-		//[self.mapView removeTapRecognizers];
-		//[self.mapView addTapRecognizer:self action:@selector(doubleTapped:) taps:2];
 	}
 	else {
-		//[self.mapView removeTapRecognizers];
 		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
 		DLog(@"checkBoxTableCellChanged:%@ index:[%d, %d] checked:%d", theLocation.name, indexPath.section, indexPath.row, checked)
 		if (checked) {
@@ -332,13 +328,17 @@ typedef enum {
 
 - (void) locatorFinished:(Locator *)locator latitude:(NSString *)userLatitude longitude:(NSString *)userLongitude {
 	DLog(@"locator: %@, %@", userLatitude, userLongitude);
+	[self.loadingView hide];
 	self.currentLatitude = userLatitude;
 	self.currentLongitude = userLongitude;
 	[self.tableView reloadData];
+	self.refreshButton.enabled = YES;
 }
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
+	self.refreshButton.enabled = YES;
+	[self.loadingView hide];
 }
 
 - (void) lookupFinished:(Locator *)locator address:(NSString *)address {
@@ -346,7 +346,6 @@ typedef enum {
 	if ([NSString isNilOrEmpty:self.location]) {
 		self.location = address;
 	}
-	[self.tableView reloadData];
 }
 
 - (void) lookupFailed:(Locator *)locator error:(NSError *)error {
@@ -381,6 +380,8 @@ typedef enum {
 		DLog("%f, %f", annotationView.annotation.coordinate.latitude, annotationView.annotation.coordinate.longitude);
 		self.latitude = [NSString stringWithFormat:@"%f", annotationView.annotation.coordinate.latitude];
 		self.longitude = [NSString stringWithFormat:@"%f", annotationView.annotation.coordinate.longitude];
+		self.currentLatitude = self.latitude;
+		self.currentLongitude = self.longitude;
 	}
 }
 
@@ -395,7 +396,7 @@ typedef enum {
 - (void)mapView:(MKMapView *)theMapView didSelectAnnotationView:(MKAnnotationView *)annotationView {
 	MapAnnotation *mapAnnotation = (MapAnnotation *)annotationView.annotation;
 	if ([mapAnnotation class] == MKUserLocation.class) {
-		self.location = nil;
+		self.location = [[Locator sharedLocator] address];
 		self.latitude = [NSString stringWithFormat:@"%f", mapAnnotation.coordinate.latitude];
 		self.longitude = [NSString stringWithFormat:@"%f",mapAnnotation.coordinate.longitude];
 		annotationView.draggable = YES;
@@ -412,10 +413,8 @@ typedef enum {
 
 - (void)mapView:(MKMapView *)theMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
 	DLog(@"latitude:%f longitude:%f", userLocation.coordinate.latitude, userLocation.coordinate.longitude);
-	if ([NSString isNilOrEmpty:self.location]) {
-		[self.mapView centerAtCoordinate:userLocation.coordinate withDelta:0.4 animated:NO];
-		[self.mapView selectAnnotation:userLocation animated:YES];
-	}
+	[self.mapView centerAtCoordinate:userLocation.coordinate withDelta:0.4 animated:NO];
+	[self.mapView selectAnnotation:userLocation animated:YES];
 }
 
 @end

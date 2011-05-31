@@ -53,5 +53,6 @@
 
 - (void)viewWillBePushed;
 - (void)viewWasPushed;
+- (void) setBackButtonTitle:(NSString *)text;
 
 @end

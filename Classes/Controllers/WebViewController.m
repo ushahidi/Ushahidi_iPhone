@@ -76,6 +76,8 @@ typedef enum {
 #pragma mark UIViewController
 
 - (void) viewDidLoad {
+	[super viewDidLoad];
+	[self.searchBar setPlaceholder:NSLocalizedString(@"Enter URL or search phrase", nil)];
 	if ([Device isIPad]) {
 		self.homePage = @"http://www.google.com";
 		self.googleSearch = @"http://www.google.com/search?q=%@";

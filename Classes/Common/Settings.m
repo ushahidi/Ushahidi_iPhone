@@ -74,7 +74,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	self.tableGroupedBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableGroupedColor"]];
 	self.tableOddRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableOddRowColor"]];
 	self.tableEvenRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableEvenRowColor"]];
-	self.tableSelectRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableSelectedColor"]];
+	self.tableSelectRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableSelectedRowColor"]];
 	self.tableHeaderBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableHeaderColor"]];
 	self.tableHeaderTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableHeaderTextColor"]];
 	self.verifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"VerifiedTextColor"]];

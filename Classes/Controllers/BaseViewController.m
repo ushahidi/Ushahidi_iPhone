@@ -114,4 +114,12 @@
 	}
 }
 
+- (void) setBackButtonTitle:(NSString *)text {
+	self.navigationItem.backBarButtonItem = 
+	[[[UIBarButtonItem alloc] initWithTitle:text
+									  style:UIBarButtonItemStyleBordered
+									 target:nil
+									 action:nil] autorelease];
+}
+
 @end

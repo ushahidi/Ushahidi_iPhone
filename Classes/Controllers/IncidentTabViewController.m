@@ -111,6 +111,7 @@ typedef enum {
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	[self setBackButtonTitle:NSLocalizedString(@"Reports", nil)];
 	if ([NSString isNilOrEmpty:[[Settings sharedSettings] mapURL]] == NO && 
 		[NSString isNilOrEmpty:[[Settings sharedSettings] mapName]] == NO) {
 		self.settingsButton = [UIButton buttonWithType:UIButtonTypeInfoLight];

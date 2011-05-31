@@ -101,6 +101,14 @@
 #pragma mark -
 #pragma mark UIViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	[self.deploymentTableViewController setBackButtonTitle:NSLocalizedString(@"Maps", nil)];
+	[self.incidentTabViewController setBackButtonTitle:NSLocalizedString(@"Reports", nil)];
+	[self.incidentDetailsViewController setBackButtonTitle:NSLocalizedString(@"Report", nil)];
+	[self.checkinMapViewController setBackButtonTitle:NSLocalizedString(@"Checkins", nil)];
+}
+
 - (void)viewDidUnload {
     [super viewDidUnload];
 }
@@ -134,6 +142,7 @@
 	[deploymentTableViewController release];
 	[incidentTabViewController release];
 	[incidentDetailsViewController release];
+	[checkinMapViewController release];
     [super dealloc];
 }
 

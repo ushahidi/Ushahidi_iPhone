@@ -63,6 +63,102 @@
 		3E72992E12EF262A00FDED00 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72992D12EF262A00FDED00 /* arrow_down@2x.png */; };
 		3E72996C12EF30C500FDED00 /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72996B12EF30C500FDED00 /* selected@2x.png */; };
 		3E72996E12EF30D100FDED00 /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72996D12EF30D100FDED00 /* unselected@2x.png */; };
+		3E79A96913950A3C00914628 /* CategoryTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */; };
+		3E79A96A13950A3C00914628 /* CategoryTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93A13950A3C00914628 /* CategoryTableViewController_iPhone.xib */; };
+		3E79A96B13950A3C00914628 /* CheckinAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93B13950A3C00914628 /* CheckinAddViewController_iPad.xib */; };
+		3E79A96C13950A3C00914628 /* CheckinAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93C13950A3C00914628 /* CheckinAddViewController_iPhone.xib */; };
+		3E79A96D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib */; };
+		3E79A96E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib */; };
+		3E79A96F13950A3C00914628 /* CheckinMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93F13950A3C00914628 /* CheckinMapViewController_iPad.xib */; };
+		3E79A97013950A3C00914628 /* CheckinMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94013950A3C00914628 /* CheckinMapViewController_iPhone.xib */; };
+		3E79A97113950A3C00914628 /* DeploymentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94113950A3C00914628 /* DeploymentAddViewController_iPad.xib */; };
+		3E79A97213950A3C00914628 /* DeploymentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94213950A3C00914628 /* DeploymentAddViewController_iPhone.xib */; };
+		3E79A97313950A3C00914628 /* DeploymentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94313950A3C00914628 /* DeploymentTableCell_iPad.xib */; };
+		3E79A97413950A3C00914628 /* DeploymentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94413950A3C00914628 /* DeploymentTableCell_iPhone.xib */; };
+		3E79A97513950A3C00914628 /* DeploymentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94513950A3C00914628 /* DeploymentTableViewController_iPad.xib */; };
+		3E79A97613950A3C00914628 /* DeploymentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94613950A3C00914628 /* DeploymentTableViewController_iPhone.xib */; };
+		3E79A97713950A3C00914628 /* ImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94713950A3C00914628 /* ImageViewController_iPad.xib */; };
+		3E79A97813950A3C00914628 /* ImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94813950A3C00914628 /* ImageViewController_iPhone.xib */; };
+		3E79A97913950A3C00914628 /* IncidentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94913950A3C00914628 /* IncidentAddViewController_iPad.xib */; };
+		3E79A97A13950A3C00914628 /* IncidentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94A13950A3C00914628 /* IncidentAddViewController_iPhone.xib */; };
+		3E79A97B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib */; };
+		3E79A97C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib */; };
+		3E79A97D13950A3C00914628 /* IncidentMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94D13950A3C00914628 /* IncidentMapViewController_iPad.xib */; };
+		3E79A97E13950A3C00914628 /* IncidentMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94E13950A3C00914628 /* IncidentMapViewController_iPhone.xib */; };
+		3E79A97F13950A3C00914628 /* IncidentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94F13950A3C00914628 /* IncidentTableCell_iPad.xib */; };
+		3E79A98013950A3C00914628 /* IncidentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95013950A3C00914628 /* IncidentTableCell_iPhone.xib */; };
+		3E79A98113950A3C00914628 /* IncidentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95113950A3C00914628 /* IncidentTableViewController_iPad.xib */; };
+		3E79A98213950A3C00914628 /* IncidentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95213950A3C00914628 /* IncidentTableViewController_iPhone.xib */; };
+		3E79A98313950A3C00914628 /* IncidentTabViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95313950A3C00914628 /* IncidentTabViewController_iPad.xib */; };
+		3E79A98413950A3C00914628 /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
+		3E79A98513950A3C00914628 /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
+		3E79A98613950A3C00914628 /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
+		3E79A98713950A3C00914628 /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
+		3E79A98813950A3C00914628 /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3E79A98913950A3C00914628 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
+		3E79A98A13950A3C00914628 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
+		3E79A98B13950A3C00914628 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
+		3E79A98C13950A3C00914628 /* MapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95C13950A3C00914628 /* MapViewController_iPhone.xib */; };
+		3E79A98D13950A3C00914628 /* NewsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95D13950A3C00914628 /* NewsViewController_iPad.xib */; };
+		3E79A98E13950A3C00914628 /* NewsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95E13950A3C00914628 /* NewsViewController_iPhone.xib */; };
+		3E79A98F13950A3C00914628 /* SettingsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95F13950A3C00914628 /* SettingsViewController_iPad.xib */; };
+		3E79A99013950A3C00914628 /* SettingsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96013950A3C00914628 /* SettingsViewController_iPhone.xib */; };
+		3E79A99113950A3C00914628 /* SliderTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96113950A3C00914628 /* SliderTableCell_iPad.xib */; };
+		3E79A99213950A3C00914628 /* SliderTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96213950A3C00914628 /* SliderTableCell_iPhone.xib */; };
+		3E79A99313950A3C00914628 /* SplashViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96313950A3C00914628 /* SplashViewController_iPad.xib */; };
+		3E79A99413950A3C00914628 /* SplashViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96413950A3C00914628 /* SplashViewController_iPhone.xib */; };
+		3E79A99513950A3C00914628 /* TwitterViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96513950A3C00914628 /* TwitterViewController_iPad.xib */; };
+		3E79A99613950A3C00914628 /* TwitterViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96613950A3C00914628 /* TwitterViewController_iPhone.xib */; };
+		3E79A99713950A3C00914628 /* WebViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96713950A3C00914628 /* WebViewController_iPad.xib */; };
+		3E79A99813950A3C00914628 /* WebViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96813950A3C00914628 /* WebViewController_iPhone.xib */; };
+		3E79A99913950A3C00914628 /* CategoryTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */; };
+		3E79A99A13950A3C00914628 /* CategoryTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93A13950A3C00914628 /* CategoryTableViewController_iPhone.xib */; };
+		3E79A99B13950A3C00914628 /* CheckinAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93B13950A3C00914628 /* CheckinAddViewController_iPad.xib */; };
+		3E79A99C13950A3C00914628 /* CheckinAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93C13950A3C00914628 /* CheckinAddViewController_iPhone.xib */; };
+		3E79A99D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib */; };
+		3E79A99E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib */; };
+		3E79A99F13950A3C00914628 /* CheckinMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93F13950A3C00914628 /* CheckinMapViewController_iPad.xib */; };
+		3E79A9A013950A3C00914628 /* CheckinMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94013950A3C00914628 /* CheckinMapViewController_iPhone.xib */; };
+		3E79A9A113950A3C00914628 /* DeploymentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94113950A3C00914628 /* DeploymentAddViewController_iPad.xib */; };
+		3E79A9A213950A3C00914628 /* DeploymentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94213950A3C00914628 /* DeploymentAddViewController_iPhone.xib */; };
+		3E79A9A313950A3C00914628 /* DeploymentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94313950A3C00914628 /* DeploymentTableCell_iPad.xib */; };
+		3E79A9A413950A3C00914628 /* DeploymentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94413950A3C00914628 /* DeploymentTableCell_iPhone.xib */; };
+		3E79A9A513950A3C00914628 /* DeploymentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94513950A3C00914628 /* DeploymentTableViewController_iPad.xib */; };
+		3E79A9A613950A3C00914628 /* DeploymentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94613950A3C00914628 /* DeploymentTableViewController_iPhone.xib */; };
+		3E79A9A713950A3C00914628 /* ImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94713950A3C00914628 /* ImageViewController_iPad.xib */; };
+		3E79A9A813950A3C00914628 /* ImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94813950A3C00914628 /* ImageViewController_iPhone.xib */; };
+		3E79A9A913950A3C00914628 /* IncidentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94913950A3C00914628 /* IncidentAddViewController_iPad.xib */; };
+		3E79A9AA13950A3C00914628 /* IncidentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94A13950A3C00914628 /* IncidentAddViewController_iPhone.xib */; };
+		3E79A9AB13950A3C00914628 /* IncidentDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib */; };
+		3E79A9AC13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib */; };
+		3E79A9AD13950A3C00914628 /* IncidentMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94D13950A3C00914628 /* IncidentMapViewController_iPad.xib */; };
+		3E79A9AE13950A3C00914628 /* IncidentMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94E13950A3C00914628 /* IncidentMapViewController_iPhone.xib */; };
+		3E79A9AF13950A3C00914628 /* IncidentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94F13950A3C00914628 /* IncidentTableCell_iPad.xib */; };
+		3E79A9B013950A3C00914628 /* IncidentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95013950A3C00914628 /* IncidentTableCell_iPhone.xib */; };
+		3E79A9B113950A3C00914628 /* IncidentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95113950A3C00914628 /* IncidentTableViewController_iPad.xib */; };
+		3E79A9B213950A3C00914628 /* IncidentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95213950A3C00914628 /* IncidentTableViewController_iPhone.xib */; };
+		3E79A9B313950A3C00914628 /* IncidentTabViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95313950A3C00914628 /* IncidentTabViewController_iPad.xib */; };
+		3E79A9B413950A3C00914628 /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
+		3E79A9B513950A3C00914628 /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
+		3E79A9B613950A3C00914628 /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
+		3E79A9B713950A3C00914628 /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
+		3E79A9B813950A3C00914628 /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3E79A9B913950A3C00914628 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
+		3E79A9BA13950A3C00914628 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
+		3E79A9BB13950A3C00914628 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
+		3E79A9BC13950A3C00914628 /* MapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95C13950A3C00914628 /* MapViewController_iPhone.xib */; };
+		3E79A9BD13950A3C00914628 /* NewsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95D13950A3C00914628 /* NewsViewController_iPad.xib */; };
+		3E79A9BE13950A3C00914628 /* NewsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95E13950A3C00914628 /* NewsViewController_iPhone.xib */; };
+		3E79A9BF13950A3C00914628 /* SettingsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95F13950A3C00914628 /* SettingsViewController_iPad.xib */; };
+		3E79A9C013950A3C00914628 /* SettingsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96013950A3C00914628 /* SettingsViewController_iPhone.xib */; };
+		3E79A9C113950A3C00914628 /* SliderTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96113950A3C00914628 /* SliderTableCell_iPad.xib */; };
+		3E79A9C213950A3C00914628 /* SliderTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96213950A3C00914628 /* SliderTableCell_iPhone.xib */; };
+		3E79A9C313950A3C00914628 /* SplashViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96313950A3C00914628 /* SplashViewController_iPad.xib */; };
+		3E79A9C413950A3C00914628 /* SplashViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96413950A3C00914628 /* SplashViewController_iPhone.xib */; };
+		3E79A9C513950A3C00914628 /* TwitterViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96513950A3C00914628 /* TwitterViewController_iPad.xib */; };
+		3E79A9C613950A3C00914628 /* TwitterViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96613950A3C00914628 /* TwitterViewController_iPhone.xib */; };
+		3E79A9C713950A3C00914628 /* WebViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96713950A3C00914628 /* WebViewController_iPad.xib */; };
+		3E79A9C813950A3C00914628 /* WebViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96813950A3C00914628 /* WebViewController_iPhone.xib */; };
 		3E8090EC129B2B8500CF273F /* ItemPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8090EB129B2B8500CF273F /* ItemPicker.m */; };
 		3E809136129B2F8E00CF273F /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E809135129B2F8E00CF273F /* filter.png */; };
 		3E84E7011282931400A55292 /* sort_alphabetical.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E84E6FF1282931400A55292 /* sort_alphabetical.png */; };
@@ -142,7 +238,6 @@
 		3E8F03BD131566140011E423 /* button_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03BB131566140011E423 /* button_red@2x.png */; };
 		3E8F03EC131568AE0011E423 /* button_red_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03EA131568AE0011E423 /* button_red_selected.png */; };
 		3E8F03ED131568AE0011E423 /* button_red_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03EB131568AE0011E423 /* button_red_selected@2x.png */; };
-		3E91383E12F73F4800F8369F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E91383C12F73F4800F8369F /* Localizable.strings */; };
 		3E91985A1293A81F005AC005 /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9198591293A81F005AC005 /* Locator.m */; };
 		3E9198A61293AD09005AC005 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9198A51293AD09005AC005 /* CoreLocation.framework */; };
 		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
@@ -185,102 +280,6 @@
 		3EBBD75F12DCAC48007ECE4B /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD75E12DCAC48007ECE4B /* SFHFKeychainUtils.m */; };
 		3EBBD76C12DCAC73007ECE4B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBBD76B12DCAC73007ECE4B /* Security.framework */; };
 		3EC194C3131C62AF00BF073D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC194C2131C62AF00BF073D /* UIImage+RoundedCorner.m */; };
-		3EC8F50D138F96F0007F7B21 /* CategoryTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4AD138F96F0007F7B21 /* CategoryTableViewController_iPad.xib */; };
-		3EC8F50E138F96F0007F7B21 /* CategoryTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4AF138F96F0007F7B21 /* CategoryTableViewController_iPhone.xib */; };
-		3EC8F50F138F96F0007F7B21 /* CheckinAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B1138F96F0007F7B21 /* CheckinAddViewController_iPad.xib */; };
-		3EC8F510138F96F0007F7B21 /* CheckinAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B3138F96F0007F7B21 /* CheckinAddViewController_iPhone.xib */; };
-		3EC8F511138F96F0007F7B21 /* CheckinDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B5138F96F0007F7B21 /* CheckinDetailsViewController_iPad.xib */; };
-		3EC8F512138F96F0007F7B21 /* CheckinDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B7138F96F0007F7B21 /* CheckinDetailsViewController_iPhone.xib */; };
-		3EC8F513138F96F0007F7B21 /* CheckinMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B9138F96F0007F7B21 /* CheckinMapViewController_iPad.xib */; };
-		3EC8F514138F96F0007F7B21 /* CheckinMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4BB138F96F0007F7B21 /* CheckinMapViewController_iPhone.xib */; };
-		3EC8F515138F96F0007F7B21 /* DeploymentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4BD138F96F0007F7B21 /* DeploymentAddViewController_iPad.xib */; };
-		3EC8F516138F96F0007F7B21 /* DeploymentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4BF138F96F0007F7B21 /* DeploymentAddViewController_iPhone.xib */; };
-		3EC8F517138F96F0007F7B21 /* DeploymentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C1138F96F0007F7B21 /* DeploymentTableCell_iPad.xib */; };
-		3EC8F518138F96F0007F7B21 /* DeploymentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C3138F96F0007F7B21 /* DeploymentTableCell_iPhone.xib */; };
-		3EC8F519138F96F0007F7B21 /* DeploymentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C5138F96F0007F7B21 /* DeploymentTableViewController_iPad.xib */; };
-		3EC8F51A138F96F0007F7B21 /* DeploymentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C7138F96F0007F7B21 /* DeploymentTableViewController_iPhone.xib */; };
-		3EC8F51B138F96F0007F7B21 /* ImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C9138F96F0007F7B21 /* ImageViewController_iPad.xib */; };
-		3EC8F51C138F96F0007F7B21 /* ImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4CB138F96F0007F7B21 /* ImageViewController_iPhone.xib */; };
-		3EC8F51D138F96F0007F7B21 /* IncidentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4CD138F96F0007F7B21 /* IncidentAddViewController_iPad.xib */; };
-		3EC8F51E138F96F0007F7B21 /* IncidentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4CF138F96F0007F7B21 /* IncidentAddViewController_iPhone.xib */; };
-		3EC8F51F138F96F0007F7B21 /* IncidentDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D1138F96F0007F7B21 /* IncidentDetailsViewController_iPad.xib */; };
-		3EC8F520138F96F0007F7B21 /* IncidentDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D3138F96F0007F7B21 /* IncidentDetailsViewController_iPhone.xib */; };
-		3EC8F521138F96F0007F7B21 /* IncidentMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D5138F96F0007F7B21 /* IncidentMapViewController_iPad.xib */; };
-		3EC8F522138F96F0007F7B21 /* IncidentMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D7138F96F0007F7B21 /* IncidentMapViewController_iPhone.xib */; };
-		3EC8F523138F96F0007F7B21 /* IncidentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D9138F96F0007F7B21 /* IncidentTableCell_iPad.xib */; };
-		3EC8F524138F96F0007F7B21 /* IncidentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4DB138F96F0007F7B21 /* IncidentTableCell_iPhone.xib */; };
-		3EC8F525138F96F0007F7B21 /* IncidentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4DD138F96F0007F7B21 /* IncidentTableViewController_iPad.xib */; };
-		3EC8F526138F96F0007F7B21 /* IncidentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4DF138F96F0007F7B21 /* IncidentTableViewController_iPhone.xib */; };
-		3EC8F527138F96F0007F7B21 /* IncidentTabViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E1138F96F0007F7B21 /* IncidentTabViewController_iPad.xib */; };
-		3EC8F528138F96F0007F7B21 /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E3138F96F0007F7B21 /* IncidentTabViewController_iPhone.xib */; };
-		3EC8F529138F96F0007F7B21 /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E5138F96F0007F7B21 /* LoadingViewController_iPad.xib */; };
-		3EC8F52A138F96F0007F7B21 /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E7138F96F0007F7B21 /* LoadingViewController_iPhone.xib */; };
-		3EC8F52B138F96F0007F7B21 /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E9138F96F0007F7B21 /* LocationTableViewController_iPad.xib */; };
-		3EC8F52C138F96F0007F7B21 /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4EB138F96F0007F7B21 /* LocationTableViewController_iPhone.xib */; };
-		3EC8F52D138F96F0007F7B21 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4ED138F96F0007F7B21 /* MainWindow_iPad.xib */; };
-		3EC8F52E138F96F0007F7B21 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4EF138F96F0007F7B21 /* MainWindow_iPhone.xib */; };
-		3EC8F52F138F96F0007F7B21 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F1138F96F0007F7B21 /* MapViewController_iPad.xib */; };
-		3EC8F530138F96F0007F7B21 /* MapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F3138F96F0007F7B21 /* MapViewController_iPhone.xib */; };
-		3EC8F531138F96F0007F7B21 /* NewsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F5138F96F0007F7B21 /* NewsViewController_iPad.xib */; };
-		3EC8F532138F96F0007F7B21 /* NewsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F7138F96F0007F7B21 /* NewsViewController_iPhone.xib */; };
-		3EC8F533138F96F0007F7B21 /* SettingsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F9138F96F0007F7B21 /* SettingsViewController_iPad.xib */; };
-		3EC8F534138F96F0007F7B21 /* SettingsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4FB138F96F0007F7B21 /* SettingsViewController_iPhone.xib */; };
-		3EC8F535138F96F0007F7B21 /* SliderTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4FD138F96F0007F7B21 /* SliderTableCell_iPad.xib */; };
-		3EC8F536138F96F0007F7B21 /* SliderTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4FF138F96F0007F7B21 /* SliderTableCell_iPhone.xib */; };
-		3EC8F537138F96F0007F7B21 /* SplashViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F501138F96F0007F7B21 /* SplashViewController_iPad.xib */; };
-		3EC8F538138F96F0007F7B21 /* SplashViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F503138F96F0007F7B21 /* SplashViewController_iPhone.xib */; };
-		3EC8F539138F96F0007F7B21 /* TwitterViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F505138F96F0007F7B21 /* TwitterViewController_iPad.xib */; };
-		3EC8F53A138F96F0007F7B21 /* TwitterViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F507138F96F0007F7B21 /* TwitterViewController_iPhone.xib */; };
-		3EC8F53B138F96F0007F7B21 /* WebViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F509138F96F0007F7B21 /* WebViewController_iPad.xib */; };
-		3EC8F53C138F96F0007F7B21 /* WebViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F50B138F96F0007F7B21 /* WebViewController_iPhone.xib */; };
-		3EC8F53D138F96F0007F7B21 /* CategoryTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4AD138F96F0007F7B21 /* CategoryTableViewController_iPad.xib */; };
-		3EC8F53E138F96F0007F7B21 /* CategoryTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4AF138F96F0007F7B21 /* CategoryTableViewController_iPhone.xib */; };
-		3EC8F53F138F96F0007F7B21 /* CheckinAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B1138F96F0007F7B21 /* CheckinAddViewController_iPad.xib */; };
-		3EC8F540138F96F0007F7B21 /* CheckinAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B3138F96F0007F7B21 /* CheckinAddViewController_iPhone.xib */; };
-		3EC8F541138F96F0007F7B21 /* CheckinDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B5138F96F0007F7B21 /* CheckinDetailsViewController_iPad.xib */; };
-		3EC8F542138F96F0007F7B21 /* CheckinDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B7138F96F0007F7B21 /* CheckinDetailsViewController_iPhone.xib */; };
-		3EC8F543138F96F0007F7B21 /* CheckinMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4B9138F96F0007F7B21 /* CheckinMapViewController_iPad.xib */; };
-		3EC8F544138F96F0007F7B21 /* CheckinMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4BB138F96F0007F7B21 /* CheckinMapViewController_iPhone.xib */; };
-		3EC8F545138F96F0007F7B21 /* DeploymentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4BD138F96F0007F7B21 /* DeploymentAddViewController_iPad.xib */; };
-		3EC8F546138F96F0007F7B21 /* DeploymentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4BF138F96F0007F7B21 /* DeploymentAddViewController_iPhone.xib */; };
-		3EC8F547138F96F0007F7B21 /* DeploymentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C1138F96F0007F7B21 /* DeploymentTableCell_iPad.xib */; };
-		3EC8F548138F96F0007F7B21 /* DeploymentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C3138F96F0007F7B21 /* DeploymentTableCell_iPhone.xib */; };
-		3EC8F549138F96F0007F7B21 /* DeploymentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C5138F96F0007F7B21 /* DeploymentTableViewController_iPad.xib */; };
-		3EC8F54A138F96F0007F7B21 /* DeploymentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C7138F96F0007F7B21 /* DeploymentTableViewController_iPhone.xib */; };
-		3EC8F54B138F96F0007F7B21 /* ImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4C9138F96F0007F7B21 /* ImageViewController_iPad.xib */; };
-		3EC8F54C138F96F0007F7B21 /* ImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4CB138F96F0007F7B21 /* ImageViewController_iPhone.xib */; };
-		3EC8F54D138F96F0007F7B21 /* IncidentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4CD138F96F0007F7B21 /* IncidentAddViewController_iPad.xib */; };
-		3EC8F54E138F96F0007F7B21 /* IncidentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4CF138F96F0007F7B21 /* IncidentAddViewController_iPhone.xib */; };
-		3EC8F54F138F96F0007F7B21 /* IncidentDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D1138F96F0007F7B21 /* IncidentDetailsViewController_iPad.xib */; };
-		3EC8F550138F96F0007F7B21 /* IncidentDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D3138F96F0007F7B21 /* IncidentDetailsViewController_iPhone.xib */; };
-		3EC8F551138F96F0007F7B21 /* IncidentMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D5138F96F0007F7B21 /* IncidentMapViewController_iPad.xib */; };
-		3EC8F552138F96F0007F7B21 /* IncidentMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D7138F96F0007F7B21 /* IncidentMapViewController_iPhone.xib */; };
-		3EC8F553138F96F0007F7B21 /* IncidentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4D9138F96F0007F7B21 /* IncidentTableCell_iPad.xib */; };
-		3EC8F554138F96F0007F7B21 /* IncidentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4DB138F96F0007F7B21 /* IncidentTableCell_iPhone.xib */; };
-		3EC8F555138F96F0007F7B21 /* IncidentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4DD138F96F0007F7B21 /* IncidentTableViewController_iPad.xib */; };
-		3EC8F556138F96F0007F7B21 /* IncidentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4DF138F96F0007F7B21 /* IncidentTableViewController_iPhone.xib */; };
-		3EC8F557138F96F0007F7B21 /* IncidentTabViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E1138F96F0007F7B21 /* IncidentTabViewController_iPad.xib */; };
-		3EC8F558138F96F0007F7B21 /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E3138F96F0007F7B21 /* IncidentTabViewController_iPhone.xib */; };
-		3EC8F559138F96F0007F7B21 /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E5138F96F0007F7B21 /* LoadingViewController_iPad.xib */; };
-		3EC8F55A138F96F0007F7B21 /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E7138F96F0007F7B21 /* LoadingViewController_iPhone.xib */; };
-		3EC8F55B138F96F0007F7B21 /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4E9138F96F0007F7B21 /* LocationTableViewController_iPad.xib */; };
-		3EC8F55C138F96F0007F7B21 /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4EB138F96F0007F7B21 /* LocationTableViewController_iPhone.xib */; };
-		3EC8F55D138F96F0007F7B21 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4ED138F96F0007F7B21 /* MainWindow_iPad.xib */; };
-		3EC8F55E138F96F0007F7B21 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4EF138F96F0007F7B21 /* MainWindow_iPhone.xib */; };
-		3EC8F55F138F96F0007F7B21 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F1138F96F0007F7B21 /* MapViewController_iPad.xib */; };
-		3EC8F560138F96F0007F7B21 /* MapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F3138F96F0007F7B21 /* MapViewController_iPhone.xib */; };
-		3EC8F561138F96F0007F7B21 /* NewsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F5138F96F0007F7B21 /* NewsViewController_iPad.xib */; };
-		3EC8F562138F96F0007F7B21 /* NewsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F7138F96F0007F7B21 /* NewsViewController_iPhone.xib */; };
-		3EC8F563138F96F0007F7B21 /* SettingsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4F9138F96F0007F7B21 /* SettingsViewController_iPad.xib */; };
-		3EC8F564138F96F0007F7B21 /* SettingsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4FB138F96F0007F7B21 /* SettingsViewController_iPhone.xib */; };
-		3EC8F565138F96F0007F7B21 /* SliderTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4FD138F96F0007F7B21 /* SliderTableCell_iPad.xib */; };
-		3EC8F566138F96F0007F7B21 /* SliderTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F4FF138F96F0007F7B21 /* SliderTableCell_iPhone.xib */; };
-		3EC8F567138F96F0007F7B21 /* SplashViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F501138F96F0007F7B21 /* SplashViewController_iPad.xib */; };
-		3EC8F568138F96F0007F7B21 /* SplashViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F503138F96F0007F7B21 /* SplashViewController_iPhone.xib */; };
-		3EC8F569138F96F0007F7B21 /* TwitterViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F505138F96F0007F7B21 /* TwitterViewController_iPad.xib */; };
-		3EC8F56A138F96F0007F7B21 /* TwitterViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F507138F96F0007F7B21 /* TwitterViewController_iPhone.xib */; };
-		3EC8F56B138F96F0007F7B21 /* WebViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F509138F96F0007F7B21 /* WebViewController_iPad.xib */; };
-		3EC8F56C138F96F0007F7B21 /* WebViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8F50B138F96F0007F7B21 /* WebViewController_iPhone.xib */; };
 		3EC94CBC12773CDD00411AE0 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3ECB541E122F3F53000AAC56 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB541D122F3F53000AAC56 /* NavigationController.m */; };
 		3ECB55D2122F5BEE000AAC56 /* DateTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */; };
@@ -341,7 +340,6 @@
 		3ED0F8DC138E6BE40065C8E8 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72992D12EF262A00FDED00 /* arrow_down@2x.png */; };
 		3ED0F8DD138E6BE40065C8E8 /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72996B12EF30C500FDED00 /* selected@2x.png */; };
 		3ED0F8DE138E6BE40065C8E8 /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72996D12EF30D100FDED00 /* unselected@2x.png */; };
-		3ED0F8DF138E6BE40065C8E8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E91383C12F73F4800F8369F /* Localizable.strings */; };
 		3ED0F8E0138E6BE40065C8E8 /* checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E466F59130C62BF00EE685B /* checkin.png */; };
 		3ED0F8E1138E6BE40065C8E8 /* checkin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E466F5A130C62BF00EE685B /* checkin@2x.png */; };
 		3ED0F8F0138E6BE40065C8E8 /* button_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03BA131566140011E423 /* button_red.png */; };
@@ -533,6 +531,8 @@
 		3ED45095128B475100578DB4 /* sort_verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED45094128B475100578DB4 /* sort_verified.png */; };
 		3ED9827212ECD7DC0065A324 /* ASIHTTPRequest+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED9827112ECD7DC0065A324 /* ASIHTTPRequest+Extension.m */; };
 		3EE3EDDD12B7EDF600782581 /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3EDDC12B7EDF600782581 /* sms.png */; };
+		3EE793421394E2EF0086D664 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE793401394E2EF0086D664 /* Localizable.strings */; };
+		3EE793431394E2EF0086D664 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE793401394E2EF0086D664 /* Localizable.strings */; };
 		3EEE8E281311888B0096CBEA /* IncidentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE8E271311888B0096CBEA /* IncidentTableViewController.m */; };
 		3EEE8E2B131188970096CBEA /* IncidentMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE8E2A131188970096CBEA /* IncidentMapViewController.m */; };
 		3EEE8E2E131188AF0096CBEA /* CheckinMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE8E2D131188AF0096CBEA /* CheckinMapViewController.m */; };
@@ -599,54 +599,6 @@
 		3E4C659912AD774F001ED08A /* MoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePlayer.h; sourceTree = "<group>"; };
 		3E4C659A12AD774F001ED08A /* MoviePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePlayer.m; sourceTree = "<group>"; };
 		3E4C65BE12AD77DA001ED08A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		3E5918CB1393ADAA0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/CategoryTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918CC1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/CategoryTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918CD1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/CheckinAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918CE1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/CheckinAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918CF1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/CheckinDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918D01393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/CheckinDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918D11393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/CheckinMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918D21393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/CheckinMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918D31393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/DeploymentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918D41393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/DeploymentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918D51393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3E5918D61393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/DeploymentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3E5918D71393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/DeploymentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918D81393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/DeploymentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918D91393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/ImageViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918DA1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/ImageViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918DB1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918DC1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918DD1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918DE1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918DF1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918E01393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918E11393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3E5918E21393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3E5918E31393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918E41393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918E51393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentTabViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918E61393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/IncidentTabViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918E71393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/LoadingViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918E81393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/LoadingViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918E91393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/LocationTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918EA1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/LocationTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918EB1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		3E5918EC1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
-		3E5918ED1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/MapViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918EE1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/MapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918EF1393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/NewsViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918F01393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/NewsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918F11393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/SettingsViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918F21393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/SettingsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918F31393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/SliderTableCell_iPad.xib; sourceTree = "<group>"; };
-		3E5918F41393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3E5918F51393ADAB0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/SplashViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918F61393ADAC0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/SplashViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918F71393ADAC0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwitterViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918F81393ADAC0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/TwitterViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E5918F91393ADAC0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/WebViewController_iPad.xib; sourceTree = "<group>"; };
-		3E5918FA1393ADAC0033AF8E /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/WebViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E5BB9EE131056C90073E4F8 /* CheckinAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckinAddViewController.h; sourceTree = "<group>"; };
 		3E5BB9EF131056C90073E4F8 /* CheckinAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinAddViewController.m; sourceTree = "<group>"; };
 		3E5BBBB41310A6150073E4F8 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -679,6 +631,54 @@
 		3E72992D12EF262A00FDED00 /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
 		3E72996B12EF30C500FDED00 /* selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected@2x.png"; sourceTree = "<group>"; };
 		3E72996D12EF30D100FDED00 /* unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unselected@2x.png"; sourceTree = "<group>"; };
+		3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A93A13950A3C00914628 /* CategoryTableViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A93B13950A3C00914628 /* CheckinAddViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinAddViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A93C13950A3C00914628 /* CheckinAddViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinAddViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A93D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinDetailsViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A93E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A93F13950A3C00914628 /* CheckinMapViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinMapViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A94013950A3C00914628 /* CheckinMapViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckinMapViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A94113950A3C00914628 /* DeploymentAddViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentAddViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A94213950A3C00914628 /* DeploymentAddViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentAddViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A94313950A3C00914628 /* DeploymentTableCell_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
+		3E79A94413950A3C00914628 /* DeploymentTableCell_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentTableCell_iPhone.xib; sourceTree = "<group>"; };
+		3E79A94513950A3C00914628 /* DeploymentTableViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentTableViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A94613950A3C00914628 /* DeploymentTableViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeploymentTableViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A94713950A3C00914628 /* ImageViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A94813950A3C00914628 /* ImageViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A94913950A3C00914628 /* IncidentAddViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentAddViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A94A13950A3C00914628 /* IncidentAddViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentAddViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A94B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentDetailsViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A94C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A94D13950A3C00914628 /* IncidentMapViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentMapViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A94E13950A3C00914628 /* IncidentMapViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentMapViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A94F13950A3C00914628 /* IncidentTableCell_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTableCell_iPad.xib; sourceTree = "<group>"; };
+		3E79A95013950A3C00914628 /* IncidentTableCell_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTableCell_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95113950A3C00914628 /* IncidentTableViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTableViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A95213950A3C00914628 /* IncidentTableViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTableViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95313950A3C00914628 /* IncidentTabViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTabViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTabViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95913950A3C00914628 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
+		3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A95C13950A3C00914628 /* MapViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95D13950A3C00914628 /* NewsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A95E13950A3C00914628 /* NewsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95F13950A3C00914628 /* SettingsViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A96013950A3C00914628 /* SettingsViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A96113950A3C00914628 /* SliderTableCell_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableCell_iPad.xib; sourceTree = "<group>"; };
+		3E79A96213950A3C00914628 /* SliderTableCell_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
+		3E79A96313950A3C00914628 /* SplashViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A96413950A3C00914628 /* SplashViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A96513950A3C00914628 /* TwitterViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwitterViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A96613950A3C00914628 /* TwitterViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwitterViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A96713950A3C00914628 /* WebViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A96813950A3C00914628 /* WebViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E8090EA129B2B8500CF273F /* ItemPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPicker.h; sourceTree = "<group>"; };
 		3E8090EB129B2B8500CF273F /* ItemPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPicker.m; sourceTree = "<group>"; };
 		3E809135129B2F8E00CF273F /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
@@ -823,7 +823,6 @@
 		3E8F03BB131566140011E423 /* button_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_red@2x.png"; sourceTree = "<group>"; };
 		3E8F03EA131568AE0011E423 /* button_red_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red_selected.png; sourceTree = "<group>"; };
 		3E8F03EB131568AE0011E423 /* button_red_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_red_selected@2x.png"; sourceTree = "<group>"; };
-		3E91383D12F73F4800F8369F /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E9198581293A81F005AC005 /* Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locator.h; sourceTree = "<group>"; };
 		3E9198591293A81F005AC005 /* Locator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locator.m; sourceTree = "<group>"; };
 		3E9198A51293AD09005AC005 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -931,249 +930,6 @@
 		3EBBD76B12DCAC73007ECE4B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3EC194C1131C62AF00BF073D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		3EC194C2131C62AF00BF073D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
-		3EC8F49C138F8FF0007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3EC8F49D138F9002007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3EC8F49E138F9011007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3EC8F49F138F9025007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3EC8F4AE138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CategoryTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4B0138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CategoryTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4B2138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CheckinAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4B4138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CheckinAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4B6138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CheckinDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4B8138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CheckinDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4BA138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CheckinMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4BC138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CheckinMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4BE138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DeploymentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4C0138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DeploymentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4C2138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4C4138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DeploymentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4C6138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DeploymentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4C8138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DeploymentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4CA138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ImageViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4CC138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ImageViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4CE138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4D0138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4D2138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4D4138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4D6138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4D8138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4DA138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4DC138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4DE138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4E0138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4E2138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentTabViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4E4138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/IncidentTabViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4E6138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoadingViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4E8138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoadingViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4EA138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LocationTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4EC138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LocationTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4EE138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4F0138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4F2138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4F4138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4F6138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NewsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4F8138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NewsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4FA138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F4FC138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F4FE138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SliderTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F500138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F502138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SplashViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F504138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SplashViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F506138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TwitterViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F508138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TwitterViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F50A138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WebViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F50C138F96F0007F7B21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WebViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F56D138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/CategoryTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F56E138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/CategoryTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F56F138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/CheckinAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F570138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/CheckinAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F571138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/CheckinDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F572138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/CheckinDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F573138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/CheckinMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F574138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/CheckinMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F575138F9729007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DeploymentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F576138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DeploymentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F577138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F578138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DeploymentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F579138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DeploymentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F57A138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/DeploymentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F57B138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/ImageViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F57C138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/ImageViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F57D138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F57E138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F57F138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F580138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F581138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F582138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F583138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F584138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F585138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F586138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F587138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentTabViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F588138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncidentTabViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F589138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/LoadingViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F58A138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/LoadingViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F58B138F972A007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/LocationTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F58C138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/LocationTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F58D138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		3EC8F58E138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/MapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F58F138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/MapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F590138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/NewsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F591138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/NewsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F592138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SettingsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F593138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SettingsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F594138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SliderTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F595138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F596138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SplashViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F597138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SplashViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F598138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/TwitterViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F599138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/TwitterViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F59A138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/WebViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F59B138F972B007F7B21 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/WebViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F59C138F974C007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CategoryTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F59D138F974C007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CategoryTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F59E138F974C007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CheckinAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F59F138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CheckinAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5A0138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CheckinDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5A1138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CheckinDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5A2138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CheckinMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5A3138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/CheckinMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5A4138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DeploymentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5A5138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DeploymentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5A6138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5A7138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DeploymentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5A8138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DeploymentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5A9138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/DeploymentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5AA138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/ImageViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5AB138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/ImageViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5AC138F974D007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5AD138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5AE138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5AF138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5B0138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5B1138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5B2138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5B3138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5B4138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5B5138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5B6138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentTabViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5B7138F974E007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/IncidentTabViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5B8138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/LoadingViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5B9138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/LoadingViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5BA138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/LocationTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5BB138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/LocationTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5BC138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5BD138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5BE138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/MapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5BF138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/MapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5C0138F974F007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/NewsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5C1138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/NewsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5C2138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SettingsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5C3138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SettingsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5C4138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SliderTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5C5138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5C6138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SplashViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5C7138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SplashViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5C8138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/TwitterViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5C9138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/TwitterViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5CA138F9750007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/WebViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5CB138F9751007F7B21 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/WebViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5CC138F9767007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CategoryTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5CD138F9767007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CategoryTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5CE138F9767007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CheckinAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5CF138F9767007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CheckinAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5D0138F9767007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CheckinDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5D1138F9767007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CheckinDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5D2138F9767007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CheckinMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5D3138F9767007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/CheckinMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5D4138F9768007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DeploymentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5D5138F9768007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DeploymentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5D6138F9768007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5D7138F9768007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DeploymentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5D8138F9768007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DeploymentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5D9138F9768007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/DeploymentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5DA138F9769007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/ImageViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5DB138F9769007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/ImageViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5DC138F9769007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5DD138F9769007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5DE138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5DF138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5E0138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5E1138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5E2138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5E3138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5E4138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5E5138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5E6138F976A007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentTabViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5E7138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/IncidentTabViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5E8138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/LoadingViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5E9138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/LoadingViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5EA138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/LocationTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5EB138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/LocationTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5EC138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5ED138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5EE138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5EF138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5F0138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/NewsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5F1138F976B007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/NewsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5F2138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SettingsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5F3138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SettingsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5F4138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SliderTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5F5138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5F6138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SplashViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5F7138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SplashViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5F8138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/TwitterViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5F9138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/TwitterViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5FA138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/WebViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5FB138F976C007F7B21 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/WebViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5FC138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/CategoryTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5FD138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/CategoryTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F5FE138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/CheckinAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F5FF138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/CheckinAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F600138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/CheckinDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F601138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/CheckinDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F602138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/CheckinMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F603138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/CheckinMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F604138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/DeploymentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F605138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/DeploymentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F606138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/DeploymentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F607138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/DeploymentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F608138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/DeploymentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F609138F97A9007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/DeploymentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F60A138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/ImageViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F60B138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/ImageViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F60C138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentAddViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F60D138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentAddViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F60E138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentDetailsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F60F138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentDetailsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F610138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentMapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F611138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentMapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F612138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F613138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F614138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F615138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F616138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentTabViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F617138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/IncidentTabViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F618138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/LoadingViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F619138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/LoadingViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F61A138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/LocationTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F61B138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/LocationTableViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F61C138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		3EC8F61D138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/MainWindow_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F61E138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/MapViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F61F138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/MapViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F620138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/NewsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F621138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/NewsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F622138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/SettingsViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F623138F97AA007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/SettingsViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F624138F97AB007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/SliderTableCell_iPad.xib; sourceTree = "<group>"; };
-		3EC8F625138F97AB007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/SliderTableCell_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F626138F97AB007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/SplashViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F627138F97AB007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/SplashViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F628138F97AB007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/TwitterViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F629138F97AB007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/TwitterViewController_iPhone.xib; sourceTree = "<group>"; };
-		3EC8F62A138F97AB007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/WebViewController_iPad.xib; sourceTree = "<group>"; };
-		3EC8F62B138F97AB007F7B21 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/WebViewController_iPhone.xib; sourceTree = "<group>"; };
 		3EC94CBA12773CDD00411AE0 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
 		3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		3ECB541C122F3F53000AAC56 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
@@ -1232,6 +988,12 @@
 		3ED9827012ECD7DC0065A324 /* ASIHTTPRequest+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+Extension.h"; sourceTree = "<group>"; };
 		3ED9827112ECD7DC0065A324 /* ASIHTTPRequest+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+Extension.m"; sourceTree = "<group>"; };
 		3EE3EDDC12B7EDF600782581 /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
+		3EE793741394E3070086D664 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3EE793A51394E31C0086D664 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3EE793D61394E32F0086D664 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3EE794071394E3440086D664 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3EE794381394E3560086D664 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3EE794391394E3760086D664 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3EEE8E261311888B0096CBEA /* IncidentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentTableViewController.h; sourceTree = "<group>"; };
 		3EEE8E271311888B0096CBEA /* IncidentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncidentTableViewController.m; sourceTree = "<group>"; };
 		3EEE8E29131188970096CBEA /* IncidentMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentMapViewController.h; sourceTree = "<group>"; };
@@ -1368,6 +1130,61 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3E79A86C139508CD00914628 /* NIBs */ = {
+			isa = PBXGroup;
+			children = (
+				3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */,
+				3E79A93A13950A3C00914628 /* CategoryTableViewController_iPhone.xib */,
+				3E79A93B13950A3C00914628 /* CheckinAddViewController_iPad.xib */,
+				3E79A93C13950A3C00914628 /* CheckinAddViewController_iPhone.xib */,
+				3E79A93D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib */,
+				3E79A93E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib */,
+				3E79A93F13950A3C00914628 /* CheckinMapViewController_iPad.xib */,
+				3E79A94013950A3C00914628 /* CheckinMapViewController_iPhone.xib */,
+				3E79A94113950A3C00914628 /* DeploymentAddViewController_iPad.xib */,
+				3E79A94213950A3C00914628 /* DeploymentAddViewController_iPhone.xib */,
+				3E79A94313950A3C00914628 /* DeploymentTableCell_iPad.xib */,
+				3E79A94413950A3C00914628 /* DeploymentTableCell_iPhone.xib */,
+				3E79A94513950A3C00914628 /* DeploymentTableViewController_iPad.xib */,
+				3E79A94613950A3C00914628 /* DeploymentTableViewController_iPhone.xib */,
+				3E79A94713950A3C00914628 /* ImageViewController_iPad.xib */,
+				3E79A94813950A3C00914628 /* ImageViewController_iPhone.xib */,
+				3E79A94913950A3C00914628 /* IncidentAddViewController_iPad.xib */,
+				3E79A94A13950A3C00914628 /* IncidentAddViewController_iPhone.xib */,
+				3E79A94B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib */,
+				3E79A94C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib */,
+				3E79A94D13950A3C00914628 /* IncidentMapViewController_iPad.xib */,
+				3E79A94E13950A3C00914628 /* IncidentMapViewController_iPhone.xib */,
+				3E79A94F13950A3C00914628 /* IncidentTableCell_iPad.xib */,
+				3E79A95013950A3C00914628 /* IncidentTableCell_iPhone.xib */,
+				3E79A95113950A3C00914628 /* IncidentTableViewController_iPad.xib */,
+				3E79A95213950A3C00914628 /* IncidentTableViewController_iPhone.xib */,
+				3E79A95313950A3C00914628 /* IncidentTabViewController_iPad.xib */,
+				3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */,
+				3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */,
+				3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */,
+				3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */,
+				3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */,
+				3E79A95913950A3C00914628 /* MainWindow_iPad.xib */,
+				3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */,
+				3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */,
+				3E79A95C13950A3C00914628 /* MapViewController_iPhone.xib */,
+				3E79A95D13950A3C00914628 /* NewsViewController_iPad.xib */,
+				3E79A95E13950A3C00914628 /* NewsViewController_iPhone.xib */,
+				3E79A95F13950A3C00914628 /* SettingsViewController_iPad.xib */,
+				3E79A96013950A3C00914628 /* SettingsViewController_iPhone.xib */,
+				3E79A96113950A3C00914628 /* SliderTableCell_iPad.xib */,
+				3E79A96213950A3C00914628 /* SliderTableCell_iPhone.xib */,
+				3E79A96313950A3C00914628 /* SplashViewController_iPad.xib */,
+				3E79A96413950A3C00914628 /* SplashViewController_iPhone.xib */,
+				3E79A96513950A3C00914628 /* TwitterViewController_iPad.xib */,
+				3E79A96613950A3C00914628 /* TwitterViewController_iPhone.xib */,
+				3E79A96713950A3C00914628 /* WebViewController_iPad.xib */,
+				3E79A96813950A3C00914628 /* WebViewController_iPhone.xib */,
+			);
+			path = NIBs;
+			sourceTree = "<group>";
+		};
 		3E8629C61222BBBD001DE141 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1385,6 +1202,7 @@
 		3E8629C71222BBC2001DE141 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E79A86C139508CD00914628 /* NIBs */,
 				3E91382F12F73A1900F8369F /* Localizations */,
 				3E862A3C1222BCE9001DE141 /* Images */,
 			);
@@ -1726,55 +1544,7 @@
 		3E91382F12F73A1900F8369F /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
-				3EC8F4AD138F96F0007F7B21 /* CategoryTableViewController_iPad.xib */,
-				3EC8F4AF138F96F0007F7B21 /* CategoryTableViewController_iPhone.xib */,
-				3EC8F4B1138F96F0007F7B21 /* CheckinAddViewController_iPad.xib */,
-				3EC8F4B3138F96F0007F7B21 /* CheckinAddViewController_iPhone.xib */,
-				3EC8F4B5138F96F0007F7B21 /* CheckinDetailsViewController_iPad.xib */,
-				3EC8F4B7138F96F0007F7B21 /* CheckinDetailsViewController_iPhone.xib */,
-				3EC8F4B9138F96F0007F7B21 /* CheckinMapViewController_iPad.xib */,
-				3EC8F4BB138F96F0007F7B21 /* CheckinMapViewController_iPhone.xib */,
-				3EC8F4BD138F96F0007F7B21 /* DeploymentAddViewController_iPad.xib */,
-				3EC8F4BF138F96F0007F7B21 /* DeploymentAddViewController_iPhone.xib */,
-				3EC8F4C1138F96F0007F7B21 /* DeploymentTableCell_iPad.xib */,
-				3EC8F4C3138F96F0007F7B21 /* DeploymentTableCell_iPhone.xib */,
-				3EC8F4C5138F96F0007F7B21 /* DeploymentTableViewController_iPad.xib */,
-				3EC8F4C7138F96F0007F7B21 /* DeploymentTableViewController_iPhone.xib */,
-				3EC8F4C9138F96F0007F7B21 /* ImageViewController_iPad.xib */,
-				3EC8F4CB138F96F0007F7B21 /* ImageViewController_iPhone.xib */,
-				3EC8F4CD138F96F0007F7B21 /* IncidentAddViewController_iPad.xib */,
-				3EC8F4CF138F96F0007F7B21 /* IncidentAddViewController_iPhone.xib */,
-				3EC8F4D1138F96F0007F7B21 /* IncidentDetailsViewController_iPad.xib */,
-				3EC8F4D3138F96F0007F7B21 /* IncidentDetailsViewController_iPhone.xib */,
-				3EC8F4D5138F96F0007F7B21 /* IncidentMapViewController_iPad.xib */,
-				3EC8F4D7138F96F0007F7B21 /* IncidentMapViewController_iPhone.xib */,
-				3EC8F4D9138F96F0007F7B21 /* IncidentTableCell_iPad.xib */,
-				3EC8F4DB138F96F0007F7B21 /* IncidentTableCell_iPhone.xib */,
-				3EC8F4DD138F96F0007F7B21 /* IncidentTableViewController_iPad.xib */,
-				3EC8F4DF138F96F0007F7B21 /* IncidentTableViewController_iPhone.xib */,
-				3EC8F4E1138F96F0007F7B21 /* IncidentTabViewController_iPad.xib */,
-				3EC8F4E3138F96F0007F7B21 /* IncidentTabViewController_iPhone.xib */,
-				3EC8F4E5138F96F0007F7B21 /* LoadingViewController_iPad.xib */,
-				3EC8F4E7138F96F0007F7B21 /* LoadingViewController_iPhone.xib */,
-				3EC8F4E9138F96F0007F7B21 /* LocationTableViewController_iPad.xib */,
-				3EC8F4EB138F96F0007F7B21 /* LocationTableViewController_iPhone.xib */,
-				3EC8F4ED138F96F0007F7B21 /* MainWindow_iPad.xib */,
-				3EC8F4EF138F96F0007F7B21 /* MainWindow_iPhone.xib */,
-				3EC8F4F1138F96F0007F7B21 /* MapViewController_iPad.xib */,
-				3EC8F4F3138F96F0007F7B21 /* MapViewController_iPhone.xib */,
-				3EC8F4F5138F96F0007F7B21 /* NewsViewController_iPad.xib */,
-				3EC8F4F7138F96F0007F7B21 /* NewsViewController_iPhone.xib */,
-				3EC8F4F9138F96F0007F7B21 /* SettingsViewController_iPad.xib */,
-				3EC8F4FB138F96F0007F7B21 /* SettingsViewController_iPhone.xib */,
-				3EC8F4FD138F96F0007F7B21 /* SliderTableCell_iPad.xib */,
-				3EC8F4FF138F96F0007F7B21 /* SliderTableCell_iPhone.xib */,
-				3EC8F501138F96F0007F7B21 /* SplashViewController_iPad.xib */,
-				3EC8F503138F96F0007F7B21 /* SplashViewController_iPhone.xib */,
-				3EC8F505138F96F0007F7B21 /* TwitterViewController_iPad.xib */,
-				3EC8F507138F96F0007F7B21 /* TwitterViewController_iPhone.xib */,
-				3EC8F509138F96F0007F7B21 /* WebViewController_iPad.xib */,
-				3EC8F50B138F96F0007F7B21 /* WebViewController_iPhone.xib */,
-				3E91383C12F73F4800F8369F /* Localizable.strings */,
+				3EE793401394E2EF0086D664 /* Localizable.strings */,
 			);
 			path = Localizations;
 			sourceTree = "<group>";
@@ -2133,7 +1903,6 @@
 				3E72992E12EF262A00FDED00 /* arrow_down@2x.png in Resources */,
 				3E72996C12EF30C500FDED00 /* selected@2x.png in Resources */,
 				3E72996E12EF30D100FDED00 /* unselected@2x.png in Resources */,
-				3E91383E12F73F4800F8369F /* Localizable.strings in Resources */,
 				3E466F5B130C62BF00EE685B /* checkin.png in Resources */,
 				3E466F5C130C62BF00EE685B /* checkin@2x.png in Resources */,
 				3E8F03BC131566140011E423 /* button_red.png in Resources */,
@@ -2157,54 +1926,55 @@
 				3ED0F9B4138E6BF80065C8E8 /* Logo_iPad@2x.png in Resources */,
 				3ED0F9B5138E6BF80065C8E8 /* Logo_iPhone.png in Resources */,
 				3ED0F9B6138E6BF80065C8E8 /* Logo_iPhone@2x.png in Resources */,
-				3EC8F53D138F96F0007F7B21 /* CategoryTableViewController_iPad.xib in Resources */,
-				3EC8F53E138F96F0007F7B21 /* CategoryTableViewController_iPhone.xib in Resources */,
-				3EC8F53F138F96F0007F7B21 /* CheckinAddViewController_iPad.xib in Resources */,
-				3EC8F540138F96F0007F7B21 /* CheckinAddViewController_iPhone.xib in Resources */,
-				3EC8F541138F96F0007F7B21 /* CheckinDetailsViewController_iPad.xib in Resources */,
-				3EC8F542138F96F0007F7B21 /* CheckinDetailsViewController_iPhone.xib in Resources */,
-				3EC8F543138F96F0007F7B21 /* CheckinMapViewController_iPad.xib in Resources */,
-				3EC8F544138F96F0007F7B21 /* CheckinMapViewController_iPhone.xib in Resources */,
-				3EC8F545138F96F0007F7B21 /* DeploymentAddViewController_iPad.xib in Resources */,
-				3EC8F546138F96F0007F7B21 /* DeploymentAddViewController_iPhone.xib in Resources */,
-				3EC8F547138F96F0007F7B21 /* DeploymentTableCell_iPad.xib in Resources */,
-				3EC8F548138F96F0007F7B21 /* DeploymentTableCell_iPhone.xib in Resources */,
-				3EC8F549138F96F0007F7B21 /* DeploymentTableViewController_iPad.xib in Resources */,
-				3EC8F54A138F96F0007F7B21 /* DeploymentTableViewController_iPhone.xib in Resources */,
-				3EC8F54B138F96F0007F7B21 /* ImageViewController_iPad.xib in Resources */,
-				3EC8F54C138F96F0007F7B21 /* ImageViewController_iPhone.xib in Resources */,
-				3EC8F54D138F96F0007F7B21 /* IncidentAddViewController_iPad.xib in Resources */,
-				3EC8F54E138F96F0007F7B21 /* IncidentAddViewController_iPhone.xib in Resources */,
-				3EC8F54F138F96F0007F7B21 /* IncidentDetailsViewController_iPad.xib in Resources */,
-				3EC8F550138F96F0007F7B21 /* IncidentDetailsViewController_iPhone.xib in Resources */,
-				3EC8F551138F96F0007F7B21 /* IncidentMapViewController_iPad.xib in Resources */,
-				3EC8F552138F96F0007F7B21 /* IncidentMapViewController_iPhone.xib in Resources */,
-				3EC8F553138F96F0007F7B21 /* IncidentTableCell_iPad.xib in Resources */,
-				3EC8F554138F96F0007F7B21 /* IncidentTableCell_iPhone.xib in Resources */,
-				3EC8F555138F96F0007F7B21 /* IncidentTableViewController_iPad.xib in Resources */,
-				3EC8F556138F96F0007F7B21 /* IncidentTableViewController_iPhone.xib in Resources */,
-				3EC8F557138F96F0007F7B21 /* IncidentTabViewController_iPad.xib in Resources */,
-				3EC8F558138F96F0007F7B21 /* IncidentTabViewController_iPhone.xib in Resources */,
-				3EC8F559138F96F0007F7B21 /* LoadingViewController_iPad.xib in Resources */,
-				3EC8F55A138F96F0007F7B21 /* LoadingViewController_iPhone.xib in Resources */,
-				3EC8F55B138F96F0007F7B21 /* LocationTableViewController_iPad.xib in Resources */,
-				3EC8F55C138F96F0007F7B21 /* LocationTableViewController_iPhone.xib in Resources */,
-				3EC8F55D138F96F0007F7B21 /* MainWindow_iPad.xib in Resources */,
-				3EC8F55E138F96F0007F7B21 /* MainWindow_iPhone.xib in Resources */,
-				3EC8F55F138F96F0007F7B21 /* MapViewController_iPad.xib in Resources */,
-				3EC8F560138F96F0007F7B21 /* MapViewController_iPhone.xib in Resources */,
-				3EC8F561138F96F0007F7B21 /* NewsViewController_iPad.xib in Resources */,
-				3EC8F562138F96F0007F7B21 /* NewsViewController_iPhone.xib in Resources */,
-				3EC8F563138F96F0007F7B21 /* SettingsViewController_iPad.xib in Resources */,
-				3EC8F564138F96F0007F7B21 /* SettingsViewController_iPhone.xib in Resources */,
-				3EC8F565138F96F0007F7B21 /* SliderTableCell_iPad.xib in Resources */,
-				3EC8F566138F96F0007F7B21 /* SliderTableCell_iPhone.xib in Resources */,
-				3EC8F567138F96F0007F7B21 /* SplashViewController_iPad.xib in Resources */,
-				3EC8F568138F96F0007F7B21 /* SplashViewController_iPhone.xib in Resources */,
-				3EC8F569138F96F0007F7B21 /* TwitterViewController_iPad.xib in Resources */,
-				3EC8F56A138F96F0007F7B21 /* TwitterViewController_iPhone.xib in Resources */,
-				3EC8F56B138F96F0007F7B21 /* WebViewController_iPad.xib in Resources */,
-				3EC8F56C138F96F0007F7B21 /* WebViewController_iPhone.xib in Resources */,
+				3EE793431394E2EF0086D664 /* Localizable.strings in Resources */,
+				3E79A99913950A3C00914628 /* CategoryTableViewController_iPad.xib in Resources */,
+				3E79A99A13950A3C00914628 /* CategoryTableViewController_iPhone.xib in Resources */,
+				3E79A99B13950A3C00914628 /* CheckinAddViewController_iPad.xib in Resources */,
+				3E79A99C13950A3C00914628 /* CheckinAddViewController_iPhone.xib in Resources */,
+				3E79A99D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib in Resources */,
+				3E79A99E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib in Resources */,
+				3E79A99F13950A3C00914628 /* CheckinMapViewController_iPad.xib in Resources */,
+				3E79A9A013950A3C00914628 /* CheckinMapViewController_iPhone.xib in Resources */,
+				3E79A9A113950A3C00914628 /* DeploymentAddViewController_iPad.xib in Resources */,
+				3E79A9A213950A3C00914628 /* DeploymentAddViewController_iPhone.xib in Resources */,
+				3E79A9A313950A3C00914628 /* DeploymentTableCell_iPad.xib in Resources */,
+				3E79A9A413950A3C00914628 /* DeploymentTableCell_iPhone.xib in Resources */,
+				3E79A9A513950A3C00914628 /* DeploymentTableViewController_iPad.xib in Resources */,
+				3E79A9A613950A3C00914628 /* DeploymentTableViewController_iPhone.xib in Resources */,
+				3E79A9A713950A3C00914628 /* ImageViewController_iPad.xib in Resources */,
+				3E79A9A813950A3C00914628 /* ImageViewController_iPhone.xib in Resources */,
+				3E79A9A913950A3C00914628 /* IncidentAddViewController_iPad.xib in Resources */,
+				3E79A9AA13950A3C00914628 /* IncidentAddViewController_iPhone.xib in Resources */,
+				3E79A9AB13950A3C00914628 /* IncidentDetailsViewController_iPad.xib in Resources */,
+				3E79A9AC13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib in Resources */,
+				3E79A9AD13950A3C00914628 /* IncidentMapViewController_iPad.xib in Resources */,
+				3E79A9AE13950A3C00914628 /* IncidentMapViewController_iPhone.xib in Resources */,
+				3E79A9AF13950A3C00914628 /* IncidentTableCell_iPad.xib in Resources */,
+				3E79A9B013950A3C00914628 /* IncidentTableCell_iPhone.xib in Resources */,
+				3E79A9B113950A3C00914628 /* IncidentTableViewController_iPad.xib in Resources */,
+				3E79A9B213950A3C00914628 /* IncidentTableViewController_iPhone.xib in Resources */,
+				3E79A9B313950A3C00914628 /* IncidentTabViewController_iPad.xib in Resources */,
+				3E79A9B413950A3C00914628 /* IncidentTabViewController_iPhone.xib in Resources */,
+				3E79A9B513950A3C00914628 /* LoadingViewController_iPad.xib in Resources */,
+				3E79A9B613950A3C00914628 /* LoadingViewController_iPhone.xib in Resources */,
+				3E79A9B713950A3C00914628 /* LocationTableViewController_iPad.xib in Resources */,
+				3E79A9B813950A3C00914628 /* LocationTableViewController_iPhone.xib in Resources */,
+				3E79A9B913950A3C00914628 /* MainWindow_iPad.xib in Resources */,
+				3E79A9BA13950A3C00914628 /* MainWindow_iPhone.xib in Resources */,
+				3E79A9BB13950A3C00914628 /* MapViewController_iPad.xib in Resources */,
+				3E79A9BC13950A3C00914628 /* MapViewController_iPhone.xib in Resources */,
+				3E79A9BD13950A3C00914628 /* NewsViewController_iPad.xib in Resources */,
+				3E79A9BE13950A3C00914628 /* NewsViewController_iPhone.xib in Resources */,
+				3E79A9BF13950A3C00914628 /* SettingsViewController_iPad.xib in Resources */,
+				3E79A9C013950A3C00914628 /* SettingsViewController_iPhone.xib in Resources */,
+				3E79A9C113950A3C00914628 /* SliderTableCell_iPad.xib in Resources */,
+				3E79A9C213950A3C00914628 /* SliderTableCell_iPhone.xib in Resources */,
+				3E79A9C313950A3C00914628 /* SplashViewController_iPad.xib in Resources */,
+				3E79A9C413950A3C00914628 /* SplashViewController_iPhone.xib in Resources */,
+				3E79A9C513950A3C00914628 /* TwitterViewController_iPad.xib in Resources */,
+				3E79A9C613950A3C00914628 /* TwitterViewController_iPhone.xib in Resources */,
+				3E79A9C713950A3C00914628 /* WebViewController_iPad.xib in Resources */,
+				3E79A9C813950A3C00914628 /* WebViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2262,7 +2032,6 @@
 				3ED0F8DC138E6BE40065C8E8 /* arrow_down@2x.png in Resources */,
 				3ED0F8DD138E6BE40065C8E8 /* selected@2x.png in Resources */,
 				3ED0F8DE138E6BE40065C8E8 /* unselected@2x.png in Resources */,
-				3ED0F8DF138E6BE40065C8E8 /* Localizable.strings in Resources */,
 				3ED0F8E0138E6BE40065C8E8 /* checkin.png in Resources */,
 				3ED0F8E1138E6BE40065C8E8 /* checkin@2x.png in Resources */,
 				3ED0F8F0138E6BE40065C8E8 /* button_red.png in Resources */,
@@ -2286,54 +2055,55 @@
 				3ED0F903138E6BE40065C8E8 /* Logo_iPad@2x.png in Resources */,
 				3ED0F904138E6BE40065C8E8 /* Logo_iPhone.png in Resources */,
 				3ED0F905138E6BE40065C8E8 /* Logo_iPhone@2x.png in Resources */,
-				3EC8F50D138F96F0007F7B21 /* CategoryTableViewController_iPad.xib in Resources */,
-				3EC8F50E138F96F0007F7B21 /* CategoryTableViewController_iPhone.xib in Resources */,
-				3EC8F50F138F96F0007F7B21 /* CheckinAddViewController_iPad.xib in Resources */,
-				3EC8F510138F96F0007F7B21 /* CheckinAddViewController_iPhone.xib in Resources */,
-				3EC8F511138F96F0007F7B21 /* CheckinDetailsViewController_iPad.xib in Resources */,
-				3EC8F512138F96F0007F7B21 /* CheckinDetailsViewController_iPhone.xib in Resources */,
-				3EC8F513138F96F0007F7B21 /* CheckinMapViewController_iPad.xib in Resources */,
-				3EC8F514138F96F0007F7B21 /* CheckinMapViewController_iPhone.xib in Resources */,
-				3EC8F515138F96F0007F7B21 /* DeploymentAddViewController_iPad.xib in Resources */,
-				3EC8F516138F96F0007F7B21 /* DeploymentAddViewController_iPhone.xib in Resources */,
-				3EC8F517138F96F0007F7B21 /* DeploymentTableCell_iPad.xib in Resources */,
-				3EC8F518138F96F0007F7B21 /* DeploymentTableCell_iPhone.xib in Resources */,
-				3EC8F519138F96F0007F7B21 /* DeploymentTableViewController_iPad.xib in Resources */,
-				3EC8F51A138F96F0007F7B21 /* DeploymentTableViewController_iPhone.xib in Resources */,
-				3EC8F51B138F96F0007F7B21 /* ImageViewController_iPad.xib in Resources */,
-				3EC8F51C138F96F0007F7B21 /* ImageViewController_iPhone.xib in Resources */,
-				3EC8F51D138F96F0007F7B21 /* IncidentAddViewController_iPad.xib in Resources */,
-				3EC8F51E138F96F0007F7B21 /* IncidentAddViewController_iPhone.xib in Resources */,
-				3EC8F51F138F96F0007F7B21 /* IncidentDetailsViewController_iPad.xib in Resources */,
-				3EC8F520138F96F0007F7B21 /* IncidentDetailsViewController_iPhone.xib in Resources */,
-				3EC8F521138F96F0007F7B21 /* IncidentMapViewController_iPad.xib in Resources */,
-				3EC8F522138F96F0007F7B21 /* IncidentMapViewController_iPhone.xib in Resources */,
-				3EC8F523138F96F0007F7B21 /* IncidentTableCell_iPad.xib in Resources */,
-				3EC8F524138F96F0007F7B21 /* IncidentTableCell_iPhone.xib in Resources */,
-				3EC8F525138F96F0007F7B21 /* IncidentTableViewController_iPad.xib in Resources */,
-				3EC8F526138F96F0007F7B21 /* IncidentTableViewController_iPhone.xib in Resources */,
-				3EC8F527138F96F0007F7B21 /* IncidentTabViewController_iPad.xib in Resources */,
-				3EC8F528138F96F0007F7B21 /* IncidentTabViewController_iPhone.xib in Resources */,
-				3EC8F529138F96F0007F7B21 /* LoadingViewController_iPad.xib in Resources */,
-				3EC8F52A138F96F0007F7B21 /* LoadingViewController_iPhone.xib in Resources */,
-				3EC8F52B138F96F0007F7B21 /* LocationTableViewController_iPad.xib in Resources */,
-				3EC8F52C138F96F0007F7B21 /* LocationTableViewController_iPhone.xib in Resources */,
-				3EC8F52D138F96F0007F7B21 /* MainWindow_iPad.xib in Resources */,
-				3EC8F52E138F96F0007F7B21 /* MainWindow_iPhone.xib in Resources */,
-				3EC8F52F138F96F0007F7B21 /* MapViewController_iPad.xib in Resources */,
-				3EC8F530138F96F0007F7B21 /* MapViewController_iPhone.xib in Resources */,
-				3EC8F531138F96F0007F7B21 /* NewsViewController_iPad.xib in Resources */,
-				3EC8F532138F96F0007F7B21 /* NewsViewController_iPhone.xib in Resources */,
-				3EC8F533138F96F0007F7B21 /* SettingsViewController_iPad.xib in Resources */,
-				3EC8F534138F96F0007F7B21 /* SettingsViewController_iPhone.xib in Resources */,
-				3EC8F535138F96F0007F7B21 /* SliderTableCell_iPad.xib in Resources */,
-				3EC8F536138F96F0007F7B21 /* SliderTableCell_iPhone.xib in Resources */,
-				3EC8F537138F96F0007F7B21 /* SplashViewController_iPad.xib in Resources */,
-				3EC8F538138F96F0007F7B21 /* SplashViewController_iPhone.xib in Resources */,
-				3EC8F539138F96F0007F7B21 /* TwitterViewController_iPad.xib in Resources */,
-				3EC8F53A138F96F0007F7B21 /* TwitterViewController_iPhone.xib in Resources */,
-				3EC8F53B138F96F0007F7B21 /* WebViewController_iPad.xib in Resources */,
-				3EC8F53C138F96F0007F7B21 /* WebViewController_iPhone.xib in Resources */,
+				3EE793421394E2EF0086D664 /* Localizable.strings in Resources */,
+				3E79A96913950A3C00914628 /* CategoryTableViewController_iPad.xib in Resources */,
+				3E79A96A13950A3C00914628 /* CategoryTableViewController_iPhone.xib in Resources */,
+				3E79A96B13950A3C00914628 /* CheckinAddViewController_iPad.xib in Resources */,
+				3E79A96C13950A3C00914628 /* CheckinAddViewController_iPhone.xib in Resources */,
+				3E79A96D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib in Resources */,
+				3E79A96E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib in Resources */,
+				3E79A96F13950A3C00914628 /* CheckinMapViewController_iPad.xib in Resources */,
+				3E79A97013950A3C00914628 /* CheckinMapViewController_iPhone.xib in Resources */,
+				3E79A97113950A3C00914628 /* DeploymentAddViewController_iPad.xib in Resources */,
+				3E79A97213950A3C00914628 /* DeploymentAddViewController_iPhone.xib in Resources */,
+				3E79A97313950A3C00914628 /* DeploymentTableCell_iPad.xib in Resources */,
+				3E79A97413950A3C00914628 /* DeploymentTableCell_iPhone.xib in Resources */,
+				3E79A97513950A3C00914628 /* DeploymentTableViewController_iPad.xib in Resources */,
+				3E79A97613950A3C00914628 /* DeploymentTableViewController_iPhone.xib in Resources */,
+				3E79A97713950A3C00914628 /* ImageViewController_iPad.xib in Resources */,
+				3E79A97813950A3C00914628 /* ImageViewController_iPhone.xib in Resources */,
+				3E79A97913950A3C00914628 /* IncidentAddViewController_iPad.xib in Resources */,
+				3E79A97A13950A3C00914628 /* IncidentAddViewController_iPhone.xib in Resources */,
+				3E79A97B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib in Resources */,
+				3E79A97C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib in Resources */,
+				3E79A97D13950A3C00914628 /* IncidentMapViewController_iPad.xib in Resources */,
+				3E79A97E13950A3C00914628 /* IncidentMapViewController_iPhone.xib in Resources */,
+				3E79A97F13950A3C00914628 /* IncidentTableCell_iPad.xib in Resources */,
+				3E79A98013950A3C00914628 /* IncidentTableCell_iPhone.xib in Resources */,
+				3E79A98113950A3C00914628 /* IncidentTableViewController_iPad.xib in Resources */,
+				3E79A98213950A3C00914628 /* IncidentTableViewController_iPhone.xib in Resources */,
+				3E79A98313950A3C00914628 /* IncidentTabViewController_iPad.xib in Resources */,
+				3E79A98413950A3C00914628 /* IncidentTabViewController_iPhone.xib in Resources */,
+				3E79A98513950A3C00914628 /* LoadingViewController_iPad.xib in Resources */,
+				3E79A98613950A3C00914628 /* LoadingViewController_iPhone.xib in Resources */,
+				3E79A98713950A3C00914628 /* LocationTableViewController_iPad.xib in Resources */,
+				3E79A98813950A3C00914628 /* LocationTableViewController_iPhone.xib in Resources */,
+				3E79A98913950A3C00914628 /* MainWindow_iPad.xib in Resources */,
+				3E79A98A13950A3C00914628 /* MainWindow_iPhone.xib in Resources */,
+				3E79A98B13950A3C00914628 /* MapViewController_iPad.xib in Resources */,
+				3E79A98C13950A3C00914628 /* MapViewController_iPhone.xib in Resources */,
+				3E79A98D13950A3C00914628 /* NewsViewController_iPad.xib in Resources */,
+				3E79A98E13950A3C00914628 /* NewsViewController_iPhone.xib in Resources */,
+				3E79A98F13950A3C00914628 /* SettingsViewController_iPad.xib in Resources */,
+				3E79A99013950A3C00914628 /* SettingsViewController_iPhone.xib in Resources */,
+				3E79A99113950A3C00914628 /* SliderTableCell_iPad.xib in Resources */,
+				3E79A99213950A3C00914628 /* SliderTableCell_iPhone.xib in Resources */,
+				3E79A99313950A3C00914628 /* SplashViewController_iPad.xib in Resources */,
+				3E79A99413950A3C00914628 /* SplashViewController_iPhone.xib in Resources */,
+				3E79A99513950A3C00914628 /* TwitterViewController_iPad.xib in Resources */,
+				3E79A99613950A3C00914628 /* TwitterViewController_iPhone.xib in Resources */,
+				3E79A99713950A3C00914628 /* WebViewController_iPad.xib in Resources */,
+				3E79A99813950A3C00914628 /* WebViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2621,639 +2391,17 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3E91383C12F73F4800F8369F /* Localizable.strings */ = {
+		3EE793401394E2EF0086D664 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3E91383D12F73F4800F8369F /* en */,
-				3EC8F49C138F8FF0007F7B21 /* de */,
-				3EC8F49D138F9002007F7B21 /* es */,
-				3EC8F49E138F9011007F7B21 /* fr */,
-				3EC8F49F138F9025007F7B21 /* it */,
+				3EE794391394E3760086D664 /* en */,
+				3EE793741394E3070086D664 /* de */,
+				3EE793A51394E31C0086D664 /* es */,
+				3EE793D61394E32F0086D664 /* fr */,
+				3EE794071394E3440086D664 /* it */,
+				3EE794381394E3560086D664 /* nl */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		3EC8F4AD138F96F0007F7B21 /* CategoryTableViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4AE138F96F0007F7B21 /* en */,
-				3EC8F56D138F9729007F7B21 /* de */,
-				3EC8F59C138F974C007F7B21 /* es */,
-				3EC8F5CC138F9767007F7B21 /* fr */,
-				3EC8F5FC138F97A9007F7B21 /* it */,
-				3E5918CB1393ADAA0033AF8E /* nl */,
-			);
-			name = CategoryTableViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4AF138F96F0007F7B21 /* CategoryTableViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4B0138F96F0007F7B21 /* en */,
-				3EC8F56E138F9729007F7B21 /* de */,
-				3EC8F59D138F974C007F7B21 /* es */,
-				3EC8F5CD138F9767007F7B21 /* fr */,
-				3EC8F5FD138F97A9007F7B21 /* it */,
-				3E5918CC1393ADAB0033AF8E /* nl */,
-			);
-			name = CategoryTableViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4B1138F96F0007F7B21 /* CheckinAddViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4B2138F96F0007F7B21 /* en */,
-				3EC8F56F138F9729007F7B21 /* de */,
-				3EC8F59E138F974C007F7B21 /* es */,
-				3EC8F5CE138F9767007F7B21 /* fr */,
-				3EC8F5FE138F97A9007F7B21 /* it */,
-				3E5918CD1393ADAB0033AF8E /* nl */,
-			);
-			name = CheckinAddViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4B3138F96F0007F7B21 /* CheckinAddViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4B4138F96F0007F7B21 /* en */,
-				3EC8F570138F9729007F7B21 /* de */,
-				3EC8F59F138F974D007F7B21 /* es */,
-				3EC8F5CF138F9767007F7B21 /* fr */,
-				3EC8F5FF138F97A9007F7B21 /* it */,
-				3E5918CE1393ADAB0033AF8E /* nl */,
-			);
-			name = CheckinAddViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4B5138F96F0007F7B21 /* CheckinDetailsViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4B6138F96F0007F7B21 /* en */,
-				3EC8F571138F9729007F7B21 /* de */,
-				3EC8F5A0138F974D007F7B21 /* es */,
-				3EC8F5D0138F9767007F7B21 /* fr */,
-				3EC8F600138F97A9007F7B21 /* it */,
-				3E5918CF1393ADAB0033AF8E /* nl */,
-			);
-			name = CheckinDetailsViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4B7138F96F0007F7B21 /* CheckinDetailsViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4B8138F96F0007F7B21 /* en */,
-				3EC8F572138F9729007F7B21 /* de */,
-				3EC8F5A1138F974D007F7B21 /* es */,
-				3EC8F5D1138F9767007F7B21 /* fr */,
-				3EC8F601138F97A9007F7B21 /* it */,
-				3E5918D01393ADAB0033AF8E /* nl */,
-			);
-			name = CheckinDetailsViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4B9138F96F0007F7B21 /* CheckinMapViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4BA138F96F0007F7B21 /* en */,
-				3EC8F573138F9729007F7B21 /* de */,
-				3EC8F5A2138F974D007F7B21 /* es */,
-				3EC8F5D2138F9767007F7B21 /* fr */,
-				3EC8F602138F97A9007F7B21 /* it */,
-				3E5918D11393ADAB0033AF8E /* nl */,
-			);
-			name = CheckinMapViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4BB138F96F0007F7B21 /* CheckinMapViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4BC138F96F0007F7B21 /* en */,
-				3EC8F574138F9729007F7B21 /* de */,
-				3EC8F5A3138F974D007F7B21 /* es */,
-				3EC8F5D3138F9767007F7B21 /* fr */,
-				3EC8F603138F97A9007F7B21 /* it */,
-				3E5918D21393ADAB0033AF8E /* nl */,
-			);
-			name = CheckinMapViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4BD138F96F0007F7B21 /* DeploymentAddViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4BE138F96F0007F7B21 /* en */,
-				3EC8F575138F9729007F7B21 /* de */,
-				3EC8F5A4138F974D007F7B21 /* es */,
-				3EC8F5D4138F9768007F7B21 /* fr */,
-				3EC8F604138F97A9007F7B21 /* it */,
-				3E5918D31393ADAB0033AF8E /* nl */,
-			);
-			name = DeploymentAddViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4BF138F96F0007F7B21 /* DeploymentAddViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4C0138F96F0007F7B21 /* en */,
-				3EC8F576138F972A007F7B21 /* de */,
-				3EC8F5A5138F974D007F7B21 /* es */,
-				3EC8F5D5138F9768007F7B21 /* fr */,
-				3EC8F605138F97A9007F7B21 /* it */,
-				3E5918D41393ADAB0033AF8E /* nl */,
-			);
-			name = DeploymentAddViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4C1138F96F0007F7B21 /* DeploymentTableCell_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4C2138F96F0007F7B21 /* en */,
-				3EC8F577138F972A007F7B21 /* de */,
-				3EC8F5A6138F974D007F7B21 /* es */,
-				3EC8F5D6138F9768007F7B21 /* fr */,
-				3EC8F606138F97A9007F7B21 /* it */,
-				3E5918D51393ADAB0033AF8E /* nl */,
-			);
-			name = DeploymentTableCell_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4C3138F96F0007F7B21 /* DeploymentTableCell_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4C4138F96F0007F7B21 /* en */,
-				3EC8F578138F972A007F7B21 /* de */,
-				3EC8F5A7138F974D007F7B21 /* es */,
-				3EC8F5D7138F9768007F7B21 /* fr */,
-				3EC8F607138F97A9007F7B21 /* it */,
-				3E5918D61393ADAB0033AF8E /* nl */,
-			);
-			name = DeploymentTableCell_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4C5138F96F0007F7B21 /* DeploymentTableViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4C6138F96F0007F7B21 /* en */,
-				3EC8F579138F972A007F7B21 /* de */,
-				3EC8F5A8138F974D007F7B21 /* es */,
-				3EC8F5D8138F9768007F7B21 /* fr */,
-				3EC8F608138F97A9007F7B21 /* it */,
-				3E5918D71393ADAB0033AF8E /* nl */,
-			);
-			name = DeploymentTableViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4C7138F96F0007F7B21 /* DeploymentTableViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4C8138F96F0007F7B21 /* en */,
-				3EC8F57A138F972A007F7B21 /* de */,
-				3EC8F5A9138F974D007F7B21 /* es */,
-				3EC8F5D9138F9768007F7B21 /* fr */,
-				3EC8F609138F97A9007F7B21 /* it */,
-				3E5918D81393ADAB0033AF8E /* nl */,
-			);
-			name = DeploymentTableViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4C9138F96F0007F7B21 /* ImageViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4CA138F96F0007F7B21 /* en */,
-				3EC8F57B138F972A007F7B21 /* de */,
-				3EC8F5AA138F974D007F7B21 /* es */,
-				3EC8F5DA138F9769007F7B21 /* fr */,
-				3EC8F60A138F97AA007F7B21 /* it */,
-				3E5918D91393ADAB0033AF8E /* nl */,
-			);
-			name = ImageViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4CB138F96F0007F7B21 /* ImageViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4CC138F96F0007F7B21 /* en */,
-				3EC8F57C138F972A007F7B21 /* de */,
-				3EC8F5AB138F974D007F7B21 /* es */,
-				3EC8F5DB138F9769007F7B21 /* fr */,
-				3EC8F60B138F97AA007F7B21 /* it */,
-				3E5918DA1393ADAB0033AF8E /* nl */,
-			);
-			name = ImageViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4CD138F96F0007F7B21 /* IncidentAddViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4CE138F96F0007F7B21 /* en */,
-				3EC8F57D138F972A007F7B21 /* de */,
-				3EC8F5AC138F974D007F7B21 /* es */,
-				3EC8F5DC138F9769007F7B21 /* fr */,
-				3EC8F60C138F97AA007F7B21 /* it */,
-				3E5918DB1393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentAddViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4CF138F96F0007F7B21 /* IncidentAddViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4D0138F96F0007F7B21 /* en */,
-				3EC8F57E138F972A007F7B21 /* de */,
-				3EC8F5AD138F974E007F7B21 /* es */,
-				3EC8F5DD138F9769007F7B21 /* fr */,
-				3EC8F60D138F97AA007F7B21 /* it */,
-				3E5918DC1393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentAddViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4D1138F96F0007F7B21 /* IncidentDetailsViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4D2138F96F0007F7B21 /* en */,
-				3EC8F57F138F972A007F7B21 /* de */,
-				3EC8F5AE138F974E007F7B21 /* es */,
-				3EC8F5DE138F976A007F7B21 /* fr */,
-				3EC8F60E138F97AA007F7B21 /* it */,
-				3E5918DD1393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentDetailsViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4D3138F96F0007F7B21 /* IncidentDetailsViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4D4138F96F0007F7B21 /* en */,
-				3EC8F580138F972A007F7B21 /* de */,
-				3EC8F5AF138F974E007F7B21 /* es */,
-				3EC8F5DF138F976A007F7B21 /* fr */,
-				3EC8F60F138F97AA007F7B21 /* it */,
-				3E5918DE1393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentDetailsViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4D5138F96F0007F7B21 /* IncidentMapViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4D6138F96F0007F7B21 /* en */,
-				3EC8F581138F972A007F7B21 /* de */,
-				3EC8F5B0138F974E007F7B21 /* es */,
-				3EC8F5E0138F976A007F7B21 /* fr */,
-				3EC8F610138F97AA007F7B21 /* it */,
-				3E5918DF1393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentMapViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4D7138F96F0007F7B21 /* IncidentMapViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4D8138F96F0007F7B21 /* en */,
-				3EC8F582138F972A007F7B21 /* de */,
-				3EC8F5B1138F974E007F7B21 /* es */,
-				3EC8F5E1138F976A007F7B21 /* fr */,
-				3EC8F611138F97AA007F7B21 /* it */,
-				3E5918E01393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentMapViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4D9138F96F0007F7B21 /* IncidentTableCell_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4DA138F96F0007F7B21 /* en */,
-				3EC8F583138F972A007F7B21 /* de */,
-				3EC8F5B2138F974E007F7B21 /* es */,
-				3EC8F5E2138F976A007F7B21 /* fr */,
-				3EC8F612138F97AA007F7B21 /* it */,
-				3E5918E11393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentTableCell_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4DB138F96F0007F7B21 /* IncidentTableCell_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4DC138F96F0007F7B21 /* en */,
-				3EC8F584138F972A007F7B21 /* de */,
-				3EC8F5B3138F974E007F7B21 /* es */,
-				3EC8F5E3138F976A007F7B21 /* fr */,
-				3EC8F613138F97AA007F7B21 /* it */,
-				3E5918E21393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentTableCell_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4DD138F96F0007F7B21 /* IncidentTableViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4DE138F96F0007F7B21 /* en */,
-				3EC8F585138F972A007F7B21 /* de */,
-				3EC8F5B4138F974E007F7B21 /* es */,
-				3EC8F5E4138F976A007F7B21 /* fr */,
-				3EC8F614138F97AA007F7B21 /* it */,
-				3E5918E31393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentTableViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4DF138F96F0007F7B21 /* IncidentTableViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4E0138F96F0007F7B21 /* en */,
-				3EC8F586138F972A007F7B21 /* de */,
-				3EC8F5B5138F974E007F7B21 /* es */,
-				3EC8F5E5138F976A007F7B21 /* fr */,
-				3EC8F615138F97AA007F7B21 /* it */,
-				3E5918E41393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentTableViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4E1138F96F0007F7B21 /* IncidentTabViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4E2138F96F0007F7B21 /* en */,
-				3EC8F587138F972A007F7B21 /* de */,
-				3EC8F5B6138F974E007F7B21 /* es */,
-				3EC8F5E6138F976A007F7B21 /* fr */,
-				3EC8F616138F97AA007F7B21 /* it */,
-				3E5918E51393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentTabViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4E3138F96F0007F7B21 /* IncidentTabViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4E4138F96F0007F7B21 /* en */,
-				3EC8F588138F972A007F7B21 /* de */,
-				3EC8F5B7138F974E007F7B21 /* es */,
-				3EC8F5E7138F976B007F7B21 /* fr */,
-				3EC8F617138F97AA007F7B21 /* it */,
-				3E5918E61393ADAB0033AF8E /* nl */,
-			);
-			name = IncidentTabViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4E5138F96F0007F7B21 /* LoadingViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4E6138F96F0007F7B21 /* en */,
-				3EC8F589138F972A007F7B21 /* de */,
-				3EC8F5B8138F974F007F7B21 /* es */,
-				3EC8F5E8138F976B007F7B21 /* fr */,
-				3EC8F618138F97AA007F7B21 /* it */,
-				3E5918E71393ADAB0033AF8E /* nl */,
-			);
-			name = LoadingViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4E7138F96F0007F7B21 /* LoadingViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4E8138F96F0007F7B21 /* en */,
-				3EC8F58A138F972A007F7B21 /* de */,
-				3EC8F5B9138F974F007F7B21 /* es */,
-				3EC8F5E9138F976B007F7B21 /* fr */,
-				3EC8F619138F97AA007F7B21 /* it */,
-				3E5918E81393ADAB0033AF8E /* nl */,
-			);
-			name = LoadingViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4E9138F96F0007F7B21 /* LocationTableViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4EA138F96F0007F7B21 /* en */,
-				3EC8F58B138F972A007F7B21 /* de */,
-				3EC8F5BA138F974F007F7B21 /* es */,
-				3EC8F5EA138F976B007F7B21 /* fr */,
-				3EC8F61A138F97AA007F7B21 /* it */,
-				3E5918E91393ADAB0033AF8E /* nl */,
-			);
-			name = LocationTableViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4EB138F96F0007F7B21 /* LocationTableViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4EC138F96F0007F7B21 /* en */,
-				3EC8F58C138F972B007F7B21 /* de */,
-				3EC8F5BB138F974F007F7B21 /* es */,
-				3EC8F5EB138F976B007F7B21 /* fr */,
-				3EC8F61B138F97AA007F7B21 /* it */,
-				3E5918EA1393ADAB0033AF8E /* nl */,
-			);
-			name = LocationTableViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4ED138F96F0007F7B21 /* MainWindow_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4EE138F96F0007F7B21 /* en */,
-				3EC8F58D138F972B007F7B21 /* de */,
-				3EC8F5BC138F974F007F7B21 /* es */,
-				3EC8F5EC138F976B007F7B21 /* fr */,
-				3EC8F61C138F97AA007F7B21 /* it */,
-				3E5918EB1393ADAB0033AF8E /* nl */,
-			);
-			name = MainWindow_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4EF138F96F0007F7B21 /* MainWindow_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4F0138F96F0007F7B21 /* en */,
-				3EC8F5BD138F974F007F7B21 /* es */,
-				3EC8F5ED138F976B007F7B21 /* fr */,
-				3EC8F61D138F97AA007F7B21 /* it */,
-				3E5918EC1393ADAB0033AF8E /* nl */,
-			);
-			name = MainWindow_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4F1138F96F0007F7B21 /* MapViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4F2138F96F0007F7B21 /* en */,
-				3EC8F58E138F972B007F7B21 /* de */,
-				3EC8F5BE138F974F007F7B21 /* es */,
-				3EC8F5EE138F976B007F7B21 /* fr */,
-				3EC8F61E138F97AA007F7B21 /* it */,
-				3E5918ED1393ADAB0033AF8E /* nl */,
-			);
-			name = MapViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4F3138F96F0007F7B21 /* MapViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4F4138F96F0007F7B21 /* en */,
-				3EC8F58F138F972B007F7B21 /* de */,
-				3EC8F5BF138F974F007F7B21 /* es */,
-				3EC8F5EF138F976B007F7B21 /* fr */,
-				3EC8F61F138F97AA007F7B21 /* it */,
-				3E5918EE1393ADAB0033AF8E /* nl */,
-			);
-			name = MapViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4F5138F96F0007F7B21 /* NewsViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4F6138F96F0007F7B21 /* en */,
-				3EC8F590138F972B007F7B21 /* de */,
-				3EC8F5C0138F974F007F7B21 /* es */,
-				3EC8F5F0138F976B007F7B21 /* fr */,
-				3EC8F620138F97AA007F7B21 /* it */,
-				3E5918EF1393ADAB0033AF8E /* nl */,
-			);
-			name = NewsViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4F7138F96F0007F7B21 /* NewsViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4F8138F96F0007F7B21 /* en */,
-				3EC8F591138F972B007F7B21 /* de */,
-				3EC8F5C1138F9750007F7B21 /* es */,
-				3EC8F5F1138F976B007F7B21 /* fr */,
-				3EC8F621138F97AA007F7B21 /* it */,
-				3E5918F01393ADAB0033AF8E /* nl */,
-			);
-			name = NewsViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4F9138F96F0007F7B21 /* SettingsViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4FA138F96F0007F7B21 /* en */,
-				3EC8F592138F972B007F7B21 /* de */,
-				3EC8F5C2138F9750007F7B21 /* es */,
-				3EC8F5F2138F976C007F7B21 /* fr */,
-				3EC8F622138F97AA007F7B21 /* it */,
-				3E5918F11393ADAB0033AF8E /* nl */,
-			);
-			name = SettingsViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4FB138F96F0007F7B21 /* SettingsViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4FC138F96F0007F7B21 /* en */,
-				3EC8F593138F972B007F7B21 /* de */,
-				3EC8F5C3138F9750007F7B21 /* es */,
-				3EC8F5F3138F976C007F7B21 /* fr */,
-				3EC8F623138F97AA007F7B21 /* it */,
-				3E5918F21393ADAB0033AF8E /* nl */,
-			);
-			name = SettingsViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4FD138F96F0007F7B21 /* SliderTableCell_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F4FE138F96F0007F7B21 /* en */,
-				3EC8F594138F972B007F7B21 /* de */,
-				3EC8F5C4138F9750007F7B21 /* es */,
-				3EC8F5F4138F976C007F7B21 /* fr */,
-				3EC8F624138F97AB007F7B21 /* it */,
-				3E5918F31393ADAB0033AF8E /* nl */,
-			);
-			name = SliderTableCell_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F4FF138F96F0007F7B21 /* SliderTableCell_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F500138F96F0007F7B21 /* en */,
-				3EC8F595138F972B007F7B21 /* de */,
-				3EC8F5C5138F9750007F7B21 /* es */,
-				3EC8F5F5138F976C007F7B21 /* fr */,
-				3EC8F625138F97AB007F7B21 /* it */,
-				3E5918F41393ADAB0033AF8E /* nl */,
-			);
-			name = SliderTableCell_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F501138F96F0007F7B21 /* SplashViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F502138F96F0007F7B21 /* en */,
-				3EC8F596138F972B007F7B21 /* de */,
-				3EC8F5C6138F9750007F7B21 /* es */,
-				3EC8F5F6138F976C007F7B21 /* fr */,
-				3EC8F626138F97AB007F7B21 /* it */,
-				3E5918F51393ADAB0033AF8E /* nl */,
-			);
-			name = SplashViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F503138F96F0007F7B21 /* SplashViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F504138F96F0007F7B21 /* en */,
-				3EC8F597138F972B007F7B21 /* de */,
-				3EC8F5C7138F9750007F7B21 /* es */,
-				3EC8F5F7138F976C007F7B21 /* fr */,
-				3EC8F627138F97AB007F7B21 /* it */,
-				3E5918F61393ADAC0033AF8E /* nl */,
-			);
-			name = SplashViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F505138F96F0007F7B21 /* TwitterViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F506138F96F0007F7B21 /* en */,
-				3EC8F598138F972B007F7B21 /* de */,
-				3EC8F5C8138F9750007F7B21 /* es */,
-				3EC8F5F8138F976C007F7B21 /* fr */,
-				3EC8F628138F97AB007F7B21 /* it */,
-				3E5918F71393ADAC0033AF8E /* nl */,
-			);
-			name = TwitterViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F507138F96F0007F7B21 /* TwitterViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F508138F96F0007F7B21 /* en */,
-				3EC8F599138F972B007F7B21 /* de */,
-				3EC8F5C9138F9750007F7B21 /* es */,
-				3EC8F5F9138F976C007F7B21 /* fr */,
-				3EC8F629138F97AB007F7B21 /* it */,
-				3E5918F81393ADAC0033AF8E /* nl */,
-			);
-			name = TwitterViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F509138F96F0007F7B21 /* WebViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F50A138F96F0007F7B21 /* en */,
-				3EC8F59A138F972B007F7B21 /* de */,
-				3EC8F5CA138F9750007F7B21 /* es */,
-				3EC8F5FA138F976C007F7B21 /* fr */,
-				3EC8F62A138F97AB007F7B21 /* it */,
-				3E5918F91393ADAC0033AF8E /* nl */,
-			);
-			name = WebViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		3EC8F50B138F96F0007F7B21 /* WebViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3EC8F50C138F96F0007F7B21 /* en */,
-				3EC8F59B138F972B007F7B21 /* de */,
-				3EC8F5CB138F9751007F7B21 /* es */,
-				3EC8F5FB138F976C007F7B21 /* fr */,
-				3EC8F62B138F97AB007F7B21 /* it */,
-				3E5918FA1393ADAC0033AF8E /* nl */,
-			);
-			name = WebViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

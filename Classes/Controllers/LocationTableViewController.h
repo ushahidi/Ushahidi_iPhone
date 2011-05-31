@@ -36,6 +36,7 @@
 @public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
+	UIBarButtonItem *refreshButton;
 	MKMapView *mapView;
 	UISegmentedControl *viewMode;
 	UIView *containerView;
@@ -51,6 +52,7 @@
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
 @property(nonatomic, retain) IBOutlet MKMapView *mapView;
 @property(nonatomic, retain) IBOutlet UISegmentedControl *viewMode;
 @property(nonatomic, retain) IBOutlet UIView *containerView;
@@ -59,5 +61,6 @@
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;
 - (IBAction) viewModeChanged:(id)sender;
+- (void) refresh:(id)sender;
 
 @end

@@ -52,6 +52,7 @@
 @implementation SettingsViewController
 
 @synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, email, website, support, download, logo;
+@synthesize cancelButton, doneButton;
 
 #pragma mark -
 #pragma mark Enums
@@ -138,6 +139,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.navigationBar.topItem.title = NSLocalizedString(@"Settings", nil);
 	self.email = [[Email alloc] initWithController:self];
 	self.website = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"SupportURL"];
 	self.support = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"SupportEmail"];
@@ -187,6 +189,8 @@ typedef enum {
 }
 
 - (void)dealloc {
+	[cancelButton release];
+	[doneButton release];
 	[userEmail release];
 	[firstName release];
 	[lastName release];

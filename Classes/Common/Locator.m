@@ -146,7 +146,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 				[addressString appendString:country];
 			}
 			self.address = addressString;
-			[self dispatchSelector:@selector(lookupFinished:street:city:state:country:)
+			[self dispatchSelector:@selector(lookupFinished:address:)
 							target:self.delegate 
 						   objects:self, self.address, nil];	
 		}
@@ -189,9 +189,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 	if (json != nil && [@"OK" isEqualToString:[json objectForKey:@"status"]]) {
 		NSArray *results = [json objectForKey:@"results"];
 		NSDictionary *result = [results objectAtIndex:0];
+		self.address = [result objectForKey:@"formatted_address"];
 		[self dispatchSelector:@selector(lookupFinished:address:)
 						target:self.delegate 
-					   objects:self, [result objectForKey:@"formatted_address"], nil];
+					   objects:self, self.address, nil];
 	}
 	else {
 		[self dispatchSelector:@selector(lookupFailed:error:)

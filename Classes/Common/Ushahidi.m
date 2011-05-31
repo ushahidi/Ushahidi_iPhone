@@ -1017,7 +1017,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		if (json == nil) {
 			error = [NSError errorWithDomain:self.deployment.domain 
 										code:HttpStatusInternalServerError 
-									 message:NSLocalizedString(@"Invalid server response", nil)];
+									 message:NSLocalizedString(@"Invalid Server Response", nil)];
 		}
 		else {
 			NSDictionary *payload = [json objectForKey:@"payload"];

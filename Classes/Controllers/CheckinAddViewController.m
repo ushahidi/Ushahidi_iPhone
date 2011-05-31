@@ -96,6 +96,8 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.navigationBar.topItem.title = NSLocalizedString(@"Add Checkin", nil);
+	self.doneButton.title = NSLocalizedString(@"Send", nil);
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	[self setHeader:NSLocalizedString(@"Message", nil) atSection:TableSectionMessage];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];

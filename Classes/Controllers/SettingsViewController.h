@@ -32,6 +32,10 @@
 														SliderTableCellDelegate,
 														UIAlertViewDelegate> {
 	
+@public 
+	UIBarButtonItem *cancelButton;
+	UIBarButtonItem *doneButton;	
+															
 @private
 	NSString *userEmail;
 	NSString *firstName;
@@ -46,6 +50,9 @@
 	NSString *download;
 	UIImage *logo;
 }
+
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *cancelButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *doneButton;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;

@@ -26,6 +26,7 @@
 #import "DeploymentTableCell.h"
 #import "TableCellFactory.h"
 #import "UIColor+Extension.h"
+#import "UIView+Extension.h"
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
@@ -134,7 +135,8 @@ typedef enum {
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
-	
+	self.title = NSLocalizedString(@"Ushahidi Maps", nil);
+	[self setBackButtonTitle:NSLocalizedString(@"Maps", nil)];
 	self.settingsButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [self.settingsButton addTarget:self action:@selector(settings:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:self.settingsButton] autorelease];

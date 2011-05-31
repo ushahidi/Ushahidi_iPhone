@@ -155,6 +155,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.navigationBar.topItem.title = NSLocalizedString(@"Add Report", nil);
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
 	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
@@ -557,6 +558,10 @@ typedef enum {
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
+	[self setFooter:NSLocalizedString(@"Error Detecting Location", nil) atSection:TableSectionLocation];
+	if (self.editing == NO) {
+		[self.tableView reloadData];
+	}
 }
 
 - (void) lookupFinished:(Locator *)locator address:(NSString *)address {

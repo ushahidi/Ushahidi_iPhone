@@ -139,7 +139,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.twitter = [[MGTwitterEngine alloc] initWithDelegate:self];
-	
+	self.navigationBar.topItem.title = NSLocalizedString(@"Twitter", nil);
+	self.doneButton.title = NSLocalizedString(@"Send", nil);
 	NSString *twitterKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterKey];
 	NSString *twitterSecret = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterSecret];
 	DLog(@"Twitter key:%@ secret:%@", twitterKey, twitterSecret);

@@ -116,6 +116,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.navigationBar.topItem.title = NSLocalizedString(@"Add Map", nil);
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
 	self.mapDialog = [[MapDialog alloc] initForDelegate:self];
 	self.mapDistance = [[Settings sharedSettings] mapDistance];

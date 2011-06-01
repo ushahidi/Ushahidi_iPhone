@@ -55,6 +55,10 @@
 	return self;
 }
 
+- (NSString *) coordinates {
+	return [NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude];
+}
+
 - (BOOL) matchesString:(NSString *)string {
 	return self.name != nil && [self.name anyWordHasPrefix:string];
 }

@@ -39,7 +39,7 @@
 
 @synthesize identifier, title, description, date;
 @synthesize map;
-@synthesize active, verified, uploading, pending;
+@synthesize active, verified, uploading, pending, userLocation;
 @synthesize news, photos, sounds, videos, categories;
 @synthesize location, latitude, longitude;
 @synthesize errors;
@@ -54,6 +54,7 @@
 		self.latitude = nil;
 		self.longitude = nil;
 		self.date = [NSDate date];
+		self.userLocation = YES;
 	}
 	return self;
 }
@@ -87,6 +88,7 @@
 	[encoder encodeBool:self.active forKey:@"active"];
 	[encoder encodeBool:self.verified forKey:@"verified"];
 	[encoder encodeBool:self.pending forKey:@"pending"];
+	[encoder encodeBool:self.userLocation forKey:@"userLocation"];
 	[encoder encodeObject:self.news forKey:@"news"];
 	[encoder encodeObject:self.photos forKey:@"photos"];
 	[encoder encodeObject:self.sounds forKey:@"sounds"];
@@ -112,6 +114,7 @@
 		self.active = [decoder decodeBoolForKey:@"active"];
 		self.verified = [decoder decodeBoolForKey:@"verified"];
 		self.pending = [decoder decodeBoolForKey:@"pending"];
+		self.userLocation = [decoder decodeBoolForKey:@"userLocation"];
 		self.location = [decoder decodeObjectForKey:@"location"];
 		self.latitude = [decoder decodeObjectForKey:@"latitude"];
 		self.longitude = [decoder decodeObjectForKey:@"longitude"];

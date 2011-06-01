@@ -196,10 +196,10 @@ typedef enum {
 					  atSection:TableSectionLocation];
 			}
 			else {
-				[[Locator sharedLocator] detectLocationForDelegate:self];
 				[self setFooter:NSLocalizedString(@"Locating...", nil) 
 					  atSection:TableSectionLocation];
 			}
+			[[Locator sharedLocator] detectLocationForDelegate:self];
 		}
 		else {
 			self.cancelButton.enabled = NO;

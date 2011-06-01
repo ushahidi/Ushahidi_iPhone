@@ -42,6 +42,7 @@
 	BOOL verified;
 	BOOL uploading;
 	BOOL pending;
+	BOOL userLocation;
 	
 	NSMutableArray *news;
 	NSMutableArray *photos;
@@ -66,6 +67,7 @@
 @property(nonatomic,assign) BOOL verified;
 @property(nonatomic,assign) BOOL uploading;
 @property(nonatomic,assign) BOOL pending;
+@property(nonatomic,assign) BOOL userLocation;
 
 @property(nonatomic,retain) NSMutableArray *news;
 @property(nonatomic,retain) NSMutableArray *photos;

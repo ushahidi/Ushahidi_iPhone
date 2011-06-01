@@ -27,12 +27,14 @@
 	NSString *name;
 	NSString *latitude;
 	NSString *longitude;
+	NSString *coordinates;
 }
 
 @property(nonatomic,retain)	NSString *identifier;
 @property(nonatomic,retain) NSString *name;
 @property(nonatomic,retain) NSString *latitude;
 @property(nonatomic,retain) NSString *longitude;
+@property(nonatomic,readonly) NSString *coordinates;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 - (BOOL) matchesString:(NSString *)string;

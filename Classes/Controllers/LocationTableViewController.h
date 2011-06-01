@@ -60,7 +60,7 @@
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;
+- (IBAction) locate:(id)sender;
 - (IBAction) viewModeChanged:(id)sender;
-- (void) refresh:(id)sender;
 
 @end

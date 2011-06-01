@@ -72,11 +72,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 - (void)detectLocationForDelegate:(id<LocatorDelegate>)theDelegate {
 	DLog(@"");
 	self.delegate = theDelegate;
-	if (self.latitude != nil && self.longitude != nil) {
-		[self dispatchSelector:@selector(locatorFinished:latitude:longitude:)
-						target:self.delegate 
-					   objects:self, self.latitude, self.longitude, nil];	
-	}
+	//if (self.latitude != nil && self.longitude != nil) {
+//		[self dispatchSelector:@selector(locatorFinished:latitude:longitude:)
+//						target:self.delegate 
+//					   objects:self, self.latitude, self.longitude, nil];	
+//	}
 	[self.locationManager startUpdatingLocation];
 }
 
@@ -94,11 +94,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 - (void)lookupAddressForDelegate:(id<LocatorDelegate>)theDelegate {
 	DLog(@"latitude:%@ longitude:%@", self.latitude, self.longitude);
 	self.delegate = theDelegate;
-	if (self.address != nil) {
-		[self dispatchSelector:@selector(lookupFinished:address:)
-						target:self.delegate 
-					   objects:self, self.address, nil];	
-	}
+	//if (self.address != nil) {
+//		[self dispatchSelector:@selector(lookupFinished:address:)
+//						target:self.delegate 
+//					   objects:self, self.address, nil];	
+//	}
 	CLLocationCoordinate2D coordinate;
 	coordinate.longitude = [self.latitude floatValue];
 	coordinate.latitude = [self.longitude floatValue];

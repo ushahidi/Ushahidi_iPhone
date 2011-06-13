@@ -1019,6 +1019,7 @@
 		3EFC1C841295DC9F00163B36 /* Email.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Email.h; sourceTree = "<group>"; };
 		3EFC1C851295DC9F00163B36 /* Email.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Email.m; sourceTree = "<group>"; };
 		3EFC1CA21295DD2900163B36 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		3EFC3CEC13A6042200CCA185 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2400,6 +2401,7 @@
 				3EE793D61394E32F0086D664 /* fr */,
 				3EE794071394E3440086D664 /* it */,
 				3EE794381394E3560086D664 /* nl */,
+				3EFC3CEC13A6042200CCA185 /* pt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

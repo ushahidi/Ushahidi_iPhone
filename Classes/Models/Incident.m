@@ -198,15 +198,10 @@
 
 - (NSString *) dateAmPm {
 	if (self.date != nil) {
-		NSString *amPm = [self.date dateToString:@"a"];
-		if ([NSString isNilOrEmpty:amPm] == NO) {
-			return [amPm lowercaseString];
-		}
-		else {
-			NSCalendar *calendar = [NSCalendar currentCalendar];
-			NSDateComponents *components = [calendar components:kCFCalendarUnitHour fromDate:self.date];
-			return [components hour] >= 12 ? @"pm" : @"am";
-		}
+		NSCalendar *calendar = [NSCalendar currentCalendar];
+		NSDateComponents *components = [calendar components:kCFCalendarUnitHour fromDate:self.date];
+		NSString *value = [components hour] >= 12 ? @"pm" : @"am";
+		return value;
 	}
 	return nil;
 }

@@ -20,37 +20,31 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
-#import "TextViewTableCell.h"
-#import "TextFieldTableCell.h"
-#import "MapTableCell.h"
-#import "ImagePickerController.h"
-#import "Ushahidi.h"
-#import "Locator.h"
+#import "ItemPicker.h"
 
-@class Checkin;
+@class Deployment;
+@class ItemPicker;
 
-@interface CheckinAddViewController : BaseTableViewController<TextViewTableCellDelegate, 
-																TextFieldTableCellDelegate,
-																MapTableCellDelegate, 
-																ImagePickerDelegate, 
-																UshahidiDelegate,
-																LocatorDelegate,
-																UIActionSheetDelegate> {
+typedef enum {
+	TableSortDate,
+	TableSortTitle,
+	TableSortVerified
+} TableSort;
+
+@interface BaseSortTableViewController : BaseTableViewController<ItemPickerDelegate> {
 
 @public
-	UIBarButtonItem *cancelButton;
-	UIBarButtonItem *doneButton;
-	ImagePickerController *imagePickerController;
-														   
-@private
-	Checkin *checkin;														   
+	UISegmentedControl *tableSort;
+	UIBarButtonItem *refreshButton;
+	UIBarButtonItem *filterButton;
+	ItemPicker *itemPicker;
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property (nonatomic, retain) ImagePickerController *imagePickerController;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *tableSort;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
+@property(nonatomic,retain) ItemPicker *itemPicker;
 
-- (IBAction) cancel:(id)sender;
-- (IBAction) done:(id)sender;
+- (IBAction) sortChanged:(id)sender;
 
 @end

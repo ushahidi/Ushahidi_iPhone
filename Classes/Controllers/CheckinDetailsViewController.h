@@ -19,30 +19,30 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "BaseDetailsViewController.h"
+#import "TextTableCell.h"
 #import "MapTableCell.h"
 #import "Ushahidi.h"
+#import "Photo.h"
+#import "SMS.h"
+#import "Email.h"
+#import "Bitly.h"
 
-@class Checkin;
-@class ImageViewController;
-@class MapViewController;
-
-@interface CheckinDetailsViewController : TableViewController<UshahidiDelegate, MapTableCellDelegate> {
-
-@public
-	ImageViewController *imageViewController;
-	MapViewController *mapViewController;
-	UISegmentedControl *nextPrevious;
+@interface CheckinDetailsViewController : BaseDetailsViewController<UshahidiDelegate, 
+																	SMSDelegate,
+																	EmailDelegate,
+																	BitlyDelegate,
+																	MapTableCellDelegate> {
 	Checkin *checkin;
 	NSArray *checkins;
 }
 
-@property(nonatomic,retain) IBOutlet ImageViewController *imageViewController;
-@property(nonatomic,retain) IBOutlet MapViewController *mapViewController;
-@property(nonatomic,retain) IBOutlet UISegmentedControl *nextPrevious;
 @property(nonatomic,retain) Checkin *checkin;
 @property(nonatomic,retain) NSArray *checkins;
 
 - (IBAction) nextPrevious:(id)sender;
+- (IBAction) sendEmail:(id)sender;
+- (IBAction) sendSMS:(id)sender;
+- (IBAction) sendTweet:(id)sender;
 
 @end

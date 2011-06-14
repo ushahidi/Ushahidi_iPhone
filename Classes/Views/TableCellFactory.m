@@ -33,6 +33,7 @@
 #import "DateTableCell.h"
 #import "DeploymentTableCell.h"
 #import "IncidentTableCell.h"
+#import "CheckinTableCell.h"
 #import "SliderTableCell.h"
 #import "Settings.h"
 #import "Device.h"
@@ -93,6 +94,21 @@
 	if (cell == nil) {
 		NSString *nibName = [Device isIPad] ? @"IncidentTableCell_iPad" : @"IncidentTableCell_iPhone";
 		cell = (IncidentTableCell *)[TableCellFactory getTableViewCellFromNib:nibName];
+		[cell setSelectedColor:[[Settings sharedSettings] tableSelectRowColor]];
+	}
+	cell.indexPath = indexPath;
+	return cell;
+}
+
+#pragma mark -
+#pragma mark CheckinTableCell
+
++ (CheckinTableCell *) getCheckinTableCellForTable:(UITableView *)tableView 
+										 indexPath:(NSIndexPath *)indexPath {
+	CheckinTableCell *cell = (CheckinTableCell *)[tableView dequeueReusableCellWithIdentifier:@"CheckinTableCell"];
+	if (cell == nil) {
+		NSString *nibName = [Device isIPad] ? @"CheckinTableCell_iPad" : @"CheckinTableCell_iPhone";
+		cell = (CheckinTableCell *)[TableCellFactory getTableViewCellFromNib:nibName];
 		[cell setSelectedColor:[[Settings sharedSettings] tableSelectRowColor]];
 	}
 	cell.indexPath = indexPath;

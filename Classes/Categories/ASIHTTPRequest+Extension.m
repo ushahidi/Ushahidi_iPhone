@@ -30,6 +30,7 @@
 #define kIncidentKey @"incident"
 #define kPhotoKey @"photo"
 #define kCheckinKey @"checkin"
+#define kObjectKey @"object"
 
 @implementation ASIHTTPRequest (Extension)
 
@@ -51,6 +52,10 @@
 
 - (Checkin *) getCheckin {
 	return [self.userInfo objectForKey:kCheckinKey];
+}
+
+- (NSObject *) getObject {
+	return [self.userInfo objectForKey:kObjectKey];
 }
 
 - (void) attachDelegate:(id<UshahidiDelegate>)theDelegate {
@@ -104,6 +109,17 @@
 	}
 	else {
 		[mutableUserInfo removeObjectForKey:kCheckinKey];
+	}
+	self.userInfo = mutableUserInfo;
+}
+
+- (void) attachObject:(NSObject *)object {
+	NSMutableDictionary *mutableUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
+	if (object != nil) {
+		[mutableUserInfo setObject:object forKey:kObjectKey];
+	}
+	else {
+		[mutableUserInfo removeObjectForKey:kObjectKey];
 	}
 	self.userInfo = mutableUserInfo;
 }

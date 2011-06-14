@@ -19,7 +19,7 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "BaseTableViewController.h"
 #import "TextFieldTableCell.h"
 #import "BooleanTableCell.h"
 #import "SliderTableCell.h"
@@ -27,10 +27,10 @@
 
 @class Email;
 
-@interface SettingsViewController : TableViewController<TextFieldTableCellDelegate, 
-														BooleanTableCellDelegate, 
-														SliderTableCellDelegate,
-														UIAlertViewDelegate> {
+@interface SettingsViewController : BaseTableViewController<TextFieldTableCellDelegate, 
+															BooleanTableCellDelegate, 
+															SliderTableCellDelegate,
+															UIAlertViewDelegate> {
 	
 @public 
 	UIBarButtonItem *cancelButton;

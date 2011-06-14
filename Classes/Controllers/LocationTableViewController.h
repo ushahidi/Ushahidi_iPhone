@@ -19,7 +19,7 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "BaseTableViewController.h"
 #import "Ushahidi.h"
 #import "CheckBoxTableCell.h"
 #import <CoreLocation/CoreLocation.h>
@@ -29,10 +29,10 @@
 
 @class Incident;
 
-@interface LocationTableViewController : TableViewController<UshahidiDelegate,
-															 LocatorDelegate,
-															 MKMapViewDelegate,
-															 CheckBoxTableCellDelegate> {
+@interface LocationTableViewController : BaseTableViewController<UshahidiDelegate,
+																LocatorDelegate,
+																MKMapViewDelegate,
+																CheckBoxTableCellDelegate> {
 @public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;

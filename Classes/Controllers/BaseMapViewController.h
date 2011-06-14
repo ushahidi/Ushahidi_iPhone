@@ -19,34 +19,30 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseDetailsViewController.h"
-#import "TextTableCell.h"
-#import "MapTableCell.h"
-#import "Ushahidi.h"
-#import "Photo.h"
-#import "SMS.h"
-#import "Email.h"
-#import "Bitly.h"
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <MapKit/MKAnnotation.h>
+#import "BaseViewController.h"
+#import "ItemPicker.h"
 
-@class Incident;
+@interface BaseMapViewController : BaseViewController<ItemPickerDelegate> {
 
-@interface IncidentDetailsViewController : BaseDetailsViewController<UshahidiDelegate, 
-																	UIWebViewDelegate,
-																	SMSDelegate,
-																	EmailDelegate,
-																	BitlyDelegate,
-																	MapTableCellDelegate> {
-@public	
-	Incident *incident;
-	NSArray *incidents;
+@public
+	UIBarButtonItem *refreshButton;
+	UIBarButtonItem *filterButton;
+	UISegmentedControl *mapType;
+	UILabel *filterLabel;
+	MKMapView *mapView;
+	ItemPicker *itemPicker;
 }
 
-@property(nonatomic,retain) Incident *incident;
-@property(nonatomic,retain) NSArray *incidents;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
+@property(nonatomic,retain) IBOutlet UILabel *filterLabel;
+@property(nonatomic,retain) IBOutlet MKMapView *mapView;
+@property(nonatomic,retain) ItemPicker *itemPicker;
 
-- (IBAction) nextPrevious:(id)sender;
-- (IBAction) sendEmail:(id)sender;
-- (IBAction) sendSMS:(id)sender;
-- (IBAction) sendTweet:(id)sender;
+- (IBAction) mapTypeChanged:(id)sender;
 
 @end

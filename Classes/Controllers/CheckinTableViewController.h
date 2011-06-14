@@ -23,37 +23,34 @@
 #import "Ushahidi.h"
 #import "ItemPicker.h"
 
-@class IncidentTabViewController;
-@class IncidentAddViewController;
-@class IncidentDetailsViewController;
+@class CheckinTabViewController;
+@class CheckinAddViewController;
+@class CheckinDetailsViewController;
+@class SettingsViewController;
 @class Deployment;
-@class Category;
+@class User;
 
-@protocol ItemPickerDelegate;
-
-@interface IncidentTableViewController : BaseSortTableViewController<UshahidiDelegate, 
-																	 ItemPickerDelegate> {
-
+@interface CheckinTableViewController : BaseSortTableViewController<UshahidiDelegate, 
+																	ItemPickerDelegate> {
 @public
-	IncidentTabViewController *incidentTabViewController;
-	IncidentAddViewController *incidentAddViewController;
-	IncidentDetailsViewController *incidentDetailsViewController;
+	CheckinTabViewController *checkinTabViewController;
+	CheckinAddViewController *checkinAddViewController;
+	CheckinDetailsViewController *checkinDetailsViewController;
 	Deployment *deployment;
-																 
+																		
 @private
-	NSMutableArray *pending;
-	NSMutableArray *categories;
-	Category *category;
+	NSMutableArray *users;
+	User *user;
 }
 
-@property(nonatomic,retain) IBOutlet IncidentTabViewController *incidentTabViewController;
-@property(nonatomic,retain) IBOutlet IncidentAddViewController *incidentAddViewController;
-@property(nonatomic,retain) IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
+@property(nonatomic,retain) IBOutlet CheckinTabViewController *checkinTabViewController;
+@property(nonatomic,retain) IBOutlet CheckinAddViewController *checkinAddViewController;
+@property(nonatomic,retain) IBOutlet CheckinDetailsViewController *checkinDetailsViewController;
 @property(nonatomic,retain) Deployment *deployment;
 
-- (void) populate:(BOOL)refresh;
-- (IBAction) addReport:(id)sender;
+- (IBAction) addCheckin:(id)sender;
 - (IBAction) refresh:(id)sender;
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
+- (void) populate:(BOOL)refresh;
 
 @end

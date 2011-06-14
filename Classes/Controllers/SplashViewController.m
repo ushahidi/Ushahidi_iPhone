@@ -21,8 +21,8 @@
 #import "SplashViewController.h"
 #import "DeploymentTableViewController.h"
 #import "IncidentTabViewController.h"
+#import "CheckinTabViewController.h"
 #import "IncidentDetailsViewController.h"
-#import "CheckinMapViewController.h"
 #import "Deployment.h"
 #import "Settings.h"
 #import "NSString+Extension.h"
@@ -35,7 +35,7 @@
 
 @implementation SplashViewController
 
-@synthesize deploymentTableViewController, incidentTabViewController, incidentDetailsViewController, checkinMapViewController;
+@synthesize deploymentTableViewController, incidentTabViewController, incidentDetailsViewController, checkinTabViewController;
 
 #pragma mark -
 #pragma mark private
@@ -52,8 +52,8 @@
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 		}
 		if (deployment.supportsCheckins) {
-			self.checkinMapViewController.deployment = deployment;
-			[self.navigationController pushViewController:self.checkinMapViewController animated:YES];	
+			self.checkinTabViewController.deployment = deployment;
+			[self.navigationController pushViewController:self.checkinTabViewController animated:YES];	
 		}
 		else {
 			self.incidentTabViewController.deployment = deployment;
@@ -66,8 +66,8 @@
 			[self.navigationController pushViewController:self.deploymentTableViewController animated:NO];
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 			if (deployment.supportsCheckins) {
-				self.checkinMapViewController.deployment = deployment;
-				[self.navigationController pushViewController:self.checkinMapViewController animated:YES];	
+				self.checkinTabViewController.deployment = deployment;
+				[self.navigationController pushViewController:self.checkinTabViewController animated:YES];	
 			}
 			else {
 				self.incidentTabViewController.deployment = deployment;
@@ -106,7 +106,7 @@
 	[self.deploymentTableViewController setBackButtonTitle:NSLocalizedString(@"Maps", nil)];
 	[self.incidentTabViewController setBackButtonTitle:NSLocalizedString(@"Reports", nil)];
 	[self.incidentDetailsViewController setBackButtonTitle:NSLocalizedString(@"Report", nil)];
-	[self.checkinMapViewController setBackButtonTitle:NSLocalizedString(@"Checkins", nil)];
+	[self.checkinTabViewController setBackButtonTitle:NSLocalizedString(@"Checkins", nil)];
 }
 
 - (void)viewDidUnload {
@@ -142,7 +142,7 @@
 	[deploymentTableViewController release];
 	[incidentTabViewController release];
 	[incidentDetailsViewController release];
-	[checkinMapViewController release];
+	[checkinTabViewController release];
     [super dealloc];
 }
 

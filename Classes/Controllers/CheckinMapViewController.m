@@ -19,9 +19,9 @@
  *****************************************************************************/
 
 #import "CheckinMapViewController.h"
+#import "CheckinTabViewController.h"
 #import "CheckinAddViewController.h"
 #import "CheckinDetailsViewController.h"
-#import "SettingsViewController.h"
 #import "MapViewController.h"
 #import "IncidentTableCell.h"
 #import "TableCellFactory.h"
@@ -46,7 +46,6 @@
 
 @interface CheckinMapViewController ()
 
-@property(nonatomic,retain) ItemPicker *itemPicker;
 @property(nonatomic,retain) NSMutableArray *allCheckins;
 @property(nonatomic,retain) NSMutableArray *filteredCheckins;
 @property(nonatomic,retain) NSMutableArray *users;
@@ -56,9 +55,8 @@
 
 @implementation CheckinMapViewController
 
-@synthesize checkinAddViewController, checkinDetailsViewController, settingsViewController;
+@synthesize checkinTabViewController, checkinAddViewController, checkinDetailsViewController;
 @synthesize deployment, users, user, allCheckins, filteredCheckins;
-@synthesize mapView, mapType, filterLabel, itemPicker, refreshButton, filterButton;
 
 #pragma mark -
 #pragma mark Handlers
@@ -72,18 +70,6 @@
 	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
-}
-
-- (void) settings:(id)sender {
-	DLog(@"");
-	self.settingsViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	[self presentModalViewController:self.settingsViewController animated:YES];
-}
-
-- (IBAction) mapTypeChanged:(id)sender {
-	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-	DLog(@"checkinsMapTypeChanged: %d", segmentedControl.selectedSegmentIndex);
-	self.mapView.mapType = segmentedControl.selectedSegmentIndex;
 }
 
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
@@ -179,17 +165,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self setBackButtonTitle:NSLocalizedString(@"Checkins", nil)];
-	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
+	self.users = [[NSMutableArray alloc] initWithCapacity:0];
 	self.allCheckins = [[NSMutableArray alloc] initWithCapacity:0];
 	self.filteredCheckins = [[NSMutableArray alloc] initWithCapacity:0];
-	self.users = [[NSMutableArray alloc] initWithCapacity:0];
-	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.itemPicker = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -206,7 +188,6 @@
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"This map supports Checkins!\nClick the Filter button to only show checkins for a specific user or the Pin button to checkin now.", nil)];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -217,10 +198,7 @@
 - (void)dealloc {
 	[checkinAddViewController release];
 	[checkinDetailsViewController release];
-	[settingsViewController release];
 	[deployment release];
-	[mapType release];
-	[itemPicker release];
 	[allCheckins release];
 	[filteredCheckins release];
 	[users release];
@@ -296,7 +274,7 @@
 		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
 		self.checkinDetailsViewController.checkin = (Checkin *)mapAnnotation.object; 
 		self.checkinDetailsViewController.checkins = self.filteredCheckins;
-		[self.navigationController pushViewController:self.checkinDetailsViewController animated:YES];
+		[self.checkinTabViewController.navigationController pushViewController:self.checkinDetailsViewController animated:YES];
 	}
 }
 

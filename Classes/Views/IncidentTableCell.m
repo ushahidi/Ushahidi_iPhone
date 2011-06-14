@@ -32,16 +32,6 @@ typedef enum {
 
 @synthesize titleLabel, locationLabel, categoryLabel, dateLabel, verifiedLabel, imageView, activityIndicator;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-    }
-    return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
-
 - (void)dealloc {
 	[titleLabel release];
 	[locationLabel release];
@@ -62,7 +52,6 @@ typedef enum {
 }
 
 - (void) setLocation:(NSString *)location {
-	//self.locationLabel.text = location;
 	if (location != nil && [location length] > 0) {
 		self.locationLabel.text = location;
 	}
@@ -76,7 +65,6 @@ typedef enum {
 }
 
 - (void) setCategory:(NSString *)category {
-	//self.categoryLabel.text = category;
 	if (category != nil && [category length] > 0) {
 		self.categoryLabel.text = category;
 	}
@@ -90,7 +78,6 @@ typedef enum {
 }
 
 - (void) setDate:(NSString *)date {
-	//self.dateLabel.text = date;
 	if (date != nil && [date length] > 0) {
 		self.dateLabel.text = date;
 	}

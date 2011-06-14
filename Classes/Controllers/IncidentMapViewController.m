@@ -49,7 +49,6 @@
 
 @property(nonatomic,retain) NSMutableArray *incidents;
 @property(nonatomic,retain) NSMutableArray *pending;
-@property(nonatomic,retain) ItemPicker *itemPicker;
 @property(nonatomic,retain) NSMutableArray *categories;
 @property(nonatomic,retain) Category *category;
 
@@ -63,7 +62,6 @@
 @implementation IncidentMapViewController
 
 @synthesize incidentTabViewController, incidentAddViewController, incidentDetailsViewController;
-@synthesize refreshButton, filterButton, mapType, itemPicker, mapView, filterLabel;
 @synthesize incidents, deployment, pending, categories, category;
 
 #pragma mark -
@@ -82,12 +80,6 @@
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
-}
-
-- (IBAction) mapTypeChanged:(id)sender {
-	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-	DLog(@"reportsMapTypeChanged: %d", segmentedControl.selectedSegmentIndex);
-	self.mapView.mapType = segmentedControl.selectedSegmentIndex;
 }
 
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
@@ -175,16 +167,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 	self.incidents = [[NSMutableArray alloc] initWithCapacity:0];
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
 	self.categories = [[NSMutableArray alloc] initWithCapacity:0];
-	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.itemPicker = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -220,9 +209,7 @@
 	[incidentAddViewController release];
 	[incidentDetailsViewController release];
 	[deployment release];
-	[mapType release];
 	[pending release];
-	[itemPicker release];
 	[categories release];
 	[category release];
 	[super dealloc];

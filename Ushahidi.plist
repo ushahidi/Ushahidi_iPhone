@@ -33,7 +33,7 @@
 	<key>SearchBarColor</key>
 	<string>#2E2E2E</string>
 	<key>TablePlainColor</key>
-	<string>#f6f6ee</string>
+	<string>#f6f5ee</string>
 	<key>TableGroupedColor</key>
 	<string>#f2eddc</string>
 	<key>TableOddRowColor</key>
@@ -73,7 +73,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>LSRequiresIPhoneOS</key>
-	<false/>
+	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>

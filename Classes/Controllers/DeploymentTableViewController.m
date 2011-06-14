@@ -20,7 +20,7 @@
 
 #import "DeploymentTableViewController.h"
 #import "IncidentTabViewController.h"
-#import "CheckinMapViewController.h"
+#import "CheckinTabViewController.h"
 #import "DeploymentAddViewController.h"
 #import "SettingsViewController.h"
 #import "DeploymentTableCell.h"
@@ -45,7 +45,7 @@
 
 @implementation DeploymentTableViewController
 
-@synthesize incidentTabViewController, deploymentAddViewController, settingsViewController, checkinMapViewController;
+@synthesize incidentTabViewController, deploymentAddViewController, settingsViewController, checkinTabViewController;
 @synthesize addButton, editButton, refreshButton, settingsButton, tableSort;
 
 #pragma mark -
@@ -120,8 +120,8 @@ typedef enum {
 - (void) loadedFromUshahidi:(Ushahidi *)ushahidi deployment:(Deployment *)deployment {
 	DLog(@"");
 	if (deployment.supportsCheckins) {
-		self.checkinMapViewController.deployment = deployment;
-		[self.navigationController pushViewController:self.checkinMapViewController animated:YES];
+		self.checkinTabViewController.deployment = deployment;
+		[self.navigationController pushViewController:self.checkinTabViewController animated:YES];
 	}
 	else {
 		self.incidentTabViewController.deployment = deployment;
@@ -191,7 +191,7 @@ typedef enum {
 
 - (void)dealloc {
 	[incidentTabViewController release];
-	[checkinMapViewController release];
+	[checkinTabViewController release];
 	[deploymentAddViewController release];
 	[settingsViewController release];
 	[editButton release];

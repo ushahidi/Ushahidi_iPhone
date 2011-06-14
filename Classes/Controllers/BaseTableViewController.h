@@ -21,10 +21,10 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface TableViewController : BaseViewController<UITableViewDelegate, 
-													UITableViewDataSource, 
-													UINavigationControllerDelegate, 
-													UISearchBarDelegate> {
+@interface BaseTableViewController : BaseViewController<UITableViewDelegate, 
+														UITableViewDataSource, 
+														UINavigationControllerDelegate, 
+														UISearchBarDelegate> {
 	
 @public
 	IBOutlet UITableView *tableView;
@@ -61,7 +61,7 @@
 - (void) filterRows:(BOOL)reloadTable;
 - (void) replaceRows:(NSArray *)rows;
 - (void) clearHeaders;
--(void) setHeader:(NSString *)header atSection:(NSInteger)section;
+- (void) setHeader:(NSString *)header atSection:(NSInteger)section;
 - (void) setFooter:(NSString *)text atSection:(NSInteger)section;
 - (void) setTableFooter:(NSString *)text;
 

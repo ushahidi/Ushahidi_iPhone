@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "CheckinDetailsViewController.h"
+#import "TwitterViewController.h"
 #import "ImageViewController.h"
 #import "MapViewController.h"
 #import "TableCellFactory.h"
@@ -32,6 +33,7 @@
 #import "Incident.h"
 #import "Device.h"
 #import "Settings.h"
+#import "NSString+Extension.h"
 
 @interface CheckinDetailsViewController()
 
@@ -39,7 +41,7 @@
 
 @implementation CheckinDetailsViewController
 
-@synthesize nextPrevious, checkin, checkins, imageViewController, mapViewController;
+@synthesize checkin, checkins;
 
 #pragma mark -
 #pragma mark Enums
@@ -57,22 +59,20 @@ typedef enum {
 	TableRowLocationMap
 } TableRowLocation;
 
-typedef enum {
-	NavBarPrevious,
-	NavBarNext
-} NavBar;
-
 #pragma mark -
-#pragma mark Enums
+#pragma mark Handlers
 
 - (IBAction) nextPrevious:(id)sender {
 	NSInteger index = [self.checkins indexOfObject:self.checkin];
 	if (self.nextPrevious.selectedSegmentIndex == NavBarNext) {
+		DLog(@"Next");
 		self.checkin = [self.checkins objectAtIndex:index + 1];
 	}
 	else if (self.nextPrevious.selectedSegmentIndex == NavBarPrevious) {
+		DLog(@"Previous");
 		self.checkin = [self.checkins objectAtIndex:index - 1];
 	}
+	[[Settings sharedSettings] setLastIncident:self.checkin.identifier];
 	NSInteger newIndex = [self.checkins indexOfObject:self.checkin];
 	self.title = [NSString stringWithFormat:@"%d / %d", newIndex + 1, [self.checkins count]];
 	[self.nextPrevious setEnabled:(newIndex > 0) forSegmentAtIndex:NavBarPrevious];
@@ -82,14 +82,133 @@ typedef enum {
 	[self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
+- (IBAction) sendTweet:(id)sender {
+	DLog(@"");
+	NSMutableString *message = [NSMutableString string];
+	if ([NSString isNilOrEmpty:self.checkin.message] == NO) {
+		[message appendFormat:@"\"%@\"", self.checkin.message];
+	}
+	if ([NSString isNilOrEmpty:self.checkin.name] == NO) {
+		if ([message length] > 0) {
+			[message appendFormat:@" - %@", self.checkin.name];
+		}
+		else {
+			[message appendFormat:@"%@", self.checkin.name];
+		}
+	}
+	if ([message length] > 0) {
+		[message appendFormat:@" http://maps.google.com/maps?q=%@,%@", self.checkin.latitude, self.checkin.longitude];
+	}
+	else {
+		[message appendFormat:@"http://maps.google.com/maps?q=%@,%@", self.checkin.latitude, self.checkin.longitude];
+	}
+	if ([self.checkin hasPhotos]) {
+		Photo *photo = [self.checkin firstPhoto];
+		if ([message length] > 0) {
+			[message appendFormat:@" %@", photo.url];
+		}
+		else {
+			[message appendFormat:@"%@", photo.url];
+		}
+	}
+	self.twitterViewController.tweet = message;
+	[self presentModalViewController:self.twitterViewController animated:YES];
+}
+
+- (IBAction) sendSMS:(id)sender {
+	DLog(@"");
+	NSMutableString *message = [NSMutableString string];
+	if ([NSString isNilOrEmpty:self.checkin.message] == NO) {
+		[message appendFormat:@"\"%@\"", self.checkin.message];
+	}
+	if ([NSString isNilOrEmpty:self.checkin.name] == NO) {
+		if ([message length] > 0) {
+			[message appendFormat:@" - %@", self.checkin.name];
+		}
+		else {
+			[message appendFormat:@"%@", self.checkin.name];
+		}
+	}
+	if ([message length] > 0) {
+		[message appendFormat:@" http://maps.google.com/maps?q=%@,%@", self.checkin.latitude, self.checkin.longitude];
+	}
+	else {
+		[message appendFormat:@"http://maps.google.com/maps?q=%@,%@", self.checkin.latitude, self.checkin.longitude];
+	}
+	if ([self.checkin hasPhotos]) {
+		Photo *photo = [self.checkin firstPhoto];
+		if ([message length] > 0) {
+			[message appendFormat:@" %@", photo.url];
+		}
+		else {
+			[message appendFormat:@"%@", photo.url];
+		}
+	}
+	[self.sms sendToRecipients:nil 
+				   withMessage:message];
+}
+
+- (IBAction) sendEmail:(id)sender {
+	DLog(@"");
+	NSMutableString *subject = [NSMutableString string];
+	NSMutableString *message = [NSMutableString string];
+	if ([NSString isNilOrEmpty:self.checkin.message] == NO) {
+		[subject appendFormat:@"\"%@\"", self.checkin.message];
+		[message appendFormat:@"\"%@\"", self.checkin.message];
+	}
+	if ([NSString isNilOrEmpty:self.checkin.name] == NO) {
+		if ([message length] > 0) {
+			[subject appendFormat:@" - %@", self.checkin.name];
+			[message appendFormat:@" - %@", self.checkin.name];
+		}
+		else {
+			[subject appendFormat:@"%@", self.checkin.name];
+			[message appendFormat:@"%@", self.checkin.name];
+		}
+	}
+	if (self.checkin.date != nil) {
+		if ([message length] > 0) {
+			[message appendFormat:@", %@", self.checkin.dateTimeString];
+		}
+		else {
+			[message appendFormat:@"%@", self.checkin.dateTimeString];
+		}
+	}
+	NSString *mapURL = [NSString stringWithFormat:@"<br/>http://maps.google.com/maps?q=%@,%@", self.checkin.latitude, self.checkin.longitude];
+	[message appendFormat:@"<br/><a href=\"%@\" title=\"%@\">%@</>", mapURL, mapURL, mapURL];
+	NSMutableArray *photos = [NSMutableArray array];
+	if (self.checkin.map != nil) {
+		[photos addObject:self.checkin.map];
+	}
+	else {
+		@try {
+			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:TableRowLocationMap inSection:TableSectionLocation]; 
+			MapTableCell *mapCell = (MapTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+			MKMapView *mapView = mapCell.mapView;
+			UIGraphicsBeginImageContext(mapView.bounds.size);
+			[mapView.layer renderInContext:UIGraphicsGetCurrentContext()];
+			[photos addObject:UIGraphicsGetImageFromCurrentImageContext()];
+			UIGraphicsEndImageContext();
+		}
+		@catch (NSException *e) {
+			DLog(@"%@", e);
+		}
+	}
+	if ([self.checkin.photos count] > 0) {
+		[photos addObjectsFromArray:self.checkin.photoImages];
+	}
+	[self.email sendToRecipients:nil 
+					 withMessage:message 
+					 withSubject:subject 
+					  withPhotos:photos];
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
 	[self setBackButtonTitle:NSLocalizedString(@"Checkin", nil)];
-	self.oddRowColor = [[Settings sharedSettings] tableOddRowColor];
-	self.evenRowColor = [[Settings sharedSettings] tableOddRowColor];
 	[self setHeader:NSLocalizedString(@"Name", nil) atSection:TableSectionName];
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDate];
 	[self setHeader:NSLocalizedString(@"Message", nil) atSection:TableSectionMessage];
@@ -107,7 +226,10 @@ typedef enum {
 	self.title = [NSString stringWithFormat:@"%d / %d", index + 1, [self.checkins count]];
 	[self.nextPrevious setEnabled:index > 0 forSegmentAtIndex:NavBarPrevious];
 	[self.nextPrevious setEnabled:index + 1 < [self.checkins count] forSegmentAtIndex:NavBarNext];
-	[self.tableView reloadData];
+	if (self.willBePushed) {
+		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+	}
+	[self.tableView reloadData];	
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -116,10 +238,7 @@ typedef enum {
 }
 
 - (void)dealloc {
-	[imageViewController release];
-	[mapViewController release];
-	[nextPrevious release];
-    [checkins release];
+	[checkins release];
 	[checkin release];
 	[super dealloc];
 }
@@ -224,7 +343,7 @@ typedef enum {
 				}
 				else {
 					[cell setImage:nil];
-					[[Ushahidi sharedUshahidi] downloadPhoto:photo incident:nil forDelegate:self];
+					[[Ushahidi sharedUshahidi] downloadPhoto:photo forCheckin:checkin forDelegate:self];
 				}
 			}
 			else {
@@ -324,10 +443,16 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo incident:(Incident *)incident {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo checkin:(Checkin *)checkin {
 	DLog(@"downloadedFromUshahidi: %@", [photo url]);
-	if (photo != nil) {
-		[self.tableView reloadData];
+	if (photo != nil && photo.indexPath != nil) {
+		ImageTableCell *cell = (ImageTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
+		if (cell != nil) {
+			[cell setImage:photo.image];
+		}
+		else {
+			[self.tableView reloadData];
+		}
 	}
 }
 

@@ -19,19 +19,19 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "BaseTableViewController.h"
 #import "Ushahidi.h"
 
 @class IncidentTabViewController;
+@class CheckinTabViewController;
 @class DeploymentAddViewController;
 @class SettingsViewController;
-@class CheckinMapViewController;
 
-@interface DeploymentTableViewController : TableViewController<UshahidiDelegate> {
+@interface DeploymentTableViewController : BaseTableViewController<UshahidiDelegate> {
 	
 @public
 	IBOutlet IncidentTabViewController *incidentTabViewController;
-	IBOutlet CheckinMapViewController *checkinMapViewController;
+	IBOutlet CheckinTabViewController *checkinTabViewController;
 	IBOutlet DeploymentAddViewController *deploymentAddViewController;
 	IBOutlet SettingsViewController *settingsViewController;
 	IBOutlet UIBarButtonItem *addButton;
@@ -46,7 +46,7 @@
 @property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
 @property(nonatomic, retain) DeploymentAddViewController *deploymentAddViewController;
 @property(nonatomic, retain) SettingsViewController *settingsViewController;
-@property(nonatomic, retain) CheckinMapViewController *checkinMapViewController;
+@property(nonatomic, retain) CheckinTabViewController *checkinTabViewController;
 @property(nonatomic, retain) UIBarButtonItem *addButton;
 @property(nonatomic, retain) UIBarButtonItem *editButton;
 @property(nonatomic, retain) UIBarButtonItem *refreshButton;

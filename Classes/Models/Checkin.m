@@ -27,6 +27,7 @@
 @implementation Checkin
 
 @synthesize identifier, message, date, latitude, longitude, location, photos, user, name, email, firstName, lastName, mobile;
+@synthesize map;
 
 - (id)initWithDefaultValues {
 	if (self = [super init]) {
@@ -74,6 +75,12 @@
 	[encoder encodeObject:self.firstName forKey:@"firstName"];
 	[encoder encodeObject:self.lastName forKey:@"lastName"];
 	[encoder encodeObject:self.mobile forKey:@"mobile"];
+	if (self.map != nil) {
+		[encoder encodeObject:UIImagePNGRepresentation(self.map) forKey:@"map"];
+	} 
+	else {
+		[encoder encodeObject:nil forKey:@"map"];
+	}
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -91,6 +98,10 @@
 		self.mobile = [decoder decodeObjectForKey:@"mobile"];
 		self.photos = [decoder decodeObjectForKey:@"photos"];
 		if (self.photos == nil) self.photos = [NSMutableArray array];
+		NSData *mapData = [decoder decodeObjectForKey:@"map"];
+		if (mapData != nil) {
+			self.map = [UIImage imageWithData:mapData];
+		}
 	}
 	return self;
 }
@@ -107,8 +118,16 @@
 	return self.date != nil ? [self.date dateToString:@"h:mm a" fromTimeZone:@"UTC"] : nil;
 }
 
+- (NSString *) coordinates {
+	return [NSString stringWithFormat:@"%@, %@", self.latitude, self.longitude];
+}
+
 - (BOOL) hasPhotos {
 	return self.photos != nil && [self.photos count] > 0;
+}
+
+- (BOOL) hasMap {
+	return self.map != nil;
 }
 
 - (BOOL) hasName {
@@ -127,6 +146,10 @@
 	return [NSString isNilOrEmpty:self.latitude] == NO && [NSString isNilOrEmpty:self.longitude] == NO;
 }
 
+- (Photo *) firstPhoto {
+	return [self.photos count] > 0 ? [self.photos objectAtIndex:0] : nil;
+}
+
 - (NSArray *) photoImages {
 	NSMutableArray *images = [NSMutableArray arrayWithCapacity:[self.photos count]];
 	for (Photo *photo in self.photos) {
@@ -143,8 +166,24 @@
 	[self.photos removeAllObjects];
 }
 
+- (UIImage *) getFirstPhotoThumbnail {
+	for (Photo *photo in self.photos) {
+		if (photo.thumbnail != nil) {
+			return photo.thumbnail;
+		}
+		if (photo.image != nil) {
+			return photo.image;
+		}
+	} 
+	return nil;
+}
+
 - (NSComparisonResult)compareByDate:(Checkin *)checkin {
 	return [checkin.date compare:self.date];
+}
+
+- (NSComparisonResult)compareByName:(Checkin *)checkin {
+	return [self.name compare:checkin.name];
 }
 
 - (void)dealloc {
@@ -161,6 +200,7 @@
 	[firstName release];
 	[lastName release];
 	[mobile release];
+	[map release];
     [super dealloc];
 }
 

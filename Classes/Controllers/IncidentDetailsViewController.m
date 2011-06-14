@@ -49,11 +49,6 @@
 
 @interface IncidentDetailsViewController ()
 
-@property(nonatomic,retain) Email *email;
-@property(nonatomic,retain) SMS *sms;
-@property(nonatomic,retain) Bitly *bitly;
-@property(nonatomic,retain) MoviePlayer *moviePlayer;
-
 @end
 
 @implementation IncidentDetailsViewController
@@ -61,9 +56,7 @@
 #define kBitlyLogin		@"BitlyLogin"
 #define kBitlyApiKey	@"BitlyApiKey"
 
-@synthesize mapViewController, imageViewController, newsViewController, twitterViewController;
-@synthesize nextPrevious, incident, incidents, email, sms;
-@synthesize smsButton, emailButton, tweetButton, moviePlayer, bitly;
+@synthesize incident, incidents;
 
 #pragma mark -
 #pragma mark Enums
@@ -80,11 +73,6 @@ typedef enum {
 	TableSectionNews,
 	TableSectionVideo
 } TableSection;
-
-typedef enum {
-	NavBarPrevious,
-	NavBarNext
-} NavBar;
 
 #pragma mark -
 #pragma mark Handlers
@@ -179,15 +167,6 @@ typedef enum {
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
-	self.oddRowColor = [[Settings sharedSettings] tableEvenRowColor];
-	self.evenRowColor = [[Settings sharedSettings] tableEvenRowColor];
-	self.email = [[Email alloc] initWithController:self];
-	self.sms = [[SMS alloc] initWithController:self];
-	self.moviePlayer = [[MoviePlayer alloc] initWithController:self];
-	self.bitly = [[Bitly alloc] init];
-	self.bitly.login = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyLogin];
-	self.bitly.apiKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyApiKey];
-	
 	[self setHeader:NSLocalizedString(@"Errors", nil) atSection:TableSectionErrors];
 	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
 	[self setHeader:NSLocalizedString(@"Verified", nil) atSection:TableSectionVerified];
@@ -202,10 +181,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.email = nil;
-	self.sms = nil;
-	self.moviePlayer = nil;
-	self.bitly = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -218,8 +193,6 @@ typedef enum {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];	
-	self.smsButton.enabled = [self.sms canSend];
-	self.emailButton.enabled = [self.email canSend];
 	[[Settings sharedSettings] setLastIncident:self.incident.identifier];
 }
 
@@ -229,19 +202,9 @@ typedef enum {
 }
 
 - (void)dealloc {
-	[mapViewController release];
-	[imageViewController release];
-	[newsViewController release];
-	[twitterViewController release];
-	[nextPrevious release];
 	[incident release];
-	[email release];
-	[bitly release];
-	[moviePlayer release];
-	[smsButton release];
-	[emailButton release];
-	[tweetButton release];
-    [super dealloc];
+	[incidents release];
+	[super dealloc];
 }
 
 #pragma mark -
@@ -315,7 +278,7 @@ typedef enum {
 			else {
 				[cell setImage:nil];
 				photo.indexPath = indexPath;
-				[[Ushahidi sharedUshahidi] downloadPhoto:photo incident:self.incident forDelegate:self];
+				[[Ushahidi sharedUshahidi] downloadPhoto:photo forIncident:self.incident forDelegate:self];
 			}
 		}
 		else {
@@ -519,57 +482,6 @@ typedef enum {
 			[self.tableView reloadData];
 		}
 	}
-}
-
-#pragma mark -
-#pragma mark SMSDelegate
-
-- (void) smsSent:(SMS *)theSms {
-	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil) afterDelay:1.0];
-	[self.loadingView hideAfterDelay:2.5];
-}
-
-- (void) smsCancelled:(SMS *)theSms {
-	DLog(@"");
-	[self.loadingView hide];
-}
-
-- (void) smsFailed:(SMS *)theSms {
-	DLog(@"");
-	[self.loadingView hide];
-	[self.alertView showOkWithTitle:NSLocalizedString(@"SMS Failed", nil) 
-						 andMessage:NSLocalizedString(@"Unable To Send SMS", nil)];
-}
-
-#pragma mark -
-#pragma mark EmailDelegate
-
-- (void) emailSent:(Email *)email {
-	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
-	[self.loadingView hideAfterDelay:2.5];
-}
-
-- (void) emailCancelled:(Email *)email {
-	DLog(@"");
-}
-
-- (void) emailFailed:(Email *)email {
-	DLog(@"");
-	[self.alertView showOkWithTitle:NSLocalizedString(@"Email Failed", nil) 
-						 andMessage:NSLocalizedString(@"Unable To Send Email", nil)];
-}
-
-#pragma mark -
-#pragma mark BitlyDelegate
-
-- (void) urlShortened:(Bitly *)bitly original:(NSString *)original shortened:(NSString *)shortened error:(NSError *)error {
-	DLog(@"original: %@ shortened: %@", original, shortened);
-	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)];
-	NSString *link = [NSString isNilOrEmpty:shortened] ? original : shortened;
-	NSString *message = [NSString stringWithFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, link];
-	[self.sms sendToRecipients:nil withMessage:message];
 }
 
 @end

@@ -19,14 +19,14 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "BaseTableViewController.h"
 #import "Ushahidi.h"
 #import "CheckBoxTableCell.h"
 
 @class Incident;
 
-@interface CategoryTableViewController : TableViewController<UshahidiDelegate,
-														     CheckBoxTableCellDelegate> {
+@interface CategoryTableViewController : BaseTableViewController<UshahidiDelegate,
+																 CheckBoxTableCellDelegate> {
 
 @public
 	UIBarButtonItem *cancelButton;

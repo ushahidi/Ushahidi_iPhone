@@ -41,12 +41,10 @@
 @interface IncidentTableViewController ()
 
 @property(nonatomic,retain) NSMutableArray *pending;
-@property(nonatomic,retain) ItemPicker *itemPicker;
 @property(nonatomic,retain) NSMutableArray *categories;
 @property(nonatomic,retain) Category *category;
 
 - (void) updateSyncedLabel;
-
 
 - (void) pushViewController:(UIViewController *)viewController;
 - (void) presentModalViewController:(UIViewController *)viewController;
@@ -61,7 +59,6 @@
 @implementation IncidentTableViewController
 
 @synthesize incidentTabViewController, incidentAddViewController, incidentDetailsViewController;
-@synthesize tableSort, refreshButton, filterButton, itemPicker;
 @synthesize pending, categories, category, deployment;
 
 #pragma mark -
@@ -71,12 +68,6 @@ typedef enum {
 	TableSectionPending,
 	TableSectionIncidents
 } TableSection;
-
-typedef enum {
-	TableSortDate,
-	TableSortTitle,
-	TableSortVerified
-} TableSort;
 
 #pragma mark -
 #pragma mark Handlers
@@ -94,20 +85,6 @@ typedef enum {
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
-}
-
-- (IBAction) sortChanged:(id)sender {
-	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
-	if (segmentControl.selectedSegmentIndex == TableSortDate) {
-		DLog(@"TableSortDate");
-	}
-	else if (segmentControl.selectedSegmentIndex == TableSortTitle) {
-		DLog(@"TableSortTitle");
-	}
-	else if (segmentControl.selectedSegmentIndex == TableSortVerified) {
-		DLog(@"TableSortVerified");
-	}
-	[self filterRows:YES];
 }
 
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
@@ -182,7 +159,6 @@ typedef enum {
     [super viewDidLoad];
 	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
 	self.categories = [[NSMutableArray alloc] initWithCapacity:0];
-	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", nil)];
 	[self setHeader:NSLocalizedString(@"Pending Upload", nil) atSection:TableSectionPending];
 	[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
@@ -190,7 +166,6 @@ typedef enum {
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.itemPicker = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -229,12 +204,10 @@ typedef enum {
 	[incidentTabViewController release];
 	[incidentAddViewController release];
 	[incidentDetailsViewController release];
-	[deployment release];
-	[tableSort release];
 	[pending release];
-	[itemPicker release];
 	[categories release];
 	[category release];
+	[deployment release];
 	[super dealloc];
 }
 
@@ -285,7 +258,8 @@ typedef enum {
 		}
 		else if (incident.hasPhotos) {
 			Photo *photo = [incident.photos objectAtIndex:0];
-			[[Ushahidi sharedUshahidi] downloadPhoto:photo incident:incident forDelegate:self];
+			photo.indexPath = indexPath;
+			[[Ushahidi sharedUshahidi] downloadPhoto:photo forIncident:incident forDelegate:self];
 		}
 		else if (incident.map != nil) {
 			[cell setImage:incident.map];

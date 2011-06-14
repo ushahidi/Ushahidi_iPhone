@@ -22,52 +22,40 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
-#import "BaseViewController.h"
+#import "BaseMapViewController.h"
 #import "Ushahidi.h"
 #import "Photo.h"
 #import "ItemPicker.h"
 
+@class CheckinTabViewController;
 @class CheckinAddViewController;
 @class CheckinDetailsViewController;
-@class SettingsViewController;
 @class Deployment;
 @class User;
 
-@interface CheckinMapViewController : BaseViewController<UshahidiDelegate, 
-													     MKMapViewDelegate, 
-													     ItemPickerDelegate> {
+@interface CheckinMapViewController : BaseMapViewController<UshahidiDelegate, 
+															MKMapViewDelegate, 
+															ItemPickerDelegate> {
 @public
+	CheckinTabViewController *checkinTabViewController;
 	CheckinAddViewController *checkinAddViewController;
 	CheckinDetailsViewController *checkinDetailsViewController;
-	SettingsViewController *settingsViewController;
 	Deployment *deployment;
-	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *filterButton;
-	UISegmentedControl *mapType;
-	UILabel *filterLabel;
-	MKMapView *mapView;
-   
+	
 @private
-	ItemPicker *itemPicker;
 	NSMutableArray *allCheckins;
 	NSMutableArray *filteredCheckins;
 	NSMutableArray *users;
 	User *user;
 }
 
+@property(nonatomic,retain) IBOutlet CheckinTabViewController *checkinTabViewController;
 @property(nonatomic,retain) IBOutlet CheckinAddViewController *checkinAddViewController;
 @property(nonatomic,retain) IBOutlet CheckinDetailsViewController *checkinDetailsViewController;
-@property(nonatomic,retain) IBOutlet SettingsViewController *settingsViewController;
-@property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
-@property(nonatomic,retain) IBOutlet UILabel *filterLabel;
-@property(nonatomic,retain) IBOutlet MKMapView *mapView;
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) addCheckin:(id)sender;
 - (IBAction) refresh:(id)sender;
-- (IBAction) mapTypeChanged:(id)sender;
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
 - (void) populate:(BOOL)refresh resize:(BOOL)resize;
 

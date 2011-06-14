@@ -18,10 +18,10 @@
  **
  *****************************************************************************/
 
-#import "IncidentTabViewController.h"
+#import "CheckinTabViewController.h"
 #import "BaseTabViewController.h"
-#import "IncidentTableViewController.h";
-#import "IncidentMapViewController.h";
+#import "CheckinTableViewController.h";
+#import "CheckinMapViewController.h";
 #import "SettingsViewController.h"
 #import "NSString+Extension.h"
 #import "UIView+Extension.h"
@@ -29,13 +29,13 @@
 #import "Device.h"
 #import "Settings.h"
 
-@interface IncidentTabViewController ()
+@interface CheckinTabViewController ()
 
 @end
 
-@implementation IncidentTabViewController
+@implementation CheckinTabViewController
 
-@synthesize incidentTableViewController, incidentMapViewController;
+@synthesize checkinTableViewController, checkinMapViewController;
 
 #pragma mark -
 #pragma mark Handlers
@@ -46,25 +46,25 @@
 	BOOL animate = (segmentControl.tag == ShouldAnimateYes);
 	BOOL resize = NO;
 	if (segmentControl.selectedSegmentIndex == ViewModeTable) {
-		if (self.incidentTableViewController.deployment != self.deployment) {
-			self.incidentTableViewController.deployment = self.deployment;
+		if (self.checkinTableViewController.deployment != self.deployment) {
+			self.checkinTableViewController.deployment = self.deployment;
 			populate = YES;
 			resize = YES;
 		}
 		DLog(@"ViewModeTable populate:%d animate:%d", populate, animate);
-		[self showViewController:self.incidentTableViewController animated:animate];
-		[self.incidentTableViewController populate:populate];
+		[self showViewController:self.checkinTableViewController animated:animate];
+		[self.checkinTableViewController populate:populate];
 		segmentControl.tag = ShouldAnimateYes;
 	}
 	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
-		if (self.incidentMapViewController.deployment != self.deployment) {
-			self.incidentMapViewController.deployment = self.deployment;
+		if (self.checkinMapViewController.deployment != self.deployment) {
+			self.checkinMapViewController.deployment = self.deployment;
 			populate = YES;
 			resize = YES;
 		}
 		DLog(@"ViewModeMap populate:%d animate:%d resize:%d", populate, animate, resize);
-		[self showViewController:self.incidentMapViewController animated:animate];
-		[self.incidentMapViewController populate:populate resize:resize];
+		[self showViewController:self.checkinMapViewController animated:animate];
+		[self.checkinMapViewController populate:populate resize:resize];
 		segmentControl.tag = ShouldAnimateYes;
 	}
 }
@@ -74,24 +74,25 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	[self setBackButtonTitle:NSLocalizedString(@"Reports", nil)];
+	[self setBackButtonTitle:NSLocalizedString(@"Checkins", nil)];
+	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 } 
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	DLog(@"willBePushed: %d", self.willBePushed);
-	if (self.incidentTableViewController.view.superview == nil && 
-		self.incidentMapViewController.view.superview == nil) {
-		self.incidentTableViewController.deployment = self.deployment;
-		[self.incidentTableViewController populate:self.willBePushed];
-		[self showViewController:self.incidentTableViewController animated:NO];
+	if (self.checkinTableViewController.view.superview == nil && 
+		self.checkinMapViewController.view.superview == nil) {
+		self.checkinTableViewController.deployment = self.deployment;
+		[self.checkinTableViewController populate:self.willBePushed];
+		[self showViewController:self.checkinTableViewController animated:NO];
 	}
-	else if (self.incidentTableViewController.view.superview != nil) {
-		[self.incidentTableViewController populate:self.willBePushed];
+	else if (self.checkinTableViewController.view.superview != nil) {
+		[self.checkinTableViewController populate:self.willBePushed];
 	}
-	else if(self.incidentMapViewController.view.superview != nil) {
-		[self.incidentMapViewController populate:self.willBePushed 
-										  resize:self.willBePushed];
+	else if (self.checkinMapViewController.view.superview != nil) {
+		[self.checkinMapViewController populate:self.willBePushed 
+										 resize:self.willBePushed];
 	}
 	if ([self.viewMode numberOfSegments] >= ViewModeCheckin + 1) {
 		self.viewMode.tag = ShouldAnimateNo;
@@ -118,12 +119,12 @@
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Map button to view the report map, the Filter button to filter by category or the Compose button to create a new incident report.", nil)];
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"This map supports Checkins!\nClick the Filter button to only show checkins for a specific user or the Pin button to checkin now.", nil)];
 }
 
 - (void)dealloc {
-	[incidentTableViewController release];
-	[incidentMapViewController release];
+	[checkinTableViewController release];
+	[checkinMapViewController release];
 	[super dealloc];
 }
 

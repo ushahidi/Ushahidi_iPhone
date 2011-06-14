@@ -33,6 +33,7 @@
 @class DateTableCell;
 @class DeploymentTableCell;
 @class IncidentTableCell;
+@class CheckinTableCell;
 @class SliderTableCell;
 @class ButtonTableCell;
 
@@ -59,6 +60,9 @@
 											   indexPath:(NSIndexPath *)indexPath;
 
 + (IncidentTableCell *) getIncidentTableCellForTable:(UITableView *)tableView 
+										   indexPath:(NSIndexPath *)indexPath;
+
++ (CheckinTableCell *) getCheckinTableCellForTable:(UITableView *)tableView 
 										   indexPath:(NSIndexPath *)indexPath;
 
 + (UITableViewCell *) getDefaultTableCellForTable:(UITableView *)tableView 

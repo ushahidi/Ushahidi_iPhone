@@ -22,7 +22,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
-#import "BaseViewController.h"
+#import "BaseMapViewController.h"
 #import "ItemPicker.h"
 #import "Ushahidi.h"
 
@@ -33,24 +33,18 @@
 @class Deployment;
 @class Category;
 
-@interface IncidentMapViewController : BaseViewController<UshahidiDelegate, 
-														  MKMapViewDelegate, 
-														  ItemPickerDelegate> {
+@interface IncidentMapViewController : BaseMapViewController<UshahidiDelegate, 
+															 MKMapViewDelegate, 
+															 ItemPickerDelegate> {
 @public
 	IncidentTabViewController *incidentTabViewController;
 	IncidentAddViewController *incidentAddViewController;
 	IncidentDetailsViewController *incidentDetailsViewController;
 	Deployment *deployment;
-	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *filterButton;
-	UISegmentedControl *mapType;
-	UILabel *filterLabel;
-	MKMapView *mapView;
-  
+
 @private
 	NSMutableArray *incidents;	
 	NSMutableArray *pending;
-	ItemPicker *itemPicker;
 	NSMutableArray *categories;
 	Category *category;
 }
@@ -58,16 +52,10 @@
 @property(nonatomic,retain) IBOutlet IncidentTabViewController *incidentTabViewController;
 @property(nonatomic,retain) IBOutlet IncidentAddViewController *incidentAddViewController;
 @property(nonatomic,retain) IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
-@property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
-@property(nonatomic,retain) IBOutlet UILabel *filterLabel;
-@property(nonatomic,retain) IBOutlet MKMapView *mapView;
 @property(nonatomic,retain) Deployment *deployment;
 
 - (IBAction) addReport:(id)sender;
 - (IBAction) refresh:(id)sender;
-- (IBAction) mapTypeChanged:(id)sender;
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
 - (void) populate:(BOOL)refresh resize:(BOOL)resize;
 

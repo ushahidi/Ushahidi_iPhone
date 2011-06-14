@@ -19,34 +19,28 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseDetailsViewController.h"
-#import "TextTableCell.h"
-#import "MapTableCell.h"
-#import "Ushahidi.h"
-#import "Photo.h"
-#import "SMS.h"
-#import "Email.h"
-#import "Bitly.h"
+#import "IndexedTableCell.h"
 
-@class Incident;
+@interface CheckinTableCell : IndexedTableCell {
 
-@interface IncidentDetailsViewController : BaseDetailsViewController<UshahidiDelegate, 
-																	UIWebViewDelegate,
-																	SMSDelegate,
-																	EmailDelegate,
-																	BitlyDelegate,
-																	MapTableCellDelegate> {
-@public	
-	Incident *incident;
-	NSArray *incidents;
+@public
+	IBOutlet UILabel *nameLabel;
+	IBOutlet UILabel *messageLabel;
+	IBOutlet UILabel *dateLabel;
+	IBOutlet UIImageView *imageView;
 }
 
-@property(nonatomic,retain) Incident *incident;
-@property(nonatomic,retain) NSArray *incidents;
+@property (nonatomic, retain) UILabel *nameLabel;
+@property (nonatomic, retain) UILabel *messageLabel;
+@property (nonatomic, retain) UILabel *dateLabel;
+@property (nonatomic, retain) UIImageView *imageView;
 
-- (IBAction) nextPrevious:(id)sender;
-- (IBAction) sendEmail:(id)sender;
-- (IBAction) sendSMS:(id)sender;
-- (IBAction) sendTweet:(id)sender;
+@property (nonatomic, assign) NSString *name;
+@property (nonatomic, assign) NSString *message;
+@property (nonatomic, assign) NSString *date;
+@property (nonatomic, assign) UIImage *image;
+@property (nonatomic, assign) UIColor *selectedColor;
+
++ (CGFloat) getCellHeight;
 
 @end

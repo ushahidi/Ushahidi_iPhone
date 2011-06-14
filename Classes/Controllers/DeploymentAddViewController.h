@@ -19,16 +19,16 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "BaseTableViewController.h"
 #import "Ushahidi.h"
 #import "MapDialog.h"
 #import "Locator.h"
 #import "ItemPicker.h"
 
-@interface DeploymentAddViewController : TableViewController<UshahidiDelegate, 
-															 MapDialogDelegate, 
-															 LocatorDelegate, 
-															 ItemPickerDelegate> {
+@interface DeploymentAddViewController : BaseTableViewController<UshahidiDelegate, 
+																 MapDialogDelegate, 
+																 LocatorDelegate, 
+																 ItemPickerDelegate> {
 	
 @public
 	UIBarButtonItem *cancelButton;

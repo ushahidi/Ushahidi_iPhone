@@ -19,34 +19,41 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseDetailsViewController.h"
-#import "TextTableCell.h"
-#import "MapTableCell.h"
-#import "Ushahidi.h"
-#import "Photo.h"
-#import "SMS.h"
-#import "Email.h"
-#import "Bitly.h"
+#import "BaseViewController.h"
 
-@class Incident;
+@class SettingsViewController;
+@class Deployment;
 
-@interface IncidentDetailsViewController : BaseDetailsViewController<UshahidiDelegate, 
-																	UIWebViewDelegate,
-																	SMSDelegate,
-																	EmailDelegate,
-																	BitlyDelegate,
-																	MapTableCellDelegate> {
-@public	
-	Incident *incident;
-	NSArray *incidents;
+#pragma mark -
+#pragma mark Enums
+
+typedef enum {
+	ViewModeTable,
+	ViewModeMap,
+	ViewModeCheckin
+} ViewMode;
+
+typedef enum {
+	ShouldAnimateYes,
+	ShouldAnimateNo
+} ShouldAnimate;
+
+@interface BaseTabViewController : BaseViewController {
+
+@public
+	SettingsViewController *settingsViewController;
+	Deployment *deployment;
+	UISegmentedControl *viewMode;
+	
+@private 
+	UIButton *settingsButton;
 }
 
-@property(nonatomic,retain) Incident *incident;
-@property(nonatomic,retain) NSArray *incidents;
+@property(nonatomic,retain) IBOutlet SettingsViewController *settingsViewController;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *viewMode;
+@property(nonatomic,retain) Deployment *deployment;
 
-- (IBAction) nextPrevious:(id)sender;
-- (IBAction) sendEmail:(id)sender;
-- (IBAction) sendSMS:(id)sender;
-- (IBAction) sendTweet:(id)sender;
+- (void) showViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (UIViewController *) getViewControllerForView:(UIView *)view;
 
 @end

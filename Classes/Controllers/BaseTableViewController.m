@@ -18,7 +18,7 @@
  **
  *****************************************************************************/
 
-#import "TableViewController.h"
+#import "BaseTableViewController.h"
 #import "TableCellFactory.h"
 #import "UIView+Extension.h"
 #import "TableHeaderView.h"
@@ -26,7 +26,7 @@
 #import "Settings.h"
 #import "Device.h"
 
-@interface TableViewController ()
+@interface BaseTableViewController ()
 
 @property(nonatomic,assign) BOOL shouldBeginEditing;
 @property(nonatomic,retain) NSMutableDictionary *headers;
@@ -42,7 +42,7 @@
 
 @end
 
-@implementation TableViewController
+@implementation BaseTableViewController
 
 @synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, shouldBeginEditing, headers, footers, editing;
 

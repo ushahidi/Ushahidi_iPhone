@@ -19,28 +19,27 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "BaseTableViewController.h"
 #import "TextFieldTableCell.h"
 #import "TextViewTableCell.h"
 #import "ButtonTableCell.h"
 #import "ImagePickerController.h"
 #import "Ushahidi.h"
 #import "DatePicker.h"
-#import "ImagePickerController.h"
 #import "Locator.h"
 
 @class CategoryTableViewController;
 @class LocationTableViewController;
 @class Incident;
 
-@interface IncidentAddViewController : TableViewController<TextFieldTableCellDelegate, 
-														   TextViewTableCellDelegate, 
-														   DatePickerDelegate,
-														   ImagePickerDelegate,
-														   UIActionSheetDelegate, 
-														   LocatorDelegate,
-														   ButtonTableCellDelegate,
-														   UshahidiDelegate>  {
+@interface IncidentAddViewController : BaseTableViewController<TextFieldTableCellDelegate, 
+																TextViewTableCellDelegate, 
+																DatePickerDelegate,
+																ImagePickerDelegate,
+																UIActionSheetDelegate, 
+																LocatorDelegate,
+																ButtonTableCellDelegate,
+																UshahidiDelegate>  {
 																
 @public
 	CategoryTableViewController *categoryTableViewController;

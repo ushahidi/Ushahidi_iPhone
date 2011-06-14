@@ -19,7 +19,7 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "TableViewController.h"
+#import "BaseTableViewController.h"
 #import "TextViewTableCell.h"
 #import "TextFieldTableCell.h"
 #import "Bitly.h"
@@ -27,10 +27,10 @@
 
 @class MGTwitterEngine;
 
-@interface TwitterViewController : TableViewController<TextViewTableCellDelegate, 
-													   TextFieldTableCellDelegate,
-													   MGTwitterEngineDelegate,
-													   BitlyDelegate> {
+@interface TwitterViewController : BaseTableViewController<TextViewTableCellDelegate, 
+															TextFieldTableCellDelegate,
+															MGTwitterEngineDelegate,
+															BitlyDelegate> {
 @public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;

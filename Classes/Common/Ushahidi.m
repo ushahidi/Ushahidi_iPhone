@@ -93,7 +93,6 @@
 - (void) downloadPhotoFinished:(ASIHTTPRequest *)request;
 - (void) downloadPhotoFailed:(ASIHTTPRequest *)request;
 
-- (void) downloadMap:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (void) downloadMapStarted:(ASIHTTPRequest *)request;
 - (void) downloadMapFinished:(ASIHTTPRequest *)request;
 - (void) downloadMapFailed:(ASIHTTPRequest *)request;
@@ -110,6 +109,9 @@
 
 - (void) loadDeploymentWithDictionary:(NSDictionary *)dict;
 - (void) loadDeploymentInBackground:(Deployment *)theDeployment;
+
+- (void) downloadMapForObject:(NSObject *)object latitude:(NSString *)latitude longitude:(NSString *)longitude forDelegate:(id<UshahidiDelegate>)delegate;
+- (void) downloadPhoto:(Photo *)photo forObject:(NSObject *)object forDelegate:(id<UshahidiDelegate>)delegate;
 
 @end
 
@@ -462,11 +464,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Checkins
 
+- (BOOL) hasCheckins {
+	return [self.deployment checkins] != nil && [self.deployment.checkins count] > 0;
+}
+
 - (NSArray *) getCheckins {
 	return [[self.deployment.checkins allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
 }
 
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate {
+	if ([[Settings sharedSettings] downloadMaps]) {
+		for (Checkin *checkin in [self.deployment.checkins allValues]) {
+			[self downloadMapForCheckin:checkin forDelegate:delegate];
+		}
+	}
 	NSString *url = (self.deployment.lastCheckinId != nil)
 		? [self.deployment getUrlForCheckinsBySinceID:self.deployment.lastCheckinId]
 		: [self.deployment getUrlForCheckins];
@@ -1078,7 +1089,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	DLog(@"DELEGATE: %@", [delegate class]);
 	if ([[Settings sharedSettings] downloadMaps]) {
 		for (Incident *incident in [self.deployment.incidents allValues]) {
-			[self downloadMap:incident forDelegate:delegate];
+			[self downloadMapForIncident:incident forDelegate:delegate];
 		}
 	}
 	NSString *url = (self.deployment.lastIncidentId != nil)
@@ -1151,7 +1162,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 							[incident addPhoto:photo];
 							if (photo.url != nil && photo.image == nil && photo.downloading == NO) {
 								[self downloadPhoto:photo 
-										   incident:incident 
+										forIncident:incident 
 										forDelegate:[request getDelegate]];
 							}
 						}
@@ -1181,7 +1192,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					}
 				}
 				if ([[Settings sharedSettings] downloadMaps] && incident.map == nil) {
-					[self downloadMap:incident forDelegate:[request getDelegate]];
+					[self downloadMapForIncident:incident 
+									 forDelegate:[request getDelegate]];
 				}
 				[incident release];
 			}
@@ -1221,7 +1233,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Photo
 
-- (void) downloadPhoto:(Photo *)photo incident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate {
+- (void) downloadPhoto:(Photo *)photo forIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate {
+	[self downloadPhoto:photo forObject:incident forDelegate:delegate];
+}
+
+- (void) downloadPhoto:(Photo *)photo forCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate {
+	[self downloadPhoto:photo forObject:checkin forDelegate:delegate];
+}
+
+- (void) downloadPhoto:(Photo *)photo forObject:(NSObject *)object forDelegate:(id<UshahidiDelegate>)delegate {
 	if (photo.url != nil && photo.image == nil && photo.downloading == NO) {
 		photo.downloading = YES;
 		NSURL *url = nil;
@@ -1240,7 +1260,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 										finishSelector:@selector(downloadPhotoFinished:)
 										  failSelector:@selector(downloadPhotoFailed:)];
 		[request attachDelegate:delegate];
-		[request attachIncident:incident];
+		[request attachObject:object];
 		[request attachPhoto:photo];
 		[self.photoQueue addOperation:request];
 	}
@@ -1261,9 +1281,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	else if ([request responseData] != nil) {
 		DLog(@"RESPONSE: BINARY IMAGE %@", [request.originalURL absoluteString]);
 		photo.image = [UIImage imageWithData:[request responseData]];
-		[self dispatchSelector:@selector(downloadedFromUshahidi:photo:incident:) 
-						target:[request getDelegate] 
-					   objects:self, photo, [request getIncident], nil];
+		NSObject *object = [request getObject];
+		if ([object isKindOfClass:Incident.class]) {
+			[self dispatchSelector:@selector(downloadedFromUshahidi:photo:incident:) 
+							target:[request getDelegate] 
+						   objects:self, photo, object, nil];
+		}
+		else if ([object isKindOfClass:Checkin.class]) {
+			[self dispatchSelector:@selector(downloadedFromUshahidi:photo:checkin:) 
+							target:[request getDelegate] 
+						   objects:self, photo, object, nil];
+		}
+		else {
+			DLog(@"UNKNOWN CLASS: %@", object.class);
+		}
 	}
 	else {
 		DLog(@"RESPONSE: %@", [request responseString]);
@@ -1273,7 +1304,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) downloadPhotoFailed:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST:%@", [request.originalURL absoluteString]);
 	DLog(@"ERROR: %@", [[request error] localizedDescription]);
-	Photo *photo = (Photo *)[request getPhoto];
+	Photo *photo = [request getPhoto];
 	if (photo != nil) {
 		photo.downloading = NO;
 	}
@@ -1282,23 +1313,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Maps
 
-- (void) downloadMap:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate {
+- (void) downloadMapForIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate {
 	if (incident.map == nil && incident.latitude != nil && incident.longitude != nil) {
-		CGRect screen = [[UIScreen mainScreen] bounds];
-		NSMutableString *url = [NSMutableString stringWithString:kGoogleStaticMaps];
-		[url appendFormat:@"?center=%@,%@", incident.latitude, incident.longitude];
-		[url appendFormat:@"&markers=%@,%@", incident.latitude, incident.longitude];
-		[url appendFormat:@"&size=%dx%d", (int)CGRectGetWidth(screen), (int)CGRectGetWidth(screen)];
-		[url appendFormat:@"&zoom=%d", [[Settings sharedSettings] mapZoomLevel]];
-		[url appendFormat:@"&sensor=false"];
-		ASIHTTPRequest *request = [self getHTTPRequest:url 
-										 startSelector:@selector(downloadMapStarted:)
-										finishSelector:@selector(downloadMapFinished:)
-										  failSelector:@selector(downloadMapFailed:)];
-		[request attachDelegate:delegate];
-		[request attachIncident:incident];
-		[self.mapQueue addOperation:request];	
+		[self downloadMapForObject:incident 
+						  latitude:incident.latitude 
+						 longitude:incident.longitude 
+					   forDelegate:delegate];
 	}
+}
+
+- (void) downloadMapForCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate {
+	if (checkin.map == nil && checkin.latitude != nil && checkin.longitude != nil) {
+		[self downloadMapForObject:checkin 
+						  latitude:checkin.latitude 
+						 longitude:checkin.longitude 
+					   forDelegate:delegate];
+	}
+}
+
+- (void) downloadMapForObject:(NSObject *)object latitude:(NSString *)latitude longitude:(NSString *)longitude forDelegate:(id<UshahidiDelegate>)delegate {
+	CGRect screen = [[UIScreen mainScreen] bounds];
+	NSMutableString *url = [NSMutableString stringWithString:kGoogleStaticMaps];
+	[url appendFormat:@"?center=%@,%@", latitude, longitude];
+	[url appendFormat:@"&markers=%@,%@", latitude, longitude];
+	[url appendFormat:@"&size=%dx%d", (int)CGRectGetWidth(screen), (int)CGRectGetWidth(screen)];
+	[url appendFormat:@"&zoom=%d", [[Settings sharedSettings] mapZoomLevel]];
+	[url appendFormat:@"&sensor=false"];
+	ASIHTTPRequest *request = [self getHTTPRequest:url 
+									 startSelector:@selector(downloadMapStarted:)
+									finishSelector:@selector(downloadMapFinished:)
+									  failSelector:@selector(downloadMapFailed:)];
+	[request attachDelegate:delegate];
+	[request attachObject:object];
+	[self.mapQueue addOperation:request];	
 }
 
 - (void) downloadMapStarted:(ASIHTTPRequest *)request {
@@ -1317,11 +1364,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			[self.mapQueue cancelAllOperations];	
 		}
 		else {
-			Incident *incident = [request getIncident];
-			incident.map = map;
-			[self dispatchSelector:@selector(downloadedFromUshahidi:map:incident:) 
-							target:[request getDelegate] 
-						   objects:self, incident.map, incident, nil];
+			NSObject *object = [request getObject];
+			if ([object isKindOfClass:Incident.class]) {
+				Incident *incident = (Incident *)object;
+				incident.map = map;
+				[self dispatchSelector:@selector(downloadedFromUshahidi:map:incident:) 
+								target:[request getDelegate] 
+							   objects:self, map, incident, nil];
+			}
+			else if ([object isKindOfClass:Checkin.class]) {
+				Checkin *checkin = (Checkin *)object;
+				checkin.map = map;
+				[self dispatchSelector:@selector(downloadedFromUshahidi:map:checkin:) 
+								target:[request getDelegate] 
+							   objects:self, map, checkin, nil];
+			}
+			else {
+				DLog(@"UNKNOWN CLASS: %@", object.class);
+			}
 		}
 	}
 	else {

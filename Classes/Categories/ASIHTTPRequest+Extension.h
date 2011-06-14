@@ -35,11 +35,13 @@
 - (Incident *) getIncident;
 - (Photo *) getPhoto;
 - (Checkin *) getCheckin;
+- (NSObject *) getObject;
 
 - (void) attachDelegate:(id<UshahidiDelegate>)delegate;
 - (void) attachDeployment:(Deployment *)deployment;
 - (void) attachIncident:(Incident *)incident;
 - (void) attachPhoto:(Photo *)photo;
 - (void) attachCheckin:(Checkin *)checkin;
+- (void) attachObject:(NSObject *)object;
 
 @end

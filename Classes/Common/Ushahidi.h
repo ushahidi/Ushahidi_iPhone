@@ -79,6 +79,7 @@
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) removeIncident:(Incident *)incident;
 
+- (BOOL) hasCheckins;
 - (NSArray *) getCheckins;
 - (NSArray *) getCheckinsForDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) uploadCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
@@ -94,9 +95,14 @@
 - (NSArray *) getIncidents;
 - (NSArray *) getIncidentsPending;
 - (NSArray *) getIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
+
 - (NSURL *) getUrlForIncident:(Incident *)incident;
 
-- (void) downloadPhoto:(Photo *)photo incident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
+- (void) downloadPhoto:(Photo *)photo forIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
+- (void) downloadPhoto:(Photo *)photo forCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
+
+- (void) downloadMapForIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
+- (void) downloadMapForCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
 
 @end
 			 
@@ -122,7 +128,10 @@
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi version:(Deployment *)deployment;
 
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi map:(UIImage *)map checkin:(Checkin *)checkin;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi map:(UIImage *)map incident:(Incident *)incident;
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo checkin:(Checkin *)checkin;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo incident:(Incident *)incident;
 
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;

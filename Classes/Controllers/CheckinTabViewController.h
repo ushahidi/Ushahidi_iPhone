@@ -19,34 +19,21 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseDetailsViewController.h"
-#import "TextTableCell.h"
-#import "MapTableCell.h"
-#import "Ushahidi.h"
-#import "Photo.h"
-#import "SMS.h"
-#import "Email.h"
-#import "Bitly.h"
+#import "BaseTabViewController.h"
 
-@class Incident;
+@class CheckinTableViewController;
+@class CheckinMapViewController;
 
-@interface IncidentDetailsViewController : BaseDetailsViewController<UshahidiDelegate, 
-																	UIWebViewDelegate,
-																	SMSDelegate,
-																	EmailDelegate,
-																	BitlyDelegate,
-																	MapTableCellDelegate> {
-@public	
-	Incident *incident;
-	NSArray *incidents;
+@interface CheckinTabViewController : BaseTabViewController {
+
+@public
+	CheckinTableViewController *checkinTableViewController;
+	CheckinMapViewController *checkinMapViewController;
 }
 
-@property(nonatomic,retain) Incident *incident;
-@property(nonatomic,retain) NSArray *incidents;
+@property(nonatomic,retain) IBOutlet CheckinTableViewController *checkinTableViewController;
+@property(nonatomic,retain) IBOutlet CheckinMapViewController *checkinMapViewController;
 
-- (IBAction) nextPrevious:(id)sender;
-- (IBAction) sendEmail:(id)sender;
-- (IBAction) sendSMS:(id)sender;
-- (IBAction) sendTweet:(id)sender;
+- (IBAction) viewModeChanged:(id)sender;
 
 @end

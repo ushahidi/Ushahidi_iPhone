@@ -96,7 +96,7 @@ typedef enum {
 	[self.tableView reloadData];
 	[self.loadingView showWithMessage:NSLocalizedString(@"Shortening...", nil)]; 
 	for (NSString *word in [self.tweet componentsSeparatedByString:@" "]) {
-		if ([word isValidURL]) {
+		if ([word isValidURL] || [word hasPrefix:@"http://"]) {
 			[self.bitly shortenUrl:word forDelegate:self];
 		}
 	}
@@ -277,6 +277,7 @@ typedef enum {
 		[self updateCharactersLeftLabel:[text length]];
 	}
 	self.doneButton.enabled = [self hasRequiredInputs];
+	[self.view endEditing:YES];
 }
 
 #pragma mark -
@@ -306,6 +307,7 @@ typedef enum {
 	}
 	self.twitter.accessToken = nil;
 	self.doneButton.enabled = [self hasRequiredInputs];
+	[self.view endEditing:YES];
 }
 
 #pragma mark -
@@ -322,6 +324,7 @@ typedef enum {
 	else if (shortened) {
 		self.tweet = [self.tweet stringByReplacingOccurrencesOfString:original
 														   withString:shortened];
+		[self updateCharactersLeftLabel:[self.tweet length]];
 		[self.tableView reloadData];
 	}
 }

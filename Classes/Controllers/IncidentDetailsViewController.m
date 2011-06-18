@@ -113,15 +113,16 @@ typedef enum {
 
 - (IBAction) sendSMS:(id)sender {
 	DLog(@"");
+	NSMutableString *message = [NSMutableString string];
 	if ([self.incident hasURL]) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Shortening...", nil)];
 		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
-		[self.bitly shortenUrl:[link absoluteString] forDelegate:self];
+		[message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
 	}
 	else {
-		NSString *message = [NSString stringWithFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
-		[self.sms sendToRecipients:nil withMessage:message];
+		[message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
 	}
+	[self.sms sendToRecipients:nil 
+				   withMessage:message];
 }
 
 - (IBAction) sendEmail:(id)sender {
@@ -159,7 +160,10 @@ typedef enum {
 	if ([self.incident.photos count] > 0) {
 		[photos addObjectsFromArray:self.incident.photoImages];
 	}
-	[self.email sendToRecipients:nil withMessage:message withSubject:self.incident.title withPhotos:photos];
+	[self.email sendToRecipients:nil 
+					 withMessage:message 
+					 withSubject:self.incident.title 
+					  withPhotos:photos];
 }
 
 #pragma mark -

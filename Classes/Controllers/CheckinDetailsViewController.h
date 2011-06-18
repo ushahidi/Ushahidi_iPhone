@@ -26,12 +26,10 @@
 #import "Photo.h"
 #import "SMS.h"
 #import "Email.h"
-#import "Bitly.h"
 
 @interface CheckinDetailsViewController : BaseDetailsViewController<UshahidiDelegate, 
 																	SMSDelegate,
 																	EmailDelegate,
-																	BitlyDelegate,
 																	MapTableCellDelegate> {
 	Checkin *checkin;
 	NSArray *checkins;

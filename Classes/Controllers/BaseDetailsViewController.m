@@ -41,13 +41,9 @@
 #import "NSString+Extension.h"
 #import "MoviePlayer.h"
 #import "SMS.h"
-#import "Bitly.h"
 #import "Settings.h"
 #import "Ushahidi.h"
 #import "Device.h"
-
-#define kBitlyLogin		@"BitlyLogin"
-#define kBitlyApiKey	@"BitlyApiKey"
 
 @interface BaseDetailsViewController()
 
@@ -57,7 +53,7 @@
 
 @synthesize imageViewController, mapViewController, twitterViewController, newsViewController;
 @synthesize smsButton, emailButton, tweetButton, nextPrevious;
-@synthesize email, sms, bitly, moviePlayer;
+@synthesize email, sms, moviePlayer;
 
 
 #pragma mark -
@@ -71,17 +67,13 @@
 	
 	self.email = [[Email alloc] initWithController:self];
 	self.sms = [[SMS alloc] initWithController:self];
-	self.bitly = [[Bitly alloc] init];
 	self.moviePlayer = [[MoviePlayer alloc] initWithController:self];
-	self.bitly.login = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyLogin];
-	self.bitly.apiKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyApiKey];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.email = nil;
 	self.sms = nil;
-	self.bitly = nil;
 	self.moviePlayer = nil;
 }
 
@@ -104,8 +96,7 @@
 	[tweetButton release];
 	[email release];
 	[sms release];
-	[bitly release];
-    [super dealloc];
+	[super dealloc];
 }
 
 #pragma mark -

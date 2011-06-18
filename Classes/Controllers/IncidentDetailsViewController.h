@@ -26,7 +26,6 @@
 #import "Photo.h"
 #import "SMS.h"
 #import "Email.h"
-#import "Bitly.h"
 
 @class Incident;
 
@@ -34,7 +33,6 @@
 																	UIWebViewDelegate,
 																	SMSDelegate,
 																	EmailDelegate,
-																	BitlyDelegate,
 																	MapTableCellDelegate> {
 @public	
 	Incident *incident;

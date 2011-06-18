@@ -22,7 +22,6 @@
 #import "BaseTableViewController.h"
 #import "SMS.h"
 #import "Email.h"
-#import "Bitly.h"
 
 @class WebViewController;
 @class MapViewController;
@@ -31,7 +30,6 @@
 @class NewsViewController;
 @class Email;
 @class SMS;
-@class Bitly;
 @class MoviePlayer;
 
 typedef enum {
@@ -40,8 +38,7 @@ typedef enum {
 } NavBar;
 
 @interface BaseDetailsViewController : BaseTableViewController<SMSDelegate,
-															   EmailDelegate,
-															   BitlyDelegate> {
+															   EmailDelegate> {
 
 @public
 	MapViewController *mapViewController;
@@ -56,7 +53,6 @@ typedef enum {
 	
 	Email *email;
 	SMS *sms;
-	Bitly *bitly;
 	MoviePlayer *moviePlayer;
 }
 
@@ -72,7 +68,6 @@ typedef enum {
 
 @property(nonatomic,retain) Email *email;
 @property(nonatomic,retain) SMS *sms;
-@property(nonatomic,retain) Bitly *bitly;
 @property(nonatomic,retain) MoviePlayer *moviePlayer;
 
 @end

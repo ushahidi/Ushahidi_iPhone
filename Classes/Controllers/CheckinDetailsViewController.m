@@ -187,7 +187,10 @@ typedef enum {
 			MKMapView *mapView = mapCell.mapView;
 			UIGraphicsBeginImageContext(mapView.bounds.size);
 			[mapView.layer renderInContext:UIGraphicsGetCurrentContext()];
-			[photos addObject:UIGraphicsGetImageFromCurrentImageContext()];
+			UIImage *mapImage = UIGraphicsGetImageFromCurrentImageContext();
+			if (mapImage != nil) {
+				[photos addObject:mapImage];
+			}
 			UIGraphicsEndImageContext();
 		}
 		@catch (NSException *e) {

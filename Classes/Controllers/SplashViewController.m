@@ -42,15 +42,18 @@
 
 - (void) pushNextViewController {
 	NSString *mapURL = [[Settings sharedSettings] mapURL];
+	DLog(@"MapURL: %@", mapURL);
 	NSString *mapName = [[Settings sharedSettings] mapName];
+	DLog(@"MapName: %@", mapName);
 	NSString *lastDeployment = [[Settings sharedSettings] lastDeployment];
+	DLog(@"LastDeployment: %@", lastDeployment);
 	if ([NSString isNilOrEmpty:mapURL] == NO && [NSString isNilOrEmpty:mapName] == NO) {
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:mapURL];
 		if (deployment == nil) {
-			deployment = [[[Deployment alloc] initWithName:mapName url:mapURL] autorelease];
+			deployment = [[Deployment alloc] initWithName:mapName url:mapURL];
 			[[Ushahidi sharedUshahidi] addDeployment:deployment];
-			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 		}
+		[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 		if (deployment.supportsCheckins) {
 			self.checkinTabViewController.deployment = deployment;
 			[self.navigationController pushViewController:self.checkinTabViewController animated:YES];	

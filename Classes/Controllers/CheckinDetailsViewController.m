@@ -310,21 +310,28 @@ typedef enum {
 				return cell;
 			}
 			else if (indexPath.row == TableRowLocationMap) {
-				MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
-				[cell setScrollable:YES];
-				[cell setZoomable:YES];
-				[cell setCanShowCallout:YES];
-				NSString *location = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
-				if ([location isEqualToString:cell.location] == NO) {
-					[cell removeAllPins];
-					[cell addPinWithTitle:self.checkin.message 
-								 subtitle:self.checkin.dateTimeString
-								 latitude:self.checkin.latitude 
-								longitude:self.checkin.longitude];
-					[cell resizeRegionToFitAllPins:NO];		
-					cell.location = location;
+				if (self.checkin.map != nil) {
+					ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
+					[cell setImage:self.checkin.map];
+					return cell;
 				}
-				return cell;	
+				else {
+					MapTableCell *cell = [TableCellFactory getMapTableCellForDelegate:self table:theTableView indexPath:indexPath];
+					[cell setScrollable:YES];
+					[cell setZoomable:YES];
+					[cell setCanShowCallout:YES];
+					NSString *location = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
+					if ([location isEqualToString:cell.location] == NO) {
+						[cell removeAllPins];
+						[cell addPinWithTitle:self.checkin.message 
+									 subtitle:self.checkin.dateTimeString
+									 latitude:self.checkin.latitude 
+									longitude:self.checkin.longitude];
+						[cell resizeRegionToFitAllPins:NO];		
+						cell.location = location;
+					}
+					return cell;
+				}
 			}
 		}
 		else {
@@ -376,8 +383,13 @@ typedef enum {
 		}
 	}
 	else if (indexPath.section == TableSectionLocation) {
-		if (indexPath.row == TableRowLocationMap && self.checkin.hasLocation) {
-			return [Device isIPad] ? 300 : 150;
+		if (indexPath.row == TableRowLocationMap) {
+			if (self.checkin.map != nil) {
+				return self.checkin.map.size.height;
+			}
+			if (self.checkin.hasLocation) {
+				return [Device isIPad] ? 300 : 150;
+			}	
 		}
 	}
 	else if (indexPath.section == TableSectionName) {
@@ -404,42 +416,51 @@ typedef enum {
 			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}
 	}
-	else if (indexPath.section == TableSectionLocation && indexPath.row == TableRowLocationLink) {
-		if (self.checkin.hasMessage && self.checkin.hasName && self.checkin.hasDate) {
-			self.mapViewController.locationName = self.checkin.message;
-			self.mapViewController.locationDetails = [NSString stringWithFormat:@"%@ - %@", self.checkin.name, self.checkin.dateTimeString];
-		}
-		else if (self.checkin.hasMessage && self.checkin.hasName) {
-			self.mapViewController.locationName = self.checkin.message;
-			self.mapViewController.locationDetails = self.checkin.name;
-		}
-		else if (self.checkin.hasMessage && self.checkin.hasDate) {
-			self.mapViewController.locationName = self.checkin.message;
-			self.mapViewController.locationDetails = self.checkin.dateTimeString;
-		}
-		else if (self.checkin.hasName && self.checkin.hasDate) {
-			self.mapViewController.locationName = self.checkin.name;
-			self.mapViewController.locationDetails = self.checkin.dateTimeString;
-		}
-		else if (self.checkin.hasMessage) {
-			self.mapViewController.locationName = self.checkin.message;
-			self.mapViewController.locationDetails = nil;
-		}
-		else if (self.checkin.hasName) {
-			self.mapViewController.locationName = self.checkin.name;
-			self.mapViewController.locationDetails = nil;
-		}
-		else if (self.checkin.hasDate) {
-			self.mapViewController.locationName = self.checkin.dateTimeString;
-			self.mapViewController.locationDetails = nil;
+	else if (indexPath.section == TableSectionLocation) {
+		if (indexPath.row == TableRowLocationLink) {
+			if (self.checkin.hasMessage && self.checkin.hasName && self.checkin.hasDate) {
+				self.mapViewController.locationName = self.checkin.message;
+				self.mapViewController.locationDetails = [NSString stringWithFormat:@"%@ - %@", self.checkin.name, self.checkin.dateTimeString];
+			}
+			else if (self.checkin.hasMessage && self.checkin.hasName) {
+				self.mapViewController.locationName = self.checkin.message;
+				self.mapViewController.locationDetails = self.checkin.name;
+			}
+			else if (self.checkin.hasMessage && self.checkin.hasDate) {
+				self.mapViewController.locationName = self.checkin.message;
+				self.mapViewController.locationDetails = self.checkin.dateTimeString;
+			}
+			else if (self.checkin.hasName && self.checkin.hasDate) {
+				self.mapViewController.locationName = self.checkin.name;
+				self.mapViewController.locationDetails = self.checkin.dateTimeString;
+			}
+			else if (self.checkin.hasMessage) {
+				self.mapViewController.locationName = self.checkin.message;
+				self.mapViewController.locationDetails = nil;
+			}
+			else if (self.checkin.hasName) {
+				self.mapViewController.locationName = self.checkin.name;
+				self.mapViewController.locationDetails = nil;
+			}
+			else if (self.checkin.hasDate) {
+				self.mapViewController.locationName = self.checkin.dateTimeString;
+				self.mapViewController.locationDetails = nil;
+			}
+			else {
+				self.mapViewController.locationName = nil;
+				self.mapViewController.locationDetails = nil;
+			}
+			self.mapViewController.locationLatitude = self.checkin.latitude;
+			self.mapViewController.locationLongitude = self.checkin.longitude;
+			[self.navigationController pushViewController:self.mapViewController animated:YES];
 		}
 		else {
-			self.mapViewController.locationName = nil;
-			self.mapViewController.locationDetails = nil;
+			self.imageViewController.title = self.checkin.message;
+			self.imageViewController.image = self.checkin.map;
+			self.imageViewController.images = nil;
+			self.imageViewController.pending = NO;
+			[self.navigationController pushViewController:self.imageViewController animated:YES];
 		}
-		self.mapViewController.locationLatitude = self.checkin.latitude;
-		self.mapViewController.locationLongitude = self.checkin.longitude;
-		[self.navigationController pushViewController:self.mapViewController animated:YES];	
 	}
 }
 

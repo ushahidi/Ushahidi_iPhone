@@ -7,11 +7,11 @@
 	<key>CFBundleVersion</key>
 	<string>1.6</string>
 	<key>CFBundleName</key>
-	<string>Beijing</string>
+	<string>Beijing Transport</string>
 	<key>CFBundleDisplayName</key>
-	<string>Beijing</string>
+	<string>Beijing Transport</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ushahidi.ios.beijingpublictransport</string>
+	<string>com.ushahidi.ios.beijingtransport</string>
 	<key>## SUPPORT INFORMATION ##</key>
 	<string>########################## SUPPORT INFORMATION ##########################</string>
 	<key>SupportEmail</key>
@@ -19,7 +19,7 @@
 	<key>SupportURL</key>
 	<string>http://114.251.208.133/ushahidi/</string>
 	<key>AppStoreURL</key>
-	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
+	<string>http://114.251.208.133/ushahidi/</string>
 	<key>## SINGLE DEPLOYMENT URL ##</key>
 	<string>########################## SINGLE DEPLOYMENT URL ##########################</string>
 	<key>MapURL</key>

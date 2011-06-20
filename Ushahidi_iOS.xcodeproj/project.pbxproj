@@ -1028,6 +1028,7 @@
 		3E8090EA129B2B8500CF273F /* ItemPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPicker.h; sourceTree = "<group>"; };
 		3E8090EB129B2B8500CF273F /* ItemPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPicker.m; sourceTree = "<group>"; };
 		3E809135129B2F8E00CF273F /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
+		3E81C6CB13AF775600243495 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E84E6FF1282931400A55292 /* sort_alphabetical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_alphabetical.png; sourceTree = "<group>"; };
 		3E84E7001282931400A55292 /* sort_date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_date.png; sourceTree = "<group>"; };
 		3E8629F61222BCC4001DE141 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1336,7 +1337,7 @@
 		3ED873031379F1CB004E8714 /* Logo_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPad@2x.png"; sourceTree = "<group>"; };
 		3ED873041379F1CB004E8714 /* Logo_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPhone.png; sourceTree = "<group>"; };
 		3ED873051379F1CB004E8714 /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
-		3ED873E11379FEA0004E8714 /* BeijingPublicTransport.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BeijingPublicTransport.plist; sourceTree = "<group>"; };
+		3ED873E11379FEA0004E8714 /* BeijingTransport.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BeijingTransport.plist; sourceTree = "<group>"; };
 		3ED9827012ECD7DC0065A324 /* ASIHTTPRequest+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+Extension.h"; sourceTree = "<group>"; };
 		3ED9827112ECD7DC0065A324 /* ASIHTTPRequest+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+Extension.m"; sourceTree = "<group>"; };
 		3EE3EDDC12B7EDF600782581 /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
@@ -1489,7 +1490,7 @@
 				3E030A7C13ACA71D00DCC48C /* Entitlements.plist */,
 				3E0F759D13AB57A3004494EC /* Ushahidi.plist */,
 				3ED0F9D3138E71140065C8E8 /* MapATL.plist */,
-				3ED873E11379FEA0004E8714 /* BeijingPublicTransport.plist */,
+				3ED873E11379FEA0004E8714 /* BeijingTransport.plist */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -1517,7 +1518,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3E0F75AF13AB772A004494EC /* BeijingPublicTransport */ = {
+		3E0F75AF13AB772A004494EC /* BeijingTransport */ = {
 			isa = PBXGroup;
 			children = (
 				3E0F75B013AB775A004494EC /* Default-Portrait.png */,
@@ -1538,6 +1539,7 @@
 				3E0F75C313AB775A004494EC /* Logo_iPhone@2x.png */,
 				3E0F75C413AB775A004494EC /* placeholder.png */,
 			);
+			name = BeijingTransport;
 			path = BeijingPublicTransport;
 			sourceTree = "<group>";
 		};
@@ -2140,7 +2142,7 @@
 			children = (
 				3ED871781379CA70004E8714 /* Ushahidi */,
 				3ED871CC1379D343004E8714 /* MapATL */,
-				3E0F75AF13AB772A004494EC /* BeijingPublicTransport */,
+				3E0F75AF13AB772A004494EC /* BeijingTransport */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -2227,9 +2229,9 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3E0F760B13AB7772004494EC /* BeijingPublicTransport */ = {
+		3E0F760B13AB7772004494EC /* BeijingTransport */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E0F773D13AB7772004494EC /* Build configuration list for PBXNativeTarget "BeijingPublicTransport" */;
+			buildConfigurationList = 3E0F773D13AB7772004494EC /* Build configuration list for PBXNativeTarget "BeijingTransport" */;
 			buildPhases = (
 				3E0F760C13AB7772004494EC /* Resources */,
 				3E0F769F13AB7772004494EC /* Sources */,
@@ -2239,7 +2241,7 @@
 			);
 			dependencies = (
 			);
-			name = BeijingPublicTransport;
+			name = BeijingTransport;
 			productName = Ushahidi_iPhone;
 			productReference = 3E0F774213AB7772004494EC /* Ushahidi_iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -2294,6 +2296,7 @@
 				sw,
 				"zh-tw",
 				zh,
+				el,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -2301,7 +2304,7 @@
 			targets = (
 				1D6058900D05DD3D006BFB54 /* Ushahidi */,
 				3ED0F889138E6BE40065C8E8 /* MapATL */,
-				3E0F760B13AB7772004494EC /* BeijingPublicTransport */,
+				3E0F760B13AB7772004494EC /* BeijingTransport */,
 			);
 		};
 /* End PBXProject section */
@@ -3165,15 +3168,16 @@
 				3E030A2C13AC9D6A00DCC48C /* cs */,
 				3E030A2D13AC9D7900DCC48C /* de */,
 				3E030A2E13AC9D8100DCC48C /* es */,
+				3E81C6CB13AF775600243495 /* el */,
 				3E030A2F13AC9D8900DCC48C /* fr */,
 				3E030A3013AC9D9500DCC48C /* hi */,
 				3E030A3113AC9D9E00DCC48C /* it */,
 				3E030A3313AC9DB000DCC48C /* pl */,
 				3E030A3413AC9DB900DCC48C /* pt */,
 				3E030A3613AC9DCA00DCC48C /* sw */,
-				3E030A3813AC9DDB00DCC48C /* zh */,
 				3E030A4813ACA0FD00DCC48C /* ru */,
 				3E030A4913ACA10700DCC48C /* nl */,
+				3E030A3813AC9DDB00DCC48C /* zh */,
 				3E030A4A13ACA11200DCC48C /* zh-tw */,
 			);
 			name = Localizable.strings;
@@ -3234,14 +3238,14 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
-				INFOPLIST_FILE = BeijingPublicTransport.plist;
+				INFOPLIST_FILE = BeijingTransport.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CF50D36-ABF0-4A38-B19C-CF475A482035";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7ED74F22-D899-454B-B201-6004FFC4549B";
 			};
 			name = Debug;
 		};
@@ -3254,14 +3258,14 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
-				INFOPLIST_FILE = BeijingPublicTransport.plist;
+				INFOPLIST_FILE = BeijingTransport.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CF50D36-ABF0-4A38-B19C-CF475A482035";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7ED74F22-D899-454B-B201-6004FFC4549B";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3275,14 +3279,14 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
-				INFOPLIST_FILE = BeijingPublicTransport.plist;
+				INFOPLIST_FILE = BeijingTransport.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "39539845-715B-4943-A459-CD72AAC53CE0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "44986CD2-9F55-4816-BC74-320C658CDE54";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -3296,14 +3300,14 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
-				INFOPLIST_FILE = BeijingPublicTransport.plist;
+				INFOPLIST_FILE = BeijingTransport.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "044A7D32-D6A2-4FFE-A31E-FC29858FFB84";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3AE4CD1-C2AD-4209-B526-F5F3F50DA3C4";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -3524,7 +3528,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E0F773D13AB7772004494EC /* Build configuration list for PBXNativeTarget "BeijingPublicTransport" */ = {
+		3E0F773D13AB7772004494EC /* Build configuration list for PBXNativeTarget "BeijingTransport" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E0F773E13AB7772004494EC /* Debug */,

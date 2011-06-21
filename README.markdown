@@ -15,6 +15,7 @@ For more information visit:
 
 ### How To White-Label The App ###
 * Duplicate the Ushahidi target with the name of your map (ex MapATL)
+* Right-click on your new target (ex MapATL) select Get Info > Build tab > rename Product Name to name of map without spaces (ex MapATL)
 * Duplicate the /Themes/Ushahidi folder with the name of your map as folder name (ex /Themes/MapATL)
 * Replace each image in the folder with your own custom graphic, maintaining the image dimensions and filenames
 * In XCode, on your new theme folder (ex /Themes/MapATL) Right-Click > Get Info > Targets tab, uncheck Ushahidi and check your new target (ex MapATL)

@@ -7,9 +7,9 @@
 	<key>CFBundleVersion</key>
 	<string>1.6</string>
 	<key>CFBundleName</key>
-	<string>Beijing Transport</string>
+	<string>北京交通</string>
 	<key>CFBundleDisplayName</key>
-	<string>Beijing Transport</string>
+	<string>北京交通</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.ushahidi.ios.beijingtransport</string>
 	<key>## SUPPORT INFORMATION ##</key>
@@ -45,7 +45,7 @@
 	<key>TableHeaderColor</key>
 	<string>#c57d5b</string>
 	<key>TableHeaderTextColor</key>
-	<string>#ffffff</string>
+	<string>#000000</string>
 	<key>VerifiedTextColor</key>
 	<string>#99CC99</string>
 	<key>UnverifiedTextColor</key>

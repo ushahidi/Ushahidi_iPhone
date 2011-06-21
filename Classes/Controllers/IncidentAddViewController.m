@@ -249,7 +249,7 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionDescription) {
 		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView indexPath:indexPath];
-		[cell setPlaceholder:@"Enter description"];
+		[cell setPlaceholder:NSLocalizedString(@"Enter description", nil)];
 		[cell setText:self.incident.description];
 		[cell setReturnKeyType:UIReturnKeyDefault];
 		[cell setKeyboardType:UIKeyboardTypeDefault];

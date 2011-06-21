@@ -268,10 +268,6 @@
 								</object>
 							</object>
 							<bool key="IBMomentary">YES</bool>
-							<object class="NSColor" key="IBTintColor">
-								<int key="NSColorSpace">3</int>
-								<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
-							</object>
 						</object>
 						<reference key="IBUINavigationItem" ref="357798234"/>
 					</object>

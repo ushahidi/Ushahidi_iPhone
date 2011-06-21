@@ -879,10 +879,8 @@
 		3E030A3313AC9DB000DCC48C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E030A3413AC9DB900DCC48C /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E030A3613AC9DCA00DCC48C /* sw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sw; path = sw.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3E030A3813AC9DDB00DCC48C /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E030A4813ACA0FD00DCC48C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E030A4913ACA10700DCC48C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3E030A4A13ACA11200DCC48C /* zh-tw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-tw"; path = "zh-tw.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3E030A7C13ACA71D00DCC48C /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		3E0F759D13AB57A3004494EC /* Ushahidi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Ushahidi.plist; sourceTree = "<group>"; };
 		3E0F75B013AB775A004494EC /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
@@ -902,7 +900,7 @@
 		3E0F75C213AB775A004494EC /* Logo_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPhone.png; sourceTree = "<group>"; };
 		3E0F75C313AB775A004494EC /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
 		3E0F75C413AB775A004494EC /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
-		3E0F774213AB7772004494EC /* Ushahidi_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E0F774213AB7772004494EC /* BeijingTransport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeijingTransport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E119AD7126F7E6200C3DCBB /* DeploymentTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeploymentTableCell.h; sourceTree = "<group>"; };
 		3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeploymentTableCell.m; sourceTree = "<group>"; };
 		3E119ADC126F7E7600C3DCBB /* IncidentTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncidentTableCell.h; sourceTree = "<group>"; };
@@ -1029,6 +1027,8 @@
 		3E8090EB129B2B8500CF273F /* ItemPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPicker.m; sourceTree = "<group>"; };
 		3E809135129B2F8E00CF273F /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
 		3E81C6CB13AF775600243495 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3E81C73913AF90ED00243495 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3E81C75613AF90F600243495 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E84E6FF1282931400A55292 /* sort_alphabetical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_alphabetical.png; sourceTree = "<group>"; };
 		3E84E7001282931400A55292 /* sort_date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_date.png; sourceTree = "<group>"; };
 		3E8629F61222BCC4001DE141 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1300,7 +1300,7 @@
 		3ECFF35C12AFE9AD00DE75D7 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
 		3ECFF3D212AFF33F00DE75D7 /* satellite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = satellite.png; sourceTree = "<group>"; };
 		3ECFF3DC12AFF52400DE75D7 /* hybrid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hybrid.png; sourceTree = "<group>"; };
-		3ED0F9A2138E6BE40065C8E8 /* Ushahidi_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ED0F9A2138E6BE40065C8E8 /* MapATL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapATL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ED0F9D3138E71140065C8E8 /* MapATL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MapATL.plist; sourceTree = "<group>"; };
 		3ED45094128B475100578DB4 /* sort_verified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_verified.png; sourceTree = "<group>"; };
 		3ED871851379CB51004E8714 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
@@ -1462,8 +1462,8 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */,
-				3ED0F9A2138E6BE40065C8E8 /* Ushahidi_iOS.app */,
-				3E0F774213AB7772004494EC /* Ushahidi_iOS.app */,
+				3ED0F9A2138E6BE40065C8E8 /* MapATL.app */,
+				3E0F774213AB7772004494EC /* BeijingTransport.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2243,7 +2243,7 @@
 			);
 			name = BeijingTransport;
 			productName = Ushahidi_iPhone;
-			productReference = 3E0F774213AB7772004494EC /* Ushahidi_iOS.app */;
+			productReference = 3E0F774213AB7772004494EC /* BeijingTransport.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3ED0F889138E6BE40065C8E8 /* MapATL */ = {
@@ -2260,7 +2260,7 @@
 			);
 			name = MapATL;
 			productName = Ushahidi_iPhone;
-			productReference = 3ED0F9A2138E6BE40065C8E8 /* Ushahidi_iOS.app */;
+			productReference = 3ED0F9A2138E6BE40065C8E8 /* MapATL.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2297,6 +2297,8 @@
 				"zh-tw",
 				zh,
 				el,
+				zh_CN,
+				zh_TW,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -3177,8 +3179,8 @@
 				3E030A3613AC9DCA00DCC48C /* sw */,
 				3E030A4813ACA0FD00DCC48C /* ru */,
 				3E030A4913ACA10700DCC48C /* nl */,
-				3E030A3813AC9DDB00DCC48C /* zh */,
-				3E030A4A13ACA11200DCC48C /* zh-tw */,
+				3E81C73913AF90ED00243495 /* zh_CN */,
+				3E81C75613AF90F600243495 /* zh_TW */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3244,8 +3246,8 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7ED74F22-D899-454B-B201-6004FFC4549B";
+				PRODUCT_NAME = BeijingTransport;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "95FCF73A-063E-4325-9CED-15DED2F1EEBA";
 			};
 			name = Debug;
 		};
@@ -3264,8 +3266,8 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7ED74F22-D899-454B-B201-6004FFC4549B";
+				PRODUCT_NAME = BeijingTransport;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "95FCF73A-063E-4325-9CED-15DED2F1EEBA";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3285,8 +3287,8 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "44986CD2-9F55-4816-BC74-320C658CDE54";
+				PRODUCT_NAME = BeijingTransport;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A3319AD3-167C-4727-A26A-11D0AE8721FB";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -3306,7 +3308,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = BeijingTransport;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3AE4CD1-C2AD-4209-B526-F5F3F50DA3C4";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3407,7 +3409,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = MapATL;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47F13E44-E045-4FC1-9E62-FE132BE3D19A";
 			};
 			name = Debug;
@@ -3427,7 +3429,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = MapATL;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47F13E44-E045-4FC1-9E62-FE132BE3D19A";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3448,7 +3450,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = MapATL;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CB1D17A-E9D3-463D-AA90-31AA20FF4035";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3469,7 +3471,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = MapATL;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3FD25BA3-C575-4A11-A3AC-3B7E99B7FBC9";
 				VALIDATE_PRODUCT = YES;
 			};

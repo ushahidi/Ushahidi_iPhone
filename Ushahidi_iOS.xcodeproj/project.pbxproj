@@ -3205,7 +3205,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C558711E-5113-4A3C-A8B5-090C86856901";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4EE100A-D4D7-46B6-AB63-65052D31CE65";
 			};
 			name = Debug;
 		};
@@ -3224,7 +3224,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C558711E-5113-4A3C-A8B5-090C86856901";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4EE100A-D4D7-46B6-AB63-65052D31CE65";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3348,7 +3348,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F87C649-7D0A-49AF-9498-43AC079FCF9F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C300FDC8-3E47-4793-8B91-46CAB71F232E";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -3410,7 +3410,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MapATL;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47F13E44-E045-4FC1-9E62-FE132BE3D19A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CC7B5FA5-559B-4421-89DC-5AE86DEEABD9";
 			};
 			name = Debug;
 		};
@@ -3430,7 +3430,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MapATL;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "47F13E44-E045-4FC1-9E62-FE132BE3D19A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CC7B5FA5-559B-4421-89DC-5AE86DEEABD9";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3451,7 +3451,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MapATL;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1CB1D17A-E9D3-463D-AA90-31AA20FF4035";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96A72BBB-6558-496B-BB35-FDDA9A16A9E8";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";

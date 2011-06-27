@@ -762,6 +762,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 											  startSelector:@selector(uploadIncidentStarted:) 
 											 finishSelector:@selector(uploadIncidentFinished:) 
 											   failSelector:@selector(uploadIncidentFailed:)];
+		DLog(@"Date: %@", [incident dateDayMonthYear]);
+		DLog(@"Hour: %@", [incident date12Hour]);
+		DLog(@"Minute: %@", [incident dateMinute]);
+		DLog(@"AM/PM: %@", [incident dateAmPm]);
 		[post attachDelegate:delegate];
 		[post attachIncident:incident];
 		[post addPostValue:@"report" forKey:@"task"];

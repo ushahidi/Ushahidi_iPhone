@@ -38,18 +38,36 @@
 		
 		sourceDate = [NSDate dateWithTimeInterval:interval sinceDate:self];
 	}
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:dateFormat];
+	[formatter setCalendar:calendar];
+	[formatter setLocale:locale];
+	
 	NSString *dateString = [formatter stringFromDate:sourceDate];
-	[formatter release];	
+	[formatter release];
+	[calendar release];
+	[locale release];
+	
 	return dateString;
 }
 
 + (NSDate *) dateFromString:(NSString *)string {
+	NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+	[formatter setCalendar:calendar];
+	[formatter setLocale:locale];
+	
 	NSDate *date = [formatter dateFromString:string];
-	[formatter release];	
+	[formatter release];
+	[calendar release];
+	[locale release];
+	
 	return date;
 }
 

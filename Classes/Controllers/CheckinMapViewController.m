@@ -63,7 +63,7 @@
 
 - (IBAction) addCheckin:(id)sender {
 	DLog(@"");
-	[self presentModalViewController:self.checkinAddViewController animated:YES];
+	[self.checkinTabViewController presentModalViewController:self.checkinAddViewController animated:YES];
 }
 
 - (IBAction) refresh:(id)sender {

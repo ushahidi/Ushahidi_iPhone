@@ -835,6 +835,9 @@
 		3EEFE1BA12DB89D50076ABA1 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE1B912DB89D50076ABA1 /* twitter.png */; };
 		3EEFE35D12DBA32C0076ABA1 /* shorten.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE35C12DBA32C0076ABA1 /* shorten.png */; };
 		3EEFE3E312DBAFC40076ABA1 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE3E212DBAFC40076ABA1 /* logout.png */; };
+		3EF6947713B32E7400DFCE77 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
+		3EF6947813B32E7400DFCE77 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
+		3EF6947913B32E7500DFCE77 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
 		3EF8731712B136EF00E9D799 /* Internet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8731612B136EF00E9D799 /* Internet.m */; };
 		3EF8785F12B29C1500E9D799 /* MKPinAnnotationView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8785E12B29C1500E9D799 /* MKPinAnnotationView+Extension.m */; };
 		3EFC1C1D1295D81C00163B36 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1B1295D81C00163B36 /* email.png */; };
@@ -1164,6 +1167,7 @@
 		3E8637E512246A64001DE141 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
 		3E8638C212247BAC001DE141 /* MKMapView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Extension.h"; sourceTree = "<group>"; };
 		3E8638C312247BAC001DE141 /* MKMapView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Extension.m"; sourceTree = "<group>"; };
+		3E8BF2E513B8B39900457BD4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E8F02EF1315565F0011E423 /* ButtonTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonTableCell.h; sourceTree = "<group>"; };
 		3E8F02F01315565F0011E423 /* ButtonTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonTableCell.m; sourceTree = "<group>"; };
 		3E8F03BA131566140011E423 /* button_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red.png; sourceTree = "<group>"; };
@@ -2299,6 +2303,7 @@
 				el,
 				zh_CN,
 				zh_TW,
+				ja,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -2444,6 +2449,7 @@
 				3EBBE2ED13A6552A0019BDED /* CheckinTableCell_iPhone.xib in Resources */,
 				3EBBE2F013A655370019BDED /* CheckinTableCell_iPad.xib in Resources */,
 				3E030A2313AC9D1300DCC48C /* Localizable.strings in Resources */,
+				3EF6947713B32E7400DFCE77 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2579,6 +2585,7 @@
 				3E0F769D13AB7772004494EC /* Logo_iPhone@2x.png in Resources */,
 				3E0F769E13AB7772004494EC /* placeholder.png in Resources */,
 				3E030A2413AC9D1300DCC48C /* Localizable.strings in Resources */,
+				3EF6947913B32E7500DFCE77 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2714,6 +2721,7 @@
 				3EBBE2EC13A6552A0019BDED /* CheckinTableCell_iPhone.xib in Resources */,
 				3EBBE2EF13A655370019BDED /* CheckinTableCell_iPad.xib in Resources */,
 				3E030A2213AC9D1300DCC48C /* Localizable.strings in Resources */,
+				3EF6947813B32E7400DFCE77 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3179,6 +3187,7 @@
 				3E030A3613AC9DCA00DCC48C /* sw */,
 				3E030A4813ACA0FD00DCC48C /* ru */,
 				3E030A4913ACA10700DCC48C /* nl */,
+				3E8BF2E513B8B39900457BD4 /* ja */,
 				3E81C73913AF90ED00243495 /* zh_CN */,
 				3E81C75613AF90F600243495 /* zh_TW */,
 			);
@@ -3205,7 +3214,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4EE100A-D4D7-46B6-AB63-65052D31CE65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9A679120-50BD-46D3-85F4-463D01A73A65";
 			};
 			name = Debug;
 		};
@@ -3224,7 +3233,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4EE100A-D4D7-46B6-AB63-65052D31CE65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9A679120-50BD-46D3-85F4-463D01A73A65";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3247,7 +3256,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "95FCF73A-063E-4325-9CED-15DED2F1EEBA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE59A5EA-7286-40AD-8E8B-0691C2DAB159";
 			};
 			name = Debug;
 		};
@@ -3267,7 +3276,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "95FCF73A-063E-4325-9CED-15DED2F1EEBA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BE59A5EA-7286-40AD-8E8B-0691C2DAB159";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3288,7 +3297,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A3319AD3-167C-4727-A26A-11D0AE8721FB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2CABE85C-CAF2-40EB-8604-2BBC28F80C11";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -3348,7 +3357,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C300FDC8-3E47-4793-8B91-46CAB71F232E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C45EAF9F-51A5-4D7A-B9A6-B89EAC9D0E58";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";

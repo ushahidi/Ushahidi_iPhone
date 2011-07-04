@@ -1572,7 +1572,7 @@
 		3EBBE2F613A657720019BDED /* CheckinTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinTableCell.m; sourceTree = "<group>"; };
 		3EC194C1131C62AF00BF073D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		3EC194C2131C62AF00BF073D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
-		3EC4BEC013C1E19D000056AE /* Ushahidi_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EC4BEC013C1E19D000056AE /* Team_Checkins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Team_Checkins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EC4BEC213C1E19E000056AE /* TeamCheckins.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TeamCheckins.plist; sourceTree = "<group>"; };
 		3EC4BF0613C1E771000056AE /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		3EC4BF0713C1E771000056AE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -1796,7 +1796,7 @@
 				1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */,
 				3ED0F9A2138E6BE40065C8E8 /* MapATL.app */,
 				3E0F774213AB7772004494EC /* BeijingTransport.app */,
-				3EC4BEC013C1E19D000056AE /* Ushahidi_iOS.app */,
+				3EC4BEC013C1E19D000056AE /* Team_Checkins.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2619,7 +2619,7 @@
 			);
 			name = TeamCheckins;
 			productName = Ushahidi_iPhone;
-			productReference = 3EC4BEC013C1E19D000056AE /* Ushahidi_iOS.app */;
+			productReference = 3EC4BEC013C1E19D000056AE /* Team_Checkins.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3ED0F889138E6BE40065C8E8 /* MapATL */ = {
@@ -3995,7 +3995,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = Team_Checkins;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "420899E4-741B-4BD5-8303-9BAB12F0FEDE";
 			};
 			name = Debug;
@@ -4015,7 +4015,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = Team_Checkins;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "420899E4-741B-4BD5-8303-9BAB12F0FEDE";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4036,7 +4036,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = Team_Checkins;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3C7DA140-B3D3-446E-A161-E93801BB2284";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4057,7 +4057,7 @@
 					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = Team_Checkins;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ABAA0D6A-74AF-40BD-8C52-FC1512E06B6A";
 				VALIDATE_PRODUCT = YES;
 			};

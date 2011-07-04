@@ -34,7 +34,8 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
 @synthesize email, firstName, lastName, lastDeployment, lastIncident, mapDistance, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
-@synthesize mapName, mapURL, navBarTintColor, toolBarTintColor, searchBarTintColor, tablePlainBackColor, tableGroupedBackColor, tableOddRowColor, tableEvenRowColor, tableSelectRowColor, tableHeaderBackColor, tableHeaderTextColor, verifiedTextColor, unverifiedTextColor;
+@synthesize mapName, mapURL;
+@synthesize navBarTintColor, toolBarTintColor, searchBarTintColor, tablePlainBackColor, tableGroupedBackColor, tableOddRowColor, tableEvenRowColor, tableSelectRowColor, tableHeaderBackColor, tableHeaderTextColor, verifiedTextColor, unverifiedTextColor;
 
 - (id) init {
 	if ((self = [super init])) {

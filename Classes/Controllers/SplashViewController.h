@@ -19,13 +19,14 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "Ushahidi.h"
 
 @class DeploymentTableViewController;
 @class IncidentTabViewController;
 @class IncidentDetailsViewController;
 @class CheckinTabViewController;
 
-@interface SplashViewController : UIViewController {
+@interface SplashViewController : UIViewController<UshahidiDelegate> {
 	
 @public
 	IBOutlet DeploymentTableViewController *deploymentTableViewController;

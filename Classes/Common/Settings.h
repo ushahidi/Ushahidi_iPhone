@@ -36,6 +36,7 @@
 	
 	NSString *mapName;
 	NSString *mapURL;
+	
 	UIColor *navBarTintColor;
 	UIColor *toolBarTintColor;
 	UIColor *searchBarTintColor;

@@ -52,15 +52,19 @@
 		if (deployment == nil) {
 			deployment = [[Deployment alloc] initWithName:mapName url:mapURL];
 			[[Ushahidi sharedUshahidi] addDeployment:deployment];
-		}
-		[[Ushahidi sharedUshahidi] loadDeployment:deployment];
-		if (deployment.supportsCheckins) {
-			self.checkinTabViewController.deployment = deployment;
-			[self.navigationController pushViewController:self.checkinTabViewController animated:YES];	
+			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
+			[[Ushahidi sharedUshahidi] getVersionOfDeployment:deployment forDelegate:self];
 		}
 		else {
-			self.incidentTabViewController.deployment = deployment;
-			[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
+			[[Ushahidi sharedUshahidi] loadDeployment:deployment];	
+			if (deployment.supportsCheckins) {
+				self.checkinTabViewController.deployment = deployment;
+				[self.navigationController pushViewController:self.checkinTabViewController animated:YES];	
+			}
+			else {
+				self.incidentTabViewController.deployment = deployment;
+				[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
+			}
 		}
 	}
 	else if ([NSString isNilOrEmpty:lastDeployment] == NO) {
@@ -147,6 +151,21 @@
 	[incidentDetailsViewController release];
 	[checkinTabViewController release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark UshahidiDelegate
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi version:(Deployment *)deployment {
+	DLog(@"url: %@ version: %@ checkins: %d", deployment.url, deployment.version, deployment.supportsCheckins);
+	if (deployment.supportsCheckins) {
+		self.checkinTabViewController.deployment = deployment;
+		[self.navigationController pushViewController:self.checkinTabViewController animated:YES];	
+	}
+	else {
+		self.incidentTabViewController.deployment = deployment;
+		[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
+	}
 }
 
 @end

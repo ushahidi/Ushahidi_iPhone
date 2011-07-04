@@ -322,6 +322,7 @@
 		3E4C630A12AD4D05001ED08A /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C630912AD4D05001ED08A /* NewsViewController.m */; };
 		3E4C659B12AD774F001ED08A /* MoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C659A12AD774F001ED08A /* MoviePlayer.m */; };
 		3E4C65BF12AD77DA001ED08A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4C65BE12AD77DA001ED08A /* MediaPlayer.framework */; };
+		3E59467E13C1EC2800A186BA /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBBD62F12DCA73E007ECE4B /* libOAuth.a */; };
 		3E5BB9F0131056C90073E4F8 /* CheckinAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9EF131056C90073E4F8 /* CheckinAddViewController.m */; };
 		3E5BBBB61310A6150073E4F8 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BBBB51310A6150073E4F8 /* User.m */; };
 		3E6E2B461312B38E00B9E331 /* IncidentTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6E2B451312B38E00B9E331 /* IncidentTabViewController.m */; };
@@ -574,6 +575,290 @@
 		3EBBE2F713A657720019BDED /* CheckinTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBE2F613A657720019BDED /* CheckinTableCell.m */; };
 		3EBBE2F813A657720019BDED /* CheckinTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBE2F613A657720019BDED /* CheckinTableCell.m */; };
 		3EC194C3131C62AF00BF073D /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC194C2131C62AF00BF073D /* UIImage+RoundedCorner.m */; };
+		3EC4BD9C13C1E19D000056AE /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A421222BD09001DE141 /* blank.png */; };
+		3EC4BD9D13C1E19D000056AE /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A461222BD09001DE141 /* location.png */; };
+		3EC4BD9E13C1E19D000056AE /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A491222BD09001DE141 /* arrow_down.png */; };
+		3EC4BD9F13C1E19D000056AE /* arrow_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A4A1222BD09001DE141 /* arrow_up.png */; };
+		3EC4BDA013C1E19D000056AE /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A4C1222BD09001DE141 /* selected.png */; };
+		3EC4BDA113C1E19D000056AE /* arrow_next.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A4D1222BD09001DE141 /* arrow_next.png */; };
+		3EC4BDA213C1E19D000056AE /* arrow_previous.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A4E1222BD09001DE141 /* arrow_previous.png */; };
+		3EC4BDA313C1E19D000056AE /* unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A4F1222BD09001DE141 /* unselected.png */; };
+		3EC4BDA413C1E19D000056AE /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006C1271F26C0017AED4 /* map.png */; };
+		3EC4BDA513C1E19D000056AE /* reports.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E4A006E1271F26C0017AED4 /* reports.png */; };
+		3EC4BDA613C1E19D000056AE /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15006E1278C37A00036A0F /* empty.png */; };
+		3EC4BDA713C1E19D000056AE /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15006F1278C37A00036A0F /* refresh.png */; };
+		3EC4BDA813C1E19D000056AE /* sort_alphabetical.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E84E6FF1282931400A55292 /* sort_alphabetical.png */; };
+		3EC4BDA913C1E19D000056AE /* sort_date.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E84E7001282931400A55292 /* sort_date.png */; };
+		3EC4BDAA13C1E19D000056AE /* sort_verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED45094128B475100578DB4 /* sort_verified.png */; };
+		3EC4BDAB13C1E19D000056AE /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1B1295D81C00163B36 /* email.png */; };
+		3EC4BDAC13C1E19D000056AE /* photo_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C3A1295D92A00163B36 /* photo_save.png */; };
+		3EC4BDAD13C1E19D000056AE /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E809135129B2F8E00CF273F /* filter.png */; };
+		3EC4BDAE13C1E19D000056AE /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECFF35C12AFE9AD00DE75D7 /* radar.png */; };
+		3EC4BDAF13C1E19D000056AE /* satellite.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECFF3D212AFF33F00DE75D7 /* satellite.png */; };
+		3EC4BDB013C1E19D000056AE /* hybrid.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ECFF3DC12AFF52400DE75D7 /* hybrid.png */; };
+		3EC4BDB113C1E19D000056AE /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE3EDDC12B7EDF600782581 /* sms.png */; };
+		3EC4BDB213C1E19D000056AE /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE1B912DB89D50076ABA1 /* twitter.png */; };
+		3EC4BDB313C1E19D000056AE /* shorten.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE35C12DBA32C0076ABA1 /* shorten.png */; };
+		3EC4BDB413C1E19D000056AE /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE3E212DBAFC40076ABA1 /* logout.png */; };
+		3EC4BDB513C1E19D000056AE /* jQueryInject.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBD62C12DCA73E007ECE4B /* jQueryInject.txt */; };
+		3EC4BDB613C1E19D000056AE /* jQueryInjectLandscape.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBD62D12DCA73E007ECE4B /* jQueryInjectLandscape.txt */; };
+		3EC4BDB713C1E19D000056AE /* arrow_next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72983912EE4F9D00FDED00 /* arrow_next@2x.png */; };
+		3EC4BDB813C1E19D000056AE /* arrow_previous@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72983A12EE4F9D00FDED00 /* arrow_previous@2x.png */; };
+		3EC4BDB913C1E19D000056AE /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72983D12EE4F9D00FDED00 /* email@2x.png */; };
+		3EC4BDBA13C1E19D000056AE /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72983E12EE4F9D00FDED00 /* filter@2x.png */; };
+		3EC4BDBB13C1E19D000056AE /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984112EE4F9D00FDED00 /* location@2x.png */; };
+		3EC4BDBC13C1E19D000056AE /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984212EE4F9D00FDED00 /* logout@2x.png */; };
+		3EC4BDBD13C1E19D000056AE /* map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984312EE4F9D00FDED00 /* map@2x.png */; };
+		3EC4BDBE13C1E19D000056AE /* photo_save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984412EE4F9D00FDED00 /* photo_save@2x.png */; };
+		3EC4BDBF13C1E19D000056AE /* radar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984512EE4F9D00FDED00 /* radar@2x.png */; };
+		3EC4BDC013C1E19D000056AE /* refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984612EE4F9D00FDED00 /* refresh@2x.png */; };
+		3EC4BDC113C1E19D000056AE /* reports@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984712EE4F9D00FDED00 /* reports@2x.png */; };
+		3EC4BDC213C1E19D000056AE /* shorten@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984812EE4F9D00FDED00 /* shorten@2x.png */; };
+		3EC4BDC313C1E19D000056AE /* sms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984912EE4F9D00FDED00 /* sms@2x.png */; };
+		3EC4BDC413C1E19D000056AE /* sort_alphabetical@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984A12EE4F9D00FDED00 /* sort_alphabetical@2x.png */; };
+		3EC4BDC513C1E19D000056AE /* sort_date@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984B12EE4F9D00FDED00 /* sort_date@2x.png */; };
+		3EC4BDC613C1E19D000056AE /* sort_verified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984C12EE4F9D00FDED00 /* sort_verified@2x.png */; };
+		3EC4BDC713C1E19D000056AE /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72984E12EE4F9D00FDED00 /* twitter@2x.png */; };
+		3EC4BDC813C1E19D000056AE /* satellite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72990212EE5A2D00FDED00 /* satellite@2x.png */; };
+		3EC4BDC913C1E19D000056AE /* hybrid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72990B12EE5CCD00FDED00 /* hybrid@2x.png */; };
+		3EC4BDCA13C1E19D000056AE /* arrow_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72992B12EF261D00FDED00 /* arrow_up@2x.png */; };
+		3EC4BDCB13C1E19D000056AE /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72992D12EF262A00FDED00 /* arrow_down@2x.png */; };
+		3EC4BDCC13C1E19D000056AE /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72996B12EF30C500FDED00 /* selected@2x.png */; };
+		3EC4BDCD13C1E19D000056AE /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72996D12EF30D100FDED00 /* unselected@2x.png */; };
+		3EC4BDCE13C1E19D000056AE /* checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E466F59130C62BF00EE685B /* checkin.png */; };
+		3EC4BDCF13C1E19D000056AE /* checkin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E466F5A130C62BF00EE685B /* checkin@2x.png */; };
+		3EC4BDD013C1E19D000056AE /* button_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03BA131566140011E423 /* button_red.png */; };
+		3EC4BDD113C1E19D000056AE /* button_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03BB131566140011E423 /* button_red@2x.png */; };
+		3EC4BDD213C1E19D000056AE /* button_red_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03EA131568AE0011E423 /* button_red_selected.png */; };
+		3EC4BDD313C1E19D000056AE /* button_red_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03EB131568AE0011E423 /* button_red_selected@2x.png */; };
+		3EC4BDE513C1E19D000056AE /* CategoryTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */; };
+		3EC4BDE613C1E19D000056AE /* CategoryTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93A13950A3C00914628 /* CategoryTableViewController_iPhone.xib */; };
+		3EC4BDE713C1E19D000056AE /* CheckinAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93B13950A3C00914628 /* CheckinAddViewController_iPad.xib */; };
+		3EC4BDE813C1E19D000056AE /* CheckinAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93C13950A3C00914628 /* CheckinAddViewController_iPhone.xib */; };
+		3EC4BDE913C1E19D000056AE /* CheckinDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib */; };
+		3EC4BDEA13C1E19D000056AE /* CheckinDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib */; };
+		3EC4BDEB13C1E19D000056AE /* CheckinMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A93F13950A3C00914628 /* CheckinMapViewController_iPad.xib */; };
+		3EC4BDEC13C1E19D000056AE /* CheckinMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94013950A3C00914628 /* CheckinMapViewController_iPhone.xib */; };
+		3EC4BDED13C1E19D000056AE /* DeploymentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94113950A3C00914628 /* DeploymentAddViewController_iPad.xib */; };
+		3EC4BDEE13C1E19D000056AE /* DeploymentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94213950A3C00914628 /* DeploymentAddViewController_iPhone.xib */; };
+		3EC4BDEF13C1E19D000056AE /* DeploymentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94313950A3C00914628 /* DeploymentTableCell_iPad.xib */; };
+		3EC4BDF013C1E19D000056AE /* DeploymentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94413950A3C00914628 /* DeploymentTableCell_iPhone.xib */; };
+		3EC4BDF113C1E19D000056AE /* DeploymentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94513950A3C00914628 /* DeploymentTableViewController_iPad.xib */; };
+		3EC4BDF213C1E19D000056AE /* DeploymentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94613950A3C00914628 /* DeploymentTableViewController_iPhone.xib */; };
+		3EC4BDF313C1E19D000056AE /* ImageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94713950A3C00914628 /* ImageViewController_iPad.xib */; };
+		3EC4BDF413C1E19D000056AE /* ImageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94813950A3C00914628 /* ImageViewController_iPhone.xib */; };
+		3EC4BDF513C1E19D000056AE /* IncidentAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94913950A3C00914628 /* IncidentAddViewController_iPad.xib */; };
+		3EC4BDF613C1E19D000056AE /* IncidentAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94A13950A3C00914628 /* IncidentAddViewController_iPhone.xib */; };
+		3EC4BDF713C1E19D000056AE /* IncidentDetailsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib */; };
+		3EC4BDF813C1E19D000056AE /* IncidentDetailsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib */; };
+		3EC4BDF913C1E19D000056AE /* IncidentMapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94D13950A3C00914628 /* IncidentMapViewController_iPad.xib */; };
+		3EC4BDFA13C1E19D000056AE /* IncidentMapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94E13950A3C00914628 /* IncidentMapViewController_iPhone.xib */; };
+		3EC4BDFB13C1E19D000056AE /* IncidentTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A94F13950A3C00914628 /* IncidentTableCell_iPad.xib */; };
+		3EC4BDFC13C1E19D000056AE /* IncidentTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95013950A3C00914628 /* IncidentTableCell_iPhone.xib */; };
+		3EC4BDFD13C1E19D000056AE /* IncidentTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95113950A3C00914628 /* IncidentTableViewController_iPad.xib */; };
+		3EC4BDFE13C1E19D000056AE /* IncidentTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95213950A3C00914628 /* IncidentTableViewController_iPhone.xib */; };
+		3EC4BDFF13C1E19D000056AE /* IncidentTabViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95313950A3C00914628 /* IncidentTabViewController_iPad.xib */; };
+		3EC4BE0013C1E19D000056AE /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
+		3EC4BE0113C1E19D000056AE /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
+		3EC4BE0213C1E19D000056AE /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
+		3EC4BE0313C1E19D000056AE /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
+		3EC4BE0413C1E19D000056AE /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3EC4BE0513C1E19D000056AE /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
+		3EC4BE0613C1E19D000056AE /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
+		3EC4BE0713C1E19D000056AE /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
+		3EC4BE0813C1E19D000056AE /* MapViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95C13950A3C00914628 /* MapViewController_iPhone.xib */; };
+		3EC4BE0913C1E19D000056AE /* NewsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95D13950A3C00914628 /* NewsViewController_iPad.xib */; };
+		3EC4BE0A13C1E19D000056AE /* NewsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95E13950A3C00914628 /* NewsViewController_iPhone.xib */; };
+		3EC4BE0B13C1E19D000056AE /* SettingsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95F13950A3C00914628 /* SettingsViewController_iPad.xib */; };
+		3EC4BE0C13C1E19D000056AE /* SettingsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96013950A3C00914628 /* SettingsViewController_iPhone.xib */; };
+		3EC4BE0D13C1E19D000056AE /* SliderTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96113950A3C00914628 /* SliderTableCell_iPad.xib */; };
+		3EC4BE0E13C1E19D000056AE /* SliderTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96213950A3C00914628 /* SliderTableCell_iPhone.xib */; };
+		3EC4BE0F13C1E19D000056AE /* SplashViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96313950A3C00914628 /* SplashViewController_iPad.xib */; };
+		3EC4BE1013C1E19D000056AE /* SplashViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96413950A3C00914628 /* SplashViewController_iPhone.xib */; };
+		3EC4BE1113C1E19D000056AE /* TwitterViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96513950A3C00914628 /* TwitterViewController_iPad.xib */; };
+		3EC4BE1213C1E19D000056AE /* TwitterViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96613950A3C00914628 /* TwitterViewController_iPhone.xib */; };
+		3EC4BE1313C1E19D000056AE /* WebViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96713950A3C00914628 /* WebViewController_iPad.xib */; };
+		3EC4BE1413C1E19D000056AE /* WebViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A96813950A3C00914628 /* WebViewController_iPhone.xib */; };
+		3EC4BE1513C1E19D000056AE /* CheckinTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC3D8D13A627EB00CCA185 /* CheckinTabViewController_iPhone.xib */; };
+		3EC4BE1613C1E19D000056AE /* CheckinTabViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC3D9013A627F900CCA185 /* CheckinTabViewController_iPad.xib */; };
+		3EC4BE1713C1E19D000056AE /* CheckinTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC3D9313A6282100CCA185 /* CheckinTableViewController_iPhone.xib */; };
+		3EC4BE1813C1E19D000056AE /* CheckinTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC3D9613A6283300CCA185 /* CheckinTableViewController_iPad.xib */; };
+		3EC4BE1913C1E19D000056AE /* CheckinTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EB13A6552A0019BDED /* CheckinTableCell_iPhone.xib */; };
+		3EC4BE1A13C1E19D000056AE /* CheckinTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EE13A655370019BDED /* CheckinTableCell_iPad.xib */; };
+		3EC4BE1B13C1E19D000056AE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A2013AC9D1300DCC48C /* Localizable.strings */; };
+		3EC4BE1C13C1E19D000056AE /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
+		3EC4BE1E13C1E19D000056AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
+		3EC4BE1F13C1E19D000056AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
+		3EC4BE2013C1E19D000056AE /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
+		3EC4BE2113C1E19D000056AE /* IncidentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */; };
+		3EC4BE2213C1E19D000056AE /* DeploymentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FF1222BCD0001DE141 /* DeploymentAddViewController.m */; };
+		3EC4BE2313C1E19D000056AE /* ImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A011222BCD0001DE141 /* ImagePickerController.m */; };
+		3EC4BE2413C1E19D000056AE /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A031222BCD0001DE141 /* ImageViewController.m */; };
+		3EC4BE2513C1E19D000056AE /* DeploymentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A071222BCD0001DE141 /* DeploymentTableViewController.m */; };
+		3EC4BE2613C1E19D000056AE /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A091222BCD0001DE141 /* MapViewController.m */; };
+		3EC4BE2713C1E19D000056AE /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A0B1222BCD0001DE141 /* BaseTableViewController.m */; };
+		3EC4BE2813C1E19D000056AE /* IncidentDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A0D1222BCD0001DE141 /* IncidentDetailsViewController.m */; };
+		3EC4BE2913C1E19D000056AE /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A0F1222BCD0001DE141 /* WebViewController.m */; };
+		3EC4BE2A13C1E19D000056AE /* BooleanTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A1F1222BCE5001DE141 /* BooleanTableCell.m */; };
+		3EC4BE2B13C1E19D000056AE /* CheckBoxTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A211222BCE5001DE141 /* CheckBoxTableCell.m */; };
+		3EC4BE2C13C1E19D000056AE /* ImageTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A231222BCE5001DE141 /* ImageTableCell.m */; };
+		3EC4BE2D13C1E19D000056AE /* MapTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A251222BCE5001DE141 /* MapTableCell.m */; };
+		3EC4BE2E13C1E19D000056AE /* SubtitleTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A291222BCE5001DE141 /* SubtitleTableCell.m */; };
+		3EC4BE2F13C1E19D000056AE /* TableCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A2B1222BCE5001DE141 /* TableCellFactory.m */; };
+		3EC4BE3013C1E19D000056AE /* TextFieldTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A2D1222BCE5001DE141 /* TextFieldTableCell.m */; };
+		3EC4BE3113C1E19D000056AE /* TextTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A2F1222BCE5001DE141 /* TextTableCell.m */; };
+		3EC4BE3213C1E19D000056AE /* TextViewTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A311222BCE5001DE141 /* TextViewTableCell.m */; };
+		3EC4BE3313C1E19D000056AE /* AppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A931222BD57001DE141 /* AppDelegate_iPad.m */; };
+		3EC4BE3413C1E19D000056AE /* AppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862A961222BD61001DE141 /* AppDelegate_iPhone.m */; };
+		3EC4BE3513C1E19D000056AE /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AB91222C019001DE141 /* NSObject+SBJSON.m */; };
+		3EC4BE3613C1E19D000056AE /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862ABB1222C019001DE141 /* NSString+SBJSON.m */; };
+		3EC4BE3713C1E19D000056AE /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862ABD1222C019001DE141 /* SBJsonBase.m */; };
+		3EC4BE3813C1E19D000056AE /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862ABF1222C019001DE141 /* SBJsonParser.m */; };
+		3EC4BE3913C1E19D000056AE /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AC11222C019001DE141 /* SBJsonWriter.m */; };
+		3EC4BE3A13C1E19D000056AE /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862ACB1222C0DA001DE141 /* ASIAuthenticationDialog.m */; };
+		3EC4BE3B13C1E19D000056AE /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862ACE1222C0DA001DE141 /* ASIDownloadCache.m */; };
+		3EC4BE3C13C1E19D000056AE /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AD01222C0DA001DE141 /* ASIFormDataRequest.m */; };
+		3EC4BE3D13C1E19D000056AE /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AD21222C0DA001DE141 /* ASIHTTPRequest.m */; };
+		3EC4BE3E13C1E19D000056AE /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AD61222C0DA001DE141 /* ASIInputStream.m */; };
+		3EC4BE3F13C1E19D000056AE /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AD81222C0DA001DE141 /* ASINetworkQueue.m */; };
+		3EC4BE4013C1E19D000056AE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862AFB1222C154001DE141 /* Reachability.m */; };
+		3EC4BE4113C1E19D000056AE /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862B281222C66E001DE141 /* Category.m */; };
+		3EC4BE4213C1E19D000056AE /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862BC21222CFE0001DE141 /* Settings.m */; };
+		3EC4BE4313C1E19D000056AE /* LoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862BDD1222D081001DE141 /* LoadingViewController.m */; };
+		3EC4BE4413C1E19D000056AE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862C221222D288001DE141 /* BaseViewController.m */; };
+		3EC4BE4513C1E19D000056AE /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862CA41222D604001DE141 /* AlertView.m */; };
+		3EC4BE4613C1E19D000056AE /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862CA91222D60F001DE141 /* InputView.m */; };
+		3EC4BE4713C1E19D000056AE /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862CD61222D8DB001DE141 /* SplashViewController.m */; };
+		3EC4BE4813C1E19D000056AE /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862DCD1222E1A1001DE141 /* UIColor+Extension.m */; };
+		3EC4BE4913C1E19D000056AE /* Ushahidi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E771222F178001DE141 /* Ushahidi.m */; };
+		3EC4BE4A13C1E19D000056AE /* NSKeyedArchiver+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E7E1222F2D1001DE141 /* NSKeyedArchiver+Extension.m */; };
+		3EC4BE4B13C1E19D000056AE /* NSKeyedUnarchiver+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E801222F2D1001DE141 /* NSKeyedUnarchiver+Extension.m */; };
+		3EC4BE4C13C1E19D000056AE /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E862E821222F2D1001DE141 /* NSDate+Extension.m */; };
+		3EC4BE4D13C1E19D000056AE /* Deployment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86305E12231498001DE141 /* Deployment.m */; };
+		3EC4BE4E13C1E19D000056AE /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86337C12243205001DE141 /* Country.m */; };
+		3EC4BE4F13C1E19D000056AE /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86338312243248001DE141 /* Location.m */; };
+		3EC4BE5013C1E19D000056AE /* Incident.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86338612243255001DE141 /* Incident.m */; };
+		3EC4BE5113C1E19D000056AE /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8633D71224362A001DE141 /* News.m */; };
+		3EC4BE5213C1E19D000056AE /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8633DC12243647001DE141 /* Photo.m */; };
+		3EC4BE5313C1E19D000056AE /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344812243A0C001DE141 /* UIImage+Alpha.m */; };
+		3EC4BE5413C1E19D000056AE /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E86344A12243A0C001DE141 /* UIImage+Resize.m */; };
+		3EC4BE5513C1E19D000056AE /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8635E012244A54001DE141 /* MapAnnotation.m */; };
+		3EC4BE5613C1E19D000056AE /* NSDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8637E512246A64001DE141 /* NSDictionary+Extension.m */; };
+		3EC4BE5713C1E19D000056AE /* MKMapView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8638C312247BAC001DE141 /* MKMapView+Extension.m */; };
+		3EC4BE5813C1E19D000056AE /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB541D122F3F53000AAC56 /* NavigationController.m */; };
+		3EC4BE5913C1E19D000056AE /* DateTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */; };
+		3EC4BE5A13C1E19D000056AE /* DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55EC122F5E33000AAC56 /* DatePicker.m */; };
+		3EC4BE5B13C1E19D000056AE /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB579E122F809C000AAC56 /* UIView+Extension.m */; };
+		3EC4BE5C13C1E19D000056AE /* DeploymentTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */; };
+		3EC4BE5D13C1E19D000056AE /* IncidentTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */; };
+		3EC4BE5E13C1E19D000056AE /* Media.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D55126FAE5800C3DCBB /* Media.m */; };
+		3EC4BE5F13C1E19D000056AE /* Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D6F126FAF0B00C3DCBB /* Sound.m */; };
+		3EC4BE6013C1E19D000056AE /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E119D72126FAF1300C3DCBB /* Video.m */; };
+		3EC4BE6113C1E19D000056AE /* TableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AF91C1270AA370017AED4 /* TableHeaderView.m */; };
+		3EC4BE6213C1E19D000056AE /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */; };
+		3EC4BE6313C1E19D000056AE /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
+		3EC4BE6413C1E19D000056AE /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
+		3EC4BE6513C1E19D000056AE /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3EC4BE6613C1E19D000056AE /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
+		3EC4BE6713C1E19D000056AE /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
+		3EC4BE6813C1E19D000056AE /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
+		3EC4BE6913C1E19D000056AE /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E30492812874F3600E3C942 /* NSObject+Extension.m */; };
+		3EC4BE6A13C1E19D000056AE /* NSError+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD0A4612889A9A0006AF7C /* NSError+Extension.m */; };
+		3EC4BE6B13C1E19D000056AE /* IndexedTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E236396128C7DB400CF804A /* IndexedTableCell.m */; };
+		3EC4BE6C13C1E19D000056AE /* NSURL+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E244E71128DFDE400B36DB6 /* NSURL+Extension.m */; };
+		3EC4BE6D13C1E19D000056AE /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9198591293A81F005AC005 /* Locator.m */; };
+		3EC4BE6E13C1E19D000056AE /* Email.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC1C851295DC9F00163B36 /* Email.m */; };
+		3EC4BE6F13C1E19D000056AE /* ItemPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8090EB129B2B8500CF273F /* ItemPicker.m */; };
+		3EC4BE7013C1E19D000056AE /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C630912AD4D05001ED08A /* NewsViewController.m */; };
+		3EC4BE7113C1E19D000056AE /* MoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4C659A12AD774F001ED08A /* MoviePlayer.m */; };
+		3EC4BE7213C1E19D000056AE /* SMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECFF2C412AFDB4F00DE75D7 /* SMS.m */; };
+		3EC4BE7313C1E19D000056AE /* Internet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8731612B136EF00E9D799 /* Internet.m */; };
+		3EC4BE7413C1E19D000056AE /* MKPinAnnotationView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8785E12B29C1500E9D799 /* MKPinAnnotationView+Extension.m */; };
+		3EC4BE7513C1E19D000056AE /* Bitly.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE0EF12DB81530076ABA1 /* Bitly.m */; };
+		3EC4BE7613C1E19D000056AE /* TwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE0F412DB81600076ABA1 /* TwitterViewController.m */; };
+		3EC4BE7713C1E19D000056AE /* NSData+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEFE11D12DB81B40076ABA1 /* NSData+Extension.m */; };
+		3EC4BE7813C1E19D000056AE /* MGTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD5F912DCA73E007ECE4B /* MGTwitterEngine.m */; };
+		3EC4BE7913C1E19D000056AE /* MGTwitterHTTPURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD5FD12DCA73E007ECE4B /* MGTwitterHTTPURLConnection.m */; };
+		3EC4BE7A13C1E19D000056AE /* MGTwitterLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD5FF12DCA73E007ECE4B /* MGTwitterLibXMLParser.m */; };
+		3EC4BE7B13C1E19D000056AE /* MGTwitterMessagesLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD60112DCA73E007ECE4B /* MGTwitterMessagesLibXMLParser.m */; };
+		3EC4BE7C13C1E19D000056AE /* MGTwitterMessagesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD60312DCA73E007ECE4B /* MGTwitterMessagesParser.m */; };
+		3EC4BE7D13C1E19D000056AE /* MGTwitterMiscLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD60712DCA73E007ECE4B /* MGTwitterMiscLibXMLParser.m */; };
+		3EC4BE7E13C1E19D000056AE /* MGTwitterMiscParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD60912DCA73E007ECE4B /* MGTwitterMiscParser.m */; };
+		3EC4BE7F13C1E19D000056AE /* MGTwitterSocialGraphLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD61112DCA73E007ECE4B /* MGTwitterSocialGraphLibXMLParser.m */; };
+		3EC4BE8013C1E19D000056AE /* MGTwitterSocialGraphParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD61312DCA73E007ECE4B /* MGTwitterSocialGraphParser.m */; };
+		3EC4BE8113C1E19D000056AE /* MGTwitterStatusesLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD61512DCA73E007ECE4B /* MGTwitterStatusesLibXMLParser.m */; };
+		3EC4BE8213C1E19D000056AE /* MGTwitterStatusesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD61712DCA73E007ECE4B /* MGTwitterStatusesParser.m */; };
+		3EC4BE8313C1E19D000056AE /* MGTwitterTouchJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD61B12DCA73E007ECE4B /* MGTwitterTouchJSONParser.m */; };
+		3EC4BE8413C1E19D000056AE /* MGTwitterUserListsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD61D12DCA73E007ECE4B /* MGTwitterUserListsParser.m */; };
+		3EC4BE8513C1E19D000056AE /* MGTwitterUsersLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD61F12DCA73E007ECE4B /* MGTwitterUsersLibXMLParser.m */; };
+		3EC4BE8613C1E19D000056AE /* MGTwitterUsersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD62112DCA73E007ECE4B /* MGTwitterUsersParser.m */; };
+		3EC4BE8713C1E19D000056AE /* MGTwitterXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD62512DCA73E007ECE4B /* MGTwitterXMLParser.m */; };
+		3EC4BE8813C1E19D000056AE /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD62912DCA73E007ECE4B /* NSData+Base64.m */; };
+		3EC4BE8913C1E19D000056AE /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD62B12DCA73E007ECE4B /* NSString+UUID.m */; };
+		3EC4BE8A13C1E19D000056AE /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6D112DCA9D4007ECE4B /* CDataScanner.m */; };
+		3EC4BE8B13C1E19D000056AE /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6D412DCA9D4007ECE4B /* CFilteringJSONSerializer.m */; };
+		3EC4BE8C13C1E19D000056AE /* CJSONDeserializer_BlocksExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6D612DCA9D4007ECE4B /* CJSONDeserializer_BlocksExtensions.m */; };
+		3EC4BE8D13C1E19D000056AE /* CJSONSerializedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6D812DCA9D4007ECE4B /* CJSONSerializedData.m */; };
+		3EC4BE8E13C1E19D000056AE /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6DB12DCA9D4007ECE4B /* CDataScanner_Extensions.m */; };
+		3EC4BE8F13C1E19D000056AE /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6DD12DCA9D4007ECE4B /* NSCharacterSet_Extensions.m */; };
+		3EC4BE9013C1E19D000056AE /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6DF12DCA9D4007ECE4B /* NSDictionary_JSONExtensions.m */; };
+		3EC4BE9113C1E19D000056AE /* NSScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6E112DCA9D4007ECE4B /* NSScanner_Extensions.m */; };
+		3EC4BE9213C1E19D000056AE /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6E412DCA9D4007ECE4B /* CJSONDeserializer.m */; };
+		3EC4BE9313C1E19D000056AE /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6E612DCA9D4007ECE4B /* CJSONScanner.m */; };
+		3EC4BE9413C1E19D000056AE /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD6E812DCA9D4007ECE4B /* CJSONSerializer.m */; };
+		3EC4BE9513C1E19D000056AE /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD75E12DCAC48007ECE4B /* SFHFKeychainUtils.m */; };
+		3EC4BE9613C1E19D000056AE /* ASIHTTPRequest+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ED9827112ECD7DC0065A324 /* ASIHTTPRequest+Extension.m */; };
+		3EC4BE9713C1E19D000056AE /* MapDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E72978412EDEBD500FDED00 /* MapDialog.m */; };
+		3EC4BE9813C1E19D000056AE /* Checkin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E466FAC130C686A00EE685B /* Checkin.m */; };
+		3EC4BE9913C1E19D000056AE /* CheckinAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BB9EF131056C90073E4F8 /* CheckinAddViewController.m */; };
+		3EC4BE9A13C1E19D000056AE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E5BBBB51310A6150073E4F8 /* User.m */; };
+		3EC4BE9B13C1E19D000056AE /* IncidentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE8E271311888B0096CBEA /* IncidentTableViewController.m */; };
+		3EC4BE9C13C1E19D000056AE /* IncidentMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE8E2A131188970096CBEA /* IncidentMapViewController.m */; };
+		3EC4BE9D13C1E19D000056AE /* CheckinMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EEE8E2D131188AF0096CBEA /* CheckinMapViewController.m */; };
+		3EC4BE9E13C1E19D000056AE /* IncidentTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E6E2B451312B38E00B9E331 /* IncidentTabViewController.m */; };
+		3EC4BE9F13C1E19D000056AE /* CheckinDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1A733513143F4E00F3FAC8 /* CheckinDetailsViewController.m */; };
+		3EC4BEA013C1E19D000056AE /* ButtonTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F02F01315565F0011E423 /* ButtonTableCell.m */; };
+		3EC4BEA113C1E19D000056AE /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC194C2131C62AF00BF073D /* UIImage+RoundedCorner.m */; };
+		3EC4BEA213C1E19D000056AE /* CheckinTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3D0F13A60A5000CCA185 /* CheckinTabViewController.m */; };
+		3EC4BEA313C1E19D000056AE /* CheckinTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3D1313A60A8E00CCA185 /* CheckinTableViewController.m */; };
+		3EC4BEA413C1E19D000056AE /* BaseTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3D1713A60C9900CCA185 /* BaseTabViewController.m */; };
+		3EC4BEA513C1E19D000056AE /* BaseSortTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */; };
+		3EC4BEA613C1E19D000056AE /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
+		3EC4BEA713C1E19D000056AE /* CheckinTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBE2F613A657720019BDED /* CheckinTableCell.m */; };
+		3EC4BEA813C1E19D000056AE /* BaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */; };
+		3EC4BEAA13C1E19D000056AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		3EC4BEAB13C1E19D000056AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		3EC4BEAC13C1E19D000056AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		3EC4BEAD13C1E19D000056AE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28EEBFDC1118E19E00187D67 /* CoreData.framework */; };
+		3EC4BEAE13C1E19D000056AE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
+		3EC4BEAF13C1E19D000056AE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E862AE21222C101001DE141 /* CoreFoundation.framework */; };
+		3EC4BEB013C1E19D000056AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E862AE81222C111001DE141 /* SystemConfiguration.framework */; };
+		3EC4BEB113C1E19D000056AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E862AEE1222C120001DE141 /* MobileCoreServices.framework */; };
+		3EC4BEB213C1E19D000056AE /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E862AF41222C138001DE141 /* libz.1.2.3.dylib */; };
+		3EC4BEB313C1E19D000056AE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E862B091222C177001DE141 /* CFNetwork.framework */; };
+		3EC4BEB413C1E19D000056AE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9198A51293AD09005AC005 /* CoreLocation.framework */; };
+		3EC4BEB513C1E19D000056AE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EFC1CA21295DD2900163B36 /* MessageUI.framework */; };
+		3EC4BEB613C1E19D000056AE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4C65BE12AD77DA001ED08A /* MediaPlayer.framework */; };
+		3EC4BEB713C1E19D000056AE /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEFE19612DB87890076ABA1 /* libxml2.dylib */; };
+		3EC4BEB913C1E19D000056AE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBBD76B12DCAC73007ECE4B /* Security.framework */; };
+		3EC4BEBA13C1E19D000056AE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7298B612EE524700FDED00 /* QuartzCore.framework */; };
+		3EC4BF1813C1E771000056AE /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0613C1E771000056AE /* Default-Portrait.png */; };
+		3EC4BF1913C1E771000056AE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0713C1E771000056AE /* Default.png */; };
+		3EC4BF1A13C1E771000056AE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0813C1E771000056AE /* Default@2x.png */; };
+		3EC4BF1B13C1E771000056AE /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0913C1E771000056AE /* Icon-57.png */; };
+		3EC4BF1C13C1E771000056AE /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0A13C1E771000056AE /* Icon-72.png */; };
+		3EC4BF1D13C1E771000056AE /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0B13C1E771000056AE /* Icon-Small-50.png */; };
+		3EC4BF1E13C1E771000056AE /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0C13C1E771000056AE /* Icon-Small.png */; };
+		3EC4BF1F13C1E771000056AE /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0D13C1E771000056AE /* Icon-Small@2x.png */; };
+		3EC4BF2013C1E771000056AE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0E13C1E771000056AE /* Icon.png */; };
+		3EC4BF2113C1E771000056AE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF0F13C1E771000056AE /* Icon@2x.png */; };
+		3EC4BF2213C1E771000056AE /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF1013C1E771000056AE /* iTunesArtwork */; };
+		3EC4BF2313C1E771000056AE /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF1113C1E771000056AE /* iTunesArtwork.png */; };
+		3EC4BF2513C1E771000056AE /* Logo_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF1313C1E771000056AE /* Logo_iPad.png */; };
+		3EC4BF2613C1E771000056AE /* Logo_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF1413C1E771000056AE /* Logo_iPad@2x.png */; };
+		3EC4BF2713C1E771000056AE /* Logo_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF1513C1E771000056AE /* Logo_iPhone.png */; };
+		3EC4BF2813C1E771000056AE /* Logo_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF1613C1E771000056AE /* Logo_iPhone@2x.png */; };
+		3EC4BF2913C1E771000056AE /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC4BF1713C1E771000056AE /* placeholder.png */; };
 		3EC94CBC12773CDD00411AE0 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3ECB541E122F3F53000AAC56 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB541D122F3F53000AAC56 /* NavigationController.m */; };
 		3ECB55D2122F5BEE000AAC56 /* DateTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */; };
@@ -1287,6 +1572,25 @@
 		3EBBE2F613A657720019BDED /* CheckinTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckinTableCell.m; sourceTree = "<group>"; };
 		3EC194C1131C62AF00BF073D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		3EC194C2131C62AF00BF073D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		3EC4BEC013C1E19D000056AE /* Ushahidi_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EC4BEC213C1E19E000056AE /* TeamCheckins.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TeamCheckins.plist; sourceTree = "<group>"; };
+		3EC4BF0613C1E771000056AE /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		3EC4BF0713C1E771000056AE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3EC4BF0813C1E771000056AE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		3EC4BF0913C1E771000056AE /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
+		3EC4BF0A13C1E771000056AE /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		3EC4BF0B13C1E771000056AE /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		3EC4BF0C13C1E771000056AE /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		3EC4BF0D13C1E771000056AE /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		3EC4BF0E13C1E771000056AE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		3EC4BF0F13C1E771000056AE /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		3EC4BF1013C1E771000056AE /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		3EC4BF1113C1E771000056AE /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		3EC4BF1313C1E771000056AE /* Logo_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPad.png; sourceTree = "<group>"; };
+		3EC4BF1413C1E771000056AE /* Logo_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPad@2x.png"; sourceTree = "<group>"; };
+		3EC4BF1513C1E771000056AE /* Logo_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPhone.png; sourceTree = "<group>"; };
+		3EC4BF1613C1E771000056AE /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
+		3EC4BF1713C1E771000056AE /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		3EC94CBA12773CDD00411AE0 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
 		3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		3ECB541C122F3F53000AAC56 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
@@ -1435,6 +1739,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3EC4BEA913C1E19D000056AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EC4BEAA13C1E19D000056AE /* Foundation.framework in Frameworks */,
+				3EC4BEAB13C1E19D000056AE /* UIKit.framework in Frameworks */,
+				3EC4BEAC13C1E19D000056AE /* CoreGraphics.framework in Frameworks */,
+				3EC4BEAD13C1E19D000056AE /* CoreData.framework in Frameworks */,
+				3EC4BEAE13C1E19D000056AE /* MapKit.framework in Frameworks */,
+				3EC4BEAF13C1E19D000056AE /* CoreFoundation.framework in Frameworks */,
+				3EC4BEB013C1E19D000056AE /* SystemConfiguration.framework in Frameworks */,
+				3EC4BEB113C1E19D000056AE /* MobileCoreServices.framework in Frameworks */,
+				3EC4BEB213C1E19D000056AE /* libz.1.2.3.dylib in Frameworks */,
+				3EC4BEB313C1E19D000056AE /* CFNetwork.framework in Frameworks */,
+				3EC4BEB413C1E19D000056AE /* CoreLocation.framework in Frameworks */,
+				3EC4BEB513C1E19D000056AE /* MessageUI.framework in Frameworks */,
+				3EC4BEB613C1E19D000056AE /* MediaPlayer.framework in Frameworks */,
+				3EC4BEB713C1E19D000056AE /* libxml2.dylib in Frameworks */,
+				3EC4BEB913C1E19D000056AE /* Security.framework in Frameworks */,
+				3EC4BEBA13C1E19D000056AE /* QuartzCore.framework in Frameworks */,
+				3E59467E13C1EC2800A186BA /* libOAuth.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3ED0F98B138E6BE40065C8E8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1468,6 +1796,7 @@
 				1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */,
 				3ED0F9A2138E6BE40065C8E8 /* MapATL.app */,
 				3E0F774213AB7772004494EC /* BeijingTransport.app */,
+				3EC4BEC013C1E19D000056AE /* Ushahidi_iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1494,6 +1823,7 @@
 				3E030A7C13ACA71D00DCC48C /* Entitlements.plist */,
 				3E0F759D13AB57A3004494EC /* Ushahidi.plist */,
 				3ED0F9D3138E71140065C8E8 /* MapATL.plist */,
+				3EC4BEC213C1E19E000056AE /* TeamCheckins.plist */,
 				3ED873E11379FEA0004E8714 /* BeijingTransport.plist */,
 			);
 			name = Other;
@@ -2131,6 +2461,30 @@
 			path = Security;
 			sourceTree = "<group>";
 		};
+		3EC4BF0413C1E6F2000056AE /* TeamCheckins */ = {
+			isa = PBXGroup;
+			children = (
+				3EC4BF0613C1E771000056AE /* Default-Portrait.png */,
+				3EC4BF0713C1E771000056AE /* Default.png */,
+				3EC4BF0813C1E771000056AE /* Default@2x.png */,
+				3EC4BF0913C1E771000056AE /* Icon-57.png */,
+				3EC4BF0A13C1E771000056AE /* Icon-72.png */,
+				3EC4BF0B13C1E771000056AE /* Icon-Small-50.png */,
+				3EC4BF0C13C1E771000056AE /* Icon-Small.png */,
+				3EC4BF0D13C1E771000056AE /* Icon-Small@2x.png */,
+				3EC4BF0E13C1E771000056AE /* Icon.png */,
+				3EC4BF0F13C1E771000056AE /* Icon@2x.png */,
+				3EC4BF1013C1E771000056AE /* iTunesArtwork */,
+				3EC4BF1113C1E771000056AE /* iTunesArtwork.png */,
+				3EC4BF1313C1E771000056AE /* Logo_iPad.png */,
+				3EC4BF1413C1E771000056AE /* Logo_iPad@2x.png */,
+				3EC4BF1513C1E771000056AE /* Logo_iPhone.png */,
+				3EC4BF1613C1E771000056AE /* Logo_iPhone@2x.png */,
+				3EC4BF1713C1E771000056AE /* placeholder.png */,
+			);
+			path = TeamCheckins;
+			sourceTree = "<group>";
+		};
 		3ED1046512125524009781F5 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -2146,6 +2500,7 @@
 			children = (
 				3ED871781379CA70004E8714 /* Ushahidi */,
 				3ED871CC1379D343004E8714 /* MapATL */,
+				3EC4BF0413C1E6F2000056AE /* TeamCheckins */,
 				3E0F75AF13AB772A004494EC /* BeijingTransport */,
 			);
 			path = Themes;
@@ -2250,6 +2605,23 @@
 			productReference = 3E0F774213AB7772004494EC /* BeijingTransport.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3EC4BD9A13C1E19D000056AE /* TeamCheckins */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EC4BEBB13C1E19D000056AE /* Build configuration list for PBXNativeTarget "TeamCheckins" */;
+			buildPhases = (
+				3EC4BD9B13C1E19D000056AE /* Resources */,
+				3EC4BE1D13C1E19D000056AE /* Sources */,
+				3EC4BEA913C1E19D000056AE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeamCheckins;
+			productName = Ushahidi_iPhone;
+			productReference = 3EC4BEC013C1E19D000056AE /* Ushahidi_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		3ED0F889138E6BE40065C8E8 /* MapATL */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3ED0F99D138E6BE40065C8E8 /* Build configuration list for PBXNativeTarget "MapATL" */;
@@ -2312,6 +2684,7 @@
 				1D6058900D05DD3D006BFB54 /* Ushahidi */,
 				3ED0F889138E6BE40065C8E8 /* MapATL */,
 				3E0F760B13AB7772004494EC /* BeijingTransport */,
+				3EC4BD9A13C1E19D000056AE /* TeamCheckins */,
 			);
 		};
 /* End PBXProject section */
@@ -2586,6 +2959,142 @@
 				3E0F769E13AB7772004494EC /* placeholder.png in Resources */,
 				3E030A2413AC9D1300DCC48C /* Localizable.strings in Resources */,
 				3EF6947913B32E7500DFCE77 /* Entitlements.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3EC4BD9B13C1E19D000056AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EC4BD9C13C1E19D000056AE /* blank.png in Resources */,
+				3EC4BD9D13C1E19D000056AE /* location.png in Resources */,
+				3EC4BD9E13C1E19D000056AE /* arrow_down.png in Resources */,
+				3EC4BD9F13C1E19D000056AE /* arrow_up.png in Resources */,
+				3EC4BDA013C1E19D000056AE /* selected.png in Resources */,
+				3EC4BDA113C1E19D000056AE /* arrow_next.png in Resources */,
+				3EC4BDA213C1E19D000056AE /* arrow_previous.png in Resources */,
+				3EC4BDA313C1E19D000056AE /* unselected.png in Resources */,
+				3EC4BDA413C1E19D000056AE /* map.png in Resources */,
+				3EC4BDA513C1E19D000056AE /* reports.png in Resources */,
+				3EC4BDA613C1E19D000056AE /* empty.png in Resources */,
+				3EC4BDA713C1E19D000056AE /* refresh.png in Resources */,
+				3EC4BDA813C1E19D000056AE /* sort_alphabetical.png in Resources */,
+				3EC4BDA913C1E19D000056AE /* sort_date.png in Resources */,
+				3EC4BDAA13C1E19D000056AE /* sort_verified.png in Resources */,
+				3EC4BDAB13C1E19D000056AE /* email.png in Resources */,
+				3EC4BDAC13C1E19D000056AE /* photo_save.png in Resources */,
+				3EC4BDAD13C1E19D000056AE /* filter.png in Resources */,
+				3EC4BDAE13C1E19D000056AE /* radar.png in Resources */,
+				3EC4BDAF13C1E19D000056AE /* satellite.png in Resources */,
+				3EC4BDB013C1E19D000056AE /* hybrid.png in Resources */,
+				3EC4BDB113C1E19D000056AE /* sms.png in Resources */,
+				3EC4BDB213C1E19D000056AE /* twitter.png in Resources */,
+				3EC4BDB313C1E19D000056AE /* shorten.png in Resources */,
+				3EC4BDB413C1E19D000056AE /* logout.png in Resources */,
+				3EC4BDB513C1E19D000056AE /* jQueryInject.txt in Resources */,
+				3EC4BDB613C1E19D000056AE /* jQueryInjectLandscape.txt in Resources */,
+				3EC4BDB713C1E19D000056AE /* arrow_next@2x.png in Resources */,
+				3EC4BDB813C1E19D000056AE /* arrow_previous@2x.png in Resources */,
+				3EC4BDB913C1E19D000056AE /* email@2x.png in Resources */,
+				3EC4BDBA13C1E19D000056AE /* filter@2x.png in Resources */,
+				3EC4BDBB13C1E19D000056AE /* location@2x.png in Resources */,
+				3EC4BDBC13C1E19D000056AE /* logout@2x.png in Resources */,
+				3EC4BDBD13C1E19D000056AE /* map@2x.png in Resources */,
+				3EC4BDBE13C1E19D000056AE /* photo_save@2x.png in Resources */,
+				3EC4BDBF13C1E19D000056AE /* radar@2x.png in Resources */,
+				3EC4BDC013C1E19D000056AE /* refresh@2x.png in Resources */,
+				3EC4BDC113C1E19D000056AE /* reports@2x.png in Resources */,
+				3EC4BDC213C1E19D000056AE /* shorten@2x.png in Resources */,
+				3EC4BDC313C1E19D000056AE /* sms@2x.png in Resources */,
+				3EC4BDC413C1E19D000056AE /* sort_alphabetical@2x.png in Resources */,
+				3EC4BDC513C1E19D000056AE /* sort_date@2x.png in Resources */,
+				3EC4BDC613C1E19D000056AE /* sort_verified@2x.png in Resources */,
+				3EC4BDC713C1E19D000056AE /* twitter@2x.png in Resources */,
+				3EC4BDC813C1E19D000056AE /* satellite@2x.png in Resources */,
+				3EC4BDC913C1E19D000056AE /* hybrid@2x.png in Resources */,
+				3EC4BDCA13C1E19D000056AE /* arrow_up@2x.png in Resources */,
+				3EC4BDCB13C1E19D000056AE /* arrow_down@2x.png in Resources */,
+				3EC4BDCC13C1E19D000056AE /* selected@2x.png in Resources */,
+				3EC4BDCD13C1E19D000056AE /* unselected@2x.png in Resources */,
+				3EC4BDCE13C1E19D000056AE /* checkin.png in Resources */,
+				3EC4BDCF13C1E19D000056AE /* checkin@2x.png in Resources */,
+				3EC4BDD013C1E19D000056AE /* button_red.png in Resources */,
+				3EC4BDD113C1E19D000056AE /* button_red@2x.png in Resources */,
+				3EC4BDD213C1E19D000056AE /* button_red_selected.png in Resources */,
+				3EC4BDD313C1E19D000056AE /* button_red_selected@2x.png in Resources */,
+				3EC4BDE513C1E19D000056AE /* CategoryTableViewController_iPad.xib in Resources */,
+				3EC4BDE613C1E19D000056AE /* CategoryTableViewController_iPhone.xib in Resources */,
+				3EC4BDE713C1E19D000056AE /* CheckinAddViewController_iPad.xib in Resources */,
+				3EC4BDE813C1E19D000056AE /* CheckinAddViewController_iPhone.xib in Resources */,
+				3EC4BDE913C1E19D000056AE /* CheckinDetailsViewController_iPad.xib in Resources */,
+				3EC4BDEA13C1E19D000056AE /* CheckinDetailsViewController_iPhone.xib in Resources */,
+				3EC4BDEB13C1E19D000056AE /* CheckinMapViewController_iPad.xib in Resources */,
+				3EC4BDEC13C1E19D000056AE /* CheckinMapViewController_iPhone.xib in Resources */,
+				3EC4BDED13C1E19D000056AE /* DeploymentAddViewController_iPad.xib in Resources */,
+				3EC4BDEE13C1E19D000056AE /* DeploymentAddViewController_iPhone.xib in Resources */,
+				3EC4BDEF13C1E19D000056AE /* DeploymentTableCell_iPad.xib in Resources */,
+				3EC4BDF013C1E19D000056AE /* DeploymentTableCell_iPhone.xib in Resources */,
+				3EC4BDF113C1E19D000056AE /* DeploymentTableViewController_iPad.xib in Resources */,
+				3EC4BDF213C1E19D000056AE /* DeploymentTableViewController_iPhone.xib in Resources */,
+				3EC4BDF313C1E19D000056AE /* ImageViewController_iPad.xib in Resources */,
+				3EC4BDF413C1E19D000056AE /* ImageViewController_iPhone.xib in Resources */,
+				3EC4BDF513C1E19D000056AE /* IncidentAddViewController_iPad.xib in Resources */,
+				3EC4BDF613C1E19D000056AE /* IncidentAddViewController_iPhone.xib in Resources */,
+				3EC4BDF713C1E19D000056AE /* IncidentDetailsViewController_iPad.xib in Resources */,
+				3EC4BDF813C1E19D000056AE /* IncidentDetailsViewController_iPhone.xib in Resources */,
+				3EC4BDF913C1E19D000056AE /* IncidentMapViewController_iPad.xib in Resources */,
+				3EC4BDFA13C1E19D000056AE /* IncidentMapViewController_iPhone.xib in Resources */,
+				3EC4BDFB13C1E19D000056AE /* IncidentTableCell_iPad.xib in Resources */,
+				3EC4BDFC13C1E19D000056AE /* IncidentTableCell_iPhone.xib in Resources */,
+				3EC4BDFD13C1E19D000056AE /* IncidentTableViewController_iPad.xib in Resources */,
+				3EC4BDFE13C1E19D000056AE /* IncidentTableViewController_iPhone.xib in Resources */,
+				3EC4BDFF13C1E19D000056AE /* IncidentTabViewController_iPad.xib in Resources */,
+				3EC4BE0013C1E19D000056AE /* IncidentTabViewController_iPhone.xib in Resources */,
+				3EC4BE0113C1E19D000056AE /* LoadingViewController_iPad.xib in Resources */,
+				3EC4BE0213C1E19D000056AE /* LoadingViewController_iPhone.xib in Resources */,
+				3EC4BE0313C1E19D000056AE /* LocationTableViewController_iPad.xib in Resources */,
+				3EC4BE0413C1E19D000056AE /* LocationTableViewController_iPhone.xib in Resources */,
+				3EC4BE0513C1E19D000056AE /* MainWindow_iPad.xib in Resources */,
+				3EC4BE0613C1E19D000056AE /* MainWindow_iPhone.xib in Resources */,
+				3EC4BE0713C1E19D000056AE /* MapViewController_iPad.xib in Resources */,
+				3EC4BE0813C1E19D000056AE /* MapViewController_iPhone.xib in Resources */,
+				3EC4BE0913C1E19D000056AE /* NewsViewController_iPad.xib in Resources */,
+				3EC4BE0A13C1E19D000056AE /* NewsViewController_iPhone.xib in Resources */,
+				3EC4BE0B13C1E19D000056AE /* SettingsViewController_iPad.xib in Resources */,
+				3EC4BE0C13C1E19D000056AE /* SettingsViewController_iPhone.xib in Resources */,
+				3EC4BE0D13C1E19D000056AE /* SliderTableCell_iPad.xib in Resources */,
+				3EC4BE0E13C1E19D000056AE /* SliderTableCell_iPhone.xib in Resources */,
+				3EC4BE0F13C1E19D000056AE /* SplashViewController_iPad.xib in Resources */,
+				3EC4BE1013C1E19D000056AE /* SplashViewController_iPhone.xib in Resources */,
+				3EC4BE1113C1E19D000056AE /* TwitterViewController_iPad.xib in Resources */,
+				3EC4BE1213C1E19D000056AE /* TwitterViewController_iPhone.xib in Resources */,
+				3EC4BE1313C1E19D000056AE /* WebViewController_iPad.xib in Resources */,
+				3EC4BE1413C1E19D000056AE /* WebViewController_iPhone.xib in Resources */,
+				3EC4BE1513C1E19D000056AE /* CheckinTabViewController_iPhone.xib in Resources */,
+				3EC4BE1613C1E19D000056AE /* CheckinTabViewController_iPad.xib in Resources */,
+				3EC4BE1713C1E19D000056AE /* CheckinTableViewController_iPhone.xib in Resources */,
+				3EC4BE1813C1E19D000056AE /* CheckinTableViewController_iPad.xib in Resources */,
+				3EC4BE1913C1E19D000056AE /* CheckinTableCell_iPhone.xib in Resources */,
+				3EC4BE1A13C1E19D000056AE /* CheckinTableCell_iPad.xib in Resources */,
+				3EC4BE1B13C1E19D000056AE /* Localizable.strings in Resources */,
+				3EC4BE1C13C1E19D000056AE /* Entitlements.plist in Resources */,
+				3EC4BF1813C1E771000056AE /* Default-Portrait.png in Resources */,
+				3EC4BF1913C1E771000056AE /* Default.png in Resources */,
+				3EC4BF1A13C1E771000056AE /* Default@2x.png in Resources */,
+				3EC4BF1B13C1E771000056AE /* Icon-57.png in Resources */,
+				3EC4BF1C13C1E771000056AE /* Icon-72.png in Resources */,
+				3EC4BF1D13C1E771000056AE /* Icon-Small-50.png in Resources */,
+				3EC4BF1E13C1E771000056AE /* Icon-Small.png in Resources */,
+				3EC4BF1F13C1E771000056AE /* Icon-Small@2x.png in Resources */,
+				3EC4BF2013C1E771000056AE /* Icon.png in Resources */,
+				3EC4BF2113C1E771000056AE /* Icon@2x.png in Resources */,
+				3EC4BF2213C1E771000056AE /* iTunesArtwork in Resources */,
+				3EC4BF2313C1E771000056AE /* iTunesArtwork.png in Resources */,
+				3EC4BF2513C1E771000056AE /* Logo_iPad.png in Resources */,
+				3EC4BF2613C1E771000056AE /* Logo_iPad@2x.png in Resources */,
+				3EC4BF2713C1E771000056AE /* Logo_iPhone.png in Resources */,
+				3EC4BF2813C1E771000056AE /* Logo_iPhone@2x.png in Resources */,
+				3EC4BF2913C1E771000056AE /* placeholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3020,6 +3529,152 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3EC4BE1D13C1E19D000056AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EC4BE1E13C1E19D000056AE /* main.m in Sources */,
+				3EC4BE1F13C1E19D000056AE /* AppDelegate.m in Sources */,
+				3EC4BE2013C1E19D000056AE /* Device.m in Sources */,
+				3EC4BE2113C1E19D000056AE /* IncidentAddViewController.m in Sources */,
+				3EC4BE2213C1E19D000056AE /* DeploymentAddViewController.m in Sources */,
+				3EC4BE2313C1E19D000056AE /* ImagePickerController.m in Sources */,
+				3EC4BE2413C1E19D000056AE /* ImageViewController.m in Sources */,
+				3EC4BE2513C1E19D000056AE /* DeploymentTableViewController.m in Sources */,
+				3EC4BE2613C1E19D000056AE /* MapViewController.m in Sources */,
+				3EC4BE2713C1E19D000056AE /* BaseTableViewController.m in Sources */,
+				3EC4BE2813C1E19D000056AE /* IncidentDetailsViewController.m in Sources */,
+				3EC4BE2913C1E19D000056AE /* WebViewController.m in Sources */,
+				3EC4BE2A13C1E19D000056AE /* BooleanTableCell.m in Sources */,
+				3EC4BE2B13C1E19D000056AE /* CheckBoxTableCell.m in Sources */,
+				3EC4BE2C13C1E19D000056AE /* ImageTableCell.m in Sources */,
+				3EC4BE2D13C1E19D000056AE /* MapTableCell.m in Sources */,
+				3EC4BE2E13C1E19D000056AE /* SubtitleTableCell.m in Sources */,
+				3EC4BE2F13C1E19D000056AE /* TableCellFactory.m in Sources */,
+				3EC4BE3013C1E19D000056AE /* TextFieldTableCell.m in Sources */,
+				3EC4BE3113C1E19D000056AE /* TextTableCell.m in Sources */,
+				3EC4BE3213C1E19D000056AE /* TextViewTableCell.m in Sources */,
+				3EC4BE3313C1E19D000056AE /* AppDelegate_iPad.m in Sources */,
+				3EC4BE3413C1E19D000056AE /* AppDelegate_iPhone.m in Sources */,
+				3EC4BE3513C1E19D000056AE /* NSObject+SBJSON.m in Sources */,
+				3EC4BE3613C1E19D000056AE /* NSString+SBJSON.m in Sources */,
+				3EC4BE3713C1E19D000056AE /* SBJsonBase.m in Sources */,
+				3EC4BE3813C1E19D000056AE /* SBJsonParser.m in Sources */,
+				3EC4BE3913C1E19D000056AE /* SBJsonWriter.m in Sources */,
+				3EC4BE3A13C1E19D000056AE /* ASIAuthenticationDialog.m in Sources */,
+				3EC4BE3B13C1E19D000056AE /* ASIDownloadCache.m in Sources */,
+				3EC4BE3C13C1E19D000056AE /* ASIFormDataRequest.m in Sources */,
+				3EC4BE3D13C1E19D000056AE /* ASIHTTPRequest.m in Sources */,
+				3EC4BE3E13C1E19D000056AE /* ASIInputStream.m in Sources */,
+				3EC4BE3F13C1E19D000056AE /* ASINetworkQueue.m in Sources */,
+				3EC4BE4013C1E19D000056AE /* Reachability.m in Sources */,
+				3EC4BE4113C1E19D000056AE /* Category.m in Sources */,
+				3EC4BE4213C1E19D000056AE /* Settings.m in Sources */,
+				3EC4BE4313C1E19D000056AE /* LoadingViewController.m in Sources */,
+				3EC4BE4413C1E19D000056AE /* BaseViewController.m in Sources */,
+				3EC4BE4513C1E19D000056AE /* AlertView.m in Sources */,
+				3EC4BE4613C1E19D000056AE /* InputView.m in Sources */,
+				3EC4BE4713C1E19D000056AE /* SplashViewController.m in Sources */,
+				3EC4BE4813C1E19D000056AE /* UIColor+Extension.m in Sources */,
+				3EC4BE4913C1E19D000056AE /* Ushahidi.m in Sources */,
+				3EC4BE4A13C1E19D000056AE /* NSKeyedArchiver+Extension.m in Sources */,
+				3EC4BE4B13C1E19D000056AE /* NSKeyedUnarchiver+Extension.m in Sources */,
+				3EC4BE4C13C1E19D000056AE /* NSDate+Extension.m in Sources */,
+				3EC4BE4D13C1E19D000056AE /* Deployment.m in Sources */,
+				3EC4BE4E13C1E19D000056AE /* Country.m in Sources */,
+				3EC4BE4F13C1E19D000056AE /* Location.m in Sources */,
+				3EC4BE5013C1E19D000056AE /* Incident.m in Sources */,
+				3EC4BE5113C1E19D000056AE /* News.m in Sources */,
+				3EC4BE5213C1E19D000056AE /* Photo.m in Sources */,
+				3EC4BE5313C1E19D000056AE /* UIImage+Alpha.m in Sources */,
+				3EC4BE5413C1E19D000056AE /* UIImage+Resize.m in Sources */,
+				3EC4BE5513C1E19D000056AE /* MapAnnotation.m in Sources */,
+				3EC4BE5613C1E19D000056AE /* NSDictionary+Extension.m in Sources */,
+				3EC4BE5713C1E19D000056AE /* MKMapView+Extension.m in Sources */,
+				3EC4BE5813C1E19D000056AE /* NavigationController.m in Sources */,
+				3EC4BE5913C1E19D000056AE /* DateTableCell.m in Sources */,
+				3EC4BE5A13C1E19D000056AE /* DatePicker.m in Sources */,
+				3EC4BE5B13C1E19D000056AE /* UIView+Extension.m in Sources */,
+				3EC4BE5C13C1E19D000056AE /* DeploymentTableCell.m in Sources */,
+				3EC4BE5D13C1E19D000056AE /* IncidentTableCell.m in Sources */,
+				3EC4BE5E13C1E19D000056AE /* Media.m in Sources */,
+				3EC4BE5F13C1E19D000056AE /* Sound.m in Sources */,
+				3EC4BE6013C1E19D000056AE /* Video.m in Sources */,
+				3EC4BE6113C1E19D000056AE /* TableHeaderView.m in Sources */,
+				3EC4BE6213C1E19D000056AE /* SettingsViewController.m in Sources */,
+				3EC4BE6313C1E19D000056AE /* NSString+Extension.m in Sources */,
+				3EC4BE6413C1E19D000056AE /* CategoryTableViewController.m in Sources */,
+				3EC4BE6513C1E19D000056AE /* LocationTableViewController.m in Sources */,
+				3EC4BE6613C1E19D000056AE /* UIImage+Extension.m in Sources */,
+				3EC4BE6713C1E19D000056AE /* MotionWindow.m in Sources */,
+				3EC4BE6813C1E19D000056AE /* SliderTableCell.m in Sources */,
+				3EC4BE6913C1E19D000056AE /* NSObject+Extension.m in Sources */,
+				3EC4BE6A13C1E19D000056AE /* NSError+Extension.m in Sources */,
+				3EC4BE6B13C1E19D000056AE /* IndexedTableCell.m in Sources */,
+				3EC4BE6C13C1E19D000056AE /* NSURL+Extension.m in Sources */,
+				3EC4BE6D13C1E19D000056AE /* Locator.m in Sources */,
+				3EC4BE6E13C1E19D000056AE /* Email.m in Sources */,
+				3EC4BE6F13C1E19D000056AE /* ItemPicker.m in Sources */,
+				3EC4BE7013C1E19D000056AE /* NewsViewController.m in Sources */,
+				3EC4BE7113C1E19D000056AE /* MoviePlayer.m in Sources */,
+				3EC4BE7213C1E19D000056AE /* SMS.m in Sources */,
+				3EC4BE7313C1E19D000056AE /* Internet.m in Sources */,
+				3EC4BE7413C1E19D000056AE /* MKPinAnnotationView+Extension.m in Sources */,
+				3EC4BE7513C1E19D000056AE /* Bitly.m in Sources */,
+				3EC4BE7613C1E19D000056AE /* TwitterViewController.m in Sources */,
+				3EC4BE7713C1E19D000056AE /* NSData+Extension.m in Sources */,
+				3EC4BE7813C1E19D000056AE /* MGTwitterEngine.m in Sources */,
+				3EC4BE7913C1E19D000056AE /* MGTwitterHTTPURLConnection.m in Sources */,
+				3EC4BE7A13C1E19D000056AE /* MGTwitterLibXMLParser.m in Sources */,
+				3EC4BE7B13C1E19D000056AE /* MGTwitterMessagesLibXMLParser.m in Sources */,
+				3EC4BE7C13C1E19D000056AE /* MGTwitterMessagesParser.m in Sources */,
+				3EC4BE7D13C1E19D000056AE /* MGTwitterMiscLibXMLParser.m in Sources */,
+				3EC4BE7E13C1E19D000056AE /* MGTwitterMiscParser.m in Sources */,
+				3EC4BE7F13C1E19D000056AE /* MGTwitterSocialGraphLibXMLParser.m in Sources */,
+				3EC4BE8013C1E19D000056AE /* MGTwitterSocialGraphParser.m in Sources */,
+				3EC4BE8113C1E19D000056AE /* MGTwitterStatusesLibXMLParser.m in Sources */,
+				3EC4BE8213C1E19D000056AE /* MGTwitterStatusesParser.m in Sources */,
+				3EC4BE8313C1E19D000056AE /* MGTwitterTouchJSONParser.m in Sources */,
+				3EC4BE8413C1E19D000056AE /* MGTwitterUserListsParser.m in Sources */,
+				3EC4BE8513C1E19D000056AE /* MGTwitterUsersLibXMLParser.m in Sources */,
+				3EC4BE8613C1E19D000056AE /* MGTwitterUsersParser.m in Sources */,
+				3EC4BE8713C1E19D000056AE /* MGTwitterXMLParser.m in Sources */,
+				3EC4BE8813C1E19D000056AE /* NSData+Base64.m in Sources */,
+				3EC4BE8913C1E19D000056AE /* NSString+UUID.m in Sources */,
+				3EC4BE8A13C1E19D000056AE /* CDataScanner.m in Sources */,
+				3EC4BE8B13C1E19D000056AE /* CFilteringJSONSerializer.m in Sources */,
+				3EC4BE8C13C1E19D000056AE /* CJSONDeserializer_BlocksExtensions.m in Sources */,
+				3EC4BE8D13C1E19D000056AE /* CJSONSerializedData.m in Sources */,
+				3EC4BE8E13C1E19D000056AE /* CDataScanner_Extensions.m in Sources */,
+				3EC4BE8F13C1E19D000056AE /* NSCharacterSet_Extensions.m in Sources */,
+				3EC4BE9013C1E19D000056AE /* NSDictionary_JSONExtensions.m in Sources */,
+				3EC4BE9113C1E19D000056AE /* NSScanner_Extensions.m in Sources */,
+				3EC4BE9213C1E19D000056AE /* CJSONDeserializer.m in Sources */,
+				3EC4BE9313C1E19D000056AE /* CJSONScanner.m in Sources */,
+				3EC4BE9413C1E19D000056AE /* CJSONSerializer.m in Sources */,
+				3EC4BE9513C1E19D000056AE /* SFHFKeychainUtils.m in Sources */,
+				3EC4BE9613C1E19D000056AE /* ASIHTTPRequest+Extension.m in Sources */,
+				3EC4BE9713C1E19D000056AE /* MapDialog.m in Sources */,
+				3EC4BE9813C1E19D000056AE /* Checkin.m in Sources */,
+				3EC4BE9913C1E19D000056AE /* CheckinAddViewController.m in Sources */,
+				3EC4BE9A13C1E19D000056AE /* User.m in Sources */,
+				3EC4BE9B13C1E19D000056AE /* IncidentTableViewController.m in Sources */,
+				3EC4BE9C13C1E19D000056AE /* IncidentMapViewController.m in Sources */,
+				3EC4BE9D13C1E19D000056AE /* CheckinMapViewController.m in Sources */,
+				3EC4BE9E13C1E19D000056AE /* IncidentTabViewController.m in Sources */,
+				3EC4BE9F13C1E19D000056AE /* CheckinDetailsViewController.m in Sources */,
+				3EC4BEA013C1E19D000056AE /* ButtonTableCell.m in Sources */,
+				3EC4BEA113C1E19D000056AE /* UIImage+RoundedCorner.m in Sources */,
+				3EC4BEA213C1E19D000056AE /* CheckinTabViewController.m in Sources */,
+				3EC4BEA313C1E19D000056AE /* CheckinTableViewController.m in Sources */,
+				3EC4BEA413C1E19D000056AE /* BaseTabViewController.m in Sources */,
+				3EC4BEA513C1E19D000056AE /* BaseSortTableViewController.m in Sources */,
+				3EC4BEA613C1E19D000056AE /* BaseMapViewController.m in Sources */,
+				3EC4BEA713C1E19D000056AE /* CheckinTableCell.m in Sources */,
+				3EC4BEA813C1E19D000056AE /* BaseDetailsViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3ED0F906138E6BE40065C8E8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3214,7 +3869,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9A679120-50BD-46D3-85F4-463D01A73A65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8BE65E1D-E520-4BB3-9E3E-4FB2C557C7DB";
 			};
 			name = Debug;
 		};
@@ -3233,7 +3888,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9A679120-50BD-46D3-85F4-463D01A73A65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8BE65E1D-E520-4BB3-9E3E-4FB2C557C7DB";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -3323,6 +3978,91 @@
 			};
 			name = "App Store";
 		};
+		3EC4BEBC13C1E19D000056AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Prefix.pch;
+				INFOPLIST_FILE = TeamCheckins.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
+					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
+				);
+				PRODUCT_NAME = Ushahidi_iOS;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "420899E4-741B-4BD5-8303-9BAB12F0FEDE";
+			};
+			name = Debug;
+		};
+		3EC4BEBD13C1E19D000056AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Prefix.pch;
+				INFOPLIST_FILE = TeamCheckins.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
+					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
+				);
+				PRODUCT_NAME = Ushahidi_iOS;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "420899E4-741B-4BD5-8303-9BAB12F0FEDE";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3EC4BEBE13C1E19D000056AE /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Prefix.pch;
+				INFOPLIST_FILE = TeamCheckins.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
+					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
+				);
+				PRODUCT_NAME = Ushahidi_iOS;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3C7DA140-B3D3-446E-A161-E93801BB2284";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad Hoc";
+		};
+		3EC4BEBF13C1E19D000056AE /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Prefix.pch;
+				INFOPLIST_FILE = TeamCheckins.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\\\"",
+					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
+				);
+				PRODUCT_NAME = Ushahidi_iOS;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ABAA0D6A-74AF-40BD-8C52-FC1512E06B6A";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "App Store";
+		};
 		3ED0518E121348D6000CFFA6 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3357,7 +4097,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C45EAF9F-51A5-4D7A-B9A6-B89EAC9D0E58";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "07EF9231-B403-4CFF-A7EA-41BB44BD5643";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -3546,6 +4286,17 @@
 				3E0F773F13AB7772004494EC /* Release */,
 				3E0F774013AB7772004494EC /* Ad Hoc */,
 				3E0F774113AB7772004494EC /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3EC4BEBB13C1E19D000056AE /* Build configuration list for PBXNativeTarget "TeamCheckins" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EC4BEBC13C1E19D000056AE /* Debug */,
+				3EC4BEBD13C1E19D000056AE /* Release */,
+				3EC4BEBE13C1E19D000056AE /* Ad Hoc */,
+				3EC4BEBF13C1E19D000056AE /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1287,8 +1287,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		DLog(@"RESPONSE: BINARY IMAGE %@", [request.originalURL absoluteString]);
 		photo.image = [UIImage imageWithData:[request responseData]];
 		@try {
-			CGSize size = CGSizeMake(100, 100 * photo.image.size.height / photo.image.size.width);
-			photo.thumbnail = [photo.image resizedImage:size interpolationQuality:kCGInterpolationMedium];
+			if (photo.image != nil) {
+				CGSize thumbnailSize = CGSizeMake(100, 100 * photo.image.size.height / photo.image.size.width);
+				photo.thumbnail = [photo.image resizedImage:thumbnailSize interpolationQuality:kCGInterpolationMedium];
+			}
 		}
 		@catch (NSException *e) {
 			DLog(@"%@", e);

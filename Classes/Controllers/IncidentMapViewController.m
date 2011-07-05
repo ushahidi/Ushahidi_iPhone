@@ -80,6 +80,7 @@
 	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
 	[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
+	[[Ushahidi sharedUshahidi] getVersionOfDeployment:deployment forDelegate:self];
 }
 
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event {

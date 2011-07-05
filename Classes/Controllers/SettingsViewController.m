@@ -270,7 +270,7 @@ typedef enum {
 			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
 			[cell setReturnKeyType:UIReturnKeyDefault];
 			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
-			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
 		}
 		return cell;	

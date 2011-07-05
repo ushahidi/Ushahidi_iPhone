@@ -73,7 +73,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<false/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>

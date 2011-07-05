@@ -1452,6 +1452,7 @@
 		3E8637E512246A64001DE141 /* NSDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extension.m"; sourceTree = "<group>"; };
 		3E8638C212247BAC001DE141 /* MKMapView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Extension.h"; sourceTree = "<group>"; };
 		3E8638C312247BAC001DE141 /* MKMapView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Extension.m"; sourceTree = "<group>"; };
+		3E86815213C36BE5001FC161 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E8BF2E513B8B39900457BD4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E8F02EF1315565F0011E423 /* ButtonTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonTableCell.h; sourceTree = "<group>"; };
 		3E8F02F01315565F0011E423 /* ButtonTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonTableCell.m; sourceTree = "<group>"; };
@@ -2676,6 +2677,7 @@
 				zh_CN,
 				zh_TW,
 				ja,
+				lt,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -3843,6 +3845,7 @@
 				3E030A4813ACA0FD00DCC48C /* ru */,
 				3E030A4913ACA10700DCC48C /* nl */,
 				3E8BF2E513B8B39900457BD4 /* ja */,
+				3E86815213C36BE5001FC161 /* lt */,
 				3E81C73913AF90ED00243495 /* zh_CN */,
 				3E81C75613AF90F600243495 /* zh_TW */,
 			);

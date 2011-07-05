@@ -25,7 +25,7 @@ For more information visit:
 * Edit SINGLE DEPLOYMENT URL section with the URL for your map
 * Edit STYLING COLOR CODES section with various HEX color codes to match your map styling
 * Optionally edit BITLY AND TWITTER API KEYS if you have your own API keys for these services
-* For BITLY, Sign Up for a Bitly Account at [http://bitly.com/a/sign_up](http://bitly.com/a/sign_up), then visit [http://bitly.com/a/your_api_key](http://bitly.com/a/your_api_key) to find your BitlyLogin and BitlyApiKey
-* For TWITTER, Sign Up for a Twitter Dev Account at [https://dev.twitter.com/apps/new](https://dev.twitter.com/apps/new), entering your application name, description, website, organization, etc then visit [https://dev.twitter.com/pages/xauth](https://dev.twitter.com/pages/xauth) for information on obtaining xAuth which is not enabled by default. Note, you'll need to email api@twitter.com explaining that your mobile application requires xAuth to skip the request_token and authorize steps and jump right to the access_token step.
+* For BITLY, Sign Up for a [Bitly Account](http://bitly.com/a/sign_up), then visit [Your Bit.ly API Key](http://bitly.com/a/your_api_key) to find your BitlyLogin and BitlyApiKey
+* For TWITTER, Sign Up for a [Twitter Dev Account](https://dev.twitter.com/apps/new), entering your application name, description, website, organization, etc then visit [Using Twitter xAuth](https://dev.twitter.com/pages/xauth) for information on obtaining xAuth which is not enabled by default. Note, you'll need to email api@twitter.com explaining that your mobile application requires xAuth to skip the request_token and authorize steps and jump right to the access_token step.
 * In Xcode, Right-Click target (ex MapATL) > Get Info > Targets tab, edit the Info.plist File to your new plist file (ex MapATL.plist)
 * You should now be able to deploy your white-labelled version of the app to the Simulator for testing, enjoy!

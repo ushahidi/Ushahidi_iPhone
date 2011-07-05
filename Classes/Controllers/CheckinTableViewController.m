@@ -71,6 +71,7 @@
 	self.refreshButton.enabled = NO;
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 	[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
+	[[Ushahidi sharedUshahidi] getVersionOfDeployment:self.deployment forDelegate:self];
 }
 
 - (IBAction) filterChanged:(id)sender event:(UIEvent*)event {

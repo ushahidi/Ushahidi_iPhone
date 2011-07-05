@@ -3996,7 +3996,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "420899E4-741B-4BD5-8303-9BAB12F0FEDE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "37CA7086-C3D2-4F33-BD0D-E5D0BA29B943";
 			};
 			name = Debug;
 		};
@@ -4016,7 +4016,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "420899E4-741B-4BD5-8303-9BAB12F0FEDE";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "37CA7086-C3D2-4F33-BD0D-E5D0BA29B943";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4037,7 +4037,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3C7DA140-B3D3-446E-A161-E93801BB2284";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43D17960-D782-41C1-AFAB-73F168E1C5EC";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";

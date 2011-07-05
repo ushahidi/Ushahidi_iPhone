@@ -28,6 +28,7 @@
 #import "NSURL+Extension.h"
 #import "NSDictionary+Extension.h"
 #import "ASIHTTPRequest+Extension.h"
+#import "UIImage+Resize.h"
 #import "JSON.h"
 #import "Deployment.h"
 #import "Category.h"
@@ -1285,6 +1286,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	else if ([request responseData] != nil) {
 		DLog(@"RESPONSE: BINARY IMAGE %@", [request.originalURL absoluteString]);
 		photo.image = [UIImage imageWithData:[request responseData]];
+		@try {
+			CGSize size = CGSizeMake(100, 100 * photo.image.size.height / photo.image.size.width);
+			photo.thumbnail = [photo.image resizedImage:size interpolationQuality:kCGInterpolationMedium];
+		}
+		@catch (NSException *e) {
+			DLog(@"%@", e);
+		}
 		NSObject *object = [request getObject];
 		if ([object isKindOfClass:Incident.class]) {
 			[self dispatchSelector:@selector(downloadedFromUshahidi:photo:incident:) 

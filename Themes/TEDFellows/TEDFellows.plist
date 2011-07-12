@@ -5,51 +5,51 @@
 	<key>## BUNDLE NAME AND VERSION ##</key>
 	<string>########################## BUNDLE NAME AND VERSION ##########################</string>
 	<key>CFBundleVersion</key>
-	<string>1.9</string>
+	<string>1.8</string>
 	<key>CFBundleName</key>
-	<string>北京交通</string>
+	<string>TED Fellows</string>
 	<key>CFBundleDisplayName</key>
-	<string>北京交通</string>
+	<string>TED Fellows</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ushahidi.ios.beijingtransport</string>
+	<string>com.ushahidi.ios.tedfellows</string>
 	<key>## SUPPORT INFORMATION ##</key>
 	<string>########################## SUPPORT INFORMATION ##########################</string>
 	<key>SupportEmail</key>
-	<string>ourbjtransport@gmail.com</string>
+	<string>support@ushahidi.com</string>
 	<key>SupportURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
+	<string>http://www.crowdmap.com</string>
 	<key>AppStoreURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
+	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
 	<key>## SINGLE DEPLOYMENT URL ##</key>
 	<string>########################## SINGLE DEPLOYMENT URL ##########################</string>
 	<key>MapURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
+	<string>http://tedfellows.crowdmap.com</string>
 	<key>## STYLING COLOR CODES ##</key>
 	<string>########################## STYLING COLOR CODES ##########################</string>
 	<key>NavBarColor</key>
-	<string>#3c4a65</string>
+	<string>#808080</string>
 	<key>ToolBarColor</key>
-	<string>#55637d</string>
+	<string>#8e8e8e</string>
 	<key>SearchBarColor</key>
-	<string>#55637d</string>
+	<string>#8e8e8e</string>
 	<key>TablePlainColor</key>
-	<string>#e1f0f3</string>
+	<string>#fcfcfc</string>
 	<key>TableGroupedColor</key>
-	<string>#c4e2ed</string>
+	<string>#ececec</string>
 	<key>TableOddRowColor</key>
-	<string>#c4e2ed</string>
+	<string>#f4f4f4</string>
 	<key>TableEvenRowColor</key>
-	<string>#d4edf2</string>
+	<string>#fbfbfb</string>
 	<key>TableSelectedRowColor</key>
-	<string>#ea5e20</string>
+	<string>#e5e5e5</string>
 	<key>TableHeaderColor</key>
-	<string>#7b8297</string>
+	<string>#d6d6d6</string>
 	<key>TableHeaderTextColor</key>
-	<string>#000000</string>
+	<string>#ff2b06</string>
 	<key>VerifiedTextColor</key>
-	<string>#414e6e</string>
+	<string>#8e8e8e</string>
 	<key>UnverifiedTextColor</key>
-	<string>#ea5e20</string>
+	<string>#8e8e8e</string>
 	<key>## BITLY AND TWITTER API KEYS ##</key>
 	<string>########################## BITLY AND TWITTER API KEYS ##########################</string>
 	<key>BitlyLogin</key>

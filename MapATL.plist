@@ -5,7 +5,7 @@
 	<key>## BUNDLE NAME AND VERSION ##</key>
 	<string>########################## BUNDLE NAME AND VERSION ##########################</string>
 	<key>CFBundleVersion</key>
-	<string>1.8</string>
+	<string>1.9</string>
 	<key>CFBundleName</key>
 	<string>MapATL</string>
 	<key>CFBundleDisplayName</key>

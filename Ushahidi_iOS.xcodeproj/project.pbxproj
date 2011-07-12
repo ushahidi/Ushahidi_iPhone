@@ -138,7 +138,6 @@
 		3E0F769813AB7772004494EC /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75BD13AB775A004494EC /* iTunesArtwork */; };
 		3E0F769913AB7772004494EC /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75BE13AB775A004494EC /* iTunesArtwork.png */; };
 		3E0F769A13AB7772004494EC /* Logo_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75C013AB775A004494EC /* Logo_iPad.png */; };
-		3E0F769B13AB7772004494EC /* Logo_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75C113AB775A004494EC /* Logo_iPad@2x.png */; };
 		3E0F769C13AB7772004494EC /* Logo_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75C213AB775A004494EC /* Logo_iPhone.png */; };
 		3E0F769D13AB7772004494EC /* Logo_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75C313AB775A004494EC /* Logo_iPhone@2x.png */; };
 		3E0F769E13AB7772004494EC /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75C413AB775A004494EC /* placeholder.png */; };
@@ -1469,7 +1468,6 @@
 		3E0F75BD13AB775A004494EC /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		3E0F75BE13AB775A004494EC /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		3E0F75C013AB775A004494EC /* Logo_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPad.png; sourceTree = "<group>"; };
-		3E0F75C113AB775A004494EC /* Logo_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPad@2x.png"; sourceTree = "<group>"; };
 		3E0F75C213AB775A004494EC /* Logo_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPhone.png; sourceTree = "<group>"; };
 		3E0F75C313AB775A004494EC /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
 		3E0F75C413AB775A004494EC /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -2199,13 +2197,11 @@
 				3E0F75BD13AB775A004494EC /* iTunesArtwork */,
 				3E0F75BE13AB775A004494EC /* iTunesArtwork.png */,
 				3E0F75C013AB775A004494EC /* Logo_iPad.png */,
-				3E0F75C113AB775A004494EC /* Logo_iPad@2x.png */,
 				3E0F75C213AB775A004494EC /* Logo_iPhone.png */,
 				3E0F75C313AB775A004494EC /* Logo_iPhone@2x.png */,
 				3E0F75C413AB775A004494EC /* placeholder.png */,
 			);
-			name = BeijingTransport;
-			path = BeijingPublicTransport;
+			path = BeijingTransport;
 			sourceTree = "<group>";
 		};
 		3E15E7F913C5CC9B0050D46F /* TEDFellows */ = {
@@ -3328,7 +3324,6 @@
 				3E0F769813AB7772004494EC /* iTunesArtwork in Resources */,
 				3E0F769913AB7772004494EC /* iTunesArtwork.png in Resources */,
 				3E0F769A13AB7772004494EC /* Logo_iPad.png in Resources */,
-				3E0F769B13AB7772004494EC /* Logo_iPad@2x.png in Resources */,
 				3E0F769C13AB7772004494EC /* Logo_iPhone.png in Resources */,
 				3E0F769D13AB7772004494EC /* Logo_iPhone@2x.png in Resources */,
 				3E0F769E13AB7772004494EC /* placeholder.png in Resources */,
@@ -4514,7 +4509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4527,7 +4522,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25FECBFA-53C5-4AE5-81A4-D491E143261C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E493D11-7F41-4704-8F7D-15E7DF06506A";
 			};
 			name = Debug;
 		};
@@ -4535,7 +4530,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4546,7 +4541,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "25FECBFA-53C5-4AE5-81A4-D491E143261C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E493D11-7F41-4704-8F7D-15E7DF06506A";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4654,7 +4649,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = TEDFellows;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E2871D17-29CB-4858-97CB-4F197B12C886";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2DF5A8C8-4E94-402D-A404-2A28FB4A54A4";
 			};
 			name = Debug;
 		};
@@ -4674,7 +4669,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = TEDFellows;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E2871D17-29CB-4858-97CB-4F197B12C886";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2DF5A8C8-4E94-402D-A404-2A28FB4A54A4";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4695,7 +4690,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = TEDFellows;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52BA3EFF-8618-4286-835F-007E9648C414";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "22E8F734-8031-4352-AE14-DD33A5048873";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -4840,7 +4835,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "991BE558-0E6A-4436-AC62-6BD3C15466B3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B337AC22-38F4-4064-A60D-4E2AFCE7A3B5";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";

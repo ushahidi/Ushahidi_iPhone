@@ -72,16 +72,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 - (void)detectLocationForDelegate:(id<LocatorDelegate>)theDelegate {
 	DLog(@"");
 	self.delegate = theDelegate;
-	//if (self.latitude != nil && self.longitude != nil) {
-//		[self dispatchSelector:@selector(locatorFinished:latitude:longitude:)
-//						target:self.delegate 
-//					   objects:self, self.latitude, self.longitude, nil];	
-//	}
 	[self.locationManager startUpdatingLocation];
 }
 
+- (void)lookupAddressForDelegate:(id<LocatorDelegate>)theDelegate {
+	DLog(@"latitude:%@ longitude:%@", self.latitude, self.longitude);
+	self.delegate = theDelegate;
+	CLLocationCoordinate2D coordinate;
+	coordinate.longitude = [self.latitude floatValue];
+	coordinate.latitude = [self.longitude floatValue];
+	self.reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:coordinate];
+	[self.reverseGeocoder setDelegate:self];
+	[self.reverseGeocoder start];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    if (abs([newLocation.timestamp timeIntervalSinceNow]) < 15.0) {
+	if (newLocation != nil && abs([newLocation.timestamp timeIntervalSinceNow]) < 15.0) {
 		self.latitude = [NSString stringWithFormat:@"%.6f", newLocation.coordinate.latitude];
 		self.longitude = [NSString stringWithFormat:@"%.6f", newLocation.coordinate.longitude];
         [self dispatchSelector:@selector(locatorFinished:latitude:longitude:)
@@ -91,23 +97,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 	}
 }
 
-- (void)lookupAddressForDelegate:(id<LocatorDelegate>)theDelegate {
-	DLog(@"latitude:%@ longitude:%@", self.latitude, self.longitude);
-	self.delegate = theDelegate;
-	//if (self.address != nil) {
-//		[self dispatchSelector:@selector(lookupFinished:address:)
-//						target:self.delegate 
-//					   objects:self, self.address, nil];	
-//	}
-	CLLocationCoordinate2D coordinate;
-	coordinate.longitude = [self.latitude floatValue];
-	coordinate.latitude = [self.longitude floatValue];
-	self.reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate:coordinate];
-	[self.reverseGeocoder setDelegate:self];
-	[self.reverseGeocoder start];
-}
-
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+	DLog(@"error: %@", [error localizedDescription]);
 	[self.locationManager stopUpdatingLocation];
 	[self dispatchSelector:@selector(locatorFailed:error:)
 					target:self.delegate 
@@ -115,48 +106,57 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 }
 
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark {
-	DLog(@"%@", [placemark addressDictionary]);
 	if (placemark != nil) {
-		NSDictionary *addressDictionary = [placemark addressDictionary];
-		if (addressDictionary != nil) {
-			NSString *street = [addressDictionary objectForKey:@"street"];
-			NSString *city = [addressDictionary objectForKey:@"city"];
-			NSString *state = [addressDictionary objectForKey:@"state"];
-			NSString *country = [addressDictionary objectForKey:@"country"];
+		@try {
 			NSMutableString *addressString = [NSMutableString string];
-			if ([NSString isNilOrEmpty:street]) {
-				[addressString appendString:street];
+			if ([NSString isNilOrEmpty:placemark.subThoroughfare] == NO) {
+				[addressString appendString:placemark.subThoroughfare];
 			}
-			if ([NSString isNilOrEmpty:city]) {
+			if ([NSString isNilOrEmpty:placemark.thoroughfare] == NO) {
+				if ([addressString length] > 0) {
+					[addressString appendString:@" "];
+				}
+				[addressString appendString:placemark.thoroughfare];
+			}
+			if ([NSString isNilOrEmpty:placemark.locality] == NO) {
 				if ([addressString length] > 0) {
 					[addressString appendString:@", "];
 				}
-				[addressString appendString:city];
+				[addressString appendString:placemark.locality];
 			}
-			if ([NSString isNilOrEmpty:state]) {
+			if ([NSString isNilOrEmpty:placemark.subAdministrativeArea] == NO) {
 				if ([addressString length] > 0) {
 					[addressString appendString:@", "];
 				}
-				[addressString appendString:state];
+				[addressString appendString:placemark.subAdministrativeArea];
 			}
-			if ([NSString isNilOrEmpty:country]) {
+			if ([NSString isNilOrEmpty:placemark.administrativeArea] == NO) {
 				if ([addressString length] > 0) {
 					[addressString appendString:@", "];
 				}
-				[addressString appendString:country];
+				[addressString appendString:placemark.administrativeArea];
+			}
+			if ([NSString isNilOrEmpty:placemark.country] == NO) {
+				if ([addressString length] > 0) {
+					[addressString appendString:@", "];
+				}
+				[addressString appendString:placemark.country];
 			}
 			self.address = addressString;
 			[self dispatchSelector:@selector(lookupFinished:address:)
 							target:self.delegate 
 						   objects:self, self.address, nil];	
 		}
-		else {
+		@catch (NSException *e) {
+			DLog(@"NSException: %@", e);
+			[self reverseGeocoderViaGoogleApi];
 			[self dispatchSelector:@selector(lookupFailed:error:)
 							target:self.delegate 
 						   objects:self, nil, nil];
 		}
 	}
 	else {
+		DLog(@"Placemark is NIL");
 		[self reverseGeocoderViaGoogleApi];
 		[self dispatchSelector:@selector(lookupFailed:error:)
 						target:self.delegate 
@@ -165,7 +165,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 }
 
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error {
-	DLog(@"%@", [error localizedDescription]);
+	DLog(@"error: %@", [error localizedDescription]);
 	[self reverseGeocoderViaGoogleApi];
 	[self dispatchSelector:@selector(lookupFailed:error:)
 					target:self.delegate 
@@ -202,7 +202,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 }
 
 - (void) reverseGeocoderFailed:(ASIHTTPRequest *)request {
-	DLog(@"%@", [[request error] localizedDescription]);
+	DLog(@"error: %@", [request error] != nil ? [[request error] localizedDescription] : @"NIL");
 	[self dispatchSelector:@selector(lookupFailed:error:)
 					target:self.delegate 
 				   objects:self, [request error], nil];

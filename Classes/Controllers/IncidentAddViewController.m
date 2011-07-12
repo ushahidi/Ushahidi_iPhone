@@ -557,7 +557,7 @@ typedef enum {
 }
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
-	DLog(@"error: %@", [error localizedDescription]);
+	DLog(@"error: %@", error != nil ? [error localizedDescription] : @"NIL");
 	[self setFooter:NSLocalizedString(@"Error Detecting Location", nil) atSection:TableSectionLocation];
 	if (self.editing == NO) {
 		[self.tableView reloadData];
@@ -576,7 +576,7 @@ typedef enum {
 }
 
 - (void) lookupFailed:(Locator *)locator error:(NSError *)error {
-	DLog(@"error: %@", [error localizedDescription]);
+	DLog(@"error: %@", error != nil ? [error localizedDescription] : @"NIL");
 }
 
 #pragma mark -

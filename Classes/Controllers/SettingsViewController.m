@@ -330,7 +330,7 @@ typedef enum {
 		}
 		else if (indexPath.row == TableRowAppShare) {
 			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-			[cell setText:NSLocalizedString(@"Share Ushahidi iOS", nil)];
+			[cell setText:NSLocalizedString(@"Share Application", nil)];
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 			return cell;

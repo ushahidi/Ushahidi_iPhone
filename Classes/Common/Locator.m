@@ -124,12 +124,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Locator);
 				}
 				[addressString appendString:placemark.locality];
 			}
-			if ([NSString isNilOrEmpty:placemark.subAdministrativeArea] == NO) {
-				if ([addressString length] > 0) {
-					[addressString appendString:@", "];
-				}
-				[addressString appendString:placemark.subAdministrativeArea];
-			}
 			if ([NSString isNilOrEmpty:placemark.administrativeArea] == NO) {
 				if ([addressString length] > 0) {
 					[addressString appendString:@", "];

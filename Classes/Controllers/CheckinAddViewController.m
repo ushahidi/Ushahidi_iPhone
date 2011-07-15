@@ -49,9 +49,8 @@
 
 typedef enum {
 	TableSectionMessage,
-	TableSectionLocation,
 	TableSectionPhoto,
-	TableSectionContact
+	TableSectionLocation
 } TableSection;
 
 typedef enum {
@@ -73,10 +72,6 @@ typedef enum {
 
 - (IBAction) done:(id)sender {
 	DLog(@"");
-	[[Settings sharedSettings] setFirstName:self.checkin.firstName];
-	[[Settings sharedSettings] setLastName:self.checkin.lastName];
-	[[Settings sharedSettings] setEmail:self.checkin.email];
-	
 	[self.view endEditing:YES];
 	if ([[Ushahidi sharedUshahidi] uploadCheckin:self.checkin forDelegate:self]) {
 		[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nill)];
@@ -102,7 +97,6 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Message", nil) atSection:TableSectionMessage];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photo", nil) atSection:TableSectionPhoto];
-	[self setHeader:NSLocalizedString(@"Contact", nil) atSection:TableSectionContact];
 }
 
 - (void)viewDidUnload {
@@ -129,12 +123,6 @@ typedef enum {
 		[[Locator sharedLocator] detectLocationForDelegate:self];
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
-	if ([NSString isNilOrEmpty:self.checkin.email] || [self.checkin.email isValidEmail]) {
-		[self setFooter:nil atSection:TableSectionContact];
-	}
-	else {
-		[self setFooter:NSLocalizedString(@"Invalid Email Address", nil) atSection:TableSectionContact];
-	}
 	[self.tableView reloadData];
 	[self.loadingView hide];
 }
@@ -156,7 +144,7 @@ typedef enum {
 #pragma mark TableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -168,9 +156,6 @@ typedef enum {
 	}
 	if (section == TableSectionPhoto) {
 		return 1;
-	}
-	if (section == TableSectionContact) {
-		return 3;
 	}
 	return 0;
 }
@@ -222,46 +207,15 @@ typedef enum {
 			return cell;
 		}
 	}
-	else if (indexPath.section == TableSectionContact) {
-		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
-		if (indexPath.row == TableRowContactFirst) {
-			[cell setText:self.checkin.firstName];
-			[cell setLabel:NSLocalizedString(@"first name", nil)];
-			[cell setPlaceholder:NSLocalizedString(@"Enter first name", nil)];
-			[cell setReturnKeyType:UIReturnKeyNext];
-			[cell setKeyboardType:UIKeyboardTypeDefault];
-			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
-			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
-		}
-		else if (indexPath.row == TableRowContactLast) {
-			[cell setText:self.checkin.lastName];
-			[cell setLabel:NSLocalizedString(@"last name", nil)];
-			[cell setPlaceholder:NSLocalizedString(@"Enter last name", nil)];
-			[cell setReturnKeyType:UIReturnKeyNext];
-			[cell setKeyboardType:UIKeyboardTypeDefault];
-			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
-			[cell setAutocapitalizationType:UITextAutocapitalizationTypeWords];
-		}
-		else if (indexPath.row == TableRowContactEmail) {
-			[cell setText:self.checkin.email];
-			[cell setLabel:NSLocalizedString(@"email", nil)];
-			[cell setPlaceholder:NSLocalizedString(@"Enter email", nil)];
-			[cell setReturnKeyType:UIReturnKeyDefault];
-			[cell setKeyboardType:UIKeyboardTypeEmailAddress];
-			[cell setAutocorrectionType:UITextAutocorrectionTypeNo];
-			[cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-		}
-		return cell;
-	}
 	return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionMessage) {
-		return [Device isIPad] ? 150 : 80;
+		return [Device isIPad] ? 160 : 70;
 	}
 	if (indexPath.section == TableSectionLocation) {
-		return [Device isIPad] ? 450 : 235;
+		return [Device isIPad] ? 600 : 165;
 	}
 	if (indexPath.section == TableSectionPhoto) {
 		if (self.checkin.hasPhotos) {
@@ -271,9 +225,6 @@ typedef enum {
 			}
 			return 200;	
 		}
-		return 44;
-	}
-	if (indexPath.section == TableSectionContact) {
 		return 44;
 	}
 	return 0;
@@ -333,50 +284,11 @@ typedef enum {
 }
 
 - (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	if (indexPath.section == TableSectionContact) {
-		if (indexPath.row == TableRowContactFirst) {
-			self.checkin.firstName = text;
-		}
-		else if (indexPath.row == TableRowContactLast) {
-			self.checkin.lastName = text;
-		}
-		else if (indexPath.row == TableRowContactEmail) {
-			self.checkin.email = text;
-		}
-	}
+	
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	if (indexPath.section == TableSectionContact) {
-		if (indexPath.row == TableRowContactFirst) {
-			self.checkin.firstName = text;
-			NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:TableRowContactLast inSection:TableSectionContact];
-			TextFieldTableCell *nextCell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:nextIndexPath];
-			[nextCell showKeyboard];
-		}
-		else if (indexPath.row == TableRowContactLast) {
-			self.checkin.lastName = text;
-			NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:TableRowContactEmail inSection:TableSectionContact];
-			TextFieldTableCell *nextCell = (TextFieldTableCell *)[self.tableView cellForRowAtIndexPath:nextIndexPath];
-			[nextCell showKeyboard];
-		}
-		else if (indexPath.row == TableRowContactEmail) {
-			self.checkin.email = text;
-			if ([NSString isNilOrEmpty:text] || [text isValidEmail]) {
-				[self setFooter:nil atSection:TableSectionContact];
-			}
-			else {
-				[self setFooter:NSLocalizedString(@"Invalid Email Address", nil) atSection:TableSectionContact];
-			}
-			[self.tableView reloadData];
-		}
-		else {
-			[cell hideKeyboard];
-		}
-	}
-	else {
-		[cell hideKeyboard];
-	}
+	[cell hideKeyboard];
 }
 
 #pragma mark -
@@ -493,9 +405,6 @@ typedef enum {
 - (void) lookupFinished:(Locator *)locator address:(NSString *)address {
 	DLog(@"address:%@", address);
 	[self setFooter:address atSection:TableSectionLocation];
-	if ([NSString isNilOrEmpty:self.checkin.message]) {
-		self.checkin.message = address;
-	}
 	if (self.editing == NO) {
 		[self.tableView reloadData];
 	}

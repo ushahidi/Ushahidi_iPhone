@@ -4550,7 +4550,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4564,7 +4564,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B87B96AC-4FF0-4B16-8C0D-7B8D2D0987D5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E663008-07C4-41A8-AF78-E9200BDD4365";
 			};
 			name = Debug;
 		};
@@ -4572,7 +4572,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4584,7 +4584,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B87B96AC-4FF0-4B16-8C0D-7B8D2D0987D5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E663008-07C4-41A8-AF78-E9200BDD4365";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4605,7 +4605,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B8DA91CC-6537-4D84-A71A-51E3B5DBF90D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1EEC450C-098B-491F-ABEA-6C566FADE837";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";

@@ -34,6 +34,7 @@
 @private
 	CGFloat width;
 	CGRect rect;
+	BOOL resize;
 }
 
 @property(nonatomic, retain) UIViewController *viewController;
@@ -41,7 +42,7 @@
 @property(nonatomic, assign) id<ImagePickerDelegate> delegate;
 
 - (id) initWithController:(UIViewController *)controller;
-- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)delegate width:(CGFloat)width forRect:(CGRect)rect;
+- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)delegate resize:(BOOL)resize width:(CGFloat)width forRect:(CGRect)rect;
 
 @end
 

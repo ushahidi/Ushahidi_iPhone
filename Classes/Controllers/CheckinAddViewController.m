@@ -246,6 +246,7 @@ typedef enum {
 		else {
 			UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 			[self.imagePickerController showImagePickerForDelegate:self
+															resize:[[Settings sharedSettings] resizePhotos]
 															 width:[[Settings sharedSettings] imageWidth] 
 														   forRect:cell.frame];
 		}
@@ -325,14 +326,24 @@ typedef enum {
 
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", nil)];
+	if ([[Settings sharedSettings] resizePhotos]) {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", nil)];
+	}
+	else {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
+	}
 }
 
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
 	DLog(@"");
 	if (image != nil && image.size.width > 0 && image.size.height > 0) {
 		[self.checkin addPhoto:[Photo photoWithImage:image]];
-		[self.loadingView showWithMessage:NSLocalizedString(@"Resized", nil)];
+		if ([[Settings sharedSettings] resizePhotos]) {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Resized", nil)];
+		}
+		else {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+		}
 		[self.loadingView hideAfterDelay:1.0];
 	}
 	else {

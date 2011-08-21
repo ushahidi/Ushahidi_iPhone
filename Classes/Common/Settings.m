@@ -33,7 +33,7 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
-@synthesize email, firstName, lastName, lastDeployment, lastIncident, mapDistance, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel;
+@synthesize email, firstName, lastName, lastDeployment, lastIncident, mapDistance, downloadMaps, becomeDiscrete, resizePhotos, imageWidth, mapZoomLevel;
 @synthesize mapName, mapURL;
 @synthesize navBarTintColor, toolBarTintColor, searchBarTintColor, tablePlainBackColor, tableGroupedBackColor, tableOddRowColor, tableEvenRowColor, tableSelectRowColor, tableHeaderBackColor, tableHeaderTextColor, verifiedTextColor, unverifiedTextColor;
 
@@ -54,6 +54,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	self.lastIncident = [userDefaults stringForKey:@"lastIncident"];
 	self.downloadMaps = [userDefaults boolForKey:@"downloadMaps"];
 	self.becomeDiscrete = [userDefaults boolForKey:@"becomeDiscrete"];
+	if ([userDefaults objectForKey:@"resizePhotos"] != nil) {
+		self.resizePhotos = [userDefaults boolForKey:@"resizePhotos"];
+	}
+	else {
+		self.resizePhotos = YES;
+	}
 	self.imageWidth = [userDefaults floatForKey:@"imageWidth"];
 	if (self.imageWidth == 0) self.imageWidth = 600;
 	self.mapZoomLevel = [userDefaults integerForKey:@"mapZoomLevel"];
@@ -107,6 +113,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[[NSUserDefaults standardUserDefaults] setFloat:self.imageWidth forKey:@"imageWidth"];
 	[[NSUserDefaults standardUserDefaults] setInteger:self.mapZoomLevel forKey:@"mapZoomLevel"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.mapDistance forKey:@"mapDistance"];
+	[[NSUserDefaults standardUserDefaults] setBool:self.resizePhotos forKey:@"resizePhotos"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

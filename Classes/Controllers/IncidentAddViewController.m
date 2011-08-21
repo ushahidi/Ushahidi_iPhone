@@ -400,7 +400,10 @@ typedef enum {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
 		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-		[self.imagePickerController showImagePickerForDelegate:self width:[[Settings sharedSettings] imageWidth] forRect:cell.frame];
+		[self.imagePickerController showImagePickerForDelegate:self 
+														resize:[[Settings sharedSettings] resizePhotos]
+														 width:[[Settings sharedSettings] imageWidth] 
+													   forRect:cell.frame];
 	}
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
@@ -505,13 +508,23 @@ typedef enum {
 
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Resizing Photo...", nil)];
+	if ([[Settings sharedSettings] resizePhotos]) {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", nil)];
+	}
+	else {
+		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
+	}
 }
 
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
 	DLog(@"");
 	if (image != nil && image.size.width > 0 && image.size.height > 0) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Photo Added", nil)];
+		if ([[Settings sharedSettings] resizePhotos]) {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Resized", nil)];
+		}
+		else {
+			[self.loadingView showWithMessage:NSLocalizedString(@"Photo Added", nil)];
+		}
 		[self.loadingView hideAfterDelay:1.0];
 		[self.incident addPhoto:[Photo photoWithImage:image]];
 		[self.tableView reloadData];	

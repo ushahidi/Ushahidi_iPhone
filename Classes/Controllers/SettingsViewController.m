@@ -37,6 +37,7 @@
 @property(nonatomic, retain) NSString *lastName;
 @property(nonatomic, assign) BOOL downloadMaps;
 @property(nonatomic, assign) BOOL becomeDiscrete;
+@property(nonatomic, assign) BOOL resizePhotos;
 @property(nonatomic, assign) NSInteger imageWidth;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
 @property(nonatomic, retain) Email *email;
@@ -51,7 +52,7 @@
 
 @implementation SettingsViewController
 
-@synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, email, website, support, download, logo;
+@synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, resizePhotos, email, website, support, download, logo;
 @synthesize cancelButton, doneButton;
 
 #pragma mark -
@@ -72,6 +73,7 @@ typedef enum {
 } TableRowContact;
 
 typedef enum {
+	TableRowPhotoResize,
 	TableRowPhotoSize
 } TableRowPhoto;
 
@@ -116,6 +118,7 @@ typedef enum {
 		[[Settings sharedSettings] setLastName:self.lastName];
 		[[Settings sharedSettings] setDownloadMaps:self.downloadMaps];
 		[[Settings sharedSettings] setBecomeDiscrete:self.becomeDiscrete];
+		[[Settings sharedSettings] setResizePhotos:self.resizePhotos];
 		[[Settings sharedSettings] setImageWidth:self.imageWidth];
 		[[Settings sharedSettings] setMapZoomLevel:self.mapZoomLevel];
 		[[Settings sharedSettings] save];
@@ -168,6 +171,7 @@ typedef enum {
 	self.lastName = [[Settings sharedSettings] lastName];
 	self.downloadMaps = [[Settings sharedSettings] downloadMaps];
 	self.becomeDiscrete = [[Settings sharedSettings] becomeDiscrete];
+	self.resizePhotos = [[Settings sharedSettings] resizePhotos];
 	self.imageWidth = [[Settings sharedSettings] imageWidth];
 	self.mapZoomLevel = [[Settings sharedSettings] mapZoomLevel];
 	if ([NSString isNilOrEmpty:self.userEmail] || [self.userEmail isValidEmail]) {
@@ -213,7 +217,7 @@ typedef enum {
 		return 3;
 	}
 	if (section == TableSectionPhoto) {
-		return 1;
+		return 2;
 	}
 	if (section == TableSectionMap) {
 		return 2;
@@ -230,6 +234,10 @@ typedef enum {
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionPhoto &&
 		indexPath.row == TableRowPhotoSize) {
+		return 60;
+	}
+	if (indexPath.section == TableSectionPhoto &&
+		indexPath.row == TableRowPhotoResize) {
 		return 60;
 	}
 	if (indexPath.section == TableSectionMap &&
@@ -276,21 +284,26 @@ typedef enum {
 		return cell;	
 	}
 	else if (indexPath.section == TableSectionPhoto) {
-		if (indexPath.row == TableRowPhotoSize) {
+		if (indexPath.row == TableRowPhotoResize) {
+			BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView indexPath:indexPath];
+			[cell setText:NSLocalizedString(@"Resize Images", nil)];
+			[cell setValue:self.resizePhotos];
+			return cell;
+		}
+		else if (indexPath.row == TableRowPhotoSize) {
 			SliderTableCell *cell = [TableCellFactory getSliderTableCellForDelegate:self table:theTableView indexPath:indexPath];
 			cell.textLabel.text = NSLocalizedString(@"Resized Image Width", nil);
 			cell.valueLabel.text = [NSString stringWithFormat:@"%d %@", (int)self.imageWidth, NSLocalizedString(@"pixels", nil)];
 			[cell setMaximum:1024];
 			[cell setMinimum:200];
 			[cell setValue:self.imageWidth];
-			[cell setEnabled:YES];
+			[cell setEnabled:self.resizePhotos];
 			return cell;
 		}
 	}
 	else if (indexPath.section == TableSectionMap) {
 		if (indexPath.row == TableRowMapDownload) {
 			BooleanTableCell *cell = [TableCellFactory getBooleanTableCellForDelegate:self table:theTableView indexPath:indexPath];
-			[cell setText:NSLocalizedString(@"Downloaded Map Zoom Level", nil)];
 			[cell setText:NSLocalizedString(@"Download Offline Maps", nil)];
 			[cell setValue:self.downloadMaps];
 			DLog(@"BooleanTableCell.backgroundColor:%@", cell.backgroundColor);
@@ -441,6 +454,11 @@ typedef enum {
 	else if (cell.indexPath.section == TableSectionMap &&
 			 cell.indexPath.row == TableRowMapDownload) {
 		self.downloadMaps = value;
+		[self.tableView reloadData];
+	}
+	else if (cell.indexPath.section == TableSectionPhoto &&
+			 cell.indexPath.row == TableRowPhotoResize) {
+		self.resizePhotos = value;
 		[self.tableView reloadData];
 	}
 }

@@ -27,6 +27,7 @@
 
 @property(nonatomic, assign) CGFloat width;
 @property(nonatomic, assign) CGRect rect;
+@property(nonatomic, assign) BOOL resize;
 
 - (void) showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType;
 - (void) resizeImageInBackground:(UIImage *)image;
@@ -35,7 +36,7 @@
 
 @implementation ImagePickerController
 
-@synthesize viewController, popoverController, delegate, width, rect;
+@synthesize viewController, popoverController, delegate, width, rect, resize;
 
 - (id)initWithController:(UIViewController *)controller {
     if ((self = [super init])) {
@@ -44,10 +45,11 @@
     return self;
 }
 
-- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)theDelegate width:(CGFloat)theWidth forRect:(CGRect)theRect {
+- (void) showImagePickerForDelegate:(id<ImagePickerDelegate>)theDelegate resize:(BOOL)theResize width:(CGFloat)theWidth forRect:(CGRect)theRect {
 	self.delegate = theDelegate;
 	self.width = theWidth;
 	self.rect = theRect;
+	self.resize = theResize;
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
@@ -110,7 +112,14 @@
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
 	[self dispatchSelector:@selector(imagePickerDidSelect:) target:delegate objects:self, nil];
-	[self performSelectorInBackground:@selector(resizeImageInBackground:) withObject:image];
+	if (self.resize) {
+		[self performSelectorInBackground:@selector(resizeImageInBackground:) withObject:image];
+	}
+	else {
+		[self dispatchSelector:@selector(imagePickerDidFinish:image:)
+						target:self.delegate 
+					   objects:self, image, nil];
+	}
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -122,7 +131,14 @@
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
 	[self dispatchSelector:@selector(imagePickerDidSelect:) target:delegate objects:self, nil];
-	[self performSelectorInBackground:@selector(resizeImageInBackground:) withObject:[info objectForKey:UIImagePickerControllerOriginalImage]];
+	if (self.resize) {
+		[self performSelectorInBackground:@selector(resizeImageInBackground:) withObject:[info objectForKey:UIImagePickerControllerOriginalImage]];
+	}
+	else {
+		[self dispatchSelector:@selector(imagePickerDidFinish:image:)
+						target:self.delegate 
+					   objects:self, [info objectForKey:UIImagePickerControllerOriginalImage], nil];
+	}
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

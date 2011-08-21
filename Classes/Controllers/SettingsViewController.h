@@ -42,6 +42,7 @@
 	NSString *lastName;
 	BOOL downloadMaps;
 	BOOL becomeDiscrete;
+	BOOL resizePhotos;
 	NSInteger mapZoomLevel;
 	NSInteger imageWidth;
 	Email *email;

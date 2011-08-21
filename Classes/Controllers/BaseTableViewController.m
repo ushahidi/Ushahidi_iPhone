@@ -302,20 +302,26 @@
 
 -(void) keyboardWillShow:(NSNotification *)notification {
 	//DLog(@"notification:%@", notification);
-	NSTimeInterval duration = 0.3;
-	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
-	DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
-	
-	CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
-	[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
-	DLog(@"Keyboard x:%f y:%f width:%f height:%f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
-	
-	CGRect tableFrame = self.tableView.frame;
-	DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
-	
-	tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y - [self getFrameHeight:keyboardFrame];
-	
-	[self resizeTableToFrame:tableFrame duration:duration animation:@"ShrinkTableHeight"];
+	@try {
+		NSTimeInterval duration = 0.3;
+		[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
+		DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
+		
+		CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
+		[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
+		DLog(@"Keyboard x:%f y:%f width:%f height:%f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+		
+		CGRect tableFrame = self.tableView.frame;
+		DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
+		
+		tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y - [self getFrameHeight:keyboardFrame];
+		
+		[self resizeTableToFrame:tableFrame duration:duration animation:@"ShrinkTableHeight"];
+	}
+	@catch (NSException *e) {
+		DLog(@"NSException:%@", e);
+		//TODO handle keyboard show error
+	}	
 }
 
 -(void) keyboardDidShow:(NSNotification *)notification {
@@ -324,25 +330,30 @@
 
 -(void) keyboardWillHide:(NSNotification *)notification {
 	//DLog(@"notification:%@", notification);
-	NSTimeInterval duration = 0.3;
-	[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
-	DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
-	
-	CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
-	[[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
-	DLog(@"Keyboard x:%f y:%f width:%f height:%f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
-	
-	CGRect tableFrame = self.tableView.frame;
-	DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
-	
-	if (self.toolBar) {
-		tableFrame.size.height = self.toolBar.frame.origin.y - tableFrame.origin.y;
+	@try {
+		NSTimeInterval duration = 0.3;
+		[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
+		DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
+		
+		CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
+		[[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
+		DLog(@"Keyboard x:%f y:%f width:%f height:%f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
+		
+		CGRect tableFrame = self.tableView.frame;
+		DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
+		
+		if (self.toolBar) {
+			tableFrame.size.height = self.toolBar.frame.origin.y - tableFrame.origin.y;
+		}
+		else {
+			tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y;
+		}
+		[self resizeTableToFrame:tableFrame duration:duration animation:@"RestoreTableHeight"];
 	}
-	else {
-		tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y;
-	}
-	
-	[self resizeTableToFrame:tableFrame duration:duration animation:@"RestoreTableHeight"];
+	@catch (NSException *e) {
+		DLog(@"NSException:%@", e);
+		//TODO handle keyboard hide error
+	}	
 }
 
 -(void) keyboardDidHide:(NSNotification *)notification {

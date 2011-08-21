@@ -31,6 +31,7 @@
 	NSString *mapDistance;
 	BOOL downloadMaps;
 	BOOL becomeDiscrete;
+	BOOL resizePhotos;
 	CGFloat imageWidth;
 	NSInteger mapZoomLevel;
 	
@@ -60,6 +61,7 @@
 @property(nonatomic, retain) NSString *mapDistance;
 @property(nonatomic, assign) BOOL downloadMaps;
 @property(nonatomic, assign) BOOL becomeDiscrete;
+@property(nonatomic, assign) BOOL resizePhotos;
 @property(nonatomic, assign) CGFloat imageWidth;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
 

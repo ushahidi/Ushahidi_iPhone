@@ -50,6 +50,10 @@
 	<string>#8e8e8e</string>
 	<key>UnverifiedTextColor</key>
 	<string>#8e8e8e</string>
+	<key>## VISIBILITY INFORMATION ##</key>
+	<string>########################## VISIBILITY INFORMATION ##########################</string>
+	<key>ReportNewsURL</key>
+	<false/>
 	<key>## BITLY AND TWITTER API KEYS ##</key>
 	<string>########################## BITLY AND TWITTER API KEYS ##########################</string>
 	<key>BitlyLogin</key>

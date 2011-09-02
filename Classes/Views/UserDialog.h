@@ -18,26 +18,30 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "BaseTabViewController.h"
-#import "UserDialog.h"
+#import <Foundation/Foundation.h>
 
-@class CheckinTableViewController;
-@class CheckinMapViewController;
+@protocol UserDialogDelegate;
 
-@interface CheckinTabViewController : BaseTabViewController<UserDialogDelegate> {
-
-@public
-	CheckinTableViewController *checkinTableViewController;
-	CheckinMapViewController *checkinMapViewController;
+@interface UserDialog : NSObject<UIAlertViewDelegate, UITextFieldDelegate> {
 	
 @private
-	UserDialog *userDialog;
+	id<UserDialogDelegate> delegate;
+	UITextField *firstField;
+	UITextField *lastField;
+	UITextField *emailField;
 }
 
-@property(nonatomic,retain) IBOutlet CheckinTableViewController *checkinTableViewController;
-@property(nonatomic,retain) IBOutlet CheckinMapViewController *checkinMapViewController;
+- (id) initForDelegate:(id<UserDialogDelegate>)delegate;
+- (void) showWithTitle:(NSString *)title first:(NSString *)first last:(NSString *)last email:(NSString *)email;
 
-- (IBAction) viewModeChanged:(id)sender;
+@end
+
+
+@protocol UserDialogDelegate <NSObject>
+
+@optional
+
+- (void) userDialogReturned:(UserDialog *)dialog first:(NSString *)first last:(NSString *)last email:(NSString *)email;
+- (void) userDialogCancelled:(UserDialog *)dialog;
 
 @end

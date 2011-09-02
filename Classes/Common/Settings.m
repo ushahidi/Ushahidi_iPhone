@@ -21,6 +21,7 @@
 #import "Settings.h"
 #import "SynthesizeSingleton.h"
 #import "UIColor+Extension.h"
+#import "NSString+Extension.h"
 
 @interface Settings ()
 
@@ -36,6 +37,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 @synthesize email, firstName, lastName, lastDeployment, lastIncident, mapDistance, downloadMaps, becomeDiscrete, resizePhotos, imageWidth, mapZoomLevel;
 @synthesize mapName, mapURL;
 @synthesize navBarTintColor, toolBarTintColor, searchBarTintColor, tablePlainBackColor, tableGroupedBackColor, tableOddRowColor, tableEvenRowColor, tableSelectRowColor, tableHeaderBackColor, tableHeaderTextColor, verifiedTextColor, unverifiedTextColor;
+@synthesize showReportNewsURL;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -87,6 +89,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	
 	self.verifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"VerifiedTextColor"]];
 	self.unverifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"UnverifiedTextColor"]];
+	
+	if ([infoDictionary objectForKey:@"ReportNewsURL"] != nil) {
+		self.showReportNewsURL = [infoDictionary boolForKey:@"ReportNewsURL"];
+	}
+	else {
+		self.showReportNewsURL = YES;
+	}
 }
 
 - (void)dealloc {
@@ -115,6 +124,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[[NSUserDefaults standardUserDefaults] setObject:self.mapDistance forKey:@"mapDistance"];
 	[[NSUserDefaults standardUserDefaults] setBool:self.resizePhotos forKey:@"resizePhotos"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL) hasFirstName {
+	return [NSString isNilOrEmpty:self.firstName] == NO;
+}
+
+- (BOOL) hasLastName {
+	return [NSString isNilOrEmpty:self.lastName] == NO;
+}
+
+- (BOOL) hasEmail {
+	return [NSString isNilOrEmpty:self.email] == NO;
 }
 
 @end

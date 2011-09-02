@@ -22,6 +22,7 @@
 #import "BaseSortTableViewController.h"
 #import "Ushahidi.h"
 #import "ItemPicker.h"
+#import "UserDialog.h"
 
 @class CheckinTabViewController;
 @class CheckinAddViewController;

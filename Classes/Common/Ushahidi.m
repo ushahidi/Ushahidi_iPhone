@@ -901,7 +901,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (NSArray *) getCategories {
-	return [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)];
+	return [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (NSArray *) getCategoriesForDelegate:(id<UshahidiDelegate>)delegate {
@@ -912,7 +912,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 									  failSelector:@selector(getCategoriesFailed:)];
 	[request attachDelegate:delegate];
 	[self.mainQueue addOperation:request];
-	return [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)];
+	return [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (void) getCategoriesStarted:(ASIHTTPRequest *)request {
@@ -920,7 +920,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	id<UshahidiDelegate> delegate = [request getDelegate];
 	[self dispatchSelector:@selector(downloadingFromUshahidi:categories:) 
 					target:delegate 
-				   objects:self, [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)], nil];
+				   objects:self, [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compare:)], nil];
 }
 
 - (void) getCategoriesFinished:(ASIHTTPRequest *)request {
@@ -974,7 +974,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	if (hasChanges) {
 		DLog(@"Has New Categories");
 	}
-	NSArray *categories = [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compareByTitle:)];
+	NSArray *categories = [[self.deployment.categories allValues] sortedArrayUsingSelector:@selector(compare:)];
 	[self dispatchSelector:@selector(downloadedFromUshahidi:categories:error:hasChanges:) 
 					target:[request getDelegate] 
 				   objects:self, categories, error, hasChanges, nil];	

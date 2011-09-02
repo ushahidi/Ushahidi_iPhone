@@ -27,16 +27,18 @@
 	NSString *title;
 	NSString *description;
 	UIColor *color;
+	NSInteger position;
 }
 
 @property(nonatomic,retain) NSString *identifier;
 @property(nonatomic,retain) NSString *title;
 @property(nonatomic,retain) NSString *description;
+@property(nonatomic,assign) NSInteger position;
 @property(nonatomic,retain) UIColor *color;
 
 - (id) initWithDictionary:(NSDictionary *)dictionary;
 - (BOOL) updateWithDictionary:(NSDictionary *)dictionary;
 - (BOOL) matchesString:(NSString *)string;
-- (NSComparisonResult)compareByTitle:(Category *)category;
+- (NSComparisonResult)compare:(Category *)category;
 
 @end

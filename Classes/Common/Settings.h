@@ -35,6 +35,10 @@
 	CGFloat imageWidth;
 	NSInteger mapZoomLevel;
 	
+	BOOL hasFirstName;
+	BOOL hasLastName;
+	BOOL hasEmail;
+	
 	NSString *mapName;
 	NSString *mapURL;
 	
@@ -51,6 +55,8 @@
 	UIColor *verifiedTextColor;
 	UIColor *unverifiedTextColor;
 	
+	BOOL showReportNewsURL;
+	
 }
 
 @property(nonatomic, retain) NSString *email;
@@ -64,6 +70,10 @@
 @property(nonatomic, assign) BOOL resizePhotos;
 @property(nonatomic, assign) CGFloat imageWidth;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
+
+@property(nonatomic, readonly) BOOL hasFirstName;
+@property(nonatomic, readonly) BOOL hasLastName;
+@property(nonatomic, readonly) BOOL hasEmail;
 
 @property(nonatomic, retain) NSString *mapName;
 @property(nonatomic, retain) NSString *mapURL;
@@ -81,6 +91,8 @@
 @property(nonatomic, retain) UIColor *tableHeaderTextColor;
 @property(nonatomic, retain) UIColor *verifiedTextColor;
 @property(nonatomic, retain) UIColor *unverifiedTextColor;
+
+@property(nonatomic, assign) BOOL showReportNewsURL;
 
 + (Settings *) sharedSettings;
 

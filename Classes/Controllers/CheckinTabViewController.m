@@ -31,11 +31,15 @@
 
 @interface CheckinTabViewController ()
 
+@property(nonatomic, retain) UserDialog *userDialog;
+
+- (void) showInfoOnceOnly;
+
 @end
 
 @implementation CheckinTabViewController
 
-@synthesize checkinTableViewController, checkinMapViewController;
+@synthesize checkinTableViewController, checkinMapViewController, userDialog;
 
 #pragma mark -
 #pragma mark Handlers
@@ -76,6 +80,7 @@
 	[super viewDidLoad];
 	[self setBackButtonTitle:NSLocalizedString(@"Checkins", nil)];
 	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
+	self.userDialog = [[UserDialog alloc] initForDelegate:self];
 } 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -119,13 +124,41 @@
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"This map supports Checkins!\nClick the Filter button to only show checkins for a specific user or the Pin button to checkin now.", nil)];
+	if ([[Settings sharedSettings] hasFirstName] == NO && 
+		[[Settings sharedSettings] hasLastName] == NO &&
+		[[Settings sharedSettings] hasEmail] == NO) {
+		[self.userDialog showWithTitle:NSLocalizedString(@"Contact Settings", nil) 
+								 first:[[Settings sharedSettings] firstName] 
+								  last:[[Settings sharedSettings] lastName]  
+								 email:[[Settings sharedSettings] email]];
+	}
+	else {
+		[self showInfoOnceOnly];
+	}
 }
 
 - (void)dealloc {
 	[checkinTableViewController release];
 	[checkinMapViewController release];
 	[super dealloc];
+}
+
+- (void) showInfoOnceOnly {
+	[self.alertView showInfoOnceOnly:NSLocalizedString(@"This map supports Checkins!\nClick the Filter button to only show checkins for a specific user or the Pin button to checkin now.", nil)];	
+}
+
+#pragma mark -
+#pragma mark UserDialog
+
+- (void) userDialogReturned:(UserDialog *)dialog first:(NSString *)first last:(NSString *)last email:(NSString *)email {
+	[[Settings sharedSettings] setFirstName:first];
+	[[Settings sharedSettings] setLastName:last];
+	[[Settings sharedSettings] setEmail:email];
+	[self showInfoOnceOnly];
+}
+
+- (void) userDialogCancelled:(UserDialog *)dialog {
+	[self showInfoOnceOnly];
 }
 
 @end

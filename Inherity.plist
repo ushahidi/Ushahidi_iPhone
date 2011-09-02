@@ -5,55 +5,55 @@
 	<key>## BUNDLE NAME AND VERSION ##</key>
 	<string>########################## BUNDLE NAME AND VERSION ##########################</string>
 	<key>CFBundleVersion</key>
-	<string>1.10</string>
+	<string>1.11</string>
 	<key>CFBundleName</key>
-	<string>交通出行互动平台</string>
+	<string>Inherity</string>
 	<key>CFBundleDisplayName</key>
-	<string>交通出行互动平台</string>
+	<string>Inherity</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ushahidi.ios.beijingtransport</string>
+	<string>com.ushahidi.ios.inherity</string>
 	<key>## SUPPORT INFORMATION ##</key>
 	<string>########################## SUPPORT INFORMATION ##########################</string>
 	<key>SupportEmail</key>
-	<string>ourbjtransport@gmail.com</string>
+	<string>info@inherity.org</string>
 	<key>SupportURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
+	<string>http://inherity.crowdmap.com</string>
 	<key>AppStoreURL</key>
-	<string>http://itunes.apple.com/us/app/id449819867</string>
+	<string>http://itunes.apple.com/us/app/inherity/id462758826</string>
 	<key>## SINGLE DEPLOYMENT URL ##</key>
 	<string>########################## SINGLE DEPLOYMENT URL ##########################</string>
 	<key>MapURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
+	<string>http://inherity.crowdmap.com</string>
 	<key>## STYLING COLOR CODES ##</key>
 	<string>########################## STYLING COLOR CODES ##########################</string>
 	<key>NavBarColor</key>
-	<string>#3c4a65</string>
+	<string>#031634</string>
 	<key>ToolBarColor</key>
-	<string>#55637d</string>
+	<string>#033649</string>
 	<key>SearchBarColor</key>
-	<string>#55637d</string>
+	<string>#033649</string>
 	<key>TablePlainColor</key>
-	<string>#e1f0f3</string>
+	<string>#ffffff</string>
 	<key>TableGroupedColor</key>
-	<string>#c4e2ed</string>
+	<string>#e7e3da</string>
 	<key>TableOddRowColor</key>
-	<string>#c4e2ed</string>
+	<string>#c7c2bc</string>
 	<key>TableEvenRowColor</key>
-	<string>#d4edf2</string>
+	<string>#e7e3da</string>
 	<key>TableSelectedRowColor</key>
-	<string>#ea5e20</string>
+	<string>#036564</string>
 	<key>TableHeaderColor</key>
-	<string>#7b8297</string>
+	<string>#c2c2c2</string>
 	<key>TableHeaderTextColor</key>
 	<string>#000000</string>
 	<key>VerifiedTextColor</key>
-	<string>#414e6e</string>
+	<string>#99CC99</string>
 	<key>UnverifiedTextColor</key>
-	<string>#ea5e20</string>
+	<string>#CC6666</string>
 	<key>## VISIBILITY INFORMATION ##</key>
 	<string>########################## VISIBILITY INFORMATION ##########################</string>
 	<key>ReportNewsURL</key>
-	<true/>
+	<false/>
 	<key>## BITLY AND TWITTER API KEYS ##</key>
 	<string>########################## BITLY AND TWITTER API KEYS ##########################</string>
 	<key>BitlyLogin</key>

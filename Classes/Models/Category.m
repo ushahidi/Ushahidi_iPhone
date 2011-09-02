@@ -21,19 +21,25 @@
 #import "Category.h"
 #import "UIColor+Extension.h"
 #import "NSString+Extension.h"
+#import "NSDictionary+Extension.h"
 
 @implementation Category
 
-@synthesize identifier, title, description, color;
+@synthesize identifier, title, description, color, position;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
-		//DLog(@"dictionary: %@", dictionary);
 		if (dictionary != nil) {
 			self.identifier = [dictionary objectForKey:@"id"];
 			self.title = [dictionary objectForKey:@"title"];
 			self.description = [dictionary objectForKey:@"description"];
 			self.color = [UIColor colorFromHexString:[dictionary objectForKey:@"color"]];
+			if ([dictionary objectForKey:@"position"] != nil) {
+				self.position = [dictionary intForKey:@"position"];
+			}
+			else {
+				self.position = -1;
+			}
 		}
 	}
 	return self;
@@ -64,6 +70,7 @@
 	[encoder encodeObject:self.title forKey:@"title"];
 	[encoder encodeObject:self.description forKey:@"description"];
 	[encoder encodeObject:self.color forKey:@"color"];
+	[encoder encodeInt:self.position forKey:@"position"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -72,6 +79,7 @@
 		self.title = [decoder decodeObjectForKey:@"title"];
 		self.description = [decoder decodeObjectForKey:@"description"];
 		self.color = [decoder decodeObjectForKey:@"color"];
+		self.position = [decoder decodeIntForKey:@"position"];
 	}
 	return self;
 }
@@ -80,7 +88,12 @@
 	return self.title != nil && [self.title anyWordHasPrefix:string];
 }
 
-- (NSComparisonResult)compareByTitle:(Category *)category {
+- (NSComparisonResult)compare:(Category *)category {
+	if (self.position > -1) {
+		if (self.position < category.position) return NSOrderedAscending;
+		else if (self.position > category.position) return NSOrderedDescending;
+		else return NSOrderedSame;
+	}
 	return [self.title localizedCaseInsensitiveCompare:category.title];
 }
 

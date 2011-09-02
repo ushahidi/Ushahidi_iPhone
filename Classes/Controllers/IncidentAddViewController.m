@@ -164,7 +164,12 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDate];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photos", nil) atSection:TableSectionPhotos];
-	[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
+	if ([[Settings sharedSettings] showReportNewsURL]) {
+		[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
+	}
+	else {
+		//DO NOT SHOW 'News' HEADING
+	}
 }
 
 - (void)viewDidUnload {
@@ -242,6 +247,9 @@ typedef enum {
 	}
 	if (section == TableSectionDelete) {
 		return self.incident.pending ? 1 : 0;
+	}
+	if (section == TableSectionNews) {
+		return [[Settings sharedSettings] showReportNewsURL] ? 1 : 0;
 	}
 	return 1;
 }
@@ -391,6 +399,9 @@ typedef enum {
 		if (size.height > 44) {
 			return size.height;
 		}
+	}
+	if (indexPath.section == TableSectionNews) {
+		return [[Settings sharedSettings] showReportNewsURL] ? 44 : 0;
 	}
 	return 44;
 }

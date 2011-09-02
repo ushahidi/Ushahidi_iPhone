@@ -37,9 +37,9 @@
 	<key>TableGroupedColor</key>
 	<string>#e7e3da</string>
 	<key>TableOddRowColor</key>
-	<string>#c7c2bc</string>
+	<string>#eaeaec</string>
 	<key>TableEvenRowColor</key>
-	<string>#e7e3da</string>
+	<string>#f3f4f6</string>
 	<key>TableSelectedRowColor</key>
 	<string>#036564</string>
 	<key>TableHeaderColor</key>

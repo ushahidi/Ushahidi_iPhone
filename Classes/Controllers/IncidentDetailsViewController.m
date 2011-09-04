@@ -179,7 +179,12 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDateTime];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photos", nil) atSection:TableSectionPhotos];
-	[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
+	if ([[Settings sharedSettings] showReportNewsURL]) {
+		[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
+	}
+	else {
+		[self setHeader:@"" atSection:TableSectionNews];
+	}
 	[self setHeader:NSLocalizedString(@"Video", nil) atSection:TableSectionVideo];
 }
 
@@ -222,6 +227,9 @@ typedef enum {
 	if (section == TableSectionErrors) {
 		return [NSString isNilOrEmpty:self.incident.errors] ? 0 : [TableHeaderView getViewHeight];
 	}
+	if (section == TableSectionNews) {
+		return [[Settings sharedSettings] showReportNewsURL] ?  [TableHeaderView getViewHeight] : 0;
+	}
 	return [TableHeaderView getViewHeight];
 }
 
@@ -230,10 +238,10 @@ typedef enum {
 		return [NSString isNilOrEmpty:self.incident.errors] ? 0 : 1;
 	}
 	if (section == TableSectionNews) {
-		if ([self.incident.news count] > 0) {
-			return [self.incident.news count];
+		if ([[Settings sharedSettings] showReportNewsURL]) {
+			return [self.incident.news count] > 0 ? [self.incident.news count] : 1;
 		}
-		return 1;
+		return 0;
 	}
 	if (section == TableSectionPhotos) {
 		if ([self.incident.photos count] > 0) {

@@ -19,23 +19,21 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "IndexedTableCell.h"
 
 @protocol TextViewTableCellDelegate;
 
-@interface TextViewTableCell : UITableViewCell<UITextViewDelegate> {
+@interface TextViewTableCell : IndexedTableCell<UITextViewDelegate> {
 	
 @public
-	UITextView *textView;
-	NSIndexPath *indexPath;
 	NSInteger limit;
 	
 @private
+    UITextView *textView;
 	id<TextViewTableCellDelegate> delegate;
 	NSString *placeholder_;
 }
 
-@property (nonatomic, retain) UITextView *textView;
-@property (nonatomic, assign) NSIndexPath *indexPath;
 @property (nonatomic, assign) NSInteger limit;
 @property (nonatomic, assign) UITextAutocorrectionType autocorrectionType;
 @property (nonatomic, assign) UITextAutocapitalizationType autocapitalizationType;

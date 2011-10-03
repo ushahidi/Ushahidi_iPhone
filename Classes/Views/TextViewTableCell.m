@@ -24,13 +24,14 @@
 
 @property (nonatomic, assign) id<TextViewTableCellDelegate>	delegate;
 @property (nonatomic, retain) NSString *placeholder_;
+@property (nonatomic, retain) UITextView *textView;
 
 @end
 
 
 @implementation TextViewTableCell
 
-@synthesize delegate, textView, indexPath, limit, placeholder_;
+@synthesize delegate, textView, limit, placeholder_;
 
 - (id)initForDelegate:(id<TextViewTableCellDelegate>)theDelegate reuseIdentifier:(NSString *)reuseIdentifier {
     if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier])) {
@@ -58,7 +59,6 @@
 - (void)dealloc {
 	delegate = nil;
 	[textView release];
-	[indexPath release];
 	[placeholder_ release];
     [super dealloc];
 }

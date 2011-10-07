@@ -2,92 +2,32 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>## BUNDLE NAME AND VERSION ##</key>
-	<string>########################## BUNDLE NAME AND VERSION ##########################</string>
-	<key>CFBundleVersion</key>
-	<string>1.11</string>
-	<key>CFBundleName</key>
-	<string>交通出行互动平台</string>
-	<key>CFBundleDisplayName</key>
-	<string>交通出行互动平台</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.ushahidi.ios.beijingtransport</string>
-	<key>## SUPPORT INFORMATION ##</key>
-	<string>########################## SUPPORT INFORMATION ##########################</string>
-	<key>SupportEmail</key>
-	<string>ourbjtransport@gmail.com</string>
-	<key>SupportURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
-	<key>AppStoreURL</key>
-	<string>http://itunes.apple.com/us/app/id449819867</string>
-	<key>## SINGLE DEPLOYMENT URL ##</key>
-	<string>########################## SINGLE DEPLOYMENT URL ##########################</string>
-	<key>MapURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
-	<key>## STYLING COLOR CODES ##</key>
-	<string>########################## STYLING COLOR CODES ##########################</string>
-	<key>NavBarColor</key>
-	<string>#3c4a65</string>
-	<key>ToolBarColor</key>
-	<string>#55637d</string>
-	<key>SearchBarColor</key>
-	<string>#55637d</string>
-	<key>TablePlainColor</key>
-	<string>#e1f0f3</string>
-	<key>TableGroupedColor</key>
-	<string>#c4e2ed</string>
-	<key>TableOddRowColor</key>
-	<string>#c4e2ed</string>
-	<key>TableEvenRowColor</key>
-	<string>#d4edf2</string>
-	<key>TableSelectedRowColor</key>
-	<string>#ea5e20</string>
-	<key>TableHeaderColor</key>
-	<string>#7b8297</string>
-	<key>TableHeaderTextColor</key>
-	<string>#000000</string>
-	<key>VerifiedTextColor</key>
-	<string>#414e6e</string>
-	<key>UnverifiedTextColor</key>
-	<string>#ea5e20</string>
-	<key>## VISIBILITY INFORMATION ##</key>
-	<string>########################## VISIBILITY INFORMATION ##########################</string>
-	<key>ReportNewsURL</key>
-	<true/>
 	<key>## BITLY AND TWITTER API KEYS ##</key>
 	<string>########################## BITLY AND TWITTER API KEYS ##########################</string>
-	<key>BitlyLogin</key>
-	<string>ushahidiios</string>
-	<key>BitlyApiKey</key>
-	<string>R_5ca9804d3e3653daf4500968dbdc61ae</string>
-	<key>TwitterKey</key>
-	<string>muqzQTP4YkXi0ncI39s0Jw</string>
-	<key>TwitterSecret</key>
-	<string>3uOGt2Hjj777rTOI76tOu1eFEvkgtbTWOvYcHiBqsE</string>
+	<key>## BUNDLE NAME AND VERSION ##</key>
+	<string>########################## BUNDLE NAME AND VERSION ##########################</string>
 	<key>## DO NOT EDIT BELOW THIS LINE ##</key>
 	<string>########################## DO NOT EDIT BELOW THIS LINE ##########################</string>
+	<key>## SINGLE DEPLOYMENT URL ##</key>
+	<string>########################## SINGLE DEPLOYMENT URL ##########################</string>
+	<key>## STYLING COLOR CODES ##</key>
+	<string>########################## STYLING COLOR CODES ##########################</string>
+	<key>## SUPPORT INFORMATION ##</key>
+	<string>########################## SUPPORT INFORMATION ##########################</string>
+	<key>## VISIBILITY INFORMATION ##</key>
+	<string>########################## VISIBILITY INFORMATION ##########################</string>
+	<key>AppStoreURL</key>
+	<string>http://itunes.apple.com/us/app/id449819867</string>
+	<key>BitlyApiKey</key>
+	<string>R_5ca9804d3e3653daf4500968dbdc61ae</string>
+	<key>BitlyLogin</key>
+	<string>ushahidiios</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>交通出行互动平台</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSMainNibFile</key>
-	<string>MainWindow_iPhone</string>
-	<key>NSMainNibFile~ipad</key>
-	<string>MainWindow_iPad</string>
-	<key>UILaunchImageFile</key>
-	<string>Default</string>
-	<key>UILaunchImageFile~ipad</key>
-	<string>Default-Portrait</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon.png</string>
@@ -97,6 +37,62 @@
 		<string>Icon-Small.png</string>
 		<string>Icon-Small@2x.png</string>
 	</array>
+	<key>CFBundleIdentifier</key>
+	<string>com.ushahidi.ios.beijingtransport</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>交通出行互动平台</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.11</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MapURL</key>
+	<string>http://114.251.208.133/ushahidi/</string>
+	<key>NSMainNibFile</key>
+	<string>MainWindow_iPhone</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>MainWindow_iPad</string>
+	<key>NavBarColor</key>
+	<string>#3c4a65</string>
+	<key>ReportNewsURL</key>
+	<true/>
+	<key>SearchBarColor</key>
+	<string>#55637d</string>
+	<key>SupportEmail</key>
+	<string>ourbjtransport@gmail.com</string>
+	<key>SupportURL</key>
+	<string>http://114.251.208.133/ushahidi/</string>
+	<key>TableEvenRowColor</key>
+	<string>#d4edf2</string>
+	<key>TableGroupedColor</key>
+	<string>#c4e2ed</string>
+	<key>TableHeaderColor</key>
+	<string>#7b8297</string>
+	<key>TableHeaderTextColor</key>
+	<string>#000000</string>
+	<key>TableOddRowColor</key>
+	<string>#c4e2ed</string>
+	<key>TablePlainColor</key>
+	<string>#e1f0f3</string>
+	<key>TableSelectedRowColor</key>
+	<string>#ea5e20</string>
+	<key>ToolBarColor</key>
+	<string>#55637d</string>
+	<key>TwitterKey</key>
+	<string>muqzQTP4YkXi0ncI39s0Jw</string>
+	<key>TwitterSecret</key>
+	<string>3uOGt2Hjj777rTOI76tOu1eFEvkgtbTWOvYcHiBqsE</string>
+	<key>UILaunchImageFile</key>
+	<string>Default</string>
+	<key>UILaunchImageFile~ipad</key>
+	<string>Default-Portrait</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -107,6 +103,15 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UnverifiedTextColor</key>
+	<string>#ea5e20</string>
+	<key>VerifiedTextColor</key>
+	<string>#414e6e</string>
+	<key>Required Device Capabilities</key>
+	<array>
+		<string>armv6</string>
+		<string>armv7</string>
 	</array>
 </dict>
 </plist>

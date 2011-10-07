@@ -20,8 +20,8 @@
 
 #import "IncidentTabViewController.h"
 #import "BaseTabViewController.h"
-#import "IncidentTableViewController.h";
-#import "IncidentMapViewController.h";
+#import "IncidentTableViewController.h"
+#import "IncidentMapViewController.h"
 #import "SettingsViewController.h"
 #import "NSString+Extension.h"
 #import "UIView+Extension.h"

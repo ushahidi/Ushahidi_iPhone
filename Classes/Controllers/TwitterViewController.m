@@ -155,8 +155,8 @@ typedef enum {
 	else {
 		self.twitter.accessToken = nil;
 	}
-	//Bit.ly API
-	self.bitly = [[Bitly alloc] init];
+	
+    self.bitly = [[Bitly alloc] init];
 	self.bitly.login = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyLogin];
 	self.bitly.apiKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyApiKey];
 	

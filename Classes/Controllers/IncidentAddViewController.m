@@ -408,32 +408,33 @@ typedef enum {
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
-	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-	if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
-		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+	[self.view endEditing:YES];
+    [theTableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 		[self.imagePickerController showImagePickerForDelegate:self 
 														resize:[[Settings sharedSettings] resizePhotos]
 														 width:[[Settings sharedSettings] imageWidth] 
 													   forRect:cell.frame];
 	}
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
-		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+    	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
 																 delegate:self 
 														cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
 												   destructiveButtonTitle:NSLocalizedString(@"Remove Photo", nil)
 														otherButtonTitles:nil];
 		[actionSheet setTag:indexPath.row - 1];
-		[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
+		[actionSheet setActionSheetStyle:UIActionSheetStyleBlackOpaque];
 		[actionSheet showInView:[self view]];
 		[actionSheet release];
 	}
 	else if (indexPath.section == TableSectionCategory) {
-		self.categoryTableViewController.incident = self.incident;
-		[self presentModalViewController:self.categoryTableViewController animated:YES];
+	    self.categoryTableViewController.incident = self.incident;
+        [self presentModalViewController:self.categoryTableViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionLocation) {
-		self.locationTableViewController.incident = self.incident;
-		[self presentModalViewController:self.locationTableViewController animated:YES];
+	    self.locationTableViewController.incident = self.incident;
+        [self presentModalViewController:self.locationTableViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionDate){
 		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
@@ -490,6 +491,7 @@ typedef enum {
 #pragma mark TextViewTableCellDelegate
 
 - (void) textViewFocussed:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath {
+    DLog(@"textViewFocussed:[%d, %d]", indexPath.section, indexPath.row);
 	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
 }
 
@@ -519,7 +521,7 @@ typedef enum {
 
 - (void) imagePickerDidSelect:(ImagePickerController *)imagePicker {
 	DLog(@"");
-	if ([[Settings sharedSettings] resizePhotos]) {
+    if ([[Settings sharedSettings] resizePhotos]) {
 		[self.loadingView showWithMessage:NSLocalizedString(@"Resizing...", nil)];
 	}
 	else {
@@ -529,7 +531,7 @@ typedef enum {
 
 - (void) imagePickerDidFinish:(ImagePickerController *)imagePicker image:(UIImage *)image {
 	DLog(@"");
-	if (image != nil && image.size.width > 0 && image.size.height > 0) {
+    if (image != nil && image.size.width > 0 && image.size.height > 0) {
 		if ([[Settings sharedSettings] resizePhotos]) {
 			[self.loadingView showWithMessage:NSLocalizedString(@"Resized", nil)];
 		}
@@ -558,7 +560,7 @@ typedef enum {
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (actionSheet.cancelButtonIndex != buttonIndex) {
-		[self.incident removePhotoAtIndex:actionSheet.tag];
+        [self.incident removePhotoAtIndex:actionSheet.tag];
 		[self.tableView reloadData];	
 	}
 }

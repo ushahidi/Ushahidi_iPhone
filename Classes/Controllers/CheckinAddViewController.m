@@ -177,7 +177,7 @@ typedef enum {
 		[cell setAnimatesDrop:YES];
 		[cell setCanShowCallout:YES];
 		[cell setDraggable:YES];
-		//[cell setTappable:YES];
+        [cell setTappable:YES];
 		if (self.checkin.latitude != nil && self.checkin.longitude != nil) {
 			NSString *location = [NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude];
 			if ([location isEqualToString:cell.location] == NO) {
@@ -232,6 +232,7 @@ typedef enum {
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
+    [self.view endEditing:YES];
 	if (indexPath.section == TableSectionPhoto) {
 		if ([self.checkin.photos count] > 0) {
 			UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
@@ -239,7 +240,7 @@ typedef enum {
 															cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
 													   destructiveButtonTitle:NSLocalizedString(@"Remove Photo", nil)
 															otherButtonTitles:nil];
-			[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
+			[actionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
 			[actionSheet showInView:[self view]];
 			[actionSheet release];
 		}
@@ -257,7 +258,8 @@ typedef enum {
 #pragma mark TextViewCellDelegate
 
 - (void) textViewFocussed:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath {
-	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
+    DLog(@"textViewFocussed:[%d, %d]", indexPath.section, indexPath.row);
+    [self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
 }
 
 - (void) textViewChanged:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
@@ -281,6 +283,7 @@ typedef enum {
 #pragma mark TextViewTableCellDelegate
 
 - (void) textFieldFocussed:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath {
+    DLog(@"textFieldFocussed:[%d, %d]", indexPath.section, indexPath.row);
 	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
 }
 

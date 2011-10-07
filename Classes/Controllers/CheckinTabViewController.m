@@ -20,8 +20,8 @@
 
 #import "CheckinTabViewController.h"
 #import "BaseTabViewController.h"
-#import "CheckinTableViewController.h";
-#import "CheckinMapViewController.h";
+#import "CheckinTableViewController.h"
+#import "CheckinMapViewController.h"
 #import "SettingsViewController.h"
 #import "NSString+Extension.h"
 #import "UIView+Extension.h"

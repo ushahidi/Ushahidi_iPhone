@@ -2,72 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>## BUNDLE NAME AND VERSION ##</key>
-	<string>########################## BUNDLE NAME AND VERSION ##########################</string>
-	<key>CFBundleVersion</key>
-	<string>1.11</string>
-	<key>CFBundleName</key>
-	<string>Ushahidi</string>
-	<key>CFBundleDisplayName</key>
-	<string>Ushahidi</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.ushahidi.ios.app</string>
-	<key>## SUPPORT INFORMATION ##</key>
-	<string>########################## SUPPORT INFORMATION ##########################</string>
-	<key>SupportEmail</key>
-	<string>support@ushahidi.com</string>
-	<key>SupportURL</key>
-	<string>http://www.ushahidi.com</string>
-	<key>AppStoreURL</key>
-	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
-	<key>## SINGLE DEPLOYMENT URL ##</key>
-	<string>########################## SINGLE DEPLOYMENT URL ##########################</string>
-	<key>MapURL</key>
-	<string></string>
-	<key>## STYLING COLOR CODES ##</key>
-	<string>########################## STYLING COLOR CODES ##########################</string>
-	<key>NavBarColor</key>
-	<string>#2E2E2E</string>
-	<key>ToolBarColor</key>
-	<string>#2E2E2E</string>
-	<key>SearchBarColor</key>
-	<string>#2E2E2E</string>
-	<key>TablePlainColor</key>
-	<string>#f6f5ee</string>
-	<key>TableGroupedColor</key>
-	<string>#f2eddc</string>
-	<key>TableOddRowColor</key>
-	<string>#f2eddc</string>
-	<key>TableEvenRowColor</key>
-	<string>#f9f6ee</string>
-	<key>TableSelectedRowColor</key>
-	<string>#e6ddbe</string>
-	<key>TableHeaderColor</key>
-	<string>#e6ddbe</string>
-	<key>TableHeaderTextColor</key>
-	<string>#891f02</string>
-	<key>UnverifiedTextColor</key>
-	<string>#CC6666</string>
-	<key>VerifiedTextColor</key>
-	<string>#99CC99</string>
-	<key>## VISIBILITY INFORMATION ##</key>
-	<string>########################## VISIBILITY INFORMATION ##########################</string>
-	<key>ReportNewsURL</key>
-	<true/>
 	<key>## BITLY AND TWITTER API KEYS ##</key>
 	<string>########################## BITLY AND TWITTER API KEYS ##########################</string>
-	<key>BitlyLogin</key>
-	<string>ushahidiios</string>
-	<key>BitlyApiKey</key>
-	<string>R_5ca9804d3e3653daf4500968dbdc61ae</string>
-	<key>TwitterKey</key>
-	<string>muqzQTP4YkXi0ncI39s0Jw</string>
-	<key>TwitterSecret</key>
-	<string>3uOGt2Hjj777rTOI76tOu1eFEvkgtbTWOvYcHiBqsE</string>
+	<key>## BUNDLE NAME AND VERSION ##</key>
+	<string>########################## BUNDLE NAME AND VERSION ##########################</string>
 	<key>## DO NOT EDIT BELOW THIS LINE ##</key>
 	<string>########################## DO NOT EDIT BELOW THIS LINE ##########################</string>
+	<key>## SINGLE DEPLOYMENT URL ##</key>
+	<string>########################## SINGLE DEPLOYMENT URL ##########################</string>
+	<key>## STYLING COLOR CODES ##</key>
+	<string>########################## STYLING COLOR CODES ##########################</string>
+	<key>## SUPPORT INFORMATION ##</key>
+	<string>########################## SUPPORT INFORMATION ##########################</string>
+	<key>## VISIBILITY INFORMATION ##</key>
+	<string>########################## VISIBILITY INFORMATION ##########################</string>
+	<key>AppStoreURL</key>
+	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
+	<key>BitlyApiKey</key>
+	<string>R_5ca9804d3e3653daf4500968dbdc61ae</string>
+	<key>BitlyLogin</key>
+	<string>ushahidiios</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Ushahidi</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -79,18 +37,56 @@
 		<string>Icon-Small.png</string>
 		<string>Icon-Small@2x.png</string>
 	</array>
+	<key>CFBundleIdentifier</key>
+	<string>com.ushahidi.ios.app</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Ushahidi</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1.11</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MapURL</key>
+	<string></string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
+	<key>NavBarColor</key>
+	<string>#2E2E2E</string>
+	<key>ReportNewsURL</key>
+	<true/>
+	<key>SearchBarColor</key>
+	<string>#2E2E2E</string>
+	<key>SupportEmail</key>
+	<string>support@ushahidi.com</string>
+	<key>SupportURL</key>
+	<string>http://www.ushahidi.com</string>
+	<key>TableEvenRowColor</key>
+	<string>#f9f6ee</string>
+	<key>TableGroupedColor</key>
+	<string>#f2eddc</string>
+	<key>TableHeaderColor</key>
+	<string>#e6ddbe</string>
+	<key>TableHeaderTextColor</key>
+	<string>#891f02</string>
+	<key>TableOddRowColor</key>
+	<string>#f2eddc</string>
+	<key>TablePlainColor</key>
+	<string>#f6f5ee</string>
+	<key>TableSelectedRowColor</key>
+	<string>#e6ddbe</string>
+	<key>ToolBarColor</key>
+	<string>#2E2E2E</string>
+	<key>TwitterKey</key>
+	<string>muqzQTP4YkXi0ncI39s0Jw</string>
+	<key>TwitterSecret</key>
+	<string>3uOGt2Hjj777rTOI76tOu1eFEvkgtbTWOvYcHiBqsE</string>
 	<key>UILaunchImageFile</key>
 	<string>Default</string>
 	<key>UILaunchImageFile~ipad</key>
@@ -107,6 +103,15 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UnverifiedTextColor</key>
+	<string>#CC6666</string>
+	<key>VerifiedTextColor</key>
+	<string>#99CC99</string>
+	<key>Required Device Capabilities</key>
+	<array>
+		<string>armv6</string>
+		<string>armv7</string>
 	</array>
 </dict>
 </plist>

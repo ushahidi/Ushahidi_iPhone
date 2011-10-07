@@ -22,6 +22,7 @@
 #import "SynthesizeSingleton.h"
 #import "UIColor+Extension.h"
 #import "NSString+Extension.h"
+#import "NSDictionary+Extension.h"
 
 @interface Settings ()
 

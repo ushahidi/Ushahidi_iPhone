@@ -24,6 +24,7 @@
 #import "InputView.h"
 #import "Device.h"
 #import "Internet.h"
+#import "Settings.h"
 
 @interface WebViewController ()
 
@@ -78,6 +79,8 @@ typedef enum {
 - (void) viewDidLoad {
 	[super viewDidLoad];
 	[self.searchBar setPlaceholder:NSLocalizedString(@"Enter URL or search phrase", nil)];
+    self.searchBar.tintColor = [[Settings sharedSettings] navBarTintColor];
+    
 	if ([Device isIPad]) {
 		self.homePage = @"http://www.google.com";
 		self.googleSearch = @"http://www.google.com/search?q=%@";

@@ -57,7 +57,7 @@
 												   destructiveButtonTitle:nil
 														otherButtonTitles:NSLocalizedString(@"Take Photo", nil), 
 																		  NSLocalizedString(@"From Library", nil), nil];
-		[actionSheet setActionSheetStyle:UIBarStyleBlackTranslucent];
+		[actionSheet setActionSheetStyle:UIActionSheetStyleBlackOpaque];
 		[actionSheet showInView:self.viewController.view];
 		[actionSheet release];
 	}

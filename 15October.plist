@@ -17,7 +17,7 @@
 	<key>## VISIBILITY INFORMATION ##</key>
 	<string>########################## VISIBILITY INFORMATION ##########################</string>
 	<key>AppStoreURL</key>
-	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
+	<string>http://itunes.apple.com/us/app/15october/id471444617</string>
 	<key>BitlyApiKey</key>
 	<string>R_5ca9804d3e3653daf4500968dbdc61ae</string>
 	<key>BitlyLogin</key>
@@ -25,7 +25,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Corruption</string>
+	<string>15October</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -38,11 +38,11 @@
 		<string>Icon-Small@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.ushahidi.ios.corruptiontracker</string>
+	<string>com.ushahidi.ios.15october</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Corruption Tracker</string>
+	<string>15October</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
@@ -52,37 +52,37 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MapURL</key>
-	<string>http://www.corruptiontracker.org</string>
+	<string>http://map.15october.net</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
 	<key>NavBarColor</key>
-	<string>#4d4d4d</string>
+	<string>#390000</string>
 	<key>ReportNewsURL</key>
 	<true/>
 	<key>SearchBarColor</key>
-	<string>#cdcdcd</string>
+	<string>#a8a8a8</string>
 	<key>SupportEmail</key>
-	<string>report@corruptiontracker.org</string>
+	<string>contact@15october.net</string>
 	<key>SupportURL</key>
-	<string>http://www.corruptiontracker.org</string>
+	<string>http://map.15october.net</string>
 	<key>TableEvenRowColor</key>
-	<string>#f0f0f0</string>
+	<string>#e9e9e9</string>
 	<key>TableGroupedColor</key>
-	<string>#cdcdcd</string>
+	<string>#e2e2e2</string>
 	<key>TableHeaderColor</key>
-	<string>#8cbe33</string>
+	<string>#cccf9a</string>
 	<key>TableHeaderTextColor</key>
-	<string>#ffffff</string>
+	<string>#000000</string>
 	<key>TableOddRowColor</key>
-	<string>#e7e3da</string>
+	<string>#e2e2e2</string>
 	<key>TablePlainColor</key>
 	<string>#ffffff</string>
 	<key>TableSelectedRowColor</key>
-	<string>#8cbe33</string>
+	<string>#00fffe</string>
 	<key>ToolBarColor</key>
-	<string>#4d4d4d</string>
+	<string>#390000</string>
 	<key>TwitterKey</key>
 	<string>muqzQTP4YkXi0ncI39s0Jw</string>
 	<key>TwitterSecret</key>

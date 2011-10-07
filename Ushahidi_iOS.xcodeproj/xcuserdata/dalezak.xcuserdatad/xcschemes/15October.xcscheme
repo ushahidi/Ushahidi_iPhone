@@ -13,9 +13,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3EDC9355143F4B570088A62C"
-               BuildableName = "Inherity copy.app"
-               BlueprintName = "October15"
+               BlueprintIdentifier = "3EF80B1C143F9C50002C792E"
+               BuildableName = "15October.app"
+               BlueprintName = "15October"
                ReferencedContainer = "container:Ushahidi_iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -38,9 +38,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3EDC9355143F4B570088A62C"
-            BuildableName = "Inherity copy.app"
-            BlueprintName = "October15"
+            BlueprintIdentifier = "3EF80B1C143F9C50002C792E"
+            BuildableName = "15October.app"
+            BlueprintName = "15October"
             ReferencedContainer = "container:Ushahidi_iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -55,9 +55,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3EDC9355143F4B570088A62C"
-            BuildableName = "Inherity copy.app"
-            BlueprintName = "October15"
+            BlueprintIdentifier = "3EF80B1C143F9C50002C792E"
+            BuildableName = "15October.app"
+            BlueprintName = "15October"
             ReferencedContainer = "container:Ushahidi_iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

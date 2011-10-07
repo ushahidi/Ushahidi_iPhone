@@ -7170,7 +7170,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = 15October;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E493D11-7F41-4704-8F7D-15E7DF06506A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6A13558E-06CE-46C1-A3E7-C3ED02B72617";
 			};
 			name = Debug;
 		};
@@ -7190,7 +7190,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = 15October;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8E493D11-7F41-4704-8F7D-15E7DF06506A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6A13558E-06CE-46C1-A3E7-C3ED02B72617";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -7211,7 +7211,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = 15October;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B337AC22-38F4-4064-A60D-4E2AFCE7A3B5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6A2E1AED-370C-4B10-A393-5414A8D7A83E";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -7232,7 +7232,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = 15October;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A5E45788-8125-4AA3-B27A-14484C91A352";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B7DE48E8-2CE4-4928-959B-35883AD089F1";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";

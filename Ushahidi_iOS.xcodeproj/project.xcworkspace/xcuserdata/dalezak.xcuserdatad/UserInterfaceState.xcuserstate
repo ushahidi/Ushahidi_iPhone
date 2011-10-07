@@ -977,7 +977,7 @@
 			</dict>
 		</dict>
 		<string>file://localhost/Users/dalezak/SandBox/Ushahidi_iOS/Ushahidi_iOS.xcodeproj/</string>
-		<real>339702901.19017202</real>
+		<real>339703046.40161997</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -5767,7 +5767,7 @@
 		<string>IDECollapsedTypes</string>
 		<string>IDERecentFilteringEnabled</string>
 		<string>IDECollapsedGroups</string>
-		<string>{{0, 0}, {239, 732}}</string>
+		<string>{{0, 0}, {224, 732}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -14092,7 +14092,7 @@
 				<integer>1140</integer>
 			</dict>
 		</dict>
-		<real>339702901.183393</real>
+		<real>339703046.39726597</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -21458,7 +21458,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>106</integer>
+					<integer>1698</integer>
 				</dict>
 			</array>
 		</dict>
@@ -21533,7 +21533,7 @@
 		<string>IDEActivityReportStringSegmentStringValue</string>
 		<real>2</real>
 		<string> </string>
-		<string>Clean</string>
+		<string>Archive</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -21712,7 +21712,7 @@
 				<integer>1714</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>339702896.18301201</real>
+			<real>339703040.50504202</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -21723,7 +21723,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 11:54 AM</string>
+		<string>Today at 11:57 AM</string>
 		<integer>234</integer>
 		<dict>
 			<key>$class</key>

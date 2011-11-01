@@ -39,6 +39,10 @@
 
 @synthesize delegate, nameField, urlField;
 
+NSString *const HTTP = @"http://";
+NSString *const HTTPS = @"https://";
+NSString *const NEWLINE = @"\n";
+
 - (id) initForDelegate:(id<MapDialogDelegate>)theDelegate {
 	if (self = [super init]) {
 		self.delegate = theDelegate;
@@ -121,7 +125,7 @@
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-	if ([string isEqualToString:@"\n"]) {
+	if ([string isEqualToString:NEWLINE]) {
 		if ([NSString isNilOrEmpty:self.nameField.text] == NO && [NSString isNilOrEmpty:self.urlField.text] == NO) {
 			[textField resignFirstResponder];
 			UIAlertView *alertView = (UIAlertView *)[textField superview];
@@ -140,8 +144,12 @@
 		}
 		return NO;
 	}
-	if ([string hasPrefix:@"http://"] || [string hasPrefix:@"https://"]) {
-		if (textField == self.urlField && [textField.text isEqualToString:@"http://"]) {
+    if ([string hasPrefix:HTTP] || [string hasPrefix:HTTPS]) {
+		if (textField == self.urlField && [textField.text isEqualToString:HTTP]) {
+			textField.text = string;
+			return NO;
+		}
+        if (textField == self.urlField && [textField.text isEqualToString:HTTPS]) {
 			textField.text = string;
 			return NO;
 		}
@@ -151,13 +159,13 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
 	if (textField == self.urlField && [NSString isNilOrEmpty:textField.text]) {
-		textField.text = @"http://";
+		textField.text = HTTP;
 	}
 	return YES;
 }   
   
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-	if (textField == self.urlField && [textField.text isEqualToString:@"http://"]) {
+	if (textField == self.urlField && [textField.text isEqualToString:HTTP]) {
 		textField.text = nil;
 	}
 	return YES;

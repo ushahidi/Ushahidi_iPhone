@@ -88,14 +88,17 @@
 	DLog(@"willBePushed: %d", self.willBePushed);
 	if (self.checkinTableViewController.view.superview == nil && 
 		self.checkinMapViewController.view.superview == nil) {
+        DLog(@"XXXXXXXXXXXXX %d", self.willBePushed);
 		self.checkinTableViewController.deployment = self.deployment;
 		[self.checkinTableViewController populate:self.willBePushed];
 		[self showViewController:self.checkinTableViewController animated:NO];
 	}
 	else if (self.checkinTableViewController.view.superview != nil) {
+        DLog(@"YYYYYYYYYYYYY %d", self.willBePushed);
 		[self.checkinTableViewController populate:self.willBePushed];
 	}
 	else if (self.checkinMapViewController.view.superview != nil) {
+        DLog(@"ZZZZZZZZZZZZZ %d", self.willBePushed);
 		[self.checkinMapViewController populate:self.willBePushed 
 										 resize:self.willBePushed];
 	}

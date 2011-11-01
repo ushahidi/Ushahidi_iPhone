@@ -112,7 +112,7 @@ typedef enum {
 		self.checkin.firstName = [[Settings sharedSettings] firstName];
 		self.checkin.lastName = [[Settings sharedSettings] lastName];
 		self.checkin.email = [[Settings sharedSettings] email];
-		if ([[Locator sharedLocator] hasLocation]) {
+        if ([[Locator sharedLocator] hasLocation]) {
 			self.checkin.latitude = [[Locator sharedLocator] latitude];
 			self.checkin.longitude = [[Locator sharedLocator] longitude];
 			[self setFooter:[NSString stringWithFormat:@"%@, %@", self.checkin.latitude, self.checkin.longitude] atSection:TableSectionLocation];

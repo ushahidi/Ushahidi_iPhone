@@ -329,6 +329,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		DLog(@"RESPONSE: %@", [request responseString]);
 	}
 	else {
+        DLog(@"RESPONSE: %@", [request responseString]);
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json != nil) {
 			NSDictionary *payload = [json objectForKey:@"payload"];
@@ -341,6 +342,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					DLog(@"DOES NOT SUPPORT CHECKINS %@", [request.originalURL absoluteString]);
 					theDeployment.supportsCheckins = NO;
 				}
+                NSString *domain = [payload stringForKey:@"domain"];
+                if ([NSString isNilOrEmpty:domain] == NO) {
+                    theDeployment.url = domain;
+                    DLog(@"DEPLOYMENT URL %@", theDeployment.url);
+                    if ([domain hasPrefix:@"http://"]) {
+                        theDeployment.domain = [domain stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+                    }
+                    else if ([domain hasPrefix:@"https://"]) {
+                        theDeployment.domain = [domain stringByReplacingOccurrencesOfString:@"https://" withString:@""];
+                    }
+                    else {
+                        theDeployment.domain = domain;
+                    } 
+                    DLog(@"DEPLOYMENT DOMAIN %@", theDeployment.domain);
+                }
 			}
 		}
 	}
@@ -663,13 +679,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 		NSDictionary *json = [[request responseString] JSONValue];
 		if (json == nil) {
 			DLog(@"RESPONSE: %@", [request responseString]);
-			error = [NSError errorWithDomain:self.deployment.domain 
+            error = [NSError errorWithDomain:self.deployment.domain 
 										code:HttpStatusInternalServerError 
 									 message:NSLocalizedString(@"Unable To Checkin", nil)];
 		}
+        else if ([json objectForKey:@"error"] != nil && 
+                 [[json objectForKey:@"error"] intForKey:@"code"] != 0) {
+            DLog(@"RESPONSE: %@", [request responseString]);
+            NSDictionary *errorDictionary = [json objectForKey:@"error"];
+            error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:[errorDictionary stringForKey:@"message"]];
+		}
 		else {
-			NSDictionary *payload = [json objectForKey:@"payload"];
-			DLog(@"PAYLOAD: %@", payload);
+            NSDictionary *payload = [json objectForKey:@"payload"];
+            DLog(@"PAYLOAD: %@", payload);
 			if ([@"true" isEqualToString:[payload stringForKey:@"success"]] || [payload boolForKey:@"success"]) {
 				NSString *userIdentifier = [payload stringForKey:@"user_id"];
 				DLog(@"USER: %@", userIdentifier);
@@ -688,6 +712,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 								[name appendFormat:@"%@", checkin.lastName];
 							}
 						}
+                        checkin.name = name;
 						User *user = [[User alloc] initWithIdentifier:userIdentifier name:name];
 						[self.deployment.users setObject:user forKey:userIdentifier];
 						[user release];
@@ -697,14 +722,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					}
 					else {
 						DLog(@"Already Contains User: %@", userIdentifier);
-					}
+                        User *user = [self.deployment.users objectForKey:userIdentifier];
+                        if (user != nil) {
+                            checkin.name = [user name];
+                        }
+                    }
 				}
 				NSString *checkinIdentifier = [payload stringForKey:@"checkin_id"];
-				DLog(@"IDENTIFIER: %@", checkinIdentifier);
+				DLog(@"CHECKIN: %@", checkinIdentifier);
 				if ([NSString isNilOrEmpty:checkinIdentifier] == NO) {
 					checkin.identifier = checkinIdentifier;
 					[self.deployment.checkins setObject:checkin forKey:checkinIdentifier];
 				}
+                error = nil;
 			}
 			else {
 				error = [NSError errorWithDomain:self.deployment.domain 

@@ -20,6 +20,7 @@
 
 #import "Device.h"
 #import "NSString+Extension.h"
+#import "UIDevice+Extension.h"
 
 @implementation Device
 
@@ -52,11 +53,19 @@
 }
 
 + (NSString *) deviceIdentifier {
-	return [[UIDevice currentDevice] uniqueIdentifier];
+    NSString *deviceID = [[UIDevice currentDevice] uniqueIdentifier];
+    if ([NSString isNilOrEmpty:deviceID]) {
+        return [[UIDevice currentDevice] uniqueDeviceIdentifier];
+    }
+    return deviceID;
 }
 
 + (NSString *) deviceIdentifierHashed {
-	return [[[UIDevice currentDevice] uniqueIdentifier] MD5];
+    NSString *deviceID = [[UIDevice currentDevice] uniqueIdentifier];
+    if ([NSString isNilOrEmpty:deviceID]) {
+        return [[[UIDevice currentDevice] uniqueDeviceIdentifier] MD5];
+    }
+    return [deviceID MD5];
 }
 
 @end

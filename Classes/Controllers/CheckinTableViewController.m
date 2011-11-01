@@ -247,18 +247,16 @@
 		checkins = [self.allRows sortedArrayUsingSelector:@selector(compareByName:)];
 	}
 	for (Checkin *checkin in checkins) {
-		if ([NSString isNilOrEmpty:checkin.name] == NO) {
-			if (self.user != nil) {
-				if ([self.user.name isEqualToString:checkin.name] && 
-					[checkin.message anyWordHasPrefix:searchText]) {
-					[self.filteredRows addObject:checkin];
-				}
-			}
-			else if ([checkin.message anyWordHasPrefix:searchText] ||
-				[checkin.name anyWordHasPrefix:searchText]) {
-				[self.filteredRows addObject:checkin];
-			}
-		}
+        if (self.user != nil) {
+            if ([self.user.name isEqualToString:checkin.name] && 
+                [checkin.message anyWordHasPrefix:searchText]) {
+                [self.filteredRows addObject:checkin];
+            }
+        }
+        else if ([checkin.message anyWordHasPrefix:searchText] ||
+            [checkin.name anyWordHasPrefix:searchText]) {
+            [self.filteredRows addObject:checkin];
+        }
 	}
 	if (reload) {
 		[self.tableView reloadData];	

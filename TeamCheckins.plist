@@ -52,7 +52,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MapURL</key>
-	<string>http://ushahidi.crowdmap.com</string>
+	<string>https://ushahidi.crowdmap.com</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>

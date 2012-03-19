@@ -22,6 +22,7 @@
 #import "BaseDetailsViewController.h"
 #import "TextTableCell.h"
 #import "MapTableCell.h"
+#import "YouTubeTableCell.h"
 #import "Ushahidi.h"
 #import "Photo.h"
 #import "SMS.h"
@@ -33,7 +34,8 @@
 																	UIWebViewDelegate,
 																	SMSDelegate,
 																	EmailDelegate,
-																	MapTableCellDelegate> {
+																	MapTableCellDelegate,
+                                                                    YouTubeTableCellDelegate> {
 @public	
 	Incident *incident;
 	NSArray *incidents;

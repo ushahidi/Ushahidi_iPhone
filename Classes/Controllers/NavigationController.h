@@ -24,4 +24,6 @@
 
 }
 
+- (void) setViewController:(UIViewController*)viewController animated:(BOOL)animated;
+
 @end

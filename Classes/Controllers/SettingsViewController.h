@@ -46,9 +46,6 @@
 	NSInteger mapZoomLevel;
 	NSInteger imageWidth;
 	Email *email;
-	NSString *website;
-	NSString *support;
-	NSString *download;
 	UIImage *logo;
 }
 

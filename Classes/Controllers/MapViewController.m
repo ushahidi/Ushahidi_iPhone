@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "MapViewController.h"
+#import "BaseMapViewController.h"
 #import "LoadingViewController.h"
 #import "AlertView.h"
 #import "InputView.h"
@@ -27,59 +28,18 @@
 #import "Settings.h"
 #import "MKPinAnnotationView+Extension.h"
 
-typedef enum {
-	MapTypeNormal,
-	MapTypeSatellite,
-	MapTypeHybrid
-} MapType;
-
 @interface MapViewController ()
-
-- (void) showSearchBar:(BOOL)show animated:(BOOL)animated;
 
 @end
 
 @implementation MapViewController
 
-@synthesize mapView, searchBar, mapType, locationName, locationDetails, locationLatitude, locationLongitude;
-
-#pragma mark -
-#pragma mark Internal
-
-- (void) showSearchBar:(BOOL)show animated:(BOOL)animated {
-	self.searchBar.tintColor = [[Settings sharedSettings] searchBarTintColor];
-	if (animated) {
-		[UIView beginAnimations:@"SearchBarVisibility" context:NULL];
-		[UIView setAnimationDuration:0.3];
-	}
-	CGRect searchBarFrame = self.searchBar.frame;
-	if (show) {
-		if (self.searchBar.frame.origin.y < 0) {
-			searchBarFrame.origin.y += self.searchBar.frame.size.height;
-		}
-		[self.searchBar becomeFirstResponder];
-	}
-	else {
-		if (self.searchBar.frame.origin.y >= 0) {
-			searchBarFrame.origin.y -= self.searchBar.frame.size.height;
-		}
-		[self.searchBar resignFirstResponder];
-	}
-	self.searchBar.frame = searchBarFrame;
-	if (animated) {
-		[UIView commitAnimations];
-	}
-}
+@synthesize locationName, locationDetails, locationLatitude, locationLongitude;
 
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) search:(id)sender {
-	DLog(@"");
-	[self showSearchBar:YES animated:YES];
-}
-
-- (IBAction) findLocation:(id)sender {
+- (IBAction) locate:(id)sender event:(UIEvent*)event {
 	DLog(@"");
 	if (self.mapView.showsUserLocation && self.mapView.userLocation != nil) {
 		[self.mapView resizeRegionToFitAllPins:YES animated:YES];
@@ -99,8 +59,6 @@ typedef enum {
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
-	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
-	[self showSearchBar:NO animated:NO];
 }
 
 - (void)viewDidUnload {
@@ -132,9 +90,6 @@ typedef enum {
 	[locationDetails release];
 	[locationLatitude release];
 	[locationLongitude release];
-	[mapView release];
-	[mapType release];
-	[searchBar release];
 	[super dealloc];
 }
 

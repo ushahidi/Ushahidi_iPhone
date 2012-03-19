@@ -59,6 +59,7 @@
 - (BOOL) hasUsers;
 - (NSArray *) getUsers;
 
+- (void) getVersionForDelegate:(id<UshahidiDelegate>)delegate;
 - (void) getVersionsForDelegate:(id<UshahidiDelegate>)delegate;
 - (void) getVersionOfDeployment:(Deployment *)theDeployment forDelegate:(id<UshahidiDelegate>)delegate;
 
@@ -66,8 +67,10 @@
 
 - (void) unloadDeployment;
 - (void) loadDeployment:(Deployment *)deployment;
+- (void) loadDeploymentForDelegate:(id<UshahidiDelegate>)delegate;
 - (void) loadDeployment:(Deployment *)deployment forDelegate:(id<UshahidiDelegate>)delegate;
-
+- (BOOL) hasDeployment;
+- (BOOL) isDeployment:(Deployment*)another;
 - (BOOL) addDeployment:(Deployment *)deployment;
 - (BOOL) removeDeployment:(Deployment *)deployment;
 - (Deployment *) getDeploymentWithUrl:(NSString *)url;

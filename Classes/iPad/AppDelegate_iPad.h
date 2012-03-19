@@ -20,6 +20,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "Ushahidi.h"
 
 @interface AppDelegate_iPad : AppDelegate {
 }

@@ -20,17 +20,22 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "ItemPicker.h"
 
-@class SettingsViewController;
 @class Deployment;
+@class ItemPicker;
+
+@class BaseTableViewController;
+@class BaseMapViewController;
+@class BaseAddViewController;
+@class BaseDetailsViewController;
 
 #pragma mark -
 #pragma mark Enums
 
 typedef enum {
 	ViewModeTable,
-	ViewModeMap,
-	ViewModeCheckin
+	ViewModeMap
 } ViewMode;
 
 typedef enum {
@@ -38,22 +43,60 @@ typedef enum {
 	ShouldAnimateNo
 } ShouldAnimate;
 
-@interface BaseTabViewController : BaseViewController {
+@interface BaseTabViewController : BaseViewController<UISplitViewControllerDelegate, 
+                                                      ItemPickerDelegate> {
 
 @public
-	SettingsViewController *settingsViewController;
-	Deployment *deployment;
-	UISegmentedControl *viewMode;
-	
-@private 
-	UIButton *settingsButton;
+    BaseTableViewController *baseTableViewController;
+    BaseMapViewController *baseMapViewController;
+	BaseAddViewController *baseAddViewController;
+	BaseDetailsViewController *baseDetailsViewController;
+                                                          
+    UIPopoverController *popoverController;
+                                                          
+	UISegmentedControl *displayMode;
+    UIBarButtonItem *addButton;
+    UIBarButtonItem *refreshButton;
+    UIBarButtonItem *filterButton;
+    UIView *containerView;
+    
+    Deployment *deployment;
+	ItemPicker *itemPicker;
+    
+    NSMutableArray *allItems;
+    NSMutableArray *filteredItems;
+    NSMutableArray *pendingItems;
+    NSMutableArray *filters;
+    NSObject *filter;
 }
 
-@property(nonatomic,retain) IBOutlet SettingsViewController *settingsViewController;
-@property(nonatomic,retain) IBOutlet UISegmentedControl *viewMode;
-@property(nonatomic,retain) Deployment *deployment;
+@property(nonatomic,retain) IBOutlet BaseTableViewController *baseTableViewController;
+@property(nonatomic,retain) IBOutlet BaseMapViewController *baseMapViewController;
+@property(nonatomic,retain) IBOutlet BaseAddViewController *baseAddViewController;
+@property(nonatomic,retain) IBOutlet BaseDetailsViewController *baseDetailsViewController;
 
-- (void) showViewController:(UIViewController *)viewController animated:(BOOL)animated;
-- (UIViewController *) getViewControllerForView:(UIView *)view;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *displayMode;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *addButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
+@property(nonatomic,retain) IBOutlet UIView *containerView;
+
+@property(nonatomic,retain) UIPopoverController *popoverController;
+
+@property(nonatomic,retain) Deployment *deployment;
+@property(nonatomic,retain) ItemPicker *itemPicker;
+
+@property(nonatomic,retain) NSMutableArray *allItems;
+@property(nonatomic,retain) NSMutableArray *filteredItems;
+@property(nonatomic,retain) NSMutableArray *pendingItems;
+@property(nonatomic,retain) NSMutableArray *filters;
+@property(nonatomic,retain) NSObject *filter;
+
+- (IBAction) add:(id)sender event:(UIEvent*)event;
+- (IBAction) refresh:(id)sender event:(UIEvent*)event;
+- (IBAction) filter:(id)sender event:(UIEvent*)event;
+- (IBAction) display:(id)sender event:(UIEvent*)event;
+- (void) populateWithFilter:(NSObject*)filter;
+- (void) populate:(NSArray*)items filter:(NSObject*)filter;
 
 @end

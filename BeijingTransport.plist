@@ -2,25 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>## BITLY AND TWITTER API KEYS ##</key>
-	<string>########################## BITLY AND TWITTER API KEYS ##########################</string>
-	<key>## BUNDLE NAME AND VERSION ##</key>
-	<string>########################## BUNDLE NAME AND VERSION ##########################</string>
-	<key>## DO NOT EDIT BELOW THIS LINE ##</key>
-	<string>########################## DO NOT EDIT BELOW THIS LINE ##########################</string>
-	<key>## SINGLE DEPLOYMENT URL ##</key>
-	<string>########################## SINGLE DEPLOYMENT URL ##########################</string>
-	<key>## STYLING COLOR CODES ##</key>
-	<string>########################## STYLING COLOR CODES ##########################</string>
-	<key>## SUPPORT INFORMATION ##</key>
-	<string>########################## SUPPORT INFORMATION ##########################</string>
-	<key>## VISIBILITY INFORMATION ##</key>
-	<string>########################## VISIBILITY INFORMATION ##########################</string>
-	<key>AppStoreURL</key>
+	<key>USHAppStoreURL</key>
 	<string>http://itunes.apple.com/us/app/id449819867</string>
-	<key>BitlyApiKey</key>
+	<key>USHBitlyApiKey</key>
 	<string>R_5ca9804d3e3653daf4500968dbdc61ae</string>
-	<key>BitlyLogin</key>
+	<key>USHBitlyApiLogin</key>
 	<string>ushahidiios</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -48,44 +34,44 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.12</string>
+	<string>2.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MapURL</key>
+	<key>USHMapURL</key>
 	<string>http://114.251.208.133/ushahidi/</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
-	<key>NavBarColor</key>
+	<key>USHNavBarColor</key>
 	<string>#3c4a65</string>
-	<key>ReportNewsURL</key>
+	<key>USHReportNewsURL</key>
 	<true/>
-	<key>SearchBarColor</key>
+	<key>USHSearchBarColor</key>
 	<string>#55637d</string>
-	<key>SupportEmail</key>
+	<key>USHSupportEmail</key>
 	<string>ourbjtransport@gmail.com</string>
-	<key>SupportURL</key>
+	<key>USHSupportURL</key>
 	<string>http://114.251.208.133/ushahidi/</string>
-	<key>TableEvenRowColor</key>
+	<key>USHTableEvenRowColor</key>
 	<string>#d4edf2</string>
-	<key>TableGroupedColor</key>
+	<key>USHTableGroupedColor</key>
 	<string>#c4e2ed</string>
-	<key>TableHeaderColor</key>
+	<key>USHTableHeaderColor</key>
 	<string>#7b8297</string>
-	<key>TableHeaderTextColor</key>
+	<key>USHTableHeaderTextColor</key>
 	<string>#000000</string>
-	<key>TableOddRowColor</key>
+	<key>USHTableOddRowColor</key>
 	<string>#c4e2ed</string>
-	<key>TablePlainColor</key>
+	<key>USHTablePlainColor</key>
 	<string>#e1f0f3</string>
-	<key>TableSelectedRowColor</key>
+	<key>USHTableSelectedRowColor</key>
 	<string>#ea5e20</string>
-	<key>ToolBarColor</key>
+	<key>USHToolBarColor</key>
 	<string>#55637d</string>
-	<key>TwitterKey</key>
+	<key>USHTwitterApiKey</key>
 	<string>muqzQTP4YkXi0ncI39s0Jw</string>
-	<key>TwitterSecret</key>
+	<key>USHTwitterApiSecret</key>
 	<string>3uOGt2Hjj777rTOI76tOu1eFEvkgtbTWOvYcHiBqsE</string>
 	<key>UILaunchImageFile</key>
 	<string>Default</string>
@@ -100,13 +86,10 @@
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UnverifiedTextColor</key>
+	<key>USHUnverifiedTextColor</key>
 	<string>#ea5e20</string>
-	<key>VerifiedTextColor</key>
+	<key>USHVerifiedTextColor</key>
 	<string>#414e6e</string>
 	<key>Required Device Capabilities</key>
 	<array>

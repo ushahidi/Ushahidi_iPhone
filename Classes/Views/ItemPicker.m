@@ -73,7 +73,7 @@
 		self.popoverController.delegate = self;
 		[self.popoverController presentPopoverFromRect:rect
 												inView:self.controller.view 
-							  permittedArrowDirections:UIPopoverArrowDirectionDown 
+							  permittedArrowDirections:UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown
 											  animated:YES];
 	}
 	else {

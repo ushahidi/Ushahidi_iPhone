@@ -37,29 +37,22 @@
 #import "TableHeaderView.h"
 #import "Internet.h"
 #import "ItemPicker.h"
+#import "AppDelegate.h"
+#import "Ushahidi.h"
+#import "Video.h"
 
 @interface IncidentTableViewController ()
 
-@property(nonatomic,retain) NSMutableArray *pending;
-@property(nonatomic,retain) NSMutableArray *categories;
-@property(nonatomic,retain) Category *category;
-
 - (void) updateSyncedLabel;
-
-- (void) pushViewController:(UIViewController *)viewController;
-- (void) presentModalViewController:(UIViewController *)viewController;
-
-- (void) mainQueueFinished;
-- (void) mapQueueFinished;
-- (void) photoQueueFinished;
-- (void) uploadQueueFinished;
 
 @end
 
 @implementation IncidentTableViewController
 
-@synthesize incidentTabViewController, incidentAddViewController, incidentDetailsViewController;
-@synthesize pending, categories, category, deployment;
+@synthesize incidentTabViewController;
+@synthesize incidentAddViewController; 
+@synthesize incidentDetailsViewController;
+@synthesize deployment;
 
 #pragma mark -
 #pragma mark Enums
@@ -72,46 +65,6 @@ typedef enum {
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) addReport:(id)sender {
-	DLog(@"");
-	self.incidentAddViewController.incident = nil;
-	[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
-}
-
-- (IBAction) refresh:(id)sender {
-	DLog(@"");
-	self.refreshButton.enabled = NO;
-	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-	[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self];
-	[[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
-	[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
-	[[Ushahidi sharedUshahidi] getVersionOfDeployment:self.deployment forDelegate:self];
-}
-
-- (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
-	DLog(@"");
-	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", nil)];
-	for (Category *theCategory in self.categories) {
-		if ([NSString isNilOrEmpty:[theCategory title]] == NO) {
-			[items addObject:theCategory.title];
-		}
-	}
-	if (event != nil) {
-		UIView *toolbar = [[event.allTouches anyObject] view];
-		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
-		[self.itemPicker showWithItems:items 
-						  withSelected:[self.category title] 
-							   forRect:rect 
-								   tag:0];
-	}
-	else {
-		[self.itemPicker showWithItems:items 
-						  withSelected:[self.category title] 
-							   forRect:CGRectMake(100, self.view.frame.size.height, 0, 0) 
-								   tag:0];	
-	}
-}
-
 - (void) updateSyncedLabel {
 	if (self.deployment.synced) {
 		[self setTableFooter:[NSString stringWithFormat:@"%@ %@", 
@@ -123,34 +76,37 @@ typedef enum {
 	}
 }
 
-- (void) populate:(BOOL)refresh {
-	DLog(@"refresh:%d", refresh);
-	[self.allRows removeAllObjects];
-	if (refresh) {
-		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
-		[self.categories removeAllObjects];
-		if ([[Ushahidi sharedUshahidi] hasCategories]) {
-			[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategories]];
+- (void) populate:(NSArray*)items filter:(NSObject*)theFilter {
+    DLog(@"");
+    self.filter = theFilter;
+    
+    [self.allRows removeAllObjects];
+    [self.allRows addObjectsFromArray:items];
+    
+    [self.filteredRows removeAllObjects];
+	NSString *searchText = [self getSearchText];
+	for (Incident *incident in self.allRows) {
+		if (self.filter != nil) {
+            Category *category = (Category*)self.filter;
+			if ([incident hasCategory:category] && [incident matchesString:searchText]) {
+				[self.filteredRows addObject:incident];
+			}
 		}
-		else {
-			[self.categories addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+		else if ([incident matchesString:searchText]) {
+			[self.filteredRows addObject:incident];
 		}
-		self.category = nil;
-		if ([[Ushahidi sharedUshahidi] hasLocations] == NO) {
-			[[Ushahidi sharedUshahidi] getLocationsForDelegate:self];
-		}
-		if ([self.categories count] == 0) {
-			[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];	
-		}
-		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
 	}
-	else {
-		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
-	}
-	[self.pending removeAllObjects];
-	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
-	[self filterRows:YES];
-	self.filterButton.enabled = [self.categories count] > 0;
+	if (self.filter != nil) {
+        Category *category = (Category*)self.filter;
+        [self setHeader:category.title atSection:TableSectionIncidents];
+    }
+    else {
+        [self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
+    }
+    [self setTableFooter:nil];
+    [self.tableView reloadData];	
+    [self.tableView flashScrollIndicators];	
+    [self updateSyncedLabel];	
 }
 
 #pragma mark -
@@ -158,8 +114,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.pending = [[NSMutableArray alloc] initWithCapacity:0];
-	self.categories = [[NSMutableArray alloc] initWithCapacity:0];
+    [self setBackButtonTitle:NSLocalizedString(@"Reports", nil)];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", nil)];
 	[self setHeader:NSLocalizedString(@"Pending Upload", nil) atSection:TableSectionPending];
 	[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
@@ -171,43 +126,20 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[self.allRows removeAllObjects];
-	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
-	
-	[self.pending removeAllObjects];
-	[self.pending addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsPending]];
-	
-	[self filterRows:YES];
-	
-	self.filterButton.enabled = [self.categories count] > 0;
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoQueueFinished) name:kPhotoQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(uploadQueueFinished) name:kUploadQueueFinished object:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	if ([self.pending count] > 0 ) {
-		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Refresh button to upload pending reports.", nil)];
-	}
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMainQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMapQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kPhotoQueueFinished object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kUploadQueueFinished object:nil];
 }
 
 - (void)dealloc {
 	[incidentTabViewController release];
-	[incidentAddViewController release];
+    [incidentAddViewController release];
 	[incidentDetailsViewController release];
-	[pending release];
-	[categories release];
-	[category release];
 	[deployment release];
 	[super dealloc];
 }
@@ -221,7 +153,7 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
 	if (section == TableSectionPending) {
-		return [self.pending count];
+		return [self.pendingRows count];
 	}
 	if (section == TableSectionIncidents) {
 		return [self.filteredRows count];
@@ -230,7 +162,7 @@ typedef enum {
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
-	if (section == TableSectionPending && [self.pending count] > 0) {
+	if (section == TableSectionPending && [self.pendingRows count] > 0) {
 		return [TableHeaderView getViewHeight];
 	}
 	else if (section == TableSectionIncidents) {
@@ -246,14 +178,15 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	IncidentTableCell *cell = [TableCellFactory getIncidentTableCellForTable:theTableView indexPath:indexPath];
 	Incident *incident = indexPath.section == TableSectionIncidents
-		? [self filteredRowAtIndexPath:indexPath] : [self.pending objectAtIndex:indexPath.row];
+		? [self filteredRowAtIndexPath:indexPath] : [self.pendingRows objectAtIndex:indexPath.row];
 	if (incident != nil) {
 		[cell setTitle:incident.title];
+        [cell setDescription:incident.description];
 		[cell setLocation:incident.location];
 		[cell setCategory:incident.categoryNames];
 		[cell setDate:incident.dateString];
 		[cell setVerified:incident.verified];
-		UIImage *image = [incident getFirstPhotoThumbnail];
+        UIImage *image = [incident getFirstPhotoThumbnail];
 		if (image != nil) {
 			[cell setImage:image];
 		}
@@ -267,6 +200,16 @@ typedef enum {
 		}
 		else {
 			[cell setImage:nil];
+		}
+        if ([incident.videos count] > 0) {
+            Video *video = [incident.videos objectAtIndex:0];
+            if (video != nil && [[video url] isYouTubeLink]) {
+                CGSize videoSize = [cell webViewSize];
+                DLog(@"YOUTUBE: %@", video.url);
+                NSString *html = [video.url youTubeEmbedCode:NO size:videoSize];
+                DLog(@"EMBED: %@", html);
+                [cell setHTML:html];
+            }
 		}
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
@@ -292,51 +235,34 @@ typedef enum {
 		self.incidentTabViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Reports", nil);
 		if (self.editing) {
 			[self.view endEditing:YES];
-			[self performSelector:@selector(pushViewController:) withObject:self.incidentDetailsViewController afterDelay:0.1];
+			[self performSelector:@selector(pushDetailsViewController:) withObject:self.incidentDetailsViewController afterDelay:0.1];
 		}
 		else {
-			[self pushViewController:self.incidentDetailsViewController];
-		}
+            [self pushDetailsViewController:self.incidentDetailsViewController animated:YES];
+        }
 	}
 	else {
-		self.incidentAddViewController.incident = [self.pending objectAtIndex:indexPath.row];
+		self.incidentAddViewController.incident = [self.pendingRows objectAtIndex:indexPath.row];
 		if (self.editing) {
 			[self.view endEditing:YES];
 			[self performSelector:@selector(presentModalViewController:) withObject:self.incidentAddViewController afterDelay:0.1];
 		}
 		else {
-			[self presentModalViewController:self.incidentAddViewController];
-		}
+            [self presentModalViewController:self.incidentAddViewController animated:YES];
+        }
 	}	
-}
-
-- (void) pushViewController:(UIViewController *)viewController {
-	[self.incidentTabViewController.navigationController pushViewController:self.incidentDetailsViewController animated:YES];
-}
-
-- (void) presentModalViewController:(UIViewController *)viewController {
-	[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
 }
 
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
 - (void) filterRows:(BOOL)reload {
-	[self.filteredRows removeAllObjects];
+    [self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
-	NSArray *incidents;
-	if (self.tableSort.selectedSegmentIndex == TableSortDate) {
-		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)];
-	}
-	else if (self.tableSort.selectedSegmentIndex == TableSortVerified) {
-		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByVerified:)];
-	}
-	else {
-		incidents = [self.allRows sortedArrayUsingSelector:@selector(compareByTitle:)];
-	}
-	for (Incident *incident in incidents) {
-		if (self.category != nil) {
-			if ([incident hasCategory:self.category] && [incident matchesString:searchText]) {
+	for (Incident *incident in self.allRows) {
+		if (self.filter != nil) {
+            Category *category = (Category*)self.filter;
+			if ([incident hasCategory:category] && [incident matchesString:searchText]) {
 				[self.filteredRows addObject:incident];
 			}
 		}
@@ -355,79 +281,13 @@ typedef enum {
 #pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories {
-	DLog(@"Downloading Categories...");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Categories...", nil)];
-}
-
-- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations {
-	DLog(@"Downloading Locations...");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Locations...", nil)];
-}
-
-- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)thePending {
-	DLog(@"Downloading Incidents...");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Incidents...", nil)];
-}
-
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)thePending error:(NSError *)error hasChanges:(BOOL)hasChanges {
-	if (error != nil) {
-		DLog(@"error: %d %@", [error code], [error localizedDescription]);
-		if ([error code] == UnableToCreateRequest) {
-			[self.loadingView hide];
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Request Error", nil) 
-								 andMessage:[error localizedDescription]];
-		}
-		else if ([error code] == NoInternetConnection) {
-			if ([self.loadingView isShowing]) {
-				[self.loadingView hide];
-				[self.alertView showOkWithTitle:NSLocalizedString(@"No Internet", nil) 
-									 andMessage:[error localizedDescription]];
-			}
-		}
-		else if ([self.loadingView isShowing]){
-			[self.loadingView hide];
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Server Error", nil) 
-								 andMessage:[error localizedDescription]];
-		}
-	}
-	else if (hasChanges) {
-		DLog(@"incidents: %d", [incidents count]);
-		[self updateSyncedLabel];
-		[self.allRows removeAllObjects];
-		if (self.tableSort.selectedSegmentIndex == TableSortDate) {
-			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByDate:)]];
-		}
-		else if (self.tableSort.selectedSegmentIndex == TableSortVerified) {
-			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByVerified:)]];
-		}
-		else {
-			[self.allRows addObjectsFromArray:[incidents sortedArrayUsingSelector:@selector(compareByTitle:)]];
-		}
-		[self.filteredRows removeAllObjects];
-		[self.filteredRows addObjectsFromArray:self.allRows];
-		[self.pending removeAllObjects];
-		[self.pending addObjectsFromArray:thePending];
-		
-		[self.tableView reloadData];
-		[self.tableView flashScrollIndicators];	
-		DLog(@"Re-Adding Incidents");
-	}
-	else {
-		DLog(@"No Changes Incidents");
-		[self updateSyncedLabel];
-		[self.tableView reloadData];
-	}
-	self.refreshButton.enabled = YES;
-}
-
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident {
 	if (incident != nil){
-		NSInteger row = [self.pending indexOfObject:incident];
+		NSInteger row = [self.pendingRows indexOfObject:incident];
 		DLog(@"Incident: %d %@", row, incident.title);
 		if (row > -1) {
 			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionPending];
-			IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+            IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 			if (cell != nil) {
 				[cell setUploading:YES];
 			}
@@ -452,7 +312,7 @@ typedef enum {
 		}
 	}
 	if (incident != nil) {
-		NSInteger row = [self.pending indexOfObject:incident];
+		NSInteger row = [self.pendingRows indexOfObject:incident];
 		DLog(@"Incident: %d %@", row, incident.title);
 		if (row > -1) {
 			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:TableSectionPending];
@@ -485,8 +345,8 @@ typedef enum {
 }
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo incident:(Incident *)incident {
-	DLog(@"downloadedFromUshahidi:incident:photo:%@ indexPath:%@", [photo url], [photo indexPath]);
-	if (photo != nil && photo.indexPath != nil) {
+	DLog(@"incident:%@ photo:%@ indexPath:%@", [incident title], [photo url], [photo indexPath]);
+	if (photo != nil && photo.indexPath != nil) {        
 		IncidentTableCell *cell = (IncidentTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
 		if (cell != nil) {
 			if (photo.thumbnail != nil) {
@@ -506,78 +366,6 @@ typedef enum {
 	else {
 		[self.tableView reloadData];
 	}
-}
-
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories error:(NSError *)error hasChanges:(BOOL)hasChanges {
-	if (error != nil) {
-		DLog(@"error: %d %@", [error code], [error localizedDescription]);
-	}
-	else if (hasChanges) {
-		[self.categories removeAllObjects];
-		for (Category *theCategory in theCategories) {
-			[self.categories addObject:theCategory];
-		}
-		DLog(@"Re-Adding Categories");
-	}
-	else {
-		DLog(@"No Changes Categories");
-	}
-	self.filterButton.enabled = [self.categories count] > 0;
-}
-
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)theLocations error:(NSError *)error hasChanges:(BOOL)hasChanges {
-	if (error != nil) {
-		DLog(@"error: %d %@", [error code], [error localizedDescription]);
-	}
-	else if (hasChanges) {
-		DLog(@"Re-Adding Locations");
-	}
-	else {
-		DLog(@"No Changes Locations");
-	}
-}
-
-- (void) mainQueueFinished {
-	DLog(@"");
-	[self.loadingView hideAfterDelay:1.0];
-}
-
-- (void) mapQueueFinished {
-	DLog(@"");
-}
-
-- (void) photoQueueFinished {
-	DLog(@"");
-}
-
-- (void) uploadQueueFinished {
-	DLog(@"");
-}
-
-#pragma mark -
-#pragma mark ItemPickerDelegate
-
-- (void) itemPickerReturned:(ItemPicker *)theItemPicker item:(NSString *)item {
-	DLog(@"itemPickerReturned: %@", item);
-	self.category = nil;
-	for (Category *theCategory in self.categories) {
-		if ([theCategory.title isEqualToString:item]) {
-			self.category = theCategory;
-			DLog(@"Category: %@", theCategory.title);
-			break;
-		}
-	}
-	if (self.category != nil) {
-		[self setHeader:self.category.title atSection:TableSectionIncidents];
-	}
-	else {
-		[self setHeader:NSLocalizedString(@"All Categories", nil) atSection:TableSectionIncidents];
-	}
-	[self filterRows:YES];
-	if ([self.filteredRows count] == 0) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"No Reports", nil)];
-		[self.loadingView hideAfterDelay:1.0];					 
-	}	
 }
 
 @end

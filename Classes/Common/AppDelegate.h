@@ -19,17 +19,53 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+#import "Ushahidi.h"
 
-@interface AppDelegate : NSObject <UIApplicationDelegate> {
+@class DeploymentTableViewController;
+@class IncidentTabViewController;
+@class IncidentDetailsViewController;
+@class CheckinTabViewController;
+@class CategorySelectViewController;
+@class UserSelectViewController;
+@class SettingsViewController;
+@class BaseViewController;
+@class SplashViewController;
+
+@interface AppDelegate : NSObject <UIApplicationDelegate, UshahidiDelegate> {
+    
+@public
     UIWindow *window;
 	UINavigationController *navigationController;
+    UISplitViewController *splitViewController;
+
+    DeploymentTableViewController *deploymentTableViewController;
+    IncidentTabViewController *incidentTabViewController;
+    IncidentDetailsViewController *incidentDetailsViewController;
+    CheckinTabViewController *checkinTabViewController;
+    
+    CategorySelectViewController *categorySelectViewController;
+    UserSelectViewController *userSelectViewController;
+    SettingsViewController  *settingsViewController;
+    SplashViewController *splashViewController;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property(nonatomic, retain) IBOutlet UIWindow *window;
+@property(nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property(nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
+
+@property(nonatomic, retain) IBOutlet DeploymentTableViewController *deploymentTableViewController;
+@property(nonatomic, retain) IBOutlet IncidentTabViewController *incidentTabViewController;
+@property(nonatomic, retain) IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
+@property(nonatomic, retain) IBOutlet CheckinTabViewController *checkinTabViewController;
+
+@property(nonatomic, retain) IBOutlet CategorySelectViewController *categorySelectViewController;
+@property(nonatomic, retain) IBOutlet UserSelectViewController *userSelectViewController;
+@property(nonatomic, retain) IBOutlet SettingsViewController  *settingsViewController;
+@property(nonatomic, retain) IBOutlet SplashViewController *splashViewController;
 
 - (NSString *)applicationDocumentsDirectory;
+- (void)pushDetailsViewController:(BaseViewController *)viewController animated:(BOOL)animated ;
+- (void)setDetailsViewController:(BaseViewController *)viewController animated:(BOOL)animated;
 
 @end
 

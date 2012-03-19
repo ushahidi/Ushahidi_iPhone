@@ -36,6 +36,7 @@
 #import "MKMapView+Extension.h"
 #import "MKPinAnnotationView+Extension.h"
 #import "NSString+Extension.h"
+#import "SubtitleTableCell.h"
 #import "MapAnnotation.h"
 #import "Settings.h"
 #import "TableHeaderView.h"
@@ -43,80 +44,59 @@
 #import "Checkin.h"
 #import "User.h"
 #import "Photo.h"
-#import "ItemPicker.h"
+#import "Device.h"
 
 @interface CheckinTableViewController()
 
-@property(nonatomic,retain) NSMutableArray *users;
-@property(nonatomic,retain) User *user;
-
-- (void) pushViewController:(UIViewController *)viewController;
+- (void) updateSyncedLabel;
 
 @end
 
 @implementation CheckinTableViewController
 
 @synthesize checkinTabViewController, checkinAddViewController, checkinDetailsViewController;
-@synthesize users, user, deployment;
+@synthesize deployment;
+
+const CGFloat DETAIL_LABEL_HEIGHT = 18;
+const CGFloat TEXT_LABEL_HEIGHT= 22;
+const CGFloat CELL_PADDING = 25;
+const CGFloat DEFAULT_CELL_HEIGHT = 60;
+const CGFloat DEFAULT_IMAGE_WIDTH = 80;
+const CGFloat MAXIMUM_CELL_HEIGHT = 2009;
+const CGFloat GROUPED_TABLE_DIFFERENCE = 38;
 
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) addCheckin:(id)sender {
-	DLog(@"");
-	[self.checkinTabViewController presentModalViewController:self.checkinAddViewController animated:YES];
-}
-
-- (IBAction) refresh:(id)sender {
-	self.refreshButton.enabled = NO;
-	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-	[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
-	[[Ushahidi sharedUshahidi] getVersionOfDeployment:self.deployment forDelegate:self];
-}
-
-- (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
-	DLog(@"");
-	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL USERS --- ", nil)];
-	for (User *theUser in self.users) {
-		if ([NSString isNilOrEmpty:[theUser name]] == NO) {
-			[items addObject:[theUser name]];
-		}
-	}
-	if (event != nil) {
-		UIView *toolbar = [[event.allTouches anyObject] view];
-		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
-		[self.itemPicker showWithItems:items 
-						  withSelected:[self.user name] 
-							   forRect:rect 
-								   tag:0];
+- (void) updateSyncedLabel {
+	if (self.deployment.synced) {
+		[self setTableFooter:[NSString stringWithFormat:@"%@ %@", 
+							  NSLocalizedString(@"Last Sync", nil), 
+							  [self.deployment.synced dateToString:@"h:mm a, MMMM d, yyyy"]]];	
 	}
 	else {
-		[self.itemPicker showWithItems:items 
-						  withSelected:[self.user name] 
-							   forRect:CGRectMake(100, self.view.frame.size.height, 0, 0) 
-								   tag:0];	
+		[self setTableFooter:nil];
 	}
 }
 
-- (void) populate:(BOOL)refresh {
-	DLog(@"refresh:%d", refresh);
-	if (refresh) {
-		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
-	}
-	else if (self.user != nil) {
-		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
-	}
-	else {
-		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
-	}
-	[self.users removeAllObjects];
-	if ([[Ushahidi sharedUshahidi] hasUsers]) {
-		[self.users addObjectsFromArray:[[Ushahidi sharedUshahidi] getUsers]];
-	}
-	[self filterRows:YES];
+- (void) populate:(NSArray*)items filter:(NSObject*)theFilter {
+    DLog(@"");
+    self.filter = theFilter;
+    
+    [self.allRows removeAllObjects];
+    [self.allRows addObjectsFromArray:items];
+    
+    [self filterRows:YES];
+	if (self.filter != nil) {
+        User *user = (User*)self.filter;
+        [self setHeader:user.name atSection:0];
+    }
+    else {
+        [self setHeader:NSLocalizedString(@"All Users", nil) atSection:0];
+    }
+    [self updateSyncedLabel];
+    [self.tableView reloadData];	
+    [self.tableView flashScrollIndicators];	
 }
 
 #pragma mark -
@@ -124,7 +104,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.users = [[NSMutableArray alloc] initWithCapacity:0];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search checkins...", nil)];
 	[self setHeader:NSLocalizedString(@"All Users", nil) atSection:0];
 }
@@ -150,8 +129,6 @@
 	[checkinTabViewController release];
 	[checkinAddViewController release];
 	[checkinDetailsViewController release];
-	[users release];
-	[user release];
 	[deployment release];
     [super dealloc];
 }
@@ -160,95 +137,98 @@
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 1;
+	return [self.filteredRows count];
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	return [self.filteredRows count]; 
-}
-
-- (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
-	return [TableHeaderView getViewHeight];;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return [CheckinTableCell getCellHeight];
+    Checkin *checkin = [self.filteredRows objectAtIndex:indexPath.section];
+    return [CheckinTableCell getCellHeightForMessage:checkin.message];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	CheckinTableCell *cell = [TableCellFactory getCheckinTableCellForTable:theTableView indexPath:indexPath];
-	Checkin *checkin = [self.filteredRows objectAtIndex:indexPath.row];
-	if (checkin != nil) {
-		[cell setName:checkin.name];
-		if ([NSString isNilOrEmpty:checkin.message]) {
-			[cell setMessage:checkin.coordinates];
-		}
-		else {
-			[cell setMessage:checkin.message];
-		}
-		[cell setDate:checkin.dateString];
-		UIImage *image = [checkin getFirstPhotoThumbnail];
-		if (image != nil) {
-			[cell setImage:image];
-		}
-		else if (checkin.hasPhotos) {
-			Photo *photo = [checkin firstPhoto];
-			photo.indexPath = indexPath;
-			[[Ushahidi sharedUshahidi] downloadPhoto:photo forCheckin:checkin forDelegate:self];
-		}
-		else if (checkin.hasMap) {
-			[cell setImage:checkin.map];
-		}
-		else {
-			[cell setImage:nil];
-		}
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-	}
-	else {
-		[cell setName:nil];
-		[cell setMessage:nil];
-		[cell setDate:nil];
-		[cell setImage:nil];
-		cell.accessoryType = UITableViewCellAccessoryNone;
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	}
-	return cell;
+    Checkin *checkin = [self.filteredRows objectAtIndex:indexPath.section];
+    CheckinTableCell *cell = [TableCellFactory getCheckinTableCellForTable:theTableView indexPath:indexPath];
+    if (checkin != nil) {
+        if ([NSString isNilOrEmpty:checkin.message]) {
+            [cell setMessage:checkin.coordinates];
+        }
+        else {
+            [cell setMessage:checkin.message];
+        }
+        [cell setName:checkin.name];
+        if ([Device isIPad]) {
+            [cell setDate:checkin.longDateTimeString];
+        }
+        else {
+            [cell setDate:checkin.shortDateTimeString];
+        }
+        if (checkin.hasPhotos) {
+            Photo *photo = [checkin firstPhoto];
+            if (photo != nil) {
+                if (photo.thumbnail != nil) {
+                    [cell setImage:photo.thumbnail];
+                }
+                else if (photo.image != nil) {
+                    [cell setImage:photo.image];
+                }
+                
+                else {
+                    [cell setImage:nil];
+                    photo.indexPath = indexPath;
+                    [[Ushahidi sharedUshahidi] downloadPhoto:photo forCheckin:checkin forDelegate:self];
+                }
+            }
+        }
+        else if (checkin.hasMap) {
+            [cell setImage:checkin.map];
+        }
+        else {
+            [cell setImage:nil];
+        } 
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    else {
+        [cell setMessage:nil];
+        [cell setName:nil];
+        [cell setDate:nil];
+        [cell setMessage:nil];
+        [cell setImage:nil];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return cell;
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-	self.checkinDetailsViewController.checkin = [self.filteredRows objectAtIndex:indexPath.row];
+	self.checkinDetailsViewController.checkin = [self.filteredRows objectAtIndex:indexPath.section];
 	self.checkinDetailsViewController.checkins = self.filteredRows;
 	if (self.editing) {
 		[self.view endEditing:YES];
-		[self performSelector:@selector(pushViewController:) withObject:self.checkinDetailsViewController afterDelay:0.1];
+		[self performSelector:@selector(pushDetailsViewController:) withObject:self.checkinDetailsViewController afterDelay:0.1];
 	}
 	else {
-		[self pushViewController:self.checkinDetailsViewController];
+		[self pushDetailsViewController:self.checkinDetailsViewController animated:YES];
 	}
-}
-
-- (void) pushViewController:(UIViewController *)viewController {
-	[self.checkinTabViewController.navigationController pushViewController:self.checkinDetailsViewController animated:YES];
 }
 
 #pragma mark -
 #pragma mark UISearchBarDelegate
 
 - (void) filterRows:(BOOL)reload {
+    DLog(@"Reload:%d", reload);
 	[self.filteredRows removeAllObjects];
 	NSString *searchText = [self getSearchText];
-	NSArray *checkins;
-	if (self.tableSort.selectedSegmentIndex == TableSortDate) {
-		checkins = [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)];
-	}
-	else {
-		checkins = [self.allRows sortedArrayUsingSelector:@selector(compareByName:)];
-	}
+	NSArray *checkins = [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)];
 	for (Checkin *checkin in checkins) {
-        if (self.user != nil) {
-            if ([self.user.name isEqualToString:checkin.name] && 
+        if (self.filter != nil) {
+            User *user = (User*)self.filter;
+            if ([user.name isEqualToString:checkin.name] && 
                 [checkin.message anyWordHasPrefix:searchText]) {
                 [self.filteredRows addObject:checkin];
             }
@@ -271,47 +251,47 @@
 	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)theCheckins error:(NSError *)error hasChanges:(BOOL)hasChanges {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 	}
 	else if (hasChanges) {
-		DLog(@"Re-Adding Checkins: %d", [theCheckins count]);
+		DLog(@"Re-Adding Checkins: %d", [checkins count]);
 		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:theCheckins];
-		[self populate:YES];
+		[self.allRows addObjectsFromArray:checkins];
 	}
 	else {
 		DLog(@"No Changes Checkins");
 	}
+    [self filterRows:YES];
 	[self.loadingView hide];
 	self.refreshButton.enabled = YES;
 }
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)theUsers error:(NSError *)error hasChanges:(BOOL)hasChanges {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)users error:(NSError *)error hasChanges:(BOOL)hasChanges {
 	if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 	}
 	else if (hasChanges) {
-		DLog(@"Re-Adding Users: %d", [theUsers count]);
-		[self.users removeAllObjects];
-		[self.users addObjectsFromArray:theUsers];
+		DLog(@"Re-Adding Users: %d", [users count]);
+        [self.filters removeAllObjects];
+        [self.filters addObjectsFromArray:users];
 	}
 	else {
 		DLog(@"No Changes Users");
 	}
-	self.filterButton.enabled = YES;
+	self.filterButton.enabled = self.filters.count > 0;
 }
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi map:(UIImage *)map checkin:(Checkin *)checkin {
 	DLog(@"downloadedFromUshahidi:map:object:");
-	NSInteger row = [self.filteredRows indexOfObject:checkin];
-	if (row != NSNotFound) {
-		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
-		CheckinTableCell *cell = (CheckinTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-		if (cell != nil && [checkin getFirstPhotoThumbnail] == nil) {
-			[cell setImage:map];
-		}
+	NSInteger section = [self.filteredRows indexOfObject:checkin];
+	if (section != NSNotFound) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+        CheckinTableCell *cell = (CheckinTableCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+        if (cell.image == nil) {
+            [cell setImage:map];
+        }
 	}
 	else {
 		[self.tableView reloadData];
@@ -321,56 +301,20 @@
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo checkin:(Checkin *)checkin {
 	DLog(@"url:%@ indexPath:%@", [photo url], [photo indexPath]);
 	if (photo != nil && photo.indexPath != nil) {
-		CheckinTableCell *cell = (CheckinTableCell *)[self.tableView cellForRowAtIndexPath:photo.indexPath];
-		if (cell != nil) {
-			if (photo.thumbnail != nil) {
-				[cell setImage:photo.thumbnail];
-			}
-			else if (photo.image != nil)  {
-				[cell setImage:photo.image];
-			}
-			else {
-				[self.tableView reloadData];
-			}
-		}
-		else {
-			[self.tableView reloadData];
-		}
+        CheckinTableCell *cell = (CheckinTableCell*)[self.tableView cellForRowAtIndexPath:photo.indexPath];
+		if (photo.thumbnail != nil) {
+            [cell setImage:photo.thumbnail];
+        }
+        else if (photo.image != nil)  {
+            [cell setImage:photo.image];
+        }
+        else {
+            [self.tableView reloadData];
+        }        
 	}
 	else {
 		[self.tableView reloadData];
 	}
-}
-
-- (void) mainQueueFinished {
-	DLog(@"");
-	[self.loadingView hideAfterDelay:1.0];
-}
-
-#pragma mark -
-#pragma mark ItemPickerDelegate
-
-- (void) itemPickerReturned:(ItemPicker *)theItemPicker item:(NSString *)item {
-	DLog(@"itemPickerReturned: %@", item);
-	self.user = nil;
-	for (User *theUser in self.users) {
-		if ([theUser.name isEqualToString:item]) {
-			self.user = theUser;
-			DLog(@"User: %@", theUser.name);
-			break;
-		}
-	}
-	if (self.user != nil) {
-		[self setHeader:self.user.name atSection:0];
-	}
-	else {
-		[self setHeader:NSLocalizedString(@"All Users", nil) atSection:0];
-	}
-	[self filterRows:YES];
-	if ([self.filteredRows count] == 0) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"No Checkins", nil)];
-		[self.loadingView hideAfterDelay:1.0];					 
-	}	
 }
 
 @end

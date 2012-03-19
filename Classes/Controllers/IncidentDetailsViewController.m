@@ -26,6 +26,7 @@
 #import "TableCellFactory.h"
 #import "SubtitleTableCell.h"
 #import "ImageTableCell.h"
+#import "YouTubeTableCell.h"
 #import "LoadingViewController.h"
 #import "TwitterViewController.h"
 #import "AlertView.h"
@@ -108,6 +109,8 @@ typedef enum {
 		[message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
 	}
 	self.twitterViewController.tweet = message;
+    self.twitterViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+    self.twitterViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	[self presentModalViewController:self.twitterViewController animated:YES];
 }
 
@@ -171,6 +174,7 @@ typedef enum {
 
 - (void) viewDidLoad {
 	[super viewDidLoad];
+    [self setBackButtonTitle:NSLocalizedString(@"Report", nil)];
 	[self setHeader:NSLocalizedString(@"Errors", nil) atSection:TableSectionErrors];
 	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
 	[self setHeader:NSLocalizedString(@"Verified", nil) atSection:TableSectionVerified];
@@ -207,7 +211,6 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through reports, the SMS button to send the report URL, the Tweet button to share on Twitter or the Email button to send the report details.", nil)];
 }
 
 - (void)dealloc {
@@ -299,19 +302,19 @@ typedef enum {
 		return cell;
 	}
 	else if (indexPath.section == TableSectionNews && [self.incident.news count] > 0) {
+        News *news = [self.incident.news objectAtIndex:indexPath.row];
 		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithForTable:theTableView indexPath:indexPath];
-		News *news = [self.incident.news objectAtIndex:indexPath.row];
 		if (news != nil) {
-			if ([NSString isNilOrEmpty:news.title] == NO) {
-				[cell setText:news.title];	
-			}
-			else {
-				[cell setText:news.url];
-			}
-			[cell setDescription:news.url];
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		}
+            if ([NSString isNilOrEmpty:news.title] == NO) {
+                [cell setText:news.title];	
+            }
+            else {
+                [cell setText:news.url];
+            }
+            [cell setDescription:news.url];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;    
+        }
 		else {
 			[cell setText:@""];	
 			[cell setDescription:@""];
@@ -324,7 +327,12 @@ typedef enum {
 		SubtitleTableCell *cell = [TableCellFactory getSubtitleTableCellWithForTable:theTableView indexPath:indexPath];
 		Video *video = [self.incident.videos objectAtIndex:indexPath.row];
 		if (video != nil) {
-			if ([NSString isNilOrEmpty:video.title] == NO) {
+            if ([video.url isYouTubeLink]) {
+                YouTubeTableCell *youTubeCell = [TableCellFactory getYouTubeTableCellForDelegate:self table:theTableView indexPath:indexPath];
+                [youTubeCell loadVideo:video.url];
+                return youTubeCell;
+            }
+            else if ([NSString isNilOrEmpty:video.title] == NO) {
 				[cell setText:video.title];	
 			}
 			else {
@@ -391,7 +399,7 @@ typedef enum {
 		if (self.incident.map != nil) {
 			return self.incident.map.size.height;
 		}
-		return [Device isIPad] ? 225 : 150;
+		return [Device isIPad] ? 200 : 150;
 	}
 	else if (indexPath.section == TableSectionPhotos) {
 		if ([self.incident.photos count] > 0) {
@@ -411,6 +419,10 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionVideo) {
 		if ([self.incident.videos count] > 0) {
+            Video *video = [self.incident.videos objectAtIndex:indexPath.row];
+            if ([video.url isYouTubeLink]) {
+                return self.tableView.contentSize.width * 3 / 4;
+            }
 			return [SubtitleTableCell getCellHeight];
 		}
 		return [TextTableCell getCellSizeForText:NSLocalizedString(@"No Video", nil) forWidth:theTableView.contentSize.width].height;

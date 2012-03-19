@@ -19,7 +19,7 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
+#import "BaseAddViewController.h"
 #import "TextFieldTableCell.h"
 #import "TextViewTableCell.h"
 #import "ButtonTableCell.h"
@@ -32,7 +32,7 @@
 @class LocationTableViewController;
 @class Incident;
 
-@interface IncidentAddViewController : BaseTableViewController<TextFieldTableCellDelegate, 
+@interface IncidentAddViewController : BaseAddViewController<TextFieldTableCellDelegate, 
 																TextViewTableCellDelegate, 
 																DatePickerDelegate,
 																ImagePickerDelegate,
@@ -45,8 +45,6 @@
 	CategoryTableViewController *categoryTableViewController;
 	LocationTableViewController *locationTableViewController;
 	ImagePickerController *imagePickerController;
-	UIBarButtonItem *cancelButton;
-	UIBarButtonItem *doneButton;
 	Incident *incident;
 																
 @private
@@ -54,14 +52,9 @@
 	NSString *news;
 }
 
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 @property(nonatomic, retain) IBOutlet CategoryTableViewController *categoryTableViewController;
 @property(nonatomic, retain) IBOutlet LocationTableViewController *locationTableViewController;
 @property(nonatomic, retain) ImagePickerController *imagePickerController;
 @property(nonatomic, retain) Incident *incident;
-
-- (IBAction) cancel:(id)sender;
-- (IBAction) done:(id)sender;
 
 @end

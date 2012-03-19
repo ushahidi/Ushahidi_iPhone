@@ -95,6 +95,8 @@
 											  animated:YES];
 	}
 	else {
+        imagePicker.modalPresentationStyle = UIModalPresentationPageSheet;
+        imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 		[viewController presentModalViewController:imagePicker animated:YES];
 	}
 	[imagePicker release];

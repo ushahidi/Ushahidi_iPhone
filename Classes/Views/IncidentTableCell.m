@@ -22,6 +22,7 @@
 #import "UIColor+Extension.h"
 #import "Device.h"
 #import "Settings.h"
+#import "NSString+Extension.h"
 
 @implementation IncidentTableCell
 
@@ -30,7 +31,7 @@ typedef enum {
 	VerifiedYes
 } Verified;
 
-@synthesize titleLabel, locationLabel, categoryLabel, dateLabel, verifiedLabel, imageView, activityIndicator;
+@synthesize titleLabel, locationLabel, categoryLabel, dateLabel, verifiedLabel, descriptionLabel, imageView, webView, activityIndicator;
 
 - (void)dealloc {
 	[titleLabel release];
@@ -39,8 +40,36 @@ typedef enum {
 	[dateLabel release];
 	[imageView release];
 	[verifiedLabel release];
+    [webView release];
+    [descriptionLabel release];
 	[activityIndicator release];
     [super dealloc];
+}
+
+- (void) setDescription:(NSString *)theDescription {
+    if (self.descriptionLabel != nil) {
+        [self.descriptionLabel setText:theDescription];
+    }
+}
+
+- (NSString *) description {
+    return self.descriptionLabel.text;
+}
+
+- (void) setHTML:(NSString *)html {
+    if ([NSString isNilOrEmpty:html]) {
+        self.imageView.hidden = NO;
+        self.webView.hidden = YES;
+    }
+    else {
+        self.imageView.hidden = YES;
+        self.webView.hidden = NO;
+        [self.webView loadHTMLString:html baseURL:nil];
+    }
+}
+
+- (CGSize) webViewSize {
+    return self.imageView.frame.size;
 }
 
 - (void) setTitle:(NSString *)title {

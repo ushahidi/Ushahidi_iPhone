@@ -55,6 +55,8 @@
 			composeViewcontroller.recipients = recipients;
 		}
 		composeViewcontroller.messageComposeDelegate = self;
+        composeViewcontroller.modalPresentationStyle = UIModalPresentationPageSheet;
+        composeViewcontroller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 		[self.controller presentModalViewController:composeViewcontroller animated:YES];
 	}
 }

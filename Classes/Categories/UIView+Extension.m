@@ -47,4 +47,23 @@
 	self.frame = rect;
 }
 
+- (UIViewController *) getViewController {
+    for (UIView *next = [self superview]; next; next = next.superview) {
+		UIResponder *nextResponder = [next nextResponder];
+		if ([nextResponder isKindOfClass:[UIViewController class]]) {
+			return (UIViewController*)nextResponder;
+		}
+	}
+	return nil;
+}
+
+- (BOOL) isInsidePopover {
+    for (UIView *view = self;view.superview != nil; view=view.superview){
+        if ([[[view class] description] hasSuffix:@"UIPopoverView"]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
 @end

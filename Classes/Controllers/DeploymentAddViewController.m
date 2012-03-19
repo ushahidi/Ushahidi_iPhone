@@ -30,6 +30,7 @@
 #import "DeploymentTableCell.h"
 #import "NSString+Extension.h"
 #import "Settings.h"
+#import "UIEvent+Extension.h"
 
 #define kKilometerPrefix @" km"
 
@@ -40,9 +41,6 @@ typedef enum {
 
 @interface DeploymentAddViewController ()
 
-@property(nonatomic, retain) NSString *name;
-@property(nonatomic, retain) NSString *url;
-@property(nonatomic, retain) MapDialog *mapDialog;
 @property(nonatomic, retain) NSString *mapDistance;
 @property(nonatomic, retain) ItemPicker *itemPicker;
 
@@ -52,7 +50,7 @@ typedef enum {
 
 @implementation DeploymentAddViewController
 
-@synthesize cancelButton, refreshButton, tableSort, name, url, mapDialog, mapDistance, itemPicker;
+@synthesize cancelButton, tableSort, mapDistance, itemPicker, radiusButton;
 
 #pragma mark -
 #pragma mark Private
@@ -65,30 +63,15 @@ typedef enum {
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) add:(id)sender {
-	DLog(@"");
-	self.name = nil;
-	self.url = nil;
-	[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Details", nil) 
-							 name:nil 
-							  url:nil];
-}
-
-- (IBAction) refresh:(id)sender event:(UIEvent *)event {
+- (IBAction) radius:(id)sender event:(UIEvent *)event {
 	DLog(@"");
 	NSArray *items = [NSArray arrayWithObjects:@"50 km", @"100 km", @"250 km", @"500 km", @"750 km", @"1000 km", @"1500 km", nil];
 	NSString *selected = [NSString isNilOrEmpty:self.mapDistance] ? nil : [NSString stringWithFormat:@"%@%@", self.mapDistance, kKilometerPrefix];
-	if (event != nil) {
-		UIView *toolbar = [[event.allTouches anyObject] view];
-		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
-		[self.itemPicker showWithItems:items withSelected:selected forRect:rect tag:0];
-	}
-	else {
-		[self.itemPicker showWithItems:items withSelected:selected forRect:CGRectMake(100, self.view.frame.size.height, 0, 0) tag:0];	
-	}
+	CGRect rect = [event getRectForView:self.view];
+    [self.itemPicker showWithItems:items withSelected:selected forRect:rect tag:0];
 }
 
-- (IBAction) cancel:(id)sender {
+- (IBAction) cancel:(id)sender event:(UIEvent*)event{
 	DLog(@"cancel");
 	if (self.editing) {
 		[self.view endEditing:YES];
@@ -99,7 +82,7 @@ typedef enum {
 	}
 }
 
-- (IBAction) tableSortChanged:(id)sender {
+- (IBAction) sort:(id)sender event:(UIEvent*)event {
 	DLog(@"");
 	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
 	if (segmentControl.selectedSegmentIndex == TableSortDate) {
@@ -116,23 +99,27 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.navigationBar.topItem.title = NSLocalizedString(@"Add Map", nil);
+	self.title = NSLocalizedString(@"Add Map", nil);
+    if ([NSString isNilOrEmpty:self.mapDistance]) {
+        self.navigationBar.topItem.rightBarButtonItem.title = [NSString stringWithFormat:@"500%@", kKilometerPrefix];
+    }
+    else {
+        self.navigationBar.topItem.rightBarButtonItem.title = [NSString stringWithFormat:@"%@%@", self.mapDistance, kKilometerPrefix];
+    }
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
-	self.mapDialog = [[MapDialog alloc] initForDelegate:self];
 	self.mapDistance = [[Settings sharedSettings] mapDistance];
 	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.mapDialog = nil;
 	self.mapDistance = nil;
 	self.itemPicker = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	NSArray *mapsUnsorted = [[Ushahidi sharedUshahidi] getMaps];
+    NSArray *mapsUnsorted = [[Ushahidi sharedUshahidi] getMaps];
 	NSArray *mapsSorted = self.tableSort.selectedSegmentIndex == TableSortDate 
 		? [mapsUnsorted sortedArrayUsingSelector:@selector(compareByDiscovered:)]
 		: [mapsUnsorted sortedArrayUsingSelector:@selector(compareByName:)];
@@ -148,7 +135,7 @@ typedef enum {
 		}
 	}
 	else {
-		self.refreshButton.enabled = NO;
+		self.radiusButton.enabled = NO;
 		if ([NSString isNilOrEmpty:[Locator sharedLocator].latitude] && [NSString isNilOrEmpty:[Locator sharedLocator].longitude]) {
 			[[Locator sharedLocator] detectLocationForDelegate:self];
 			[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
@@ -166,16 +153,11 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Select an existing map from the list, click the Refresh button to locate maps near you or the Plus button to add your own map.", nil)];
 }
 
 - (void)dealloc {
 	[cancelButton release];
-	[refreshButton release];
 	[tableSort release];
-	[name release];
-	[url release];
-	[mapDialog release];
 	[itemPicker release];
 	[mapDistance release];
 	[itemPicker release];
@@ -265,13 +247,19 @@ typedef enum {
 		DLog(@"No Changes");
 		[self.loadingView hide];
 	}
-	self.refreshButton.enabled = YES;
+	self.radiusButton.enabled = YES;
 }
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi version:(Deployment *)deployment {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
-	[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.5];
+    if (deployment != nil) {
+     	[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
+        [self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.5];   
+    }
+    else {
+        [self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
+                             andMessage:NSLocalizedString(@"Server Error", nil)];
+    }
 }
 
 #pragma mark -
@@ -299,45 +287,6 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark MapDialogDelegate
-
-- (void) mapDialogReturned:(MapDialog *)theMapDialog name:(NSString *)theName url:(NSString *)theUrl {
-	DLog(@"name:%@ url:%@", theName, theUrl);
-	self.name = theName;
-	self.url = theUrl;
-	if (self.name != nil && [self.name length] > 0 && 
-		self.url != nil && [self.url isValidURL]) {
-		[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
-		Deployment *deployment = [[Deployment alloc] initWithName:theName url:theUrl];
-		if ([[Ushahidi sharedUshahidi] addDeployment:deployment]) {
-			[[Ushahidi sharedUshahidi] getVersionOfDeployment:deployment forDelegate:self];
-		}
-		else {
-			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.5];
-		}
-		[deployment release];
-	}
-	else {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Map Details", nil) 
-							 andMessage:NSLocalizedString(@"Please enter a valid name and url.", nil)];
-	}
-}
-
-- (void) mapDialogCancelled:(MapDialog *)theMapDialog {
-	DLog(@"");
-	self.name = nil;
-	self.url = nil;
-}
-
-- (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if ([alert.title isEqualToString:NSLocalizedString(@"Invalid Map Details", nil)]) {
-		[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Details", nil) 
-								 name:self.name 
-								  url:self.url];	
-	}
-}
-	
-#pragma mark -
 #pragma mark LocatorDelegate
 					
 - (void) locatorFinished:(Locator *)locator latitude:(NSString *)latitude longitude:(NSString *)longitude {
@@ -363,7 +312,8 @@ typedef enum {
 
 - (void) itemPickerReturned:(ItemPicker *)theItemPicker item:(NSString *)item {
 	self.mapDistance = [item stringByReplacingOccurrencesOfString:kKilometerPrefix withString:@""];
-	self.refreshButton.enabled = NO;
+    self.navigationBar.topItem.rightBarButtonItem.title = item;
+	self.radiusButton.enabled = NO;
 	if ([NSString isNilOrEmpty:[Locator sharedLocator].latitude] && [NSString isNilOrEmpty:[Locator sharedLocator].longitude]) {
 		[[Locator sharedLocator] detectLocationForDelegate:self];
 		[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];

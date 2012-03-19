@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "BaseTableViewController.h"
+#import "BaseViewController.h"
 #import "TableCellFactory.h"
 #import "UIView+Extension.h"
 #import "TableHeaderView.h"
@@ -33,18 +34,12 @@
 @property(nonatomic,retain) NSMutableDictionary *footers;
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath;
-- (void) keyboardWillShow:(NSNotification *)notification;
-- (void) keyboardDidShow:(NSNotification *)notification;
-- (void) keyboardWillHide:(NSNotification *)notification;
-- (void) keyboardDidHide:(NSNotification *)notification;
-- (void) resizeTableToFrame:(CGRect)rect duration:(NSTimeInterval)duration animation:(NSString *)animation;
-- (CGFloat) getFrameHeight:(CGRect)frame;
 
 @end
 
 @implementation BaseTableViewController
 
-@synthesize tableView, allRows, filteredRows, oddRowColor, evenRowColor, shouldBeginEditing, headers, footers, editing;
+@synthesize tableView, allRows, filteredRows, pendingRows, oddRowColor, evenRowColor, shouldBeginEditing, headers, footers, filter, filters;
 
 - (void) hideSearchBar {
 	if (self.tableView.tableHeaderView != nil) {
@@ -161,13 +156,20 @@
 	[self.headers removeAllObjects];
 }
 
+- (void) populate:(NSArray*)items filter:(NSObject*)theFilter {
+    DLog(@"");
+    self.filter = theFilter;
+    [self.allRows removeAllObjects];
+    [self.allRows addObjectsFromArray:items];
+    [self.tableView reloadData];
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 	DLog(@"%@", self.nibName);
-	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
 	self.allRows = [NSMutableArray arrayWithCapacity:0];
 	self.filteredRows = [NSMutableArray arrayWithCapacity:0];
 	self.headers = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -194,16 +196,14 @@
     [super viewDidUnload];
 	self.allRows = nil;
 	self.filteredRows = nil;
+    self.pendingRows = nil;
+    self.filters = nil;
 	self.headers = nil;
 	self.footers = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 	DLog(@"%@", self.nibName);
 }
 
@@ -221,10 +221,6 @@
 
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 	DLog(@"%@", self.nibName);
 }
 
@@ -232,11 +228,14 @@
 	DLog(@"%@", self.nibName);
 	[allRows release];
 	[filteredRows release];
+    [pendingRows release];
 	[tableView release];
 	[oddRowColor release];
 	[evenRowColor release];
 	[headers release];
 	[footers release];
+    [filters release];
+    [filter release];
 	[super dealloc];
 }
 
@@ -295,99 +294,6 @@
 - (CGFloat)tableView:(UITableView *)theTableView heightForFooterInSection:(NSInteger)section {
 	UILabel *label = [self.footers objectForKey:[NSString stringWithFormat:@"%d", section]];
 	return label != nil ? label.frame.size.height : 0.0;
-}
-
-#pragma mark -
-#pragma mark Keyboard
-
--(void) keyboardWillShow:(NSNotification *)notification {
-	//DLog(@"notification:%@", notification);
-	@try {
-		NSTimeInterval duration = 0.3;
-		[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
-		DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
-		
-		CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
-		[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardFrame];
-		DLog(@"Keyboard x:%f y:%f width:%f height:%f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
-		
-		CGRect tableFrame = self.tableView.frame;
-		DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
-		
-		tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y - [self getFrameHeight:keyboardFrame];
-		
-		[self resizeTableToFrame:tableFrame duration:duration animation:@"ShrinkTableHeight"];
-	}
-	@catch (NSException *e) {
-		DLog(@"NSException:%@", e);
-		//TODO handle keyboard show error
-	}	
-}
-
--(void) keyboardDidShow:(NSNotification *)notification {
-	self.editing = YES;
-}
-
--(void) keyboardWillHide:(NSNotification *)notification {
-	//DLog(@"notification:%@", notification);
-	@try {
-		NSTimeInterval duration = 0.3;
-		[[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&duration];
-		DLog(@"View x:%f y:%f width:%f height:%f", self.tableView.superview.frame.origin.x, self.tableView.superview.frame.origin.y, self.tableView.superview.frame.size.width, self.tableView.superview.frame.size.height);
-		
-		CGRect keyboardFrame = CGRectMake(0, 0, 0, 0);
-		[[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrame];
-		DLog(@"Keyboard x:%f y:%f width:%f height:%f", keyboardFrame.origin.x, keyboardFrame.origin.y, keyboardFrame.size.width, keyboardFrame.size.height);
-		
-		CGRect tableFrame = self.tableView.frame;
-		DLog(@"Table x:%f y:%f width:%f height:%f", tableFrame.origin.x, tableFrame.origin.y, tableFrame.size.width, tableFrame.size.height);
-		
-		if (self.toolBar) {
-			tableFrame.size.height = self.toolBar.frame.origin.y - tableFrame.origin.y;
-		}
-		else {
-			tableFrame.size.height = [self getFrameHeight:self.tableView.superview.frame] - tableFrame.origin.y;
-		}
-		[self resizeTableToFrame:tableFrame duration:duration animation:@"RestoreTableHeight"];
-	}
-	@catch (NSException *e) {
-		DLog(@"NSException:%@", e);
-		//TODO handle keyboard hide error
-	}	
-}
-
--(void) keyboardDidHide:(NSNotification *)notification {
-	self.editing = NO;
-}
-
-- (CGFloat) getFrameHeight:(CGRect)frame {
-	if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait ||
-		[UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
-		DLog(@"UIDeviceOrientation: UIDeviceOrientationPortrait");
-		return frame.size.height;
-	}
-	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ||
-			 [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-		DLog(@"UIDeviceOrientation: UIDeviceOrientationLandscape");
-		return frame.size.width;
-	}
-	else if ([UIDevice currentDevice].orientation == UIDeviceOrientationUnknown) {
-		DLog(@"UIDeviceOrientation: UIDeviceOrientationUnknown");
-		return frame.size.height;
-	}
-	else {
-		DLog(@"UIDeviceOrientation: %d", [UIDevice currentDevice].orientation);
-	}
-	return frame.size.height;
-}
-
-- (void) resizeTableToFrame:(CGRect)frame duration:(NSTimeInterval)duration animation:(NSString *)animation {
-	DLog(@"size: %f, %f", frame.size.width, frame.size.height);
-	[UIView beginAnimations:animation context:nil];
-    [UIView setAnimationDuration:duration];
-	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.tableView cache:YES];
-	self.tableView.frame = frame;
-	[UIView commitAnimations];
 }
 
 - (void) scrollToIndexPath:(NSIndexPath *)indexPath {

@@ -45,7 +45,6 @@
 }
 
 - (BOOL)updateWithDictionary:(NSDictionary *)dictionary {
-	DLog(@"%@", dictionary);
 	NSString *nameString = [dictionary stringForKey:@"name"];
 	if ([self.name isEqualToString:nameString] == NO) {
 		self.name = nameString;

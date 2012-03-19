@@ -21,11 +21,12 @@
 #import <UIKit/UIKit.h>
 #import "BaseTabViewController.h"
 #import "UserDialog.h"
+#import "Ushahidi.h"
 
 @class CheckinTableViewController;
 @class CheckinMapViewController;
 
-@interface CheckinTabViewController : BaseTabViewController<UserDialogDelegate> {
+@interface CheckinTabViewController : BaseTabViewController<UshahidiDelegate, UserDialogDelegate> {
 
 @public
 	CheckinTableViewController *checkinTableViewController;
@@ -37,7 +38,5 @@
 
 @property(nonatomic,retain) IBOutlet CheckinTableViewController *checkinTableViewController;
 @property(nonatomic,retain) IBOutlet CheckinMapViewController *checkinMapViewController;
-
-- (IBAction) viewModeChanged:(id)sender;
 
 @end

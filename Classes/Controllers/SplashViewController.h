@@ -18,26 +18,14 @@
  **
  *****************************************************************************/
 
-#import <UIKit/UIKit.h>
-#import "Ushahidi.h"
+#import "BaseViewController.h"
 
-@class DeploymentTableViewController;
-@class IncidentTabViewController;
-@class IncidentDetailsViewController;
-@class CheckinTabViewController;
-
-@interface SplashViewController : UIViewController<UshahidiDelegate> {
-	
-@public
-	IBOutlet DeploymentTableViewController *deploymentTableViewController;
-	IBOutlet IncidentTabViewController *incidentTabViewController;
-	IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
-	IBOutlet CheckinTabViewController *checkinTabViewController;
+@interface SplashViewController : BaseViewController {
+    BOOL shouldDismissOnAppear;
 }
 
-@property(nonatomic, retain) DeploymentTableViewController *deploymentTableViewController;
-@property(nonatomic, retain) IncidentTabViewController *incidentTabViewController;
-@property(nonatomic, retain) IncidentDetailsViewController *incidentDetailsViewController;
-@property(nonatomic, retain) CheckinTabViewController *checkinTabViewController;
+@property(nonatomic, assign) BOOL shouldDismissOnAppear;
+
+- (void) dismissSplashViewController;
 
 @end

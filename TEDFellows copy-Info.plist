@@ -25,7 +25,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Corruption</string>
+	<string>TED Fellows</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -38,51 +38,51 @@
 		<string>Icon-Small@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.ushahidi.ios.corruptiontracker</string>
+	<string>com.ushahidi.ios.tedfellows</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Corruption Tracker</string>
+	<string>TED Fellows</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.12</string>
+	<string>2.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MapURL</key>
-	<string>http://www.corruptiontracker.org</string>
+	<string>http://tedfellows.crowdmap.com</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
 	<key>NavBarColor</key>
-	<string>#4d4d4d</string>
+	<string>#808080</string>
 	<key>ReportNewsURL</key>
-	<true/>
+	<false/>
 	<key>SearchBarColor</key>
-	<string>#cdcdcd</string>
+	<string>#8e8e8e</string>
 	<key>SupportEmail</key>
-	<string>report@corruptiontracker.org</string>
+	<string>support@ushahidi.com</string>
 	<key>SupportURL</key>
-	<string>http://www.corruptiontracker.org</string>
+	<string>http://www.crowdmap.com</string>
 	<key>TableEvenRowColor</key>
-	<string>#f0f0f0</string>
+	<string>#fbfbfb</string>
 	<key>TableGroupedColor</key>
-	<string>#cdcdcd</string>
+	<string>#ececec</string>
 	<key>TableHeaderColor</key>
-	<string>#8cbe33</string>
+	<string>#d6d6d6</string>
 	<key>TableHeaderTextColor</key>
-	<string>#ffffff</string>
+	<string>#ff2b06</string>
 	<key>TableOddRowColor</key>
-	<string>#e7e3da</string>
+	<string>#f4f4f4</string>
 	<key>TablePlainColor</key>
-	<string>#ffffff</string>
+	<string>#fcfcfc</string>
 	<key>TableSelectedRowColor</key>
-	<string>#8cbe33</string>
+	<string>#e5e5e5</string>
 	<key>ToolBarColor</key>
-	<string>#4d4d4d</string>
+	<string>#8e8e8e</string>
 	<key>TwitterKey</key>
 	<string>muqzQTP4YkXi0ncI39s0Jw</string>
 	<key>TwitterSecret</key>
@@ -105,9 +105,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UnverifiedTextColor</key>
-	<string>#a60003</string>
+	<string>#8e8e8e</string>
 	<key>VerifiedTextColor</key>
-	<string>#368c00</string>
+	<string>#8e8e8e</string>
 	<key>Required Device Capabilities</key>
 	<array>
 		<string>armv6</string>

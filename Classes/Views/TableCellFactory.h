@@ -36,6 +36,7 @@
 @class CheckinTableCell;
 @class SliderTableCell;
 @class ButtonTableCell;
+@class YouTubeTableCell;
 
 @protocol TextTableCellDelegate;
 @protocol SearchTableCellDelegate;
@@ -47,10 +48,15 @@
 @protocol DateTableCellDelegate;
 @protocol SliderTableCellDelegate;
 @protocol ButtonTableCellDelegate;
+@protocol YouTubeTableCellDelegate;
 
 @interface TableCellFactory : NSObject {
 
 }
+
++ (YouTubeTableCell *) getYouTubeTableCellForDelegate:(id<YouTubeTableCellDelegate>)delegate
+                                                table:(UITableView *)tableView 
+                                            indexPath:(NSIndexPath *)indexPath;
 
 + (ButtonTableCell *) getButtonTableCellForDelegate:(id<ButtonTableCellDelegate>)delegate
 											  table:(UITableView *)tableView 

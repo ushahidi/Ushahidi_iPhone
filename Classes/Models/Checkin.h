@@ -73,8 +73,11 @@
 @property(nonatomic,retain) NSMutableArray *photos;
 
 @property(nonatomic,readonly) NSString *dateString;
+@property(nonatomic,readonly) NSString *shortDateString;
 @property(nonatomic,readonly) NSString *timeString;
 @property(nonatomic,readonly) NSString *dateTimeString;
+@property(nonatomic,readonly) NSString *longDateTimeString;
+@property(nonatomic,readonly) NSString *shortDateTimeString;
 @property(nonatomic,readonly) NSString *coordinates;
 
 @property(nonatomic,readonly) BOOL hasName;

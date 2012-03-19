@@ -53,7 +53,6 @@
 
 - (void) setDate:(NSString *)theDate {
 	self.dateLabel.text = theDate;
-	self.dateLabel.textColor = [[Settings sharedSettings] unverifiedTextColor];
 }
 
 - (NSString *)date {
@@ -61,6 +60,8 @@
 }
 
 - (void) setImage:(UIImage *)theImage {
+    self.imageView.layer.masksToBounds = YES;
+    self.imageView.layer.cornerRadius = 5.0;
 	if (theImage != nil) {
 		self.imageView.image = theImage;
 	} 
@@ -74,7 +75,8 @@
 }
 
 - (void) setSelectedColor:(UIColor *)color {
-	UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
+    UIView *selectedBackgroundView = [[UIView alloc] initWithFrame:self.frame];
+    selectedBackgroundView.layer.cornerRadius = 10;
 	[selectedBackgroundView setBackgroundColor:color];
 	[self setSelectedBackgroundView:selectedBackgroundView];
 	[selectedBackgroundView release];	
@@ -84,8 +86,9 @@
 	return self.selectedBackgroundView.backgroundColor;
 }
 
-+ (CGFloat) getCellHeight {
-	return [Device isIPad] ? 110 : 90;
++ (CGFloat) getCellHeightForMessage:(NSString*)theMessage {
+    // TODO adjust cell height to fit all checkin message text
+    return [Device isIPad] ? 100 : 90;
 }
 
 @end

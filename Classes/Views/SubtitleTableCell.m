@@ -80,4 +80,9 @@
 	return 50;
 }
 
+- (void) setTextColor:(UIColor *)textColor {
+    self.textLabel.textColor = textColor;
+    self.detailTextLabel.textColor = textColor;
+}
+
 @end

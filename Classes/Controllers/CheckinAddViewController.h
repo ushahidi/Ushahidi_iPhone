@@ -19,7 +19,7 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
+#import "BaseAddViewController.h"
 #import "TextViewTableCell.h"
 #import "TextFieldTableCell.h"
 #import "MapTableCell.h"
@@ -29,7 +29,7 @@
 
 @class Checkin;
 
-@interface CheckinAddViewController : BaseTableViewController<TextViewTableCellDelegate, 
+@interface CheckinAddViewController : BaseAddViewController<TextViewTableCellDelegate, 
 																TextFieldTableCellDelegate,
 																MapTableCellDelegate, 
 																ImagePickerDelegate, 
@@ -38,16 +38,12 @@
 																UIActionSheetDelegate> {
 
 @public
-	UIBarButtonItem *cancelButton;
-	UIBarButtonItem *doneButton;
 	ImagePickerController *imagePickerController;
 														   
 @private
 	Checkin *checkin;														   
 }
 
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
 @property (nonatomic, retain) ImagePickerController *imagePickerController;
 
 - (IBAction) cancel:(id)sender;

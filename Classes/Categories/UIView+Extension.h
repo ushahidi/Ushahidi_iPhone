@@ -25,5 +25,7 @@
 - (UIView *)findFirstResponder;
 - (void) setFrameWidth:(CGFloat)width;
 - (void) setFrameHeight:(CGFloat)height;
+- (UIViewController *) getViewController; 
+- (BOOL) isInsidePopover;
 
 @end

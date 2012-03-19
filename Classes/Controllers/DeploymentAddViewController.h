@@ -21,35 +21,29 @@
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
 #import "Ushahidi.h"
-#import "MapDialog.h"
 #import "Locator.h"
 #import "ItemPicker.h"
 
 @interface DeploymentAddViewController : BaseTableViewController<UshahidiDelegate, 
-																 MapDialogDelegate, 
 																 LocatorDelegate, 
 																 ItemPickerDelegate> {
 	
 @public
 	UIBarButtonItem *cancelButton;
-	UIBarButtonItem *refreshButton;
+    UIBarButtonItem *radiusButton;
 	UISegmentedControl *tableSort;
 	
 @private
-	NSString *name;
-	NSString *url;
-	MapDialog *mapDialog;
 	ItemPicker *itemPicker;
 	NSString *mapDistance;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
+@property(nonatomic, retain) IBOutlet UIBarButtonItem *radiusButton;
 @property(nonatomic, retain) IBOutlet UISegmentedControl *tableSort;
 
-- (IBAction) cancel:(id)sender;
-- (IBAction) add:(id)sender;
-- (IBAction) refresh:(id)sender event:(UIEvent*)event;
-- (IBAction) tableSortChanged:(id)sender;
+- (IBAction) cancel:(id)sender event:(UIEvent*)event;
+- (IBAction) radius:(id)sender event:(UIEvent*)event;
+- (IBAction) sort:(id)sender event:(UIEvent*)event;
 
 @end

@@ -35,10 +35,48 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
-@synthesize email, firstName, lastName, lastDeployment, lastIncident, mapDistance, downloadMaps, becomeDiscrete, resizePhotos, imageWidth, mapZoomLevel;
-@synthesize mapName, mapURL;
-@synthesize navBarTintColor, toolBarTintColor, searchBarTintColor, tablePlainBackColor, tableGroupedBackColor, tableOddRowColor, tableEvenRowColor, tableSelectRowColor, tableHeaderBackColor, tableHeaderTextColor, verifiedTextColor, unverifiedTextColor;
+@synthesize email;
+@synthesize firstName;
+@synthesize lastName;
+@synthesize lastDeployment;
+@synthesize lastIncident; 
+@synthesize downloadMaps;
+@synthesize becomeDiscrete;
+@synthesize resizePhotos;
+@synthesize imageWidth;
+
+@synthesize mapZoomLevel;
+@synthesize mapName;
+@synthesize mapURL;
+@synthesize mapDistance;
+
+@synthesize navBarTintColor;
+@synthesize toolBarTintColor;
+@synthesize searchBarTintColor;
+@synthesize tablePlainBackColor;
+@synthesize tableGroupedBackColor;
+@synthesize tableOddRowColor;
+@synthesize tableEvenRowColor;
+@synthesize tableSelectRowColor;
+@synthesize tableHeaderBackColor;
+@synthesize tableHeaderTextColor;
+@synthesize verifiedTextColor;
+@synthesize unverifiedTextColor;
 @synthesize showReportNewsURL;
+
+@synthesize supportURL;
+@synthesize supportEmail;
+@synthesize appStoreURL;
+
+@synthesize twitterUsername;
+@synthesize twitterPassword;
+@synthesize twitterUserKey;
+@synthesize twitterUserSecret;
+@synthesize twitterApiKey;
+@synthesize twitterApiSecret;
+
+@synthesize bitlyApiLogin;
+@synthesize bitlyApiKey;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -69,30 +107,45 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	if (self.mapZoomLevel == 0) self.mapZoomLevel = 12;
 	self.mapDistance = [userDefaults stringForKey:@"mapDistance"];
 	if (self.mapDistance == nil) self.mapDistance = @"500";
+    
+    self.twitterUsername = [userDefaults stringForKey:@"twitterUsername"];
+	self.twitterPassword = [userDefaults stringForKey:@"twitterPassword"];
+    self.twitterUserKey = [userDefaults stringForKey:@"twitterUserKey"];
+	self.twitterUserSecret = [userDefaults stringForKey:@"twitterUserSecret"];
 }
 
 - (void) loadInfoDictionary {
 	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-	self.mapName = [infoDictionary objectForKey:@"CFBundleName"];
-	self.mapURL = [infoDictionary objectForKey:@"MapURL"];
+	self.mapName = [infoDictionary stringForKey:@"CFBundleName"];
+	self.mapURL = [infoDictionary stringForKey:@"USHMapURL"];
 	
-	self.navBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"NavBarColor"]];
-	self.toolBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"ToolBarColor"]];
-	self.searchBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"SearchBarColor"]];
+    self.supportURL = [infoDictionary stringForKey:@"USHSupportURL"];
+	self.supportEmail = [infoDictionary stringForKey:@"USHSupportEmail"];
+	self.appStoreURL = [infoDictionary stringForKey:@"USHAppStoreURL"];
+    
+	self.navBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHNavBarColor"]];
+	self.toolBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHToolBarColor"]];
+	self.searchBarTintColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHSearchBarColor"]];
 	
-	self.tablePlainBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TablePlainColor"]];
-	self.tableGroupedBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableGroupedColor"]];
-	self.tableOddRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableOddRowColor"]];
-	self.tableEvenRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableEvenRowColor"]];
-	self.tableSelectRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableSelectedRowColor"]];
-	self.tableHeaderBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableHeaderColor"]];
-	self.tableHeaderTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"TableHeaderTextColor"]];
+	self.tablePlainBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTablePlainColor"]];
+	self.tableGroupedBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableGroupedColor"]];
+	self.tableOddRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableOddRowColor"]];
+	self.tableEvenRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableEvenRowColor"]];
+	self.tableSelectRowColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableSelectedRowColor"]];
+	self.tableHeaderBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableHeaderColor"]];
+	self.tableHeaderTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableHeaderTextColor"]];
 	
-	self.verifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"VerifiedTextColor"]];
-	self.unverifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"UnverifiedTextColor"]];
+	self.verifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHVerifiedTextColor"]];
+	self.unverifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHUnverifiedTextColor"]];
 	
-	if ([infoDictionary objectForKey:@"ReportNewsURL"] != nil) {
-		self.showReportNewsURL = [infoDictionary boolForKey:@"ReportNewsURL"];
+	self.twitterApiKey = [infoDictionary stringForKey:@"USHTwitterApiKey"];
+    self.twitterApiSecret = [infoDictionary stringForKey:@"USHTwitterApiSecret"];
+
+    self.bitlyApiLogin = [infoDictionary stringForKey:@"USHBitlyApiLogin"];
+    self.bitlyApiKey = [infoDictionary stringForKey:@"USHBitlyApiKey"];
+    
+	if ([infoDictionary objectForKey:@"USHReportNewsURL"] != nil) {
+		self.showReportNewsURL = [infoDictionary boolForKey:@"USHReportNewsURL"];
 	}
 	else {
 		self.showReportNewsURL = YES;
@@ -106,8 +159,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[lastDeployment release];
 	[lastIncident release];
 	[mapDistance release];
-	[mapURL release];
 	[mapName release];
+	[mapURL release];
+    [supportURL release];
+	[supportEmail release];
+    [appStoreURL release];
+	[navBarTintColor release];
+	[toolBarTintColor release];
+	[searchBarTintColor release];
+	[tablePlainBackColor release];
+	[tableGroupedBackColor release];
+	[tableOddRowColor release];
+	[tableEvenRowColor release];
+	[tableSelectRowColor release];
+	[tableHeaderBackColor release];
+	[tableHeaderTextColor release];
+	[verifiedTextColor release];
+	[unverifiedTextColor release];
+    
+	[twitterUsername release];
+    [twitterPassword release];
+    [twitterApiKey release];
+    [twitterApiSecret release];
+    [twitterUserKey release];
+    [twitterUserSecret release];
+    
+    [bitlyApiLogin release];
+    [bitlyApiKey release];
 	[super dealloc];
 }
 
@@ -124,6 +202,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	[[NSUserDefaults standardUserDefaults] setInteger:self.mapZoomLevel forKey:@"mapZoomLevel"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.mapDistance forKey:@"mapDistance"];
 	[[NSUserDefaults standardUserDefaults] setBool:self.resizePhotos forKey:@"resizePhotos"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.twitterUsername forKey:@"twitterUsername"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.twitterPassword forKey:@"twitterPassword"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.twitterUserKey forKey:@"twitterUserKey"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.twitterUserSecret forKey:@"twitterUserSecret"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -137,6 +219,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
 - (BOOL) hasEmail {
 	return [NSString isNilOrEmpty:self.email] == NO;
+}
+
+- (BOOL) hasMapURL {
+	return [NSString isNilOrEmpty:self.mapURL] == NO;
+}
+
+- (BOOL) isWhiteLabel {
+	return [NSString isNilOrEmpty:self.mapName] == NO ||
+           [NSString isNilOrEmpty:self.mapURL] == NO;
 }
 
 @end

@@ -129,9 +129,6 @@
 }
 
 - (UIGestureRecognizer *) addTapRecognizer:(id)target action:(SEL)action taps:(NSInteger)numberOfTaps {
-//	UILongPressGestureRecognizer *gestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:target action:action];
-//	gestureRecognizer.minimumPressDuration = 2.0;
-	
 	UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:target action:action];
 	gestureRecognizer.numberOfTapsRequired = numberOfTaps;
 	gestureRecognizer.numberOfTouchesRequired = 1;

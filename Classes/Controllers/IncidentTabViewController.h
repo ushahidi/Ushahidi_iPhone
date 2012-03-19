@@ -20,20 +20,15 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTabViewController.h"
+#import "Ushahidi.h"
+#import "ItemPicker.h"
 
-@class IncidentTableViewController;
-@class IncidentMapViewController;
+@class Category;
 
-@interface IncidentTabViewController : BaseTabViewController {
+@protocol ItemPickerDelegate;
 
-@public
-	IncidentTableViewController *incidentTableViewController;
-	IncidentMapViewController *incidentMapViewController;
+@interface IncidentTabViewController : BaseTabViewController<UshahidiDelegate, 
+                                                             ItemPickerDelegate> {
 }
-
-@property(nonatomic,retain) IBOutlet IncidentTableViewController *incidentTableViewController;
-@property(nonatomic,retain) IBOutlet IncidentMapViewController *incidentMapViewController;
-
-- (IBAction) viewModeChanged:(id)sender;
 
 @end

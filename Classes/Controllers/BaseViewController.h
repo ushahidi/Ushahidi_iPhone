@@ -30,29 +30,50 @@
 @interface BaseViewController : UIViewController<InputViewDelegate, UIAlertViewDelegate> {
 
 @public 
-	IBOutlet WebViewController *webViewController;
-	IBOutlet UINavigationBar *navigationBar;
-	IBOutlet UIToolbar *toolBar;
-	
+    WebViewController *webViewController;
+    UINavigationBar *navigationBar;
+    UIToolbar *toolBar;
+    BOOL editing;
+    
 @protected
 	LoadingViewController *loadingView;
 	InputView *inputView;
 	AlertView *alertView;
 	BOOL willBePushed;
 	BOOL wasPushed;
+    UIViewController *hostingViewController;
 }
 
-@property(nonatomic, retain) WebViewController *webViewController;
-@property(nonatomic, retain) UINavigationBar *navigationBar;
-@property(nonatomic, retain) UIToolbar *toolBar;
+@property(nonatomic, retain) IBOutlet WebViewController *webViewController;
+@property(nonatomic, retain) IBOutlet UINavigationBar *navigationBar;
+@property(nonatomic, retain) IBOutlet UIToolbar *toolBar;
 @property(nonatomic, retain) LoadingViewController *loadingView;
 @property(nonatomic, retain) InputView *inputView;
 @property(nonatomic, retain) AlertView *alertView;
 @property(nonatomic, assign) BOOL willBePushed;
 @property(nonatomic, assign) BOOL wasPushed;
+@property(nonatomic, assign) BOOL editing;
 
-- (void)viewWillBePushed;
-- (void)viewWasPushed;
+- (void) viewWillBePushed;
+- (void) viewWasPushed;
 - (void) setBackButtonTitle:(NSString *)text;
+
+- (void) pushDetailsViewController:(UIViewController *)viewController;
+- (void) pushDetailsViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
+- (void) setDetailsViewController:(UIViewController *)viewController;
+- (void) setDetailsViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
+- (void) presentModalViewController:(BaseViewController *)viewController;
+- (void) presentModalViewController:(BaseViewController *)viewController animated:(BOOL)animated;
+
+- (void) dismissModalViewController;
+- (void) dismissModalViewControllerAnimated:(BOOL)animated;
+
+@end
+
+@protocol BaseViewControllerDelegate <NSObject>
+
+@optional
 
 @end

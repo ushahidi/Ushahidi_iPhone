@@ -25,28 +25,19 @@
 #import "BaseMapViewController.h"
 #import "Ushahidi.h"
 #import "Photo.h"
-#import "ItemPicker.h"
 
 @class CheckinTabViewController;
 @class CheckinAddViewController;
 @class CheckinDetailsViewController;
 @class Deployment;
-@class User;
 
 @interface CheckinMapViewController : BaseMapViewController<UshahidiDelegate, 
-															MKMapViewDelegate, 
-															ItemPickerDelegate> {
+															MKMapViewDelegate> {
 @public
 	CheckinTabViewController *checkinTabViewController;
 	CheckinAddViewController *checkinAddViewController;
 	CheckinDetailsViewController *checkinDetailsViewController;
 	Deployment *deployment;
-	
-@private
-	NSMutableArray *allCheckins;
-	NSMutableArray *filteredCheckins;
-	NSMutableArray *users;
-	User *user;
 }
 
 @property(nonatomic,retain) IBOutlet CheckinTabViewController *checkinTabViewController;
@@ -54,9 +45,6 @@
 @property(nonatomic,retain) IBOutlet CheckinDetailsViewController *checkinDetailsViewController;
 @property(nonatomic,retain) Deployment *deployment;
 
-- (IBAction) addCheckin:(id)sender;
-- (IBAction) refresh:(id)sender;
-- (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
-- (void) populate:(BOOL)refresh resize:(BOOL)resize;
+- (void) populate:(NSArray*)items filter:(NSObject*)filter;
 
 @end

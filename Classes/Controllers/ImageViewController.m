@@ -63,6 +63,8 @@ typedef enum {
 
 - (IBAction) tweetPhoto:(id)sender {
 	self.twitterViewController.tweet = [NSMutableString	stringWithFormat:@""];
+    self.twitterViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+    self.twitterViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	[self presentModalViewController:self.twitterViewController animated:YES];
 }
 

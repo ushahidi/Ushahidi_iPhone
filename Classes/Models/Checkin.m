@@ -40,7 +40,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
-		//DLog(@"dictionary: %@", dictionary);
+		DLog(@"dictionary: %@", dictionary);
 		if (dictionary != nil) {
 			self.identifier = [dictionary stringForKey:@"id"];
 			self.message = [dictionary stringForKey:@"msg"];
@@ -106,8 +106,20 @@
 	return self;
 }
 
+- (NSString *) longDateTimeString {
+	return self.date != nil ? [self.date dateToString:@"h:mm a, MMMM d, yyyy" fromTimeZone:@"UTC"] : nil;
+}
+
+- (NSString *) shortDateTimeString {
+	return self.date != nil ? [[self.date dateToString:@"h:mma d/MM/yy" fromTimeZone:@"UTC"] lowercaseString] : nil;
+}
+
+- (NSString *) shortDateString {
+	return self.date != nil ? [self.date dateToString:@"d/MM/yyyy" fromTimeZone:@"UTC"] : nil;
+}
+
 - (NSString *) dateTimeString {
-	return self.date != nil ? [self.date dateToString:@"h:mm a, ccc, MMM d, yyyy" fromTimeZone:@"UTC"] : nil;
+	return self.date != nil ? [self.date dateToString:@"h:mm a, cccc MMMM d, yyyy" fromTimeZone:@"UTC"] : nil;
 }
 
 - (NSString *) dateString {

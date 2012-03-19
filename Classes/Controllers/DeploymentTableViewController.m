@@ -33,150 +33,121 @@
 #import "Deployment.h"
 #import "NSString+Extension.h"
 #import "Settings.h"
+#import "Device.h"
+#import "AppDelegate.h"
+#import "MapDialog.h"
+#import "UIEvent+Extension.h"
 
 @interface DeploymentTableViewController ()
 
-@property(nonatomic, retain) UIButton *settingsButton;
+@property(nonatomic, retain) MapDialog *mapDialog;
+@property(nonatomic, retain) NSString *mapName;
+@property(nonatomic, retain) NSString *mapUrl;
 
-- (void) setTableEdit:(BOOL)edit;
-- (void) settings:(id)sender;
+- (void) mainQueueFinished;
 
 @end
 
 @implementation DeploymentTableViewController
 
-@synthesize incidentTabViewController, deploymentAddViewController, settingsViewController, checkinTabViewController;
-@synthesize addButton, editButton, refreshButton, settingsButton, tableSort;
-
-#pragma mark -
-#pragma mark Enums
-
 typedef enum {
-	TableSortDate,
-	TableSortName
-} TableSort;
+	MapAddByUrl,
+	MapAddByLocation
+} MapAdd;
+
+@synthesize incidentTabViewController;
+@synthesize checkinTabViewController;
+@synthesize deploymentAddViewController;
+@synthesize settingsViewController;
+@synthesize addButton;
+@synthesize settingsButton;
+@synthesize mapDialog;
+@synthesize mapName;
+@synthesize mapUrl;
 
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) add:(id)sender {
+- (IBAction) add:(id)sender event:(UIEvent*)event {
 	DLog(@"");
-	[self presentModalViewController:self.deploymentAddViewController animated:YES];
+    self.mapName = nil;
+    self.mapUrl = nil;
+    UIActionSheet *actionSheet = [[[UIActionSheet alloc] initWithTitle:nil 
+                                                              delegate:self
+                                                     cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                destructiveButtonTitle:nil
+                                                     otherButtonTitles:NSLocalizedString(@"Add Map By URL", nil), 
+                                                                       NSLocalizedString(@"Find Maps Around Me", nil), nil] autorelease];    
+    CGRect rect = [event getRectForView:self.view];
+    [actionSheet showFromRect:rect inView:self.view animated:YES];
 }
 
-- (IBAction) edit:(id)sender {
-	if (self.tableView.editing) {
-		[self setTableEdit:NO];
-	}
-	else {
-		[self setTableEdit:YES];
-	}
-}
-
-- (IBAction) refresh:(id)sender {
+- (IBAction) settings:(id)sender event:(UIEvent*)event {
 	DLog(@"");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-	[[Ushahidi sharedUshahidi] getVersionsForDelegate:self];
-}
-
-- (void) settings:(id)sender {
-	DLog(@"");
-	self.settingsViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-	[self presentModalViewController:self.settingsViewController animated:YES];
-}
-
-- (IBAction) tableSortChanged:(id)sender {
-	DLog(@"");
-	[self setTableEdit:NO];
-	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
-	if (segmentControl.selectedSegmentIndex == TableSortDate) {
-		DLog(@"TableSortDate");
-	}
-	else if (segmentControl.selectedSegmentIndex == TableSortName) {
-		DLog(@"TableSortName");
-	}
-	[self filterRows:YES];
-}
-
-- (void) setTableEdit:(BOOL)tableEdit {
-	if (tableEdit) {
-		self.tableView.editing = YES;
-		self.editButton.title = NSLocalizedString(@"Done", nil);
-		self.refreshButton.enabled = NO;
-		self.tableSort.enabled = NO;
-		self.settingsButton.enabled = NO;
-		self.addButton.enabled = NO;
-	}
-	else {
-		self.tableView.editing = NO;
-		self.editButton.title = NSLocalizedString(@"Edit", nil);
-		self.refreshButton.enabled = YES;
-		self.tableSort.enabled = YES;
-		self.settingsButton.enabled = YES;
-		self.addButton.enabled = YES;
-	}
-}
-
-- (void) loadedFromUshahidi:(Ushahidi *)ushahidi deployment:(Deployment *)deployment {
-	DLog(@"");
-	if (deployment.supportsCheckins) {
-		self.checkinTabViewController.deployment = deployment;
-		[self.navigationController pushViewController:self.checkinTabViewController animated:YES];
-	}
-	else {
-		self.incidentTabViewController.deployment = deployment;
-		[self.navigationController pushViewController:self.incidentTabViewController animated:YES];
-	}
+	self.settingsViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+	self.settingsViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentModalViewController:self.settingsViewController animated:YES];
 }
 
 #pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
-	[super viewDidLoad];
-	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search maps...", nil)];
-	self.title = NSLocalizedString(@"Ushahidi Maps", nil);
-	[self setBackButtonTitle:NSLocalizedString(@"Maps", nil)];
-	self.settingsButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-    [self.settingsButton addTarget:self action:@selector(settings:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:self.settingsButton] autorelease];
+    [super viewDidLoad];
+	self.title = NSLocalizedString(@"Maps", nil);
+	self.mapDialog = [[MapDialog alloc] initForDelegate:self];
+    
+    NSArray *deployments = [[Ushahidi sharedUshahidi] getDeploymentsUsingSorter:@selector(compareByName:)];
+    [self.allRows removeAllObjects];
+    [self.allRows addObjectsFromArray:deployments];
+    [self.filteredRows removeAllObjects];
+    [self.filteredRows addObjectsFromArray:deployments];
+    if ([Device isIPad]) {
+        if ([[Ushahidi sharedUshahidi] hasDeployment]) {
+            [self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+            [[Ushahidi sharedUshahidi] loadDeploymentForDelegate:self];
+        }
+        else if (self.filteredRows.count > 0) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+            [self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+            Deployment *deployment = [self.filteredRows objectAtIndex:0];
+            [[Ushahidi sharedUshahidi] loadDeployment:deployment forDelegate:self];    
+        }
+        if (self.filteredRows.count < 4) {
+            CGFloat height = 4 * [DeploymentTableCell getCellHeight];
+            self.contentSizeForViewInPopover = CGSizeMake(320.0, height);
+        }
+        else if (self.filteredRows.count < 12) {
+            CGFloat height = self.filteredRows.count * [DeploymentTableCell getCellHeight];
+            self.contentSizeForViewInPopover = CGSizeMake(320.0, height);
+        }
+        else {
+            self.contentSizeForViewInPopover = CGSizeMake(320.0, 800);
+        }
+    }
 } 
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    self.mapDialog = nil;
 	self.settingsButton = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	[self setTableEdit:NO];
-	DLog(@"willBePushed: %d", self.willBePushed);
-	if (self.willBePushed || self.modalViewController != nil) {
-		SEL sorter = self.tableSort.selectedSegmentIndex == TableSortDate
-			? @selector(compareByDate:) : @selector(compareByName:);
-		NSArray *deployments = [[Ushahidi sharedUshahidi] getDeploymentsUsingSorter:sorter];
-		[self.allRows removeAllObjects];
-		[self.allRows addObjectsFromArray:deployments];
-		[self.filteredRows removeAllObjects];
-		NSString *searchText = [self getSearchText];
-		for (Deployment *deploment in deployments) {
-			if ([deploment matchesString:searchText]) {
-				[self.filteredRows addObject:deploment];
-			}
-		}
-		DLog(@"Re-Adding Rows: %d", [deployments count]);
-	}
-	if (animated) {
-		[[Ushahidi sharedUshahidi] unloadDeployment];
-	}
-	[self.tableView reloadData];
+	NSArray *deployments = [[Ushahidi sharedUshahidi] getDeploymentsUsingSorter:@selector(compareByName:)];
+    [self.allRows removeAllObjects];
+    [self.allRows addObjectsFromArray:deployments];
+    [self.filteredRows removeAllObjects];
+    [self.filteredRows addObjectsFromArray:deployments];
+    [self.tableView reloadData];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
-	[self.loadingView hide];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Info button to view app settings, Plus button to add a map or Edit button to remove a map.", nil)];
+    [self.tableView flashScrollIndicators];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -194,10 +165,12 @@ typedef enum {
 	[checkinTabViewController release];
 	[deploymentAddViewController release];
 	[settingsViewController release];
-	[editButton release];
-	[refreshButton release];
-	[tableSort release];
-    [super dealloc];
+    [mapDialog release];
+    [settingsButton release];
+    [addButton release];
+    [mapName release];
+    [mapUrl release];
+	[super dealloc];
 }
 
 #pragma mark -
@@ -223,8 +196,27 @@ typedef enum {
 		else {
 			[cell setDescription:deployment.description];
 		}
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if ([Device isIPad]) {
+            if ([[Ushahidi sharedUshahidi] isDeployment:deployment]) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                [theTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            }
+            else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
+        else {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        if (cell.gestureRecognizers.count == 0) {
+            UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+            longPressRecognizer.minimumPressDuration = 1.25;
+            [cell addGestureRecognizer:longPressRecognizer]; 
+            [longPressRecognizer release];   
+        }
 	}
 	else {
 		[cell setTitle:nil];
@@ -237,33 +229,60 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (self.tableView.editing == NO) {
-		[self.view endEditing:YES];
-		[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-		[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
-		[[Ushahidi sharedUshahidi] loadDeployment:deployment forDelegate:self];
-	}
+    DLog(@"section:%d row:%d", indexPath.section, indexPath.row);
+    if ([theTableView isEditing]) {
+        [theTableView setEditing:NO];
+        self.settingsButton.enabled = YES; 
+        self.addButton.enabled = YES;
+        [self.tableView reloadData];
+    }
+    else {
+        if ([Device isIPad]) {
+            [theTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+        else {
+            [theTableView deselectRowAtIndexPath:indexPath animated:YES];    
+        }
+        [self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+        Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
+        [[Ushahidi sharedUshahidi] loadDeployment:deployment forDelegate:self];   
+    }
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
 		Deployment *deployment = [self.filteredRows objectAtIndex:indexPath.row];
 		@try {
-			if([[Ushahidi sharedUshahidi] removeDeployment:deployment]) {
+            BOOL isCurrentDeployment = [[Ushahidi sharedUshahidi] isDeployment:deployment];
+            if ([[Ushahidi sharedUshahidi] removeDeployment:deployment]) {
 				[self.loadingView showWithMessage:NSLocalizedString(@"Removed", nil)];
 				[self.loadingView hideAfterDelay:1.0];
 				DLog(@"Removed Deployment");
 				[self.allRows removeObject:deployment];
 				[self.filteredRows removeObject:deployment];
-				[self.tableView reloadData];
+                if ([Device isIPad] && isCurrentDeployment) {
+                    if (self.filteredRows.count > 0) {
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+                        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+                        [self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+                        [[Ushahidi sharedUshahidi] loadDeployment:[self.filteredRows objectAtIndex:0] 
+                                                      forDelegate:self];
+                    }
+                    else {
+                        //TODO load default view
+                    }
+                }
+                [self.tableView setEditing:NO animated:YES];
+                [self.tableView reloadData];
+                self.addButton.enabled = YES;
+                self.settingsButton.enabled = YES;
 			}
 			else {
 				[self.alertView showOkWithTitle:NSLocalizedString(@"Remove Error", nil) 
 									 andMessage:NSLocalizedString(@"There was a problem removing the map.", nil)];	
 			}
 		}
-		@catch (NSException * e) {
+		@catch (NSException *e) {
 			[self.alertView showOkWithTitle:NSLocalizedString(@"Remove Error", nil) 
 								 andMessage:NSLocalizedString(@"There was a problem removing the map.", nil)];
 		}
@@ -283,13 +302,7 @@ typedef enum {
 	}
 	else if (hasChanges) {
 		DLog(@"Has Changes: %d", [deployments count]);
-		NSArray *sortedDeployments;
-		if (self.tableSort.selectedSegmentIndex == TableSortDate) {
-			sortedDeployments = [deployments sortedArrayUsingSelector:@selector(compareByDate:)];
-		}
-		else {
-			sortedDeployments = [deployments sortedArrayUsingSelector:@selector(compareByName:)];
-		}
+		NSArray *sortedDeployments =[deployments sortedArrayUsingSelector:@selector(compareByName:)];
 		[self.allRows removeAllObjects];
 		[self.allRows addObjectsFromArray:sortedDeployments];
 		NSString *searchText = [self getSearchText];
@@ -306,7 +319,6 @@ typedef enum {
 		DLog(@"No Changes");
 	}
 	[self.loadingView hide];
-	self.refreshButton.enabled = YES;
 }
 
 - (void) mainQueueFinished {
@@ -315,27 +327,103 @@ typedef enum {
 }
 
 #pragma mark -
-#pragma mark UISearchBarDelegate
+#pragma mark UIGestureRecognizerDelegate
 
-- (void) filterRows:(BOOL)reloadTable {
-	NSString *searchText = [self getSearchText];
-	NSArray *deployments;
-	if (self.tableSort.selectedSegmentIndex == TableSortDate) {
-		deployments = [self.allRows sortedArrayUsingSelector:@selector(compareByDate:)];
-	}
+- (void)longPress:(UILongPressGestureRecognizer*)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        if ([self.tableView isEditing]) {
+            [self.tableView setEditing:NO];
+            self.settingsButton.enabled = YES;
+            self.addButton.enabled = YES;
+        }
+        else {
+            [self.tableView setEditing:YES];
+            self.settingsButton.enabled = NO;
+            self.addButton.enabled = NO;
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == [actionSheet cancelButtonIndex]) {
+        self.mapName = nil;
+        self.mapUrl = nil;
+    }
+    else if (buttonIndex == MapAddByUrl) {
+        [self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Details", nil) 
+                                 name:self.mapName 
+                                  url:self.mapUrl];
+    }
+    else if (buttonIndex == MapAddByLocation) {
+        self.deploymentAddViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+        self.deploymentAddViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:self.deploymentAddViewController animated:YES];
+    }
+}
+
+#pragma mark -
+#pragma mark MapDialogDelegate
+
+- (void) mapDialogReturned:(MapDialog *)theMapDialog name:(NSString *)name url:(NSString *)url {
+	DLog(@"name:%@ url:%@", name, url);
+	if ([NSString isNilOrEmpty:name] == NO && [NSString isNilOrEmpty:url] == NO) {
+        self.mapName = nil;
+        self.mapUrl = nil;
+        [self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
+		Deployment *deployment = [[Deployment alloc] initWithName:name url:url];
+		if ([[Ushahidi sharedUshahidi] addDeployment:deployment]) {
+			[[Ushahidi sharedUshahidi] getVersionOfDeployment:deployment forDelegate:self];
+            [self.allRows addObject:deployment];
+            [self.filteredRows addObject:deployment];
+            [self.tableView reloadData];
+            [self.tableView flashScrollIndicators];
+        }
+        [deployment release];
+    }
 	else {
-		deployments = [self.allRows sortedArrayUsingSelector:@selector(compareByName:)];
+        self.mapName = name;
+        self.mapUrl = url;
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Invalid Map Details", nil) 
+							 andMessage:NSLocalizedString(@"Please enter a valid name and url.", nil)];
 	}
-	[self.filteredRows removeAllObjects];
-	for (Deployment *deployment in deployments) {
-		if ([deployment matchesString:searchText]) {
-			[self.filteredRows addObject:deployment];
-		}
+}
+
+- (void) mapDialogCancelled:(MapDialog *)theMapDialog {
+	DLog(@"");
+    self.mapName = nil;
+    self.mapUrl = nil;
+}
+
+- (void) alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if ([alert.title isEqualToString:NSLocalizedString(@"Invalid Map Details", nil)]) {
+		[self.mapDialog showWithTitle:NSLocalizedString(@"Enter Map Details", nil) 
+								 name:self.mapName 
+								  url:self.mapUrl];	
 	}
-	if (reloadTable) {
-		[self.tableView reloadData];	
-		[self.tableView flashScrollIndicators];
+}
+
+#pragma mark -
+#pragma mark UshahidiDelegate
+
+- (void) loadedFromUshahidi:(Ushahidi *)ushahidi deployment:(Deployment *)deployment {
+	DLog(@"");
+    NSIndexPath *selected = [self.tableView indexPathForSelectedRow];
+    [self.tableView reloadData];
+    if ([Device isIPad]) {
+        [self.tableView selectRowAtIndexPath:selected animated:NO scrollPosition:UITableViewScrollPositionNone];    
+    }
+	if (deployment.supportsCheckins) {
+		self.checkinTabViewController.deployment = deployment;
+        [self setDetailsViewController:self.checkinTabViewController animated:YES];
+    }
+	else {
+		self.incidentTabViewController.deployment = deployment;
+        [self setDetailsViewController:self.incidentTabViewController animated:YES];
 	}
+    [self.loadingView hide];
 }
 
 @end

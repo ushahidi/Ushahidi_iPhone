@@ -189,7 +189,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 }
 
+- (void) loadDeploymentForDelegate:(id<UshahidiDelegate>)delegate {
+    if ([self hasDeployment]) {
+        DLog(@"%@", self.deployment.name);
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.deployment, @"deployment", delegate, @"delegate", nil]; 
+        [self performSelectorInBackground:@selector(loadDeploymentWithDictionary:) withObject:dictionary];
+    }
+    else {
+        DLog(@"NULL");
+    }
+}
+
 - (void) loadDeployment:(Deployment *)theDeployment forDelegate:(id<UshahidiDelegate>)delegate {
+    DLog(@"%@", theDeployment.name);
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:theDeployment, @"deployment", delegate, @"delegate", nil]; 
 	[self performSelectorInBackground:@selector(loadDeploymentWithDictionary:) withObject:dictionary];
 }
@@ -238,8 +250,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 #pragma mark -
 #pragma mark Deployments
 
+- (BOOL) hasDeployment {
+    return self.deployment != nil;
+}
+
 - (NSString *) deploymentName {
 	return self.deployment != nil ? self.deployment.name : nil;
+}
+
+- (BOOL) isDeployment:(Deployment*)another {
+    return self.deployment == another;
 }
 
 - (BOOL)addDeployment:(Deployment *)theDeployment {
@@ -262,8 +282,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (BOOL)removeDeployment:(Deployment *)theDeployment {
-	if (theDeployment != nil) {
-		[self.deployments removeObjectForKey:theDeployment.url];
+    if (theDeployment != nil) {
+        [self.deployments removeObjectForKey:theDeployment.url];
 		if ([[NSFileManager defaultManager] fileExistsAtPath:[theDeployment archiveFolder]]) {
 			NSError *error = nil;
 			for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[theDeployment archiveFolder] error:&error]) {
@@ -276,6 +296,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				}
 			}
 		}
+        if (self.deployment == theDeployment) {
+            [self.deployment purge];
+            self.deployment = nil;
+        }
 		return YES;
 	}
 	return NO;
@@ -302,6 +326,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	for (Deployment *theDeployment in [self.deployments allValues]) {
 		[self getVersionOfDeployment:theDeployment forDelegate:delegate];
 	}
+}
+
+- (void) getVersionForDelegate:(id<UshahidiDelegate>)delegate {
+    [self getVersionOfDeployment:self.deployment forDelegate:delegate];
 }
 
 - (void) getVersionOfDeployment:(Deployment *)theDeployment forDelegate:(id<UshahidiDelegate>)delegate {
@@ -551,9 +579,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 								DLog(@"USER: %@", dictionary);
 							}
 						}
+                        else {
+                            DLog(@"User:NULL");
+                        }
 						[user release];
 					}
 				}
+                else {
+                    DLog(@"Users:NULL");
+                }
 				if (hasUserChanges) {
 					DLog(@"Has New Users");
 				}
@@ -563,7 +597,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				
 				NSArray *checkins = [payload objectForKey:@"checkins"]; 
 				if (checkins != nil) {
-					for (NSDictionary *dictionary in checkins) {
+                    for (NSDictionary *dictionary in checkins) {
 						Checkin *checkin = [[Checkin alloc] initWithDictionary:dictionary];
 						if (checkin != nil) {
 							User *user = [self.deployment.users objectForKey:checkin.user];
@@ -578,6 +612,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 								DLog(@"CHECKIN: %@", dictionary);
 							}	
 						}
+                        else {
+                            DLog(@"Checkin:NULL %@", dictionary);
+                        }
 						if (self.deployment.lastCheckinId == nil) {
 							self.deployment.lastCheckinId = checkin.identifier;
 						}
@@ -587,6 +624,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 						[checkin release];
 					}
 				}
+                else {
+                    DLog(@"Checkins:NULL");
+                }
 			}
 			else {
 				error = [NSError errorWithDomain:self.deployment.domain 

@@ -18,6 +18,7 @@
  **
  *****************************************************************************/
 
+#import "BaseAddViewController.h"
 #import "IncidentAddViewController.h"
 #import "MapViewController.h"
 #import "TableCellFactory.h"
@@ -25,6 +26,7 @@
 #import "LoadingViewController.h"
 #import "CategoryTableViewController.h"
 #import "LocationTableViewController.h"
+#import "LoadingViewController.h"
 #import "TextTableCell.h"
 #import "AlertView.h"
 #import "InputView.h"
@@ -45,14 +47,15 @@
 @property(nonatomic, retain) DatePicker *datePicker;
 @property(nonatomic, retain) NSString *news;
 
-- (void) dismissModalView;
-
 @end
 
 @implementation IncidentAddViewController
 
-@synthesize cancelButton, doneButton, datePicker;
-@synthesize categoryTableViewController, locationTableViewController, imagePickerController, news;
+@synthesize datePicker;
+@synthesize categoryTableViewController;
+@synthesize locationTableViewController;
+@synthesize imagePickerController;
+@synthesize news;
 @synthesize incident;
 
 #pragma mark -
@@ -135,7 +138,7 @@ typedef enum {
 			else {
 				[self.loadingView showWithMessage:NSLocalizedString(@"Saved", nil)];
 			}
-			[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.0];
+			[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:1.0];
 		}
 		else {
 			[self.loadingView hide];
@@ -143,11 +146,6 @@ typedef enum {
 								 andMessage:NSLocalizedString(@"Unable to add incident", nil)];
 		}
 	}
-}
-
-- (void) dismissModalView {
-	[self.loadingView hide];
-	[self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
@@ -182,6 +180,7 @@ typedef enum {
 	[super viewWillAppear:animated];
 	if (self.modalViewController == nil) {
 		if (self.incident == nil) {
+            self.doneButton.title = NSLocalizedString(@"Add", nil);
 			self.cancelButton.enabled = YES;
 			self.incident = [[Incident alloc] initWithDefaultValues];
 			self.news = nil;
@@ -207,6 +206,7 @@ typedef enum {
 			[[Locator sharedLocator] detectLocationForDelegate:self];
 		}
 		else {
+            self.doneButton.title = NSLocalizedString(@"Update", nil);
 			self.cancelButton.enabled = NO;
 		}
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
@@ -215,8 +215,6 @@ typedef enum {
 }
 
 - (void)dealloc {
-	[cancelButton release];
-	[doneButton release];
 	[imagePickerController release];
 	[categoryTableViewController release];
 	[locationTableViewController release];
@@ -389,7 +387,10 @@ typedef enum {
 		return [TextTableCell getCellSizeForText:NSLocalizedString(@"Add Photo", nil) forWidth:theTableView.contentSize.width].height;
 	}
 	if (indexPath.section == TableSectionDescription) {
-		return [Device isIPad] ? 250 : 120;
+        if ([Device isIPad]) {
+            return [Device isPortraitMode] ? 250 : 60;
+        }
+        return 120;
 	}
 	if (indexPath.section == TableSectionLocation) {
 		return 44;
@@ -430,10 +431,14 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionCategory) {
 	    self.categoryTableViewController.incident = self.incident;
+        self.categoryTableViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+        self.categoryTableViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:self.categoryTableViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionLocation) {
 	    self.locationTableViewController.incident = self.incident;
+        self.locationTableViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+        self.locationTableViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:self.locationTableViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionDate){
@@ -624,10 +629,10 @@ typedef enum {
 			self.incident = nil;
 			if (self.editing) {
 				[self.view endEditing:YES];
-				[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];	
+				[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:0.3];	
 			}
 			else {
-				[self dismissModalView];
+				[self dismissModalViewControllerAnimated:YES];
 			}	
 		}
 		else if (theAlertView.tag == AlertViewDelete){
@@ -636,13 +641,14 @@ typedef enum {
 			self.incident = nil;
 			if (self.editing) {
 				[self.view endEditing:YES];
-				[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:0.3];	
+				[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:0.3];	
 			}
 			else {
-				[self dismissModalView];
+				[self dismissModalViewControllerAnimated:YES];
 			}	
 		}
 	}
+    [self.loadingView hide];
 }
 
 @end

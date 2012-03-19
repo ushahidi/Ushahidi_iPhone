@@ -41,9 +41,6 @@
 @property(nonatomic, assign) NSInteger imageWidth;
 @property(nonatomic, assign) NSInteger mapZoomLevel;
 @property(nonatomic, retain) Email *email;
-@property(nonatomic, retain) NSString *website;
-@property(nonatomic, retain) NSString *support;
-@property(nonatomic, retain) NSString *download;
 @property(nonatomic, retain) UIImage *logo;
 
 - (void) dismissModalView;
@@ -52,8 +49,18 @@
 
 @implementation SettingsViewController
 
-@synthesize userEmail, firstName, lastName, downloadMaps, becomeDiscrete, imageWidth, mapZoomLevel, resizePhotos, email, website, support, download, logo;
-@synthesize cancelButton, doneButton;
+@synthesize userEmail;
+@synthesize firstName;
+@synthesize lastName;
+@synthesize downloadMaps;
+@synthesize becomeDiscrete;
+@synthesize imageWidth;
+@synthesize mapZoomLevel;
+@synthesize resizePhotos;
+@synthesize email;
+@synthesize logo;
+@synthesize cancelButton;
+@synthesize doneButton;
 
 #pragma mark -
 #pragma mark Enums
@@ -144,9 +151,6 @@ typedef enum {
     [super viewDidLoad];
 	self.navigationBar.topItem.title = NSLocalizedString(@"Settings", nil);
 	self.email = [[Email alloc] initWithController:self];
-	self.website = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"SupportURL"];
-	self.support = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"SupportEmail"];
-	self.download = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"AppStoreURL"];
 	self.logo = [Device isIPad] ? [UIImage imageNamed:@"Logo_iPad.png"] : [UIImage imageNamed:@"Logo_iPhone.png"];
 	[self setHeader:NSLocalizedString(@"Contact Settings", nil) atSection:TableSectionContact];
 	[self setHeader:NSLocalizedString(@"Photo Settings", nil) atSection:TableSectionPhoto];
@@ -158,9 +162,6 @@ typedef enum {
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.email = nil;
-	self.website = nil;
-	self.support = nil;
-	self.download = nil;
 	self.logo = nil;
 }
 
@@ -199,8 +200,6 @@ typedef enum {
 	[firstName release];
 	[lastName release];
 	[email release];
-	[website release];
-	[support release];
 	[logo release];
     [super dealloc];
 }
@@ -350,14 +349,14 @@ typedef enum {
 		}
 		else if (indexPath.row == TableRowAppEmail) {
 			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-			[cell setText:self.support];
+			[cell setText:[[Settings sharedSettings] supportEmail]];
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 			return cell;
 		}
 		else if (indexPath.row == TableRowAppWebsite) {
 			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-			[cell setText:self.website];
+			[cell setText:[[Settings sharedSettings] appStoreURL]];
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 			return cell;
@@ -374,19 +373,23 @@ typedef enum {
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == TableSectionApp) {
 		if (indexPath.row == TableRowAppShare) {
-			NSString *message = [NSString stringWithFormat:@"<a href='%@'>%@</a>", self.download, self.download];
-			[self.email sendToRecipients:nil withMessage:message withSubject:@"Ushahidi iOS"];
+            NSString *appDownload = [[Settings sharedSettings] appStoreURL];
+            NSString *appName = [[Settings sharedSettings] mapName];
+			NSString *message = [NSString stringWithFormat:@"<a href='%@'>%@</a>", appDownload, appDownload];
+			[self.email sendToRecipients:nil withMessage:message withSubject:appName];
 		}
 		else if (indexPath.row == TableRowAppEmail) {
+            NSString *supportEmail = [[Settings sharedSettings] supportEmail];
 			NSMutableString *message =[NSMutableString string];
-			[message appendFormat:@"App Version: %@<br/>", [Device appVersion]]; 
-			[message appendFormat:@"Device Model: %@<br/>", [Device deviceModel]]; 
-			[message appendFormat:@"Device Version: %@<br/>", [Device deviceVersion]]; 
-			[self.email sendToRecipients:[NSArray arrayWithObject:self.support] withMessage:message withSubject:nil];
+            [message appendFormat:@"%@: %@<br/>", NSLocalizedString(@"App Version", nil), [Device appVersion]]; 
+			[message appendFormat:@"%@: %@<br/>", NSLocalizedString(@"Device Model", nil), [Device deviceModel]]; 
+			[message appendFormat:@"%@: %@<br/>", NSLocalizedString(@"Device Version", nil), [Device deviceVersion]]; 
+			[self.email sendToRecipients:[NSArray arrayWithObject:supportEmail] withMessage:message withSubject:nil];
 		}
 		else if (indexPath.row == TableRowAppWebsite ||
 				 indexPath.row == TableRowAppLogo) {
-			[self.alertView showYesNoWithTitle:NSLocalizedString(@"Open In Safari?", nil) andMessage:self.website];
+            NSString *supportURL = [[Settings sharedSettings] supportURL];
+			[self.alertView showYesNoWithTitle:NSLocalizedString(@"Open In Safari?", nil) andMessage:supportURL];
 		}
 	}
 	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -484,7 +487,8 @@ typedef enum {
 
 - (void)alertView:(UIAlertView *)theAlertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (buttonIndex != [theAlertView cancelButtonIndex]) {
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.website]];
+        NSString *supportUrl = [[Settings sharedSettings] supportURL];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:supportUrl]];
 	}
 }
 

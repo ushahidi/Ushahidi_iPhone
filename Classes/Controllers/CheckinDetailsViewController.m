@@ -112,6 +112,8 @@ typedef enum {
 		}
 	}
 	self.twitterViewController.tweet = message;
+    self.twitterViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+    self.twitterViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	[self presentModalViewController:self.twitterViewController animated:YES];
 }
 
@@ -237,7 +239,6 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Up and Down arrows to move through checkins, click the Location to view a larger map or tap a Photo to view it full screen.", nil)];
 }
 
 - (void)dealloc {

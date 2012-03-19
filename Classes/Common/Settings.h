@@ -41,6 +41,10 @@
 	
 	NSString *mapName;
 	NSString *mapURL;
+    
+    NSString *supportURL;
+	NSString *supportEmail;
+    NSString *appStoreURL;
 	
 	UIColor *navBarTintColor;
 	UIColor *toolBarTintColor;
@@ -54,9 +58,19 @@
 	UIColor *tableHeaderTextColor;
 	UIColor *verifiedTextColor;
 	UIColor *unverifiedTextColor;
-	
+
+	NSString *twitterUsername;
+    NSString *twitterPassword;
+    NSString *twitterApiKey;
+    NSString *twitterApiSecret;
+    NSString *twitterUserKey;
+    NSString *twitterUserSecret;
+    
+    NSString *bitlyApiLogin;
+    NSString *bitlyApiKey;
+    
 	BOOL showReportNewsURL;
-	
+    BOOL isWhiteLabel;
 }
 
 @property(nonatomic, retain) NSString *email;
@@ -74,9 +88,14 @@
 @property(nonatomic, readonly) BOOL hasFirstName;
 @property(nonatomic, readonly) BOOL hasLastName;
 @property(nonatomic, readonly) BOOL hasEmail;
+@property(nonatomic, readonly) BOOL hasMapURL;
 
 @property(nonatomic, retain) NSString *mapName;
 @property(nonatomic, retain) NSString *mapURL;
+
+@property(nonatomic, retain) NSString *supportURL;
+@property(nonatomic, retain) NSString *supportEmail;
+@property(nonatomic, retain) NSString *appStoreURL;
 
 @property(nonatomic, retain) UIColor *navBarTintColor;
 @property(nonatomic, retain) UIColor *toolBarTintColor;
@@ -92,7 +111,18 @@
 @property(nonatomic, retain) UIColor *verifiedTextColor;
 @property(nonatomic, retain) UIColor *unverifiedTextColor;
 
+@property(nonatomic, retain) NSString *twitterUsername;
+@property(nonatomic, retain) NSString *twitterPassword;
+@property(nonatomic, retain) NSString *twitterApiKey;
+@property(nonatomic, retain) NSString *twitterApiSecret;
+@property(nonatomic, retain) NSString *twitterUserKey;
+@property(nonatomic, retain) NSString *twitterUserSecret;
+
+@property(nonatomic, retain) NSString *bitlyApiLogin;
+@property(nonatomic, retain) NSString *bitlyApiKey;
+
 @property(nonatomic, assign) BOOL showReportNewsURL;
+@property(nonatomic, readonly) BOOL isWhiteLabel;
 
 + (Settings *) sharedSettings;
 

@@ -35,6 +35,7 @@
 #import "IncidentTableCell.h"
 #import "CheckinTableCell.h"
 #import "SliderTableCell.h"
+#import "YouTubeTableCell.h"
 #import "Settings.h"
 #import "Device.h"
 
@@ -54,6 +55,20 @@
 		}
 	}
 	return nil;
+}
+
+#pragma mark -
+#pragma mark YouTubeTableCell
+
++ (YouTubeTableCell *) getYouTubeTableCellForDelegate:(id<YouTubeTableCellDelegate>)delegate
+                                                table:(UITableView *)tableView 
+                                            indexPath:(NSIndexPath *)indexPath {
+    YouTubeTableCell *cell = (YouTubeTableCell *)[tableView dequeueReusableCellWithIdentifier:@"YouTubeTableCell"];
+	if (cell == nil) {
+		cell = [[[YouTubeTableCell alloc] initForDelegate:delegate reuseIdentifier:@"YouTubeTableCell"] autorelease];
+	}
+	cell.indexPath = indexPath;
+	return cell;
 }
 
 #pragma mark -

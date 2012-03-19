@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "IndexedTableCell.h"
 
 @interface CheckinTableCell : IndexedTableCell {
@@ -41,6 +42,6 @@
 @property (nonatomic, assign) UIImage *image;
 @property (nonatomic, assign) UIColor *selectedColor;
 
-+ (CGFloat) getCellHeight;
++ (CGFloat) getCellHeightForMessage:(NSString*)message;
 
 @end

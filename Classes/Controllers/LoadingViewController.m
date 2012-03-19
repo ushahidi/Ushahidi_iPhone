@@ -87,6 +87,10 @@
 			[self.controller.view performSelector:@selector(addSubview:) withObject:self.view afterDelay:delay];
 			self.view.alpha = 1.0;
 			self.view.center = self.controller.view.center;
+            self.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
+                                         UIViewAutoresizingFlexibleRightMargin |
+                                         UIViewAutoresizingFlexibleTopMargin |
+                                         UIViewAutoresizingFlexibleBottomMargin;
 		}
 		self.activityIndicatorLabel.text = message;
 		self.activityIndicator.hidden = !animated;

@@ -19,33 +19,25 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
+#import "BaseMapViewController.h"
 
-@interface MapViewController : BaseViewController<MKMapViewDelegate> {
+@interface MapViewController : BaseMapViewController {
 	
 @public
-	MKMapView *mapView;
-	UISearchBar *searchBar;
-	UISegmentedControl *mapType;
 	NSString *locationName;
 	NSString *locationDetails;
 	NSString *locationLatitude;
 	NSString *locationLongitude;
 }
 
-@property(nonatomic, retain) IBOutlet MKMapView *mapView;
-@property(nonatomic, retain) IBOutlet UISearchBar *searchBar;
-@property(nonatomic, retain) IBOutlet UISegmentedControl *mapType;
 @property(nonatomic, retain) NSString *locationName;
 @property(nonatomic, retain) NSString *locationDetails;
 @property(nonatomic, retain) NSString *locationLatitude;
 @property(nonatomic, retain) NSString *locationLongitude;
 
-- (IBAction) search:(id)sender;
-- (IBAction) findLocation:(id)sender;
-- (IBAction) mapTypeChanged:(id)sender;
+- (IBAction) locate:(id)sender event:(UIEvent*)event;
 
 @end

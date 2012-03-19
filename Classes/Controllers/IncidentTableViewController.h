@@ -24,36 +24,27 @@
 #import "ItemPicker.h"
 
 @class IncidentTabViewController;
-@class IncidentAddViewController;
 @class IncidentDetailsViewController;
+@class IncidentAddViewController;
 @class Deployment;
 @class Category;
 
 @protocol ItemPickerDelegate;
 
-@interface IncidentTableViewController : BaseSortTableViewController<UshahidiDelegate, 
-																	 ItemPickerDelegate> {
+@interface IncidentTableViewController : BaseSortTableViewController<UshahidiDelegate> {
 
 @public
 	IncidentTabViewController *incidentTabViewController;
-	IncidentAddViewController *incidentAddViewController;
+    IncidentAddViewController *incidentAddViewController;
 	IncidentDetailsViewController *incidentDetailsViewController;
-	Deployment *deployment;
-																 
-@private
-	NSMutableArray *pending;
-	NSMutableArray *categories;
-	Category *category;
+
+    Deployment *deployment;
 }
 
 @property(nonatomic,retain) IBOutlet IncidentTabViewController *incidentTabViewController;
 @property(nonatomic,retain) IBOutlet IncidentAddViewController *incidentAddViewController;
 @property(nonatomic,retain) IBOutlet IncidentDetailsViewController *incidentDetailsViewController;
-@property(nonatomic,retain) Deployment *deployment;
 
-- (void) populate:(BOOL)refresh;
-- (IBAction) addReport:(id)sender;
-- (IBAction) refresh:(id)sender;
-- (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
+@property(nonatomic,retain) Deployment *deployment;
 
 @end

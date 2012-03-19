@@ -36,6 +36,7 @@
 @property(nonatomic,assign) NSInteger position;
 @property(nonatomic,retain) UIColor *color;
 
+- (id) initWithTitle:(NSString *)title description:(NSString*)description color:(UIColor*)color;
 - (id) initWithDictionary:(NSDictionary *)dictionary;
 - (BOOL) updateWithDictionary:(NSDictionary *)dictionary;
 - (BOOL) matchesString:(NSString *)string;

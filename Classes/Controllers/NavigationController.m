@@ -22,6 +22,11 @@
 
 @implementation NavigationController
 
+- (void) setViewController:(UIViewController*)viewController animated:(BOOL)animated {
+    self.viewControllers = nil;
+    [self pushViewController:viewController animated:animated];
+}
+
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
 	SEL viewWillBePushed = @selector(viewWillBePushed);
 	if ([viewController respondsToSelector:viewWillBePushed]) {

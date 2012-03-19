@@ -21,6 +21,7 @@
 #import "NewsViewController.h"
 #import "NSString+Extension.h"
 #import "Internet.h"
+#import "Device.h"
 
 @interface NewsViewController ()
 
@@ -68,6 +69,12 @@ typedef enum {
 		[[self.current stringByTrimmingSuffix:@"/"] isEqualToString:[self.website stringByTrimmingSuffix:@"/"]]) {
 		//DO nothing, the correct webpage is already loaded
 	}
+    else if ([self.website isYouTubeLink]) {
+        self.title = self.website;
+        [self.webView setBackgroundColor:[UIColor blackColor]];
+        NSString *htmlString = [self.website youTubeEmbedCode:YES size:self.webView.frame.size];
+        [self.webView loadHTMLString:htmlString baseURL:nil];
+    }
 	else {
 		self.title = self.website;
 		[self.webView loadHTMLString:@"<html><head></head><body></body></html>" baseURL:nil];
@@ -92,6 +99,10 @@ typedef enum {
     [super dealloc];
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    DLog(@"");
+}
+
 #pragma mark -
 #pragma mark UIWebViewDelegate
 
@@ -103,7 +114,9 @@ typedef enum {
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView {
 	DLog(@"%@", [[[theWebView request] URL] absoluteString]);
-	self.title = [[[theWebView request] URL] absoluteString];
+    if ([@"about:blank" isEqualToString:[[[theWebView request] URL] absoluteString]] == NO) {
+        self.title = [[[theWebView request] URL] absoluteString];
+	}
 	self.current = [[[theWebView request] URL] absoluteString];
 	[self.backForwardButton setEnabled:self.webView.canGoBack forSegmentAtIndex:NavigationBack];
 	[self.backForwardButton setEnabled:self.webView.canGoForward forSegmentAtIndex:NavigationForward];

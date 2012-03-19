@@ -25,11 +25,12 @@
 }
 
 + (BOOL) isIPad;
++ (BOOL) isIPhone;
 + (BOOL) isGestureSupported;
++ (BOOL) isPortraitMode;
 + (NSString *) appVersion;
 + (NSString *) deviceVersion;
 + (NSString *) deviceModel;
 + (NSString *) deviceIdentifier;
 + (NSString *) deviceIdentifierHashed;
-
 @end

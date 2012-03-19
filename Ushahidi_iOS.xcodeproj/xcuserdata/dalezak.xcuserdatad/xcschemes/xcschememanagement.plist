@@ -39,6 +39,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>TEDxMap.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>TeamCheckins.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -70,6 +75,11 @@
 			<true/>
 		</dict>
 		<key>3E15E6CF13C5CBA80050D46F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3E44319414FBE1E300BFECD8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

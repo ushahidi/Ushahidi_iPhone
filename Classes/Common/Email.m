@@ -75,6 +75,8 @@
 		}
 		index++;
 	}
+    picker.modalPresentationStyle = UIModalPresentationPageSheet;
+    picker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	[self.controller presentModalViewController:picker animated:YES];
 	[picker release];
 }

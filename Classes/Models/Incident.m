@@ -98,7 +98,7 @@
 	[encoder encodeObject:self.latitude forKey:@"latitude"];
 	[encoder encodeObject:self.longitude forKey:@"longitude"];
 	if (self.map != nil) {
-		[encoder encodeObject:UIImagePNGRepresentation(self.map) forKey:@"map"];
+        [encoder encodeObject:UIImagePNGRepresentation(self.map) forKey:@"map"];
 	} 
 	else {
 		[encoder encodeObject:nil forKey:@"map"];

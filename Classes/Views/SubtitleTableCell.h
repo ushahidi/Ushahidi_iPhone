@@ -34,6 +34,7 @@
 
 - (void) setDescription:(NSString *)description;
 - (NSString *) getDescription;
+- (void) setTextColor:(UIColor *)textColor;
 
 + (CGFloat) getCellHeight;
 

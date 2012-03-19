@@ -36,13 +36,11 @@
 
 @property (nonatomic, retain) Checkin *checkin;
 
-- (void) dismissModalView;
-
 @end
 
 @implementation CheckinAddViewController
 
-@synthesize cancelButton, doneButton, imagePickerController, checkin;
+@synthesize imagePickerController, checkin;
 
 #pragma mark -
 #pragma mark Enums
@@ -80,10 +78,6 @@ typedef enum {
 		[self.alertView showOkWithTitle:NSLocalizedString(@"Checkin Error", nil) 
 							 andMessage:NSLocalizedString(@"Unable to checkin, please try again later.", nil)];
 	}
-}
-
-- (void) dismissModalView {
-	[self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
@@ -132,10 +126,13 @@ typedef enum {
 	[self.alertView showInfoOnceOnly:NSLocalizedString(@"To checkin, drag the map pin to a more accurate location, then click the Send button after entering an optional message, contact information and photo.", nil)];
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self.tableView reloadData];
+}
+
 - (void)dealloc {
 	[imagePickerController release];
-	[cancelButton release];
-	[doneButton release];
 	[checkin release];
 	[super dealloc];
 }
@@ -215,8 +212,11 @@ typedef enum {
 		return [Device isIPad] ? 160 : 70;
 	}
 	if (indexPath.section == TableSectionLocation) {
-		return [Device isIPad] ? 600 : 165;
-	}
+        if ([Device isIPad]) {
+            return [Device isPortraitMode] ? 600 : 350;
+        }
+        return 165;
+    }
 	if (indexPath.section == TableSectionPhoto) {
 		if (self.checkin.hasPhotos) {
 			Photo *photo = [self.checkin.photos objectAtIndex:indexPath.row];
@@ -378,7 +378,7 @@ typedef enum {
 		DLog(@"Checkin: %@", theCheckin.identifier);
 		[self.loadingView showWithMessage:NSLocalizedString(@"Sent", nil)];
 		[self.loadingView hideAfterDelay:1.0];
-		[self performSelector:@selector(dismissModalView) withObject:nil afterDelay:1.2];
+		[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:1.2];
 	}
 }
 

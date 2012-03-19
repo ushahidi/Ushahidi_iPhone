@@ -23,54 +23,56 @@
 #import "CheckinTableViewController.h"
 #import "CheckinMapViewController.h"
 #import "SettingsViewController.h"
+#import "LoadingViewController.h"
 #import "NSString+Extension.h"
 #import "UIView+Extension.h"
 #import "Deployment.h"
 #import "Device.h"
 #import "Settings.h"
+#import "User.h"
+#import "UIEvent+Extension.h"
 
 @interface CheckinTabViewController ()
 
 @property(nonatomic, retain) UserDialog *userDialog;
 
-- (void) showInfoOnceOnly;
-
 @end
 
 @implementation CheckinTabViewController
 
-@synthesize checkinTableViewController, checkinMapViewController, userDialog;
+@synthesize checkinTableViewController;
+@synthesize checkinMapViewController;
+@synthesize userDialog;
 
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) viewModeChanged:(id)sender {
-	UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
-	BOOL populate = NO;
-	BOOL animate = (segmentControl.tag == ShouldAnimateYes);
-	BOOL resize = NO;
-	if (segmentControl.selectedSegmentIndex == ViewModeTable) {
-		if (self.checkinTableViewController.deployment != self.deployment) {
-			self.checkinTableViewController.deployment = self.deployment;
-			populate = YES;
-			resize = YES;
+#pragma mark -
+#pragma mark Handlers
+
+- (IBAction) refresh:(id)sender event:(UIEvent*)event {
+	DLog(@"");
+    self.addButton.enabled = NO;
+	self.refreshButton.enabled = NO;
+    self.filterButton.enabled = NO;
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+	[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
+	[[Ushahidi sharedUshahidi] getVersionForDelegate:self];
+}
+
+- (IBAction) filter:(id)sender event:(UIEvent*)event {
+	DLog(@"");
+	NSMutableArray *names = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL USERS --- ", nil)];
+	for (User *user in self.filters) {
+		if ([NSString isNilOrEmpty:[user name]] == NO) {
+			[names addObject:user.name];
 		}
-		DLog(@"ViewModeTable populate:%d animate:%d", populate, animate);
-		[self showViewController:self.checkinTableViewController animated:animate];
-		[self.checkinTableViewController populate:populate];
-		segmentControl.tag = ShouldAnimateYes;
 	}
-	else if (segmentControl.selectedSegmentIndex == ViewModeMap) {
-		if (self.checkinMapViewController.deployment != self.deployment) {
-			self.checkinMapViewController.deployment = self.deployment;
-			populate = YES;
-			resize = YES;
-		}
-		DLog(@"ViewModeMap populate:%d animate:%d resize:%d", populate, animate, resize);
-		[self showViewController:self.checkinMapViewController animated:animate];
-		[self.checkinMapViewController populate:populate resize:resize];
-		segmentControl.tag = ShouldAnimateYes;
-	}
+    User *user = (User*)self.filter;
+    [self.itemPicker showWithItems:names 
+                      withSelected:user.name 
+                           forRect:[event getRectForView:self.view] 
+                               tag:0];
 }
 
 #pragma mark -
@@ -78,48 +80,36 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	[self setBackButtonTitle:NSLocalizedString(@"Checkins", nil)];
-	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
-	self.userDialog = [[UserDialog alloc] initForDelegate:self];
+    self.backButtonTitle = NSLocalizedString(@"Checkins", nil);
+    self.userDialog = [[UserDialog alloc] initForDelegate:self];
 } 
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    self.userDialog = nil;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	DLog(@"willBePushed: %d", self.willBePushed);
-	if (self.checkinTableViewController.view.superview == nil && 
-		self.checkinMapViewController.view.superview == nil) {
-        self.checkinTableViewController.deployment = self.deployment;
-		[self.checkinTableViewController populate:self.willBePushed];
-		[self showViewController:self.checkinTableViewController animated:NO];
-	}
-	else if (self.checkinTableViewController.view.superview != nil) {
-        [self.checkinTableViewController populate:self.willBePushed];
-	}
-	else if (self.checkinMapViewController.view.superview != nil) {
-        [self.checkinMapViewController populate:self.willBePushed 
-										 resize:self.willBePushed];
-	}
-	if ([self.viewMode numberOfSegments] >= ViewModeCheckin + 1) {
-		self.viewMode.tag = ShouldAnimateNo;
-		if (self.viewMode.selectedSegmentIndex == ViewModeCheckin) {
-			[self.viewMode setSelectedSegmentIndex:ViewModeTable];
-		}
-		else {
-			NSInteger selectedSegmentIndex = self.viewMode.selectedSegmentIndex;
-			[self.viewMode setSelectedSegmentIndex:UISegmentedControlNoSegment];
-			[self.viewMode setSelectedSegmentIndex:selectedSegmentIndex];
-		}
-		[self.viewMode removeSegmentAtIndex:ViewModeCheckin animated:NO];
-	}
-	if ([Device isIPad]) {
-		[self.viewMode setFrameWidth:150];
-	}
-	else {
-		[self.viewMode setFrameWidth:80];
-	}
-	if (animated) {
-		[[Settings sharedSettings] setLastIncident:nil];
-	}
+	
+    self.title = self.deployment.name;
+    
+    [self.allItems removeAllObjects];
+	if (self.willBePushed) {
+        [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
+    }
+    else {
+        self.addButton.enabled = YES;
+        self.refreshButton.enabled = YES;
+        self.filterButton.enabled = [self.filters count] > 0;
+        [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
+    }
+    
+    [self.filters removeAllObjects];
+    [self.filters addObjectsFromArray:[[Ushahidi sharedUshahidi] getUsers]];
+    self.filterButton.enabled = [self.filters count] > 0;
+    
+    [self populateWithFilter:self.filter];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -132,33 +122,96 @@
 								  last:[[Settings sharedSettings] lastName]  
 								 email:[[Settings sharedSettings] email]];
 	}
-	else {
-		[self showInfoOnceOnly];
-	}
 }
 
 - (void)dealloc {
 	[checkinTableViewController release];
 	[checkinMapViewController release];
-	[super dealloc];
-}
-
-- (void) showInfoOnceOnly {
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"This map supports Checkins!\nClick the Filter button to only show checkins for a specific user or the Pin button to checkin now.", nil)];	
+    [userDialog release];
+    [super dealloc];
 }
 
 #pragma mark -
 #pragma mark UserDialog
 
 - (void) userDialogReturned:(UserDialog *)dialog first:(NSString *)first last:(NSString *)last email:(NSString *)email {
+    DLog(@"first:%@ last:%@ email:%@", first, last, email);
 	[[Settings sharedSettings] setFirstName:first];
 	[[Settings sharedSettings] setLastName:last];
 	[[Settings sharedSettings] setEmail:email];
-	[self showInfoOnceOnly];
 }
 
 - (void) userDialogCancelled:(UserDialog *)dialog {
-	[self showInfoOnceOnly];
+    DLog(@"");
+}
+
+#pragma mark -
+#pragma mark ItemPickerDelegate
+
+- (void) itemPickerReturned:(ItemPicker *)theItemPicker item:(NSString *)item {
+	DLog(@"itemPickerReturned: %@", item);
+	self.filter = nil;
+	for (User *user in self.filters) {
+		if ([user.name isEqualToString:item]) {
+			self.filter = user;
+			DLog(@"User: %@", user.name);
+			break;
+		}
+	}
+    [self populateWithFilter:self.filter];
+}
+
+#pragma mark -
+#pragma mark UshahidiDelegate
+
+- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins {
+	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins error:(NSError *)error hasChanges:(BOOL)hasChanges {
+	if (error != nil) {
+		DLog(@"error: %d %@", [error code], [error localizedDescription]);
+	}
+	else if (hasChanges) {
+		DLog(@"Re-Adding Checkins: %d", [checkins count]);
+		[self.allItems removeAllObjects];
+		[self.allItems addObjectsFromArray:checkins];
+    }
+	else {
+		DLog(@"No Changes Checkins");
+	}
+    [self populateWithFilter:self.filter];
+    self.addButton.enabled = YES;
+	self.refreshButton.enabled = YES;
+    self.filterButton.enabled = [self.filters count] > 0;
+    [self.loadingView hide];
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)users error:(NSError *)error hasChanges:(BOOL)hasChanges {
+	if (error != nil) {
+		DLog(@"error: %d %@", [error code], [error localizedDescription]);
+	}
+	else {
+		DLog(@"Users: %d", [users count]);
+        [self.filters removeAllObjects];
+        [self.filters addObjectsFromArray:users];
+	}
+	self.filterButton.enabled = [self.filters count] > 0;
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi map:(UIImage *)map checkin:(Checkin *)checkin {
+	DLog(@"downloadedFromUshahidi:map:object:");
+    [self.baseTableViewController downloadedFromUshahidi:ushahidi map:map checkin:checkin];
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo checkin:(Checkin *)checkin {
+	DLog(@"url:%@ indexPath:%@", [photo url], [photo indexPath]);
+    [self.baseTableViewController downloadedFromUshahidi:ushahidi photo:photo checkin:checkin];
+}
+
+- (void) mainQueueFinished {
+	DLog(@"");
+	[self.loadingView hideAfterDelay:1.0];
 }
 
 @end

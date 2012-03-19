@@ -32,6 +32,14 @@
 	return iPad;
 }
 
++ (BOOL) isIPhone {
+	BOOL iPhone = NO;
+#ifdef UI_USER_INTERFACE_IDIOM
+	iPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+#endif
+	return iPhone;
+}
+
 + (BOOL) isGestureSupported {
 	BOOL gesture = NO;
 #if (__IPHONE_OS_VERSION_MAX_ALLOWED >= 30200)
@@ -66,6 +74,11 @@
         return [[[UIDevice currentDevice] uniqueDeviceIdentifier] MD5];
     }
     return [deviceID MD5];
+}
+
++ (BOOL) isPortraitMode {
+    return ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationPortrait) || 
+           ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end

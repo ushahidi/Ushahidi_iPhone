@@ -256,4 +256,62 @@ static NSDictionary *escapeEntities() {
 	return nil;
 }
 
+- (NSString *)captureRegex:(NSString *)pattern {
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern 
+                                                                           options:NSRegularExpressionCaseInsensitive 
+                                                                             error:&error];
+    if (regex == nil) {
+        return nil;
+    }
+    NSArray *matches = [regex matchesInString:self
+                                      options:NSRegularExpressionCaseInsensitive
+                                        range:NSMakeRange(0, [self length])];
+    for (NSTextCheckingResult *match in matches) {
+        NSRange matchRange = [match rangeAtIndex:1];
+        NSString *matchString = [self substringWithRange:matchRange];
+        DLog(@"MATCH: %@", matchString);
+        return matchString;
+    }
+    return nil;
+}
+
+- (BOOL) matchRegex:(NSString *)pattern {    
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern 
+                                                                           options:NSRegularExpressionCaseInsensitive 
+                                                                             error:&error];
+    if (regex == nil) {
+        return NO;
+    }
+    
+    NSUInteger n = [regex numberOfMatchesInString:self options:0 range:NSMakeRange(0, [self length])];
+    return n == 1;
+}
+
+- (BOOL) isYouTubeLink {
+    return [self hasPrefix:@"http://www.youtube.com"] ||
+           [self hasPrefix:@"http://youtu.be"];
+            
+}
+
+- (NSString *) youTubeEmbedCode:(BOOL)playInline size:(CGSize)size {
+    if (playInline) {
+        NSString *youTubeID = [self captureRegex:
+            @"https?:\\/\\/(?:[0-9A-Z-]+\\.)?(?:youtu\\.be\\/|youtube\\.com\\S*[^\\w\\-\\s])([\\w\\-]{11})(?=[^\\w\\-]|$)(?![?=&+%\\w]*(?:['\"][^<>]*>|<\\/a>))[?=&+%\\w]*"];
+        return [NSString stringWithFormat:
+            @"<html><head><title>%@</title>"
+            "<style type=\"text/css\">body{background-color:black;color:white;}</style></head>"
+            "<body style=\"margin:0\"><iframe style=\"margin:0\" class=\"youtube-player\" type=\"text/html\" frameborder=\"0\" "
+            "src=\"http://www.youtube.com/embed/%@\" width=\"%0.0f\" height=\"%0.0f\">"
+            "</iframe></body></html>", self, youTubeID, size.width, size.height];
+    }
+    return [NSString stringWithFormat: 
+            @"<html><head><title>%@</title>"
+            "<style type=\"text/css\">body{background-color:black;color:white;}</style></head>"
+            "<body style=\"margin:0\"><embed id=\"yt\" type=\"application/x-shockwave-flash\" "
+            "src=\"%@\" width=\"%0.0f\" height=\"%0.0f\"></embed></body></html>", self, self, size.width, size.height];  
+    
+}
+
 @end

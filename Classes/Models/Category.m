@@ -27,6 +27,15 @@
 
 @synthesize identifier, title, description, color, position;
 
+- (id) initWithTitle:(NSString *)theTitle description:(NSString*)theDescription color:(UIColor*)theColor {
+    if (self = [super init]) {
+        self.title = theTitle;
+        self.description = theDescription;
+        self.color = theColor;
+	}
+	return self;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
 		if (dictionary != nil) {

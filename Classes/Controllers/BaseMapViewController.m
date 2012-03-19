@@ -23,24 +23,61 @@
 
 @interface BaseMapViewController()
 
+@property(nonatomic,assign) BOOL flipped;
+- (void) pageCurl:(BOOL)up fillMode:(NSString*)fillMode type:(NSString*)type duration:(CGFloat)duration;
+
 @end
 
 @implementation BaseMapViewController
 
-@synthesize refreshButton, filterButton, mapType, itemPicker, mapView, filterLabel;
+@synthesize mapView, flipView, mapType, infoButton, filterLabel, filter, allPins, filteredPins, pendingPins, filters, flipped;
+
+#pragma mark -
+#pragma mark Handlers
+
+- (void) populate:(NSArray*)items filter:(NSObject*)theFilter {
+    DLog(@"");
+    self.filter = theFilter;
+    [self.allPins removeAllObjects];
+    [self.allPins addObjectsFromArray:items];
+}
+
+- (IBAction) mapTypeChanged:(id)sender event:(UIEvent*)event {
+    DLog(@"");
+	self.mapView.mapType = self.mapType.selectedSegmentIndex;
+    self.flipped = NO;
+    [self pageCurl:NO fillMode:kCAFillModeBackwards type:@"pageUnCurl" duration:0.5];
+}
+
+- (void)mapTypeCancelled:(id)sender event:(UIEvent*)event {
+    DLog(@"");
+    self.flipped = NO;
+    [self pageCurl:NO fillMode:kCAFillModeBackwards type:@"pageUnCurl" duration:0.5];
+}
+
+- (IBAction) showInfo:(id)sender event:(UIEvent*)event {
+    DLog(@"");
+    self.mapType.selectedSegmentIndex = self.mapView.mapType;
+    self.flipped = YES;
+    [self pageCurl:YES fillMode:kCAFillModeForwards type:@"pageCurl" duration:0.5];
+}
 
 #pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
-	self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
+    self.allPins = [NSMutableArray arrayWithCapacity:0];
+	self.filteredPins = [NSMutableArray arrayWithCapacity:0];
+    self.filters = [NSMutableArray arrayWithCapacity:0];
+    self.flipView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern.png"]];
+    [self.mapType setTitle:NSLocalizedString(@"Standard", nil) forSegmentAtIndex:MKMapTypeStandard];
+    [self.mapType setTitle:NSLocalizedString(@"Satellite", nil) forSegmentAtIndex:MKMapTypeSatellite];
+    [self.mapType setTitle:NSLocalizedString(@"Hybrid", nil) forSegmentAtIndex:MKMapTypeHybrid];
 }
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-	self.itemPicker = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,25 +88,51 @@
 	[super viewDidAppear:animated];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+    if (self.flipped) {
+        self.flipped = NO;
+        [self pageCurl:NO fillMode:kCAFillModeBackwards type:@"pageUnCurl" duration:0];
+    }
+}
+
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 }
 
 - (void)dealloc {
-	[mapType release];
-	[filterButton release];
+    [allPins release];
+    [filteredPins release];
+    [pendingPins release];
 	[mapView release];
+    [flipView release];
+	[mapType release];
+	[infoButton release];
 	[filterLabel release];
-	[itemPicker release];
+    [filters release];
+	[filter release];
 	[super dealloc];
 }
 
 #pragma mark -
-#pragma mark Handlers
+#pragma mark Helpers
 
-- (IBAction) mapTypeChanged:(id)sender {
-	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-	self.mapView.mapType = segmentedControl.selectedSegmentIndex;
+- (void) pageCurl:(BOOL)up fillMode:(NSString*)fillMode type:(NSString*)type duration:(CGFloat)duration {
+    CATransition *animation = [CATransition animation];
+    [animation setDelegate:self]; 
+    [animation setDuration:duration];
+    [animation setTimingFunction:UIViewAnimationCurveEaseInOut];
+    animation.type = type;
+    animation.fillMode = fillMode;
+    if (up) {
+        animation.endProgress = 0.50;
+    }
+    else {
+        animation.startProgress = 0.55;
+    }
+    [animation setRemovedOnCompletion:NO];
+    [[self view] exchangeSubviewAtIndex:0 withSubviewAtIndex:1];
+    [[[self view] layer] addAnimation:animation forKey:@"pageCurlAnimation"];
 }
 
 @end

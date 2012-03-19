@@ -26,6 +26,8 @@
 
 @interface Photo ()
 
+- (BOOL) isJpeg:(NSString*)url;
+
 @end
 
 @implementation Photo
@@ -83,25 +85,43 @@ NSInteger const kMaxThumbnaiHeight = 80;
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[super encodeWithCoder:encoder];
-	if (self.image != nil) {
-		[encoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"image"];
-	} 
-	else {
-		[encoder encodeObject:nil forKey:@"image"];
-	}
-	if (self.thumbnail != nil) {
-		[encoder encodeObject:UIImagePNGRepresentation(self.thumbnail) forKey:@"thumbnail"];
-	} 
-	else {
-		[encoder encodeObject:nil forKey:@"thumbnail"];
-	}
-	[encoder encodeObject:self.imageURL forKey:@"imageURL"];
-	[encoder encodeObject:self.thumbnailURL forKey:@"thumbnailURL"];
+    @try {
+        if (self.image != nil) {
+            DLog(@"Image:%@ Thumbnail:%@", self.imageURL, self.thumbnailURL);
+            if ([self isJpeg:self.imageURL] || [self isJpeg:self.thumbnailURL]) {
+                [encoder encodeObject:UIImageJPEGRepresentation(self.image, 1.0) forKey:@"image"];
+            }
+            else {
+                [encoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"image"];    
+            }
+        } 
+        else {
+            [encoder encodeObject:nil forKey:@"image"];
+        }
+        if (self.thumbnail != nil) {
+            if ([self isJpeg:self.imageURL] || [self isJpeg:self.thumbnailURL]) {
+                [encoder encodeObject:UIImageJPEGRepresentation(self.image, 1.0) forKey:@"thumbnail"];
+            }
+            else {
+                [encoder encodeObject:UIImagePNGRepresentation(self.image) forKey:@"thumbnail"];    
+            }
+        } 
+        else {
+            [encoder encodeObject:nil forKey:@"thumbnail"];
+        }
+        [encoder encodeObject:self.imageURL forKey:@"imageURL"];
+        [encoder encodeObject:self.thumbnailURL forKey:@"thumbnailURL"];
+    }
+    @catch (NSException *exception) {
+        DLog(@"NSException %@", exception);
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
 	if (self = [super initWithCoder:decoder]) {
-		NSData *imageData = [decoder decodeObjectForKey:@"image"];
+		self.imageURL = [decoder decodeObjectForKey:@"imageURL"];
+		self.thumbnailURL = [decoder decodeObjectForKey:@"thumbnailURL"];
+        NSData *imageData = [decoder decodeObjectForKey:@"image"];
 		if (imageData != nil) {
 			self.image = [UIImage imageWithData:imageData];
 		}
@@ -109,8 +129,6 @@ NSInteger const kMaxThumbnaiHeight = 80;
 		if (thumbnailData != nil) {
 			self.thumbnail = [UIImage imageWithData:thumbnailData];
 		}
-		self.imageURL = [decoder decodeObjectForKey:@"imageURL"];
-		self.thumbnailURL = [decoder decodeObjectForKey:@"thumbnailURL"];
 	}
 	return self;
 }
@@ -130,6 +148,15 @@ NSInteger const kMaxThumbnaiHeight = 80;
 
 - (NSData *) getPngData {
 	return self.image != nil ? UIImagePNGRepresentation(self.image) : nil;
+}
+
+- (BOOL) isJpeg:(NSString*)path {
+    for (NSString *extension in [NSArray arrayWithObjects:@".jpg", @".jpeg", @".JPG", @".JPEG", nil]) {
+        if ([path hasSuffix:extension]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end

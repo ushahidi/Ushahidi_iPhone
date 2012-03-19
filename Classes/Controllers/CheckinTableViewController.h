@@ -29,19 +29,13 @@
 @class CheckinDetailsViewController;
 @class SettingsViewController;
 @class Deployment;
-@class User;
 
-@interface CheckinTableViewController : BaseSortTableViewController<UshahidiDelegate, 
-																	ItemPickerDelegate> {
+@interface CheckinTableViewController : BaseSortTableViewController<UshahidiDelegate> {
 @public
 	CheckinTabViewController *checkinTabViewController;
 	CheckinAddViewController *checkinAddViewController;
 	CheckinDetailsViewController *checkinDetailsViewController;
 	Deployment *deployment;
-																		
-@private
-	NSMutableArray *users;
-	User *user;
 }
 
 @property(nonatomic,retain) IBOutlet CheckinTabViewController *checkinTabViewController;
@@ -49,9 +43,5 @@
 @property(nonatomic,retain) IBOutlet CheckinDetailsViewController *checkinDetailsViewController;
 @property(nonatomic,retain) Deployment *deployment;
 
-- (IBAction) addCheckin:(id)sender;
-- (IBAction) refresh:(id)sender;
-- (IBAction) filterChanged:(id)sender event:(UIEvent*)event;
-- (void) populate:(BOOL)refresh;
 
 @end

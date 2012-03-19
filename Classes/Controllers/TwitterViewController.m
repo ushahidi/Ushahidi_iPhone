@@ -47,15 +47,6 @@
 @synthesize cancelButton, doneButton, logoutButton;
 @synthesize tweet, twitter, bitly, username, password;
 
-#define kBitlyLogin			@"BitlyLogin"
-#define kBitlyApiKey		@"BitlyApiKey"
-#define kTwitterKey			@"TwitterKey"
-#define kTwitterSecret		@"TwitterSecret"
-#define kTwitterUsername	@"TwitterUsername"
-#define kTwitterPassword	@"TwitterPassword"
-#define kTwitterOAuthKey	@"TwitterOAuthKey"
-#define kTwitterOAuthSecret	@"TwitterOAuthSecret"
-
 NSInteger const kTwitterLimit = 140;
 
 typedef enum {
@@ -75,10 +66,8 @@ typedef enum {
 
 - (IBAction) done:(id)sender {
 	DLog(@"");
-	[[NSUserDefaults standardUserDefaults] setObject:self.username forKey:kTwitterUsername];
-	[[NSUserDefaults standardUserDefaults] setObject:self.password forKey:kTwitterPassword];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	
+    [[Settings sharedSettings] setTwitterUsername:self.username];
+    [[Settings sharedSettings] setTwitterPassword:self.password];
 	[self.tableView reloadData];
 	if (self.twitter.accessToken != nil) {
 		[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)]; 
@@ -105,12 +94,11 @@ typedef enum {
 - (IBAction) logout:(id)sender {
 	DLog(@"");
 	[self.loadingView showWithMessage:NSLocalizedString(@"Logout...", nil)]; 
-	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterUsername];
-	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterPassword];
-	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterOAuthKey];
-	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kTwitterOAuthSecret];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	self.username = nil;
+    [[Settings sharedSettings] setTwitterUsername:nil];
+    [[Settings sharedSettings] setTwitterPassword:nil];
+    [[Settings sharedSettings] setTwitterUserKey:nil];
+    [[Settings sharedSettings] setTwitterUserSecret:nil];
+    self.username = nil;
 	self.password = nil;
 	self.logoutButton.enabled = NO;
 	self.doneButton.enabled = NO;
@@ -141,24 +129,24 @@ typedef enum {
 	self.twitter = [[MGTwitterEngine alloc] initWithDelegate:self];
 	self.navigationBar.topItem.title = NSLocalizedString(@"Twitter", nil);
 	self.doneButton.title = NSLocalizedString(@"Send", nil);
-	NSString *twitterKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterKey];
-	NSString *twitterSecret = [[[NSBundle mainBundle] infoDictionary] objectForKey:kTwitterSecret];
-	DLog(@"Twitter key:%@ secret:%@", twitterKey, twitterSecret);
-	[self.twitter setConsumerKey:twitterKey secret:twitterSecret];
+	NSString *twitterApiKey = [[Settings sharedSettings] twitterApiKey];
+	NSString *twitterApiSecret = [[Settings sharedSettings] twitterApiSecret];
+	DLog(@"Twitter key:%@ secret:%@", twitterApiKey, twitterApiSecret);
+	[self.twitter setConsumerKey:twitterApiKey secret:twitterApiSecret];
 	
-	NSString *twitterOAuthKey = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuthKey];
-	NSString *twitterOAuthSecret = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterOAuthSecret];
-	DLog(@"OAuth key:%@ secret:%@", twitterOAuthKey, twitterOAuthSecret);
-	if ([NSString isNilOrEmpty:twitterOAuthKey] == NO && [NSString isNilOrEmpty:twitterOAuthSecret]) {
-		self.twitter.accessToken = [[OAToken alloc] initWithKey:twitterOAuthKey secret:twitterOAuthSecret];
+	NSString *twitterUserKey = [[Settings sharedSettings] twitterUserKey];
+	NSString *twitterUserSecret = [[Settings sharedSettings] twitterUserSecret];
+	DLog(@"OAuth key:%@ secret:%@", twitterUserKey, twitterUserSecret);
+	if ([NSString isNilOrEmpty:twitterUserKey] == NO && [NSString isNilOrEmpty:twitterUserSecret] == NO) {
+		self.twitter.accessToken = [[OAToken alloc] initWithKey:twitterUserKey secret:twitterUserSecret];
 	}
 	else {
 		self.twitter.accessToken = nil;
 	}
 	
     self.bitly = [[Bitly alloc] init];
-	self.bitly.login = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyLogin];
-	self.bitly.apiKey = [[[NSBundle mainBundle] infoDictionary] objectForKey:kBitlyApiKey];
+	self.bitly.login = [[Settings sharedSettings] bitlyApiLogin];
+	self.bitly.apiKey = [[Settings sharedSettings] bitlyApiKey];
 	
 	[self setHeader:NSLocalizedString(@"Tweet", nil) atSection:TableSectionTweet];
 	[self setHeader:NSLocalizedString(@"Username", nil) atSection:TableSectionUsername];
@@ -173,8 +161,8 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	self.username = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterUsername];
-	self.password = [[NSUserDefaults standardUserDefaults] objectForKey:kTwitterPassword];
+	self.username = [[Settings sharedSettings] twitterUsername];
+	self.password = [[Settings sharedSettings] twitterPassword];
 	if ([NSString isNilOrEmpty:self.username] || [NSString isNilOrEmpty:self.password]) {
 		self.logoutButton.enabled = NO;
 	}
@@ -334,9 +322,9 @@ typedef enum {
 
 - (void)accessTokenReceived:(OAToken *)token forRequest:(NSString *)connectionIdentifier {
 	DLog(@"key:%@ secret:%@", token.key, token.secret);
-	[[NSUserDefaults standardUserDefaults] setObject:token.key forKey:kTwitterOAuthKey];
-	[[NSUserDefaults standardUserDefaults] setObject:token.secret forKey:kTwitterOAuthSecret];
-	[[NSUserDefaults standardUserDefaults] synchronize];
+    
+	[[Settings sharedSettings] setTwitterUserKey:token.key];
+    [[Settings sharedSettings] setTwitterUserSecret:token.secret];
 	
 	[self.twitter setAccessToken:token];
 	[self.loadingView showWithMessage:NSLocalizedString(@"Sending...", nil)];

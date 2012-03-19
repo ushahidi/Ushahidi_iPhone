@@ -42,86 +42,39 @@
 #import "Internet.h"
 #import "Checkin.h"
 #import "User.h"
-#import "ItemPicker.h"
 
 @interface CheckinMapViewController ()
-
-@property(nonatomic,retain) NSMutableArray *allCheckins;
-@property(nonatomic,retain) NSMutableArray *filteredCheckins;
-@property(nonatomic,retain) NSMutableArray *users;
-@property(nonatomic,retain) User *user;
 
 @end
 
 @implementation CheckinMapViewController
 
-@synthesize checkinTabViewController, checkinAddViewController, checkinDetailsViewController;
-@synthesize deployment, users, user, allCheckins, filteredCheckins;
+@synthesize checkinTabViewController;
+@synthesize checkinAddViewController;
+@synthesize checkinDetailsViewController;
+@synthesize deployment;
 
 #pragma mark -
 #pragma mark Handlers
 
-- (IBAction) addCheckin:(id)sender {
-	DLog(@"");
-	[self.checkinTabViewController presentModalViewController:self.checkinAddViewController animated:YES];
-}
-
-- (IBAction) refresh:(id)sender {
-	self.refreshButton.enabled = NO;
-	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-	[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self];
-	[[Ushahidi sharedUshahidi] getVersionOfDeployment:self.deployment forDelegate:self];
-}
-
-- (IBAction) filterChanged:(id)sender event:(UIEvent*)event {
-	DLog(@"");
-	NSMutableArray *items = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL USERS --- ", nil)];
-	for (User *theUser in self.users) {
-		if ([NSString isNilOrEmpty:[theUser name]] == NO) {
-			[items addObject:[theUser name]];
+- (void) populate:(NSArray*)items filter:(NSObject*)theFilter {
+    self.filter = theFilter;
+    User *user = (User*)self.filter;
+    [self.allPins removeAllObjects];
+    [self.allPins addObjectsFromArray:items];
+    [self.filteredPins removeAllObjects];
+	if (user != nil) {
+		[self.filterLabel setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"All Checkins By", nil), user.name]];
+        for (Checkin *checkin in self.allPins) {
+			if ([user.identifier isEqualToString:[checkin user]]) {
+				[self.filteredPins addObject:checkin];
+			}
 		}
 	}
-	if (event != nil) {
-		UIView *toolbar = [[event.allTouches anyObject] view];
-		CGRect rect = CGRectMake(toolbar.frame.origin.x, self.view.frame.size.height - toolbar.frame.size.height, toolbar.frame.size.width, toolbar.frame.size.height);
-		[self.itemPicker showWithItems:items 
-						  withSelected:[self.user name] 
-							   forRect:rect 
-								   tag:0];
-	}
 	else {
-		[self.itemPicker showWithItems:items 
-						  withSelected:[self.user name] 
-							   forRect:CGRectMake(100, self.view.frame.size.height, 0, 0) 
-								   tag:0];	
-	}
-}
-
-- (void) populate:(BOOL)refresh resize:(BOOL)resize {
-	DLog(@"refresh:%d resize:%d", refresh, resize);
-	if (refresh) {
-		[self.allCheckins removeAllObjects];
-		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckinsForDelegate:self]];
 		[self.filterLabel setText:NSLocalizedString(@"Last Checkin For Each User", nil)];
-	}
-	else if (self.user != nil) {
-		[self.allCheckins removeAllObjects];
-		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
-		[self.filterLabel setText:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"All Checkins By", nil), self.user.name]];
-	}
-	else {
-		[self.allCheckins removeAllObjects];
-		[self.allCheckins addObjectsFromArray:[[Ushahidi sharedUshahidi] getCheckins]];
-		[self.filterLabel setText:NSLocalizedString(@"Last Checkin For Each User", nil)];
-	}
-	[self.users removeAllObjects];
-	if ([[Ushahidi sharedUshahidi] hasUsers]) {
-		[self.users addObjectsFromArray:[[Ushahidi sharedUshahidi] getUsers]];
-	}
-	[self.filteredCheckins removeAllObjects];
-	if (self.user == nil) {
-		NSMutableDictionary *checkins = [NSMutableDictionary dictionary];
-		for (Checkin *checkin in self.allCheckins) {
+        NSMutableDictionary *checkins = [NSMutableDictionary dictionary];
+		for (Checkin *checkin in self.allPins) {
 			if ([NSString isNilOrEmpty:checkin.user] == NO) {
 				Checkin *existing = [checkins objectForKey:checkin.user];
 				if (existing == nil) {
@@ -132,33 +85,32 @@
 				}
 			}
 		}	
-		[self.filteredCheckins addObjectsFromArray:[checkins allValues]];
+		[self.filteredPins addObjectsFromArray:[checkins allValues]];
 	}
-	else {
-		for (Checkin *checkin in self.allCheckins) {
-			if ([self.user.identifier isEqualToString:[checkin user]]) {
-				[self.filteredCheckins addObject:checkin];
-			}
-		}
-	}
-	[self.mapView removeAllPins];
-	for (Checkin *checkin in self.filteredCheckins) {
-		for (User *theUser in self.users) {
-			if ([theUser.identifier isEqualToString:checkin.user]) {
-				//DLog(@"%@ %@ by %@ on %@", checkin.identifier, checkin.message, theUser.name, checkin.dateTimeString);
-				break;
-			}
-		}
-		[self.mapView addPinWithTitle:checkin.message 
-							 subtitle:checkin.dateTimeString 
+    [self.mapView removeAllPins];
+    NSArray *users = [[Ushahidi sharedUshahidi] getUsers];
+    for (Checkin *checkin in self.filteredPins) {
+        NSMutableString *subtitle = [NSMutableString string];
+        for (User *user in users) {
+            if ([user.identifier isEqualToString:[checkin user]]) {
+                if ([NSString isNilOrEmpty:user.name]) {
+                    [subtitle appendFormat:@"%@ - ", NSLocalizedString(@"Unknown", nil)];
+                }
+                else {
+                    [subtitle appendFormat:@"%@ - ", user.name]; 
+                }
+                break;
+            }
+        }
+        [subtitle appendString:checkin.dateTimeString];
+        [self.mapView addPinWithTitle:checkin.message 
+							 subtitle:subtitle 
 							 latitude:checkin.latitude 
 							longitude:checkin.longitude 
 							   object:checkin
 							 pinColor:MKPinAnnotationColorRed];
 	}
-	if (resize) {
-		[self.mapView resizeRegionToFitAllPins:NO animated:YES];
-	}
+	[self.mapView resizeRegionToFitAllPins:NO animated:YES];
 }
 
 #pragma mark -
@@ -166,9 +118,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.users = [[NSMutableArray alloc] initWithCapacity:0];
-	self.allCheckins = [[NSMutableArray alloc] initWithCapacity:0];
-	self.filteredCheckins = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (void)viewDidUnload {
@@ -183,8 +132,6 @@
 	else {
 		self.title = NSLocalizedString(@"Checkins", nil);
 	}
-	[self populate:self.willBePushed resize:YES];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -193,62 +140,13 @@
 
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kMainQueueFinished object:nil];
 }
 
 - (void)dealloc {
 	[checkinAddViewController release];
 	[checkinDetailsViewController release];
 	[deployment release];
-	[allCheckins release];
-	[filteredCheckins release];
-	[users release];
-	[user release];
-    [super dealloc];
-}
-
-#pragma mark -
-#pragma mark UshahidiDelegate
-
-- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins {
-	[self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-}
-
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)theCheckins error:(NSError *)error hasChanges:(BOOL)hasChanges {
-	if (error != nil) {
-		DLog(@"error: %d %@", [error code], [error localizedDescription]);
-	}
-	else if (hasChanges) {
-		DLog(@"Re-Adding Checkins: %d", [theCheckins count]);
-		[self.allCheckins removeAllObjects];
-		[self.allCheckins addObjectsFromArray:theCheckins];
-		[self populate:NO resize:YES];
-	}
-	else {
-		DLog(@"No Changes Checkins");
-	}
-	[self.loadingView hide];
-	self.refreshButton.enabled = YES;
-}
-
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi users:(NSArray *)theUsers error:(NSError *)error hasChanges:(BOOL)hasChanges {
-	if (error != nil) {
-		DLog(@"error: %d %@", [error code], [error localizedDescription]);
-	}
-	else if (hasChanges) {
-		DLog(@"Re-Adding Users: %d", [theUsers count]);
-		[self.users removeAllObjects];
-		[self.users addObjectsFromArray:theUsers];
-	}
-	else {
-		DLog(@"No Changes Users");
-	}
-	self.filterButton.enabled = YES;
-}
-
-- (void) mainQueueFinished {
-	DLog(@"");
-	[self.loadingView hideAfterDelay:1.0];
+	[super dealloc];
 }
 
 #pragma mark -
@@ -274,7 +172,7 @@
 	else {
 		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
 		self.checkinDetailsViewController.checkin = (Checkin *)mapAnnotation.object; 
-		self.checkinDetailsViewController.checkins = self.filteredCheckins;
+		self.checkinDetailsViewController.checkins = self.filteredPins;
 		[self.checkinTabViewController.navigationController pushViewController:self.checkinDetailsViewController animated:YES];
 	}
 }
@@ -288,22 +186,6 @@
 
 - (void)mapViewDidFailLoadingMap:(MKMapView *)theMapView withError:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
-}
-
-#pragma mark -
-#pragma mark ItemPickerDelegate
-
-- (void) itemPickerReturned:(ItemPicker *)theItemPicker item:(NSString *)item {
-	DLog(@"itemPickerReturned: %@", item);
-	self.user = nil;
-	for (User *theUser in self.users) {
-		if ([theUser.name isEqualToString:item]) {
-			self.user = theUser;
-			DLog(@"User: %@", theUser.name);
-			break;
-		}
-	}
-	[self populate:NO resize:YES];
 }
 
 @end

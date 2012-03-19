@@ -20,34 +20,40 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "Ushahidi.h"
 
 @interface BaseTableViewController : BaseViewController<UITableViewDelegate, 
 														UITableViewDataSource, 
 														UINavigationControllerDelegate, 
-														UISearchBarDelegate> {
+														UISearchBarDelegate,
+                                                        UshahidiDelegate> {
 	
 @public
-	IBOutlet UITableView *tableView;
-	
-@protected
+    UITableView *tableView;
 	NSMutableArray *allRows;
 	NSMutableArray *filteredRows;
-	UIColor *oddRowColor;
-	UIColor *evenRowColor;
-	BOOL editing;
-	
+    NSMutableArray *pendingRows;   
+    NSMutableArray *filters;
+    NSObject *filter;
+
+    UIColor *oddRowColor;
+    UIColor *evenRowColor; 
+                                                            
 @private
 	BOOL shouldBeginEditing;
 	NSMutableDictionary *headers;
 	NSMutableDictionary *footers;
 }
 
-@property(nonatomic,retain) UITableView *tableView;
+@property(nonatomic,retain) IBOutlet UITableView *tableView;
 @property(nonatomic,retain) NSMutableArray *allRows;
 @property(nonatomic,retain) NSMutableArray *filteredRows;
+@property(nonatomic,retain) NSMutableArray *pendingRows;
+@property(nonatomic,retain) NSMutableArray *filters;
+@property(nonatomic,retain) NSObject *filter;
+
 @property(nonatomic,retain) UIColor *oddRowColor;
 @property(nonatomic,retain) UIColor *evenRowColor;
-@property(nonatomic,assign) BOOL editing;
 
 - (void) hideSearchBar;
 - (void) showSearchBar;
@@ -64,5 +70,6 @@
 - (void) setHeader:(NSString *)header atSection:(NSInteger)section;
 - (void) setFooter:(NSString *)text atSection:(NSInteger)section;
 - (void) setTableFooter:(NSString *)text;
+- (void) populate:(NSArray*)items filter:(NSObject*)filter;
 
 @end

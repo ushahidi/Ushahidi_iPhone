@@ -43,4 +43,9 @@
 - (NSString *) appendUrlStringWithFormat:(NSString *)format, ...;
 + (NSString *) stringByEscapingCharacters:(NSString *)string;
 
+- (NSString *)captureRegex:(NSString *)pattern;
+- (BOOL)matchRegex:(NSString *)pattern;
+- (BOOL) isYouTubeLink;
+- (NSString *) youTubeEmbedCode:(BOOL)playInline size:(CGSize)size;
+
 @end

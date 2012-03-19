@@ -22,27 +22,42 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotation.h>
+#import <QuartzCore/QuartzCore.h>
 #import "BaseViewController.h"
-#import "ItemPicker.h"
+#import "Ushahidi.h"
 
-@interface BaseMapViewController : BaseViewController<ItemPickerDelegate> {
+@interface BaseMapViewController : BaseViewController<UshahidiDelegate> {
 
 @public
-	UIBarButtonItem *refreshButton;
-	UIBarButtonItem *filterButton;
+    UIButton *flipView;
+    MKMapView *mapView;
 	UISegmentedControl *mapType;
-	UILabel *filterLabel;
-	MKMapView *mapView;
-	ItemPicker *itemPicker;
+	UIButton *infoButton;
+    UILabel *filterLabel;
+    NSObject *filter;
+	NSMutableArray *allPins;
+	NSMutableArray *filteredPins;
+    NSMutableArray *pendingPins;
+    NSMutableArray *filters;
+    
+@private
+    BOOL flipped;
 }
 
-@property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic,retain) IBOutlet UIBarButtonItem *filterButton;
-@property(nonatomic,retain) IBOutlet UILabel *filterLabel;
 @property(nonatomic,retain) IBOutlet MKMapView *mapView;
-@property(nonatomic,retain) ItemPicker *itemPicker;
+@property(nonatomic,retain) IBOutlet UIButton *flipView;
+@property(nonatomic,retain) IBOutlet UISegmentedControl *mapType;
+@property(nonatomic,retain) IBOutlet UIButton *infoButton;
+@property(nonatomic,retain) IBOutlet UILabel *filterLabel;
+@property(nonatomic,retain) NSObject *filter;
+@property(nonatomic,retain) NSMutableArray *allPins;
+@property(nonatomic,retain) NSMutableArray *filteredPins;
+@property(nonatomic,retain) NSMutableArray *pendingPins;
+@property(nonatomic,retain) NSMutableArray *filters;
 
-- (IBAction) mapTypeChanged:(id)sender;
+- (void) populate:(NSArray*)items filter:(NSObject*)filter;
+- (IBAction) showInfo:(id)sender event:(UIEvent*)event;
+- (IBAction) mapTypeChanged:(id)sender event:(UIEvent*)event;
+- (IBAction) mapTypeCancelled:(id)sender event:(UIEvent*)event;
 
 @end

@@ -4,25 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>15October.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
-		</dict>
 		<key>BeijingTransport.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
-		</dict>
-		<key>CorruptionTracker.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>ICCM 2011.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
 		</dict>
 		<key>Inherity.xcscheme</key>
 		<dict>

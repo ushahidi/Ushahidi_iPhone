@@ -121,6 +121,7 @@
     [self.filters removeAllObjects];
     
     if (self.willBePushed) {
+        [self.loadingView show];
         self.filterButton.enabled = [self.filters count] > 0;
         [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
         [self.filters addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
@@ -136,6 +137,7 @@
    
     [self populateWithFilter:self.filter];
 	
+    self.filterButton.enabled = self.filters.count > 0;
     DLog(@"Categories:%d", [self.filters count]);
 }
 

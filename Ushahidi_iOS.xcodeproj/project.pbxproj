@@ -7181,6 +7181,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7192,6 +7193,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
+				PROVISIONING_PROFILE = "D90F10DA-FCCE-4DF5-90A1-78EE8FF339FB";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D90F10DA-FCCE-4DF5-90A1-78EE8FF339FB";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -7246,6 +7248,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7257,7 +7260,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B510B69D-D9E9-42D8-A174-275AFB582EE4";
+				PROVISIONING_PROFILE = "FC0E9135-95C9-414C-8E0F-84E9AAFC226A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC0E9135-95C9-414C-8E0F-84E9AAFC226A";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -7290,6 +7294,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7301,6 +7306,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
+				PROVISIONING_PROFILE = "F3B29AB4-B01F-4892-B2FF-D0F1E1165E17";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3B29AB4-B01F-4892-B2FF-D0F1E1165E17";
 				VALIDATE_PRODUCT = YES;
 			};

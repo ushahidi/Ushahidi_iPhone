@@ -102,7 +102,10 @@
         }        
     }
     else {
-        [self.navigationController pushViewController:viewController animated:animated];
+        [viewController viewWillBePushed];
+        self.navigationController.viewControllers = [NSMutableArray arrayWithObject:viewController];
+        [viewController viewWasPushed];
+        //[self.navigationController pushViewController:viewController animated:animated];
     }
 }
 

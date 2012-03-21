@@ -75,17 +75,14 @@
 			</object>
 			<object class="IBUIViewController" id="888680612">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="995128150">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Maps</string>
 					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="747306554">
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUIButton" key="IBUICustomView" id="258609718">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{5, 12}, {18, 19}}</string>
-							<reference key="NSSuperview"/>
-							<reference key="NSWindow"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
@@ -461,20 +458,12 @@
 			</object>
 			<object class="IBUIViewController" id="906486659">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="996893678">
+					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Map</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="987001369">
 						<string key="IBUITitle">Back</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
-					</object>
-					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="186129977">
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">location.png</string>
-						</object>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIStyle">1</int>
-						<reference key="IBUINavigationItem" ref="996893678"/>
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
@@ -1138,14 +1127,6 @@
 					<int key="connectionID">253</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">locate:event:</string>
-						<reference key="source" ref="186129977"/>
-						<reference key="destination" ref="906486659"/>
-					</object>
-					<int key="connectionID">244</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">nextPrevious</string>
 						<reference key="source" ref="685228346"/>
@@ -1452,7 +1433,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="987001369"/>
-							<reference ref="186129977"/>
 						</object>
 						<reference key="parent" ref="906486659"/>
 					</object>
@@ -1629,11 +1609,6 @@
 						<reference key="parent" ref="910909503"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">177</int>
-						<reference key="object" ref="186129977"/>
-						<reference key="parent" ref="996893678"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">179</int>
 						<reference key="object" ref="685228346"/>
 						<object class="NSMutableArray" key="children">
@@ -1769,7 +1744,6 @@
 					<string>152.IBPluginDependency</string>
 					<string>153.IBPluginDependency</string>
 					<string>154.IBPluginDependency</string>
-					<string>177.IBPluginDependency</string>
 					<string>179.CustomClassName</string>
 					<string>179.IBPluginDependency</string>
 					<string>180.IBPluginDependency</string>
@@ -1854,7 +1828,6 @@
 					<string>CheckinMapViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>IncidentTabViewController</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -3853,7 +3826,6 @@
 				<string>arrow_previous.png</string>
 				<string>arrow_up.png</string>
 				<string>filter.png</string>
-				<string>location.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3862,7 +3834,6 @@
 				<string>{7, 14}</string>
 				<string>{15, 13}</string>
 				<string>{18, 20}</string>
-				<string>{18, 18}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>

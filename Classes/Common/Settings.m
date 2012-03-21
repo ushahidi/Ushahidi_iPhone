@@ -191,6 +191,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
 - (void) save {
 	DLog(@"");
+    DLog(@"LastDeployment:%@", self.lastDeployment);
+    DLog(@"LastIncident:%@", self.lastIncident);
 	[[NSUserDefaults standardUserDefaults] setObject:self.email forKey:@"email"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.firstName forKey:@"firstName"];
 	[[NSUserDefaults standardUserDefaults] setObject:self.lastName forKey:@"lastName"];

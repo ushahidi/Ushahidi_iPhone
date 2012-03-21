@@ -102,10 +102,7 @@
         }        
     }
     else {
-        [viewController viewWillBePushed];
-        self.navigationController.viewControllers = [NSMutableArray arrayWithObject:viewController];
-        [viewController viewWasPushed];
-        //[self.navigationController pushViewController:viewController animated:animated];
+        [self.navigationController pushViewController:viewController animated:animated];
     }
 }
 
@@ -163,7 +160,9 @@
 		if (deployment == nil) {
             self.splashViewController.shouldDismissOnAppear = NO;
             [masterNavigationController pushViewController:self.categorySelectViewController animated:NO];
-            [self setDetailsViewController:self.incidentTabViewController animated:NO];
+            if ([Device isIPad]) {
+                [self setDetailsViewController:self.incidentTabViewController animated:NO];
+            }
             deployment = [[Deployment alloc] initWithName:mapName url:mapURL];
 			[[Ushahidi sharedUshahidi] addDeployment:deployment];
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment];

@@ -146,7 +146,6 @@
 		3E0F769C13AB7772004494EC /* Logo_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75C213AB775A004494EC /* Logo_iPhone.png */; };
 		3E0F769D13AB7772004494EC /* Logo_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75C313AB775A004494EC /* Logo_iPhone@2x.png */; };
 		3E0F769E13AB7772004494EC /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0F75C413AB775A004494EC /* placeholder.png */; };
-		3E0F76A013AB7772004494EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E0F76A113AB7772004494EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3E0F76A213AB7772004494EC /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3E0F76A313AB7772004494EC /* IncidentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */; };
@@ -417,8 +416,6 @@
 		3E15A01C1410CFE600D12964 /* CheckinTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EB13A6552A0019BDED /* CheckinTableCell_iPhone.xib */; };
 		3E15A01D1410CFE600D12964 /* CheckinTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EE13A655370019BDED /* CheckinTableCell_iPad.xib */; };
 		3E15A01E1410CFE600D12964 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A2013AC9D1300DCC48C /* Localizable.strings */; };
-		3E15A01F1410CFE600D12964 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
-		3E15A0211410CFE600D12964 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E15A0221410CFE600D12964 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3E15A0231410CFE600D12964 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3E15A0241410CFE600D12964 /* IncidentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */; };
@@ -698,8 +695,6 @@
 		3E15E74E13C5CBA80050D46F /* CheckinTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EB13A6552A0019BDED /* CheckinTableCell_iPhone.xib */; };
 		3E15E74F13C5CBA80050D46F /* CheckinTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EE13A655370019BDED /* CheckinTableCell_iPad.xib */; };
 		3E15E75013C5CBA80050D46F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A2013AC9D1300DCC48C /* Localizable.strings */; };
-		3E15E75113C5CBA80050D46F /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
-		3E15E75313C5CBA80050D46F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E15E75413C5CBA80050D46F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3E15E75513C5CBA80050D46F /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3E15E75613C5CBA80050D46F /* IncidentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */; };
@@ -1008,7 +1003,6 @@
 		3E44320014FBE1E300BFECD8 /* CheckinTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EB13A6552A0019BDED /* CheckinTableCell_iPhone.xib */; };
 		3E44320114FBE1E300BFECD8 /* CheckinTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EE13A655370019BDED /* CheckinTableCell_iPad.xib */; };
 		3E44320214FBE1E300BFECD8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A2013AC9D1300DCC48C /* Localizable.strings */; };
-		3E44320314FBE1E300BFECD8 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
 		3E44320414FBE1E300BFECD8 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15E7FB13C5CCDF0050D46F /* Default-Portrait.png */; };
 		3E44320514FBE1E300BFECD8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15E7FC13C5CCDF0050D46F /* Default.png */; };
 		3E44320614FBE1E300BFECD8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E15E7FD13C5CCDF0050D46F /* Default@2x.png */; };
@@ -1031,7 +1025,6 @@
 		3E44321714FBE1E300BFECD8 /* UserSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA9BD8B14ED856000167351 /* UserSelectViewController_iPhone.xib */; };
 		3E44321814FBE1E300BFECD8 /* UserSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EA9BD9514ED857300167351 /* UserSelectViewController_iPad.xib */; };
 		3E44321914FBE1E300BFECD8 /* pattern.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E50FFD614F459440054CD41 /* pattern.png */; };
-		3E44321B14FBE1E300BFECD8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E44321C14FBE1E300BFECD8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3E44321D14FBE1E300BFECD8 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3E44321E14FBE1E300BFECD8 /* IncidentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */; };
@@ -1216,7 +1209,6 @@
 		3E4432E214FBE83200BFECD8 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4432DC14FBE83100BFECD8 /* SplashViewController.m */; };
 		3E4432E514FBE83200BFECD8 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4432DC14FBE83100BFECD8 /* SplashViewController.m */; };
 		3E4432E614FBE83200BFECD8 /* SplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4432DC14FBE83100BFECD8 /* SplashViewController.m */; };
-		3E4432E814FBF2AA00BFECD8 /* TEDxMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E4432E714FBF2AA00BFECD8 /* TEDxMap.plist */; };
 		3E4432EB14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4432EA14FC2C8800BFECD8 /* YouTubeTableCell.m */; };
 		3E4432EC14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4432EA14FC2C8800BFECD8 /* YouTubeTableCell.m */; };
 		3E4432ED14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4432EA14FC2C8800BFECD8 /* YouTubeTableCell.m */; };
@@ -1279,6 +1271,22 @@
 		3E72992E12EF262A00FDED00 /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72992D12EF262A00FDED00 /* arrow_down@2x.png */; };
 		3E72996C12EF30C500FDED00 /* selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72996B12EF30C500FDED00 /* selected@2x.png */; };
 		3E72996E12EF30D100FDED00 /* unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E72996D12EF30D100FDED00 /* unselected@2x.png */; };
+		3E738750151A843A00692956 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E73874D151A843A00692956 /* Entitlements.plist */; };
+		3E738751151A843A00692956 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E73874D151A843A00692956 /* Entitlements.plist */; };
+		3E738752151A843A00692956 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E73874D151A843A00692956 /* Entitlements.plist */; };
+		3E738753151A843A00692956 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E73874D151A843A00692956 /* Entitlements.plist */; };
+		3E738754151A843A00692956 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E73874D151A843A00692956 /* Entitlements.plist */; };
+		3E738755151A843A00692956 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E73874D151A843A00692956 /* Entitlements.plist */; };
+		3E738756151A843A00692956 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E73874D151A843A00692956 /* Entitlements.plist */; };
+		3E738757151A843A00692956 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E73874D151A843A00692956 /* Entitlements.plist */; };
+		3E738758151A843A00692956 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73874E151A843A00692956 /* main.m */; };
+		3E738759151A843A00692956 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73874E151A843A00692956 /* main.m */; };
+		3E73875A151A843A00692956 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73874E151A843A00692956 /* main.m */; };
+		3E73875B151A843A00692956 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73874E151A843A00692956 /* main.m */; };
+		3E73875C151A843A00692956 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73874E151A843A00692956 /* main.m */; };
+		3E73875D151A843A00692956 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73874E151A843A00692956 /* main.m */; };
+		3E73875E151A843A00692956 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73874E151A843A00692956 /* main.m */; };
+		3E73875F151A843A00692956 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E73874E151A843A00692956 /* main.m */; };
 		3E78472F1410F23600C5F5A6 /* UserDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E78472E1410F23600C5F5A6 /* UserDialog.m */; };
 		3E7847301410F23600C5F5A6 /* UserDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E78472E1410F23600C5F5A6 /* UserDialog.m */; };
 		3E7847311410F23600C5F5A6 /* UserDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E78472E1410F23600C5F5A6 /* UserDialog.m */; };
@@ -1456,7 +1464,6 @@
 		3E8F03ED131568AE0011E423 /* button_red_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F03EB131568AE0011E423 /* button_red_selected@2x.png */; };
 		3E91985A1293A81F005AC005 /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9198591293A81F005AC005 /* Locator.m */; };
 		3E9198A61293AD09005AC005 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9198A51293AD09005AC005 /* CoreLocation.framework */; };
-		3E98EF181211BC9800C35F36 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
 		3EA4FCA313A7863500DBF3DA /* BaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */; };
 		3EA4FCA413A7863500DBF3DA /* BaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */; };
@@ -1611,8 +1618,6 @@
 		3EB1F75C146D6E4F009C62AB /* CheckinTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EB13A6552A0019BDED /* CheckinTableCell_iPhone.xib */; };
 		3EB1F75D146D6E4F009C62AB /* CheckinTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EE13A655370019BDED /* CheckinTableCell_iPad.xib */; };
 		3EB1F75E146D6E4F009C62AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A2013AC9D1300DCC48C /* Localizable.strings */; };
-		3EB1F75F146D6E4F009C62AB /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
-		3EB1F772146D6E4F009C62AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3EB1F773146D6E4F009C62AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3EB1F774146D6E4F009C62AB /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3EB1F775146D6E4F009C62AB /* IncidentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */; };
@@ -1942,8 +1947,6 @@
 		3EC4BE1913C1E19D000056AE /* CheckinTableCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EB13A6552A0019BDED /* CheckinTableCell_iPhone.xib */; };
 		3EC4BE1A13C1E19D000056AE /* CheckinTableCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EBBE2EE13A655370019BDED /* CheckinTableCell_iPad.xib */; };
 		3EC4BE1B13C1E19D000056AE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A2013AC9D1300DCC48C /* Localizable.strings */; };
-		3EC4BE1C13C1E19D000056AE /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
-		3EC4BE1E13C1E19D000056AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3EC4BE1F13C1E19D000056AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3EC4BE2013C1E19D000056AE /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3EC4BE2113C1E19D000056AE /* IncidentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */; };
@@ -2196,7 +2199,6 @@
 		3ED0F903138E6BE40065C8E8 /* Logo_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED872FB1379F1BE004E8714 /* Logo_iPad@2x.png */; };
 		3ED0F904138E6BE40065C8E8 /* Logo_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED872FC1379F1BE004E8714 /* Logo_iPhone.png */; };
 		3ED0F905138E6BE40065C8E8 /* Logo_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3ED872FD1379F1BE004E8714 /* Logo_iPhone@2x.png */; };
-		3ED0F907138E6BE40065C8E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E98EF171211BC9800C35F36 /* main.m */; };
 		3ED0F908138E6BE40065C8E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F71222BCC4001DE141 /* AppDelegate.m */; };
 		3ED0F909138E6BE40065C8E8 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629F91222BCC4001DE141 /* Device.m */; };
 		3ED0F90A138E6BE40065C8E8 /* IncidentAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */; };
@@ -2355,9 +2357,6 @@
 		3EEFE1BA12DB89D50076ABA1 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE1B912DB89D50076ABA1 /* twitter.png */; };
 		3EEFE35D12DBA32C0076ABA1 /* shorten.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE35C12DBA32C0076ABA1 /* shorten.png */; };
 		3EEFE3E312DBAFC40076ABA1 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EEFE3E212DBAFC40076ABA1 /* logout.png */; };
-		3EF6947713B32E7400DFCE77 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
-		3EF6947813B32E7400DFCE77 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
-		3EF6947913B32E7500DFCE77 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E030A7C13ACA71D00DCC48C /* Entitlements.plist */; };
 		3EF8731712B136EF00E9D799 /* Internet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8731612B136EF00E9D799 /* Internet.m */; };
 		3EF8785F12B29C1500E9D799 /* MKPinAnnotationView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF8785E12B29C1500E9D799 /* MKPinAnnotationView+Extension.m */; };
 		3EFC1C1D1295D81C00163B36 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFC1C1B1295D81C00163B36 /* email.png */; };
@@ -2405,8 +2404,6 @@
 		3E030A3613AC9DCA00DCC48C /* sw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sw; path = sw.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E030A4813ACA0FD00DCC48C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3E030A4913ACA10700DCC48C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3E030A7C13ACA71D00DCC48C /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
-		3E0F759D13AB57A3004494EC /* Ushahidi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Ushahidi.plist; sourceTree = "<group>"; };
 		3E0F75B013AB775A004494EC /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		3E0F75B213AB775A004494EC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3E0F75B413AB775A004494EC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -2439,7 +2436,6 @@
 		3E1501151278D82500036A0F /* SliderTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderTableCell.h; sourceTree = "<group>"; };
 		3E1501161278D82500036A0F /* SliderTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderTableCell.m; sourceTree = "<group>"; };
 		3E15A0C31410CFE600D12964 /* Inherity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inherity.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E15A0C51410CFE600D12964 /* Inherity.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Inherity.plist; sourceTree = "<group>"; };
 		3E15A0D51410D0E400D12964 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		3E15A0D61410D0E400D12964 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3E15A0D71410D0E400D12964 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -2458,7 +2454,6 @@
 		3E15A0E41410D0E400D12964 /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
 		3E15A0E51410D0E400D12964 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		3E15E7F513C5CBA80050D46F /* TEDFellows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TEDFellows.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E15E7F713C5CBA80050D46F /* TEDFellows.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TEDFellows.plist; sourceTree = "<group>"; };
 		3E15E7FB13C5CCDF0050D46F /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		3E15E7FC13C5CCDF0050D46F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3E15E7FD13C5CCDF0050D46F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -2482,7 +2477,6 @@
 		3E236396128C7DB400CF804A /* IndexedTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexedTableCell.m; sourceTree = "<group>"; };
 		3E244E70128DFDE400B36DB6 /* NSURL+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Extension.h"; sourceTree = "<group>"; };
 		3E244E71128DFDE400B36DB6 /* NSURL+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Extension.m"; sourceTree = "<group>"; };
-		3E24638B128DAD1A00C01DF6 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		3E2E853612787E7F00ADA49B /* MotionWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionWindow.h; sourceTree = "<group>"; };
 		3E2E853712787E7F00ADA49B /* MotionWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionWindow.m; sourceTree = "<group>"; };
 		3E30492712874F3600E3C942 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
@@ -2494,7 +2488,6 @@
 		3E4432D014FBE78D00BFECD8 /* SplashViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E4432DB14FBE83100BFECD8 /* SplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashViewController.h; sourceTree = "<group>"; };
 		3E4432DC14FBE83100BFECD8 /* SplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashViewController.m; sourceTree = "<group>"; };
-		3E4432E714FBF2AA00BFECD8 /* TEDxMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TEDxMap.plist; sourceTree = "<group>"; };
 		3E4432E914FC2C8800BFECD8 /* YouTubeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeTableCell.h; sourceTree = "<group>"; };
 		3E4432EA14FC2C8800BFECD8 /* YouTubeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeTableCell.m; sourceTree = "<group>"; };
 		3E466F59130C62BF00EE685B /* checkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkin.png; sourceTree = "<group>"; };
@@ -2549,6 +2542,16 @@
 		3E72992D12EF262A00FDED00 /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
 		3E72996B12EF30C500FDED00 /* selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selected@2x.png"; sourceTree = "<group>"; };
 		3E72996D12EF30D100FDED00 /* unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unselected@2x.png"; sourceTree = "<group>"; };
+		3E73872D151A829200692956 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E738735151A82BB00692956 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ICCM2011/Info.plist; sourceTree = "<group>"; };
+		3E73873C151A82E200692956 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E73873D151A82FC00692956 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E73873E151A831200692956 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E73873F151A832400692956 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E738746151A833C00692956 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E73874D151A843A00692956 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		3E73874E151A843A00692956 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3E73874F151A843A00692956 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		3E78472D1410F23600C5F5A6 /* UserDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDialog.h; sourceTree = "<group>"; };
 		3E78472E1410F23600C5F5A6 /* UserDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDialog.m; sourceTree = "<group>"; };
 		3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewController_iPad.xib; sourceTree = "<group>"; };
@@ -2746,7 +2749,6 @@
 		3E9198581293A81F005AC005 /* Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locator.h; sourceTree = "<group>"; };
 		3E9198591293A81F005AC005 /* Locator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locator.m; sourceTree = "<group>"; };
 		3E9198A51293AD09005AC005 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		3E98EF171211BC9800C35F36 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3EA4FCA113A7863500DBF3DA /* BaseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDetailsViewController.h; sourceTree = "<group>"; };
 		3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDetailsViewController.m; sourceTree = "<group>"; };
@@ -2759,7 +2761,6 @@
 		3EA9BD8B14ED856000167351 /* UserSelectViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSelectViewController_iPhone.xib; sourceTree = "<group>"; };
 		3EA9BD9514ED857300167351 /* UserSelectViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserSelectViewController_iPad.xib; sourceTree = "<group>"; };
 		3EB1F816146D6E4F009C62AB /* ICCM 2011.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ICCM 2011.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EB1F818146D6E4F009C62AB /* ICCM2011.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ICCM2011.plist; path = /Users/dalezak/SandBox/Ushahidi_iOS/ICCM2011.plist; sourceTree = "<absolute>"; };
 		3EB1F81A146D7003009C62AB /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait.png"; path = "ICCM2011/Default-Portrait.png"; sourceTree = "<group>"; };
 		3EB1F81B146D7003009C62AB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ICCM2011/Default.png; sourceTree = "<group>"; };
 		3EB1F81C146D7003009C62AB /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "ICCM2011/Default@2x.png"; sourceTree = "<group>"; };
@@ -2885,7 +2886,6 @@
 		3EC194C1131C62AF00BF073D /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		3EC194C2131C62AF00BF073D /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		3EC4BEC013C1E19D000056AE /* Team_Checkins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Team_Checkins.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3EC4BEC213C1E19E000056AE /* TeamCheckins.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TeamCheckins.plist; sourceTree = "<group>"; };
 		3EC4BF0613C1E771000056AE /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		3EC4BF0713C1E771000056AE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3EC4BF0813C1E771000056AE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -2921,7 +2921,6 @@
 		3ECFF3D212AFF33F00DE75D7 /* satellite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = satellite.png; sourceTree = "<group>"; };
 		3ECFF3DC12AFF52400DE75D7 /* hybrid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hybrid.png; sourceTree = "<group>"; };
 		3ED0F9A2138E6BE40065C8E8 /* MapATL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapATL.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3ED0F9D3138E71140065C8E8 /* MapATL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MapATL.plist; sourceTree = "<group>"; };
 		3ED45094128B475100578DB4 /* sort_verified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sort_verified.png; sourceTree = "<group>"; };
 		3ED871851379CB51004E8714 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		3ED871871379CB51004E8714 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -2957,7 +2956,6 @@
 		3ED873031379F1CB004E8714 /* Logo_iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPad@2x.png"; sourceTree = "<group>"; };
 		3ED873041379F1CB004E8714 /* Logo_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPhone.png; sourceTree = "<group>"; };
 		3ED873051379F1CB004E8714 /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
-		3ED873E11379FEA0004E8714 /* BeijingTransport.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BeijingTransport.plist; sourceTree = "<group>"; };
 		3ED9827012ECD7DC0065A324 /* ASIHTTPRequest+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+Extension.h"; sourceTree = "<group>"; };
 		3ED9827112ECD7DC0065A324 /* ASIHTTPRequest+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+Extension.m"; sourceTree = "<group>"; };
 		3EE3EDDC12B7EDF600782581 /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
@@ -3220,7 +3218,6 @@
 				3E8629C71222BBC2001DE141 /* Resources */,
 				3E8629C61222BBBD001DE141 /* Classes */,
 				3ED1046512125524009781F5 /* Libraries */,
-				3EDC95F7143F650B0088A62C /* Plists */,
 				29B97315FDCFA39411CA2CEA /* Other */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -3231,11 +3228,11 @@
 		29B97315FDCFA39411CA2CEA /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				3E98EF171211BC9800C35F36 /* main.m */,
-				3E24638B128DAD1A00C01DF6 /* Prefix.pch */,
-				3E030A7C13ACA71D00DCC48C /* Entitlements.plist */,
+				3E73874D151A843A00692956 /* Entitlements.plist */,
+				3E73874E151A843A00692956 /* main.m */,
+				3E73874F151A843A00692956 /* Prefix.pch */,
 			);
-			name = Other;
+			path = Other;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -3264,6 +3261,7 @@
 		3E0F75AF13AB772A004494EC /* BeijingTransport */ = {
 			isa = PBXGroup;
 			children = (
+				3E738746151A833C00692956 /* Info.plist */,
 				3E0F75B013AB775A004494EC /* Default-Portrait.png */,
 				3E0F75B213AB775A004494EC /* Default.png */,
 				3E0F75B413AB775A004494EC /* Default@2x.png */,
@@ -3287,6 +3285,7 @@
 		3E159F781410CDDA00D12964 /* Inherity */ = {
 			isa = PBXGroup;
 			children = (
+				3E73873C151A82E200692956 /* Info.plist */,
 				3E15A0D51410D0E400D12964 /* Default-Portrait.png */,
 				3E15A0D61410D0E400D12964 /* Default.png */,
 				3E15A0D71410D0E400D12964 /* Default@2x.png */,
@@ -3311,6 +3310,7 @@
 		3E15E7F913C5CC9B0050D46F /* TEDFellows */ = {
 			isa = PBXGroup;
 			children = (
+				3E73873E151A831200692956 /* Info.plist */,
 				3E15E7FC13C5CCDF0050D46F /* Default.png */,
 				3E15E7FD13C5CCDF0050D46F /* Default@2x.png */,
 				3E15E7FB13C5CCDF0050D46F /* Default-Portrait.png */,
@@ -3793,6 +3793,7 @@
 		3EB1F819146D6FD1009C62AB /* ICCM2011 */ = {
 			isa = PBXGroup;
 			children = (
+				3E738735151A82BB00692956 /* Info.plist */,
 				3EB1F81A146D7003009C62AB /* Default-Portrait.png */,
 				3EB1F81B146D7003009C62AB /* Default.png */,
 				3EB1F81C146D7003009C62AB /* Default@2x.png */,
@@ -3961,6 +3962,7 @@
 		3EC4BF0413C1E6F2000056AE /* TeamCheckins */ = {
 			isa = PBXGroup;
 			children = (
+				3E73873F151A832400692956 /* Info.plist */,
 				3EC4BF0613C1E771000056AE /* Default-Portrait.png */,
 				3EC4BF0713C1E771000056AE /* Default.png */,
 				3EC4BF0813C1E771000056AE /* Default@2x.png */,
@@ -3995,9 +3997,9 @@
 		3ED8716D1379CA48004E8714 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				3ED871781379CA70004E8714 /* Ushahidi */,
 				3EB1F819146D6FD1009C62AB /* ICCM2011 */,
 				3E159F781410CDDA00D12964 /* Inherity */,
-				3ED871781379CA70004E8714 /* Ushahidi */,
 				3ED871CC1379D343004E8714 /* MapATL */,
 				3E15E7F913C5CC9B0050D46F /* TEDFellows */,
 				3EC4BF0413C1E6F2000056AE /* TeamCheckins */,
@@ -4009,6 +4011,7 @@
 		3ED871781379CA70004E8714 /* Ushahidi */ = {
 			isa = PBXGroup;
 			children = (
+				3E73872D151A829200692956 /* Info.plist */,
 				3ED871851379CB51004E8714 /* Default-Portrait.png */,
 				3ED871871379CB51004E8714 /* Default.png */,
 				3ED871891379CB51004E8714 /* Default@2x.png */,
@@ -4027,13 +4030,13 @@
 				3ED873041379F1CB004E8714 /* Logo_iPhone.png */,
 				3ED873051379F1CB004E8714 /* Logo_iPhone@2x.png */,
 			);
-			name = Ushahidi;
-			path = Default;
+			path = Ushahidi;
 			sourceTree = "<group>";
 		};
 		3ED871CC1379D343004E8714 /* MapATL */ = {
 			isa = PBXGroup;
 			children = (
+				3E73873D151A82FC00692956 /* Info.plist */,
 				3ED871CD1379D358004E8714 /* Default-Portrait.png */,
 				3ED871CE1379D358004E8714 /* Default.png */,
 				3ED871CF1379D358004E8714 /* Default@2x.png */,
@@ -4053,21 +4056,6 @@
 				3ED872FD1379F1BE004E8714 /* Logo_iPhone@2x.png */,
 			);
 			path = MapATL;
-			sourceTree = "<group>";
-		};
-		3EDC95F7143F650B0088A62C /* Plists */ = {
-			isa = PBXGroup;
-			children = (
-				3E0F759D13AB57A3004494EC /* Ushahidi.plist */,
-				3ED0F9D3138E71140065C8E8 /* MapATL.plist */,
-				3E15E7F713C5CBA80050D46F /* TEDFellows.plist */,
-				3EC4BEC213C1E19E000056AE /* TeamCheckins.plist */,
-				3E4432E714FBF2AA00BFECD8 /* TEDxMap.plist */,
-				3ED873E11379FEA0004E8714 /* BeijingTransport.plist */,
-				3E15A0C51410CFE600D12964 /* Inherity.plist */,
-				3EB1F818146D6E4F009C62AB /* ICCM2011.plist */,
-			);
-			name = Plists;
 			sourceTree = "<group>";
 		};
 		3EEFE05B12DB804D0076ABA1 /* Twitter */ = {
@@ -4392,7 +4380,6 @@
 				3EBBE2ED13A6552A0019BDED /* CheckinTableCell_iPhone.xib in Resources */,
 				3EBBE2F013A655370019BDED /* CheckinTableCell_iPad.xib in Resources */,
 				3E030A2313AC9D1300DCC48C /* Localizable.strings in Resources */,
-				3EF6947713B32E7400DFCE77 /* Entitlements.plist in Resources */,
 				3E25C2251410DB8000B168D0 /* Default-Portrait.png in Resources */,
 				3E25C2261410DB8000B168D0 /* Default.png in Resources */,
 				3E25C2271410DB8000B168D0 /* Default@2x.png in Resources */,
@@ -4417,6 +4404,7 @@
 				3E50FFD714F459440054CD41 /* pattern.png in Resources */,
 				3E4432C614FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D114FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
+				3E738750151A843A00692956 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4549,7 +4537,6 @@
 				3E0F769D13AB7772004494EC /* Logo_iPhone@2x.png in Resources */,
 				3E0F769E13AB7772004494EC /* placeholder.png in Resources */,
 				3E030A2413AC9D1300DCC48C /* Localizable.strings in Resources */,
-				3EF6947913B32E7500DFCE77 /* Entitlements.plist in Resources */,
 				3EA9BD7A14ED852F00167351 /* CategorySelectViewController_iPhone.xib in Resources */,
 				3EA9BD8414ED854700167351 /* CategorySelectViewController_iPad.xib in Resources */,
 				3EA9BD8E14ED856000167351 /* UserSelectViewController_iPhone.xib in Resources */,
@@ -4557,6 +4544,7 @@
 				3E50FFD914F459440054CD41 /* pattern.png in Resources */,
 				3E4432C814FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D314FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
+				3E738752151A843A00692956 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4673,7 +4661,6 @@
 				3E15A01C1410CFE600D12964 /* CheckinTableCell_iPhone.xib in Resources */,
 				3E15A01D1410CFE600D12964 /* CheckinTableCell_iPad.xib in Resources */,
 				3E15A01E1410CFE600D12964 /* Localizable.strings in Resources */,
-				3E15A01F1410CFE600D12964 /* Entitlements.plist in Resources */,
 				3E15A0E61410D0E400D12964 /* Default-Portrait.png in Resources */,
 				3E15A0E71410D0E400D12964 /* Default.png in Resources */,
 				3E15A0E81410D0E400D12964 /* Default@2x.png in Resources */,
@@ -4698,6 +4685,7 @@
 				3E50FFDC14F459440054CD41 /* pattern.png in Resources */,
 				3E4432CB14FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D614FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
+				3E738755151A843A00692956 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4814,7 +4802,6 @@
 				3E15E74E13C5CBA80050D46F /* CheckinTableCell_iPhone.xib in Resources */,
 				3E15E74F13C5CBA80050D46F /* CheckinTableCell_iPad.xib in Resources */,
 				3E15E75013C5CBA80050D46F /* Localizable.strings in Resources */,
-				3E15E75113C5CBA80050D46F /* Entitlements.plist in Resources */,
 				3E15E80C13C5CCDF0050D46F /* Default-Portrait.png in Resources */,
 				3E15E80D13C5CCDF0050D46F /* Default.png in Resources */,
 				3E15E80E13C5CCDF0050D46F /* Default@2x.png in Resources */,
@@ -4839,6 +4826,7 @@
 				3E50FFDB14F459440054CD41 /* pattern.png in Resources */,
 				3E4432CA14FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D514FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
+				3E738754151A843A00692956 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4955,7 +4943,6 @@
 				3E44320014FBE1E300BFECD8 /* CheckinTableCell_iPhone.xib in Resources */,
 				3E44320114FBE1E300BFECD8 /* CheckinTableCell_iPad.xib in Resources */,
 				3E44320214FBE1E300BFECD8 /* Localizable.strings in Resources */,
-				3E44320314FBE1E300BFECD8 /* Entitlements.plist in Resources */,
 				3E44320414FBE1E300BFECD8 /* Default-Portrait.png in Resources */,
 				3E44320514FBE1E300BFECD8 /* Default.png in Resources */,
 				3E44320614FBE1E300BFECD8 /* Default@2x.png in Resources */,
@@ -4980,7 +4967,7 @@
 				3E44321914FBE1E300BFECD8 /* pattern.png in Resources */,
 				3E4432CF14FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432DA14FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
-				3E4432E814FBF2AA00BFECD8 /* TEDxMap.plist in Resources */,
+				3E738757151A843A00692956 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5097,7 +5084,6 @@
 				3EB1F75C146D6E4F009C62AB /* CheckinTableCell_iPhone.xib in Resources */,
 				3EB1F75D146D6E4F009C62AB /* CheckinTableCell_iPad.xib in Resources */,
 				3EB1F75E146D6E4F009C62AB /* Localizable.strings in Resources */,
-				3EB1F75F146D6E4F009C62AB /* Entitlements.plist in Resources */,
 				3EB1F82B146D7003009C62AB /* Default-Portrait.png in Resources */,
 				3EB1F82C146D7003009C62AB /* Default.png in Resources */,
 				3EB1F82D146D7003009C62AB /* Default@2x.png in Resources */,
@@ -5121,6 +5107,7 @@
 				3E50FFDF14F459440054CD41 /* pattern.png in Resources */,
 				3E4432CE14FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D914FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
+				3E738756151A843A00692956 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5237,7 +5224,6 @@
 				3EC4BE1913C1E19D000056AE /* CheckinTableCell_iPhone.xib in Resources */,
 				3EC4BE1A13C1E19D000056AE /* CheckinTableCell_iPad.xib in Resources */,
 				3EC4BE1B13C1E19D000056AE /* Localizable.strings in Resources */,
-				3EC4BE1C13C1E19D000056AE /* Entitlements.plist in Resources */,
 				3EC4BF1813C1E771000056AE /* Default-Portrait.png in Resources */,
 				3EC4BF1913C1E771000056AE /* Default.png in Resources */,
 				3EC4BF1A13C1E771000056AE /* Default@2x.png in Resources */,
@@ -5262,6 +5248,7 @@
 				3E50FFDA14F459440054CD41 /* pattern.png in Resources */,
 				3E4432C914FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D414FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
+				3E738753151A843A00692956 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5395,7 +5382,6 @@
 				3EBBE2EC13A6552A0019BDED /* CheckinTableCell_iPhone.xib in Resources */,
 				3EBBE2EF13A655370019BDED /* CheckinTableCell_iPad.xib in Resources */,
 				3E030A2213AC9D1300DCC48C /* Localizable.strings in Resources */,
-				3EF6947813B32E7400DFCE77 /* Entitlements.plist in Resources */,
 				3EA9BD7914ED852F00167351 /* CategorySelectViewController_iPhone.xib in Resources */,
 				3EA9BD8314ED854700167351 /* CategorySelectViewController_iPad.xib in Resources */,
 				3EA9BD8D14ED856000167351 /* UserSelectViewController_iPhone.xib in Resources */,
@@ -5403,6 +5389,7 @@
 				3E50FFD814F459440054CD41 /* pattern.png in Resources */,
 				3E4432C714FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D214FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
+				3E738751151A843A00692956 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5413,7 +5400,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E98EF181211BC9800C35F36 /* main.m in Sources */,
 				3E8629FA1222BCC4001DE141 /* AppDelegate.m in Sources */,
 				3E8629FB1222BCC4001DE141 /* Device.m in Sources */,
 				3E862A101222BCD0001DE141 /* IncidentAddViewController.m in Sources */,
@@ -5559,6 +5545,7 @@
 				3E65A81914EEC9D700635E71 /* BaseAddViewController.m in Sources */,
 				3E4432DD14FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432EB14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
+				3E738758151A843A00692956 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5566,7 +5553,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E0F76A013AB7772004494EC /* main.m in Sources */,
 				3E0F76A113AB7772004494EC /* AppDelegate.m in Sources */,
 				3E0F76A213AB7772004494EC /* Device.m in Sources */,
 				3E0F76A313AB7772004494EC /* IncidentAddViewController.m in Sources */,
@@ -5712,6 +5698,7 @@
 				3E65A81B14EEC9D700635E71 /* BaseAddViewController.m in Sources */,
 				3E4432DF14FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432ED14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
+				3E73875A151A843A00692956 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5719,7 +5706,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E15A0211410CFE600D12964 /* main.m in Sources */,
 				3E15A0221410CFE600D12964 /* AppDelegate.m in Sources */,
 				3E15A0231410CFE600D12964 /* Device.m in Sources */,
 				3E15A0241410CFE600D12964 /* IncidentAddViewController.m in Sources */,
@@ -5865,6 +5851,7 @@
 				3E65A81E14EEC9D700635E71 /* BaseAddViewController.m in Sources */,
 				3E4432E214FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432F014FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
+				3E73875D151A843A00692956 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5872,7 +5859,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E15E75313C5CBA80050D46F /* main.m in Sources */,
 				3E15E75413C5CBA80050D46F /* AppDelegate.m in Sources */,
 				3E15E75513C5CBA80050D46F /* Device.m in Sources */,
 				3E15E75613C5CBA80050D46F /* IncidentAddViewController.m in Sources */,
@@ -6018,6 +6004,7 @@
 				3E65A81D14EEC9D700635E71 /* BaseAddViewController.m in Sources */,
 				3E4432E114FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432EF14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
+				3E73875C151A843A00692956 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6025,7 +6012,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E44321B14FBE1E300BFECD8 /* main.m in Sources */,
 				3E44321C14FBE1E300BFECD8 /* AppDelegate.m in Sources */,
 				3E44321D14FBE1E300BFECD8 /* Device.m in Sources */,
 				3E44321E14FBE1E300BFECD8 /* IncidentAddViewController.m in Sources */,
@@ -6171,6 +6157,7 @@
 				3E4432AA14FBE1E300BFECD8 /* BaseAddViewController.m in Sources */,
 				3E4432E614FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432F314FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
+				3E73875F151A843A00692956 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6178,7 +6165,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EB1F772146D6E4F009C62AB /* main.m in Sources */,
 				3EB1F773146D6E4F009C62AB /* AppDelegate.m in Sources */,
 				3EB1F774146D6E4F009C62AB /* Device.m in Sources */,
 				3EB1F775146D6E4F009C62AB /* IncidentAddViewController.m in Sources */,
@@ -6324,6 +6310,7 @@
 				3E65A82114EEC9D700635E71 /* BaseAddViewController.m in Sources */,
 				3E4432E514FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432F214FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
+				3E73875E151A843A00692956 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6331,7 +6318,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EC4BE1E13C1E19D000056AE /* main.m in Sources */,
 				3EC4BE1F13C1E19D000056AE /* AppDelegate.m in Sources */,
 				3EC4BE2013C1E19D000056AE /* Device.m in Sources */,
 				3EC4BE2113C1E19D000056AE /* IncidentAddViewController.m in Sources */,
@@ -6477,6 +6463,7 @@
 				3E65A81C14EEC9D700635E71 /* BaseAddViewController.m in Sources */,
 				3E4432E014FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432EE14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
+				3E73875B151A843A00692956 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6484,7 +6471,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ED0F907138E6BE40065C8E8 /* main.m in Sources */,
 				3ED0F908138E6BE40065C8E8 /* AppDelegate.m in Sources */,
 				3ED0F909138E6BE40065C8E8 /* Device.m in Sources */,
 				3ED0F90A138E6BE40065C8E8 /* IncidentAddViewController.m in Sources */,
@@ -6630,6 +6616,7 @@
 				3E65A81A14EEC9D700635E71 /* BaseAddViewController.m in Sources */,
 				3E4432DE14FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432EC14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
+				3E738759151A843A00692956 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6675,9 +6662,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = Ushahidi.plist;
+				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6695,9 +6682,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = Ushahidi.plist;
+				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6718,9 +6705,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = BeijingTransport.plist;
+				INFOPLIST_FILE = Themes/BeijingTransport/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6738,9 +6725,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = BeijingTransport.plist;
+				INFOPLIST_FILE = Themes/BeijingTransport/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6759,9 +6746,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = BeijingTransport.plist;
+				INFOPLIST_FILE = Themes/BeijingTransport/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6780,9 +6767,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = BeijingTransport.plist;
+				INFOPLIST_FILE = Themes/BeijingTransport/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6803,9 +6790,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = Inherity.plist;
+				INFOPLIST_FILE = Themes/Inherity/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6823,9 +6810,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = Inherity.plist;
+				INFOPLIST_FILE = Themes/Inherity/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6844,9 +6831,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = Inherity.plist;
+				INFOPLIST_FILE = Themes/Inherity/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6865,9 +6852,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = Inherity.plist;
+				INFOPLIST_FILE = Themes/Inherity/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6888,9 +6875,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TEDFellows.plist;
+				INFOPLIST_FILE = Themes/TEDFellows/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6908,9 +6895,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TEDFellows.plist;
+				INFOPLIST_FILE = Themes/TEDFellows/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6929,9 +6916,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TEDFellows.plist;
+				INFOPLIST_FILE = Themes/TEDFellows/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6950,9 +6937,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TEDFellows.plist;
+				INFOPLIST_FILE = Themes/TEDFellows/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6973,9 +6960,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TEDxMap.plist;
+				INFOPLIST_FILE = Themes/TEDxMap/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -6993,9 +6980,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TEDxMap.plist;
+				INFOPLIST_FILE = Themes/TEDxMap/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7014,9 +7001,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TEDxMap.plist;
+				INFOPLIST_FILE = Themes/TEDxMap/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7035,9 +7022,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TEDxMap.plist;
+				INFOPLIST_FILE = Themes/TEDxMap/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7058,9 +7045,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = ICCM2011.plist;
+				INFOPLIST_FILE = Themes/ICCM2011/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7078,9 +7065,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = ICCM2011.plist;
+				INFOPLIST_FILE = Themes/ICCM2011/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7099,9 +7086,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = ICCM2011.plist;
+				INFOPLIST_FILE = Themes/ICCM2011/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7120,9 +7107,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = ICCM2011.plist;
+				INFOPLIST_FILE = Themes/ICCM2011/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7143,9 +7130,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TeamCheckins.plist;
+				INFOPLIST_FILE = Themes/TeamCheckins/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7163,9 +7150,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TeamCheckins.plist;
+				INFOPLIST_FILE = Themes/TeamCheckins/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7185,9 +7172,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TeamCheckins.plist;
+				INFOPLIST_FILE = Themes/TeamCheckins/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7207,9 +7194,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = TeamCheckins.plist;
+				INFOPLIST_FILE = Themes/TeamCheckins/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7231,7 +7218,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
-				INFOPLIST_FILE = Ushahidi.plist;
+				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -7252,9 +7239,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = Ushahidi.plist;
+				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7277,7 +7264,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
-				INFOPLIST_FILE = Ushahidi.plist;
+				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -7298,9 +7285,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = Ushahidi.plist;
+				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7322,9 +7309,9 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = MapATL.plist;
+				INFOPLIST_FILE = Themes/MapATL/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7342,9 +7329,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = MapATL.plist;
+				INFOPLIST_FILE = Themes/MapATL/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7363,9 +7350,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = MapATL.plist;
+				INFOPLIST_FILE = Themes/MapATL/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7384,9 +7371,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = MapATL.plist;
+				INFOPLIST_FILE = Themes/MapATL/Info.plist;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -7409,7 +7396,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
-				INFOPLIST_FILE = Ushahidi.plist;
+				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				ONLY_ACTIVE_ARCH = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -7429,7 +7416,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
-				INFOPLIST_FILE = Ushahidi.plist;
+				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

@@ -19,7 +19,7 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
+#import "BaseMapViewController.h"
 #import "Ushahidi.h"
 #import "CheckBoxTableCell.h"
 #import <CoreLocation/CoreLocation.h>
@@ -29,17 +29,12 @@
 
 @class Incident;
 
-@interface LocationTableViewController : BaseTableViewController<UshahidiDelegate,
-																LocatorDelegate,
-																MKMapViewDelegate,
-																CheckBoxTableCellDelegate> {
+@interface LocationTableViewController : BaseMapViewController<UshahidiDelegate,
+                                                            LocatorDelegate,
+                                                            MKMapViewDelegate> {
 @public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
-	UIBarButtonItem *refreshButton;
-	MKMapView *mapView;
-	UISegmentedControl *viewMode;
-	UIView *containerView;
 	Incident *incident;
 															 
 @private
@@ -48,19 +43,15 @@
 	NSString *longitude;
 	NSString *currentLatitude;
 	NSString *currentLongitude;
+    NSMutableArray *locations;
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property(nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
-@property(nonatomic, retain) IBOutlet MKMapView *mapView;
-@property(nonatomic, retain) IBOutlet UISegmentedControl *viewMode;
-@property(nonatomic, retain) IBOutlet UIView *containerView;
 @property(nonatomic, retain) Incident *incident;
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;
 - (IBAction) locate:(id)sender;
-- (IBAction) viewModeChanged:(id)sender;
 
 @end

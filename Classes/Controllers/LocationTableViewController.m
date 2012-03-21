@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "LocationTableViewController.h"
+#import "BaseMapViewController.h"
 #import "LoadingViewController.h"
 #import "Incident.h"
 #import "Location.h"
@@ -27,6 +28,7 @@
 #import "MKPinAnnotationView+Extension.h"
 #import "MapAnnotation.h"
 #import "NSString+Extension.h"
+#import "Ushahidi.h"
 #import "Settings.h"
 
 @interface LocationTableViewController ()
@@ -36,6 +38,7 @@
 @property(nonatomic, retain) NSString *longitude;
 @property(nonatomic, retain) NSString *currentLatitude;
 @property(nonatomic, retain) NSString *currentLongitude;
+@property(nonatomic, retain) NSMutableArray *locations;
 
 - (void) populateMapPins:(BOOL)centerMap;
 
@@ -43,28 +46,27 @@
 
 @implementation LocationTableViewController
 
-@synthesize cancelButton, doneButton, refreshButton;
-@synthesize incident, location, latitude, longitude, currentLatitude, currentLongitude;
-@synthesize mapView, viewMode, containerView;
-
-typedef enum {
-	TableSectionNewLocation,
-	TableSectionExistingLocations
-} TableSection;
-
-typedef enum {
-	ViewModeTable,
-	ViewModeMap
-} ViewMode;
+@synthesize cancelButton, doneButton;
+@synthesize incident, location, locations;
+@synthesize latitude, longitude;
+@synthesize currentLatitude, currentLongitude;
 
 #pragma mark -
 #pragma mark Handlers
 
+- (IBAction) locate:(id)sender {
+    DLog(@"");
+    [self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
+    [[Locator sharedLocator] detectLocationForDelegate:self];
+}
+
 - (IBAction) cancel:(id)sender {
+    DLog(@"");
 	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction) done:(id)sender {
+    DLog(@"");
 	[self setEditing:NO];
 	self.incident.location = self.location;
 	self.incident.latitude = self.latitude;
@@ -72,70 +74,41 @@ typedef enum {
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction) viewModeChanged:(id)sender {
-	if (self.viewMode.selectedSegmentIndex == ViewModeTable) {
-		DLog(@"ViewModeTable");
-		CGRect rect = self.containerView.frame;
-		rect.origin = CGPointMake(0, 0);
-		self.tableView.frame = rect;
-		[UIView beginAnimations:@"ViewModeTable" context:nil];
-		[UIView setAnimationDuration:0.6];
-		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.containerView cache:YES];
-		[self.mapView removeFromSuperview];
-		[self.containerView addSubview:self.tableView];
-		[UIView commitAnimations];
-		[self.tableView reloadData];
-	}
-	else if (self.viewMode.selectedSegmentIndex == ViewModeMap) {
-		DLog(@"ViewModeMap");
-		CGRect rect = self.containerView.frame;
-		rect.origin = CGPointMake(0, 0);
-		self.mapView.frame = rect;
-		[UIView beginAnimations:@"ViewModeMap" context:nil];
-		[UIView setAnimationDuration:0.6];
-		[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.containerView cache:YES];
-		[self.tableView removeFromSuperview];
-		[self.containerView addSubview:self.mapView];
-		[UIView commitAnimations];
-		[self populateMapPins:YES];
-	}
-}
-
 - (void) populateMapPins:(BOOL)centerMap {
+    DLog(@"Center:%d", centerMap);
 	[self.mapView removeAllPins];
-	for (Location *theLocation in self.allRows) {
-		MapAnnotation *mapAnnotation = [self.mapView addPinWithTitle:theLocation.name 
-															subtitle:theLocation.coordinates 
-															latitude:theLocation.latitude 
-														   longitude:theLocation.longitude
-															  object:theLocation
+    MapAnnotation *selected = nil;
+	for (Location *loc in self.locations) {
+		MapAnnotation *mapAnnotation = [self.mapView addPinWithTitle:loc.name 
+															subtitle:loc.coordinates 
+															latitude:loc.latitude 
+														   longitude:loc.longitude
+															  object:loc
 															pinColor:MKPinAnnotationColorRed];
-		if (centerMap && self.incident.userLocation == NO &&
-			[theLocation.name isEqualToString:self.location] &&
-			[theLocation.latitude isEqualToString:self.latitude] &&
-			[theLocation.longitude isEqualToString:self.longitude]) {
-			[self.mapView centerAtCoordinate:mapAnnotation.coordinate withDelta:0.4 animated:NO];
-			[self.mapView selectAnnotation:mapAnnotation animated:NO];
+		if (self.incident.userLocation == NO &&
+			[loc.name isEqualToString:self.location] &&
+			[loc.latitude isEqualToString:self.latitude] &&
+			[loc.longitude isEqualToString:self.longitude]) {
+            selected = mapAnnotation;
 		}
 	}
 	if (self.currentLatitude != nil && self.currentLongitude != nil) {
-		MapAnnotation *mapAnnotation = [self.mapView addPinWithTitle:NSLocalizedString(@"Current Location", nil) 
-															subtitle:[NSString stringWithFormat:@"%@, %@", self.currentLatitude, self.currentLongitude] 
-															latitude:self.currentLatitude
-														   longitude:self.currentLongitude
-															  object:nil
-															pinColor:MKPinAnnotationColorGreen];
-		if (centerMap && self.incident.userLocation) {
-			[self.mapView centerAtCoordinate:mapAnnotation.coordinate withDelta:0.4 animated:NO];
-			[self.mapView selectAnnotation:mapAnnotation animated:NO];
+		MapAnnotation *userAnnotation = [self.mapView addPinWithTitle:NSLocalizedString(@"Current Location", nil) 
+                                                             subtitle:[NSString stringWithFormat:@"%@, %@", self.currentLatitude, self.currentLongitude] 
+                                                             latitude:self.currentLatitude
+                                                            longitude:self.currentLongitude
+                                                               object:nil
+                                                             pinColor:MKPinAnnotationColorGreen];
+		if (self.incident.userLocation) {
+			selected = userAnnotation;
 		}
 	}
-}
-
-- (IBAction) locate:(id)sender {
-	[self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
-	self.refreshButton.enabled = NO;
-	[[Locator sharedLocator] detectLocationForDelegate:self];
+    if (selected != nil) {
+        if (centerMap) {
+            [self.mapView centerAtCoordinate:selected.coordinate withDelta:0.4 animated:NO];
+        }
+        [self.mapView selectAnnotation:selected animated:NO];   
+    }
 }
 
 #pragma mark -
@@ -143,11 +116,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.toolBar.tintColor = [[Settings sharedSettings] toolBarTintColor];
-	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search locations...", nil)];
-	[self setHeader:NSLocalizedString(@"New Location", nil) atSection:TableSectionNewLocation];
-	[self setHeader:NSLocalizedString(@"Existing Location", nil) atSection:TableSectionExistingLocations];
-	[self.containerView addSubview:self.tableView];
+    self.locations = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -155,18 +124,24 @@ typedef enum {
 	self.location = self.incident.location;
 	self.latitude = self.incident.latitude;
 	self.longitude = self.incident.longitude;
-	self.currentLatitude = [[Locator sharedLocator] latitude];
+    self.currentLatitude = [[Locator sharedLocator] latitude];
 	self.currentLongitude = [[Locator sharedLocator] longitude];
-	[self.allRows removeAllObjects];
-	[self.filteredRows removeAllObjects];
-	[self.allRows addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsForDelegate:self]];
-	[self.filteredRows addObjectsFromArray:self.allRows];
-	if (self.viewMode.selectedSegmentIndex == ViewModeTable) {
-		[self.tableView reloadData];
-	}
-	else if (self.viewMode.selectedSegmentIndex == ViewModeMap) {
-		[self populateMapPins:YES];
-	}
+    if (self.currentLatitude == nil && self.currentLongitude == nil) {
+        [self.loadingView showWithMessage:NSLocalizedString(@"Locating...", nil)];
+        [[Locator sharedLocator] detectLocationForDelegate:self];
+    }
+    [self.locations removeAllObjects];
+    if ([[Ushahidi sharedUshahidi] hasLocations]) {
+        [self.locations addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocations]];
+    }
+    else {
+        [self.locations addObjectsFromArray:[[Ushahidi sharedUshahidi] getLocationsForDelegate:self]];
+    }
+    [self populateMapPins:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -176,160 +151,33 @@ typedef enum {
 - (void)dealloc {
 	[cancelButton release];
 	[doneButton release];
-	[refreshButton release];
 	[incident release];
 	[location release];
 	[currentLatitude release];
 	[currentLongitude release];
-	[mapView release];
-	[viewMode release];
-	[containerView release];
+    [locations release];
     [super dealloc];
 }
 
 #pragma mark -
-#pragma mark UITableView
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
-	if (section == TableSectionNewLocation) {
-		return 1;
-	}
-	return self.filteredRows.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	CheckBoxTableCell *cell = [TableCellFactory getCheckBoxTableCellForDelegate:self table:theTableView indexPath:indexPath];
-	if (indexPath.section == TableSectionNewLocation) {
-		[cell setTitle:NSLocalizedString(@"Current Location", nil)];
-		if (self.currentLatitude != nil &&  self.currentLongitude != nil) {
-			[cell setDescription:[NSString stringWithFormat:@"%@, %@", self.currentLatitude, self.currentLongitude]];	
-		}
-		else {
-			[cell setDescription:NSLocalizedString(@"Locating...", nil)];
-		}
-		if (self.incident.userLocation) {
-			[cell setChecked:YES];
-		}
-		else {
-			[cell setChecked:NO];
-		}
-	}
-	else {
-		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
-		if (theLocation != nil) {
-			[cell setTitle:theLocation.name];	
-			[cell setDescription:theLocation.coordinates];
-			[cell setChecked:[theLocation equals:self.location
-										latitude:self.latitude
-									   longitude:self.longitude]];
-		}
-		else {
-			[cell setTitle:nil];
-			[cell setDescription:nil];
-			[cell setChecked:NO];
-		}	
-	}
-	return cell;
-}
-
-- (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[theTableView deselectRowAtIndexPath:indexPath animated:YES];
-	CheckBoxTableCell *cell = (CheckBoxTableCell *)[theTableView cellForRowAtIndexPath:indexPath];
-	if (cell.checked) {
-		[cell setChecked:NO];
-		self.location = nil;
-		self.latitude = nil;
-		self.longitude = nil;
-	}
-	else {
-		[cell setChecked:YES];
-		if (indexPath.section == TableSectionNewLocation) {
-			self.location = [[Locator sharedLocator] address];
-			self.latitude = self.currentLatitude;
-			self.longitude = self.currentLongitude;
-			self.incident.userLocation = YES;
-		}
-		else {
-			Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
-			self.location = theLocation.name;
-			self.latitude = theLocation.latitude;
-			self.longitude = theLocation.longitude;	
-			self.incident.userLocation = NO;
-		}
-	}
-	[self.tableView reloadData];
-}
-
-#pragma mark -
-#pragma mark CheckBoxTableCellDelegate
-
-- (void) checkBoxTableCellChanged:(CheckBoxTableCell *)cell index:(NSIndexPath *)indexPath checked:(BOOL)checked {
-	if (indexPath.section == TableSectionNewLocation) {
-		DLog(@"location:%@", [[Locator sharedLocator] address]);
-		if (checked) {
-			self.location = [[Locator sharedLocator] address];
-			self.latitude = self.currentLatitude;
-			self.longitude = self.currentLongitude;
-			self.incident.userLocation = YES;
-		}
-	}
-	else {
-		Location *theLocation = (Location *)[self filteredRowAtIndexPath:indexPath];
-		DLog(@"location:%@ index:[%d, %d] checked:%d", theLocation.name, indexPath.section, indexPath.row, checked)
-		if (checked) {
-			self.location = theLocation.name;
-			self.latitude = theLocation.latitude;
-			self.longitude = theLocation.longitude;
-			self.incident.userLocation = NO;
-		}
-	}
-	[self.tableView reloadData];
-}
-
-#pragma mark -
-#pragma mark UISearchBarDelegate
-
-- (void) filterRows:(BOOL)reloadTable {
-	[self.filteredRows removeAllObjects];
-	NSString *searchText = [self getSearchText];
-	for (Location *theLocation in self.allRows) {
-		if ([theLocation matchesString:searchText]) {
-			[self.filteredRows addObject:theLocation];
-		}
-	}
-	DLog(@"Re-Adding Rows");
-	if (reloadTable) {
-		[self.tableView reloadData];	
-		[self.tableView flashScrollIndicators];
-	}
-} 
-
-#pragma mark -
 #pragma mark UshahidiDelegate
 
-- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations error:(NSError *)error hasChanges:(BOOL)hasChanges {
-	if (error != nil) {
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)theLocations error:(NSError *)error hasChanges:(BOOL)hasChanges {
+    if (error != nil) {
 		DLog(@"error: %@", [error localizedDescription]);
-		if ([self.allRows count] == 0) {
-			[self.alertView showOkWithTitle:@"Server Error" andMessage:[error localizedDescription]];
+		if (self.locations.count == 0) {
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Server Error", nil) andMessage:[error localizedDescription]];
 		}
 	}
 	else if (hasChanges) {
-		DLog(@"locations: %@", locations);
-		[self.allRows removeAllObjects];
-		[self.filteredRows removeAllObjects];
-		[self.allRows addObjectsFromArray:locations];
-		[self.filteredRows addObjectsFromArray:self.allRows];
-		[self.tableView reloadData];
-		[self.tableView flashScrollIndicators];
-	}
+		DLog(@"locations: %d", theLocations.count);
+        [self.locations removeAllObjects];
+        [self.locations addObjectsFromArray:theLocations];
+    }
 	else {
-		DLog(@"No Changes");
+		DLog(@"No Changes: %d", theLocations.count);
 	}
+    [self populateMapPins:NO];
 }
 
 #pragma mark -
@@ -343,20 +191,13 @@ typedef enum {
 	self.longitude = userLongitude;
 	self.currentLatitude = userLatitude;
 	self.currentLongitude = userLongitude;
-	if (self.viewMode.selectedSegmentIndex == ViewModeTable) {
-		[self.tableView reloadData];
-	}
-	else if (self.viewMode.selectedSegmentIndex == ViewModeMap) {
-		[self populateMapPins:YES];
-	}
-	self.refreshButton.enabled = YES;
+	[self populateMapPins:YES];
 }
 
 - (void) locatorFailed:(Locator *)locator error:(NSError *)error {
 	DLog(@"error: %@", [error localizedDescription]);
 	[self.loadingView showWithMessage:NSLocalizedString(@"Location Error", )];
 	[self.loadingView hideAfterDelay:1.5];
-	self.refreshButton.enabled = YES;
 }
 
 - (void) lookupFinished:(Locator *)locator address:(NSString *)address {

@@ -147,6 +147,9 @@ typedef enum {
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+    if (animated) {
+        [[Settings sharedSettings] setLastDeployment:nil];
+    }
     [self.tableView flashScrollIndicators];
 }
 

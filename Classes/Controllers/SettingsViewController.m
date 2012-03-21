@@ -356,7 +356,7 @@ typedef enum {
 		}
 		else if (indexPath.row == TableRowAppWebsite) {
 			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
-			[cell setText:[[Settings sharedSettings] appStoreURL]];
+			[cell setText:[[Settings sharedSettings] supportURL]];
 			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			cell.selectionStyle = UITableViewCellSelectionStyleGray;
 			return cell;

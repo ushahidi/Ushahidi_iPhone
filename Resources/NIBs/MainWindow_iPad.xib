@@ -48,6 +48,7 @@
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -465,15 +466,7 @@
 			</object>
 			<object class="IBUIViewController" id="920892568">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="658501258">
-					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="203014307">
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">location.png</string>
-						</object>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIStyle">1</int>
-						<reference key="IBUINavigationItem" ref="658501258"/>
-					</object>
+					<reference key="IBUINavigationBar"/>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				</object>
 				<string key="IBUINibName">MapViewController_iPad</string>
@@ -1223,14 +1216,6 @@
 					<int key="connectionID">161</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">locate:event:</string>
-						<reference key="source" ref="203014307"/>
-						<reference key="destination" ref="920892568"/>
-					</object>
-					<int key="connectionID">228</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">nextPrevious</string>
 						<reference key="source" ref="809644881"/>
@@ -1509,7 +1494,6 @@
 						<reference key="object" ref="658501258"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="203014307"/>
 						</object>
 						<reference key="parent" ref="920892568"/>
 					</object>
@@ -1689,11 +1673,6 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">131</int>
-						<reference key="object" ref="203014307"/>
-						<reference key="parent" ref="658501258"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">133</int>
 						<reference key="object" ref="809644881"/>
 						<object class="NSMutableArray" key="children">
@@ -1866,7 +1845,6 @@
 					<string>12.IBPluginDependency</string>
 					<string>13.CustomClassName</string>
 					<string>13.IBPluginDependency</string>
-					<string>131.IBPluginDependency</string>
 					<string>133.CustomClassName</string>
 					<string>133.IBPluginDependency</string>
 					<string>134.IBPluginDependency</string>
@@ -1953,7 +1931,6 @@
 					<string>DeploymentAddViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>IncidentTabViewController</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>CheckinDetailsViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -3483,7 +3460,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">LocationTableViewController</string>
-					<string key="superclassName">BaseTableViewController</string>
+					<string key="superclassName">BaseMapViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -3491,11 +3468,9 @@
 							<string>cancel:</string>
 							<string>done:</string>
 							<string>locate:</string>
-							<string>viewModeChanged:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -3508,7 +3483,6 @@
 							<string>cancel:</string>
 							<string>done:</string>
 							<string>locate:</string>
-							<string>viewModeChanged:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3524,10 +3498,6 @@
 								<string key="name">locate:</string>
 								<string key="candidateClassName">id</string>
 							</object>
-							<object class="IBActionInfo">
-								<string key="name">viewModeChanged:</string>
-								<string key="candidateClassName">id</string>
-							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
@@ -3535,20 +3505,12 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
-							<string>containerView</string>
 							<string>doneButton</string>
-							<string>mapView</string>
-							<string>refreshButton</string>
-							<string>viewMode</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIBarButtonItem</string>
-							<string>UIView</string>
 							<string>UIBarButtonItem</string>
-							<string>MKMapView</string>
-							<string>UIBarButtonItem</string>
-							<string>UISegmentedControl</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -3556,11 +3518,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>cancelButton</string>
-							<string>containerView</string>
 							<string>doneButton</string>
-							<string>mapView</string>
-							<string>refreshButton</string>
-							<string>viewMode</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3569,24 +3527,8 @@
 								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">containerView</string>
-								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
 								<string key="name">doneButton</string>
 								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">mapView</string>
-								<string key="candidateClassName">MKMapView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">refreshButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">viewMode</string>
-								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 						</object>
 					</object>
@@ -3960,7 +3902,6 @@
 				<string>arrow_previous.png</string>
 				<string>arrow_up.png</string>
 				<string>filter.png</string>
-				<string>location.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3969,7 +3910,6 @@
 				<string>{7, 14}</string>
 				<string>{15, 13}</string>
 				<string>{18, 20}</string>
-				<string>{18, 18}</string>
 			</object>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>

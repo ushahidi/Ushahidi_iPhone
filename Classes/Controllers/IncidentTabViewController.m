@@ -138,7 +138,10 @@
     [self populateWithFilter:self.filter];
 	
     self.filterButton.enabled = self.filters.count > 0;
-    DLog(@"Categories:%d", [self.filters count]);
+    DLog(@"Categories:%d", [self.filters count]);    
+    if (animated) {
+        [[Settings sharedSettings] setLastIncident:nil];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {

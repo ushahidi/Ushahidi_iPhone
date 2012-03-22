@@ -63,4 +63,4 @@ Optionally you can edit the Twitter API information, sign Up for a [Twitter Dev 
 * USHTwitterApiKey: your Twitter API key
 * USHTwitterApiSecret: your Twitter API secret
 
-You should now be able to deploy your white-labelled version of the app to the Simulator for testing, enjoy!
+You should now be able to deploy your white-labelled version of the app to the Simulator for testing, enjoy!!

@@ -19,12 +19,10 @@ For more information visit:
 * Duplicate the /Themes/Ushahidi folder with the name of your map as folder name (ex /Themes/MapATL)
 * Replace each image in the folder with your own custom graphic, maintaining the image dimensions and filenames
 * In XCode, on your new theme folder (ex /Themes/MapATL) Right-Click > Get Info > Targets tab, uncheck Ushahidi and check your new target (ex MapATL)
-* Duplicate the Ushahidi.plist file using the name of your map as filename (ex MapATL.plist)
-* In Xcode, Right-Click target (ex MapATL) > Get Info > Targets tab, edit the Info.plist File to your new plist file (ex MapATL.plist)
-* Customize your app by editing the following properties in your plist file
+* You can now customize your app by editing the following properties in Info.plist in your new Themes folder
 
 ##### Name and identifier of your map #####
-* CFBundleIdentifier: unique indentifer of your app (ex com.ushahidi.ios.mapatl)
+* CFBundleIdentifier: unique identifier of your app (ex com.ushahidi.ios.mapatl)
 * CFBundleName: title of your application (ex MapATL)
 * CFBundleDisplayName: name of your application (ex MapATL)
 

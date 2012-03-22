@@ -23,20 +23,20 @@ For more information visit:
 * In Xcode, Right-Click target (ex MapATL) > Get Info > Targets tab, edit the Info.plist File to your new plist file (ex MapATL.plist)
 * Customize your app by editing the following properties in your plist file
 
-#### Name and identifier of your map ####
+##### Name and identifier of your map #####
 * CFBundleIdentifier: unique indentifer of your app (ex com.ushahidi.ios.mapatl)
 * CFBundleName: title of your application (ex MapATL)
 * CFBundleDisplayName: name of your application (ex MapATL)
 
-#### URL of your custom or Crowdmap deployment ####
+##### URL of your custom or Crowdmap deployment #####
 * USHMapURL: URL for your map (ex http://crime.mapatl.com)
 
-#### Email and website for your map ####
+##### Email and website for your map #####
 * USHSupportEmail: support email for your deployment (ex crime@mapatl.com)
 * USHSupportURL: website for your deployment (ex http://crime.mapatl.com)
 * USHAppStoreURL: link on App Store to download your application (ex http://itunes.apple.com/app/ushahidi-ios/id410609585)
 
-#### HEX color codes to match your map styling ####
+##### HEX color codes to match your map styling #####
 * USHNavBarColor: code for navigation bar 
 * USHSearchBarColor: code for searchbars 
 * USHToolBarColor: code for toolbars
@@ -50,16 +50,18 @@ For more information visit:
 * USHVerifiedTextColor: text color for verified label
 * USHUnverifiedTextColor: text color for unverified label
 
-#### Visibility of elements ####
+##### Visibility of elements #####
 * USHReportNewsURL: should news link be should in reports?
 
-#### Bit.ly ####
+##### Bit.ly #####
 Optionally you can edit the Bit.ly API information, sign Up for a [Bitly Account](http://bitly.com/a/sign_up), then visit [Your bitly API Key](http://bitly.com/a/your_api_key)
+
 * USHBitlyApiKey: your Bit.ly API key 
 * USHBitlyApiLogin: your Bit.ly API login 
 
-#### Twitter ####
+##### Twitter #####
 Optionally you can edit the Twitter API information, sign Up for a [Twitter Dev Account](https://dev.twitter.com/apps/new), entering your application name, description, website, organization, etc then visit [Using Twitter xAuth](https://dev.twitter.com/pages/xauth) for information on obtaining xAuth which is not enabled by default. Note, you'll need to email api@twitter.com explaining that your mobile application requires xAuth to skip the request_token and authorize steps and jump right to the access_token step.
+
 * USHTwitterApiKey: your Twitter API key
 * USHTwitterApiSecret: your Twitter API secret
 

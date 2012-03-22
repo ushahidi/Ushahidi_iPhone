@@ -296,7 +296,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
             DLog(@"Deleted: %@", [theDeployment archiveFolder]);
 		}
         NSString *url = theDeployment.url;
+        DLog(@"Remove: %@", url);
         [self.deployments removeObjectForKey:url];
+        //HACK to ensure that deployment is removed from the dictionary
+        NSMutableDictionary *otherDeployments = [NSMutableDictionary dictionaryWithCapacity:self.deployments.count-1];
+        for (Deployment *other in [self.deployments allValues]) {
+            if ([url isEqualToString:other.url] == NO) {
+                [otherDeployments setObject:other forKey:other.url];
+            }
+        }
+        self.deployments = otherDeployments;
         if (self.deployment == theDeployment) {
             [self.deployment purge];
             self.deployment = nil;

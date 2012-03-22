@@ -183,6 +183,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	if (self.deployment != nil) {
 		[self.deployment archive];
 	}
+    for (Deployment *toArchive in [self.deployments allValues]) {
+        DLog(@"Deployment:%@", toArchive.name);
+    }
 	[NSKeyedArchiver archiveObject:self.deployments forKey:@"deployments"];
 	if (self.maps != nil) {
 		[NSKeyedArchiver archiveObject:self.maps forKey:@"maps"];
@@ -263,16 +266,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 }
 
 - (BOOL)addDeployment:(Deployment *)theDeployment {
-	if (theDeployment != nil) {
-		[self.deployments setObject:theDeployment forKey:theDeployment.url];
+    if (theDeployment != nil) {
+        DLog(@"%@", theDeployment.url);
+        [self.deployments setObject:theDeployment forKey:theDeployment.url];
 		if ([[NSFileManager defaultManager] fileExistsAtPath:[theDeployment archiveFolder]] == NO) {
 			NSError *error = nil;
-			BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:[theDeployment archiveFolder] 
-													 withIntermediateDirectories:YES 
-																	  attributes:nil 
-																		   error:&error];
-			if (!success || error) {
-				DLog(@"Add Directory Error: %@", [error localizedDescription]);
+			if (![[NSFileManager defaultManager] createDirectoryAtPath:[theDeployment archiveFolder] 
+                                           withIntermediateDirectories:YES 
+                                                            attributes:nil 
+                                                                 error:&error]) {
+				DLog(@"Error: %@", [error localizedDescription]);
 				return NO;
 			}
 		}
@@ -283,24 +286,22 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (BOOL)removeDeployment:(Deployment *)theDeployment {
     if (theDeployment != nil) {
-        [self.deployments removeObjectForKey:theDeployment.url];
-		if ([[NSFileManager defaultManager] fileExistsAtPath:[theDeployment archiveFolder]]) {
-			NSError *error = nil;
-			for (NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[theDeployment archiveFolder] error:&error]) {
-				NSString *filePath = [[theDeployment archiveFolder] stringByAppendingPathComponent:file];
-				DLog(@"Deleting %@", filePath);
-				BOOL success = [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
-				if (!success || error) {
-					DLog(@"Remove Directory Error: %@", [error localizedDescription]);
-					return NO;
-				}
-			}
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[theDeployment archiveFolder]]) {
+			DLog(@"Deleting: %@", [theDeployment archiveFolder]);
+            NSError *error;
+            if (![[NSFileManager defaultManager] removeItemAtPath:[theDeployment archiveFolder] error:&error]) {
+                DLog(@"Error: %@", [error localizedDescription]);
+                return NO;
+            }
+            DLog(@"Deleted: %@", [theDeployment archiveFolder]);
 		}
+        NSString *url = theDeployment.url;
+        [self.deployments removeObjectForKey:url];
         if (self.deployment == theDeployment) {
             [self.deployment purge];
             self.deployment = nil;
         }
-		return YES;
+        return YES;
 	}
 	return NO;
 }
@@ -311,10 +312,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 - (NSArray *) getDeploymentsUsingSorter:(SEL)sorter {
 	if ([self.deployments count] == 0) {
-		Deployment *demoDeployment = [[Deployment alloc] initWithName:NSLocalizedString(@"Ushahidi Demo", nil) 
-																  url:@"http://demo.ushahidi.com"];
-		[self addDeployment:demoDeployment];
-		[demoDeployment release];
+		Deployment *demo = [[Deployment alloc] initWithName:NSLocalizedString(@"Ushahidi Demo", nil) 
+                                                        url:@"http://demo.ushahidi.com"];
+		[self addDeployment:demo];
+		[demo release];
 	}
 	return [[self.deployments allValues] sortedArrayUsingSelector:sorter];
 }

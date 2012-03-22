@@ -81,7 +81,7 @@
 }
 
 - (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay animated:(BOOL)animated {
-	DLog(@"message:%@ delay:%.2f", message, delay);
+	//DLog(@"message:%@ delay:%.2f", message, delay);
 	if ([NSThread isMainThread]) {
 		if (self.view.superview == nil) {
 			[self.controller.view performSelector:@selector(addSubview:) withObject:self.view afterDelay:delay];
@@ -119,10 +119,10 @@
 
 - (void) hideAfterDelay:(NSTimeInterval)delay {
 	if (self.activityIndicatorLabel.text) {
-		DLog(@"message:%@ delay:%.2f", self.activityIndicatorLabel.text, delay);
+		//DLog(@"message:%@ delay:%.2f", self.activityIndicatorLabel.text, delay);
 	}
 	else {
-		DLog(@"delay:%.2f", delay);
+		//DLog(@"delay:%.2f", delay);
 	}
 	if ([NSThread isMainThread]) {
 		[self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:delay];

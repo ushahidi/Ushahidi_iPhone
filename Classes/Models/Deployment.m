@@ -79,6 +79,7 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
+    DLog(@"%@", self.domain);
 	[encoder encodeObject:self.identifier forKey:@"identifier"];
 	[encoder encodeObject:self.name forKey:@"name"];
 	[encoder encodeObject:self.description forKey:@"description"];
@@ -135,6 +136,7 @@
 }
 
 - (void) purge {
+    DLog(@"%@", self.domain);
 	[self.categories removeAllObjects];
 	[self.locations removeAllObjects];
 	[self.incidents removeAllObjects];
@@ -203,6 +205,7 @@
 }
 
 - (void)dealloc {
+    DLog(@"%@", self.domain);
 	[identifier release];
 	[name release];
 	[url release];

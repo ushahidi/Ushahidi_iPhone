@@ -260,7 +260,6 @@ typedef enum {
             if ([[Ushahidi sharedUshahidi] removeDeployment:deployment]) {
 				[self.loadingView showWithMessage:NSLocalizedString(@"Removed", nil)];
 				[self.loadingView hideAfterDelay:1.0];
-				DLog(@"Removed Deployment");
 				[self.allRows removeObject:deployment];
 				[self.filteredRows removeObject:deployment];
                 if ([Device isIPad] && isCurrentDeployment) {
@@ -268,11 +267,7 @@ typedef enum {
                         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
                         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
                         [self.loadingView showWithMessage:NSLocalizedString(@"Loading...", nil)];
-                        [[Ushahidi sharedUshahidi] loadDeployment:[self.filteredRows objectAtIndex:0] 
-                                                      forDelegate:self];
-                    }
-                    else {
-                        //TODO load default view
+                        [[Ushahidi sharedUshahidi] loadDeployment:[self.filteredRows objectAtIndex:0] forDelegate:self];
                     }
                 }
                 [self.tableView setEditing:NO animated:YES];

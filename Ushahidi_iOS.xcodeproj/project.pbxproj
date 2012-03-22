@@ -6657,6 +6657,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6670,7 +6671,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C40D90D0-9B21-401B-80D9-9A79F0D2FA78";
+				PROVISIONING_PROFILE = "49D72CB1-AA98-46FD-A286-7C3B9164C714";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "49D72CB1-AA98-46FD-A286-7C3B9164C714";
 			};
 			name = Debug;
 		};
@@ -6679,6 +6681,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6690,7 +6693,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C40D90D0-9B21-401B-80D9-9A79F0D2FA78";
+				PROVISIONING_PROFILE = "C541F582-F0F3-4C19-B12C-4161051FF331";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C541F582-F0F3-4C19-B12C-4161051FF331";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -6700,6 +6704,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6713,7 +6718,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F9ABC6E-3794-4987-B325-30D887B26CCF";
+				PROVISIONING_PROFILE = "B0589BC0-7829-4D96-A652-BCA18C42B207";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B0589BC0-7829-4D96-A652-BCA18C42B207";
 			};
 			name = Debug;
 		};
@@ -6722,6 +6728,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6733,7 +6740,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9F9ABC6E-3794-4987-B325-30D887B26CCF";
+				PROVISIONING_PROFILE = "B0589BC0-7829-4D96-A652-BCA18C42B207";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B0589BC0-7829-4D96-A652-BCA18C42B207";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -6742,7 +6750,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6754,7 +6763,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4BB75577-5B6D-4ED5-9F46-85D121A1912B";
+				PROVISIONING_PROFILE = "6967B503-479F-4BB3-8944-CB0C126973A0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6967B503-479F-4BB3-8944-CB0C126973A0";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -6763,7 +6773,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6775,6 +6786,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
+				PROVISIONING_PROFILE = "8D1E812A-9B4C-4315-85E1-895F2CF43E0E";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8D1E812A-9B4C-4315-85E1-895F2CF43E0E";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6785,6 +6797,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6798,7 +6811,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Inherity;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7315306B-4232-407B-9DC6-0D864C618DDC";
+				PROVISIONING_PROFILE = "E6B893A0-3124-4407-B146-2E64822096BC";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E6B893A0-3124-4407-B146-2E64822096BC";
 			};
 			name = Debug;
 		};
@@ -6807,6 +6821,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6818,7 +6833,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Inherity;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7315306B-4232-407B-9DC6-0D864C618DDC";
+				PROVISIONING_PROFILE = "E6B893A0-3124-4407-B146-2E64822096BC";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E6B893A0-3124-4407-B146-2E64822096BC";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -6827,7 +6843,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6839,7 +6856,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Inherity;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2CD4E2AF-A842-4C63-A9A6-FA098826B976";
+				PROVISIONING_PROFILE = "5CA2CBCB-1FE6-4390-A427-F1D563B1B18E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5CA2CBCB-1FE6-4390-A427-F1D563B1B18E";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -6848,7 +6866,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6860,6 +6879,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Inherity;
+				PROVISIONING_PROFILE = "C93D46C4-4499-48CC-BACE-E757854A2ABA";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C93D46C4-4499-48CC-BACE-E757854A2ABA";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6869,7 +6889,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6891,7 +6911,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6912,7 +6932,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6933,7 +6953,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6954,7 +6974,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6968,6 +6989,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = TEDxMap;
+				PROVISIONING_PROFILE = "5E230712-42CC-4377-90EC-093E0293BE93";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E230712-42CC-4377-90EC-093E0293BE93";
 			};
 			name = Debug;
@@ -6976,7 +6998,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -6988,6 +7011,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = TEDxMap;
+				PROVISIONING_PROFILE = "5E230712-42CC-4377-90EC-093E0293BE93";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5E230712-42CC-4377-90EC-093E0293BE93";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6997,7 +7021,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7009,6 +7034,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = TEDxMap;
+				PROVISIONING_PROFILE = "95EEF8D7-17D5-4912-92A5-DCA0DD13A758";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "89F3BCC9-240A-4818-A5EA-629608EA536C";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -7018,7 +7044,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7039,7 +7065,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -7061,7 +7087,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7082,7 +7108,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7103,7 +7129,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7125,6 +7151,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -7138,7 +7165,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F7AB0048-5A92-4683-A49A-01DFDF83EE11";
+				PROVISIONING_PROFILE = "CD713345-A5A6-4BAE-A8BF-A5BF19D5A1C6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CD713345-A5A6-4BAE-A8BF-A5BF19D5A1C6";
 			};
 			name = Debug;
 		};
@@ -7147,6 +7175,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7158,7 +7187,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F7AB0048-5A92-4683-A49A-01DFDF83EE11";
+				PROVISIONING_PROFILE = "CD713345-A5A6-4BAE-A8BF-A5BF19D5A1C6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CD713345-A5A6-4BAE-A8BF-A5BF19D5A1C6";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -7167,7 +7197,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
@@ -7180,8 +7210,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				PROVISIONING_PROFILE = "D90F10DA-FCCE-4DF5-90A1-78EE8FF339FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D90F10DA-FCCE-4DF5-90A1-78EE8FF339FB";
+				PROVISIONING_PROFILE = "FCADF99D-9CEE-480B-9081-9D8407CFE028";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FCADF99D-9CEE-480B-9081-9D8407CFE028";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -7190,7 +7220,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7202,7 +7233,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AC8C3F71-CA2C-4777-8B09-25C29B53A149";
+				PROVISIONING_PROFILE = "FCADF99D-9CEE-480B-9081-9D8407CFE028";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FCADF99D-9CEE-480B-9081-9D8407CFE028";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -7234,7 +7266,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
@@ -7247,8 +7279,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi_iOS;
-				PROVISIONING_PROFILE = "FC0E9135-95C9-414C-8E0F-84E9AAFC226A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FC0E9135-95C9-414C-8E0F-84E9AAFC226A";
+				PROVISIONING_PROFILE = "95EEF8D7-17D5-4912-92A5-DCA0DD13A758";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "95EEF8D7-17D5-4912-92A5-DCA0DD13A758";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -7280,7 +7312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
@@ -7303,7 +7335,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -7317,7 +7350,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MapATL;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "552A0078-9A20-4A5B-A9F4-20DDA9CF615D";
+				PROVISIONING_PROFILE = "34422083-1FB8-44E4-9479-275EED2B2380";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34422083-1FB8-44E4-9479-275EED2B2380";
 			};
 			name = Debug;
 		};
@@ -7325,7 +7359,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7337,7 +7372,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MapATL;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "552A0078-9A20-4A5B-A9F4-20DDA9CF615D";
+				PROVISIONING_PROFILE = "34422083-1FB8-44E4-9479-275EED2B2380";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "34422083-1FB8-44E4-9479-275EED2B2380";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -7346,7 +7382,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7358,7 +7395,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MapATL;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CF503B4C-75C0-451A-BFBF-744502C20446";
+				PROVISIONING_PROFILE = "42974A53-2C3E-486A-9532-BEE585853F47";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42974A53-2C3E-486A-9532-BEE585853F47";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -7367,7 +7405,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/SandBox/Ushahidi_iOS/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7379,6 +7418,7 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MapATL;
+				PROVISIONING_PROFILE = "7B8AE39E-9C63-4DAF-B27E-73E97EB54DC1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7B8AE39E-9C63-4DAF-B27E-73E97EB54DC1";
 				VALIDATE_PRODUCT = YES;
 			};

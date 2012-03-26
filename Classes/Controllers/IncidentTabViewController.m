@@ -198,11 +198,8 @@
 								 andMessage:[error localizedDescription]];
 		}
 		else if ([error code] == NoInternetConnection) {
-			if ([self.loadingView isShowing]) {
-				[self.loadingView hide];
-				[self.alertView showOkWithTitle:NSLocalizedString(@"No Internet", nil) 
-									 andMessage:[error localizedDescription]];
-			}
+			[self.loadingView showWithMessage:NSLocalizedString(@"No Internet", nil)];
+            [self.loadingView hideAfterDelay:3.5];
 		}
 		else if ([self.loadingView isShowing]){
 			[self.loadingView hide];

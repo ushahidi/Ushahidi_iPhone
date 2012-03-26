@@ -26,7 +26,7 @@
 @property (nonatomic, retain) UIViewController *controller;
 
 - (void) removeFromSuperview;
-
+- (void) removeFromSuperviewAfterDelay:(NSNumber*)delay;
 @end
 
 
@@ -81,7 +81,6 @@
 }
 
 - (void) showWithMessage:(NSString *)message afterDelay:(NSTimeInterval)delay animated:(BOOL)animated {
-	//DLog(@"message:%@ delay:%.2f", message, delay);
 	if ([NSThread isMainThread]) {
 		if (self.view.superview == nil) {
 			[self.controller.view performSelector:@selector(addSubview:) withObject:self.view afterDelay:delay];
@@ -118,22 +117,20 @@
 }
 
 - (void) hideAfterDelay:(NSTimeInterval)delay {
-	if (self.activityIndicatorLabel.text) {
-		//DLog(@"message:%@ delay:%.2f", self.activityIndicatorLabel.text, delay);
+    if ([NSThread isMainThread]) {
+        [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:delay];
 	}
 	else {
-		//DLog(@"delay:%.2f", delay);
-	}
-	if ([NSThread isMainThread]) {
-		[self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:delay];
-	}
-	else {
-		[self performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
-	}
+        [self performSelectorOnMainThread:@selector(removeFromSuperviewAfterDelay:) withObject:[NSNumber numberWithFloat:delay] waitUntilDone:NO];
+    }
+}
+
+- (void) removeFromSuperviewAfterDelay:(NSNumber*)delay {
+    [self performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:[delay floatValue]];
 }
 
 - (void) removeFromSuperview {
-	[UIView beginAnimations:@"RemoveFromSuperView" context:nil];
+    [UIView beginAnimations:@"RemoveFromSuperView" context:nil];
 	[UIView setAnimationDuration:0.3];
 	self.view.alpha = 0.0;
 	[UIView commitAnimations];

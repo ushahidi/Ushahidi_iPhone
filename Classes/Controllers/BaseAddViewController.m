@@ -22,6 +22,10 @@
 #import "BaseViewController.h"
 #import "LoadingViewController.h"
 
+@interface BaseAddViewController()
+
+@end
+
 @implementation BaseAddViewController
 
 @synthesize cancelButton;
@@ -35,6 +39,10 @@
 
 - (IBAction) done:(id)sender {
     DLog(@"");
+}
+
+- (void) load:(NSObject*)item {
+    //child will provide implementation
 }
 
 #pragma mark - UIViewController

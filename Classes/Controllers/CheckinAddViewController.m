@@ -60,6 +60,14 @@ typedef enum {
 #pragma mark -
 #pragma mark Handlers
 
+- (void) setItem:(NSObject *)item {
+    self.checkin = (Checkin *)item;
+}
+
+- (NSObject*) item {
+    return self.checkin;
+}
+
 - (IBAction) cancel:(id)sender {
 	DLog(@"");
 	self.checkin = nil;
@@ -123,7 +131,6 @@ typedef enum {
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self.alertView showInfoOnceOnly:NSLocalizedString(@"To checkin, drag the map pin to a more accurate location, then click the Send button after entering an optional message, contact information and photo.", nil)];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {

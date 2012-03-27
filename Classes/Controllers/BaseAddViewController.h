@@ -26,6 +26,7 @@
 @public
     UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;
+    
 }
 
 @property(nonatomic, retain) IBOutlet UIBarButtonItem *cancelButton;
@@ -33,5 +34,6 @@
 
 - (IBAction) cancel:(id)sender;
 - (IBAction) done:(id)sender;
+- (void) load:(NSObject*)item;
 
 @end

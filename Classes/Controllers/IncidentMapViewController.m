@@ -149,9 +149,10 @@
 		DLog(@"title:%@ latitude:%f longitude:%f", mapAnnotation.title, mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude);
 		Incident *incident = (Incident *)mapAnnotation.object; 
 		if (incident.pending) {
-			self.incidentAddViewController.incident = incident;
+            [self.incidentAddViewController load:incident];
             self.incidentAddViewController.modalPresentationStyle = UIModalPresentationPageSheet;
             self.incidentAddViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            self.incidentAddViewController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Reports", nil);
 			[self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
 		}
 		else {

@@ -68,6 +68,7 @@
 	DLog(@"");
 	self.baseAddViewController.modalPresentationStyle = UIModalPresentationPageSheet;
     self.baseAddViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self.baseAddViewController load:nil];
 	[self presentModalViewController:self.baseAddViewController animated:YES];
 }
 

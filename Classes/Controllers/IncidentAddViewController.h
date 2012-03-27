@@ -45,16 +45,15 @@
 	CategoryTableViewController *categoryTableViewController;
 	LocationTableViewController *locationTableViewController;
 	ImagePickerController *imagePickerController;
-	Incident *incident;
 																
 @private
 	DatePicker *datePicker;
 	NSString *news;
+    Incident *incident;
 }
 
 @property(nonatomic, retain) IBOutlet CategoryTableViewController *categoryTableViewController;
 @property(nonatomic, retain) IBOutlet LocationTableViewController *locationTableViewController;
 @property(nonatomic, retain) ImagePickerController *imagePickerController;
-@property(nonatomic, retain) Incident *incident;
 
 @end

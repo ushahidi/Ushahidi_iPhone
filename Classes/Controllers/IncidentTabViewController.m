@@ -57,6 +57,11 @@
 #pragma mark -
 #pragma mark Handlers
 
+- (IBAction) add:(id)sender event:(UIEvent*)event  {
+	DLog(@"");
+    [super add:sender event:event];
+}
+
 - (IBAction) refresh:(id)sender event:(UIEvent*)event {
 	DLog(@"");
 	self.refreshButton.enabled = NO;

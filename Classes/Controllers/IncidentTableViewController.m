@@ -242,13 +242,13 @@ typedef enum {
         }
 	}
 	else {
-		self.incidentAddViewController.incident = [self.pendingRows objectAtIndex:indexPath.row];
+        [self.incidentAddViewController load:[self.pendingRows objectAtIndex:indexPath.row]];
 		if (self.editing) {
 			[self.view endEditing:YES];
-			[self performSelector:@selector(presentModalViewController:) withObject:self.incidentAddViewController afterDelay:0.1];
+			[self.incidentTabViewController performSelector:@selector(presentModalViewController:) withObject:self.incidentAddViewController afterDelay:0.1];
 		}
 		else {
-            [self presentModalViewController:self.incidentAddViewController animated:YES];
+            [self.incidentTabViewController presentModalViewController:self.incidentAddViewController animated:YES];
         }
 	}	
 }

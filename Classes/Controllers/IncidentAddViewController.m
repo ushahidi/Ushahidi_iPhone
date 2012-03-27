@@ -46,6 +46,7 @@
 
 @property(nonatomic, retain) DatePicker *datePicker;
 @property(nonatomic, retain) NSString *news;
+@property(nonatomic, retain) Incident *incident;
 
 @end
 
@@ -90,6 +91,10 @@ typedef enum {
 #pragma mark -
 #pragma mark Handlers
 
+- (void) load:(NSObject*)item {
+    self.incident = (Incident *)item;
+}
+
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
 	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Unsaved Changes", nil) 
@@ -125,7 +130,7 @@ typedef enum {
 			[self.loadingView showWithMessage:NSLocalizedString(@"Adding...", nil)];
 		}
 		else {
-			[self.loadingView showWithMessage:NSLocalizedString(@"Saving...", nil)];
+			[self.loadingView showWithMessage:NSLocalizedString(@"Updating...", nil)];
 		}
 		if (self.news != nil && [self.news isValidURL]) {
 			[self.incident addNews:[News newsWithUrl:self.news]];
@@ -136,7 +141,7 @@ typedef enum {
 				[self.loadingView showWithMessage:NSLocalizedString(@"Added", nil)];
 			}
 			else {
-				[self.loadingView showWithMessage:NSLocalizedString(@"Saved", nil)];
+				[self.loadingView showWithMessage:NSLocalizedString(@"Updated", nil)];
 			}
 			[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:1.0];
 		}
@@ -212,6 +217,11 @@ typedef enum {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.loadingView hide];
 }
 
 - (void)dealloc {

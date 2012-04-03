@@ -88,6 +88,10 @@ typedef enum {
 	}
 }
 
+- (void) hideKeyboard {
+    [self.tableView reloadData];
+}
+
 #pragma mark -
 #pragma mark UIView
 
@@ -99,6 +103,10 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Message", nil) atSection:TableSectionMessage];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photo", nil) atSection:TableSectionPhoto];
+    
+    UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)] autorelease];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)viewDidUnload {
@@ -127,10 +135,6 @@ typedef enum {
 	}
 	[self.tableView reloadData];
 	[self.loadingView hide];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
@@ -169,8 +173,9 @@ typedef enum {
 		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setPlaceholder:NSLocalizedString(@"Enter message", nil)];
 		[cell setText:self.checkin.message];
+        [cell setReturnKeyType:UIReturnKeyDefault];
 		[cell setKeyboardType:UIKeyboardTypeDefault];
-		[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+        [cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 		[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
 		return cell;	
 	}
@@ -267,6 +272,7 @@ typedef enum {
 - (void) textViewFocussed:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath {
     DLog(@"textViewFocussed:[%d, %d]", indexPath.section, indexPath.row);
     [self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
+    DLog(@"Table:%f,%f", self.tableView.frame.size.width, self.tableView.frame.size.height);
 }
 
 - (void) textViewChanged:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
@@ -278,28 +284,9 @@ typedef enum {
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionMessage) {
 		self.checkin.message = text;
-		[cell hideKeyboard];
 	}
-	else {
-		[cell hideKeyboard];
-	}
-	[self.tableView reloadData];
-}
-
-#pragma mark -
-#pragma mark TextViewTableCellDelegate
-
-- (void) textFieldFocussed:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath {
-    DLog(@"textFieldFocussed:[%d, %d]", indexPath.section, indexPath.row);
-	[self performSelector:@selector(scrollToIndexPath:) withObject:indexPath afterDelay:0.3];
-}
-
-- (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	
-}
-
-- (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
-	[cell hideKeyboard];
+    //[cell hideKeyboard];
+    DLog(@"Table:%f,%f", self.tableView.frame.size.width, self.tableView.frame.size.height);
 }
 
 #pragma mark -

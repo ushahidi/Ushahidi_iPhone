@@ -193,13 +193,7 @@ typedef enum {
 	if (deployment != nil) {
 		[cell setTitle:deployment.name];
 		[cell setUrl:deployment.url];
-		if ([NSString isNilOrEmpty:deployment.description]) {
-			[cell setDescription:deployment.name];
-		}
-		else {
-			[cell setDescription:deployment.description];
-		}
-        if ([Device isIPad]) {
+		if ([Device isIPad]) {
             if ([[Ushahidi sharedUshahidi] isDeployment:deployment]) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
                 [theTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -224,7 +218,6 @@ typedef enum {
 	else {
 		[cell setTitle:nil];
 		[cell setUrl:nil];
-		[cell setDescription:nil];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}

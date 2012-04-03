@@ -153,6 +153,10 @@ typedef enum {
 	}
 }
 
+- (void) hideKeyboard {
+    [self.tableView reloadData];
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -173,6 +177,10 @@ typedef enum {
 	else {
 		//DO NOT SHOW 'News' HEADING
 	}
+    
+    UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)] autorelease];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)viewDidUnload {
@@ -519,7 +527,7 @@ typedef enum {
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionDescription) {
 		self.incident.description = text;
-		[cell hideKeyboard];
+		//[cell hideKeyboard];
 	}
 }
 

@@ -128,13 +128,13 @@
     if (self.willBePushed) {
         [self.loadingView show];
         self.filterButton.enabled = [self.filters count] > 0;
-        [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
         [self.filters addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
+        [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
     }
     else {
         self.filterButton.enabled = [self.filters count] > 0;
-        [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
         [self.filters addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategories]];
+        [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
     }
 	
 	[self.pendingItems removeAllObjects];
@@ -143,7 +143,6 @@
     [self populateWithFilter:self.filter];
 	
     self.filterButton.enabled = self.filters.count > 0;
-    DLog(@"Categories:%d", [self.filters count]);    
     if (animated) {
         [[Settings sharedSettings] setLastIncident:nil];
     }
@@ -152,8 +151,9 @@
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	if ([self.pendingItems count] > 0) {
-		[self.alertView showInfoOnceOnly:NSLocalizedString(@"Click the Refresh button to upload pending reports.", nil)];
-	}
+        [self.loadingView showWithMessage:NSLocalizedString(@"Uploading...", nil)];
+        [[Ushahidi sharedUshahidi] uploadIncidentsForDelegate:self];
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -181,7 +181,7 @@
 
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi categories:(NSArray *)theCategories {
 	DLog(@"Downloading Categories...");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Categories...", nil)];
+	//[self.loadingView showWithMessage:NSLocalizedString(@"Categories...", nil)];
 }
 
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations {
@@ -191,7 +191,7 @@
 
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending {
 	DLog(@"Downloading Incidents...");
-	[self.loadingView showWithMessage:NSLocalizedString(@"Incidents...", nil)];
+	[self.loadingView showWithMessage:NSLocalizedString(@"Reports...", nil)];
 }
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges {
@@ -252,10 +252,10 @@
 }
 
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error {
+    [self.loadingView hide];
     if (error != nil) {
 		DLog(@"error: %d %@", [error code], [error localizedDescription]);
 		if ([error code] > NoInternetConnection) {
-			[self.loadingView hide];
 			[self.alertView showOkWithTitle:NSLocalizedString(@"Upload Error", nil) 
 								 andMessage:[error localizedDescription]];
 		}

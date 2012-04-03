@@ -271,10 +271,16 @@
 	if ([self.headers count] > section) {
 		NSString *header = [self.headers objectForKey:[NSString stringWithFormat:@"%d", section]];
 		if (self.tableView.style == UITableViewStyleGrouped) {
-			return [TableHeaderView headerForTable:theTableView text:header textColor:[[Settings sharedSettings] tableHeaderTextColor] backgroundColor:[UIColor clearColor]];
+			return [TableHeaderView headerForTable:theTableView 
+                                              text:header 
+                                         textColor:[UIColor blackColor] 
+                                   backgroundColor:[UIColor clearColor]];
 		}
 		else {
-			return [TableHeaderView headerForTable:theTableView text:header textColor:[[Settings sharedSettings] tableHeaderTextColor] backgroundColor:[[Settings sharedSettings] tableHeaderBackColor]];
+			return [TableHeaderView headerForTable:theTableView 
+                                              text:header 
+                                         textColor:[[Settings sharedSettings] tableHeaderTextColor] 
+                                   backgroundColor:[[Settings sharedSettings] tableHeaderBackColor]];
 		}
 	}
 	return nil;

@@ -168,7 +168,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (self.view.superview != nil) {
+    DLog(@"%@", self.nibName);
+    if (self.view.superview != nil || [Device isIPhone]) {
+        //DLog(@"Register keyboardWillShow:%@", self.nibName);
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
      	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -182,6 +184,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    DLog(@"%@", self.nibName);
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -192,11 +195,12 @@
 
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
-    if (self.view.superview != nil) {
+    DLog(@"%@", self.nibName);
+    if (self.view.superview != nil || [Device isIPhone]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 	}
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 }
 

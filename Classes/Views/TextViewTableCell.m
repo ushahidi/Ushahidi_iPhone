@@ -139,7 +139,7 @@
 		if (self.delegate != NULL && [self.delegate respondsToSelector:selector]) {
 			[self.delegate textViewReturned:self indexPath:self.indexPath text:theTextView.text];
 		}
-		return NO;
+		return YES;
 	}
 	NSString *message = [theTextView.text stringByReplacingCharactersInRange:range withString:string];
 	if (self.limit == 0 || self.limit >= [message length]) {

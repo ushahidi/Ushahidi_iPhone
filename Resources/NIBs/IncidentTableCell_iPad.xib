@@ -95,9 +95,12 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
 								</object>
-								<nil key="IBUIHighlightedColor"/>
+								<object class="NSColor" key="IBUIHighlightedColor" id="644287774">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MQA</bytes>
+								</object>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">12</float>
+								<float key="IBUIMinimumFontSize">16</float>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<string key="name">Helvetica-Bold</string>
 									<string key="family">Helvetica</string>
@@ -127,19 +130,19 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC4zMzMzMzMzMzMzAA</bytes>
 								</object>
-								<nil key="IBUIHighlightedColor"/>
+								<reference key="IBUIHighlightedColor" ref="644287774"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">11</float>
+								<float key="IBUIMinimumFontSize">14</float>
 								<int key="IBUITextAlignment">2</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="351926368">
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="995451795">
 									<string key="name">Helvetica</string>
 									<string key="family">Helvetica</string>
 									<int key="traits">0</int>
-									<double key="pointSize">15</double>
+									<double key="pointSize">16</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="992455330">
+								<object class="NSFont" key="IBUIFont" id="301526426">
 									<string key="NSName">Helvetica</string>
-									<double key="NSSize">15</double>
+									<double key="NSSize">16</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
@@ -157,11 +160,11 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<string key="IBUIText">Description</string>
 								<reference key="IBUITextColor" ref="15743815"/>
-								<nil key="IBUIHighlightedColor"/>
+								<reference key="IBUIHighlightedColor" ref="644287774"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">13</float>
-								<reference key="IBUIFontDescription" ref="351926368"/>
-								<reference key="IBUIFont" ref="992455330"/>
+								<float key="IBUIMinimumFontSize">14</float>
+								<reference key="IBUIFontDescription" ref="995451795"/>
+								<reference key="IBUIFont" ref="301526426"/>
 							</object>
 							<object class="IBUILabel" id="634062148">
 								<reference key="NSNextResponder" ref="25071829"/>
@@ -177,11 +180,11 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<string key="IBUIText">Location</string>
 								<reference key="IBUITextColor" ref="15743815"/>
-								<nil key="IBUIHighlightedColor"/>
+								<reference key="IBUIHighlightedColor" ref="644287774"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">11</float>
-								<reference key="IBUIFontDescription" ref="351926368"/>
-								<reference key="IBUIFont" ref="992455330"/>
+								<float key="IBUIMinimumFontSize">14</float>
+								<reference key="IBUIFontDescription" ref="995451795"/>
+								<reference key="IBUIFont" ref="301526426"/>
 							</object>
 							<object class="IBUILabel" id="13669522">
 								<reference key="NSNextResponder" ref="25071829"/>
@@ -197,11 +200,11 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<string key="IBUIText">Categories</string>
 								<reference key="IBUITextColor" ref="15743815"/>
-								<nil key="IBUIHighlightedColor"/>
+								<reference key="IBUIHighlightedColor" ref="644287774"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">11</float>
-								<reference key="IBUIFontDescription" ref="351926368"/>
-								<reference key="IBUIFont" ref="992455330"/>
+								<float key="IBUIMinimumFontSize">14</float>
+								<reference key="IBUIFontDescription" ref="995451795"/>
+								<reference key="IBUIFont" ref="301526426"/>
 							</object>
 							<object class="IBUIActivityIndicatorView" id="220295298">
 								<reference key="NSNextResponder" ref="25071829"/>
@@ -231,19 +234,19 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4yOTgwMzkyMjc3IDAuMjk4MDM5MjI3NyAwLjI5ODAzOTIyNzcAA</bytes>
 								</object>
-								<nil key="IBUIHighlightedColor"/>
+								<reference key="IBUIHighlightedColor" ref="644287774"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">11</float>
+								<float key="IBUIMinimumFontSize">14</float>
 								<int key="IBUITextAlignment">2</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<string key="name">Helvetica-Bold</string>
 									<string key="family">Helvetica</string>
 									<int key="traits">2</int>
-									<double key="pointSize">15</double>
+									<double key="pointSize">16</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">15</double>
+									<double key="NSSize">16</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
@@ -383,8 +386,8 @@
 							<reference ref="867418857"/>
 							<reference ref="13669522"/>
 							<reference ref="634062148"/>
-							<reference ref="641325493"/>
 							<reference ref="959999259"/>
+							<reference ref="641325493"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -602,7 +605,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">placeholder.png</string>
-			<string key="NS.object.0">{87, 90}</string>
+			<string key="NS.object.0">{98, 98}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

@@ -30,12 +30,11 @@
 @class Checkin;
 
 @interface CheckinAddViewController : BaseAddViewController<TextViewTableCellDelegate, 
-																TextFieldTableCellDelegate,
-																MapTableCellDelegate, 
-																ImagePickerDelegate, 
-																UshahidiDelegate,
-																LocatorDelegate,
-																UIActionSheetDelegate> {
+                                                            MapTableCellDelegate, 
+                                                            ImagePickerDelegate, 
+                                                            UshahidiDelegate,
+                                                            LocatorDelegate,
+                                                            UIActionSheetDelegate> {
 
 @public
 	ImagePickerController *imagePickerController;

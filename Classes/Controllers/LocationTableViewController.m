@@ -117,6 +117,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.locations = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    tapGestureRecognizer.numberOfTapsRequired = 2;
+    tapGestureRecognizer.numberOfTouchesRequired = 1;
+    [self.mapView addGestureRecognizer:tapGestureRecognizer];
+    [tapGestureRecognizer release];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -213,7 +220,6 @@
 #pragma mark MKMapView
 
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)theMapView {
-	DLog(@"");
 	for (NSObject<MKAnnotation> *annotation in theMapView.annotations) {
 		if ([annotation isKindOfClass:[MapAnnotation class]]) {
 			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
@@ -279,6 +285,22 @@
 		[self.mapView centerAtCoordinate:userLocation.coordinate withDelta:0.4 animated:NO];
 		[self.mapView selectAnnotation:userLocation animated:YES];	
 	}
+}
+
+- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint point = [gestureRecognizer locationInView:self.mapView];
+        CLLocationCoordinate2D coordinate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+        DLog("%f, %f", coordinate.latitude, coordinate.longitude);
+        
+		self.latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
+		self.longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
+        
+		self.currentLatitude = self.latitude;
+		self.currentLongitude = self.longitude;
+        
+        [self populateMapPins:NO];
+    }
 }
 
 @end

@@ -44,7 +44,7 @@
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
 	<key>USHNavBarColor</key>
-	<string>#5b5b5b</string>
+	<string>#524939</string>
 	<key>USHReportNewsURL</key>
 	<false/>
 	<key>USHSearchBarColor</key>
@@ -60,13 +60,13 @@
 	<key>USHTableHeaderColor</key>
 	<string>#def2fb</string>
 	<key>USHTableHeaderTextColor</key>
-	<string>#779dcd</string>
+	<string>#FFFFFF</string>
 	<key>USHTableOddRowColor</key>
 	<string>#eaeaec</string>
 	<key>USHTablePlainColor</key>
 	<string>#f7f7f4</string>
 	<key>USHTableSelectedRowColor</key>
-	<string>#779dcd</string>
+	<string>#938982</string>
 	<key>USHToolBarColor</key>
 	<string>#5b5b5b</string>
 	<key>USHTwitterApiKey</key>

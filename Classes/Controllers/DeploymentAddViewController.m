@@ -181,12 +181,6 @@ typedef enum {
 	if (map != nil) {
 		[cell setTitle:map.name];
 		[cell setUrl:map.url];
-		if ([NSString isNilOrEmpty:map.description]) {
-			[cell setDescription:map.name];
-		}
-		else {
-			[cell setDescription:map.description];
-		}
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		cell.selectionStyle = UITableViewCellSelectionStyleGray;
 	}

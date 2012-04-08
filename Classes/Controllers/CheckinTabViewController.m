@@ -62,7 +62,7 @@
 
 - (IBAction) filter:(id)sender event:(UIEvent*)event {
 	DLog(@"");
-	NSMutableArray *names = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL USERS --- ", nil)];
+	NSMutableArray *names = [NSMutableArray arrayWithObject:NSLocalizedString(@"--- ALL USERS ---", nil)];
 	for (User *user in self.filters) {
 		if ([NSString isNilOrEmpty:[user name]] == NO) {
 			[names addObject:user.name];

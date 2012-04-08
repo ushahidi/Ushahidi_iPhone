@@ -78,7 +78,7 @@
 
 - (IBAction) filter:(id)sender event:(UIEvent*)event {
 	DLog(@"");
-	NSMutableArray *titles = [NSMutableArray arrayWithObject:NSLocalizedString(@" --- ALL CATEGORIES --- ", nil)];
+	NSMutableArray *titles = [NSMutableArray arrayWithObject:NSLocalizedString(@"--- ALL CATEGORIES ---", nil)];
 	for (Category *theCategory in self.filters) {
 		if ([NSString isNilOrEmpty:[theCategory title]] == NO) {
 			[titles addObject:theCategory.title];

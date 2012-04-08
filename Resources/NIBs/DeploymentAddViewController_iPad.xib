@@ -108,7 +108,6 @@
 								<string key="NSFrame">{{7, 8}, {754, 30}}</string>
 								<reference key="NSSuperview" ref="201547839"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBSegmentControlStyle">2</int>

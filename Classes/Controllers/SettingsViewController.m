@@ -44,6 +44,7 @@
 @property(nonatomic, retain) UIImage *logo;
 
 - (void) dismissModalView;
+- (void) hideKeyboard;
 
 @end
 
@@ -144,6 +145,10 @@ typedef enum {
 	[self dismissModalViewControllerAnimated:YES];
 }
 
+- (void) hideKeyboard {
+    [self.view endEditing:NO];
+}
+
 #pragma mark -
 #pragma mark UIView
 
@@ -159,6 +164,10 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Map Settings", nil) atSection:TableSectionMap];
 	[self setHeader:NSLocalizedString(@"Privacy Settings", nil) atSection:TableSectionPrivacy];
 	[self setHeader:NSLocalizedString(@"App Settings", nil) atSection:TableSectionApp];
+    UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] 
+                                                  initWithTarget:self action:@selector(hideKeyboard)] autorelease];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)viewDidUnload {
@@ -438,11 +447,13 @@ typedef enum {
 			self.userEmail = text;
 			if ([NSString isNilOrEmpty:text] || [text isValidEmail]) {
 				[self setFooter:nil atSection:TableSectionContact];
+                [self.tableView reloadData];
 			}
 			else {
 				[self setFooter:NSLocalizedString(@"Invalid Email Address", nil) atSection:TableSectionContact];
-			}
-			[self.tableView reloadData];
+				[self.tableView reloadData];
+            }
+            [self.view endEditing:YES];
 		}
 	}
 }

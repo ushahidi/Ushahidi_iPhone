@@ -21,6 +21,7 @@
 #import "Email.h"
 #import "AlertView.h"
 #import "NSObject+Extension.h"
+#import "Settings.h"
 
 @interface Email ()
 
@@ -59,6 +60,9 @@
 - (void)sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message withSubject:(NSString *)subject withPhotos:(NSArray *)photos {
 	DLog(@"message:%@ withSubject:%@ photos:%d", message, subject, [photos count]);
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    picker.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];
+    picker.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleBordered;
+    picker.navigationItem.rightBarButtonItem.tintColor = [[Settings sharedSettings] doneButtonColor];
 	picker.mailComposeDelegate = self;
 	[picker setMessageBody:message isHTML:YES];
 	[picker setSubject:subject];

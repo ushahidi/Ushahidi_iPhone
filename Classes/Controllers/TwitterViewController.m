@@ -39,6 +39,7 @@
 
 - (BOOL) hasRequiredInputs;
 - (void) updateCharactersLeftLabel:(NSInteger)characters;
+- (void) hideKeyboard;
 
 @end
 
@@ -121,6 +122,10 @@ typedef enum {
 		  atSection:TableSectionTweet];	
 }
 
+- (void) hideKeyboard {
+    [self.view endEditing:NO];
+}
+
 #pragma mark -
 #pragma mark UIView
 
@@ -150,6 +155,11 @@ typedef enum {
 	self.bitly.login = [[Settings sharedSettings] bitlyApiLogin];
 	self.bitly.apiKey = [[Settings sharedSettings] bitlyApiKey];
 	
+    UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] 
+                                                  initWithTarget:self action:@selector(hideKeyboard)] autorelease];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.tableView addGestureRecognizer:gestureRecognizer];
+    
 	[self setHeader:NSLocalizedString(@"Tweet", nil) atSection:TableSectionTweet];
 	[self setHeader:NSLocalizedString(@"Username", nil) atSection:TableSectionUsername];
 	[self setHeader:NSLocalizedString(@"Password", nil) atSection:TableSectionPassword];

@@ -163,6 +163,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.navigationBar.topItem.title = NSLocalizedString(@"Add Report", nil);
+    self.doneButton.title = NSLocalizedString(@"Add", nil);
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
 	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
@@ -177,7 +178,6 @@ typedef enum {
 	else {
 		//DO NOT SHOW 'News' HEADING
 	}
-    
     UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self 
                                                                                          action:@selector(hideKeyboard)] autorelease];
     gestureRecognizer.cancelsTouchesInView = NO;

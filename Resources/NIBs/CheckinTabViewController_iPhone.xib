@@ -52,7 +52,6 @@
 								<string key="NSFrame">{{50, 8}, {212, 30}}</string>
 								<reference key="NSSuperview" ref="972955457"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBSegmentControlStyle">2</int>
@@ -118,7 +117,7 @@
 									<string key="NSResourceName">checkin.png</string>
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">2</int>
+								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="972955457"/>
 							</object>
 						</object>

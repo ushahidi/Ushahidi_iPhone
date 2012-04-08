@@ -58,6 +58,7 @@
 	UIColor *tableHeaderTextColor;
 	UIColor *verifiedTextColor;
 	UIColor *unverifiedTextColor;
+    UIColor *doneButtonColor;
 
 	NSString *twitterUsername;
     NSString *twitterPassword;
@@ -110,6 +111,7 @@
 @property(nonatomic, retain) UIColor *tableHeaderTextColor;
 @property(nonatomic, retain) UIColor *verifiedTextColor;
 @property(nonatomic, retain) UIColor *unverifiedTextColor;
+@property(nonatomic, retain) UIColor *doneButtonColor;
 
 @property(nonatomic, retain) NSString *twitterUsername;
 @property(nonatomic, retain) NSString *twitterPassword;

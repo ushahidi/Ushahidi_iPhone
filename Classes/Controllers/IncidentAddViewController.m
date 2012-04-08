@@ -25,7 +25,7 @@
 #import "Device.h"
 #import "LoadingViewController.h"
 #import "CategoryTableViewController.h"
-#import "LocationTableViewController.h"
+#import "LocationSelectViewController.h"
 #import "LoadingViewController.h"
 #import "TextTableCell.h"
 #import "AlertView.h"
@@ -54,7 +54,7 @@
 
 @synthesize datePicker;
 @synthesize categoryTableViewController;
-@synthesize locationTableViewController;
+@synthesize locationSelectViewController;
 @synthesize imagePickerController;
 @synthesize news;
 @synthesize incident;
@@ -178,7 +178,8 @@ typedef enum {
 		//DO NOT SHOW 'News' HEADING
 	}
     
-    UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)] autorelease];
+    UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                                         action:@selector(hideKeyboard)] autorelease];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
 }
@@ -236,7 +237,7 @@ typedef enum {
 - (void)dealloc {
 	[imagePickerController release];
 	[categoryTableViewController release];
-	[locationTableViewController release];
+	[locationSelectViewController release];
 	[incident release];
 	[news release];
     [super dealloc];
@@ -457,10 +458,10 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionLocation) {
         [self.view setUserInteractionEnabled:NO];
-        self.locationTableViewController.incident = self.incident;
-        self.locationTableViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        self.locationTableViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:self.locationTableViewController animated:YES];
+        self.locationSelectViewController.incident = self.incident;
+        self.locationSelectViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        self.locationSelectViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentModalViewController:self.locationSelectViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionDate){
 		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];

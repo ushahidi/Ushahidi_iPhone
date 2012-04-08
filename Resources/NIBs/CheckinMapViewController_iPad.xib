@@ -50,7 +50,7 @@
 							<object class="IBUISegmentedControl" id="304580280">
 								<reference key="NSNextResponder" ref="172263191"/>
 								<int key="NSvFlags">266</int>
-								<string key="NSFrame">{{42, 885}, {685, 44}}</string>
+								<string key="NSFrame">{{42, 929}, {685, 44}}</string>
 								<reference key="NSSuperview" ref="172263191"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="127559100"/>
@@ -91,7 +91,7 @@
 								</object>
 							</object>
 						</object>
-						<string key="NSFrameSize">{768, 960}</string>
+						<string key="NSFrameSize">{768, 1004}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="304580280"/>
@@ -109,7 +109,7 @@
 							<object class="IBMKMapView" id="239358661">
 								<reference key="NSNextResponder" ref="579804991"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{768, 980}</string>
+								<string key="NSFrameSize">{768, 1024}</string>
 								<reference key="NSSuperview" ref="579804991"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="103487215"/>
@@ -120,7 +120,7 @@
 							<object class="IBUIButton" id="103487215">
 								<reference key="NSNextResponder" ref="579804991"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{730, 941}, {18, 19}}</string>
+								<string key="NSFrame">{{730, 985}, {18, 19}}</string>
 								<reference key="NSSuperview" ref="579804991"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="172263191"/>
@@ -153,7 +153,7 @@
 								</object>
 							</object>
 						</object>
-						<string key="NSFrame">{{0, -10}, {768, 980}}</string>
+						<string key="NSFrame">{{0, -10}, {768, 1024}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="239358661"/>
@@ -177,7 +177,6 @@
 								<string key="NSFrame">{{12, 2}, {745, 18}}</string>
 								<reference key="NSSuperview" ref="127559100"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -216,7 +215,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 				</object>
-				<string key="NSFrame">{{0, 64}, {768, 960}}</string>
+				<string key="NSFrameSize">{768, 1004}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="579804991"/>
@@ -224,13 +223,6 @@
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
 					<reference key="NSCustomColorSpace" ref="756688076"/>
-				</object>
-				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
-					<int key="IBUIStatusBarStyle">2</int>
-				</object>
-				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
-					<int key="IBUIBarStyle">1</int>
-					<bool key="IBUIPrompted">NO</bool>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -974,7 +966,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">CheckinAddViewController</string>
-					<string key="superclassName">BaseTableViewController</string>
+					<string key="superclassName">BaseAddViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -1004,38 +996,6 @@
 							<object class="IBActionInfo">
 								<string key="name">done:</string>
 								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cancelButton</string>
-							<string>doneButton</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIBarButtonItem</string>
-							<string>UIBarButtonItem</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>cancelButton</string>
-							<string>doneButton</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">cancelButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">doneButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
 							</object>
 						</object>
 					</object>
@@ -1188,45 +1148,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">CheckinTableViewController</string>
 					<string key="superclassName">BaseSortTableViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addCheckin:</string>
-							<string>filterChanged:event:</string>
-							<string>refresh:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addCheckin:</string>
-							<string>filterChanged:event:</string>
-							<string>refresh:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">addCheckin:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">filterChanged:event:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">refresh:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">

@@ -48,7 +48,7 @@
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
 					<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -67,7 +67,6 @@
 			<object class="IBUIViewController" id="417995747">
 				<string key="IBUITitle">Maps</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="837724815">
-					<reference key="IBUINavigationBar"/>
 					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="132599706">
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIStyle">1</int>
@@ -76,7 +75,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{7, 12}, {18, 19}}</string>
 							<reference key="NSSuperview"/>
-							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
@@ -439,7 +438,7 @@
 			</object>
 			<object class="IBUIViewController" id="279952645">
 				<string key="IBUITitle">Locations</string>
-				<string key="IBUINibName">LocationTableViewController_iPad</string>
+				<string key="IBUINibName">LocationSelectViewController_iPad</string>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
 					<int key="IBUIStatusBarStyle">2</int>
 				</object>
@@ -466,7 +465,6 @@
 			</object>
 			<object class="IBUIViewController" id="920892568">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="658501258">
-					<reference key="IBUINavigationBar"/>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				</object>
 				<string key="IBUINibName">MapViewController_iPad</string>
@@ -886,11 +884,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">locationTableViewController</string>
+						<string key="label">locationSelectViewController</string>
 						<reference key="source" ref="605466144"/>
 						<reference key="destination" ref="279952645"/>
 					</object>
-					<int key="connectionID">120</int>
+					<int key="connectionID">250</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1988,7 +1986,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>CategoryTableViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>LocationTableViewController</string>
+					<string>LocationSelectViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -2014,7 +2012,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">249</int>
+			<int key="maxID">250</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3270,12 +3268,12 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>categoryTableViewController</string>
-							<string>locationTableViewController</string>
+							<string>locationSelectViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>CategoryTableViewController</string>
-							<string>LocationTableViewController</string>
+							<string>LocationSelectViewController</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -3283,7 +3281,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>categoryTableViewController</string>
-							<string>locationTableViewController</string>
+							<string>locationSelectViewController</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3292,8 +3290,8 @@
 								<string key="candidateClassName">CategoryTableViewController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">locationTableViewController</string>
-								<string key="candidateClassName">LocationTableViewController</string>
+								<string key="name">locationSelectViewController</string>
+								<string key="candidateClassName">LocationSelectViewController</string>
 							</object>
 						</object>
 					</object>
@@ -3459,7 +3457,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">LocationTableViewController</string>
+					<string key="className">LocationSelectViewController</string>
 					<string key="superclassName">BaseMapViewController</string>
 					<object class="NSMutableDictionary" key="actions">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3534,7 +3532,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/LocationTableViewController.h</string>
+						<string key="minorKey">./Classes/LocationSelectViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

@@ -21,6 +21,7 @@
 #import "BaseAddViewController.h"
 #import "BaseViewController.h"
 #import "LoadingViewController.h"
+#import "Settings.h"
 
 @interface BaseAddViewController()
 
@@ -51,6 +52,7 @@
     [super viewDidLoad];
     self.cancelButton.title = NSLocalizedString(@"Cancel", nil);
     self.doneButton.title = NSLocalizedString(@"Add", nil);
+    self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
 }
 
 - (void)viewDidUnload {

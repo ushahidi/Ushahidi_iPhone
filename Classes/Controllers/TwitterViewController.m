@@ -129,6 +129,8 @@ typedef enum {
 	self.twitter = [[MGTwitterEngine alloc] initWithDelegate:self];
 	self.navigationBar.topItem.title = NSLocalizedString(@"Twitter", nil);
 	self.doneButton.title = NSLocalizedString(@"Send", nil);
+    self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    
 	NSString *twitterApiKey = [[Settings sharedSettings] twitterApiKey];
 	NSString *twitterApiSecret = [[Settings sharedSettings] twitterApiSecret];
 	DLog(@"Twitter key:%@ secret:%@", twitterApiKey, twitterApiSecret);

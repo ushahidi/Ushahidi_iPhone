@@ -18,7 +18,7 @@
  **
  *****************************************************************************/
 
-#import "LocationTableViewController.h"
+#import "LocationSelectViewController.h"
 #import "BaseMapViewController.h"
 #import "LoadingViewController.h"
 #import "Incident.h"
@@ -31,7 +31,7 @@
 #import "Ushahidi.h"
 #import "Settings.h"
 
-@interface LocationTableViewController ()
+@interface LocationSelectViewController ()
 
 @property(nonatomic, retain) NSString *location;
 @property(nonatomic, retain) NSString *latitude;
@@ -44,7 +44,7 @@
 
 @end
 
-@implementation LocationTableViewController
+@implementation LocationSelectViewController
 
 @synthesize cancelButton, doneButton;
 @synthesize incident, location, locations;
@@ -117,7 +117,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.locations = [[NSMutableArray alloc] initWithCapacity:0];
-    
+    self.doneButton.title = NSLocalizedString(@"Done", nil);
+    self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     tapGestureRecognizer.numberOfTapsRequired = 2;
     tapGestureRecognizer.numberOfTouchesRequired = 1;

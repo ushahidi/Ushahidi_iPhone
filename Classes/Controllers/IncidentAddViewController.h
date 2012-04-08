@@ -29,7 +29,7 @@
 #import "Locator.h"
 
 @class CategoryTableViewController;
-@class LocationTableViewController;
+@class LocationSelectViewController;
 @class Incident;
 
 @interface IncidentAddViewController : BaseAddViewController<TextFieldTableCellDelegate, 
@@ -43,7 +43,7 @@
 																
 @public
 	CategoryTableViewController *categoryTableViewController;
-	LocationTableViewController *locationTableViewController;
+	LocationSelectViewController *locationSelectViewController;
 	ImagePickerController *imagePickerController;
 																
 @private
@@ -53,7 +53,7 @@
 }
 
 @property(nonatomic, retain) IBOutlet CategoryTableViewController *categoryTableViewController;
-@property(nonatomic, retain) IBOutlet LocationTableViewController *locationTableViewController;
+@property(nonatomic, retain) IBOutlet LocationSelectViewController *locationSelectViewController;
 @property(nonatomic, retain) ImagePickerController *imagePickerController;
 
 @end

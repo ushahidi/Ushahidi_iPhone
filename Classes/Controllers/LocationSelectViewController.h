@@ -29,9 +29,9 @@
 
 @class Incident;
 
-@interface LocationTableViewController : BaseMapViewController<UshahidiDelegate,
-                                                            LocatorDelegate,
-                                                            MKMapViewDelegate> {
+@interface LocationSelectViewController : BaseMapViewController<UshahidiDelegate,
+                                                                LocatorDelegate,
+                                                                MKMapViewDelegate> {
 @public
 	UIBarButtonItem *cancelButton;
 	UIBarButtonItem *doneButton;

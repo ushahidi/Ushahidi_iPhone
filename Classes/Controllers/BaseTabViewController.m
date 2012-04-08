@@ -191,6 +191,7 @@
             [self.baseMapViewController viewWillAppear:animated];
         }
     }
+    self.addButton.tintColor = [[Settings sharedSettings] doneButtonColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoQueueFinished) name:kPhotoQueueFinished object:nil];
@@ -199,6 +200,14 @@
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+    if (self.wasPushed == NO) {
+        if (self.displayMode.selectedSegmentIndex == ViewModeTable) {
+            [self.baseTableViewController viewDidAppear:animated];
+        }
+        else if (self.displayMode.selectedSegmentIndex == ViewModeMap){
+            [self.baseMapViewController viewDidAppear:animated];
+        }
+    }
     if (self.popoverController != nil) {
         [self.popoverController dismissPopoverAnimated:YES];
     }

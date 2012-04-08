@@ -23,6 +23,7 @@
 #import "Incident.h"
 #import "Category.h"
 #import "TableCellFactory.h"
+#import "Settings.h"
 
 @interface CategoryTableViewController ()
 
@@ -48,6 +49,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.doneButton.title = NSLocalizedString(@"Done", nil);
+    self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search categories...", nil)];
 }
 

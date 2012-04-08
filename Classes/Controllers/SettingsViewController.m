@@ -150,6 +150,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.navigationBar.topItem.title = NSLocalizedString(@"Settings", nil);
+    self.doneButton.title = NSLocalizedString(@"Done", nil);
+    self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
 	self.email = [[Email alloc] initWithController:self];
 	self.logo = [Device isIPad] ? [UIImage imageNamed:@"Logo_iPad.png"] : [UIImage imageNamed:@"Logo_iPhone.png"];
 	[self setHeader:NSLocalizedString(@"Contact Settings", nil) atSection:TableSectionContact];

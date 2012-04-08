@@ -69,6 +69,8 @@
 	<string>#938982</string>
 	<key>USHToolBarColor</key>
 	<string>#5b5b5b</string>
+	<key>USHDoneButtonColor</key>
+	<string>#8a1f03</string>
 	<key>USHTwitterApiKey</key>
 	<string>muqzQTP4YkXi0ncI39s0Jw</string>
 	<key>USHTwitterApiSecret</key>

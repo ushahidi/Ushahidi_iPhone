@@ -108,8 +108,8 @@
 		3E0F767213AB7772004494EC /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
 		3E0F767313AB7772004494EC /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
 		3E0F767413AB7772004494EC /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
-		3E0F767513AB7772004494EC /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
-		3E0F767613AB7772004494EC /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3E0F767513AB7772004494EC /* LocationSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */; };
+		3E0F767613AB7772004494EC /* LocationSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */; };
 		3E0F767713AB7772004494EC /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
 		3E0F767813AB7772004494EC /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
 		3E0F767913AB7772004494EC /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
@@ -215,7 +215,7 @@
 		3E0F76E413AB7772004494EC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */; };
 		3E0F76E513AB7772004494EC /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3E0F76E613AB7772004494EC /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
-		3E0F76E713AB7772004494EC /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3E0F76E713AB7772004494EC /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */; };
 		3E0F76E813AB7772004494EC /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3E0F76E913AB7772004494EC /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3E0F76EA13AB7772004494EC /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
@@ -393,8 +393,8 @@
 		3E15A0031410CFE600D12964 /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
 		3E15A0041410CFE600D12964 /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
 		3E15A0051410CFE600D12964 /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
-		3E15A0061410CFE600D12964 /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
-		3E15A0071410CFE600D12964 /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3E15A0061410CFE600D12964 /* LocationSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */; };
+		3E15A0071410CFE600D12964 /* LocationSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */; };
 		3E15A0081410CFE600D12964 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
 		3E15A0091410CFE600D12964 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
 		3E15A00A1410CFE600D12964 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
@@ -485,7 +485,7 @@
 		3E15A0651410CFE600D12964 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */; };
 		3E15A0661410CFE600D12964 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3E15A0671410CFE600D12964 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
-		3E15A0681410CFE600D12964 /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3E15A0681410CFE600D12964 /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */; };
 		3E15A0691410CFE600D12964 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3E15A06A1410CFE600D12964 /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3E15A06B1410CFE600D12964 /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
@@ -672,8 +672,8 @@
 		3E15E73513C5CBA80050D46F /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
 		3E15E73613C5CBA80050D46F /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
 		3E15E73713C5CBA80050D46F /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
-		3E15E73813C5CBA80050D46F /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
-		3E15E73913C5CBA80050D46F /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3E15E73813C5CBA80050D46F /* LocationSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */; };
+		3E15E73913C5CBA80050D46F /* LocationSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */; };
 		3E15E73A13C5CBA80050D46F /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
 		3E15E73B13C5CBA80050D46F /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
 		3E15E73C13C5CBA80050D46F /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
@@ -764,7 +764,7 @@
 		3E15E79713C5CBA80050D46F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */; };
 		3E15E79813C5CBA80050D46F /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3E15E79913C5CBA80050D46F /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
-		3E15E79A13C5CBA80050D46F /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3E15E79A13C5CBA80050D46F /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */; };
 		3E15E79B13C5CBA80050D46F /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3E15E79C13C5CBA80050D46F /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3E15E79D13C5CBA80050D46F /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
@@ -980,8 +980,8 @@
 		3E4431E914FBE1E300BFECD8 /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
 		3E4431EA14FBE1E300BFECD8 /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
 		3E4431EB14FBE1E300BFECD8 /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
-		3E4431EC14FBE1E300BFECD8 /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
-		3E4431ED14FBE1E300BFECD8 /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3E4431EC14FBE1E300BFECD8 /* LocationSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */; };
+		3E4431ED14FBE1E300BFECD8 /* LocationSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */; };
 		3E4431EE14FBE1E300BFECD8 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
 		3E4431EF14FBE1E300BFECD8 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
 		3E4431F014FBE1E300BFECD8 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
@@ -1094,7 +1094,7 @@
 		3E44325E14FBE1E300BFECD8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */; };
 		3E44325F14FBE1E300BFECD8 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3E44326014FBE1E300BFECD8 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
-		3E44326114FBE1E300BFECD8 /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3E44326114FBE1E300BFECD8 /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */; };
 		3E44326214FBE1E300BFECD8 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3E44326314FBE1E300BFECD8 /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3E44326414FBE1E300BFECD8 /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
@@ -1323,8 +1323,8 @@
 		3E79A98413950A3C00914628 /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
 		3E79A98513950A3C00914628 /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
 		3E79A98613950A3C00914628 /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
-		3E79A98713950A3C00914628 /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
-		3E79A98813950A3C00914628 /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3E79A98713950A3C00914628 /* LocationSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */; };
+		3E79A98813950A3C00914628 /* LocationSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */; };
 		3E79A98913950A3C00914628 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
 		3E79A98A13950A3C00914628 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
 		3E79A98B13950A3C00914628 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
@@ -1369,8 +1369,8 @@
 		3E79A9B413950A3C00914628 /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
 		3E79A9B513950A3C00914628 /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
 		3E79A9B613950A3C00914628 /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
-		3E79A9B713950A3C00914628 /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
-		3E79A9B813950A3C00914628 /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3E79A9B713950A3C00914628 /* LocationSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */; };
+		3E79A9B813950A3C00914628 /* LocationSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */; };
 		3E79A9B913950A3C00914628 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
 		3E79A9BA13950A3C00914628 /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
 		3E79A9BB13950A3C00914628 /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
@@ -1595,8 +1595,8 @@
 		3EB1F743146D6E4F009C62AB /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
 		3EB1F744146D6E4F009C62AB /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
 		3EB1F745146D6E4F009C62AB /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
-		3EB1F746146D6E4F009C62AB /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
-		3EB1F747146D6E4F009C62AB /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3EB1F746146D6E4F009C62AB /* LocationSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */; };
+		3EB1F747146D6E4F009C62AB /* LocationSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */; };
 		3EB1F748146D6E4F009C62AB /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
 		3EB1F749146D6E4F009C62AB /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
 		3EB1F74A146D6E4F009C62AB /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
@@ -1687,7 +1687,7 @@
 		3EB1F7B6146D6E4F009C62AB /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */; };
 		3EB1F7B7146D6E4F009C62AB /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3EB1F7B8146D6E4F009C62AB /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
-		3EB1F7B9146D6E4F009C62AB /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3EB1F7B9146D6E4F009C62AB /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */; };
 		3EB1F7BA146D6E4F009C62AB /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3EB1F7BB146D6E4F009C62AB /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3EB1F7BC146D6E4F009C62AB /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
@@ -1796,7 +1796,7 @@
 		3EB89E85145F1AE30038594C /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB89E80145F1AE30038594C /* UIDevice+Extension.m */; };
 		3EB89E86145F1AE30038594C /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB89E80145F1AE30038594C /* UIDevice+Extension.m */; };
 		3EBB0F0012767882007D7930 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
-		3EBB10F612768DAA007D7930 /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3EBB10F612768DAA007D7930 /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */; };
 		3EBBD63F12DCA73F007ECE4B /* MGTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD5F912DCA73E007ECE4B /* MGTwitterEngine.m */; };
 		3EBBD64012DCA73F007ECE4B /* MGTwitterHTTPURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD5FD12DCA73E007ECE4B /* MGTwitterHTTPURLConnection.m */; };
 		3EBBD64112DCA73F007ECE4B /* MGTwitterLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBBD5FF12DCA73E007ECE4B /* MGTwitterLibXMLParser.m */; };
@@ -1924,8 +1924,8 @@
 		3EC4BE0013C1E19D000056AE /* IncidentTabViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */; };
 		3EC4BE0113C1E19D000056AE /* LoadingViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */; };
 		3EC4BE0213C1E19D000056AE /* LoadingViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */; };
-		3EC4BE0313C1E19D000056AE /* LocationTableViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */; };
-		3EC4BE0413C1E19D000056AE /* LocationTableViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */; };
+		3EC4BE0313C1E19D000056AE /* LocationSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */; };
+		3EC4BE0413C1E19D000056AE /* LocationSelectViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */; };
 		3EC4BE0513C1E19D000056AE /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95913950A3C00914628 /* MainWindow_iPad.xib */; };
 		3EC4BE0613C1E19D000056AE /* MainWindow_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */; };
 		3EC4BE0713C1E19D000056AE /* MapViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */; };
@@ -2016,7 +2016,7 @@
 		3EC4BE6213C1E19D000056AE /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */; };
 		3EC4BE6313C1E19D000056AE /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3EC4BE6413C1E19D000056AE /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
-		3EC4BE6513C1E19D000056AE /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3EC4BE6513C1E19D000056AE /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */; };
 		3EC4BE6613C1E19D000056AE /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3EC4BE6713C1E19D000056AE /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3EC4BE6813C1E19D000056AE /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
@@ -2268,7 +2268,7 @@
 		3ED0F94B138E6BE40065C8E8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */; };
 		3ED0F94C138E6BE40065C8E8 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A022612720E280017AED4 /* NSString+Extension.m */; };
 		3ED0F94D138E6BE40065C8E8 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */; };
-		3ED0F94E138E6BE40065C8E8 /* LocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationTableViewController.m */; };
+		3ED0F94E138E6BE40065C8E8 /* LocationSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */; };
 		3ED0F94F138E6BE40065C8E8 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EC94CBB12773CDD00411AE0 /* UIImage+Extension.m */; };
 		3ED0F950138E6BE40065C8E8 /* MotionWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E2E853712787E7F00ADA49B /* MotionWindow.m */; };
 		3ED0F951138E6BE40065C8E8 /* SliderTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1501161278D82500036A0F /* SliderTableCell.m */; };
@@ -2584,8 +2584,8 @@
 		3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IncidentTabViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingViewController_iPad.xib; sourceTree = "<group>"; };
 		3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingViewController_iPhone.xib; sourceTree = "<group>"; };
-		3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewController_iPad.xib; sourceTree = "<group>"; };
-		3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewController_iPhone.xib; sourceTree = "<group>"; };
+		3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSelectViewController_iPad.xib; sourceTree = "<group>"; };
+		3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSelectViewController_iPhone.xib; sourceTree = "<group>"; };
 		3E79A95913950A3C00914628 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
 		3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow_iPhone.xib; sourceTree = "<group>"; };
 		3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController_iPad.xib; sourceTree = "<group>"; };
@@ -2781,8 +2781,8 @@
 		3EB89E80145F1AE30038594C /* UIDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
 		3EBB0EFE12767882007D7930 /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
 		3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewController.m; sourceTree = "<group>"; };
-		3EBB10F412768DAA007D7930 /* LocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewController.h; sourceTree = "<group>"; };
-		3EBB10F512768DAA007D7930 /* LocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewController.m; sourceTree = "<group>"; };
+		3EBB10F412768DAA007D7930 /* LocationSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = LocationSelectViewController.h; sourceTree = "<group>"; };
+		3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectViewController.m; sourceTree = "<group>"; };
 		3EBBD5F812DCA73E007ECE4B /* MGTwitterEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTwitterEngine.h; sourceTree = "<group>"; };
 		3EBBD5F912DCA73E007ECE4B /* MGTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTwitterEngine.m; sourceTree = "<group>"; };
 		3EBBD5FA12DCA73E007ECE4B /* MGTwitterEngineDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTwitterEngineDelegate.h; sourceTree = "<group>"; };
@@ -3367,8 +3367,8 @@
 				3E79A93E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib */,
 				3E79A93B13950A3C00914628 /* CheckinAddViewController_iPad.xib */,
 				3E79A93C13950A3C00914628 /* CheckinAddViewController_iPhone.xib */,
-				3E79A95713950A3C00914628 /* LocationTableViewController_iPad.xib */,
-				3E79A95813950A3C00914628 /* LocationTableViewController_iPhone.xib */,
+				3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */,
+				3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */,
 				3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */,
 				3E79A93A13950A3C00914628 /* CategoryTableViewController_iPhone.xib */,
 				3EA9BD7714ED852F00167351 /* CategorySelectViewController_iPhone.xib */,
@@ -3615,8 +3615,8 @@
 				3EA9BD6D14ED83FF00167351 /* CategorySelectViewController.m */,
 				3EA9BD6114ED83E300167351 /* UserSelectViewController.h */,
 				3EA9BD6214ED83E300167351 /* UserSelectViewController.m */,
-				3EBB10F412768DAA007D7930 /* LocationTableViewController.h */,
-				3EBB10F512768DAA007D7930 /* LocationTableViewController.m */,
+				3EBB10F412768DAA007D7930 /* LocationSelectViewController.h */,
+				3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */,
 				3E862A001222BCD0001DE141 /* ImagePickerController.h */,
 				3E862A011222BCD0001DE141 /* ImagePickerController.m */,
 				3E862A021222BCD0001DE141 /* ImageViewController.h */,
@@ -4357,8 +4357,8 @@
 				3E79A9B413950A3C00914628 /* IncidentTabViewController_iPhone.xib in Resources */,
 				3E79A9B513950A3C00914628 /* LoadingViewController_iPad.xib in Resources */,
 				3E79A9B613950A3C00914628 /* LoadingViewController_iPhone.xib in Resources */,
-				3E79A9B713950A3C00914628 /* LocationTableViewController_iPad.xib in Resources */,
-				3E79A9B813950A3C00914628 /* LocationTableViewController_iPhone.xib in Resources */,
+				3E79A9B713950A3C00914628 /* LocationSelectViewController_iPad.xib in Resources */,
+				3E79A9B813950A3C00914628 /* LocationSelectViewController_iPhone.xib in Resources */,
 				3E79A9B913950A3C00914628 /* MainWindow_iPad.xib in Resources */,
 				3E79A9BA13950A3C00914628 /* MainWindow_iPhone.xib in Resources */,
 				3E79A9BB13950A3C00914628 /* MapViewController_iPad.xib in Resources */,
@@ -4498,8 +4498,8 @@
 				3E0F767213AB7772004494EC /* IncidentTabViewController_iPhone.xib in Resources */,
 				3E0F767313AB7772004494EC /* LoadingViewController_iPad.xib in Resources */,
 				3E0F767413AB7772004494EC /* LoadingViewController_iPhone.xib in Resources */,
-				3E0F767513AB7772004494EC /* LocationTableViewController_iPad.xib in Resources */,
-				3E0F767613AB7772004494EC /* LocationTableViewController_iPhone.xib in Resources */,
+				3E0F767513AB7772004494EC /* LocationSelectViewController_iPad.xib in Resources */,
+				3E0F767613AB7772004494EC /* LocationSelectViewController_iPhone.xib in Resources */,
 				3E0F767713AB7772004494EC /* MainWindow_iPad.xib in Resources */,
 				3E0F767813AB7772004494EC /* MainWindow_iPhone.xib in Resources */,
 				3E0F767913AB7772004494EC /* MapViewController_iPad.xib in Resources */,
@@ -4638,8 +4638,8 @@
 				3E15A0031410CFE600D12964 /* IncidentTabViewController_iPhone.xib in Resources */,
 				3E15A0041410CFE600D12964 /* LoadingViewController_iPad.xib in Resources */,
 				3E15A0051410CFE600D12964 /* LoadingViewController_iPhone.xib in Resources */,
-				3E15A0061410CFE600D12964 /* LocationTableViewController_iPad.xib in Resources */,
-				3E15A0071410CFE600D12964 /* LocationTableViewController_iPhone.xib in Resources */,
+				3E15A0061410CFE600D12964 /* LocationSelectViewController_iPad.xib in Resources */,
+				3E15A0071410CFE600D12964 /* LocationSelectViewController_iPhone.xib in Resources */,
 				3E15A0081410CFE600D12964 /* MainWindow_iPad.xib in Resources */,
 				3E15A0091410CFE600D12964 /* MainWindow_iPhone.xib in Resources */,
 				3E15A00A1410CFE600D12964 /* MapViewController_iPad.xib in Resources */,
@@ -4779,8 +4779,8 @@
 				3E15E73513C5CBA80050D46F /* IncidentTabViewController_iPhone.xib in Resources */,
 				3E15E73613C5CBA80050D46F /* LoadingViewController_iPad.xib in Resources */,
 				3E15E73713C5CBA80050D46F /* LoadingViewController_iPhone.xib in Resources */,
-				3E15E73813C5CBA80050D46F /* LocationTableViewController_iPad.xib in Resources */,
-				3E15E73913C5CBA80050D46F /* LocationTableViewController_iPhone.xib in Resources */,
+				3E15E73813C5CBA80050D46F /* LocationSelectViewController_iPad.xib in Resources */,
+				3E15E73913C5CBA80050D46F /* LocationSelectViewController_iPhone.xib in Resources */,
 				3E15E73A13C5CBA80050D46F /* MainWindow_iPad.xib in Resources */,
 				3E15E73B13C5CBA80050D46F /* MainWindow_iPhone.xib in Resources */,
 				3E15E73C13C5CBA80050D46F /* MapViewController_iPad.xib in Resources */,
@@ -4920,8 +4920,8 @@
 				3E4431E914FBE1E300BFECD8 /* IncidentTabViewController_iPhone.xib in Resources */,
 				3E4431EA14FBE1E300BFECD8 /* LoadingViewController_iPad.xib in Resources */,
 				3E4431EB14FBE1E300BFECD8 /* LoadingViewController_iPhone.xib in Resources */,
-				3E4431EC14FBE1E300BFECD8 /* LocationTableViewController_iPad.xib in Resources */,
-				3E4431ED14FBE1E300BFECD8 /* LocationTableViewController_iPhone.xib in Resources */,
+				3E4431EC14FBE1E300BFECD8 /* LocationSelectViewController_iPad.xib in Resources */,
+				3E4431ED14FBE1E300BFECD8 /* LocationSelectViewController_iPhone.xib in Resources */,
 				3E4431EE14FBE1E300BFECD8 /* MainWindow_iPad.xib in Resources */,
 				3E4431EF14FBE1E300BFECD8 /* MainWindow_iPhone.xib in Resources */,
 				3E4431F014FBE1E300BFECD8 /* MapViewController_iPad.xib in Resources */,
@@ -5061,8 +5061,8 @@
 				3EB1F743146D6E4F009C62AB /* IncidentTabViewController_iPhone.xib in Resources */,
 				3EB1F744146D6E4F009C62AB /* LoadingViewController_iPad.xib in Resources */,
 				3EB1F745146D6E4F009C62AB /* LoadingViewController_iPhone.xib in Resources */,
-				3EB1F746146D6E4F009C62AB /* LocationTableViewController_iPad.xib in Resources */,
-				3EB1F747146D6E4F009C62AB /* LocationTableViewController_iPhone.xib in Resources */,
+				3EB1F746146D6E4F009C62AB /* LocationSelectViewController_iPad.xib in Resources */,
+				3EB1F747146D6E4F009C62AB /* LocationSelectViewController_iPhone.xib in Resources */,
 				3EB1F748146D6E4F009C62AB /* MainWindow_iPad.xib in Resources */,
 				3EB1F749146D6E4F009C62AB /* MainWindow_iPhone.xib in Resources */,
 				3EB1F74A146D6E4F009C62AB /* MapViewController_iPad.xib in Resources */,
@@ -5201,8 +5201,8 @@
 				3EC4BE0013C1E19D000056AE /* IncidentTabViewController_iPhone.xib in Resources */,
 				3EC4BE0113C1E19D000056AE /* LoadingViewController_iPad.xib in Resources */,
 				3EC4BE0213C1E19D000056AE /* LoadingViewController_iPhone.xib in Resources */,
-				3EC4BE0313C1E19D000056AE /* LocationTableViewController_iPad.xib in Resources */,
-				3EC4BE0413C1E19D000056AE /* LocationTableViewController_iPhone.xib in Resources */,
+				3EC4BE0313C1E19D000056AE /* LocationSelectViewController_iPad.xib in Resources */,
+				3EC4BE0413C1E19D000056AE /* LocationSelectViewController_iPhone.xib in Resources */,
 				3EC4BE0513C1E19D000056AE /* MainWindow_iPad.xib in Resources */,
 				3EC4BE0613C1E19D000056AE /* MainWindow_iPhone.xib in Resources */,
 				3EC4BE0713C1E19D000056AE /* MapViewController_iPad.xib in Resources */,
@@ -5359,8 +5359,8 @@
 				3E79A98413950A3C00914628 /* IncidentTabViewController_iPhone.xib in Resources */,
 				3E79A98513950A3C00914628 /* LoadingViewController_iPad.xib in Resources */,
 				3E79A98613950A3C00914628 /* LoadingViewController_iPhone.xib in Resources */,
-				3E79A98713950A3C00914628 /* LocationTableViewController_iPad.xib in Resources */,
-				3E79A98813950A3C00914628 /* LocationTableViewController_iPhone.xib in Resources */,
+				3E79A98713950A3C00914628 /* LocationSelectViewController_iPad.xib in Resources */,
+				3E79A98813950A3C00914628 /* LocationSelectViewController_iPhone.xib in Resources */,
 				3E79A98913950A3C00914628 /* MainWindow_iPad.xib in Resources */,
 				3E79A98A13950A3C00914628 /* MainWindow_iPhone.xib in Resources */,
 				3E79A98B13950A3C00914628 /* MapViewController_iPad.xib in Resources */,
@@ -5469,7 +5469,7 @@
 				3E4AFF5F1271E21E0017AED4 /* SettingsViewController.m in Sources */,
 				3E4A022712720E280017AED4 /* NSString+Extension.m in Sources */,
 				3EBB0F0012767882007D7930 /* CategoryTableViewController.m in Sources */,
-				3EBB10F612768DAA007D7930 /* LocationTableViewController.m in Sources */,
+				3EBB10F612768DAA007D7930 /* LocationSelectViewController.m in Sources */,
 				3EC94CBC12773CDD00411AE0 /* UIImage+Extension.m in Sources */,
 				3E2E853812787E7F00ADA49B /* MotionWindow.m in Sources */,
 				3E1501171278D82500036A0F /* SliderTableCell.m in Sources */,
@@ -5622,7 +5622,7 @@
 				3E0F76E413AB7772004494EC /* SettingsViewController.m in Sources */,
 				3E0F76E513AB7772004494EC /* NSString+Extension.m in Sources */,
 				3E0F76E613AB7772004494EC /* CategoryTableViewController.m in Sources */,
-				3E0F76E713AB7772004494EC /* LocationTableViewController.m in Sources */,
+				3E0F76E713AB7772004494EC /* LocationSelectViewController.m in Sources */,
 				3E0F76E813AB7772004494EC /* UIImage+Extension.m in Sources */,
 				3E0F76E913AB7772004494EC /* MotionWindow.m in Sources */,
 				3E0F76EA13AB7772004494EC /* SliderTableCell.m in Sources */,
@@ -5775,7 +5775,7 @@
 				3E15A0651410CFE600D12964 /* SettingsViewController.m in Sources */,
 				3E15A0661410CFE600D12964 /* NSString+Extension.m in Sources */,
 				3E15A0671410CFE600D12964 /* CategoryTableViewController.m in Sources */,
-				3E15A0681410CFE600D12964 /* LocationTableViewController.m in Sources */,
+				3E15A0681410CFE600D12964 /* LocationSelectViewController.m in Sources */,
 				3E15A0691410CFE600D12964 /* UIImage+Extension.m in Sources */,
 				3E15A06A1410CFE600D12964 /* MotionWindow.m in Sources */,
 				3E15A06B1410CFE600D12964 /* SliderTableCell.m in Sources */,
@@ -5928,7 +5928,7 @@
 				3E15E79713C5CBA80050D46F /* SettingsViewController.m in Sources */,
 				3E15E79813C5CBA80050D46F /* NSString+Extension.m in Sources */,
 				3E15E79913C5CBA80050D46F /* CategoryTableViewController.m in Sources */,
-				3E15E79A13C5CBA80050D46F /* LocationTableViewController.m in Sources */,
+				3E15E79A13C5CBA80050D46F /* LocationSelectViewController.m in Sources */,
 				3E15E79B13C5CBA80050D46F /* UIImage+Extension.m in Sources */,
 				3E15E79C13C5CBA80050D46F /* MotionWindow.m in Sources */,
 				3E15E79D13C5CBA80050D46F /* SliderTableCell.m in Sources */,
@@ -6081,7 +6081,7 @@
 				3E44325E14FBE1E300BFECD8 /* SettingsViewController.m in Sources */,
 				3E44325F14FBE1E300BFECD8 /* NSString+Extension.m in Sources */,
 				3E44326014FBE1E300BFECD8 /* CategoryTableViewController.m in Sources */,
-				3E44326114FBE1E300BFECD8 /* LocationTableViewController.m in Sources */,
+				3E44326114FBE1E300BFECD8 /* LocationSelectViewController.m in Sources */,
 				3E44326214FBE1E300BFECD8 /* UIImage+Extension.m in Sources */,
 				3E44326314FBE1E300BFECD8 /* MotionWindow.m in Sources */,
 				3E44326414FBE1E300BFECD8 /* SliderTableCell.m in Sources */,
@@ -6234,7 +6234,7 @@
 				3EB1F7B6146D6E4F009C62AB /* SettingsViewController.m in Sources */,
 				3EB1F7B7146D6E4F009C62AB /* NSString+Extension.m in Sources */,
 				3EB1F7B8146D6E4F009C62AB /* CategoryTableViewController.m in Sources */,
-				3EB1F7B9146D6E4F009C62AB /* LocationTableViewController.m in Sources */,
+				3EB1F7B9146D6E4F009C62AB /* LocationSelectViewController.m in Sources */,
 				3EB1F7BA146D6E4F009C62AB /* UIImage+Extension.m in Sources */,
 				3EB1F7BB146D6E4F009C62AB /* MotionWindow.m in Sources */,
 				3EB1F7BC146D6E4F009C62AB /* SliderTableCell.m in Sources */,
@@ -6387,7 +6387,7 @@
 				3EC4BE6213C1E19D000056AE /* SettingsViewController.m in Sources */,
 				3EC4BE6313C1E19D000056AE /* NSString+Extension.m in Sources */,
 				3EC4BE6413C1E19D000056AE /* CategoryTableViewController.m in Sources */,
-				3EC4BE6513C1E19D000056AE /* LocationTableViewController.m in Sources */,
+				3EC4BE6513C1E19D000056AE /* LocationSelectViewController.m in Sources */,
 				3EC4BE6613C1E19D000056AE /* UIImage+Extension.m in Sources */,
 				3EC4BE6713C1E19D000056AE /* MotionWindow.m in Sources */,
 				3EC4BE6813C1E19D000056AE /* SliderTableCell.m in Sources */,
@@ -6540,7 +6540,7 @@
 				3ED0F94B138E6BE40065C8E8 /* SettingsViewController.m in Sources */,
 				3ED0F94C138E6BE40065C8E8 /* NSString+Extension.m in Sources */,
 				3ED0F94D138E6BE40065C8E8 /* CategoryTableViewController.m in Sources */,
-				3ED0F94E138E6BE40065C8E8 /* LocationTableViewController.m in Sources */,
+				3ED0F94E138E6BE40065C8E8 /* LocationSelectViewController.m in Sources */,
 				3ED0F94F138E6BE40065C8E8 /* UIImage+Extension.m in Sources */,
 				3ED0F950138E6BE40065C8E8 /* MotionWindow.m in Sources */,
 				3ED0F951138E6BE40065C8E8 /* SliderTableCell.m in Sources */,

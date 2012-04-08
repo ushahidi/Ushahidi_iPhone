@@ -47,6 +47,7 @@ For more information visit:
 * USHTableSelectedRowColor: background of selected rows
 * USHVerifiedTextColor: text color for verified label
 * USHUnverifiedTextColor: text color for unverified label
+* USHDoneButtonColor: color of the done button
 
 ##### Visibility of elements #####
 * USHReportNewsURL: should news link be should in reports?

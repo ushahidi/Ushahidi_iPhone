@@ -29,6 +29,7 @@
 
 @interface IncidentTabViewController : BaseTabViewController<UshahidiDelegate, 
                                                              ItemPickerDelegate> {
+ 
 }
 
 @end

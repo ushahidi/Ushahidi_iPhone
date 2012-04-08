@@ -89,7 +89,7 @@ typedef enum {
 }
 
 - (void) hideKeyboard {
-    [self.tableView reloadData];
+    [self.view endEditing:NO];
 }
 
 #pragma mark -
@@ -264,6 +264,7 @@ typedef enum {
 														   forRect:cell.frame];
 		}
 	}
+    [theTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark -

@@ -2385,7 +2385,7 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* Ushahidi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28EEBFDC1118E19E00187D67 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -3199,7 +3199,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */,
+				1D6058910D05DD3D006BFB54 /* Ushahidi.app */,
 				3ED0F9A2138E6BE40065C8E8 /* MapATL.app */,
 				3E0F774213AB7772004494EC /* BeijingTransport.app */,
 				3EC4BEC013C1E19D000056AE /* Team_Checkins.app */,
@@ -4088,7 +4088,7 @@
 			);
 			name = Ushahidi;
 			productName = Ushahidi_iPhone;
-			productReference = 1D6058910D05DD3D006BFB54 /* Ushahidi_iOS.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* Ushahidi.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3E0F760B13AB7772004494EC /* BeijingTransport */ = {
@@ -6670,7 +6670,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = Ushahidi;
 				PROVISIONING_PROFILE = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
 			};
@@ -6692,7 +6692,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
+				PRODUCT_NAME = Ushahidi;
 				PROVISIONING_PROFILE = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
 				VALIDATE_PRODUCT = YES;
@@ -7242,7 +7242,10 @@
 		3ED0518E121348D6000CFFA6 /* Ad Hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -7278,9 +7281,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
-				PROVISIONING_PROFILE = "C4477002-E653-4A59-B5B6-F3AD6904E1FC";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4477002-E653-4A59-B5B6-F3AD6904E1FC";
+				PRODUCT_NAME = Ushahidi;
+				PROVISIONING_PROFILE = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -7288,7 +7291,10 @@
 		3ED05190121348DB000CFFA6 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -7324,9 +7330,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
-				PRODUCT_NAME = Ushahidi_iOS;
-				PROVISIONING_PROFILE = "C4477002-E653-4A59-B5B6-F3AD6904E1FC";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4477002-E653-4A59-B5B6-F3AD6904E1FC";
+				PRODUCT_NAME = Ushahidi;
+				PROVISIONING_PROFILE = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -7427,7 +7433,10 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -7449,7 +7458,10 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv6,
+					armv7,
+				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

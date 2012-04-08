@@ -154,7 +154,7 @@ typedef enum {
 }
 
 - (void) hideKeyboard {
-    [self.tableView reloadData];
+    [self.view endEditing:NO];
 }
 
 #pragma mark -
@@ -225,6 +225,7 @@ typedef enum {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];
+    [self.view setUserInteractionEnabled:YES];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -448,14 +449,16 @@ typedef enum {
 		[actionSheet release];
 	}
 	else if (indexPath.section == TableSectionCategory) {
+        [self.view setUserInteractionEnabled:NO];
 	    self.categoryTableViewController.incident = self.incident;
-        self.categoryTableViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+        self.categoryTableViewController.modalPresentationStyle = UIModalPresentationFormSheet;
         self.categoryTableViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:self.categoryTableViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionLocation) {
-	    self.locationTableViewController.incident = self.incident;
-        self.locationTableViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+        [self.view setUserInteractionEnabled:NO];
+        self.locationTableViewController.incident = self.incident;
+        self.locationTableViewController.modalPresentationStyle = UIModalPresentationFormSheet;
         self.locationTableViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentModalViewController:self.locationTableViewController animated:YES];
 	}

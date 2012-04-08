@@ -54,6 +54,12 @@
     if ([viewController isKindOfClass:[BaseViewController class]]) {
         viewController.hostingViewController = self;
     }
+    if (viewController.modalPresentationStyle == UIModalPresentationFormSheet || 
+        viewController.modalPresentationStyle == UIModalPresentationPageSheet) {
+        if ([Device isIPad]) {
+            [self viewWillDisappear:animated];
+        }
+    }
     if ([self respondsToSelector:@selector(presentViewController:animated:completion:)]) {
         DLog(@"presentViewController:%@ animated:%d", viewController.nibName, animated);
         [self presentViewController:viewController animated:animated completion:nil];
@@ -61,7 +67,13 @@
     else {
         DLog(@"presentModalViewController:%@ animated:%d", viewController.nibName, animated);
         [super presentModalViewController:viewController animated:animated]; 
-    }  
+    } 
+    if (viewController.modalPresentationStyle == UIModalPresentationFormSheet || 
+        viewController.modalPresentationStyle == UIModalPresentationPageSheet) {
+        if ([Device isIPad]) {
+            [self viewDidDisappear:animated];
+        }
+    }
 }
 
 - (void) dismissModalViewController {
@@ -170,7 +182,6 @@
     [super viewWillAppear:animated];
     DLog(@"%@", self.nibName);
     if (self.view.superview != nil || [Device isIPhone]) {
-        //DLog(@"Register keyboardWillShow:%@", self.nibName);
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
      	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -189,6 +200,7 @@
 
 - (void) viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+    DLog(@"%@", self.nibName);
 	self.willBePushed = NO;
 	self.wasPushed = NO;
 }

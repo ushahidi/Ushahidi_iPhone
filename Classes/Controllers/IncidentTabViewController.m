@@ -104,10 +104,6 @@
 #pragma mark -
 #pragma mark UIViewController
 
-- (void) awakeFromNib{
-    [super awakeFromNib];
-}
-
 - (void)viewDidLoad {
 	[super viewDidLoad];
     self.backButtonTitle = NSLocalizedString(@"Reports", nil);
@@ -126,13 +122,12 @@
     [self.filters removeAllObjects];
     
     if (self.willBePushed) {
+        DLog(@"willBePushed");
         [self.loadingView show];
-        self.filterButton.enabled = [self.filters count] > 0;
         [self.filters addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
         [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
     }
     else {
-        self.filterButton.enabled = [self.filters count] > 0;
         [self.filters addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategories]];
         [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidents]];
     }

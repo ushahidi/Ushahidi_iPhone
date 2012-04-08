@@ -69,6 +69,7 @@
 - (void) clearHeaders;
 - (void) setHeader:(NSString *)header atSection:(NSInteger)section;
 - (void) setFooter:(NSString *)text atSection:(NSInteger)section;
+- (void) setFooter:(NSString *)text atSection:(NSInteger)section color:(UIColor*)color;
 - (void) setTableFooter:(NSString *)text;
 - (void) populate:(NSArray*)items filter:(NSObject*)filter;
 

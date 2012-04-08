@@ -129,7 +129,8 @@
    [self.headers setObject:header forKey:[NSString stringWithFormat:@"%d", section]];
 }
 
-- (void) setFooter:(NSString *)text atSection:(NSInteger)section {
+
+- (void) setFooter:(NSString *)text atSection:(NSInteger)section color:(UIColor*)color {
 	NSString *key = [NSString stringWithFormat:@"%d", section];
 	if (text != nil) {
 		UILabel *label = [self.footers objectForKey:key];
@@ -139,7 +140,7 @@
 		else {
 			UILabel *newLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,  self.tableView.contentSize.width, 26)];
 			newLabel.backgroundColor = [UIColor clearColor];
-			newLabel.textColor = [UIColor grayColor];
+			newLabel.textColor = color;
 			newLabel.textAlignment = UITextAlignmentCenter;
 			newLabel.font = [UIFont systemFontOfSize:15];
 			newLabel.text = text;
@@ -149,7 +150,11 @@
 	}
 	else {
 		[self.footers removeObjectForKey:key];
-	}
+	}    
+}
+
+- (void) setFooter:(NSString *)text atSection:(NSInteger)section {
+    [self setFooter:text atSection:section color:[UIColor grayColor]];
 }
 
 - (void) clearHeaders {
@@ -169,7 +174,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	DLog(@"%@", self.nibName);
 	self.allRows = [NSMutableArray arrayWithCapacity:0];
 	self.filteredRows = [NSMutableArray arrayWithCapacity:0];
 	self.headers = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -204,28 +208,23 @@
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	DLog(@"%@", self.nibName);
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self.tableView flashScrollIndicators];
-	DLog(@"%@", self.nibName);
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-	DLog(@"%@", self.nibName);
 	[self.view endEditing:YES];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
-	DLog(@"%@", self.nibName);
 }
 
 - (void)dealloc {
-	DLog(@"%@", self.nibName);
 	[allRows release];
 	[filteredRows release];
     [pendingRows release];

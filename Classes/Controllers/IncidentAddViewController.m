@@ -490,6 +490,12 @@ typedef enum {
 	}
 	else if (indexPath.section == TableSectionNews) {
 		self.news = text;
+        if ([NSString isNilOrEmpty:text] || [text isValidURL]) {
+			[self setFooter:nil atSection:TableSectionNews];
+		}
+		else {
+			[self setFooter:NSLocalizedString(@"Invalid News URL", nil) atSection:TableSectionNews color:[UIColor redColor]];
+		}
 	}
 }
 
@@ -506,7 +512,7 @@ typedef enum {
 			[self setFooter:nil atSection:TableSectionNews];
 		}
 		else {
-			[self setFooter:NSLocalizedString(@"Invalid News URL", nil) atSection:TableSectionNews];
+			[self setFooter:NSLocalizedString(@"Invalid News URL", nil) atSection:TableSectionNews color:[UIColor redColor]];
 		}
 		[self.tableView reloadData];
 	}
@@ -530,7 +536,6 @@ typedef enum {
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionDescription) {
 		self.incident.description = text;
-		//[cell hideKeyboard];
 	}
 }
 

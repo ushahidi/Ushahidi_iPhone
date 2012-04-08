@@ -179,7 +179,18 @@
 	if (self.deployment != nil) {
 		self.title = self.deployment.name;
 	}
-    [self display:self.displayMode event:nil];
+    if (self.willBePushed) {
+        DLog(@"willBePushed");
+        [self display:self.displayMode event:nil];
+    }
+    else {
+        if (self.displayMode.selectedSegmentIndex == ViewModeTable) {
+            [self.baseTableViewController viewWillAppear:animated];
+        }
+        else if (self.displayMode.selectedSegmentIndex == ViewModeMap){
+            [self.baseMapViewController viewWillAppear:animated];
+        }
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoQueueFinished) name:kPhotoQueueFinished object:nil];

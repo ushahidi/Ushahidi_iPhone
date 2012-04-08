@@ -163,6 +163,8 @@
     self.pendingItems = [[NSMutableArray alloc] initWithCapacity:0];
     self.filters = [[NSMutableArray alloc] initWithCapacity:0];
     self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
+    self.addButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    [self display:self.displayMode event:nil];
 } 
 
 - (void)viewDidUnload {
@@ -183,7 +185,12 @@
         DLog(@"willBePushed");
         [self display:self.displayMode event:nil];
     }
+    else if (self.wasPushed) {
+        DLog(@"wasPushed");
+        [self display:self.displayMode event:nil];
+    }
     else {
+        DLog(@"NOT willBePushed & NOT wasPushed");
         if (self.displayMode.selectedSegmentIndex == ViewModeTable) {
             [self.baseTableViewController viewWillAppear:animated];
         }
@@ -191,7 +198,6 @@
             [self.baseMapViewController viewWillAppear:animated];
         }
     }
-    self.addButton.tintColor = [[Settings sharedSettings] doneButtonColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainQueueFinished) name:kMainQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mapQueueFinished) name:kMapQueueFinished object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(photoQueueFinished) name:kPhotoQueueFinished object:nil];

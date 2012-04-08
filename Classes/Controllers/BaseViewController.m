@@ -169,12 +169,12 @@
 }
 
 - (void)viewWillBePushed {
-	DLog(@"%@", self.nibName);
+	//DLog(@"%@", self.nibName);
 	self.willBePushed = YES;
 }
 
 - (void)viewWasPushed {
-	DLog(@"%@", self.nibName);
+	//DLog(@"%@", self.nibName);
 	self.wasPushed = YES;
 }
 

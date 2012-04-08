@@ -55,10 +55,9 @@
 @synthesize splashViewController;
 
 - (void)pushDetailsViewController:(BaseViewController *)viewController animated:(BOOL)animated {
-    DLog(@"");
+    DLog(@"%@", viewController.nibName);
     if ([Device isIPad]) {
         if ([viewController conformsToProtocol:@protocol(UISplitViewControllerDelegate)]) {
-            DLog(@"UISplitViewControllerDelegate %@", viewController.nibName);
             self.splitViewController.delegate = (UIViewController<UISplitViewControllerDelegate>*)viewController;
         }
         NavigationController *detailNavigationController = [self.splitViewController.viewControllers objectAtIndex:1];
@@ -70,10 +69,9 @@
 }
 
 - (void)setDetailsViewController:(BaseViewController *)viewController animated:(BOOL)animated {
-    DLog(@"");
+    DLog(@"%@", viewController.nibName);
     if ([Device isIPad]) {
         if ([viewController conformsToProtocol:@protocol(UISplitViewControllerDelegate)]) {
-            DLog(@"UISplitViewControllerDelegate %@", viewController.nibName);
             self.splitViewController.delegate = (UIViewController<UISplitViewControllerDelegate>*)viewController;
         }
         NavigationController *masterNavigationController = [self.splitViewController.viewControllers objectAtIndex:0];
@@ -95,8 +93,8 @@
             }
         }
         else {
-            [detailNavigationController pushViewController:viewController animated:animated];
             [viewController viewWillBePushed];
+            [detailNavigationController pushViewController:viewController animated:animated];
             self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
             [viewController viewWasPushed];
         }        

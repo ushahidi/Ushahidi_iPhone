@@ -249,7 +249,7 @@
         [UIView beginAnimations:@"keyboardWillShow" context:nil];
         [UIView setAnimationDuration:animationDuration];
         self.view.frame = viewFrame;
-        DLog(@"keyboardWillShow nib:%@ keyboard:%f view:%f", self.nibName, keyboardHeight, viewFrame.size.height);
+        //DLog(@"keyboardWillShow nib:%@ keyboard:%f view:%f", self.nibName, keyboardHeight, viewFrame.size.height);
         [UIView commitAnimations];
     }
 }
@@ -279,7 +279,7 @@
         [UIView beginAnimations:@"keyboardWillHide" context:nil];
         [UIView setAnimationDuration:animationDuration];
         self.view.frame = viewFrame;
-        DLog(@"keyboardWillHide nib:%@ keyboard:%f view:%f", self.nibName, keyboardHeight, viewFrame.size.height);
+        //DLog(@"keyboardWillHide nib:%@ keyboard:%f view:%f", self.nibName, keyboardHeight, viewFrame.size.height);
         [UIView commitAnimations];
     }
 }

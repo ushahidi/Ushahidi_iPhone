@@ -44,31 +44,31 @@
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
 	<key>USHNavBarColor</key>
-	<string>#524939</string>
+	<string>#6b6b6b</string>
 	<key>USHReportNewsURL</key>
 	<false/>
 	<key>USHSearchBarColor</key>
-	<string>#5b5b5b</string>
+	<string>#898989</string>
 	<key>USHSupportEmail</key>
 	<string>support@ushahidi.com</string>
 	<key>USHSupportURL</key>
 	<string>http://www.ushahidi.com</string>
 	<key>USHTableEvenRowColor</key>
 	<string>#f3f4f6</string>
-	<key>USHTableGroupedColor</key>
-	<string>#f3f4f6</string>
 	<key>USHTableHeaderColor</key>
 	<string>#def2fb</string>
 	<key>USHTableHeaderTextColor</key>
-	<string>#FFFFFF</string>
+	<string>#2E2E2E</string>
 	<key>USHTableOddRowColor</key>
 	<string>#eaeaec</string>
 	<key>USHTablePlainColor</key>
 	<string>#f7f7f4</string>
+	<key>USHTableGroupedColor</key>
+	<string>#eaeaec</string>
 	<key>USHTableSelectedRowColor</key>
 	<string>#938982</string>
 	<key>USHToolBarColor</key>
-	<string>#5b5b5b</string>
+	<string>#898989</string>
 	<key>USHDoneButtonColor</key>
 	<string>#8a1f03</string>
 	<key>USHTwitterApiKey</key>

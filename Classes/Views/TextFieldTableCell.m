@@ -170,6 +170,13 @@
 	}
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldChanged:indexPath:text:)]) {
+        [self.delegate textFieldChanged:self indexPath:self.indexPath text:nil];
+    }
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
 	DLog(@"RETURN");
 	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {
@@ -179,6 +186,7 @@
 }
  
 - (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    DLog(@"%@", string);
 	if ([string isEqualToString:@"\n"]) {
 		DLog(@"RETURN");
 		if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {

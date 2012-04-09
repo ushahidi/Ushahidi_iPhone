@@ -2781,7 +2781,7 @@
 		3EB89E80145F1AE30038594C /* UIDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
 		3EBB0EFE12767882007D7930 /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
 		3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewController.m; sourceTree = "<group>"; };
-		3EBB10F412768DAA007D7930 /* LocationSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = LocationSelectViewController.h; sourceTree = "<group>"; };
+		3EBB10F412768DAA007D7930 /* LocationSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSelectViewController.h; sourceTree = "<group>"; };
 		3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectViewController.m; sourceTree = "<group>"; };
 		3EBBD5F812DCA73E007ECE4B /* MGTwitterEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTwitterEngine.h; sourceTree = "<group>"; };
 		3EBBD5F912DCA73E007ECE4B /* MGTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTwitterEngine.m; sourceTree = "<group>"; };
@@ -7331,8 +7331,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi;
-				PROVISIONING_PROFILE = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
+				PROVISIONING_PROFILE = "F3B29AB4-B01F-4892-B2FF-D0F1E1165E17";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3B29AB4-B01F-4892-B2FF-D0F1E1165E17";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";

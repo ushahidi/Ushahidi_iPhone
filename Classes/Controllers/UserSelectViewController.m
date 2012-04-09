@@ -40,6 +40,10 @@
 
 #pragma mark - View lifecycle
 
+- (void) awakeFromNib {
+    [super awakeFromNib];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Users", nil);

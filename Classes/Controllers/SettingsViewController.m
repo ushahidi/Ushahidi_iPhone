@@ -415,6 +415,7 @@ typedef enum {
 }
 
 - (void) textFieldChanged:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
+    DLog(@"%@", text);
 	if (indexPath.section == TableSectionContact) {
 		if (indexPath.row == TableRowContactFirst) {
 			self.firstName = text;

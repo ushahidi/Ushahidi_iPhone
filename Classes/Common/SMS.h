@@ -23,6 +23,7 @@
 #import <MessageUI/MFMessageComposeViewController.h>
 
 @class AlertView;
+@class BaseViewController;
 
 @interface SMS : NSObject<MFMessageComposeViewControllerDelegate> {
 
@@ -31,7 +32,7 @@
 	AlertView *alert;
 }
 
-- (id) initWithController:(UIViewController *)controller;
+- (id) initWithController:(BaseViewController *)controller;
 - (void) sendToRecipients:(NSArray *)recipients withMessage:(NSString *)message;
 - (BOOL) canSend;
 

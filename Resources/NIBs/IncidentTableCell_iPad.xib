@@ -132,7 +132,7 @@
 								</object>
 								<reference key="IBUIHighlightedColor" ref="644287774"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">14</float>
+								<float key="IBUIMinimumFontSize">13</float>
 								<int key="IBUITextAlignment">2</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="995451795">
 									<string key="name">Helvetica</string>
@@ -182,7 +182,7 @@
 								<reference key="IBUITextColor" ref="15743815"/>
 								<reference key="IBUIHighlightedColor" ref="644287774"/>
 								<int key="IBUIBaselineAdjustment">1</int>
-								<float key="IBUIMinimumFontSize">14</float>
+								<float key="IBUIMinimumFontSize">13</float>
 								<reference key="IBUIFontDescription" ref="995451795"/>
 								<reference key="IBUIFont" ref="301526426"/>
 							</object>
@@ -605,7 +605,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">placeholder.png</string>
-			<string key="NS.object.0">{98, 98}</string>
+			<string key="NS.object.0">{116, 107}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

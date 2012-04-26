@@ -25,6 +25,8 @@
 #import "AppDelegate.h"
 #import "Device.h"
 #import "UIView+Extension.h"
+#import "UIViewController+Extension.h"
+#import "BaseDetailsViewController.h"
 
 @interface BaseViewController ()
 
@@ -229,7 +231,10 @@
 #pragma mark Keyboard
 
 -(void) keyboardWillShow:(NSNotification *)notification {
-    if ([self.view isInsidePopover] == NO) {
+    if (self.modalViewController != nil) {
+        DLog(@"%@ showing modalViewController", self.nibName);
+    }
+    if ([self.view isInsidePopover] == NO && self.modalViewController == nil && [self class] != [BaseDetailsViewController class]) {
         CGRect keyboardBounds = CGRectMake(0, 0, 0, 0);
         [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
         CGFloat keyboardHeight;
@@ -259,7 +264,7 @@
 }
 
 -(void) keyboardWillHide:(NSNotification *)notification {
-    if ([self.view isInsidePopover] == NO) {
+    if ([self.view isInsidePopover] == NO && self.modalViewController == nil && [self class] != [BaseDetailsViewController class]) {
         CGRect keyboardBounds = CGRectMake(0, 0, 0, 0);
         [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
         CGFloat keyboardHeight = 0;

@@ -55,7 +55,6 @@
 @synthesize smsButton, emailButton, tweetButton, nextPrevious;
 @synthesize email, sms, moviePlayer;
 
-
 #pragma mark -
 #pragma mark UIViewController
 

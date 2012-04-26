@@ -21,6 +21,8 @@
 #import "SMS.h"
 #import "AlertView.h"
 #import "NSObject+Extension.h"
+#import "Settings.h"
+#import "BaseViewController.h"
 
 @interface SMS ()
 
@@ -33,7 +35,7 @@
 
 @synthesize controller, alert;
 
-- (id) initWithController:(UIViewController *)theController {
+- (id) initWithController:(BaseViewController *)theController {
 	if (self = [super init]) {
 		self.controller = theController;
 		self.alert = [[AlertView alloc] initWithController:theController];
@@ -54,8 +56,9 @@
 		if (recipients != nil) {
 			composeViewcontroller.recipients = recipients;
 		}
+        composeViewcontroller.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];
 		composeViewcontroller.messageComposeDelegate = self;
-        composeViewcontroller.modalPresentationStyle = UIModalPresentationPageSheet;
+        composeViewcontroller.modalPresentationStyle = UIModalPresentationFormSheet;
         composeViewcontroller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 		[self.controller presentModalViewController:composeViewcontroller animated:YES];
 	}

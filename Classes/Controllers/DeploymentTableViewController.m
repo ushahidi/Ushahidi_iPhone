@@ -37,6 +37,7 @@
 #import "AppDelegate.h"
 #import "MapDialog.h"
 #import "UIEvent+Extension.h"
+#import "AppDelegate.h"
 
 @interface DeploymentTableViewController ()
 
@@ -78,8 +79,15 @@ typedef enum {
                                                 destructiveButtonTitle:nil
                                                      otherButtonTitles:NSLocalizedString(@"Add Map By URL", nil), 
                                                                        NSLocalizedString(@"Find Maps Around Me", nil), nil] autorelease];    
-    CGRect rect = [event getRectForView:self.view];
-    [actionSheet showFromRect:rect inView:self.view animated:YES];
+    if ([Device isIPad] && [Device isPortraitMode]) {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        CGRect rect = [self.view convertRect:[event getRectForView:self.view] toView:appDelegate.window];
+        [actionSheet showFromRect:rect inView:appDelegate.window animated:YES];
+    }
+    else {
+        CGRect rect = [event getRectForView:self.view];
+        [actionSheet showFromRect:rect inView:self.view animated:YES];
+    }
 }
 
 - (IBAction) settings:(id)sender event:(UIEvent*)event {

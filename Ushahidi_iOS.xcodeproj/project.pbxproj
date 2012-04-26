@@ -1467,6 +1467,14 @@
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
 		3EA4FCA313A7863500DBF3DA /* BaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */; };
 		3EA4FCA413A7863500DBF3DA /* BaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */; };
+		3EA7DEAE1549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
+		3EA7DEAF1549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
+		3EA7DEB01549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
+		3EA7DEB11549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
+		3EA7DEB21549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
+		3EA7DEB31549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
+		3EA7DEB41549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
+		3EA7DEB51549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
 		3EA9BD6314ED83E300167351 /* UserSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9BD6214ED83E300167351 /* UserSelectViewController.m */; };
 		3EA9BD6414ED83E300167351 /* UserSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9BD6214ED83E300167351 /* UserSelectViewController.m */; };
 		3EA9BD6514ED83E300167351 /* UserSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA9BD6214ED83E300167351 /* UserSelectViewController.m */; };
@@ -2752,6 +2760,8 @@
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3EA4FCA113A7863500DBF3DA /* BaseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDetailsViewController.h; sourceTree = "<group>"; };
 		3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDetailsViewController.m; sourceTree = "<group>"; };
+		3EA7DEAC1549AD8B004566B0 /* UIViewController+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
+		3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extension.m"; sourceTree = "<group>"; };
 		3EA9BD6114ED83E300167351 /* UserSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSelectViewController.h; sourceTree = "<group>"; };
 		3EA9BD6214ED83E300167351 /* UserSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSelectViewController.m; sourceTree = "<group>"; };
 		3EA9BD6C14ED83FE00167351 /* CategorySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySelectViewController.h; sourceTree = "<group>"; };
@@ -3464,6 +3474,8 @@
 				3EB89E80145F1AE30038594C /* UIDevice+Extension.m */,
 				3E3F142414EC748700B18BF9 /* UIEvent+Extension.h */,
 				3E3F142514EC748700B18BF9 /* UIEvent+Extension.m */,
+				3EA7DEAC1549AD8B004566B0 /* UIViewController+Extension.h */,
+				3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -5546,6 +5558,7 @@
 				3E4432DD14FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432EB14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E738758151A843A00692956 /* main.m in Sources */,
+				3EA7DEAE1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5699,6 +5712,7 @@
 				3E4432DF14FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432ED14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875A151A843A00692956 /* main.m in Sources */,
+				3EA7DEB01549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5852,6 +5866,7 @@
 				3E4432E214FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432F014FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875D151A843A00692956 /* main.m in Sources */,
+				3EA7DEB31549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6005,6 +6020,7 @@
 				3E4432E114FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432EF14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875C151A843A00692956 /* main.m in Sources */,
+				3EA7DEB21549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6158,6 +6174,7 @@
 				3E4432E614FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432F314FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875F151A843A00692956 /* main.m in Sources */,
+				3EA7DEB51549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6311,6 +6328,7 @@
 				3E4432E514FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432F214FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875E151A843A00692956 /* main.m in Sources */,
+				3EA7DEB41549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6464,6 +6482,7 @@
 				3E4432E014FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432EE14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875B151A843A00692956 /* main.m in Sources */,
+				3EA7DEB11549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6617,6 +6636,7 @@
 				3E4432DE14FBE83200BFECD8 /* SplashViewController.m in Sources */,
 				3E4432EC14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E738759151A843A00692956 /* main.m in Sources */,
+				3EA7DEAF1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6763,8 +6783,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = BeijingTransport;
-				PROVISIONING_PROFILE = "6967B503-479F-4BB3-8944-CB0C126973A0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6967B503-479F-4BB3-8944-CB0C126973A0";
+				PROVISIONING_PROFILE = "8D1E812A-9B4C-4315-85E1-895F2CF43E0E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8D1E812A-9B4C-4315-85E1-895F2CF43E0E";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -6856,8 +6876,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Inherity;
-				PROVISIONING_PROFILE = "5CA2CBCB-1FE6-4390-A427-F1D563B1B18E";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5CA2CBCB-1FE6-4390-A427-F1D563B1B18E";
+				PROVISIONING_PROFILE = "C93D46C4-4499-48CC-BACE-E757854A2ABA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C93D46C4-4499-48CC-BACE-E757854A2ABA";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -7210,8 +7230,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				PROVISIONING_PROFILE = "FCADF99D-9CEE-480B-9081-9D8407CFE028";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FCADF99D-9CEE-480B-9081-9D8407CFE028";
+				PROVISIONING_PROFILE = "9C393398-8AD8-4A1E-B3FE-A62B6A05F459";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C393398-8AD8-4A1E-B3FE-A62B6A05F459";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -7233,8 +7253,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Team_Checkins;
-				PROVISIONING_PROFILE = "FCADF99D-9CEE-480B-9081-9D8407CFE028";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FCADF99D-9CEE-480B-9081-9D8407CFE028";
+				PROVISIONING_PROFILE = "9C393398-8AD8-4A1E-B3FE-A62B6A05F459";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C393398-8AD8-4A1E-B3FE-A62B6A05F459";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -7331,8 +7351,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = Ushahidi;
-				PROVISIONING_PROFILE = "F3B29AB4-B01F-4892-B2FF-D0F1E1165E17";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F3B29AB4-B01F-4892-B2FF-D0F1E1165E17";
+				PROVISIONING_PROFILE = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -7401,8 +7421,8 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MapATL;
-				PROVISIONING_PROFILE = "42974A53-2C3E-486A-9532-BEE585853F47";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42974A53-2C3E-486A-9532-BEE585853F47";
+				PROVISIONING_PROFILE = "7B8AE39E-9C63-4DAF-B27E-73E97EB54DC1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7B8AE39E-9C63-4DAF-B27E-73E97EB54DC1";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";

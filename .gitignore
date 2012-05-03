@@ -10,3 +10,5 @@ build
 *~.nib
 *.swp
 .DS_Store
+*.xcuserdatad
+xcuserdata

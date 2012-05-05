@@ -100,7 +100,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		self.resizePhotos = [userDefaults boolForKey:@"resizePhotos"];
 	}
 	else {
-		self.resizePhotos = YES;
+        NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+		self.resizePhotos = ![infoDictionary boolForKey:@"USHHighResDefaultImages"];
 	}
 	self.imageWidth = [userDefaults floatForKey:@"imageWidth"];
 	if (self.imageWidth == 0) self.imageWidth = 600;
@@ -153,6 +154,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 		self.showReportNewsURL = YES;
 	}
 }
+
 
 - (void)dealloc {
 	[email release];

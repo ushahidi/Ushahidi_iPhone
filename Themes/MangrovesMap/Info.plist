@@ -28,7 +28,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Ushahidi</string>
+	<string>Mapping The Mangroves</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
@@ -44,11 +44,11 @@
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
 	<key>USHNavBarColor</key>
-	<string>#524939</string>
+	<string>#390d07</string>
 	<key>USHReportNewsURL</key>
 	<true/>
 	<key>USHSearchBarColor</key>
-	<string>#756d61</string>
+	<string>#faf0cf</string>
 	<key>USHSupportEmail</key>
 	<string>support@ushahidi.com</string>
 	<key>USHSupportURL</key>

@@ -140,7 +140,7 @@
     
     NavigationController *masterNavigationController = [[[NavigationController alloc] init] autorelease];
     masterNavigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-    masterNavigationController.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];
+    masterNavigationController.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];   
     
     NavigationController *detailNavigationController = [[[NavigationController alloc] init] autorelease];
     detailNavigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;

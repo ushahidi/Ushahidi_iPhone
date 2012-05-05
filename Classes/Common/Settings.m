@@ -64,6 +64,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 @synthesize unverifiedTextColor;
 @synthesize showReportNewsURL;
 @synthesize doneButtonColor;
+@synthesize modalViewBackgroundColor;
 
 @synthesize supportURL;
 @synthesize supportEmail;
@@ -137,10 +138,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	self.tableHeaderBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableHeaderColor"]];
 	self.tableHeaderTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableHeaderTextColor"]];
     self.doneButtonColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHDoneButtonColor"]];
-	
+	self.modalViewBackgroundColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHModalViewBackgroundColor"]];
+    
 	self.verifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHVerifiedTextColor"]];
 	self.unverifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHUnverifiedTextColor"]];
-	
+    
 	self.twitterApiKey = [infoDictionary stringForKey:@"USHTwitterApiKey"];
     self.twitterApiSecret = [infoDictionary stringForKey:@"USHTwitterApiSecret"];
 

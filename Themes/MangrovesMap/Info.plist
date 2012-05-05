@@ -117,6 +117,8 @@
 	<string>#CC6666</string>
 	<key>USHVerifiedTextColor</key>
 	<string>#99CC99</string>
+	<key>USHModalViewBackgroundColor</key>
+	<string>#faf0cf</string>
 	<key>USHHighResDefaultImages</key>
 	<true/>
 </dict>

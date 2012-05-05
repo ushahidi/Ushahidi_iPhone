@@ -2389,6 +2389,8 @@
 		3EFC3DDA13A6333900CCA185 /* BaseSortTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */; };
 		3EFC3DDD13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
 		3EFC3DDE13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
+		608FBDC01555592A00813B62 /* mangroves57.png in Resources */ = {isa = PBXBuildFile; fileRef = 608FBDBF1555592A00813B62 /* mangroves57.png */; };
+		608FBDC21555592E00813B62 /* mangroves114.png in Resources */ = {isa = PBXBuildFile; fileRef = 608FBDC11555592E00813B62 /* mangroves114.png */; };
 		609617AA15532DB100FD97F8 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A421222BD09001DE141 /* blank.png */; };
 		609617AB15532DB100FD97F8 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A461222BD09001DE141 /* location.png */; };
 		609617AC15532DB100FD97F8 /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A491222BD09001DE141 /* arrow_down.png */; };
@@ -3306,13 +3308,12 @@
 		3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSortTableViewController.m; sourceTree = "<group>"; };
 		3EFC3DDB13A6334400CCA185 /* BaseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMapViewController.h; sourceTree = "<group>"; };
 		3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapViewController.m; sourceTree = "<group>"; };
+		608FBDBF1555592A00813B62 /* mangroves57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mangroves57.png; path = ../../mangroves57.png; sourceTree = "<group>"; };
+		608FBDC11555592E00813B62 /* mangroves114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mangroves114.png; path = ../../mangroves114.png; sourceTree = "<group>"; };
 		609618DB15532DB100FD97F8 /* MangrovesMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangrovesMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609618E015532E6400FD97F8 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
-		609618E115532E6400FD97F8 /* Default-Portrait.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait.psd"; sourceTree = "<group>"; };
 		609618E215532E6400FD97F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		609618E315532E6400FD97F8 /* Default.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Default.psd; sourceTree = "<group>"; };
 		609618E415532E6400FD97F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		609618E515532E6400FD97F8 /* Default@2x.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default@2x.psd"; sourceTree = "<group>"; };
 		609618E615532E6400FD97F8 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
 		609618E715532E6400FD97F8 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		609618E815532E6400FD97F8 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -4433,12 +4434,11 @@
 		609618DF15532E6400FD97F8 /* MangrovesMap */ = {
 			isa = PBXGroup;
 			children = (
+				608FBDC11555592E00813B62 /* mangroves114.png */,
+				608FBDBF1555592A00813B62 /* mangroves57.png */,
 				609618E015532E6400FD97F8 /* Default-Portrait.png */,
-				609618E115532E6400FD97F8 /* Default-Portrait.psd */,
 				609618E215532E6400FD97F8 /* Default.png */,
-				609618E315532E6400FD97F8 /* Default.psd */,
 				609618E415532E6400FD97F8 /* Default@2x.png */,
-				609618E515532E6400FD97F8 /* Default@2x.psd */,
 				609618E615532E6400FD97F8 /* Icon-57.png */,
 				609618E715532E6400FD97F8 /* Icon-72.png */,
 				609618E815532E6400FD97F8 /* Icon-Small-50.png */,
@@ -5937,6 +5937,8 @@
 				6096190915532E6400FD97F8 /* Logo_iPhone.png in Resources */,
 				6096190A15532E6400FD97F8 /* Logo_iPhone@2x.png in Resources */,
 				6096190B15532E6400FD97F8 /* placeholder.png in Resources */,
+				608FBDC01555592A00813B62 /* mangroves57.png in Resources */,
+				608FBDC21555592E00813B62 /* mangroves114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

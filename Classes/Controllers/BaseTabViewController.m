@@ -163,7 +163,9 @@
     self.pendingItems = [[NSMutableArray alloc] initWithCapacity:0];
     self.filters = [[NSMutableArray alloc] initWithCapacity:0];
     self.itemPicker = [[ItemPicker alloc] initWithDelegate:self forController:self];
-    self.addButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    if([self.addButton respondsToSelector:@selector(setTintColor:)]){
+        self.addButton.tintColor = [[Settings sharedSettings] doneButtonColor];        
+    }
     [self display:self.displayMode event:nil];
 } 
 

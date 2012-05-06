@@ -166,7 +166,10 @@ typedef enum {
     self.doneButton.title = NSLocalizedString(@"Add", nil);
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
-	[self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
+    if([Device isIPhone]){
+        self.tableView.backgroundColor = [Settings sharedSettings].modalViewBackgroundColor;   
+    }
+    [self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
 	[self setHeader:NSLocalizedString(@"Description", nil) atSection:TableSectionDescription];
 	[self setHeader:NSLocalizedString(@"Category", nil) atSection:TableSectionCategory];
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDate];

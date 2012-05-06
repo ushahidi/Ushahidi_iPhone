@@ -112,7 +112,6 @@
 @property(nonatomic, retain) UIColor *verifiedTextColor;
 @property(nonatomic, retain) UIColor *unverifiedTextColor;
 @property(nonatomic, retain) UIColor *doneButtonColor;
-@property(nonatomic, retain) UIColor *modalViewBackgroundColor;
 
 @property(nonatomic, retain) NSString *twitterUsername;
 @property(nonatomic, retain) NSString *twitterPassword;

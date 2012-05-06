@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>USHAppStoreURL</key>
-	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
-	<key>USHBitlyApiKey</key>
-	<string>R_5ca9804d3e3653daf4500968dbdc61ae</string>
-	<key>USHBitlyApiLogin</key>
-	<string>ushahidiios</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -34,15 +28,44 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>USHMapURL</key>
-	<string></string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow_iPad</string>
+	<key>Required Device Capabilities</key>
+	<array>
+		<string>armv6</string>
+		<string>armv7</string>
+	</array>
+	<key>UILaunchImageFile</key>
+	<string>Default</string>
+	<key>UILaunchImageFile~ipad</key>
+	<string>Default-Portrait</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>USHAppStoreURL</key>
+	<string>http://itunes.apple.com/app/ushahidi-ios/id410609585</string>
+	<key>USHBitlyApiKey</key>
+	<string>R_5ca9804d3e3653daf4500968dbdc61ae</string>
+	<key>USHBitlyApiLogin</key>
+	<string>ushahidiios</string>
+	<key>USHDoneButtonColor</key>
+	<string>#8a1f03</string>
+	<key>USHHighResDefaultImages</key>
+	<true/>
+	<key>USHMapURL</key>
+	<string></string>
 	<key>USHNavBarColor</key>
 	<string>#524939</string>
 	<key>USHReportNewsURL</key>
@@ -69,34 +92,13 @@
 	<string>#8d817a</string>
 	<key>USHToolBarColor</key>
 	<string>#756d61</string>
-	<key>USHDoneButtonColor</key>
-	<string>#8a1f03</string>
 	<key>USHTwitterApiKey</key>
 	<string>muqzQTP4YkXi0ncI39s0Jw</string>
 	<key>USHTwitterApiSecret</key>
 	<string>3uOGt2Hjj777rTOI76tOu1eFEvkgtbTWOvYcHiBqsE</string>
-	<key>UILaunchImageFile</key>
-	<string>Default</string>
-	<key>UILaunchImageFile~ipad</key>
-	<string>Default-Portrait</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
 	<key>USHUnverifiedTextColor</key>
 	<string>#CC6666</string>
 	<key>USHVerifiedTextColor</key>
 	<string>#99CC99</string>
-	<key>Required Device Capabilities</key>
-	<array>
-		<string>armv6</string>
-		<string>armv7</string>
-	</array>
 </dict>
 </plist>

@@ -81,6 +81,8 @@
 	<string>ushahidiios</string>
 	<key>USHDoneButtonColor</key>
 	<string>#8a1f03</string>
+	<key>USHHighResDefaultImages</key>
+	<true/>
 	<key>USHMapURL</key>
 	<string>http://mappingthemangroves.qfi.org/</string>
 	<key>USHNavBarColor</key>
@@ -117,9 +119,5 @@
 	<string>#CC6666</string>
 	<key>USHVerifiedTextColor</key>
 	<string>#99CC99</string>
-	<key>USHModalViewBackgroundColor</key>
-	<string>#faf0cf</string>
-	<key>USHHighResDefaultImages</key>
-	<true/>
 </dict>
 </plist>

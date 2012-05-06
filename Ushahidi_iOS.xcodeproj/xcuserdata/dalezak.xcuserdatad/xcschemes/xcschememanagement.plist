@@ -7,32 +7,37 @@
 		<key>BeijingTransport.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>5</integer>
 		</dict>
 		<key>Inherity.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
 		</dict>
-		<key>MapATL.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>TEDFellows.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>TEDxMap.xcscheme</key>
+		<key>MangrovesMap.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
+		<key>MapATL.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>TEDFellows.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>TEDxMap.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>TeamCheckins.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>3</integer>
 		</dict>
 		<key>Ushahidi.xcscheme</key>
 		<dict>
@@ -100,6 +105,11 @@
 			<true/>
 		</dict>
 		<key>3EF80B1C143F9C50002C792E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>609617A815532DB100FD97F8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

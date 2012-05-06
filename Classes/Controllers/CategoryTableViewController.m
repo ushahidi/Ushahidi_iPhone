@@ -50,7 +50,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.doneButton.title = NSLocalizedString(@"Done", nil);
-    self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    if ([self.doneButton respondsToSelector:@selector(setTintColor:)]) {
+        self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    }
 	[self showSearchBarWithPlaceholder:NSLocalizedString(@"Search categories...", nil)];
 }
 

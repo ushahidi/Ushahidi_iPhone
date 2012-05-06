@@ -52,7 +52,9 @@
     [super viewDidLoad];
     self.cancelButton.title = NSLocalizedString(@"Cancel", nil);
     self.doneButton.title = NSLocalizedString(@"Add", nil);
-    self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    if ([self.doneButton respondsToSelector:@selector(setTintColor:)]) {
+        self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    }
 }
 
 - (void)viewDidUnload {

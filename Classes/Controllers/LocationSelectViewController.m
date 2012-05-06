@@ -118,7 +118,9 @@
     [super viewDidLoad];
     self.locations = [[NSMutableArray alloc] initWithCapacity:0];
     self.doneButton.title = NSLocalizedString(@"Done", nil);
-    self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    if ([self.doneButton respondsToSelector:@selector(setTintColor:)]) {
+        self.doneButton.tintColor = [[Settings sharedSettings] doneButtonColor];
+    }
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     tapGestureRecognizer.numberOfTapsRequired = 2;
     tapGestureRecognizer.numberOfTouchesRequired = 1;

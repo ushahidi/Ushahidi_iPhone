@@ -59,7 +59,8 @@
 	searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	searchBar.barStyle = UIBarStyleBlack;
 	searchBar.placeholder = placeholder;
-	searchBar.tintColor = [[Settings sharedSettings] searchBarTintColor];
+    searchBar.tintColor = [[Settings sharedSettings] searchBarTintColor];
+    
 	[searchBar sizeToFit];
 	[self.tableView setTableHeaderView:searchBar];
 	[searchBar release];

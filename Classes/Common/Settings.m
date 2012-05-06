@@ -138,7 +138,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	self.tableHeaderBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableHeaderColor"]];
 	self.tableHeaderTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableHeaderTextColor"]];
     self.doneButtonColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHDoneButtonColor"]];
-	self.modalViewBackgroundColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHModalViewBackgroundColor"]];
+
+    if ([infoDictionary objectForKey:@"USHModalViewBackgroundColor"]) {
+        self.modalViewBackgroundColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHModalViewBackgroundColor"]];    
+    }else{
+        self.modalViewBackgroundColor = [UIColor colorFromHexString:@"#ede7d1"];
+    }
     
 	self.verifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHVerifiedTextColor"]];
 	self.unverifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHUnverifiedTextColor"]];

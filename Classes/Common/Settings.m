@@ -102,7 +102,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	}
 	else {
         NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-		self.resizePhotos = ![infoDictionary boolForKey:@"USHHighResDefaultImages"];
+        self.resizePhotos = ![infoDictionary boolForKey:@"USHHighResDefaultImages"];
 	}
 	self.imageWidth = [userDefaults floatForKey:@"imageWidth"];
 	if (self.imageWidth == 0) self.imageWidth = 600;

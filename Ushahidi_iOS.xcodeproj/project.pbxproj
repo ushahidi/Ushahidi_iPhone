@@ -2675,8 +2675,6 @@
 		609618F615532E6400FD97F8 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E015532E6400FD97F8 /* Default-Portrait.png */; };
 		609618F815532E6400FD97F8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E215532E6400FD97F8 /* Default.png */; };
 		609618FA15532E6400FD97F8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E415532E6400FD97F8 /* Default@2x.png */; };
-		609618FC15532E6400FD97F8 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E615532E6400FD97F8 /* Icon-57.png */; };
-		609618FD15532E6400FD97F8 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E715532E6400FD97F8 /* Icon-72.png */; };
 		609618FE15532E6400FD97F8 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E815532E6400FD97F8 /* Icon-Small-50.png */; };
 		609618FF15532E6400FD97F8 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E915532E6400FD97F8 /* Icon-Small.png */; };
 		6096190015532E6400FD97F8 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618EA15532E6400FD97F8 /* Icon-Small@2x.png */; };
@@ -3308,14 +3306,12 @@
 		3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSortTableViewController.m; sourceTree = "<group>"; };
 		3EFC3DDB13A6334400CCA185 /* BaseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMapViewController.h; sourceTree = "<group>"; };
 		3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapViewController.m; sourceTree = "<group>"; };
-		608FBDBF1555592A00813B62 /* mangroves57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mangroves57.png; path = ../../mangroves57.png; sourceTree = "<group>"; };
-		608FBDC11555592E00813B62 /* mangroves114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mangroves114.png; path = ../../mangroves114.png; sourceTree = "<group>"; };
+		608FBDBF1555592A00813B62 /* mangroves57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves57.png; sourceTree = "<group>"; };
+		608FBDC11555592E00813B62 /* mangroves114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves114.png; sourceTree = "<group>"; };
 		609618DB15532DB100FD97F8 /* MangrovesMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangrovesMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609618E015532E6400FD97F8 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		609618E215532E6400FD97F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		609618E415532E6400FD97F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		609618E615532E6400FD97F8 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
-		609618E715532E6400FD97F8 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		609618E815532E6400FD97F8 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		609618E915532E6400FD97F8 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		609618EA15532E6400FD97F8 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
@@ -4439,8 +4435,6 @@
 				609618E015532E6400FD97F8 /* Default-Portrait.png */,
 				609618E215532E6400FD97F8 /* Default.png */,
 				609618E415532E6400FD97F8 /* Default@2x.png */,
-				609618E615532E6400FD97F8 /* Icon-57.png */,
-				609618E715532E6400FD97F8 /* Icon-72.png */,
 				609618E815532E6400FD97F8 /* Icon-Small-50.png */,
 				609618E915532E6400FD97F8 /* Icon-Small.png */,
 				609618EA15532E6400FD97F8 /* Icon-Small@2x.png */,
@@ -5923,8 +5917,6 @@
 				609618F615532E6400FD97F8 /* Default-Portrait.png in Resources */,
 				609618F815532E6400FD97F8 /* Default.png in Resources */,
 				609618FA15532E6400FD97F8 /* Default@2x.png in Resources */,
-				609618FC15532E6400FD97F8 /* Icon-57.png in Resources */,
-				609618FD15532E6400FD97F8 /* Icon-72.png in Resources */,
 				609618FE15532E6400FD97F8 /* Icon-Small-50.png in Resources */,
 				609618FF15532E6400FD97F8 /* Icon-Small.png in Resources */,
 				6096190015532E6400FD97F8 /* Icon-Small@2x.png in Resources */,
@@ -8162,6 +8154,7 @@
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -8184,6 +8177,7 @@
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -8207,6 +8201,7 @@
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -8230,6 +8225,7 @@
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";

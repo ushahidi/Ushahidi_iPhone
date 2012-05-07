@@ -161,9 +161,7 @@ typedef enum {
     }
 	self.email = [[Email alloc] initWithController:self];
 	self.logo = [Device isIPad] ? [UIImage imageNamed:@"Logo_iPad.png"] : [UIImage imageNamed:@"Logo_iPhone.png"];
-    if([Device isIPhone]){
-        self.tableView.backgroundColor = [Settings sharedSettings].modalViewBackgroundColor;   
-    }
+
 	[self setHeader:NSLocalizedString(@"Contact Settings", nil) atSection:TableSectionContact];
 	[self setHeader:NSLocalizedString(@"Photo Settings", nil) atSection:TableSectionPhoto];
 	[self setHeader:NSLocalizedString(@"Map Settings", nil) atSection:TableSectionMap];

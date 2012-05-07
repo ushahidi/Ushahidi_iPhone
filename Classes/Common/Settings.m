@@ -64,7 +64,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 @synthesize unverifiedTextColor;
 @synthesize showReportNewsURL;
 @synthesize doneButtonColor;
-@synthesize modalViewBackgroundColor;
 
 @synthesize supportURL;
 @synthesize supportEmail;
@@ -138,12 +137,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	self.tableHeaderBackColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableHeaderColor"]];
 	self.tableHeaderTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHTableHeaderTextColor"]];
     self.doneButtonColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHDoneButtonColor"]];
-
-    if ([infoDictionary objectForKey:@"USHModalViewBackgroundColor"]) {
-        self.modalViewBackgroundColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHModalViewBackgroundColor"]];    
-    }else{
-        self.modalViewBackgroundColor = [UIColor colorFromHexString:@"#ede7d1"];
-    }
     
 	self.verifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHVerifiedTextColor"]];
 	self.unverifiedTextColor = [UIColor colorFromHexString:[infoDictionary objectForKey:@"USHUnverifiedTextColor"]];

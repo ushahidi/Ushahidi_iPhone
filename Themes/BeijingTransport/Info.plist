@@ -63,9 +63,9 @@
 	<key>USHDoneButtonColor</key>
 	<string>#ea5e20</string>
 	<key>USHHighResDefaultImages</key>
-	<true/>
+	<false/>
 	<key>USHMapURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
+	<string>http://www.ourtransport.net/ushahidi/</string>
 	<key>USHNavBarColor</key>
 	<string>#3c4a65</string>
 	<key>USHReportNewsURL</key>
@@ -75,7 +75,7 @@
 	<key>USHSupportEmail</key>
 	<string>ourbjtransport@gmail.com</string>
 	<key>USHSupportURL</key>
-	<string>http://114.251.208.133/ushahidi/</string>
+	<string>http://www.ourtransport.net/ushahidi/</string>
 	<key>USHTableEvenRowColor</key>
 	<string>#d4edf2</string>
 	<key>USHTableGroupedColor</key>

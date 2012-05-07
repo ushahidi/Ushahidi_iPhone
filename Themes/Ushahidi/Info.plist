@@ -63,7 +63,7 @@
 	<key>USHDoneButtonColor</key>
 	<string>#8a1f03</string>
 	<key>USHHighResDefaultImages</key>
-	<true/>
+	<false/>
 	<key>USHMapURL</key>
 	<string></string>
 	<key>USHNavBarColor</key>

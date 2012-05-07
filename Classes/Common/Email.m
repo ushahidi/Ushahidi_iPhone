@@ -62,7 +62,9 @@
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];
     picker.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleBordered;
-    picker.navigationItem.rightBarButtonItem.tintColor = [[Settings sharedSettings] doneButtonColor];
+    if ([picker.navigationItem.rightBarButtonItem respondsToSelector:@selector(setTintColor:)]) {
+        picker.navigationItem.rightBarButtonItem.tintColor = [[Settings sharedSettings] doneButtonColor];
+    }
 	picker.mailComposeDelegate = self;
 	[picker setMessageBody:message isHTML:YES];
 	[picker setSubject:subject];

@@ -2389,6 +2389,15 @@
 		3EFC3DDA13A6333900CCA185 /* BaseSortTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */; };
 		3EFC3DDD13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
 		3EFC3DDE13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
+		604CF576155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
+		604CF577155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
+		604CF578155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
+		604CF579155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
+		604CF57A155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
+		604CF57B155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
+		604CF57C155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
+		604CF57D155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
+		604CF57E155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
 		608FBDC01555592A00813B62 /* mangroves57.png in Resources */ = {isa = PBXBuildFile; fileRef = 608FBDBF1555592A00813B62 /* mangroves57.png */; };
 		608FBDC21555592E00813B62 /* mangroves114.png in Resources */ = {isa = PBXBuildFile; fileRef = 608FBDC11555592E00813B62 /* mangroves114.png */; };
 		609617AA15532DB100FD97F8 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A421222BD09001DE141 /* blank.png */; };
@@ -3306,6 +3315,8 @@
 		3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSortTableViewController.m; sourceTree = "<group>"; };
 		3EFC3DDB13A6334400CCA185 /* BaseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMapViewController.h; sourceTree = "<group>"; };
 		3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapViewController.m; sourceTree = "<group>"; };
+		604CF574155E813500C043CB /* VideoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPickerController.h; sourceTree = "<group>"; };
+		604CF575155E813500C043CB /* VideoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPickerController.m; sourceTree = "<group>"; };
 		608FBDBF1555592A00813B62 /* mangroves57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves57.png; sourceTree = "<group>"; };
 		608FBDC11555592E00813B62 /* mangroves114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves114.png; sourceTree = "<group>"; };
 		609618DB15532DB100FD97F8 /* MangrovesMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangrovesMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3974,6 +3985,8 @@
 				3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */,
 				3E862A001222BCD0001DE141 /* ImagePickerController.h */,
 				3E862A011222BCD0001DE141 /* ImagePickerController.m */,
+				604CF574155E813500C043CB /* VideoPickerController.h */,
+				604CF575155E813500C043CB /* VideoPickerController.m */,
 				3E862A021222BCD0001DE141 /* ImageViewController.h */,
 				3E862A031222BCD0001DE141 /* ImageViewController.m */,
 				3E862A081222BCD0001DE141 /* MapViewController.h */,
@@ -6088,6 +6101,7 @@
 				3E4432EB14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E738758151A843A00692956 /* main.m in Sources */,
 				3EA7DEAE1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				604CF576155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6242,6 +6256,7 @@
 				3E4432ED14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875A151A843A00692956 /* main.m in Sources */,
 				3EA7DEB01549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				604CF578155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6396,6 +6411,7 @@
 				3E4432F014FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875D151A843A00692956 /* main.m in Sources */,
 				3EA7DEB31549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				604CF57B155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6550,6 +6566,7 @@
 				3E4432EF14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875C151A843A00692956 /* main.m in Sources */,
 				3EA7DEB21549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				604CF57A155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6704,6 +6721,7 @@
 				3E4432F314FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875F151A843A00692956 /* main.m in Sources */,
 				3EA7DEB51549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				604CF57D155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6858,6 +6876,7 @@
 				3E4432F214FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875E151A843A00692956 /* main.m in Sources */,
 				3EA7DEB41549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				604CF57C155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7012,6 +7031,7 @@
 				3E4432EE14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875B151A843A00692956 /* main.m in Sources */,
 				3EA7DEB11549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				604CF579155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7166,6 +7186,7 @@
 				3E4432EC14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E738759151A843A00692956 /* main.m in Sources */,
 				3EA7DEAF1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				604CF577155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7320,6 +7341,7 @@
 				609618C115532DB100FD97F8 /* YouTubeTableCell.m in Sources */,
 				609618C215532DB100FD97F8 /* main.m in Sources */,
 				609618C315532DB100FD97F8 /* UIViewController+Extension.m in Sources */,
+				604CF57E155E813500C043CB /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

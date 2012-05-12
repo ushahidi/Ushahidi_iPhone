@@ -56,6 +56,7 @@
 @synthesize categoryTableViewController;
 @synthesize locationSelectViewController;
 @synthesize imagePickerController;
+@synthesize videoPickerController;
 @synthesize news;
 @synthesize incident;
 
@@ -166,6 +167,7 @@ typedef enum {
 	self.navigationBar.topItem.title = NSLocalizedString(@"Add Report", nil);
     self.doneButton.title = NSLocalizedString(@"Add", nil);
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
+    self.videoPickerController = [[VideoPickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
     [self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
 	[self setHeader:NSLocalizedString(@"Description", nil) atSection:TableSectionDescription];
@@ -189,6 +191,7 @@ typedef enum {
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.imagePickerController = nil;
+    self.videoPickerController = nil;
 	self.datePicker = nil;
 }
 
@@ -238,6 +241,7 @@ typedef enum {
 
 - (void)dealloc {
 	[imagePickerController release];
+    [videoPickerController release];
 	[categoryTableViewController release];
 	[locationSelectViewController release];
 	[incident release];
@@ -458,12 +462,10 @@ typedef enum {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[self.view endEditing:YES];
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (indexPath.section == TableSectionVideos && indexPath.row == 0) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-		[self.imagePickerController showImagePickerForDelegate:self 
-														resize:[[Settings sharedSettings] resizePhotos]
-														 width:[[Settings sharedSettings] imageWidth] 
-													   forRect:cell.frame];
+		[self.videoPickerController showVideoPickerForDelegate:self forRect:cell.frame];
 	}
 	else if (indexPath.section == TableSectionVideos && indexPath.row > 0) {
     	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
@@ -490,7 +492,7 @@ typedef enum {
 														cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
 												   destructiveButtonTitle:NSLocalizedString(@"Remove Photo", nil)
 														otherButtonTitles:nil];
-		[actionSheet setTag:indexPath.row - 1];
+		[actionSheet setTag:indexPath.row - 1 + 1000];
 		[actionSheet setActionSheetStyle:UIActionSheetStyleBlackOpaque];
 		[actionSheet showInView:[self view]];
 		[actionSheet release];
@@ -641,7 +643,7 @@ typedef enum {
         BOOL isVideoActionSheet = (actionSheet.tag > 1000);
 
         if (isVideoActionSheet) {
-            [self.incident removeVideoAtIndex:actionSheet.tag - 3000];
+            [self.incident removeVideoAtIndex:actionSheet.tag - 1000];
         }else{
             [self.incident removePhotoAtIndex:actionSheet.tag];            
         }

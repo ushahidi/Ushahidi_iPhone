@@ -116,6 +116,8 @@
 - (UIImage *) getFirstPhotoThumbnail;
 - (void) removePhotoAtIndex:(NSInteger)index;
 
+- (void) removeVideoAtIndex:(NSInteger)index;
+
 - (NSComparisonResult)compareByTitle:(Incident *)incident;
 - (NSComparisonResult)compareByDate:(Incident *)incident;
 - (NSComparisonResult)compareByVerified:(Incident *)incident;

@@ -114,6 +114,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	self.twitterPassword = [userDefaults stringForKey:@"twitterPassword"];
     self.twitterUserKey = [userDefaults stringForKey:@"twitterUserKey"];
 	self.twitterUserSecret = [userDefaults stringForKey:@"twitterUserSecret"];
+    
+    self.youtubeDeveloperKey = [userDefaults stringForKey:@"USHYoutubeDeveloperKey"];
+    self.youtubeLogin = [userDefaults stringForKey:@"USHYoutubeUsername"];   
+    self.youtubePassword = [userDefaults stringForKey:@"USHYoutubePassword"];
 }
 
 - (void) loadInfoDictionary {
@@ -146,6 +150,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
     self.bitlyApiLogin = [infoDictionary stringForKey:@"USHBitlyApiLogin"];
     self.bitlyApiKey = [infoDictionary stringForKey:@"USHBitlyApiKey"];
+    
+    self.youtubeDeveloperKey = [infoDictionary stringForKey:@"USHYoutubeDeveloperKey"];
+    self.youtubeLogin = [infoDictionary stringForKey:@"USHYoutubeUsername"];   
+    self.youtubePassword = [infoDictionary stringForKey:@"USHYoutubePassword"];
     
 	if ([infoDictionary objectForKey:@"USHReportNewsURL"] != nil) {
 		self.showReportNewsURL = [infoDictionary boolForKey:@"USHReportNewsURL"];
@@ -213,6 +221,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
     [[NSUserDefaults standardUserDefaults] setObject:self.twitterPassword forKey:@"twitterPassword"];
     [[NSUserDefaults standardUserDefaults] setObject:self.twitterUserKey forKey:@"twitterUserKey"];
     [[NSUserDefaults standardUserDefaults] setObject:self.twitterUserSecret forKey:@"twitterUserSecret"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.youtubePassword forKey:@"USHYoutubePassword"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.youtubeLogin forKey:@"USHYoutubeUsername"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.youtubeDeveloperKey forKey:@"USHYoutubeDeveloperKey"];
+
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 

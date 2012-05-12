@@ -26,7 +26,7 @@
 @interface VideoPickerController ()
 
 - (void) showVideoPickerForSourceType:(UIImagePickerControllerSourceType)sourceType;
-- (void) uploadVideoToYoutube;
+- (void) uploadVideoToYoutubeFromPath:(NSString*)filepath;
 
 @end
 
@@ -112,7 +112,9 @@
 	}
     
 	[self dispatchSelector:@selector(videoPickerDidSelect:) target:delegate objects:self, nil];
-    [self uploadVideoToYoutube];
+
+    NSString *path = [[editingInfo objectForKey:UIImagePickerControllerMediaURL] path];
+    [self uploadVideoToYoutubeFromPath:path];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -124,7 +126,9 @@
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
 	[self dispatchSelector:@selector(videoPickerDidSelect:) target:delegate objects:self, nil];
-    [self uploadVideoToYoutube];
+
+    NSString *path = [[info objectForKey:UIImagePickerControllerMediaURL] path];
+    [self uploadVideoToYoutubeFromPath:path];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -155,7 +159,10 @@
 #pragma mark -
 #pragma mark Youtube
 
-- (void) uploadVideoToYoutube {
+- (void) uploadVideoToYoutubeFromPath:(NSString*)filepath {
+    
+    
+
     [self dispatchSelector:@selector(videoPickerDidFinish:image:)
                     target:self.delegate 
                    objects:self, @"FILEPATH", nil];

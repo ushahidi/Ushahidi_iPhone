@@ -22,6 +22,9 @@
 #import "Device.h"
 #import "NSObject+Extension.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "Settings.h"
+#import "GDataServiceGoogleYouTube.h"
+#import "GDataEntryYouTubeUpload.h"
 
 @interface VideoPickerController ()
 
@@ -160,12 +163,121 @@
 #pragma mark Youtube
 
 - (void) uploadVideoToYoutubeFromPath:(NSString*)filepath {
-    
-    
+    DLog(@"uploadVideoToYoutubeFromPath: %@", filepath);
 
-    [self dispatchSelector:@selector(videoPickerDidFinish:image:)
-                    target:self.delegate 
-                   objects:self, @"FILEPATH", nil];
+    GDataServiceGoogleYouTube *service = [self youTubeService];
+    [service setYouTubeDeveloperKey:[Settings sharedSettings].youtubeDeveloperKey];
+
+    NSURL *url = [GDataServiceGoogleYouTube youTubeUploadURLForUserID:[Settings sharedSettings].youtubeLogin];
+    
+    // load the file data
+    NSData *data = [NSData dataWithContentsOfFile:filepath];
+    
+    // gather all the metadata needed for the mediaGroup
+    NSString *titleStr = @"test";
+    GDataMediaTitle *title = [GDataMediaTitle textConstructWithString:titleStr];
+    
+    NSString *descStr = @"test3";
+    GDataMediaDescription *desc = [GDataMediaDescription textConstructWithString:descStr];
+    
+    NSString *categoryStr = @"Nonprofit";
+    GDataMediaCategory *category = [GDataMediaCategory mediaCategoryWithString:categoryStr];
+
+    
+    NSString *keywordsStr = @"test4";
+    GDataMediaKeywords *keywords = [GDataMediaKeywords keywordsWithString:keywordsStr];
+
+    
+    GDataYouTubeMediaGroup *mediaGroup = [GDataYouTubeMediaGroup mediaGroup];
+    [mediaGroup setMediaTitle:title];
+    [mediaGroup setMediaDescription:desc];
+    [mediaGroup setMediaKeywords:keywords];
+    [mediaGroup setMediaCategories:[NSArray arrayWithObject:category]];
+    [mediaGroup setIsPrivate:NO];
+    
+    NSString *mimeType = [GDataUtilities MIMETypeForFileAtPath:filepath
+                                               defaultMIMEType:@"video/mp4"];
+    
+    // create the upload entry with the mediaGroup and the file data
+    GDataEntryYouTubeUpload *entry;
+    entry = [GDataEntryYouTubeUpload uploadEntryWithMediaGroup:mediaGroup
+                                                          data:data
+                                                      MIMEType:mimeType
+                                                          slug:titleStr];
+    
+    SEL progressSel = @selector(ticket:hasDeliveredByteCount:ofTotalByteCount:);
+    [service setServiceUploadProgressSelector:progressSel];
+    
+    GDataServiceTicket *ticket;
+    ticket = [service fetchEntryByInsertingEntry:entry
+                                      forFeedURL:url
+                                        delegate:self
+                               didFinishSelector:@selector(uploadTicket:finishedWithEntry:error:)];
 }
+
+
+// progress callback
+- (void)ticket:(GDataServiceTicket *)ticket
+hasDeliveredByteCount:(unsigned long long)numberOfBytesRead 
+ofTotalByteCount:(unsigned long long)dataLength {
+    
+//    [mProgressView setProgress:(double)numberOfBytesRead / (double)dataLength];
+}
+
+
+- (void)uploadTicket:(GDataServiceTicket *)ticket
+   finishedWithEntry:(GDataEntryYouTubeVideo *)videoEntry
+               error:(NSError *)error {
+    if (error == nil) {
+        // tell the user that the add worked
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uploaded!"
+                                                        message:[NSString stringWithFormat:@"%@ succesfully uploaded", 
+                                                                 [[videoEntry title] stringValue]]                    
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"Ok" 
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        [alert release];
+        
+        
+        [self dispatchSelector:@selector(videoPickerDidFinish:image:)
+                        target:self.delegate 
+                       objects:self, @"FILEPATH", nil];
+
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
+                                                        message:[NSString stringWithFormat:@"Error: %@", 
+                                                                 [error description]] 
+                                                       delegate:nil 
+                                              cancelButtonTitle:@"Ok" 
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+        [alert release];
+    }
+   // [mProgressView setProgress: 0.0];
+}
+
+- (GDataServiceGoogleYouTube *)youTubeService {
+    
+    static GDataServiceGoogleYouTube* service = nil;
+    
+    if (!service) {
+        service = [[GDataServiceGoogleYouTube alloc] init];
+        
+        [service setServiceShouldFollowNextLinks:YES];
+        [service setIsServiceRetryEnabled:YES];
+    }
+    
+    NSString *username = [Settings sharedSettings].youtubeLogin;
+    NSString *password = [Settings sharedSettings].youtubePassword;
+    
+    [service setUserCredentialsWithUsername:username password:password];
+    
+    service.youTubeDeveloperKey = [Settings sharedSettings].youtubeDeveloperKey;
+    return service;
+}
+
 
 @end

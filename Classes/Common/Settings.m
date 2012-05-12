@@ -79,6 +79,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 @synthesize bitlyApiLogin;
 @synthesize bitlyApiKey;
 
+@synthesize youtubeDeveloperKey;
+@synthesize youtubeLogin;
+@synthesize youtubePassword;
+
 - (id) init {
 	if ((self = [super init])) {
 		[self loadUserDefaults];

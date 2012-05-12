@@ -315,6 +315,11 @@
 	[self.photos removeObjectAtIndex:index];
 }
 
+- (void) removeVideoAtIndex:(NSInteger)index {
+	[self.videos removeObjectAtIndex:index];
+}
+
+
 - (BOOL) hasTitle {
 	return  self.title != nil && self.title.length > 0;
 }

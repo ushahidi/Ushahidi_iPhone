@@ -69,6 +69,7 @@ typedef enum {
 	TableSectionDate,
 	TableSectionLocation,
 	TableSectionPhotos,
+    TableSectionVideos,
 	TableSectionNews,
 	TableSectionDelete
 } TableSection;
@@ -172,6 +173,7 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDate];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photos", nil) atSection:TableSectionPhotos];
+    [self setHeader:NSLocalizedString(@"Videos", nil) atSection:TableSectionVideos];
 	if ([[Settings sharedSettings] showReportNewsURL]) {
 		[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
 	}
@@ -263,6 +265,9 @@ typedef enum {
 	if (section == TableSectionPhotos) {
 		return [self.incident.photos count] + 1;
 	}
+    if (section == TableSectionVideos) {
+		return [self.incident.videos count] + 1;
+	}
 	if (section == TableSectionDelete) {
 		return self.incident.pending ? 1 : 0;
 	}
@@ -304,6 +309,28 @@ typedef enum {
 			return cell;
 		}
 	}
+    else if (indexPath.section == TableSectionVideos) {
+		if (indexPath.row > 0) {
+			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
+			Photo *photo = [self.incident.videos objectAtIndex:indexPath.row - 1];
+			if (photo != nil && photo.image != nil) {
+				[cell setImage:photo.image];
+			}
+			else {
+				[cell setImage:nil];
+			}
+			return cell;	
+		}
+		else {
+			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			cell.selectionStyle = UITableViewCellSelectionStyleGray;
+			[cell setText:NSLocalizedString(@"Add Video", nil)];
+			[cell setTextColor:[UIColor lightGrayColor]];
+			return cell;
+		}
+	}
+
 	else if (indexPath.section == TableSectionNews) {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setText:self.news];
@@ -400,7 +427,7 @@ typedef enum {
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionPhotos) {
+	if (indexPath.section == TableSectionPhotos || indexPath.section == TableSectionVideos) {
 		if (indexPath.row > 0) {
 			return 200;
 		}
@@ -431,6 +458,25 @@ typedef enum {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[self.view endEditing:YES];
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == TableSectionVideos && indexPath.row == 0) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+		[self.imagePickerController showImagePickerForDelegate:self 
+														resize:[[Settings sharedSettings] resizePhotos]
+														 width:[[Settings sharedSettings] imageWidth] 
+													   forRect:cell.frame];
+	}
+	else if (indexPath.section == TableSectionVideos && indexPath.row > 0) {
+    	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+																 delegate:self 
+														cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+												   destructiveButtonTitle:NSLocalizedString(@"Remove Video", nil)
+														otherButtonTitles:nil];
+		[actionSheet setTag:indexPath.row - 1];
+		[actionSheet setActionSheetStyle:UIActionSheetStyleBlackOpaque];
+		[actionSheet showInView:[self view]];
+		[actionSheet release];
+	}
+
     if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 		[self.imagePickerController showImagePickerForDelegate:self 
@@ -592,7 +638,14 @@ typedef enum {
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (actionSheet.cancelButtonIndex != buttonIndex) {
-        [self.incident removePhotoAtIndex:actionSheet.tag];
+        BOOL isVideoActionSheet = (actionSheet.tag > 1000);
+
+        if (isVideoActionSheet) {
+            [self.incident removeVideoAtIndex:actionSheet.tag - 3000];
+        }else{
+            [self.incident removePhotoAtIndex:actionSheet.tag];            
+        }
+
 		[self.tableView reloadData];	
 	}
 }

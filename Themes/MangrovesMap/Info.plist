@@ -80,35 +80,35 @@
 	<key>USHBitlyApiLogin</key>
 	<string>ushahidiios</string>
 	<key>USHDoneButtonColor</key>
-	<string>#8a1f03</string>
+	<string>#0069aa</string>
 	<key>USHMapURL</key>
 	<string>http://mappingthemangroves.qfi.org/</string>
 	<key>USHNavBarColor</key>
-	<string>#390d07</string>
+	<string>#0069aa</string>
 	<key>USHReportNewsURL</key>
 	<true/>
 	<key>USHSearchBarColor</key>
-	<string>#faf0cf</string>
+	<string>#FFFFFF</string>
 	<key>USHSupportEmail</key>
 	<string>support@ushahidi.com</string>
 	<key>USHSupportURL</key>
 	<string>http://www.ushahidi.com</string>
 	<key>USHTableEvenRowColor</key>
-	<string>#f9f9f3</string>
+	<string>#FFFFFF</string>
 	<key>USHTableGroupedColor</key>
-	<string>#f5f1e3</string>
+	<string>#FFFFFF</string>
 	<key>USHTableHeaderColor</key>
-	<string>#a9a19b</string>
+	<string>#7b6666</string>
 	<key>USHTableHeaderTextColor</key>
 	<string>#FFFFFF</string>
 	<key>USHTableOddRowColor</key>
-	<string>#f6f6ee</string>
+	<string>#FFFFFF</string>
 	<key>USHTablePlainColor</key>
-	<string>#fbfbf8</string>
+	<string>#ffffff</string>
 	<key>USHTableSelectedRowColor</key>
 	<string>#8d817a</string>
 	<key>USHToolBarColor</key>
-	<string>#756d61</string>
+	<string>#0069aa</string>
 	<key>USHTwitterApiKey</key>
 	<string>muqzQTP4YkXi0ncI39s0Jw</string>
 	<key>USHTwitterApiSecret</key>

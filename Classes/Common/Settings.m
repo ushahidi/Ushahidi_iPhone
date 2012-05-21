@@ -253,4 +253,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
            [NSString isNilOrEmpty:self.mapURL] == NO;
 }
 
+- (BOOL) hasYoutubeCredentials {
+    return self.youtubeDeveloperKey && self.youtubeLogin && self.youtubePassword;
+}
+
 @end

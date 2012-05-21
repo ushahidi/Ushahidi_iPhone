@@ -75,6 +75,7 @@
 @property(nonatomic,retain) NSMutableArray *sounds;
 @property(nonatomic,retain) NSMutableArray *videos;
 @property(nonatomic,retain) NSMutableArray *categories;
+@property(nonatomic,retain) NSMutableArray *customFormEntries;
 
 @property(nonatomic,retain) NSString *errors;
 

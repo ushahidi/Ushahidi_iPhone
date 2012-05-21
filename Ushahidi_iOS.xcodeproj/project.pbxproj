@@ -2389,6 +2389,8 @@
 		3EFC3DDA13A6333900CCA185 /* BaseSortTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */; };
 		3EFC3DDD13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
 		3EFC3DDE13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
+		601A734A15659A5A009C0585 /* video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 601A734915659A5A009C0585 /* video.mov */; };
+		601A734B15659C54009C0585 /* video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 601A734915659A5A009C0585 /* video.mov */; };
 		604CF576155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
 		604CF577155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
 		604CF578155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
@@ -2398,15 +2400,6 @@
 		604CF57C155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
 		604CF57D155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
 		604CF57E155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
-		6058BFC4155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
-		6058BFC5155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
-		6058BFC6155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
-		6058BFC7155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
-		6058BFC8155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
-		6058BFC9155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
-		6058BFCA155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
-		6058BFCB155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
-		6058BFCC155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */; };
 		608FBDC01555592A00813B62 /* mangroves57.png in Resources */ = {isa = PBXBuildFile; fileRef = 608FBDBF1555592A00813B62 /* mangroves57.png */; };
 		608FBDC21555592E00813B62 /* mangroves114.png in Resources */ = {isa = PBXBuildFile; fileRef = 608FBDC11555592E00813B62 /* mangroves114.png */; };
 		609617AA15532DB100FD97F8 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A421222BD09001DE141 /* blank.png */; };
@@ -2705,6 +2698,15 @@
 		6096190915532E6400FD97F8 /* Logo_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F315532E6400FD97F8 /* Logo_iPhone.png */; };
 		6096190A15532E6400FD97F8 /* Logo_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F415532E6400FD97F8 /* Logo_iPhone@2x.png */; };
 		6096190B15532E6400FD97F8 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F515532E6400FD97F8 /* placeholder.png */; };
+		60C2110915643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
+		60C2110A15643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
+		60C2110B15643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
+		60C2110C15643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
+		60C2110D15643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
+		60C2110E15643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
+		60C2110F15643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
+		60C2111015643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
+		60C2111115643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -3324,9 +3326,9 @@
 		3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSortTableViewController.m; sourceTree = "<group>"; };
 		3EFC3DDB13A6334400CCA185 /* BaseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMapViewController.h; sourceTree = "<group>"; };
 		3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapViewController.m; sourceTree = "<group>"; };
+		601A734915659A5A009C0585 /* video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video.mov; sourceTree = "<group>"; };
 		604CF574155E813500C043CB /* VideoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPickerController.h; sourceTree = "<group>"; };
 		604CF575155E813500C043CB /* VideoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPickerController.m; sourceTree = "<group>"; };
-		6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGDataTouchStaticLib.a; sourceTree = "<group>"; };
 		608FBDBF1555592A00813B62 /* mangroves57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves57.png; sourceTree = "<group>"; };
 		608FBDC11555592E00813B62 /* mangroves114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves114.png; sourceTree = "<group>"; };
 		609618DB15532DB100FD97F8 /* MangrovesMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangrovesMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3347,6 +3349,8 @@
 		609618F315532E6400FD97F8 /* Logo_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPhone.png; sourceTree = "<group>"; };
 		609618F415532E6400FD97F8 /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
 		609618F515532E6400FD97F8 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		60C2110715643E67001DBBCE /* YouTubeUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploader.h; path = Utilities/YouTubeUploader.h; sourceTree = "<group>"; };
+		60C2110815643E67001DBBCE /* YouTubeUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploader.m; path = Utilities/YouTubeUploader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3371,7 +3375,6 @@
 				3EBBD65912DCA73F007ECE4B /* libOAuth.a in Frameworks */,
 				3EBBD76C12DCAC73007ECE4B /* Security.framework in Frameworks */,
 				3E7298B712EE524700FDED00 /* QuartzCore.framework in Frameworks */,
-				6058BFC4155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3396,7 +3399,6 @@
 				3E0F773B13AB7772004494EC /* Security.framework in Frameworks */,
 				3E0F773C13AB7772004494EC /* QuartzCore.framework in Frameworks */,
 				3E0F778713AB7B68004494EC /* libOAuth.a in Frameworks */,
-				6058BFC6155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3421,7 +3423,6 @@
 				3E15A0BC1410CFE600D12964 /* Security.framework in Frameworks */,
 				3E15A0BD1410CFE600D12964 /* QuartzCore.framework in Frameworks */,
 				3E15A0FA1410D27C00D12964 /* libOAuth.a in Frameworks */,
-				6058BFC9155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3446,7 +3447,6 @@
 				3E15E7EE13C5CBA80050D46F /* Security.framework in Frameworks */,
 				3E15E7EF13C5CBA80050D46F /* QuartzCore.framework in Frameworks */,
 				3E15E82613C5D9270050D46F /* libOAuth.a in Frameworks */,
-				6058BFC8155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3471,7 +3471,6 @@
 				3E4432BA14FBE1E300BFECD8 /* Security.framework in Frameworks */,
 				3E4432BB14FBE1E300BFECD8 /* QuartzCore.framework in Frameworks */,
 				3E4432BC14FBE1E300BFECD8 /* libOAuth.a in Frameworks */,
-				6058BFCB155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3496,7 +3495,6 @@
 				3EB1F80D146D6E4F009C62AB /* Security.framework in Frameworks */,
 				3EB1F80E146D6E4F009C62AB /* QuartzCore.framework in Frameworks */,
 				3EB1F80F146D6E4F009C62AB /* libOAuth.a in Frameworks */,
-				6058BFCA155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3521,7 +3519,6 @@
 				3EC4BEB913C1E19D000056AE /* Security.framework in Frameworks */,
 				3EC4BEBA13C1E19D000056AE /* QuartzCore.framework in Frameworks */,
 				3E59467E13C1EC2800A186BA /* libOAuth.a in Frameworks */,
-				6058BFC7155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3546,7 +3543,6 @@
 				3ED0F99B138E6BE40065C8E8 /* Security.framework in Frameworks */,
 				3ED0F99C138E6BE40065C8E8 /* QuartzCore.framework in Frameworks */,
 				3E030A6713ACA53300DCC48C /* libOAuth.a in Frameworks */,
-				6058BFC5155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3571,7 +3567,6 @@
 				609618D315532DB100FD97F8 /* libOAuth.a in Frameworks */,
 				609618D415532DB100FD97F8 /* Security.framework in Frameworks */,
 				609618D515532DB100FD97F8 /* QuartzCore.framework in Frameworks */,
-				6058BFCC155E9A9900CCC0FB /* libGDataTouchStaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3790,6 +3785,7 @@
 				3E8629D31222BC12001DE141 /* Models */,
 				3E8629D41222BC16001DE141 /* Views */,
 				3E8629D51222BC1A001DE141 /* Controllers */,
+				60C2110615643E3E001DBBCE /* Utilities */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -4374,7 +4370,6 @@
 		3ED1046512125524009781F5 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				604CF58C155E8D9200C043CB /* Google Data */,
 				3EEFE05B12DB804D0076ABA1 /* Twitter */,
 				3E862A991222BD6D001DE141 /* JSON */,
 				3E862A981222BD67001DE141 /* HTTP */,
@@ -4460,15 +4455,6 @@
 			path = Twitter;
 			sourceTree = "<group>";
 		};
-		604CF58C155E8D9200C043CB /* Google Data */ = {
-			isa = PBXGroup;
-			children = (
-				6058BFC3155E9A9900CCC0FB /* libGDataTouchStaticLib.a */,
-			);
-			name = "Google Data";
-			path = GData;
-			sourceTree = "<group>";
-		};
 		609618DF15532E6400FD97F8 /* MangrovesMap */ = {
 			isa = PBXGroup;
 			children = (
@@ -4493,6 +4479,16 @@
 				609618F515532E6400FD97F8 /* placeholder.png */,
 			);
 			path = MangrovesMap;
+			sourceTree = "<group>";
+		};
+		60C2110615643E3E001DBBCE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				601A734915659A5A009C0585 /* video.mov */,
+				60C2110715643E67001DBBCE /* YouTubeUploader.h */,
+				60C2110815643E67001DBBCE /* YouTubeUploader.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4847,6 +4843,7 @@
 				3E4432C614FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D114FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
 				3E738750151A843A00692956 /* Entitlements.plist in Resources */,
+				601A734A15659A5A009C0585 /* video.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5839,6 +5836,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				601A734B15659C54009C0585 /* video.mov in Resources */,
 				609617AA15532DB100FD97F8 /* blank.png in Resources */,
 				609617AB15532DB100FD97F8 /* location.png in Resources */,
 				609617AC15532DB100FD97F8 /* arrow_down.png in Resources */,
@@ -6131,6 +6129,7 @@
 				3E738758151A843A00692956 /* main.m in Sources */,
 				3EA7DEAE1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				604CF576155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2110915643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6286,6 +6285,7 @@
 				3E73875A151A843A00692956 /* main.m in Sources */,
 				3EA7DEB01549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				604CF578155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2110B15643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6441,6 +6441,7 @@
 				3E73875D151A843A00692956 /* main.m in Sources */,
 				3EA7DEB31549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				604CF57B155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2110E15643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6596,6 +6597,7 @@
 				3E73875C151A843A00692956 /* main.m in Sources */,
 				3EA7DEB21549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				604CF57A155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2110D15643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6751,6 +6753,7 @@
 				3E73875F151A843A00692956 /* main.m in Sources */,
 				3EA7DEB51549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				604CF57D155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2111015643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6906,6 +6909,7 @@
 				3E73875E151A843A00692956 /* main.m in Sources */,
 				3EA7DEB41549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				604CF57C155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2110F15643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7061,6 +7065,7 @@
 				3E73875B151A843A00692956 /* main.m in Sources */,
 				3EA7DEB11549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				604CF579155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2110C15643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7216,6 +7221,7 @@
 				3E738759151A843A00692956 /* main.m in Sources */,
 				3EA7DEAF1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				604CF577155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2110A15643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7371,6 +7377,7 @@
 				609618C215532DB100FD97F8 /* main.m in Sources */,
 				609618C315532DB100FD97F8 /* UIViewController+Extension.m in Sources */,
 				604CF57E155E813500C043CB /* VideoPickerController.m in Sources */,
+				60C2111115643E67001DBBCE /* YouTubeUploader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

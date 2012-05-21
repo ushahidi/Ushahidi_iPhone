@@ -23,8 +23,9 @@
 #import "NSObject+Extension.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "Settings.h"
-#import "GDataServiceGoogleYouTube.h"
-#import "GDataEntryYouTubeUpload.h"
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
+#import "YouTubeUploader.h"
 
 @interface VideoPickerController ()
 
@@ -45,6 +46,8 @@
 }
 
 - (void) showVideoPickerForDelegate:(id<VideoPickerDelegate>)theDelegate forRect:(CGRect)sourceRect {
+    DLog(@"showVideoPickerForDelegate");
+
 	self.delegate = theDelegate;
     rect = sourceRect;
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -106,36 +109,17 @@
 #pragma mark UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
-	DLog(@"editingInfo: %@", editingInfo);
-	if (self.popoverController != nil) {
-		[self.popoverController dismissPopoverAnimated:YES];
-	}
-	else {
-		[self.viewController dismissModalViewControllerAnimated:YES];
-	}
-    
-	[self dispatchSelector:@selector(videoPickerDidSelect:) target:delegate objects:self, nil];
-
     NSString *path = [[editingInfo objectForKey:UIImagePickerControllerMediaURL] path];
     [self uploadVideoToYoutubeFromPath:path];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-	DLog(@"info: %@", info);
-	if (self.popoverController != nil) {
-		[self.popoverController dismissPopoverAnimated:YES];
-	}
-	else {
-		[self.viewController dismissModalViewControllerAnimated:YES];
-	}
-	[self dispatchSelector:@selector(videoPickerDidSelect:) target:delegate objects:self, nil];
-
     NSString *path = [[info objectForKey:UIImagePickerControllerMediaURL] path];
     [self uploadVideoToYoutubeFromPath:path];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-	DLog(@"");
+	DLog(@"imagePickerControllerDidCancel for video");
 	if (self.popoverController != nil) {
 		[self.popoverController dismissPopoverAnimated:YES];
 	}
@@ -162,121 +146,47 @@
 #pragma mark -
 #pragma mark Youtube
 
-- (void) uploadVideoToYoutubeFromPath:(NSString*)filepath {
-    DLog(@"uploadVideoToYoutubeFromPath: %@", filepath);
+- (void) uploadVideoToYoutubeFromPath:(NSString *)file {
+    DLog(@"uploadToYoutubeFromPath: %@", file);
 
-    GDataServiceGoogleYouTube *service = [self youTubeService];
-    [service setYouTubeDeveloperKey:[Settings sharedSettings].youtubeDeveloperKey];
-
-    NSURL *url = [GDataServiceGoogleYouTube youTubeUploadURLForUserID:[Settings sharedSettings].youtubeLogin];
-    
-    // load the file data
-    NSData *data = [NSData dataWithContentsOfFile:filepath];
-    
-    // gather all the metadata needed for the mediaGroup
-    NSString *titleStr = @"test";
-    GDataMediaTitle *title = [GDataMediaTitle textConstructWithString:titleStr];
-    
-    NSString *descStr = @"test3";
-    GDataMediaDescription *desc = [GDataMediaDescription textConstructWithString:descStr];
-    
-    NSString *categoryStr = @"Nonprofit";
-    GDataMediaCategory *category = [GDataMediaCategory mediaCategoryWithString:categoryStr];
-
-    
-    NSString *keywordsStr = @"test4";
-    GDataMediaKeywords *keywords = [GDataMediaKeywords keywordsWithString:keywordsStr];
-
-    
-    GDataYouTubeMediaGroup *mediaGroup = [GDataYouTubeMediaGroup mediaGroup];
-    [mediaGroup setMediaTitle:title];
-    [mediaGroup setMediaDescription:desc];
-    [mediaGroup setMediaKeywords:keywords];
-    [mediaGroup setMediaCategories:[NSArray arrayWithObject:category]];
-    [mediaGroup setIsPrivate:NO];
-    
-    NSString *mimeType = [GDataUtilities MIMETypeForFileAtPath:filepath
-                                               defaultMIMEType:@"video/mp4"];
-    
-    // create the upload entry with the mediaGroup and the file data
-    GDataEntryYouTubeUpload *entry;
-    entry = [GDataEntryYouTubeUpload uploadEntryWithMediaGroup:mediaGroup
-                                                          data:data
-                                                      MIMEType:mimeType
-                                                          slug:titleStr];
-    
-    SEL progressSel = @selector(ticket:hasDeliveredByteCount:ofTotalByteCount:);
-    [service setServiceUploadProgressSelector:progressSel];
-    
-    GDataServiceTicket *ticket;
-    ticket = [service fetchEntryByInsertingEntry:entry
-                                      forFeedURL:url
-                                        delegate:self
-                               didFinishSelector:@selector(uploadTicket:finishedWithEntry:error:)];
-}
-
-
-// progress callback
-- (void)ticket:(GDataServiceTicket *)ticket
-hasDeliveredByteCount:(unsigned long long)numberOfBytesRead 
-ofTotalByteCount:(unsigned long long)dataLength {
-    
-//    [mProgressView setProgress:(double)numberOfBytesRead / (double)dataLength];
-}
-
-
-- (void)uploadTicket:(GDataServiceTicket *)ticket
-   finishedWithEntry:(GDataEntryYouTubeVideo *)videoEntry
-               error:(NSError *)error {
-    if (error == nil) {
-        // tell the user that the add worked
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uploaded!"
-                                                        message:[NSString stringWithFormat:@"%@ succesfully uploaded", 
-                                                                 [[videoEntry title] stringValue]]                    
-                                                       delegate:nil 
-                                              cancelButtonTitle:@"Ok" 
-                                              otherButtonTitles:nil];
-        
-        [alert show];
-        [alert release];
-        
-        
-        [self dispatchSelector:@selector(videoPickerDidFinish:image:)
-                        target:self.delegate 
-                       objects:self, @"FILEPATH", nil];
-
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!"
-                                                        message:[NSString stringWithFormat:@"Error: %@", 
-                                                                 [error description]] 
-                                                       delegate:nil 
-                                              cancelButtonTitle:@"Ok" 
-                                              otherButtonTitles:nil];
-        
-        [alert show];
-        [alert release];
+    if (file) {
+        youtubeUploader = [[YouTubeUploader alloc] init];
+        youtubeUploader.title = [self.delegate titleForVideo];
+        youtubeUploader.videoDescription = [self.delegate descriptionForVideo];
+        youtubeUploader.delegate = self;
+        [youtubeUploader uploadVideo:file];
+    }else {
+        [self youtubeUploaderDidFail:nil];
     }
-   // [mProgressView setProgress: 0.0];
 }
 
-- (GDataServiceGoogleYouTube *)youTubeService {
+#pragma mark -
+#pragma mark YoutubeUploader Delegate
+
+- (void) youtubeUploaderDidFinish:(YouTubeUploader *)uploader withYoutudeAddress:(NSString *)address {
+    DLog(@"youtubeUploaderDidFinish With: %@", address);
+    if (self.popoverController != nil) {
+		[self.popoverController dismissPopoverAnimated:YES];
+	}
+	else {
+		[self.viewController dismissModalViewControllerAnimated:YES];
+	}
     
-    static GDataServiceGoogleYouTube* service = nil;
+    [self.delegate videoPickerDidFinish:self withAddress:address];
+    [youtubeUploader release];
+}
+
+- (void) youtubeUploaderDidFail:(YouTubeUploader *)uploader {
+    DLog(@"youtubeUploaderDidFail"); 
+    if (self.popoverController != nil) {
+		[self.popoverController dismissPopoverAnimated:YES];
+	}
+	else {
+		[self.viewController dismissModalViewControllerAnimated:YES];
+	}
     
-    if (!service) {
-        service = [[GDataServiceGoogleYouTube alloc] init];
-        
-        [service setServiceShouldFollowNextLinks:YES];
-        [service setIsServiceRetryEnabled:YES];
-    }
-    
-    NSString *username = [Settings sharedSettings].youtubeLogin;
-    NSString *password = [Settings sharedSettings].youtubePassword;
-    
-    [service setUserCredentialsWithUsername:username password:password];
-    
-    service.youTubeDeveloperKey = [Settings sharedSettings].youtubeDeveloperKey;
-    return service;
+    [self.delegate videoPickerDidCancel:self];
+    [youtubeUploader release];
 }
 
 

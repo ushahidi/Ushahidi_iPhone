@@ -90,6 +90,7 @@
 @property(nonatomic, readonly) BOOL hasLastName;
 @property(nonatomic, readonly) BOOL hasEmail;
 @property(nonatomic, readonly) BOOL hasMapURL;
+@property(nonatomic, readonly) BOOL hasYoutubeCredentials;
 
 @property(nonatomic, retain) NSString *mapName;
 @property(nonatomic, retain) NSString *mapURL;

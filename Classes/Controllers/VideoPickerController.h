@@ -19,15 +19,18 @@
  *****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "YouTubeUploader.h"
 
 @protocol VideoPickerDelegate;
 
 @interface VideoPickerController : NSObject<UINavigationControllerDelegate,
 											UIImagePickerControllerDelegate,
 											UIActionSheetDelegate,
-											UIPopoverControllerDelegate> {
+											UIPopoverControllerDelegate,
+                                            YoutubeUploaderDelegate> {
 @public
 	UIViewController *viewController;
+    YouTubeUploader *youtubeUploader;
 	UIPopoverController *popoverController;
 	id<VideoPickerDelegate> delegate;
                                                 
@@ -45,10 +48,9 @@
 
 @protocol VideoPickerDelegate <NSObject>
 
-@optional
-
 - (void) videoPickerDidCancel:(VideoPickerController *)imagePicker;
-- (void) videoPickerDidSelect:(VideoPickerController *)imagePicker;
-- (void) videoPickerDidFinish:(VideoPickerController *)imagePicker filepath:(NSString *)image;
+- (void) videoPickerDidFinish:(VideoPickerController *)imagePicker withAddress:(NSString *)address;
 
+- (NSString *) titleForVideo;
+- (NSString *) descriptionForVideo;
 @end

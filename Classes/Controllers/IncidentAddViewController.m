@@ -41,6 +41,7 @@
 #import "Settings.h"
 #import "TableHeaderView.h"
 #import "NSString+Extension.h"
+#import "Video.h"
 
 @interface IncidentAddViewController ()
 
@@ -315,14 +316,9 @@ typedef enum {
 	}
     else if (indexPath.section == TableSectionVideos) {
 		if (indexPath.row > 0) {
-			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
-			Photo *photo = [self.incident.videos objectAtIndex:indexPath.row - 1];
-			if (photo != nil && photo.image != nil) {
-				[cell setImage:photo.image];
-			}
-			else {
-				[cell setImage:nil];
-			}
+            TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+			Video *video = [self.incident.videos objectAtIndex:indexPath.row - 1];
+            [cell setText:video.title];
 			return cell;	
 		}
 		else {
@@ -431,7 +427,7 @@ typedef enum {
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == TableSectionPhotos || indexPath.section == TableSectionVideos) {
+	if (indexPath.section == TableSectionPhotos) {
 		if (indexPath.row > 0) {
 			return 200;
 		}
@@ -443,6 +439,9 @@ typedef enum {
         }
         return 120;
 	}
+    if(indexPath.section == TableSectionVideos) {
+    	return 44;
+    }
 	if (indexPath.section == TableSectionLocation) {
 		return 44;
 	}
@@ -473,7 +472,7 @@ typedef enum {
 														cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
 												   destructiveButtonTitle:NSLocalizedString(@"Remove Video", nil)
 														otherButtonTitles:nil];
-		[actionSheet setTag:indexPath.row - 1];
+		[actionSheet setTag:indexPath.row - 1 + 1000];
 		[actionSheet setActionSheetStyle:UIActionSheetStyleBlackOpaque];
 		[actionSheet showInView:[self view]];
 		[actionSheet release];
@@ -643,8 +642,10 @@ typedef enum {
         BOOL isVideoActionSheet = (actionSheet.tag > 1000);
 
         if (isVideoActionSheet) {
+            DLog(@"removing video");
             [self.incident removeVideoAtIndex:actionSheet.tag - 1000];
         }else{
+            DLog(@"removing photo");
             [self.incident removePhotoAtIndex:actionSheet.tag];            
         }
 
@@ -732,5 +733,25 @@ typedef enum {
 	}
     [self.loadingView hide];
 }
+
+#pragma mark -
+#pragma mark Video Uploader Delegate
+
+- (void) videoPickerDidCancel:(VideoPickerController *)imagePicker {
+    DLog(@"videoPickerDidCancel");
+
+}
+
+- (void) videoPickerDidFinish:(VideoPickerController *)imagePicker withAddress:(NSString *)address {
+    DLog(@"videoPickerDidFinish:WithAddreses %@", address);
+    Video *video = [[Video alloc] init];
+    video.title = [self titleForVideo];
+    video.url = address;
+    [self.incident addVideo:video];
+    [self.tableView reloadData];
+}
+
+- (NSString *)titleForVideo { return self.incident.title; }
+- (NSString *)descriptionForVideo { return  self.incident.description; }
 
 @end

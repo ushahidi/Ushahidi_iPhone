@@ -40,16 +40,13 @@
 @synthesize videoDescription;
 @synthesize delegate;
 
--(void) uploadVideo:(NSString*)filepath {
+- (void) uploadVideo:(NSString*)filepath {
+    DLog(@"uploadVideo %@", filepath);
+
     [self login];
     [self prepareVideoUpload:[filepath lastPathComponent]];
     
-    NSString *address = [self upload:filepath];
-    if (address) {
-        [delegate youtubeUploaderDidFinish:self withYoutudeAddress:address];
-    }else{
-        [delegate youtubeUploaderDidFail:self];
-    }
+    [self uploadFileToGoogleURL:filepath];
 }
 
 - (void) login {
@@ -134,7 +131,7 @@
     }
 }
 
-- (NSString *) upload:(NSString *)file {
+- (void) uploadFileToGoogleURL:(NSString *)file {
     DLog(@"upload %@", file);
 
     if (!self.uploadURL && !self.uploadToken) return nil;
@@ -145,16 +142,34 @@
     ASIFormDataRequest *dataRequest = [ASIFormDataRequest requestWithURL:url];
     [dataRequest addFile:file forKey:@"file"];
     [dataRequest setPostValue:self.uploadToken forKey:@"token"];
-    [dataRequest startSynchronous];
-    
-    NSArray *location = [[[dataRequest url] absoluteString] componentsSeparatedByString:@"id="];
+    dataRequest.delegate = self;
+    dataRequest.uploadProgressDelegate = self;
+    [dataRequest startAsynchronous];
+    [delegate youtubeUploaderDidStart:self];
+}
+
+- (void)setProgress:(float)newProgress {
+    // Upload Progress of Video
+}
+
+#pragma mark -
+#pragma mark ASIHTTEPRequest Delegate Methods
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    [delegate youtubeUploaderDidFail:self];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSArray *location = [[[request url] absoluteString] componentsSeparatedByString:@"id="];
+    DLog(@"requestFinished");
     DLog(@"uploaded to %@", location);
     
     if ([location count] >= 2) {
         NSString *videoURL = [NSString stringWithFormat:@"http://www.youtube.com/watch?v=%@", [location objectAtIndex:1]];
-        return videoURL; 
-    } 
-    return nil;
+        [delegate youtubeUploaderDidFinish:self withYoutudeAddress:videoURL];
+    } else {
+        [delegate youtubeUploaderDidFail:self];        
+    }
 }
 
 @end

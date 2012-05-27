@@ -2389,8 +2389,6 @@
 		3EFC3DDA13A6333900CCA185 /* BaseSortTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */; };
 		3EFC3DDD13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
 		3EFC3DDE13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
-		601A734A15659A5A009C0585 /* video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 601A734915659A5A009C0585 /* video.mov */; };
-		601A734B15659C54009C0585 /* video.mov in Resources */ = {isa = PBXBuildFile; fileRef = 601A734915659A5A009C0585 /* video.mov */; };
 		604CF576155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
 		604CF577155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
 		604CF578155E813500C043CB /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 604CF575155E813500C043CB /* VideoPickerController.m */; };
@@ -3326,7 +3324,6 @@
 		3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSortTableViewController.m; sourceTree = "<group>"; };
 		3EFC3DDB13A6334400CCA185 /* BaseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMapViewController.h; sourceTree = "<group>"; };
 		3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapViewController.m; sourceTree = "<group>"; };
-		601A734915659A5A009C0585 /* video.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video.mov; sourceTree = "<group>"; };
 		604CF574155E813500C043CB /* VideoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPickerController.h; sourceTree = "<group>"; };
 		604CF575155E813500C043CB /* VideoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPickerController.m; sourceTree = "<group>"; };
 		608FBDBF1555592A00813B62 /* mangroves57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves57.png; sourceTree = "<group>"; };
@@ -4484,7 +4481,6 @@
 		60C2110615643E3E001DBBCE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				601A734915659A5A009C0585 /* video.mov */,
 				60C2110715643E67001DBBCE /* YouTubeUploader.h */,
 				60C2110815643E67001DBBCE /* YouTubeUploader.m */,
 			);
@@ -4843,7 +4839,6 @@
 				3E4432C614FBE77700BFECD8 /* SplashViewController_iPad.xib in Resources */,
 				3E4432D114FBE78D00BFECD8 /* SplashViewController_iPhone.xib in Resources */,
 				3E738750151A843A00692956 /* Entitlements.plist in Resources */,
-				601A734A15659A5A009C0585 /* video.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5836,7 +5831,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				601A734B15659C54009C0585 /* video.mov in Resources */,
 				609617AA15532DB100FD97F8 /* blank.png in Resources */,
 				609617AB15532DB100FD97F8 /* location.png in Resources */,
 				609617AC15532DB100FD97F8 /* arrow_down.png in Resources */,

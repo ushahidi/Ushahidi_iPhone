@@ -19,14 +19,16 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "ASIFormDataRequest.h"
 
 @class YouTubeUploader;
 @protocol YoutubeUploaderDelegate <NSObject>
+- (void)youtubeUploaderDidStart:(YouTubeUploader *)uploader;
 - (void)youtubeUploaderDidFail:(YouTubeUploader *)uploader;
 - (void)youtubeUploaderDidFinish:(YouTubeUploader *)uploader withYoutudeAddress:(NSString *)address;
 @end
 
-@interface YouTubeUploader : NSObject <NSXMLParserDelegate>
+@interface YouTubeUploader : NSObject <NSXMLParserDelegate, ASIHTTPRequestDelegate, ASIProgressDelegate>
 
 @property (nonatomic, retain) NSString* authToken;
 @property (nonatomic, retain) NSString* uploadURL;

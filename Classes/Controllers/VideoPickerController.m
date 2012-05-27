@@ -31,7 +31,7 @@
 
 - (void) showVideoPickerForSourceType:(UIImagePickerControllerSourceType)sourceType;
 - (void) uploadVideoToYoutubeFromPath:(NSString*)filepath;
-
+- (void) dismissPopover;
 @end
 
 @implementation VideoPickerController
@@ -163,31 +163,29 @@
 #pragma mark -
 #pragma mark YoutubeUploader Delegate
 
+- (void) youtubeUploaderDidStart:(YouTubeUploader *)uploader {
+    [self dismissPopover];    
+}
+
 - (void) youtubeUploaderDidFinish:(YouTubeUploader *)uploader withYoutudeAddress:(NSString *)address {
     DLog(@"youtubeUploaderDidFinish With: %@", address);
-    if (self.popoverController != nil) {
-		[self.popoverController dismissPopoverAnimated:YES];
-	}
-	else {
-		[self.viewController dismissModalViewControllerAnimated:YES];
-	}
-    
     [self.delegate videoPickerDidFinish:self withAddress:address];
     [youtubeUploader release];
 }
 
 - (void) youtubeUploaderDidFail:(YouTubeUploader *)uploader {
     DLog(@"youtubeUploaderDidFail"); 
+    [self.delegate videoPickerDidCancel:self];
+    [youtubeUploader release];
+}
+
+- (void) dismissPopover {
     if (self.popoverController != nil) {
 		[self.popoverController dismissPopoverAnimated:YES];
 	}
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
-    
-    [self.delegate videoPickerDidCancel:self];
-    [youtubeUploader release];
 }
-
 
 @end

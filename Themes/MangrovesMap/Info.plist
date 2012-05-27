@@ -58,7 +58,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UILaunchImageFile</key>
-	<string>MangrovesMap</string>
+	<string>MangrovesMap.png</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIStatusBarStyle</key>

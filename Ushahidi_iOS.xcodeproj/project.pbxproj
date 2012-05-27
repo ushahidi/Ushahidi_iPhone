@@ -2696,6 +2696,12 @@
 		6096190915532E6400FD97F8 /* Logo_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F315532E6400FD97F8 /* Logo_iPhone.png */; };
 		6096190A15532E6400FD97F8 /* Logo_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F415532E6400FD97F8 /* Logo_iPhone@2x.png */; };
 		6096190B15532E6400FD97F8 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F515532E6400FD97F8 /* placeholder.png */; };
+		60C04F671572629700C23AB5 /* MangrovesMap-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C04F611572629700C23AB5 /* MangrovesMap-Portrait@2x~ipad.png */; };
+		60C04F681572629700C23AB5 /* MangrovesMap-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C04F621572629700C23AB5 /* MangrovesMap-Portrait~ipad.png */; };
+		60C04F691572629700C23AB5 /* MangrovesMap-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C04F631572629700C23AB5 /* MangrovesMap-Landscape@2x~ipad.png */; };
+		60C04F6A1572629700C23AB5 /* MangrovesMap-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C04F641572629700C23AB5 /* MangrovesMap-Landscape~ipad.png */; };
+		60C04F6B1572629700C23AB5 /* MangrovesMap-Portrait@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C04F651572629700C23AB5 /* MangrovesMap-Portrait@2x~iphone.png */; };
+		60C04F6C1572629700C23AB5 /* MangrovesMap-Portrait@~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C04F661572629700C23AB5 /* MangrovesMap-Portrait@~iphone.png */; };
 		60C2110915643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
 		60C2110A15643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
 		60C2110B15643E67001DBBCE /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2110815643E67001DBBCE /* YouTubeUploader.m */; };
@@ -3346,6 +3352,12 @@
 		609618F315532E6400FD97F8 /* Logo_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_iPhone.png; sourceTree = "<group>"; };
 		609618F415532E6400FD97F8 /* Logo_iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_iPhone@2x.png"; sourceTree = "<group>"; };
 		609618F515532E6400FD97F8 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		60C04F611572629700C23AB5 /* MangrovesMap-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		60C04F621572629700C23AB5 /* MangrovesMap-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait~ipad.png"; sourceTree = "<group>"; };
+		60C04F631572629700C23AB5 /* MangrovesMap-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		60C04F641572629700C23AB5 /* MangrovesMap-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Landscape~ipad.png"; sourceTree = "<group>"; };
+		60C04F651572629700C23AB5 /* MangrovesMap-Portrait@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@2x~iphone.png"; sourceTree = "<group>"; };
+		60C04F661572629700C23AB5 /* MangrovesMap-Portrait@~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@~iphone.png"; sourceTree = "<group>"; };
 		60C2110715643E67001DBBCE /* YouTubeUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YouTubeUploader.h; path = Utilities/YouTubeUploader.h; sourceTree = "<group>"; };
 		60C2110815643E67001DBBCE /* YouTubeUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YouTubeUploader.m; path = Utilities/YouTubeUploader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -4455,6 +4467,12 @@
 		609618DF15532E6400FD97F8 /* MangrovesMap */ = {
 			isa = PBXGroup;
 			children = (
+				60C04F611572629700C23AB5 /* MangrovesMap-Portrait@2x~ipad.png */,
+				60C04F621572629700C23AB5 /* MangrovesMap-Portrait~ipad.png */,
+				60C04F631572629700C23AB5 /* MangrovesMap-Landscape@2x~ipad.png */,
+				60C04F641572629700C23AB5 /* MangrovesMap-Landscape~ipad.png */,
+				60C04F651572629700C23AB5 /* MangrovesMap-Portrait@2x~iphone.png */,
+				60C04F661572629700C23AB5 /* MangrovesMap-Portrait@~iphone.png */,
 				608FBDC11555592E00813B62 /* mangroves114.png */,
 				608FBDBF1555592A00813B62 /* mangroves57.png */,
 				609618E015532E6400FD97F8 /* Default-Portrait.png */,
@@ -5965,6 +5983,12 @@
 				6096190B15532E6400FD97F8 /* placeholder.png in Resources */,
 				608FBDC01555592A00813B62 /* mangroves57.png in Resources */,
 				608FBDC21555592E00813B62 /* mangroves114.png in Resources */,
+				60C04F671572629700C23AB5 /* MangrovesMap-Portrait@2x~ipad.png in Resources */,
+				60C04F681572629700C23AB5 /* MangrovesMap-Portrait~ipad.png in Resources */,
+				60C04F691572629700C23AB5 /* MangrovesMap-Landscape@2x~ipad.png in Resources */,
+				60C04F6A1572629700C23AB5 /* MangrovesMap-Landscape~ipad.png in Resources */,
+				60C04F6B1572629700C23AB5 /* MangrovesMap-Portrait@2x~iphone.png in Resources */,
+				60C04F6C1572629700C23AB5 /* MangrovesMap-Portrait@~iphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8535,6 +8559,7 @@
 					"$(PROJECT_DIR)/Libraries/GData",
 				);
 				INFOPLIST_FILE = Themes/MangrovesMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -8549,7 +8574,7 @@
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -8569,6 +8594,7 @@
 					"$(PROJECT_DIR)/Libraries/GData",
 				);
 				INFOPLIST_FILE = Themes/MangrovesMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -8583,7 +8609,7 @@
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -8604,6 +8630,7 @@
 					"$(PROJECT_DIR)/Libraries/GData",
 				);
 				INFOPLIST_FILE = Themes/MangrovesMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -8618,7 +8645,7 @@
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad Hoc";
@@ -8639,6 +8666,7 @@
 					"$(PROJECT_DIR)/Libraries/GData",
 				);
 				INFOPLIST_FILE = Themes/MangrovesMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
@@ -8653,7 +8681,7 @@
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";

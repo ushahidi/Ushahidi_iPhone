@@ -134,7 +134,10 @@
 - (void) uploadFileToGoogleURL:(NSString *)file {
     DLog(@"upload %@", file);
 
-    if (!self.uploadURL && !self.uploadToken) return nil;
+    if (!self.uploadURL && !self.uploadToken) {
+        [delegate youtubeUploaderDidFail:self];
+        return;
+    }
 
     NSString *nextURL = @"http://ushahidi.com/";
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?nexturl=%@", self.uploadURL, nextURL]];

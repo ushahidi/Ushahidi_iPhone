@@ -64,6 +64,14 @@
 
 #pragma mark setup request
 
+- (NSString*) stringValues {
+    NSMutableString *string = [NSMutableString string];
+    for (NSDictionary *dict in [self postData]) {
+        [string appendFormat:@"%@=%@\n", [dict objectForKey:@"key"], [dict objectForKey:@"value"]];
+    }
+    return string;
+}
+
 - (void)addPostValue:(id <NSObject>)value forKey:(NSString *)key
 {
 	if (value == nil) {

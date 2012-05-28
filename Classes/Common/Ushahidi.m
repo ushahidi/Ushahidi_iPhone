@@ -884,6 +884,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				}
 			}
 		}
+        DLog(@"POST: %@", [post stringValues]);
 		[self.uploadQueue addOperation:post];
 		return YES;
 	}
@@ -915,6 +916,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	incident.uploading = NO;
 	NSError *error = nil;
 	if ([request responseStatusCode] != HttpStatusOK) {
+        DLog(@"ERROR: %@", error);
+        DLog(@"STATUS CODE: %@", [request responseStatusCode]);
+        DLog(@"STATUS MESSAGE: %@", [request responseStatusMessage]);
 		incident.errors = [request responseStatusMessage];
 		error = [NSError errorWithDomain:self.deployment.domain 
 									code:[request responseStatusCode] 
@@ -922,7 +926,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
-		if (json == nil) {
+        if (json == nil) {
 			DLog(@"RESPONSE: %@", [request responseString]);
 			incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
 			error = [NSError errorWithDomain:self.deployment.domain 
@@ -944,13 +948,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 							   objects:self, [self.deployment.incidents allValues], self.deployment.pending, nil, YES, nil];
 			}
 			else {
-				NSDictionary *messages = [json objectForKey:@"error"];
+                DLog(@"JSON: %@", json);
+                NSDictionary *messages = [json objectForKey:@"error"];
 				if (messages != nil) {
 					incident.errors = [messages objectForKey:@"message"];
 				}
 				else {
 					incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
 				}
+                DLog(@"ERROR: %@", messages);
 				error = [NSError errorWithDomain:self.deployment.domain 
 											code:HttpStatusInternalServerError 
 										 message:incident.errors];

@@ -75,6 +75,7 @@
 @property(nonatomic,retain) NSMutableArray *sounds;
 @property(nonatomic,retain) NSMutableArray *videos;
 @property(nonatomic,retain) NSMutableArray *categories;
+@property(nonatomic,retain) NSMutableArray *customFormEntries;
 
 @property(nonatomic,retain) NSString *errors;
 
@@ -115,6 +116,8 @@
 
 - (UIImage *) getFirstPhotoThumbnail;
 - (void) removePhotoAtIndex:(NSInteger)index;
+
+- (void) removeVideoAtIndex:(NSInteger)index;
 
 - (NSComparisonResult)compareByTitle:(Incident *)incident;
 - (NSComparisonResult)compareByDate:(Incident *)incident;

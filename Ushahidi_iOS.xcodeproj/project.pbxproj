@@ -1168,6 +1168,22 @@
 		3E91985A1293A81F005AC005 /* Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9198591293A81F005AC005 /* Locator.m */; };
 		3E9198A61293AD09005AC005 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9198A51293AD09005AC005 /* CoreLocation.framework */; };
 		3E98F3A51211EC6300C35F36 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E98F3A41211EC6300C35F36 /* MapKit.framework */; };
+		3EA1A4EE15CAF2780096E93A /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */; };
+		3EA1A4EF15CAF2780096E93A /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */; };
+		3EA1A4F015CAF2780096E93A /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */; };
+		3EA1A4F115CAF2780096E93A /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */; };
+		3EA1A4F215CAF2780096E93A /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */; };
+		3EA1A4F315CAF2780096E93A /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */; };
+		3EA1A4F415CAF2780096E93A /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */; };
+		3EA1A4F515CAF2780096E93A /* YouTubeUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */; };
+		3EA1A4F815CAF2D50096E93A /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */; };
+		3EA1A4F915CAF2D50096E93A /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */; };
+		3EA1A4FA15CAF2D50096E93A /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */; };
+		3EA1A4FB15CAF2D50096E93A /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */; };
+		3EA1A4FC15CAF2D50096E93A /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */; };
+		3EA1A4FD15CAF2D50096E93A /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */; };
+		3EA1A4FE15CAF2D50096E93A /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */; };
+		3EA1A4FF15CAF2D50096E93A /* VideoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */; };
 		3EA4FCA313A7863500DBF3DA /* BaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */; };
 		3EA4FCA413A7863500DBF3DA /* BaseDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */; };
 		3EA7DEAE1549AD8B004566B0 /* UIViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7DEAD1549AD8B004566B0 /* UIViewController+Extension.m */; };
@@ -2757,6 +2773,10 @@
 		3E9198591293A81F005AC005 /* Locator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locator.m; sourceTree = "<group>"; };
 		3E9198A51293AD09005AC005 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3E98F3A41211EC6300C35F36 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3EA1A4EC15CAF2780096E93A /* YouTubeUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouTubeUploader.h; sourceTree = "<group>"; };
+		3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YouTubeUploader.m; sourceTree = "<group>"; };
+		3EA1A4F615CAF2D50096E93A /* VideoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPickerController.h; sourceTree = "<group>"; };
+		3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPickerController.m; sourceTree = "<group>"; };
 		3EA4FCA113A7863500DBF3DA /* BaseDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDetailsViewController.h; sourceTree = "<group>"; };
 		3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDetailsViewController.m; sourceTree = "<group>"; };
 		3EA7DEAC1549AD8B004566B0 /* UIViewController+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extension.h"; sourceTree = "<group>"; };
@@ -3430,12 +3450,13 @@
 			isa = PBXGroup;
 			children = (
 				3E8629D61222BC20001DE141 /* Common */,
+				3E8629D41222BC16001DE141 /* Views */,
 				3E862A891222BD34001DE141 /* iPad */,
 				3E862A881222BD2F001DE141 /* iPhone */,
 				3E8629D21222BC0B001DE141 /* Categories */,
 				3E8629D31222BC12001DE141 /* Models */,
-				3E8629D41222BC16001DE141 /* Views */,
 				3E8629D51222BC1A001DE141 /* Controllers */,
+				3EA1A4EA15CAF2560096E93A /* Utilities */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -3660,6 +3681,8 @@
 				3E4C630912AD4D05001ED08A /* NewsViewController.m */,
 				3EEFE0F312DB81600076ABA1 /* TwitterViewController.h */,
 				3EEFE0F412DB81600076ABA1 /* TwitterViewController.m */,
+				3EA1A4F615CAF2D50096E93A /* VideoPickerController.h */,
+				3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -3819,6 +3842,15 @@
 				3E030A2013AC9D1300DCC48C /* Localizable.strings */,
 			);
 			path = Localizations;
+			sourceTree = "<group>";
+		};
+		3EA1A4EA15CAF2560096E93A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3EA1A4EC15CAF2780096E93A /* YouTubeUploader.h */,
+				3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		3EB1F819146D6FD1009C62AB /* ICCM2011 */ = {
@@ -4028,8 +4060,8 @@
 		3ED8716D1379CA48004E8714 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				609618DF15532E6400FD97F8 /* MangrovesMap */,
 				3ED871781379CA70004E8714 /* Ushahidi */,
+				609618DF15532E6400FD97F8 /* MangrovesMap */,
 				3EB1F819146D6FD1009C62AB /* ICCM2011 */,
 				3E159F781410CDDA00D12964 /* Inherity */,
 				3ED871CC1379D343004E8714 /* MapATL */,
@@ -4106,6 +4138,7 @@
 		609618DF15532E6400FD97F8 /* MangrovesMap */ = {
 			isa = PBXGroup;
 			children = (
+				609618ED15532E6400FD97F8 /* Info.plist */,
 				608FBDC11555592E00813B62 /* mangroves114.png */,
 				608FBDBF1555592A00813B62 /* mangroves57.png */,
 				609618E015532E6400FD97F8 /* Default-Portrait.png */,
@@ -4116,7 +4149,6 @@
 				609618EA15532E6400FD97F8 /* Icon-Small@2x.png */,
 				609618EB15532E6400FD97F8 /* Icon.png */,
 				609618EC15532E6400FD97F8 /* Icon@2x.png */,
-				609618ED15532E6400FD97F8 /* Info.plist */,
 				609618EE15532E6400FD97F8 /* iTunesArtwork */,
 				609618EF15532E6400FD97F8 /* iTunesArtwork.png */,
 				609618F015532E6400FD97F8 /* iTunesArtwork.psd */,
@@ -5605,6 +5637,8 @@
 				3E4432EB14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E738758151A843A00692956 /* main.m in Sources */,
 				3EA7DEAE1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				3EA1A4EE15CAF2780096E93A /* YouTubeUploader.m in Sources */,
+				3EA1A4F815CAF2D50096E93A /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5759,6 +5793,8 @@
 				3E4432ED14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875A151A843A00692956 /* main.m in Sources */,
 				3EA7DEB01549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				3EA1A4F015CAF2780096E93A /* YouTubeUploader.m in Sources */,
+				3EA1A4FA15CAF2D50096E93A /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5913,6 +5949,8 @@
 				3E4432F014FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875D151A843A00692956 /* main.m in Sources */,
 				3EA7DEB31549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				3EA1A4F115CAF2780096E93A /* YouTubeUploader.m in Sources */,
+				3EA1A4FB15CAF2D50096E93A /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6067,6 +6105,8 @@
 				3E4432EF14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875C151A843A00692956 /* main.m in Sources */,
 				3EA7DEB21549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				3EA1A4F315CAF2780096E93A /* YouTubeUploader.m in Sources */,
+				3EA1A4FD15CAF2D50096E93A /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6221,6 +6261,8 @@
 				3E4432F214FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875E151A843A00692956 /* main.m in Sources */,
 				3EA7DEB41549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				3EA1A4F415CAF2780096E93A /* YouTubeUploader.m in Sources */,
+				3EA1A4FE15CAF2D50096E93A /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6375,6 +6417,8 @@
 				3E4432EE14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E73875B151A843A00692956 /* main.m in Sources */,
 				3EA7DEB11549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				3EA1A4F215CAF2780096E93A /* YouTubeUploader.m in Sources */,
+				3EA1A4FC15CAF2D50096E93A /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6529,6 +6573,8 @@
 				3E4432EC14FC2C8800BFECD8 /* YouTubeTableCell.m in Sources */,
 				3E738759151A843A00692956 /* main.m in Sources */,
 				3EA7DEAF1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
+				3EA1A4EF15CAF2780096E93A /* YouTubeUploader.m in Sources */,
+				3EA1A4F915CAF2D50096E93A /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6683,6 +6729,8 @@
 				609618C115532DB100FD97F8 /* YouTubeTableCell.m in Sources */,
 				609618C215532DB100FD97F8 /* main.m in Sources */,
 				609618C315532DB100FD97F8 /* UIViewController+Extension.m in Sources */,
+				3EA1A4F515CAF2780096E93A /* YouTubeUploader.m in Sources */,
+				3EA1A4FF15CAF2D50096E93A /* VideoPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

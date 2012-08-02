@@ -178,7 +178,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-	DLog(@"RETURN");
+	//DLog(@"RETURN");
 	if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {
 		[self.delegate textFieldReturned:self indexPath:self.indexPath text:theTextField.text];
 	}
@@ -186,9 +186,9 @@
 }
  
 - (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    DLog(@"%@", string);
+    //DLog(@"%@", string);
 	if ([string isEqualToString:@"\n"]) {
-		DLog(@"RETURN");
+		//DLog(@"RETURN");
 		if (self.delegate != NULL && [self.delegate respondsToSelector:@selector(textFieldReturned:indexPath:text:)]) {
 			[self.delegate textFieldReturned:self indexPath:self.indexPath text:theTextField.text];
 		}

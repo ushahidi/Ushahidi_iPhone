@@ -51,6 +51,7 @@ For more information visit:
 
 ##### Visibility of elements #####
 * USHReportNewsURL: should news link be should in reports?
+* USHReportVideosURL: should videos link be should in reports?
 
 ##### Bit.ly #####
 Optionally you can edit the Bit.ly API information, sign Up for a [Bitly Account](http://bitly.com/a/sign_up), then visit [Your bitly API Key](http://bitly.com/a/your_api_key)
@@ -63,5 +64,12 @@ Optionally you can edit the Twitter API information, sign Up for a [Twitter Dev 
 
 * USHTwitterApiKey: your Twitter API key
 * USHTwitterApiSecret: your Twitter API secret
+
+##### YouTube #####
+Optionally you can edit the YouTube API information, sign Up for a [YouTube Developer Account](https://code.google.com/apis/youtube/dashboard/gwt/index.html).
+
+* USHYoutubeUsername: your Youtube login
+* USHYoutubePassword: your Youtube password
+* USHYoutubeDeveloperKey: your Youtube Developer Key
 
 You should now be able to deploy your white-labelled version of the app to the Simulator for testing, enjoy!!

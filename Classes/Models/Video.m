@@ -22,6 +22,13 @@
 
 @implementation Video
 
++ (Video *) videoWithUrl:(NSString *)theUrl {
+	Video *video = [[Video alloc] init];
+	video.identifier = [NSString getUUID];
+	video.url = theUrl;
+	return [video autorelease];
+}
+
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super initWithDictionary:dictionary]) {
 		

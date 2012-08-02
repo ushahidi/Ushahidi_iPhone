@@ -40,7 +40,7 @@
 @synthesize identifier, title, description, date;
 @synthesize map;
 @synthesize active, verified, uploading, pending, userLocation;
-@synthesize news, photos, sounds, videos, categories;
+@synthesize news, photos, sounds, videos, categories, customFormEntries;
 @synthesize location, latitude, longitude;
 @synthesize errors;
 
@@ -55,6 +55,7 @@
 		self.longitude = nil;
 		self.date = [NSDate date];
 		self.userLocation = YES;
+        self.customFormEntries = [[NSMutableArray alloc] initWithCapacity:0];
 	}
 	return self;
 }
@@ -314,6 +315,11 @@
 - (void) removePhotoAtIndex:(NSInteger)index {
 	[self.photos removeObjectAtIndex:index];
 }
+
+- (void) removeVideoAtIndex:(NSInteger)index {
+	[self.videos removeObjectAtIndex:index];
+}
+
 
 - (BOOL) hasTitle {
 	return  self.title != nil && self.title.length > 0;

@@ -27,6 +27,7 @@
 #import "Ushahidi.h"
 #import "DatePicker.h"
 #import "Locator.h"
+#import "VideoPickerController.h"
 
 @class CategoryTableViewController;
 @class LocationSelectViewController;
@@ -36,6 +37,7 @@
 																TextViewTableCellDelegate, 
 																DatePickerDelegate,
 																ImagePickerDelegate,
+                                                                VideoPickerDelegate,
 																UIActionSheetDelegate, 
 																LocatorDelegate,
 																ButtonTableCellDelegate,
@@ -45,7 +47,8 @@
 	CategoryTableViewController *categoryTableViewController;
 	LocationSelectViewController *locationSelectViewController;
 	ImagePickerController *imagePickerController;
-																
+    VideoPickerController *videoPickerController;
+														
 @private
 	DatePicker *datePicker;
 	NSString *news;
@@ -55,5 +58,6 @@
 @property(nonatomic, retain) IBOutlet CategoryTableViewController *categoryTableViewController;
 @property(nonatomic, retain) IBOutlet LocationSelectViewController *locationSelectViewController;
 @property(nonatomic, retain) ImagePickerController *imagePickerController;
+@property(nonatomic, retain) VideoPickerController *videoPickerController;
 
 @end

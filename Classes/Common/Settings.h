@@ -90,6 +90,7 @@
 @property(nonatomic, readonly) BOOL hasLastName;
 @property(nonatomic, readonly) BOOL hasEmail;
 @property(nonatomic, readonly) BOOL hasMapURL;
+@property(nonatomic, readonly) BOOL hasYoutubeCredentials;
 
 @property(nonatomic, retain) NSString *mapName;
 @property(nonatomic, retain) NSString *mapURL;
@@ -123,7 +124,12 @@
 @property(nonatomic, retain) NSString *bitlyApiLogin;
 @property(nonatomic, retain) NSString *bitlyApiKey;
 
+@property(nonatomic, retain) NSString *youtubeLogin;
+@property(nonatomic, retain) NSString *youtubePassword;
+@property(nonatomic, retain) NSString *youtubeDeveloperKey;
+
 @property(nonatomic, assign) BOOL showReportNewsURL;
+@property(nonatomic, assign) BOOL showReportVideosURL;
 @property(nonatomic, readonly) BOOL isWhiteLabel;
 
 + (Settings *) sharedSettings;

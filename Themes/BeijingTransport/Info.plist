@@ -100,5 +100,11 @@
 	<string>#ea5e20</string>
 	<key>USHVerifiedTextColor</key>
 	<string>#414e6e</string>
+	<key>USHYoutubeDeveloperKey</key>
+	<string></string>
+	<key>USHYoutubePassword</key>
+	<string></string>
+	<key>USHYoutubeUsername</key>
+	<string></string>
 </dict>
 </plist>

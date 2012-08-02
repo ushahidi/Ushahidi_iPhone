@@ -25,4 +25,6 @@
 
 }
 
++ (Video *) videoWithUrl:(NSString *)url;
+
 @end

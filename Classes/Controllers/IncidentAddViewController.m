@@ -41,11 +41,13 @@
 #import "Settings.h"
 #import "TableHeaderView.h"
 #import "NSString+Extension.h"
+#import "Video.h"
 
 @interface IncidentAddViewController ()
 
 @property(nonatomic, retain) DatePicker *datePicker;
 @property(nonatomic, retain) NSString *news;
+@property(nonatomic, retain) NSString *videos;
 @property(nonatomic, retain) Incident *incident;
 
 @end
@@ -56,7 +58,9 @@
 @synthesize categoryTableViewController;
 @synthesize locationSelectViewController;
 @synthesize imagePickerController;
+@synthesize videoPickerController;
 @synthesize news;
+@synthesize videos;
 @synthesize incident;
 
 #pragma mark -
@@ -69,6 +73,7 @@ typedef enum {
 	TableSectionDate,
 	TableSectionLocation,
 	TableSectionPhotos,
+    TableSectionVideos,
 	TableSectionNews,
 	TableSectionDelete
 } TableSection;
@@ -135,6 +140,9 @@ typedef enum {
 		if (self.news != nil && [self.news isValidURL]) {
 			[self.incident addNews:[News newsWithUrl:self.news]];
 		}
+        if (self.videos != nil && [self.videos isValidURL]) {
+			[self.incident addVideo:[Video videoWithUrl:self.videos]];
+		}
 		[self.view endEditing:YES];
 		if ([[Ushahidi sharedUshahidi] addIncident:self.incident forDelegate:self]) {
 			if (adding) {
@@ -165,6 +173,7 @@ typedef enum {
 	self.navigationBar.topItem.title = NSLocalizedString(@"Add Report", nil);
     self.doneButton.title = NSLocalizedString(@"Add", nil);
 	self.imagePickerController = [[ImagePickerController alloc] initWithController:self];
+    self.videoPickerController = [[VideoPickerController alloc] initWithController:self];
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
     [self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
 	[self setHeader:NSLocalizedString(@"Description", nil) atSection:TableSectionDescription];
@@ -172,6 +181,12 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDate];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photos", nil) atSection:TableSectionPhotos];
+    if ([[Settings sharedSettings] showReportVideosURL]) {
+        [self setHeader:NSLocalizedString(@"Videos", nil) atSection:TableSectionVideos];
+    }
+    else {
+        //DO NOT SHOW 'Videos' HEADING
+    }
 	if ([[Settings sharedSettings] showReportNewsURL]) {
 		[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
 	}
@@ -187,6 +202,7 @@ typedef enum {
 - (void)viewDidUnload {
     [super viewDidUnload];
 	self.imagePickerController = nil;
+    self.videoPickerController = nil;
 	self.datePicker = nil;
 }
 
@@ -236,6 +252,7 @@ typedef enum {
 
 - (void)dealloc {
 	[imagePickerController release];
+    [videoPickerController release];
 	[categoryTableViewController release];
 	[locationSelectViewController release];
 	[incident release];
@@ -262,6 +279,17 @@ typedef enum {
 	}
 	if (section == TableSectionPhotos) {
 		return [self.incident.photos count] + 1;
+	}
+    if (section == TableSectionVideos) {
+        if ([[Settings sharedSettings] showReportVideosURL]) {
+            if ([NSString isNilOrEmpty:[Settings sharedSettings].youtubeLogin] == NO && 
+                [NSString isNilOrEmpty:[Settings sharedSettings].youtubePassword] == NO &&
+                [NSString isNilOrEmpty:[Settings sharedSettings].youtubeDeveloperKey] == NO) {
+                return [self.incident.videos count] + 1;
+            }
+            return 1;
+        }
+        return 0;
 	}
 	if (section == TableSectionDelete) {
 		return self.incident.pending ? 1 : 0;
@@ -304,6 +332,42 @@ typedef enum {
 			return cell;
 		}
 	}
+    else if (indexPath.section == TableSectionVideos) {
+        if ([NSString isNilOrEmpty:[Settings sharedSettings].youtubeDeveloperKey] == NO &&
+            [NSString isNilOrEmpty:[Settings sharedSettings].youtubeLogin] == NO &&
+            [NSString isNilOrEmpty:[Settings sharedSettings].youtubePassword] == NO) {
+            if (indexPath.row > 0) {
+                TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+                Video *video = [self.incident.videos objectAtIndex:indexPath.row - 1];
+                if (video != nil && [NSString isNilOrEmpty:video.title]) {
+                    [cell setText:video.url];
+                }
+                else {
+                    [cell setText:video.title];
+                }
+                return cell;	
+            }
+            else {
+                TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                [cell setText:NSLocalizedString(@"Add Video", nil)];
+                [cell setTextColor:[UIColor lightGrayColor]];
+                return cell;
+            }   
+        }
+        else {
+            TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
+            [cell setText:self.videos];
+            [cell setPlaceholder:NSLocalizedString(@"Enter video URL", nil)];
+            [cell setKeyboardType:UIKeyboardTypeURL];
+            [cell setReturnKeyType:UIReturnKeyDefault];
+            [cell setAutocorrectionType:UITextAutocorrectionTypeNo];
+            [cell setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+            return cell;
+        }
+	}
+    
 	else if (indexPath.section == TableSectionNews) {
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setText:self.news];
@@ -412,6 +476,14 @@ typedef enum {
         }
         return 120;
 	}
+    if (indexPath.section == TableSectionVideos) {
+        if ([NSString isNilOrEmpty:[Settings sharedSettings].youtubeLogin] == NO && 
+            [NSString isNilOrEmpty:[Settings sharedSettings].youtubePassword] == NO &&
+            [NSString isNilOrEmpty:[Settings sharedSettings].youtubeDeveloperKey] == NO) {
+            return 44;
+        }
+        return 44;
+    }
 	if (indexPath.section == TableSectionLocation) {
 		return 44;
 	}
@@ -431,6 +503,30 @@ typedef enum {
 	DLog(@"didSelectRowAtIndexPath:[%d, %d]", indexPath.section, indexPath.row);
 	[self.view endEditing:YES];
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == TableSectionVideos && indexPath.row == 0) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        if ([NSString isNilOrEmpty:[Settings sharedSettings].youtubeDeveloperKey] == NO &&
+            [NSString isNilOrEmpty:[Settings sharedSettings].youtubeLogin] == NO &&
+            [NSString isNilOrEmpty:[Settings sharedSettings].youtubePassword] == NO) {
+            [self.videoPickerController showVideoPickerForDelegate:self forRect:cell.frame];
+        }
+        else {
+            
+        }
+	}
+	else if (indexPath.section == TableSectionVideos && indexPath.row > 0) {
+    	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+																 delegate:self 
+														cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+												   destructiveButtonTitle:NSLocalizedString(@"Remove Video", nil)
+														otherButtonTitles:nil];
+		[actionSheet setTag:indexPath.row - 1];
+		[actionSheet setActionSheetStyle:UIActionSheetStyleBlackOpaque];
+		[actionSheet showInView:[self view]];
+		[actionSheet release];
+	}
+    
     if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
 		[self.imagePickerController showImagePickerForDelegate:self 
@@ -469,7 +565,7 @@ typedef enum {
 		rect.origin.y += [TableHeaderView getViewHeight];
 		rect.origin.y += 45 / 2;
 		UIDatePickerMode datePickerMode = indexPath.row == TableSectionDateRowDate
-			? UIDatePickerModeDate : UIDatePickerModeTime;
+        ? UIDatePickerModeDate : UIDatePickerModeTime;
 		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath forRect:rect];
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
@@ -498,6 +594,15 @@ typedef enum {
 			[self setFooter:NSLocalizedString(@"Invalid News URL", nil) atSection:TableSectionNews color:[UIColor redColor]];
 		}
 	}
+    else if (indexPath.section == TableSectionVideos) {
+		self.videos = text;
+        if ([NSString isNilOrEmpty:text] || [text isValidURL]) {
+			[self setFooter:nil atSection:TableSectionVideos];
+		}
+		else {
+			[self setFooter:NSLocalizedString(@"Invalid Video URL", nil) atSection:TableSectionVideos color:[UIColor redColor]];
+		}
+	}
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
@@ -514,6 +619,16 @@ typedef enum {
 		}
 		else {
 			[self setFooter:NSLocalizedString(@"Invalid News URL", nil) atSection:TableSectionNews color:[UIColor redColor]];
+		}
+		[self.tableView reloadData];
+	}
+    else if (indexPath.section == TableSectionVideos) {
+		self.videos = text;
+		if ([NSString isNilOrEmpty:text] || [text isValidURL]) {
+			[self setFooter:nil atSection:TableSectionVideos];
+		}
+		else {
+			[self setFooter:NSLocalizedString(@"Invalid Video URL", nil) atSection:TableSectionVideos color:[UIColor redColor]];
 		}
 		[self.tableView reloadData];
 	}
@@ -592,8 +707,15 @@ typedef enum {
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	if (actionSheet.cancelButtonIndex != buttonIndex) {
-        [self.incident removePhotoAtIndex:actionSheet.tag];
-		[self.tableView reloadData];	
+        NSString *destructiveButtonTitle = [actionSheet buttonTitleAtIndex:actionSheet.destructiveButtonIndex];
+        DLog(@"%@", destructiveButtonTitle);
+        if ([NSLocalizedString(@"Remove Video", nil) isEqualToString:destructiveButtonTitle]) {
+            [self.incident removeVideoAtIndex:actionSheet.tag];
+        }
+        else if ([NSLocalizedString(@"Remove Photo", nil) isEqualToString:destructiveButtonTitle]) {
+            [self.incident removePhotoAtIndex:actionSheet.tag];
+        }
+        [self.tableView reloadData];	
 	}
 }
 
@@ -677,5 +799,37 @@ typedef enum {
 	}
     [self.loadingView hide];
 }
+
+#pragma mark -
+#pragma mark Video Uploader Delegate
+
+- (void) videoPickerDidStart:(VideoPickerController *)videoPicker {
+    [self.loadingView showWithMessage:NSLocalizedString(@"Uploading...", nil)];
+}
+
+- (void) videoPickerDidCancel:(VideoPickerController *)imagePicker {
+    DLog(@"");
+    [self.loadingView hide];
+}
+
+- (void) videoPickerDidFinish:(VideoPickerController *)imagePicker withAddress:(NSString *)address {
+    DLog(@"Address: %@", address);
+    [self.loadingView showWithMessage:NSLocalizedString(@"Uploaded", nil)];
+    Video *video = [[[Video alloc] init] autorelease];
+    video.title = [self titleForVideo];
+    video.url = address;
+    [self.incident addVideo:video];
+    [self.tableView reloadData];
+    [self.loadingView hideAfterDelay:1.0];
+}
+
+- (void) videoPickerDidFail:(VideoPickerController *)videoPicker withError:(NSString*)error {
+    DLog(@"Error:%@", error);
+    [self.loadingView hide];
+    [self.alertView showOkWithTitle:NSLocalizedString(@"Upload Error", nil) andMessage:error];
+}
+
+- (NSString *)titleForVideo { return self.incident.title; }
+- (NSString *)descriptionForVideo { return  self.incident.description; }
 
 @end

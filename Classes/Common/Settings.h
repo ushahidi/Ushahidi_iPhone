@@ -72,6 +72,9 @@
     
 	BOOL showReportNewsURL;
     BOOL isWhiteLabel;
+    
+    NSArray *incidentCustomFieldsArray;
+    BOOL hasIncidentCustomFields;
 }
 
 @property(nonatomic, retain) NSString *email;
@@ -131,6 +134,8 @@
 @property(nonatomic, assign) BOOL showReportNewsURL;
 @property(nonatomic, assign) BOOL showReportVideosURL;
 @property(nonatomic, readonly) BOOL isWhiteLabel;
+
+@property(nonatomic,retain) NSArray *incidentCustomFieldsArray;
 
 + (Settings *) sharedSettings;
 

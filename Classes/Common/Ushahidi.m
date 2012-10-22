@@ -39,11 +39,11 @@
 #import "Sound.h"
 #import "Video.h"
 #import "Settings.h"
-#import "Incident.h"
 #import "Checkin.h"
 #import "Internet.h"
 #import "Device.h"
 #import "User.h"
+#import "IncidentCustomField.h"
 
 @interface Ushahidi ()
 
@@ -81,6 +81,10 @@
 - (void) getIncidentsStarted:(ASIHTTPRequest *)request;
 - (void) getIncidentsFinished:(ASIHTTPRequest *)request;
 - (void) getIncidentsFailed:(ASIHTTPRequest *)request;
+
+- (void) getIncidentCustomFieldsStarted:(ASIHTTPRequest *)request;
+- (void) getIncidentCustomFieldsFinished:(ASIHTTPRequest *)request;
+- (void) getIncidentCustomFieldsFailed:(ASIHTTPRequest *)request;
 
 - (void) getCategoriesStarted:(ASIHTTPRequest *)request;
 - (void) getCategoriesFinished:(ASIHTTPRequest *)request;
@@ -884,6 +888,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				}
 			}
 		}
+        
+        if ([incident.customFormEntries count] > 0){
+            NSArray *keys = [incident.customFormEntries allKeys];
+            for (NSString *key in keys){
+                [post addPostValue:[incident.customFormEntries objectForKey:key] forKey:key];
+            }
+        }
+        
         DLog(@"POST: %@", [post stringValues]);
 		[self.uploadQueue addOperation:post];
 		return YES;
@@ -1183,9 +1195,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			[self downloadMapForIncident:incident forDelegate:delegate];
 		}
 	}
-	NSString *url = (self.deployment.lastIncidentId != nil)
-		? [self.deployment getUrlForIncidentsBySinceID:self.deployment.lastIncidentId]
-		: [self.deployment getUrlForIncidents];
+	NSString *url = [self.deployment getUrlForIncidents];
 	ASIHTTPRequest *request = [self getHTTPRequest:url 
 									 startSelector:@selector(getIncidentsStarted:)
 									finishSelector:@selector(getIncidentsFinished:)
@@ -1282,6 +1292,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 						[category release];
 					}
 				}
+                
+                NSDictionary * customFieldsDict = [dictionary objectForKey:@"customfields"];
+                if(customFieldsDict != nil && [customFieldsDict isKindOfClass:[NSDictionary class]]){
+                    NSArray *keys = [customFieldsDict allKeys];
+                    for(NSString *key in keys){
+                        NSDictionary * customFieldDetailDict = [customFieldsDict objectForKey:key];
+                        IncidentCustomField *customField = [[IncidentCustomField alloc]init];
+                        customField.fieldID = [[customFieldDetailDict objectForKey:@"field_id"]intValue];
+                        customField.fieldName = [[NSString alloc] initWithString:[customFieldDetailDict stringForKey:@"field_name"]];
+                        customField.fieldType = [[customFieldDetailDict objectForKey:@"field_type"]intValue];
+                        if([customFieldDetailDict objectForKey:@"field_default"] != nil){
+                            NSString *tmpDefault = [customFieldDetailDict stringForKey:@"field_default"];
+                            customField.defaultValues = [tmpDefault componentsSeparatedByString:@","];
+                        }else {
+                            customField.defaultValues = [[NSArray alloc] init];
+                        }
+                        
+                        NSInteger requiredInt = [[customFieldDetailDict objectForKey:@"field_required"]intValue];
+                        if(requiredInt == 0){
+                            customField.isRequired = NO;
+                        }else {
+                            customField.isRequired = YES ;
+                        }
+                        
+                        if([customFieldDetailDict objectForKey:@"field_response"] != nil){
+                            customField.fieldResponse = [[NSString alloc]initWithString:[customFieldDetailDict objectForKey:@"field_response"]];
+                        }else{
+                            customField.fieldResponse = [[NSString alloc]initWithString:@""];
+                        }
+                        [incident.customFields addObject:customField];
+                    }
+                }
 				if ([[Settings sharedSettings] downloadMaps] && incident.map == nil) {
 					[self downloadMapForIncident:incident 
 									 forDelegate:[request getDelegate]];
@@ -1320,6 +1362,88 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 					target:[request getDelegate] 
 				   objects:self, nil, nil, [request error], NO, nil];
 }
+
+#pragma mark -
+#pragma mark Incident Custom Fields
+
+- (NSArray *) getIncidentCustomFieldsForDelegate:(id<UshahidiDelegate>)delegate {
+	
+    ASIHTTPRequest *request = [self getHTTPRequest:self.deployment.getURlForIncidentCustomFields 
+									 startSelector:@selector(getIncidentCustomFieldsStarted:)
+									finishSelector:@selector(getIncidentCustomFieldsFinished:)
+									  failSelector:@selector(getIncidentCustomFieldsFailed:)];
+	[request attachDelegate:delegate];
+	[request startSynchronous];
+	return self.deployment.incidentCustomFields;
+}
+
+- (void) getIncidentCustomFieldsStarted:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+}
+
+- (void) getIncidentCustomFieldsFinished:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"STATUS: %@", [request responseStatusMessage]);
+	NSError *error = nil;
+	if ([request responseStatusCode] != HttpStatusOK) {
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
+	}
+	else {
+		NSDictionary *json = [[request responseString] JSONValue];
+		if (json == nil) {
+			DLog(@"RESPONSE: %@", [request responseString]);
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:NSLocalizedString(@"Unable To Download Checkins", nil)];
+            self.deployment.incidentCustomFields = [[NSArray alloc] init];
+		}
+		else {
+            NSMutableArray *incidentCustomFields  = [[NSMutableArray alloc]init]; 
+			NSDictionary *payload = [json objectForKey:@"payload"];
+			if (payload != nil) {
+				NSDictionary *customForms = [payload objectForKey:@"customforms"]; 
+				if (customForms != nil) {
+					NSArray *Fields = [customForms objectForKey:@"fields"];
+                    if(Fields != nil){
+                        for (NSDictionary *dictionary in Fields) {
+                            [incidentCustomFields addObject:[dictionary objectForKey:@"meta"]];
+                        }
+                        self.deployment.incidentCustomFields = [[NSArray alloc] initWithArray:incidentCustomFields];
+                    }
+                    else{
+                        DLog(@"FIELDS:NULL");
+                        self.deployment.incidentCustomFields = [[NSArray alloc] init];
+                    }
+				}
+                else {
+                    DLog(@"CUSTOMFORMS:NULL");
+                    self.deployment.incidentCustomFields = [[NSArray alloc] init];
+                }
+			}
+			else {
+				error = [NSError errorWithDomain:self.deployment.domain 
+											code:HttpStatusInternalServerError 
+										 message:NSLocalizedString(@"Unable To Download Fields", nil)];
+                self.deployment.incidentCustomFields = [[NSArray alloc] init];
+			}
+		}
+	}
+	
+}
+
+- (void) getIncidentCustomFieldsFailed:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"STATUS: %@", [request responseStatusMessage]);
+	DLog(@"RESPONSE: %@", [request responseString]);
+	NSArray *checkins = [[self.deployment.checkins allValues] sortedArrayUsingSelector:@selector(compareByDate:)];
+    self.deployment.incidentCustomFields = nil;
+	[self dispatchSelector:@selector(downloadedFromUshahidi:checkins:error:hasChanges:) 
+					target:[request getDelegate] 
+				   objects:self, checkins, [request error], NO, nil];
+}
+
 
 #pragma mark -
 #pragma mark Photo

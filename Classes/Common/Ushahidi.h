@@ -99,6 +99,8 @@
 - (NSArray *) getIncidentsPending;
 - (NSArray *) getIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 
+- (NSArray *) getIncidentCustomFieldsForDelegate:(id<UshahidiDelegate>)delegate;
+
 - (NSURL *) getUrlForIncident:(Incident *)incident;
 
 - (void) downloadPhoto:(Photo *)photo forIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;

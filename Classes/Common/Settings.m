@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 @synthesize firstName;
 @synthesize lastName;
 @synthesize lastDeployment;
-@synthesize lastIncident; 
+@synthesize lastIncident;
 @synthesize downloadMaps;
 @synthesize becomeDiscrete;
 @synthesize resizePhotos;
@@ -83,6 +83,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 @synthesize youtubeDeveloperKey;
 @synthesize youtubeLogin;
 @synthesize youtubePassword;
+@synthesize incidentCustomFieldsArray;
 
 - (id) init {
 	if ((self = [super init])) {
@@ -121,8 +122,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 	self.twitterUserSecret = [userDefaults stringForKey:@"twitterUserSecret"];
     
     self.youtubeDeveloperKey = [userDefaults stringForKey:@"USHYoutubeDeveloperKey"];
-    self.youtubeLogin = [userDefaults stringForKey:@"USHYoutubeUsername"];   
+    self.youtubeLogin = [userDefaults stringForKey:@"USHYoutubeUsername"];
     self.youtubePassword = [userDefaults stringForKey:@"USHYoutubePassword"];
+    
+    
+    if ([userDefaults objectForKey:@"incidentCustomFields"] != nil) {
+		
+        NSData *data = [userDefaults objectForKey:@"incidentCustomFields"];
+        self.incidentCustomFieldsArray = [[NSArray alloc] initWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+	}
+	else {
+        self.incidentCustomFieldsArray = nil;
+	}
+    
 }
 
 - (void) loadInfoDictionary {
@@ -152,12 +164,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
     
 	self.twitterApiKey = [infoDictionary stringForKey:@"USHTwitterApiKey"];
     self.twitterApiSecret = [infoDictionary stringForKey:@"USHTwitterApiSecret"];
-
+    
     self.bitlyApiLogin = [infoDictionary stringForKey:@"USHBitlyApiLogin"];
     self.bitlyApiKey = [infoDictionary stringForKey:@"USHBitlyApiKey"];
     
     self.youtubeDeveloperKey = [infoDictionary stringForKey:@"USHYoutubeDeveloperKey"];
-    self.youtubeLogin = [infoDictionary stringForKey:@"USHYoutubeUsername"];   
+    self.youtubeLogin = [infoDictionary stringForKey:@"USHYoutubeUsername"];
     self.youtubePassword = [infoDictionary stringForKey:@"USHYoutubePassword"];
     
 	if ([infoDictionary objectForKey:@"USHReportNewsURL"] != nil) {
@@ -209,6 +221,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
     
     [bitlyApiLogin release];
     [bitlyApiKey release];
+    
+    [incidentCustomFieldsArray release];
 	[super dealloc];
 }
 
@@ -231,7 +245,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
     [[NSUserDefaults standardUserDefaults] setObject:self.twitterPassword forKey:@"twitterPassword"];
     [[NSUserDefaults standardUserDefaults] setObject:self.twitterUserKey forKey:@"twitterUserKey"];
     [[NSUserDefaults standardUserDefaults] setObject:self.twitterUserSecret forKey:@"twitterUserSecret"];
-
+    
+    
+    NSArray* tmpCustomFieldArray = [[NSArray alloc] initWithArray:self.incidentCustomFieldsArray];
+    
+    NSArray *arr = tmpCustomFieldArray;
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"incidentCustomFields"];
+    
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -253,11 +275,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Settings);
 
 - (BOOL) isWhiteLabel {
 	return [NSString isNilOrEmpty:self.mapName] == NO ||
-           [NSString isNilOrEmpty:self.mapURL] == NO;
+    [NSString isNilOrEmpty:self.mapURL] == NO;
 }
 
 - (BOOL) hasYoutubeCredentials {
     return self.youtubeDeveloperKey && self.youtubeLogin && self.youtubePassword;
+}
+
+- (BOOL) hasIncidentCustomFields {
+    if((self.incidentCustomFieldsArray != nil) && ([self.incidentCustomFieldsArray count]>0)){
+        return YES;
+    }
+    return NO;
 }
 
 @end

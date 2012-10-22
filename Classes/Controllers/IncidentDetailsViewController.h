@@ -39,10 +39,12 @@
 @public	
 	Incident *incident;
 	NSArray *incidents;
+    NSDictionary *customFields;
 }
 
 @property(nonatomic,retain) Incident *incident;
 @property(nonatomic,retain) NSArray *incidents;
+@property(nonatomic,retain) NSDictionary *customFields;
 
 - (IBAction) nextPrevious:(id)sender;
 - (IBAction) sendEmail:(id)sender;

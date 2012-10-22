@@ -45,8 +45,8 @@
 @synthesize window;
 @synthesize navigationController;
 @synthesize deploymentTableViewController;
-@synthesize incidentTabViewController; 
-@synthesize incidentDetailsViewController; 
+@synthesize incidentTabViewController;
+@synthesize incidentDetailsViewController;
 @synthesize checkinTabViewController;
 @synthesize splitViewController;
 @synthesize categorySelectViewController;
@@ -64,7 +64,7 @@
         [detailNavigationController pushViewController:viewController animated:animated];
     }
     else {
-        [self.navigationController pushViewController:viewController animated:animated]; 
+        [self.navigationController pushViewController:viewController animated:animated];
     }
 }
 
@@ -97,7 +97,7 @@
             [detailNavigationController pushViewController:viewController animated:animated];
             self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
             [viewController viewWasPushed];
-        }        
+        }
     }
     else {
         [self.navigationController pushViewController:viewController animated:animated];
@@ -140,7 +140,7 @@
     
     NavigationController *masterNavigationController = [[[NavigationController alloc] init] autorelease];
     masterNavigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-    masterNavigationController.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];   
+    masterNavigationController.navigationBar.tintColor = [[Settings sharedSettings] navBarTintColor];
     
     NavigationController *detailNavigationController = [[[NavigationController alloc] init] autorelease];
     detailNavigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
@@ -149,7 +149,7 @@
     if ([Device isIPad]) {
         self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
         self.navigationController = detailNavigationController;
-    } 
+    }
     else {
         self.navigationController = masterNavigationController;
     }
@@ -165,10 +165,25 @@
 			[[Ushahidi sharedUshahidi] addDeployment:deployment];
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 			[[Ushahidi sharedUshahidi] getVersionOfDeployment:deployment forDelegate:self];
+            
+            NSArray* tmpCustomFieldArray = [[NSArray alloc] initWithArray:[[Ushahidi sharedUshahidi] getIncidentCustomFieldsForDelegate:self]];
+            
+            if((tmpCustomFieldArray != nil) && ([tmpCustomFieldArray count] > 0)){
+                
+                [[Settings sharedSettings] setIncidentCustomFieldsArray:tmpCustomFieldArray];
+                [[Settings sharedSettings] save];
+            }
         }
 		else {
             self.splashViewController.shouldDismissOnAppear = YES;
-			[[Ushahidi sharedUshahidi] loadDeployment:deployment];	
+			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
+            NSArray* tmpCustomFieldArray = [[NSArray alloc] initWithArray:[[Ushahidi sharedUshahidi] getIncidentCustomFieldsForDelegate:self]];
+            
+            if((tmpCustomFieldArray != nil) && ([tmpCustomFieldArray count] > 0)){
+                [[Settings sharedSettings] setIncidentCustomFieldsArray:tmpCustomFieldArray];
+                [[Settings sharedSettings] save];
+                
+            }
 			if (deployment.supportsCheckins) {
                 self.checkinTabViewController.deployment = deployment;
                 if ([Device isIPad]) {
@@ -236,14 +251,14 @@
         [masterNavigationController pushViewController:self.deploymentTableViewController animated:NO];
         if ([Device isIPad]) {
             [self setDetailsViewController:self.incidentTabViewController animated:NO];
-        }   
+        }
     }
     self.splashViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     self.splashViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     if ([Device isIPad]) {
         [self.window addSubview:self.splitViewController.view];
         [self.splitViewController presentModalViewController:self.splashViewController animated:NO];
-    } 
+    }
     else {
         [self.window addSubview:self.navigationController.view];
         [self.navigationController presentModalViewController:self.splashViewController animated:NO];

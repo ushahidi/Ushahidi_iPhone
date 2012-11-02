@@ -39,7 +39,7 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary {
 	if (self = [super init]) {
 		if (dictionary != nil) {
-			self.identifier = [dictionary objectForKey:@"id"];
+			self.identifier = [dictionary stringForKey:@"id"];
 			self.title = [dictionary objectForKey:@"title"];
 			self.description = [dictionary objectForKey:@"description"];
 			self.color = [UIColor colorFromHexString:[dictionary objectForKey:@"color"]];

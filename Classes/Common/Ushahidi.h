@@ -81,6 +81,7 @@
 - (BOOL) uploadIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (void) uploadIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 - (BOOL) removeIncident:(Incident *)incident;
+- (NSURL *) getUrlForIncident:(Incident *)incident;
 
 - (BOOL) hasCheckins;
 - (NSArray *) getCheckins;
@@ -99,7 +100,8 @@
 - (NSArray *) getIncidentsPending;
 - (NSArray *) getIncidentsForDelegate:(id<UshahidiDelegate>)delegate;
 
-- (NSURL *) getUrlForIncident:(Incident *)incident;
+- (NSArray *) getCustomFormsFields;
+- (NSArray *) getCustomFormsForDelegate:(id<UshahidiDelegate>)delegate;
 
 - (void) downloadPhoto:(Photo *)photo forIncident:(Incident *)incident forDelegate:(id<UshahidiDelegate>)delegate;
 - (void) downloadPhoto:(Photo *)photo forCheckin:(Checkin *)checkin forDelegate:(id<UshahidiDelegate>)delegate;
@@ -120,6 +122,8 @@
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi locations:(NSArray *)locations;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending;
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi checkins:(NSArray *)checkins;
+- (void) downloadingFromUshahidi:(Ushahidi *)ushahidi CustomForms:(NSArray *)customForms;
+
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi maps:(NSArray *)maps error:(NSError *)error hasChanges:(BOOL)hasChanges;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi deployments:(NSArray *)deployments error:(NSError *)error hasChanges:(BOOL)hasChanges;
@@ -136,6 +140,8 @@
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo checkin:(Checkin *)checkin;
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi photo:(Photo *)photo incident:(Incident *)incident;
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi customForms:(NSArray *)customForms;
 
 - (void) uploadingToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident;
 - (void) uploadedToUshahidi:(Ushahidi *)ushahidi incident:(Incident *)incident error:(NSError *)error;

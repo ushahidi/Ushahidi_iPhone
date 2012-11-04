@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
+#import "Ushahidi.h"
 
 @class Photo;
 @class News;
@@ -49,7 +50,7 @@
 	NSMutableArray *sounds;
 	NSMutableArray *videos;
 	NSMutableArray *categories;
-	
+	NSMutableArray *customFormEntries;
 	NSString *errors;
 }
 
@@ -75,7 +76,7 @@
 @property(nonatomic,retain) NSMutableArray *sounds;
 @property(nonatomic,retain) NSMutableArray *videos;
 @property(nonatomic,retain) NSMutableArray *categories;
-@property(nonatomic,retain) NSMutableArray *customFormEntries;
+@property(nonatomic,retain) NSArray *customFormEntries;
 
 @property(nonatomic,retain) NSString *errors;
 

@@ -44,6 +44,7 @@
 #import "Internet.h"
 #import "Device.h"
 #import "User.h"
+#import "CustomForm.h"
 
 @interface Ushahidi ()
 
@@ -106,6 +107,10 @@
 - (void) getVersionFinished:(ASIHTTPRequest *)request;
 - (void) getVersionFailed:(ASIHTTPRequest *)request;
 
+- (void) getCustomFormsStarted:(ASIHTTPRequest *)request;
+- (void) getCustomFormsFinished:(ASIHTTPRequest *)request;
+- (void) getCustomFormsFailed:(ASIHTTPRequest *)request;
+
 - (BOOL) isDuplicate:(Incident *)incident;
 
 - (void) loadDeploymentWithDictionary:(NSDictionary *)dict;
@@ -128,6 +133,7 @@ typedef enum {
 	MediaTypeSound = 3,
 	MediaTypeNews = 4
 } MediaType;
+
 
 NSString * const kGoogleStaticMaps = @"http://maps.google.com/maps/api/staticmap";
 NSInteger const kGoogleOverCapacitySize = 100;
@@ -884,7 +890,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				}
 			}
 		}
-        DLog(@"POST: %@", [post stringValues]);
 		[self.uploadQueue addOperation:post];
 		return YES;
 	}
@@ -916,9 +921,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	incident.uploading = NO;
 	NSError *error = nil;
 	if ([request responseStatusCode] != HttpStatusOK) {
-        DLog(@"ERROR: %@", error);
-        DLog(@"STATUS CODE: %@", [request responseStatusCode]);
-        DLog(@"STATUS MESSAGE: %@", [request responseStatusMessage]);
 		incident.errors = [request responseStatusMessage];
 		error = [NSError errorWithDomain:self.deployment.domain 
 									code:[request responseStatusCode] 
@@ -926,7 +928,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	}
 	else {
 		NSDictionary *json = [[request responseString] JSONValue];
-        if (json == nil) {
+		if (json == nil) {
 			DLog(@"RESPONSE: %@", [request responseString]);
 			incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
 			error = [NSError errorWithDomain:self.deployment.domain 
@@ -948,15 +950,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 							   objects:self, [self.deployment.incidents allValues], self.deployment.pending, nil, YES, nil];
 			}
 			else {
-                DLog(@"JSON: %@", json);
-                NSDictionary *messages = [json objectForKey:@"error"];
+				NSDictionary *messages = [json objectForKey:@"error"];
 				if (messages != nil) {
 					incident.errors = [messages objectForKey:@"message"];
 				}
 				else {
 					incident.errors = NSLocalizedString(@"Unable To Upload Report", nil);
 				}
-                DLog(@"ERROR: %@", messages);
 				error = [NSError errorWithDomain:self.deployment.domain 
 											code:HttpStatusInternalServerError 
 										 message:incident.errors];
@@ -1243,7 +1243,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 						self.deployment.lastIncidentId = incident.identifier;
 					}
 				}
-				NSDictionary *media = [dictionary objectForKey:@"media"];
+				NSArray *media = [dictionary objectForKey:@"media"];
 				if (media != nil && [media isKindOfClass:[NSArray class]]) {
 					for (NSDictionary *item in media) {
 						DLog(@"INCIDENT MEDIA: %@", item);
@@ -1268,7 +1268,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 						}	
 					}
 				}
-				NSDictionary *categories = [dictionary objectForKey:@"categories"];
+				NSArray *categories = [dictionary objectForKey:@"categories"];
 				if (categories != nil && [categories isKindOfClass:[NSArray class]]) {
 					for (NSDictionary *item in categories) {
 						DLog(@"INCIDENT CATEGORY: %@", item);
@@ -1560,6 +1560,72 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
     else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
+}
+
+#pragma mark -
+#pragma mark Custom Form
+
+- (NSArray *)getCustomFormsFields {
+    return self.deployment.customFormFields;
+}
+
+- (NSArray *) getCustomFormsForDelegate:(id<UshahidiDelegate>)delegate {
+	NSString *url = [self.deployment getUrlForCustomForms];
+	ASIHTTPRequest *request = [self getHTTPRequest:url 
+									 startSelector:@selector(getCustomFormsStarted:)
+									finishSelector:@selector(getCustomFormsFinished:)
+									  failSelector:@selector(getCustomFormsFailed:)];
+	[request attachDelegate:delegate];
+	[self.mainQueue addOperation:request];
+	return self.deployment.customFormFields;
+}
+
+- (void) getCustomFormsStarted:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+}
+
+- (void) getCustomFormsFinished:(ASIHTTPRequest *)request {
+	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
+	DLog(@"STATUS: %@", [request responseStatusMessage]);
+	NSError *error = nil;
+	if ([request responseStatusCode] != HttpStatusOK) {
+		error = [NSError errorWithDomain:self.deployment.domain 
+									code:[request responseStatusCode] 
+								 message:[request responseStatusMessage]];
+	}
+	else {
+		NSDictionary *json = [[request responseString] JSONValue];
+		if (json == nil) {
+			DLog(@"RESPONSE: %@", [request responseString]);
+			error = [NSError errorWithDomain:self.deployment.domain 
+										code:HttpStatusInternalServerError 
+									 message:NSLocalizedString(@"Unable To Download Custom Forms", nil)];
+		}
+		else {
+			NSDictionary *payload = [json objectForKey:@"payload"];
+			if (payload != nil) {
+				NSMutableArray *forms = [NSMutableArray array];
+				NSArray *customFormFields = [[payload objectForKey:@"customforms"] objectForKey:@"fields"];
+				if (customFormFields != nil) {
+					for (NSDictionary *dictionary in customFormFields) {
+						CustomForm *form = [[CustomForm alloc] initWithDictionary:[dictionary objectForKey:@"meta"]];
+                        [forms addObject:form];
+                        [form release];
+                    }
+				} else {
+                    DLog(@"FORM:NULL");
+                }
+				[self dispatchSelector:@selector(downloadedFromUshahidi:customForms:)
+								target:[request getDelegate]
+							   objects:self, forms, nil];
+            }
+		}
+	}
+}
+
+- (void)getCustomFormsFailed:(ASIHTTPRequest *)request  {
+	DLog(@"REQUEST:%@", [request.originalURL absoluteString]);
+	DLog(@"ERROR: %@", [[request error] localizedDescription]);
 }
 
 @end

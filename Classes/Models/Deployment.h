@@ -45,6 +45,7 @@
 	NSMutableDictionary *checkins;
 	NSMutableDictionary *users;
 	NSMutableArray *pending;
+    
 }
 
 @property(nonatomic, retain) NSString *identifier;
@@ -65,6 +66,7 @@
 @property(nonatomic, retain) NSMutableDictionary *checkins;
 @property(nonatomic, retain) NSMutableDictionary *users;
 @property(nonatomic, retain) NSMutableArray *pending;
+@property(nonatomic, retain) NSMutableArray *customFormFields;
 
 @property(nonatomic, assign) BOOL supportsCheckins;
 
@@ -105,6 +107,7 @@
 - (NSString *) getUrlForPostVideo;
 - (NSString *) getUrlForPostPhoto;
 - (NSString *) getUrlForPostCheckin;
+- (NSString *) getUrlForCustomForms;
 
 - (NSComparisonResult)compareByName:(Deployment *)deployment;
 - (NSComparisonResult)compareByDate:(Deployment *)deployment;

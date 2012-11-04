@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "Country.h"
+#import "NSString+Extension.h"
 
 @implementation Country
 
@@ -28,7 +29,7 @@
 	if (self = [super init]) {
 		DLog(@"dictionary: %@", dictionary);
 		if (dictionary != nil) {
-			self.identifier = [dictionary objectForKey:@"id"];
+			self.identifier = [dictionary stringForKey:@"id"];
 			self.name = [dictionary objectForKey:@"name"];
 			self.iso = [dictionary objectForKey:@"iso"];
 			self.capital =  [dictionary objectForKey:@"capital"];

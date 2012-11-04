@@ -2424,8 +2424,37 @@
 		3EFC3DDA13A6333900CCA185 /* BaseSortTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */; };
 		3EFC3DDD13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
 		3EFC3DDE13A6334400CCA185 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */; };
-		608FBDC01555592A00813B62 /* mangroves57.png in Resources */ = {isa = PBXBuildFile; fileRef = 608FBDBF1555592A00813B62 /* mangroves57.png */; };
-		608FBDC21555592E00813B62 /* mangroves114.png in Resources */ = {isa = PBXBuildFile; fileRef = 608FBDC11555592E00813B62 /* mangroves114.png */; };
+		550E299316443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		550E299416443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		550E299516443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		550E299616443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		550E299716443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		550E299816443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		550E299916443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		550E299A16443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		550E299B16443C0100DF6FD9 /* CustomForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 550E299216443C0100DF6FD9 /* CustomForm.m */; };
+		55A9E60C1644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E60D1644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E60E1644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E60F1644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E6101644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E6111644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E6121644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E6131644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E6141644657B005C488F /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A9E60B1644657B005C488F /* FileUtils.m */; };
+		55A9E6461644B5F5005C488F /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E6421644B5F4005C488F /* Icon-114.png */; };
+		55A9E6471644B5F5005C488F /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E6431644B5F4005C488F /* Icon-144.png */; };
+		55A9E6481644B5F5005C488F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E6441644B5F5005C488F /* Icon.png */; };
+		55A9E6521644B6B8005C488F /* MangrovesMap-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E6511644B6B8005C488F /* MangrovesMap-Portrait~ipad.png */; };
+		55A9E6541644B6C7005C488F /* MangrovesMap-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E6531644B6C7005C488F /* MangrovesMap-Portrait@2x~ipad.png */; };
+		55A9E6551644B6E6005C488F /* Icon-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E6411644B5F3005C488F /* Icon-ipad.png */; };
+		55A9E6561644B926005C488F /* MangrovesMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E64A1644B613005C488F /* MangrovesMap.png */; };
+		55A9E6571644B92A005C488F /* MangrovesMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E64C1644B61B005C488F /* MangrovesMap@2x.png */; };
+		55A9E6591644BA7F005C488F /* MangrovesMap-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E6581644BA7E005C488F /* MangrovesMap-568h@2x.png */; };
+		55A9E65B1644C1F0005C488F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E65A1644C1EF005C488F /* Default-568h@2x.png */; };
+		55A9E65C1644C488005C488F /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E015532E6400FD97F8 /* Default-Portrait.png */; };
+		55A9E65D1644C48B005C488F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E215532E6400FD97F8 /* Default.png */; };
+		55A9E65E1644C48D005C488F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E415532E6400FD97F8 /* Default@2x.png */; };
 		609617AA15532DB100FD97F8 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A421222BD09001DE141 /* blank.png */; };
 		609617AB15532DB100FD97F8 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A461222BD09001DE141 /* location.png */; };
 		609617AC15532DB100FD97F8 /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E862A491222BD09001DE141 /* arrow_down.png */; };
@@ -2707,17 +2736,6 @@
 		609618D315532DB100FD97F8 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBBD62F12DCA73E007ECE4B /* libOAuth.a */; };
 		609618D415532DB100FD97F8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBBD76B12DCAC73007ECE4B /* Security.framework */; };
 		609618D515532DB100FD97F8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7298B612EE524700FDED00 /* QuartzCore.framework */; };
-		609618F615532E6400FD97F8 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E015532E6400FD97F8 /* Default-Portrait.png */; };
-		609618F815532E6400FD97F8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E215532E6400FD97F8 /* Default.png */; };
-		609618FA15532E6400FD97F8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E415532E6400FD97F8 /* Default@2x.png */; };
-		609618FE15532E6400FD97F8 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E815532E6400FD97F8 /* Icon-Small-50.png */; };
-		609618FF15532E6400FD97F8 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E915532E6400FD97F8 /* Icon-Small.png */; };
-		6096190015532E6400FD97F8 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618EA15532E6400FD97F8 /* Icon-Small@2x.png */; };
-		6096190115532E6400FD97F8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618EB15532E6400FD97F8 /* Icon.png */; };
-		6096190215532E6400FD97F8 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618EC15532E6400FD97F8 /* Icon@2x.png */; };
-		6096190415532E6400FD97F8 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 609618EE15532E6400FD97F8 /* iTunesArtwork */; };
-		6096190515532E6400FD97F8 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618EF15532E6400FD97F8 /* iTunesArtwork.png */; };
-		6096190715532E6400FD97F8 /* Logo_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F115532E6400FD97F8 /* Logo_iPad.png */; };
 		6096190815532E6400FD97F8 /* Logo_iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F215532E6400FD97F8 /* Logo_iPad@2x.png */; };
 		6096190915532E6400FD97F8 /* Logo_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F315532E6400FD97F8 /* Logo_iPhone.png */; };
 		6096190A15532E6400FD97F8 /* Logo_iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618F415532E6400FD97F8 /* Logo_iPhone@2x.png */; };
@@ -3363,6 +3381,31 @@
 		3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSortTableViewController.m; sourceTree = "<group>"; };
 		3EFC3DDB13A6334400CCA185 /* BaseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMapViewController.h; sourceTree = "<group>"; };
 		3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapViewController.m; sourceTree = "<group>"; };
+		550E299116443C0100DF6FD9 /* CustomForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomForm.h; sourceTree = "<group>"; };
+		550E299216443C0100DF6FD9 /* CustomForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomForm.m; sourceTree = "<group>"; };
+		55A9E60A1644657B005C488F /* FileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
+		55A9E60B1644657B005C488F /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
+		55A9E62716449311005C488F /* MangrovesMap-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		55A9E62816449312005C488F /* MangrovesMap-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Landscape~ipad.png"; sourceTree = "<group>"; };
+		55A9E62916449312005C488F /* MangrovesMap-Portrait@~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@~iphone.png"; sourceTree = "<group>"; };
+		55A9E62A16449313005C488F /* MangrovesMap-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		55A9E62B16449313005C488F /* MangrovesMap-Portrait@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@2x~iphone.png"; sourceTree = "<group>"; };
+		55A9E62C16449314005C488F /* MangrovesMap-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait~ipad.png"; sourceTree = "<group>"; };
+		55A9E6371644B5E2005C488F /* Mangrove-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mangrove-iPhone.png"; sourceTree = "<group>"; };
+		55A9E6381644B5E3005C488F /* Mangrove-iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mangrove-iPhone@2x.png"; sourceTree = "<group>"; };
+		55A9E6391644B5E3005C488F /* Mangrove-Portrait~ipad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Mangrove-Portrait~ipad.pdf"; sourceTree = "<group>"; };
+		55A9E63A1644B5E3005C488F /* Mangrove-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mangrove-Portrait~ipad.png"; sourceTree = "<group>"; };
+		55A9E63B1644B5E4005C488F /* Mangrove-Potrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mangrove-Potrait@2x~ipad.png"; sourceTree = "<group>"; };
+		55A9E6411644B5F3005C488F /* Icon-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-ipad.png"; sourceTree = "<group>"; };
+		55A9E6421644B5F4005C488F /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
+		55A9E6431644B5F4005C488F /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
+		55A9E6441644B5F5005C488F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		55A9E64A1644B613005C488F /* MangrovesMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MangrovesMap.png; sourceTree = "<group>"; };
+		55A9E64C1644B61B005C488F /* MangrovesMap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap@2x.png"; sourceTree = "<group>"; };
+		55A9E6511644B6B8005C488F /* MangrovesMap-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait~ipad.png"; sourceTree = "<group>"; };
+		55A9E6531644B6C7005C488F /* MangrovesMap-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		55A9E6581644BA7E005C488F /* MangrovesMap-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-568h@2x.png"; sourceTree = "<group>"; };
+		55A9E65A1644C1EF005C488F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		608FBDBF1555592A00813B62 /* mangroves57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves57.png; sourceTree = "<group>"; };
 		608FBDC11555592E00813B62 /* mangroves114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves114.png; sourceTree = "<group>"; };
 		609618DB15532DB100FD97F8 /* MangrovesMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangrovesMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3624,6 +3667,20 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				55A9E6581644BA7E005C488F /* MangrovesMap-568h@2x.png */,
+				55A9E6531644B6C7005C488F /* MangrovesMap-Portrait@2x~ipad.png */,
+				55A9E6511644B6B8005C488F /* MangrovesMap-Portrait~ipad.png */,
+				55A9E64C1644B61B005C488F /* MangrovesMap@2x.png */,
+				55A9E64A1644B613005C488F /* MangrovesMap.png */,
+				55A9E6411644B5F3005C488F /* Icon-ipad.png */,
+				55A9E6421644B5F4005C488F /* Icon-114.png */,
+				55A9E6431644B5F4005C488F /* Icon-144.png */,
+				55A9E6441644B5F5005C488F /* Icon.png */,
+				55A9E6371644B5E2005C488F /* Mangrove-iPhone.png */,
+				55A9E6381644B5E3005C488F /* Mangrove-iPhone@2x.png */,
+				55A9E6391644B5E3005C488F /* Mangrove-Portrait~ipad.pdf */,
+				55A9E63A1644B5E3005C488F /* Mangrove-Portrait~ipad.png */,
+				55A9E63B1644B5E4005C488F /* Mangrove-Potrait@2x~ipad.png */,
 				3ED8716D1379CA48004E8714 /* Themes */,
 				3E8629C71222BBC2001DE141 /* Resources */,
 				3E8629C61222BBBD001DE141 /* Classes */,
@@ -3884,14 +3941,18 @@
 		3E8629D31222BC12001DE141 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				550E299116443C0100DF6FD9 /* CustomForm.h */,
+				550E299216443C0100DF6FD9 /* CustomForm.m */,
+				3E862B271222C66E001DE141 /* Category.h */,
+				3E862B281222C66E001DE141 /* Category.m */,
+				3E466FAB130C686A00EE685B /* Checkin.h */,
+				3E466FAC130C686A00EE685B /* Checkin.m */,
+				3E86337B12243205001DE141 /* Country.h */,
+				3E86337C12243205001DE141 /* Country.m */,
 				3E86305D12231498001DE141 /* Deployment.h */,
 				3E86305E12231498001DE141 /* Deployment.m */,
 				3E86338512243255001DE141 /* Incident.h */,
 				3E86338612243255001DE141 /* Incident.m */,
-				3E862B271222C66E001DE141 /* Category.h */,
-				3E862B281222C66E001DE141 /* Category.m */,
-				3E86337B12243205001DE141 /* Country.h */,
-				3E86337C12243205001DE141 /* Country.m */,
 				3E86338212243248001DE141 /* Location.h */,
 				3E86338312243248001DE141 /* Location.m */,
 				3E119D54126FAE5800C3DCBB /* Media.h */,
@@ -3902,12 +3963,10 @@
 				3E8633DC12243647001DE141 /* Photo.m */,
 				3E119D6E126FAF0B00C3DCBB /* Sound.h */,
 				3E119D6F126FAF0B00C3DCBB /* Sound.m */,
-				3E119D71126FAF1300C3DCBB /* Video.h */,
-				3E119D72126FAF1300C3DCBB /* Video.m */,
 				3E5BBBB41310A6150073E4F8 /* User.h */,
 				3E5BBBB51310A6150073E4F8 /* User.m */,
-				3E466FAB130C686A00EE685B /* Checkin.h */,
-				3E466FAC130C686A00EE685B /* Checkin.m */,
+				3E119D71126FAF1300C3DCBB /* Video.h */,
+				3E119D72126FAF1300C3DCBB /* Video.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3915,60 +3974,60 @@
 		3E8629D41222BC16001DE141 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3E862A2A1222BCE5001DE141 /* TableCellFactory.h */,
-				3E862A2B1222BCE5001DE141 /* TableCellFactory.m */,
-				3E236395128C7DB400CF804A /* IndexedTableCell.h */,
-				3E236396128C7DB400CF804A /* IndexedTableCell.m */,
-				3E862A1E1222BCE5001DE141 /* BooleanTableCell.h */,
-				3E862A1F1222BCE5001DE141 /* BooleanTableCell.m */,
-				3E862A201222BCE5001DE141 /* CheckBoxTableCell.h */,
-				3E862A211222BCE5001DE141 /* CheckBoxTableCell.m */,
-				3E8F02EF1315565F0011E423 /* ButtonTableCell.h */,
-				3E8F02F01315565F0011E423 /* ButtonTableCell.m */,
-				3E862A221222BCE5001DE141 /* ImageTableCell.h */,
-				3E862A231222BCE5001DE141 /* ImageTableCell.m */,
-				3E862A241222BCE5001DE141 /* MapTableCell.h */,
-				3E862A251222BCE5001DE141 /* MapTableCell.m */,
-				3E862A281222BCE5001DE141 /* SubtitleTableCell.h */,
-				3E862A291222BCE5001DE141 /* SubtitleTableCell.m */,
-				3E862A2C1222BCE5001DE141 /* TextFieldTableCell.h */,
-				3E862A2D1222BCE5001DE141 /* TextFieldTableCell.m */,
-				3E862A301222BCE5001DE141 /* TextViewTableCell.h */,
-				3E862A311222BCE5001DE141 /* TextViewTableCell.m */,
-				3ECB55D0122F5BEE000AAC56 /* DateTableCell.h */,
-				3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */,
-				3E862A2E1222BCE5001DE141 /* TextTableCell.h */,
-				3E862A2F1222BCE5001DE141 /* TextTableCell.m */,
-				3E1501151278D82500036A0F /* SliderTableCell.h */,
-				3E1501161278D82500036A0F /* SliderTableCell.m */,
-				3E119AD7126F7E6200C3DCBB /* DeploymentTableCell.h */,
-				3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */,
-				3E119ADC126F7E7600C3DCBB /* IncidentTableCell.h */,
-				3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */,
-				3EBBE2F513A657720019BDED /* CheckinTableCell.h */,
-				3EBBE2F613A657720019BDED /* CheckinTableCell.m */,
-				3E4432E914FC2C8800BFECD8 /* YouTubeTableCell.h */,
-				3E4432EA14FC2C8800BFECD8 /* YouTubeTableCell.m */,
-				3ECB55EB122F5E33000AAC56 /* DatePicker.h */,
-				3ECB55EC122F5E33000AAC56 /* DatePicker.m */,
-				3E8090EA129B2B8500CF273F /* ItemPicker.h */,
-				3E8090EB129B2B8500CF273F /* ItemPicker.m */,
 				3E862CA31222D604001DE141 /* AlertView.h */,
 				3E862CA41222D604001DE141 /* AlertView.m */,
+				3E862A1E1222BCE5001DE141 /* BooleanTableCell.h */,
+				3E862A1F1222BCE5001DE141 /* BooleanTableCell.m */,
+				3E8F02EF1315565F0011E423 /* ButtonTableCell.h */,
+				3E8F02F01315565F0011E423 /* ButtonTableCell.m */,
+				3E862A201222BCE5001DE141 /* CheckBoxTableCell.h */,
+				3E862A211222BCE5001DE141 /* CheckBoxTableCell.m */,
+				3EBBE2F513A657720019BDED /* CheckinTableCell.h */,
+				3EBBE2F613A657720019BDED /* CheckinTableCell.m */,
+				3ECB55EB122F5E33000AAC56 /* DatePicker.h */,
+				3ECB55EC122F5E33000AAC56 /* DatePicker.m */,
+				3ECB55D0122F5BEE000AAC56 /* DateTableCell.h */,
+				3ECB55D1122F5BEE000AAC56 /* DateTableCell.m */,
+				3E119AD7126F7E6200C3DCBB /* DeploymentTableCell.h */,
+				3E119AD8126F7E6200C3DCBB /* DeploymentTableCell.m */,
+				3E862A221222BCE5001DE141 /* ImageTableCell.h */,
+				3E862A231222BCE5001DE141 /* ImageTableCell.m */,
+				3E119ADC126F7E7600C3DCBB /* IncidentTableCell.h */,
+				3E119ADD126F7E7600C3DCBB /* IncidentTableCell.m */,
+				3E236395128C7DB400CF804A /* IndexedTableCell.h */,
+				3E236396128C7DB400CF804A /* IndexedTableCell.m */,
 				3E862CA81222D60F001DE141 /* InputView.h */,
 				3E862CA91222D60F001DE141 /* InputView.m */,
-				3E72978312EDEBD500FDED00 /* MapDialog.h */,
-				3E72978412EDEBD500FDED00 /* MapDialog.m */,
-				3E78472D1410F23600C5F5A6 /* UserDialog.h */,
-				3E78472E1410F23600C5F5A6 /* UserDialog.m */,
-				3E4AF91B1270AA370017AED4 /* TableHeaderView.h */,
-				3E4AF91C1270AA370017AED4 /* TableHeaderView.m */,
+				3E8090EA129B2B8500CF273F /* ItemPicker.h */,
+				3E8090EB129B2B8500CF273F /* ItemPicker.m */,
 				3E8635DF12244A54001DE141 /* MapAnnotation.h */,
 				3E8635E012244A54001DE141 /* MapAnnotation.m */,
+				3E72978312EDEBD500FDED00 /* MapDialog.h */,
+				3E72978412EDEBD500FDED00 /* MapDialog.m */,
+				3E862A241222BCE5001DE141 /* MapTableCell.h */,
+				3E862A251222BCE5001DE141 /* MapTableCell.m */,
 				3E2E853612787E7F00ADA49B /* MotionWindow.h */,
 				3E2E853712787E7F00ADA49B /* MotionWindow.m */,
 				3E4C659912AD774F001ED08A /* MoviePlayer.h */,
 				3E4C659A12AD774F001ED08A /* MoviePlayer.m */,
+				3E1501151278D82500036A0F /* SliderTableCell.h */,
+				3E1501161278D82500036A0F /* SliderTableCell.m */,
+				3E862A281222BCE5001DE141 /* SubtitleTableCell.h */,
+				3E862A291222BCE5001DE141 /* SubtitleTableCell.m */,
+				3E862A2A1222BCE5001DE141 /* TableCellFactory.h */,
+				3E862A2B1222BCE5001DE141 /* TableCellFactory.m */,
+				3E4AF91B1270AA370017AED4 /* TableHeaderView.h */,
+				3E4AF91C1270AA370017AED4 /* TableHeaderView.m */,
+				3E862A2C1222BCE5001DE141 /* TextFieldTableCell.h */,
+				3E862A2D1222BCE5001DE141 /* TextFieldTableCell.m */,
+				3E862A2E1222BCE5001DE141 /* TextTableCell.h */,
+				3E862A2F1222BCE5001DE141 /* TextTableCell.m */,
+				3E862A301222BCE5001DE141 /* TextViewTableCell.h */,
+				3E862A311222BCE5001DE141 /* TextViewTableCell.m */,
+				3E78472D1410F23600C5F5A6 /* UserDialog.h */,
+				3E78472E1410F23600C5F5A6 /* UserDialog.m */,
+				3E4432E914FC2C8800BFECD8 /* YouTubeTableCell.h */,
+				3E4432EA14FC2C8800BFECD8 /* YouTubeTableCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3976,74 +4035,74 @@
 		3E8629D51222BC1A001DE141 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3ECB541C122F3F53000AAC56 /* NavigationController.h */,
-				3ECB541D122F3F53000AAC56 /* NavigationController.m */,
-				3E862C211222D288001DE141 /* BaseViewController.h */,
-				3E862C221222D288001DE141 /* BaseViewController.m */,
-				3EFC3D1613A60C9900CCA185 /* BaseTabViewController.h */,
-				3EFC3D1713A60C9900CCA185 /* BaseTabViewController.m */,
-				3E862A0A1222BCD0001DE141 /* BaseTableViewController.h */,
-				3E862A0B1222BCD0001DE141 /* BaseTableViewController.m */,
-				3EFC3DD713A6333900CCA185 /* BaseSortTableViewController.h */,
-				3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */,
-				3EFC3DDB13A6334400CCA185 /* BaseMapViewController.h */,
-				3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */,
-				3EA4FCA113A7863500DBF3DA /* BaseDetailsViewController.h */,
-				3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */,
 				3E65A81714EEC9D600635E71 /* BaseAddViewController.h */,
 				3E65A81814EEC9D600635E71 /* BaseAddViewController.m */,
-				3E862BDC1222D081001DE141 /* LoadingViewController.h */,
-				3E862BDD1222D081001DE141 /* LoadingViewController.m */,
-				3E4AFF5D1271E21E0017AED4 /* SettingsViewController.h */,
-				3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */,
-				3E4432DB14FBE83100BFECD8 /* SplashViewController.h */,
-				3E4432DC14FBE83100BFECD8 /* SplashViewController.m */,
-				3E862A061222BCD0001DE141 /* DeploymentTableViewController.h */,
-				3E862A071222BCD0001DE141 /* DeploymentTableViewController.m */,
-				3E8629FE1222BCD0001DE141 /* DeploymentAddViewController.h */,
-				3E8629FF1222BCD0001DE141 /* DeploymentAddViewController.m */,
-				3E6E2B441312B38E00B9E331 /* IncidentTabViewController.h */,
-				3E6E2B451312B38E00B9E331 /* IncidentTabViewController.m */,
-				3EEE8E261311888B0096CBEA /* IncidentTableViewController.h */,
-				3EEE8E271311888B0096CBEA /* IncidentTableViewController.m */,
-				3EEE8E29131188970096CBEA /* IncidentMapViewController.h */,
-				3EEE8E2A131188970096CBEA /* IncidentMapViewController.m */,
-				3E862A0C1222BCD0001DE141 /* IncidentDetailsViewController.h */,
-				3E862A0D1222BCD0001DE141 /* IncidentDetailsViewController.m */,
-				3E8629FC1222BCD0001DE141 /* IncidentAddViewController.h */,
-				3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */,
-				3EFC3D0E13A60A5000CCA185 /* CheckinTabViewController.h */,
-				3EFC3D0F13A60A5000CCA185 /* CheckinTabViewController.m */,
-				3EFC3D1213A60A8E00CCA185 /* CheckinTableViewController.h */,
-				3EFC3D1313A60A8E00CCA185 /* CheckinTableViewController.m */,
-				3EEE8E2C131188AF0096CBEA /* CheckinMapViewController.h */,
-				3EEE8E2D131188AF0096CBEA /* CheckinMapViewController.m */,
+				3EA4FCA113A7863500DBF3DA /* BaseDetailsViewController.h */,
+				3EA4FCA213A7863500DBF3DA /* BaseDetailsViewController.m */,
+				3EFC3DDB13A6334400CCA185 /* BaseMapViewController.h */,
+				3EFC3DDC13A6334400CCA185 /* BaseMapViewController.m */,
+				3EFC3DD713A6333900CCA185 /* BaseSortTableViewController.h */,
+				3EFC3DD813A6333900CCA185 /* BaseSortTableViewController.m */,
+				3E862A0A1222BCD0001DE141 /* BaseTableViewController.h */,
+				3E862A0B1222BCD0001DE141 /* BaseTableViewController.m */,
+				3EFC3D1613A60C9900CCA185 /* BaseTabViewController.h */,
+				3EFC3D1713A60C9900CCA185 /* BaseTabViewController.m */,
+				3E862C211222D288001DE141 /* BaseViewController.h */,
+				3E862C221222D288001DE141 /* BaseViewController.m */,
+				3EA9BD6C14ED83FE00167351 /* CategorySelectViewController.h */,
+				3EA9BD6D14ED83FF00167351 /* CategorySelectViewController.m */,
+				3EBB0EFE12767882007D7930 /* CategoryTableViewController.h */,
+				3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */,
 				3E5BB9EE131056C90073E4F8 /* CheckinAddViewController.h */,
 				3E5BB9EF131056C90073E4F8 /* CheckinAddViewController.m */,
 				3E1A733413143F4E00F3FAC8 /* CheckinDetailsViewController.h */,
 				3E1A733513143F4E00F3FAC8 /* CheckinDetailsViewController.m */,
-				3EBB0EFE12767882007D7930 /* CategoryTableViewController.h */,
-				3EBB0EFF12767882007D7930 /* CategoryTableViewController.m */,
-				3EA9BD6C14ED83FE00167351 /* CategorySelectViewController.h */,
-				3EA9BD6D14ED83FF00167351 /* CategorySelectViewController.m */,
-				3EA9BD6114ED83E300167351 /* UserSelectViewController.h */,
-				3EA9BD6214ED83E300167351 /* UserSelectViewController.m */,
-				3EBB10F412768DAA007D7930 /* LocationSelectViewController.h */,
-				3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */,
+				3EEE8E2C131188AF0096CBEA /* CheckinMapViewController.h */,
+				3EEE8E2D131188AF0096CBEA /* CheckinMapViewController.m */,
+				3EFC3D1213A60A8E00CCA185 /* CheckinTableViewController.h */,
+				3EFC3D1313A60A8E00CCA185 /* CheckinTableViewController.m */,
+				3EFC3D0E13A60A5000CCA185 /* CheckinTabViewController.h */,
+				3EFC3D0F13A60A5000CCA185 /* CheckinTabViewController.m */,
+				3E8629FE1222BCD0001DE141 /* DeploymentAddViewController.h */,
+				3E8629FF1222BCD0001DE141 /* DeploymentAddViewController.m */,
+				3E862A061222BCD0001DE141 /* DeploymentTableViewController.h */,
+				3E862A071222BCD0001DE141 /* DeploymentTableViewController.m */,
 				3E862A001222BCD0001DE141 /* ImagePickerController.h */,
 				3E862A011222BCD0001DE141 /* ImagePickerController.m */,
 				3E862A021222BCD0001DE141 /* ImageViewController.h */,
 				3E862A031222BCD0001DE141 /* ImageViewController.m */,
+				3E8629FC1222BCD0001DE141 /* IncidentAddViewController.h */,
+				3E8629FD1222BCD0001DE141 /* IncidentAddViewController.m */,
+				3E862A0C1222BCD0001DE141 /* IncidentDetailsViewController.h */,
+				3E862A0D1222BCD0001DE141 /* IncidentDetailsViewController.m */,
+				3EEE8E29131188970096CBEA /* IncidentMapViewController.h */,
+				3EEE8E2A131188970096CBEA /* IncidentMapViewController.m */,
+				3EEE8E261311888B0096CBEA /* IncidentTableViewController.h */,
+				3EEE8E271311888B0096CBEA /* IncidentTableViewController.m */,
+				3E6E2B441312B38E00B9E331 /* IncidentTabViewController.h */,
+				3E6E2B451312B38E00B9E331 /* IncidentTabViewController.m */,
+				3E862BDC1222D081001DE141 /* LoadingViewController.h */,
+				3E862BDD1222D081001DE141 /* LoadingViewController.m */,
+				3EBB10F412768DAA007D7930 /* LocationSelectViewController.h */,
+				3EBB10F512768DAA007D7930 /* LocationSelectViewController.m */,
 				3E862A081222BCD0001DE141 /* MapViewController.h */,
 				3E862A091222BCD0001DE141 /* MapViewController.m */,
-				3E862A0E1222BCD0001DE141 /* WebViewController.h */,
-				3E862A0F1222BCD0001DE141 /* WebViewController.m */,
+				3ECB541C122F3F53000AAC56 /* NavigationController.h */,
+				3ECB541D122F3F53000AAC56 /* NavigationController.m */,
 				3E4C630812AD4D05001ED08A /* NewsViewController.h */,
 				3E4C630912AD4D05001ED08A /* NewsViewController.m */,
+				3E4AFF5D1271E21E0017AED4 /* SettingsViewController.h */,
+				3E4AFF5E1271E21E0017AED4 /* SettingsViewController.m */,
+				3E4432DB14FBE83100BFECD8 /* SplashViewController.h */,
+				3E4432DC14FBE83100BFECD8 /* SplashViewController.m */,
 				3EEFE0F312DB81600076ABA1 /* TwitterViewController.h */,
 				3EEFE0F412DB81600076ABA1 /* TwitterViewController.m */,
+				3EA9BD6114ED83E300167351 /* UserSelectViewController.h */,
+				3EA9BD6214ED83E300167351 /* UserSelectViewController.m */,
 				3EA1A4F615CAF2D50096E93A /* VideoPickerController.h */,
 				3EA1A4F715CAF2D50096E93A /* VideoPickerController.m */,
+				3E862A0E1222BCD0001DE141 /* WebViewController.h */,
+				3E862A0F1222BCD0001DE141 /* WebViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -4210,6 +4269,8 @@
 			children = (
 				3EA1A4EC15CAF2780096E93A /* YouTubeUploader.h */,
 				3EA1A4ED15CAF2780096E93A /* YouTubeUploader.m */,
+				55A9E60A1644657B005C488F /* FileUtils.h */,
+				55A9E60B1644657B005C488F /* FileUtils.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -4525,6 +4586,13 @@
 		609618DF15532E6400FD97F8 /* MangrovesMap */ = {
 			isa = PBXGroup;
 			children = (
+				55A9E65A1644C1EF005C488F /* Default-568h@2x.png */,
+				55A9E62716449311005C488F /* MangrovesMap-Landscape@2x~ipad.png */,
+				55A9E62816449312005C488F /* MangrovesMap-Landscape~ipad.png */,
+				55A9E62916449312005C488F /* MangrovesMap-Portrait@~iphone.png */,
+				55A9E62A16449313005C488F /* MangrovesMap-Portrait@2x~ipad.png */,
+				55A9E62B16449313005C488F /* MangrovesMap-Portrait@2x~iphone.png */,
+				55A9E62C16449314005C488F /* MangrovesMap-Portrait~ipad.png */,
 				609618ED15532E6400FD97F8 /* Info.plist */,
 				608FBDC11555592E00813B62 /* mangroves114.png */,
 				608FBDBF1555592A00813B62 /* mangroves57.png */,
@@ -6026,23 +6094,23 @@
 				6096182D15532DB100FD97F8 /* SplashViewController_iPad.xib in Resources */,
 				6096182E15532DB100FD97F8 /* SplashViewController_iPhone.xib in Resources */,
 				6096182F15532DB100FD97F8 /* Entitlements.plist in Resources */,
-				609618F615532E6400FD97F8 /* Default-Portrait.png in Resources */,
-				609618F815532E6400FD97F8 /* Default.png in Resources */,
-				609618FA15532E6400FD97F8 /* Default@2x.png in Resources */,
-				609618FE15532E6400FD97F8 /* Icon-Small-50.png in Resources */,
-				609618FF15532E6400FD97F8 /* Icon-Small.png in Resources */,
-				6096190015532E6400FD97F8 /* Icon-Small@2x.png in Resources */,
-				6096190115532E6400FD97F8 /* Icon.png in Resources */,
-				6096190215532E6400FD97F8 /* Icon@2x.png in Resources */,
-				6096190415532E6400FD97F8 /* iTunesArtwork in Resources */,
-				6096190515532E6400FD97F8 /* iTunesArtwork.png in Resources */,
-				6096190715532E6400FD97F8 /* Logo_iPad.png in Resources */,
 				6096190815532E6400FD97F8 /* Logo_iPad@2x.png in Resources */,
 				6096190915532E6400FD97F8 /* Logo_iPhone.png in Resources */,
 				6096190A15532E6400FD97F8 /* Logo_iPhone@2x.png in Resources */,
 				6096190B15532E6400FD97F8 /* placeholder.png in Resources */,
-				608FBDC01555592A00813B62 /* mangroves57.png in Resources */,
-				608FBDC21555592E00813B62 /* mangroves114.png in Resources */,
+				55A9E65D1644C48B005C488F /* Default.png in Resources */,
+				55A9E65C1644C488005C488F /* Default-Portrait.png in Resources */,
+				55A9E65E1644C48D005C488F /* Default@2x.png in Resources */,
+				55A9E65B1644C1F0005C488F /* Default-568h@2x.png in Resources */,
+				55A9E6461644B5F5005C488F /* Icon-114.png in Resources */,
+				55A9E6471644B5F5005C488F /* Icon-144.png in Resources */,
+				55A9E6481644B5F5005C488F /* Icon.png in Resources */,
+				55A9E6521644B6B8005C488F /* MangrovesMap-Portrait~ipad.png in Resources */,
+				55A9E6541644B6C7005C488F /* MangrovesMap-Portrait@2x~ipad.png in Resources */,
+				55A9E6551644B6E6005C488F /* Icon-ipad.png in Resources */,
+				55A9E6561644B926005C488F /* MangrovesMap.png in Resources */,
+				55A9E6571644B92A005C488F /* MangrovesMap@2x.png in Resources */,
+				55A9E6591644BA7F005C488F /* MangrovesMap-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6202,6 +6270,8 @@
 				3EA7DEAE1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				3EA1A4EE15CAF2780096E93A /* YouTubeUploader.m in Sources */,
 				3EA1A4F815CAF2D50096E93A /* VideoPickerController.m in Sources */,
+				550E299316443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E60C1644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6358,6 +6428,8 @@
 				3EA7DEB01549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				3EA1A4F015CAF2780096E93A /* YouTubeUploader.m in Sources */,
 				3EA1A4FA15CAF2D50096E93A /* VideoPickerController.m in Sources */,
+				550E299516443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E60E1644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6514,6 +6586,8 @@
 				3EA7DEB31549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				3EA1A4F115CAF2780096E93A /* YouTubeUploader.m in Sources */,
 				3EA1A4FB15CAF2D50096E93A /* VideoPickerController.m in Sources */,
+				550E299616443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E60F1644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6670,6 +6744,8 @@
 				3EA7DEB21549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				3EA1A4F315CAF2780096E93A /* YouTubeUploader.m in Sources */,
 				3EA1A4FD15CAF2D50096E93A /* VideoPickerController.m in Sources */,
+				550E299816443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E6111644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6826,6 +6902,8 @@
 				3EA7DEB41549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				3EA1A4F415CAF2780096E93A /* YouTubeUploader.m in Sources */,
 				3EA1A4FE15CAF2D50096E93A /* VideoPickerController.m in Sources */,
+				550E299916443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E6121644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6982,6 +7060,8 @@
 				3EA7DEB11549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				3EA1A4F215CAF2780096E93A /* YouTubeUploader.m in Sources */,
 				3EA1A4FC15CAF2D50096E93A /* VideoPickerController.m in Sources */,
+				550E299716443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E6101644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7138,6 +7218,8 @@
 				3EA7DEAF1549AD8B004566B0 /* UIViewController+Extension.m in Sources */,
 				3EA1A4EF15CAF2780096E93A /* YouTubeUploader.m in Sources */,
 				3EA1A4F915CAF2D50096E93A /* VideoPickerController.m in Sources */,
+				550E299416443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E60D1644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7294,6 +7376,8 @@
 				3EF0C30E15CB2B1800B44EA4 /* UIViewController+Extension.m in Sources */,
 				3EF0C30F15CB2B1800B44EA4 /* YouTubeUploader.m in Sources */,
 				3EF0C31015CB2B1800B44EA4 /* VideoPickerController.m in Sources */,
+				550E299B16443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E6141644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7450,6 +7534,8 @@
 				609618C315532DB100FD97F8 /* UIViewController+Extension.m in Sources */,
 				3EA1A4F515CAF2780096E93A /* YouTubeUploader.m in Sources */,
 				3EA1A4FF15CAF2D50096E93A /* VideoPickerController.m in Sources */,
+				550E299A16443C0100DF6FD9 /* CustomForm.m in Sources */,
+				55A9E6131644657B005C488F /* FileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7996,7 +8082,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
@@ -8045,7 +8131,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
@@ -8269,9 +8355,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -8279,14 +8366,14 @@
 				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Themes/MangrovesMap/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MangrovesMap;
-				PROVISIONING_PROFILE = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -8295,22 +8382,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Themes/MangrovesMap/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MangrovesMap;
-				PROVISIONING_PROFILE = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43910EA6-560C-4AD0-ADEB-86C64D02BB80";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -8320,22 +8408,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Qatar Foundation International, LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Qatar Foundation International, LLC";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Themes/MangrovesMap/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MangrovesMap;
-				PROVISIONING_PROFILE = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
+				PROVISIONING_PROFILE = "4DE174C4-5C08-4042-8063-6BC4DF0F26A5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4DE174C4-5C08-4042-8063-6BC4DF0F26A5";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -8345,22 +8434,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Other/Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Qatar Foundation International, LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Qatar Foundation International, LLC";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Other/Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Themes/MangrovesMap/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MangrovesMap;
-				PROVISIONING_PROFILE = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DF9A930B-FCF7-4F40-8353-07C7D3AA6037";
+				PROVISIONING_PROFILE = "C6752755-5918-49EC-8646-048B3AACE972";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6CCD532C-B77B-43BD-BA0C-3FED17E59194";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -8382,7 +8472,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -8405,7 +8495,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

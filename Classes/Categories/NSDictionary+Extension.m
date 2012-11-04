@@ -46,7 +46,7 @@
 		if ([object isKindOfClass:[NSString class]]) {
 			return [((NSString *)object) intValue];
 		}
-		return (NSInteger)object;
+		return [(NSNumber *)object integerValue];
 	}
 	return 0;
 }

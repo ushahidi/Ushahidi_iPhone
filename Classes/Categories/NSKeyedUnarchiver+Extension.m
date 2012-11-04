@@ -19,13 +19,15 @@
  *****************************************************************************/
 
 #import "NSKeyedUnarchiver+Extension.h"
+#import "FileUtils.h"
 
 @implementation NSKeyedUnarchiver (Extension)
 
 + (id) unarchiveObjectWithKey:(NSString *)key {
 	@try {
-		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+        NSString *filePath = [[FileUtils pathForNonUserGeneratedFile] stringByAppendingPathComponent:key];
+//		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//		NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
 		DLog(@"Un-archiving %@", filePath);
 		return [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
 	}
@@ -37,8 +39,9 @@
 
 + (id) unarchiveObjectWithKey:(NSString *)key andSubKey:(NSString *)subKey {
 	@try {
-		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *folderPath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+//		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//		NSString *folderPath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
+        NSString *folderPath = [[FileUtils pathForNonUserGeneratedFile] stringByAppendingPathComponent:key];
 		if ([[NSFileManager defaultManager] fileExistsAtPath:folderPath] == NO) {
 			[[NSFileManager defaultManager] createDirectoryAtPath:folderPath withIntermediateDirectories:YES attributes:nil error:nil];
 		}
@@ -52,6 +55,8 @@
 	return nil;
 }
 
+//
+// Make sure you 
 + (id) unarchiveObjectWithPath:(NSString *)path andKey:(NSString *)key {
 	@try {
 		NSString *filePath = [path stringByAppendingPathComponent:key];

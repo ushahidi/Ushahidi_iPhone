@@ -26,7 +26,6 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "YouTubeUploader.h"
-#import "Ushahidi.h"
 
 @interface VideoPickerController ()
 
@@ -47,8 +46,8 @@
 }
 
 - (void) showVideoPickerForDelegate:(id<VideoPickerDelegate>)theDelegate forRect:(CGRect)sourceRect {
-    DLog(@"Rect:%@", NSStringFromCGRect(sourceRect));
-    
+    DLog(@"showVideoPickerForDelegate");
+
 	self.delegate = theDelegate;
     rect = sourceRect;
 	if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -57,7 +56,7 @@
 														cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 												   destructiveButtonTitle:nil
 														otherButtonTitles:NSLocalizedString(@"Take Video", nil), 
-                                      NSLocalizedString(@"From Library", nil), nil];
+																		  NSLocalizedString(@"From Library", nil), nil];
 		[actionSheet setActionSheetStyle:UIActionSheetStyleBlackOpaque];
 		[actionSheet showInView:self.viewController.view];
 		[actionSheet release];
@@ -78,19 +77,13 @@
 	return YES;
 }
 
-- (void)navigationController:(UINavigationController *)navigationController 
-      willShowViewController:(UIViewController *)theViewController 
-                    animated:(BOOL)animated {
-    [theViewController.navigationItem setTitle:NSLocalizedString(@"Videos", nil)];
-}
-
 #pragma mark -
 #pragma mark Internal
 
 - (void) showVideoPickerForSourceType:(UIImagePickerControllerSourceType)sourceType {
-	DLog(@"Type:%d", sourceType);
+	DLog(@"showVideoPicker");
 	UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
+	imagePicker.delegate = self;
     imagePicker.mediaTypes = [NSArray arrayWithObjects: (NSString*)kUTTypeMovie, nil];
     imagePicker.sourceType = sourceType;
     imagePicker.videoMaximumDuration = 10;
@@ -126,16 +119,14 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-	DLog(@"");
+	DLog(@"imagePickerControllerDidCancel for video");
 	if (self.popoverController != nil) {
 		[self.popoverController dismissPopoverAnimated:YES];
 	}
 	else {
 		[self.viewController dismissModalViewControllerAnimated:YES];
 	}
-    if ([self.delegate respondsToSelector:@selector(videoPickerDidCancel:)]) {
-        [self dispatchSelector:@selector(videoPickerDidCancel:) target:delegate objects:self, nil];
-    }
+	[self dispatchSelector:@selector(videoPickerDidCancel:) target:delegate objects:self, nil];
 }
 
 #pragma mark -
@@ -156,19 +147,16 @@
 #pragma mark Youtube
 
 - (void) uploadVideoToYoutubeFromPath:(NSString *)file {
-    DLog(@"File: %@", file);
+    DLog(@"uploadToYoutubeFromPath: %@", file);
+
     if (file) {
         youtubeUploader = [[YouTubeUploader alloc] init];
-        youtubeUploader.source = [[Ushahidi sharedUshahidi] deploymentName];
         youtubeUploader.title = [self.delegate titleForVideo];
         youtubeUploader.description = [self.delegate descriptionForVideo];
         youtubeUploader.delegate = self;
         [youtubeUploader uploadVideo:file];
-    }
-    else {
-        if ([self.delegate respondsToSelector:@selector(videoPickerDidFail:withError:)]) {
-            [self.delegate videoPickerDidFail:self withError:NSLocalizedString(@"Invalid Video File", nil)];
-        }
+    }else {
+        [self youtubeUploaderDidFail:nil withError:nil];
     }
 }
 
@@ -176,25 +164,19 @@
 #pragma mark YoutubeUploader Delegate
 
 - (void) youtubeUploaderDidStart:(YouTubeUploader *)uploader {
-    if ([self.delegate respondsToSelector:@selector(videoPickerDidStart:)]) {
-        [self.delegate videoPickerDidStart:self];   
-    }
+    [self.delegate videoPickerDidStart:self];
     [self dismissPopover];    
 }
 
 - (void) youtubeUploaderDidFinish:(YouTubeUploader *)uploader withAddress:(NSString *)address {
-    DLog(@"Address: %@", address);
-    if ([self.delegate respondsToSelector:@selector(videoPickerDidFinish:withAddress:)]) {
-        [self.delegate videoPickerDidFinish:self withAddress:address];   
-    }
+    DLog(@"youtubeUploaderDidFinish With: %@", address);
+    [self.delegate videoPickerDidFinish:self withAddress:address];
     [youtubeUploader release];
 }
 
 - (void) youtubeUploaderDidFail:(YouTubeUploader *)uploader withError:(NSString *)error {
-    DLog(@"");
-    if ([self.delegate respondsToSelector:@selector(videoPickerDidFail:withError:)]) {
-        [self.delegate videoPickerDidFail:self withError:error];
-    }
+    DLog(@"youtubeUploaderDidFail"); 
+    [self.delegate videoPickerDidCancel:self];
     [youtubeUploader release];
 }
 

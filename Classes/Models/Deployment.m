@@ -19,6 +19,7 @@
  *****************************************************************************/
 
 #import "Deployment.h"
+#import "FileUtils.h"
 #import "Location.h"
 #import "NSString+Extension.h"
 #import "NSObject+Extension.h"
@@ -34,7 +35,7 @@
 
 @synthesize identifier, name, description, url, domain, version;
 @synthesize categories, locations, incidents, checkins, users;
-@synthesize discovered, synced, added, lastIncidentId, lastCheckinId, pending;
+@synthesize discovered, synced, added, lastIncidentId, lastCheckinId, pending, customFormFields;
 @synthesize supportsCheckins;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
@@ -91,6 +92,7 @@
 	[encoder encodeObject:self.added forKey:@"added"];
 	[encoder encodeObject:self.discovered forKey:@"discovered"];
 	[encoder encodeObject:self.version forKey:@"version"];
+    [encoder encodeObject:self.customFormFields forKey:@"customFormFields"];
 	[encoder encodeBool:self.supportsCheckins forKey:@"supportsCheckins"];
 }
 
@@ -107,7 +109,9 @@
 		self.added = [decoder decodeObjectForKey:@"added"];
 		self.discovered = [decoder decodeObjectForKey:@"discovered"];
 		self.version = [decoder decodeObjectForKey:@"version"];
+        self.customFormFields = [decoder decodeObjectForKey:@"customFormFields"];
 		self.supportsCheckins = [decoder decodeBoolForKey:@"supportsCheckins"];
+        
 	}
 	return self;
 }
@@ -133,6 +137,10 @@
 	
 	[NSKeyedArchiver archiveObject:self.pending forPath:path andKey:@"pending"];
 	DLog(@"pending: %d", [self.pending count]);
+    
+    [NSKeyedArchiver archiveObject:self.customFormFields forPath:path andKey:@"customFormFields"];
+	DLog(@"customForms: %d", [self.customFormFields count]);
+
 }
 
 - (void) purge {
@@ -143,6 +151,7 @@
 	[self.checkins removeAllObjects];
 	[self.users removeAllObjects];
 	[self.pending removeAllObjects];
+    [self.customFormFields removeAllObjects];
 }
 
 - (void) unarchive {
@@ -172,10 +181,15 @@
 	self.pending = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"pending"];
 	if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 	DLog(@"pending: %d", [self.pending count]);
+    
+    self.customFormFields = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"customFormFields"];
+	if (self.customFormFields == nil) self.customFormFields = [[NSMutableArray alloc] init];
+	DLog(@"formFields: %d", [self.customFormFields count]);
+    
 }
 
 - (NSString *) archiveFolder {
-	return [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:self.domain];
+    return [[FileUtils pathForNonUserGeneratedFile] stringByAppendingPathComponent:self.domain];
 }
 
 - (BOOL) matchesString:(NSString *)string {
@@ -345,5 +359,13 @@
 - (NSString *) getUrlForPostCheckin {
 	return [self.url appendUrlStringWithFormat:@"api?task=checkin&action=ci"];
 }
+
+#pragma mark -
+#pragma mark Custom Forms
+
+- (NSString *) getUrlForCustomForms {
+    return [self.url appendUrlStringWithFormat:@"api?task=Customforms&by=fields&id=0&resp=json"];
+}
+
 
 @end

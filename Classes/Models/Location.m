@@ -29,7 +29,7 @@
 	if (self = [super init]) {
 		//DLog(@"dictionary: %@", dictionary);
 		if (dictionary != nil) {
-			self.identifier = [dictionary objectForKey:@"id"];
+			self.identifier = [dictionary stringForKey:@"id"];
 			self.name = [dictionary objectForKey:@"name"];
 			self.latitude = [dictionary objectForKey:@"latitude"];
 			self.longitude = [dictionary objectForKey:@"longitude"];

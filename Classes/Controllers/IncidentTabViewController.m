@@ -27,7 +27,6 @@
 #import "SettingsViewController.h"
 #import "NSString+Extension.h"
 #import "UIView+Extension.h"
-#import "Deployment.h"
 #import "Device.h"
 #import "Settings.h"
 #import "IncidentTableCell.h"
@@ -74,6 +73,7 @@
         [[Ushahidi sharedUshahidi] getCategoriesForDelegate:self];
 	}
 	[[Ushahidi sharedUshahidi] getVersionForDelegate:self];
+    [[Ushahidi sharedUshahidi] getCustomFormsForDelegate:self];
 }
 
 - (IBAction) filter:(id)sender event:(UIEvent*)event {
@@ -187,6 +187,10 @@
 - (void) downloadingFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending {
 	DLog(@"Downloading Incidents...");
 	[self.loadingView showWithMessage:NSLocalizedString(@"Reports...", nil)];
+}
+
+- (void) downloadedFromUshahidi:(Ushahidi *)ushahidi customForms:(NSArray *)customForms {
+    self.deployment.customFormFields = [NSMutableArray arrayWithArray:customForms];
 }
 
 - (void) downloadedFromUshahidi:(Ushahidi *)ushahidi incidents:(NSArray *)incidents pending:(NSArray *)pending error:(NSError *)error hasChanges:(BOOL)hasChanges {

@@ -104,6 +104,7 @@
 	else {
 		[encoder encodeObject:nil forKey:@"map"];
 	}
+    [encoder encodeObject:self.customFormEntries forKey:@"customFormEntries"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -137,6 +138,9 @@
 		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
 		if (self.categories == nil) self.categories = [NSMutableArray array];
+        
+        self.customFormEntries = [decoder decodeObjectForKey:@"customFormEntries"];
+        if (self.customFormEntries == nil) self.customFormEntries = [NSMutableArray array];
 	}
 	return self;
 }
@@ -387,6 +391,7 @@
 	[categories release];
 	[errors release];
 	[map release];
+    [customFormEntries release];
 	[super dealloc];
 }
 

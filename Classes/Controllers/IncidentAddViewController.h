@@ -53,6 +53,7 @@
 	DatePicker *datePicker;
 	NSString *news;
     Incident *incident;
+    BOOL isUploadingVideo;
 }
 
 @property(nonatomic, retain) IBOutlet CategoryTableViewController *categoryTableViewController;

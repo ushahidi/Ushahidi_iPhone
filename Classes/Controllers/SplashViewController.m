@@ -27,7 +27,7 @@
 
 - (void) dismissSplashViewController {
     DLog(@"");
-    [self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:0.1];  
+    [self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:3.1];
 }
 
 #pragma mark - UIViewController

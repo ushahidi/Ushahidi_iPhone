@@ -48,10 +48,9 @@
 
 @protocol VideoPickerDelegate <NSObject>
 
-- (void) videoPickerDidStart:(VideoPickerController *)videoPicker;
-- (void) videoPickerDidCancel:(VideoPickerController *)videoPicker;
-- (void) videoPickerDidFail:(VideoPickerController *)videoPicker withError:(NSString*)error;
-- (void) videoPickerDidFinish:(VideoPickerController *)videoPicker withAddress:(NSString *)address;
+- (void) videoPickerDidStart:(VideoPickerController *)imagePicker;
+- (void) videoPickerDidCancel:(VideoPickerController *)imagePicker;
+- (void) videoPickerDidFinish:(VideoPickerController *)imagePicker withAddress:(NSString *)address;
 
 - (NSString *) titleForVideo;
 - (NSString *) descriptionForVideo;

@@ -1257,7 +1257,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				if (media != nil && [media isKindOfClass:[NSArray class]]) {
 					for (NSDictionary *item in media) {
 						DLog(@"INCIDENT MEDIA: %@", item);
-						NSInteger mediatype = [item intForKey:@"type"];
+						NSNumber *mediatypeNum = [item objectForKey:@"type"];
+                        NSInteger mediatype = [mediatypeNum integerValue];
 						if (mediatype == MediaTypePhoto) {
 							Photo *photo = [[[Photo alloc] initWithDictionary:item] autorelease];
 							[incident addPhoto:photo];

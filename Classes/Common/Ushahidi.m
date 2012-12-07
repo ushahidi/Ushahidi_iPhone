@@ -199,8 +199,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) loadDeploymentForDelegate:(id<UshahidiDelegate>)delegate {
     if ([self hasDeployment]) {
         DLog(@"%@", self.deployment.name);
-        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.deployment, @"deployment", delegate, @"delegate", nil]; 
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:self.deployment, @"deployment", delegate, @"delegate", nil];
+        
+        NSArray* tmpCustomFieldArray = [[NSArray alloc] initWithArray:[[Ushahidi sharedUshahidi] getIncidentCustomFieldsForDelegate:delegate]];
+        
+        if((tmpCustomFieldArray != nil) && ([tmpCustomFieldArray count] > 0)){
+            [[Settings sharedSettings] setIncidentCustomFieldsArray:tmpCustomFieldArray];
+            [[Settings sharedSettings] save];
+            
+        }
         [self performSelectorInBackground:@selector(loadDeploymentWithDictionary:) withObject:dictionary];
+        
+        
+        
     }
     else {
         DLog(@"NULL");
@@ -235,6 +246,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	[self.mapQueue cancelAllOperations];
 	[self.photoQueue cancelAllOperations];
 	[self.mainQueue cancelAllOperations];
+    
+    
 	[[Settings sharedSettings] save];	
 }
 
@@ -248,6 +261,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 	Deployment *theDeployment = [dictionary objectForKey:@"deployment"];
 	[self loadDeployment:theDeployment];
+    
+   
+
+    
 	[self dispatchSelector:@selector(loadedFromUshahidi:deployment:)
 					target:[dictionary objectForKey:@"delegate"] 
 				   objects:self, theDeployment, nil];
@@ -1385,6 +1402,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 - (void) getIncidentCustomFieldsFinished:(ASIHTTPRequest *)request {
 	DLog(@"REQUEST: %@", [request.originalURL absoluteString]);
 	DLog(@"STATUS: %@", [request responseStatusMessage]);
+    
 	NSError *error = nil;
 	if ([request responseStatusCode] != HttpStatusOK) {
 		error = [NSError errorWithDomain:self.deployment.domain 

@@ -291,6 +291,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
+    
     if(self.customFields != nil){
         return [self.customFields count] + 7;
     }else {

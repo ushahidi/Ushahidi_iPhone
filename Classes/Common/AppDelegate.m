@@ -130,6 +130,7 @@
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     
     NSString *mapURL = [[Settings sharedSettings] mapURL];
+    //NSString *mapURL = @"http://uh.kunjan.net"; //[[Settings sharedSettings] mapURL];
 	DLog(@"MapURL: %@", mapURL);
 	
     NSString *mapName = [[Settings sharedSettings] mapName];
@@ -166,24 +167,12 @@
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
 			[[Ushahidi sharedUshahidi] getVersionOfDeployment:deployment forDelegate:self];
             
-            NSArray* tmpCustomFieldArray = [[NSArray alloc] initWithArray:[[Ushahidi sharedUshahidi] getIncidentCustomFieldsForDelegate:self]];
-            
-            if((tmpCustomFieldArray != nil) && ([tmpCustomFieldArray count] > 0)){
-                
-                [[Settings sharedSettings] setIncidentCustomFieldsArray:tmpCustomFieldArray];
-                [[Settings sharedSettings] save];
-            }
+           
         }
 		else {
             self.splashViewController.shouldDismissOnAppear = YES;
 			[[Ushahidi sharedUshahidi] loadDeployment:deployment];
-            NSArray* tmpCustomFieldArray = [[NSArray alloc] initWithArray:[[Ushahidi sharedUshahidi] getIncidentCustomFieldsForDelegate:self]];
             
-            if((tmpCustomFieldArray != nil) && ([tmpCustomFieldArray count] > 0)){
-                [[Settings sharedSettings] setIncidentCustomFieldsArray:tmpCustomFieldArray];
-                [[Settings sharedSettings] save];
-                
-            }
 			if (deployment.supportsCheckins) {
                 self.checkinTabViewController.deployment = deployment;
                 if ([Device isIPad]) {
@@ -213,6 +202,8 @@
 		Deployment *deployment = [[Ushahidi sharedUshahidi] getDeploymentWithUrl:lastDeployment];
 		if (deployment != nil) {
             [[Ushahidi sharedUshahidi] loadDeployment:deployment];
+            
+            
 			if (deployment.supportsCheckins) {
                 [masterNavigationController pushViewController:self.deploymentTableViewController animated:NO];
 				self.checkinTabViewController.deployment = deployment;
@@ -240,6 +231,7 @@
 			}
 		}
 		else {
+           
             [masterNavigationController pushViewController:self.deploymentTableViewController animated:NO];
             if ([Device isIPad]) {
                 [self setDetailsViewController:self.incidentTabViewController animated:NO];

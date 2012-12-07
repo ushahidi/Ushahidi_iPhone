@@ -326,6 +326,10 @@
 }
 
 - (NSString *) getURlForIncidentCustomFields{
+    NSString *selfURL = [[NSString alloc] initWithString:self.url];
+    [selfURL appendUrlStringWithFormat:@"api?task=customforms&by=fields&id=2&resp=json"];
+    NSLog(@"self.url append: %@", selfURL);
+    
     return [self.url appendUrlStringWithFormat:@"api?task=customforms&by=fields&id=2&resp=json"];
 }
 

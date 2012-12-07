@@ -45,7 +45,7 @@
 	NSMutableDictionary *checkins;
 	NSMutableDictionary *users;
 	NSMutableArray *pending;
-    NSArray *incidentCustomFields;
+    NSMutableArray *incidentCustomFields;
 }
 
 @property(nonatomic, retain) NSString *identifier;
@@ -66,7 +66,7 @@
 @property(nonatomic, retain) NSMutableDictionary *checkins;
 @property(nonatomic, retain) NSMutableDictionary *users;
 @property(nonatomic, retain) NSMutableArray *pending;
-@property(nonatomic, retain) NSArray *incidentCustomFields;
+@property(nonatomic, retain) NSMutableArray *incidentCustomFields;
 
 @property(nonatomic, assign) BOOL supportsCheckins;
 

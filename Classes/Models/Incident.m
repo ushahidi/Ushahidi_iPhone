@@ -106,6 +106,18 @@
 	else {
 		[encoder encodeObject:nil forKey:@"map"];
 	}
+    if(self.customFormEntries != nil){
+        [encoder encodeObject:self.customFormEntries forKey:@"customFormEntries"];
+    }else{
+        [encoder encodeObject:nil forKey:@"customFormEntries"];
+    }
+    
+    if(self.customFormEntries != nil){
+       [encoder encodeObject:self.customFields forKey:@"customFields"];
+    }else{
+        [encoder encodeObject:nil forKey:@"customFields"];
+    }
+    
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -139,6 +151,12 @@
 		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
 		if (self.categories == nil) self.categories = [NSMutableArray array];
+        
+        self.customFormEntries = [decoder decodeObjectForKey:@"customFormEntries"];
+        if (self.customFormEntries == nil) self.customFormEntries = [NSMutableDictionary dictionary];
+        
+        self.customFields = [decoder decodeObjectForKey:@"customFields"];
+        if (self.customFields == nil) self.customFields = [NSMutableArray array];
 	}
 	return self;
 }

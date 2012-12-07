@@ -113,7 +113,18 @@ typedef enum {
 
 - (IBAction) done:(id)sender {
 	DLog(@"done");
-	NSMutableArray *missingFields = [NSMutableArray array];
+    self.incident.description = @".";
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:MM:SS Z"];
+    NSDate *date = [[NSDate alloc]init];
+    NSString *formattedDateString = [dateFormatter stringFromDate:date];
+    NSLog(@"Incident Title: %@", formattedDateString);
+    self.incident.title = formattedDateString;
+
+	
+    NSMutableArray *missingFields = [NSMutableArray array];
+
 	if (self.incident.hasTitle == NO) {
 		[missingFields addObject:NSLocalizedString(@"Title", nil)];
 	}
@@ -281,9 +292,9 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
     if(self.customFields != nil){
-        return [self.customFields count] + 9;
+        return [self.customFields count] + 7;
     }else {
-        return 8;
+        return 7;
     }
 }
 

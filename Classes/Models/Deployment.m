@@ -133,6 +133,9 @@
 	
 	[NSKeyedArchiver archiveObject:self.pending forPath:path andKey:@"pending"];
 	DLog(@"pending: %d", [self.pending count]);
+    
+    [NSKeyedArchiver archiveObject:self.incidentCustomFields forPath:path andKey:@"incidentCustomFields"];
+	DLog(@"incidentCustomFields: %d", [self.incidentCustomFields count]);
 }
 
 - (void) purge {
@@ -143,6 +146,7 @@
 	[self.checkins removeAllObjects];
 	[self.users removeAllObjects];
 	[self.pending removeAllObjects];
+    [self.incidentCustomFields removeAllObjects];
 }
 
 - (void) unarchive {
@@ -172,6 +176,10 @@
 	self.pending = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"pending"];
 	if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 	DLog(@"pending: %d", [self.pending count]);
+    
+    self.incidentCustomFields = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"incidentCustomFields"];
+	if (self.incidentCustomFields == nil) self.incidentCustomFields = [[NSMutableArray alloc] init];
+	DLog(@"incidentCustomFields: %d", [self.incidentCustomFields count]);
 }
 
 - (NSString *) archiveFolder {

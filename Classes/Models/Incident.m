@@ -28,6 +28,7 @@
 #import "NSDate+Extension.h"
 #import "NSDictionary+Extension.h"
 #import "NSString+Extension.h"
+#import "IncidentCustomField.h"
 
 @interface Incident ()
 
@@ -40,7 +41,7 @@
 @synthesize identifier, title, description, date;
 @synthesize map;
 @synthesize active, verified, uploading, pending, userLocation;
-@synthesize news, photos, sounds, videos, categories, customFormEntries;
+@synthesize news, photos, sounds, videos, categories, customFormEntries,customFields;
 @synthesize location, latitude, longitude;
 @synthesize errors;
 
@@ -53,9 +54,10 @@
 		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
 		self.latitude = nil;
 		self.longitude = nil;
-		self.date = [NSDate date];
+		self.date = [self dateWithZeroSeconds:[NSDate date]];
 		self.userLocation = YES;
-        self.customFormEntries = [[NSMutableArray alloc] initWithCapacity:0];
+        self.customFormEntries = [[NSMutableDictionary alloc] initWithCapacity:0];
+        self.customFields = [[NSMutableArray alloc] initWithCapacity:0];
 	}
 	return self;
 }
@@ -71,7 +73,7 @@
 			self.verified = [dictionary boolForKey:@"incidentverified"];
 			NSString *dateString = [dictionary objectForKey:@"incidentdate"];
 			if (dateString != nil) {
-				self.date = [NSDate dateFromString:dateString];
+				self.date = [self dateWithZeroSeconds:[NSDate dateFromString:dateString]];
 			}
 			self.location = [dictionary stringForKey:@"locationname"];
 			self.latitude = [dictionary stringForKey:@"locationlatitude"];
@@ -104,6 +106,18 @@
 	else {
 		[encoder encodeObject:nil forKey:@"map"];
 	}
+    if(self.customFormEntries != nil){
+        [encoder encodeObject:self.customFormEntries forKey:@"customFormEntries"];
+    }else{
+        [encoder encodeObject:nil forKey:@"customFormEntries"];
+    }
+    
+    if(self.customFormEntries != nil){
+       [encoder encodeObject:self.customFields forKey:@"customFields"];
+    }else{
+        [encoder encodeObject:nil forKey:@"customFields"];
+    }
+    
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -137,6 +151,12 @@
 		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
 		if (self.categories == nil) self.categories = [NSMutableArray array];
+        
+        self.customFormEntries = [decoder decodeObjectForKey:@"customFormEntries"];
+        if (self.customFormEntries == nil) self.customFormEntries = [NSMutableDictionary dictionary];
+        
+        self.customFields = [decoder decodeObjectForKey:@"customFields"];
+        if (self.customFields == nil) self.customFields = [NSMutableArray array];
 	}
 	return self;
 }
@@ -161,12 +181,17 @@
 }
 
 - (BOOL) isDuplicate:(Incident *)incident {
-	return	[self.title isEqualToString:incident.title] &&
+	NSString *selfLat = [NSString stringWithFormat:@"%@ %@",self.latitude,@"." ];
+    NSString *selfLon = [NSString stringWithFormat:@"%@ %@",self.longitude,@"." ];
+    NSString *incidentLat = [NSString stringWithFormat:@"%@ %@",incident.latitude,@"." ];
+    NSString *incidentLon = [NSString stringWithFormat:@"%@ %@",incident.longitude,@"." ];
+    
+    return	[self.title isEqualToString:incident.title] &&
 			[self.description isEqualToString:incident.description] &&
 			[self.date isEqualToDate:incident.date] &&
 			[self.location isEqualToString:incident.location] &&
-			[self.latitude isEqualToString:incident.latitude] && 
-			[self.longitude isEqualToString:incident.longitude];
+			[selfLat isEqualToString:incidentLat] &&
+			[selfLon isEqualToString:incidentLon];
 }
 
 - (NSString *) dateTimeString {
@@ -267,7 +292,9 @@
 
 - (BOOL) hasCategory:(Category *)category {
 	for (Category *current in self.categories) {
-		if ([current.identifier isEqualToString:category.identifier]) {
+        NSString *currentIdentifier = [NSString stringWithFormat:@"%@%@",current.identifier,@"."];
+        NSString *categoryIdentifier = [NSString stringWithFormat:@"%@%@",category.identifier,@"."];
+		if ([currentIdentifier isEqualToString:categoryIdentifier]) {
 			return YES;
 		}
 	}
@@ -372,6 +399,140 @@
 	return incident.verified > self.verified;
 }
 
+- (void)addCustomFieldCheckBoxChoice:(NSString *)value forFieldID:(NSInteger) customFieldId choiceNum:(NSInteger)choiceNum{
+    
+    if(customFormEntries == nil){
+        customFormEntries = [[NSMutableDictionary alloc] init];
+    }
+    
+    [customFormEntries setObject:value forKey:[NSString stringWithFormat:@"%@[%d-%d]",customFieldUploadText,customFieldId,choiceNum]];
+    
+    IncidentCustomField *currentCustomField = nil;
+    for(IncidentCustomField *custField in customFields){
+        if(custField.fieldID == customFieldId){
+            currentCustomField = custField;
+        }
+    }
+    if(currentCustomField != nil){
+        NSMutableString *tempSelectedValue = [[NSMutableString alloc] init];
+        for (int i = 0; i < [currentCustomField.defaultValues count] ; i++){
+            NSString *tempValue = [self getCustomFieldCheckBoxValue:customFieldId choiceNum:i];
+            if([tempValue length] > 0){
+                [tempSelectedValue appendString:tempValue];
+                [tempSelectedValue appendString:@", "];
+            }
+        }
+        if([tempSelectedValue length] > 0){
+            currentCustomField.fieldResponse = [tempSelectedValue substringToIndex:[tempSelectedValue length] - 2];
+        }else{
+            currentCustomField.fieldResponse = [[NSString alloc]initWithString:@""];
+        }
+    }
+
+    
+    
+}
+    
+- (void)removeCustomFieldCheckBoxChoice:(NSInteger) customFieldId choiceNum:(NSInteger)choiceNum{
+    
+    if((customFormEntries != nil)&&([customFormEntries count] > 0)){
+        NSArray *keys = [customFormEntries allKeys];
+        if([keys containsObject:[NSString stringWithFormat:@"%@[%d-%d]",customFieldUploadText,customFieldId,choiceNum]]){
+            [customFormEntries removeObjectForKey:[NSString stringWithFormat:@"%@[%d-%d]",customFieldUploadText,customFieldId,choiceNum]];
+        }
+    }
+    
+    IncidentCustomField *currentCustomField = nil;
+    for(IncidentCustomField *custField in customFields){
+        if(custField.fieldID == customFieldId){
+            currentCustomField = custField;
+        }
+    }
+    if(currentCustomField != nil){
+        NSMutableString *tempSelectedValue = [[NSMutableString alloc] init];
+        for (int i = 0; i < [currentCustomField.defaultValues count] ; i++){
+            NSString *tempValue = [self getCustomFieldCheckBoxValue:customFieldId choiceNum:i];
+            if([tempValue length] > 0){
+                [tempSelectedValue appendString:tempValue];
+                [tempSelectedValue appendString:@", "];
+            }
+        }
+        if([tempSelectedValue length] > 0){
+            currentCustomField.fieldResponse = [tempSelectedValue substringToIndex:[tempSelectedValue length] - 2];
+        }else{
+            currentCustomField.fieldResponse = [[NSString alloc]initWithString:@""];
+        }
+    }
+    
+}
+
+- (NSString *)getCustomFieldCheckBoxValue:(NSInteger) customFieldId choiceNum:(NSInteger)choiceNum{
+    if((customFormEntries != nil)&&([customFormEntries count] > 0)){
+       return  [customFormEntries objectForKey:[NSString stringWithFormat:@"%@[%d-%d]",customFieldUploadText,customFieldId,choiceNum]];
+    }
+    return nil;
+}
+
+- (void)addUpdateCustomFieldValue:(NSDictionary *)value forFieldID:(NSInteger) customFieldID{
+    
+    
+    if(customFormEntries == nil){
+        customFormEntries = [[NSMutableDictionary alloc] init];
+    }
+    
+    [customFormEntries setObject:value forKey:[NSString stringWithFormat:@"%@[%d]",customFieldUploadText,customFieldID]];
+    
+    IncidentCustomField *currentCustomField = [[IncidentCustomField alloc]init];
+    for(IncidentCustomField *custField in customFields){
+        if(custField.fieldID == customFieldID){
+            currentCustomField = custField;
+        }
+    }
+    if(currentCustomField != nil){
+        if([self getCustomFieldValue:customFieldID] != nil){
+            currentCustomField.fieldResponse = [[NSString alloc]initWithString:[self getCustomFieldValue:customFieldID]];
+        }else{
+            currentCustomField.fieldResponse = [[NSString alloc]initWithString:@""];
+        }
+    }
+}
+
+- (void)removeCustomField:(NSInteger) customFieldID{
+    if((customFormEntries != nil)&&([customFormEntries count] > 0)){
+        NSArray *keys = [customFormEntries allKeys];
+        if([keys containsObject:[NSString stringWithFormat:@"%@[%d]",customFieldUploadText,customFieldID]]){
+            [customFormEntries removeObjectForKey:[NSString stringWithFormat:@"%@[%d]",customFieldUploadText,customFieldID]];
+        }
+    }
+    IncidentCustomField *currentCustomField = nil;
+    for(IncidentCustomField *custField in customFields){
+        if(custField.fieldID == customFieldID){
+            currentCustomField = custField;
+        }
+    }
+    if(currentCustomField != nil){
+        if([self getCustomFieldValue:customFieldID] != nil){
+            currentCustomField.fieldResponse = [[NSString alloc]initWithString:[self getCustomFieldValue:customFieldID]];
+        }else{
+            currentCustomField.fieldResponse = [[NSString alloc]initWithString:@""];
+        }
+    }
+}
+
+- (NSString *)getCustomFieldValue:(NSInteger) customFieldID{
+    
+    if((customFormEntries != nil)&&([customFormEntries count] > 0)){
+       return [customFormEntries objectForKey:[NSString stringWithFormat:@"%@[%d]",customFieldUploadText,customFieldID]];
+    }
+    return nil;
+}
+
+- (NSDate *)dateWithZeroSeconds:(NSDate *)dateTmp
+{
+    NSTimeInterval time = floor([dateTmp timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    return  [NSDate dateWithTimeIntervalSinceReferenceDate:time];
+}
+
 - (void)dealloc {
 	[identifier release];
 	[title release];
@@ -387,6 +548,8 @@
 	[categories release];
 	[errors release];
 	[map release];
+    [customFormEntries release];
+    [customFields release];
 	[super dealloc];
 }
 

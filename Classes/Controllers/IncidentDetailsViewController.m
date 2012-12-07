@@ -47,6 +47,7 @@
 #import "Settings.h"
 #import "Ushahidi.h"
 #import "Device.h"
+#import "incidentCustomField.h"
 
 @interface IncidentDetailsViewController ()
 
@@ -58,6 +59,7 @@
 #define kBitlyApiKey	@"BitlyApiKey"
 
 @synthesize incident, incidents;
+@synthesize customFields;
 
 #pragma mark -
 #pragma mark Enums
@@ -116,57 +118,71 @@ typedef enum {
 
 - (IBAction) sendSMS:(id)sender {
 	DLog(@"");
-	NSMutableString *message = [NSMutableString string];
-	if ([self.incident hasURL]) {
-		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
-		[message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
-	}
-	else {
-		[message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
-	}
-	[self.sms sendToRecipients:nil 
+	if ([MFMessageComposeViewController canSendText]){
+        NSMutableString *message = [NSMutableString string];
+        if ([self.incident hasURL]) {
+            NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
+            [message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
+        }
+        else {
+            [message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
+        }
+        [self.sms sendToRecipients:nil
 				   withMessage:message];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"This device is not configured to send SMS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }
 }
 
 - (IBAction) sendEmail:(id)sender {
 	DLog(@"");
-	NSMutableString *message = [NSMutableString string];
-	if ([self.incident hasURL]) {
-		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
-		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", nil), [link absoluteString], self.incident.title];
-	}
-	else {
-		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];
-	}
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", nil), self.incident.dateTimeString];
-	if ([NSString isNilOrEmpty:self.incident.latitude] == NO && [NSString isNilOrEmpty:self.incident.longitude] == NO) {
-		DLog(@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location);
-		NSString *locationURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location];
-		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Location", nil), locationURL, self.incident.location];
-	}
-	else {
-		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", nil), self.incident.location];
-	}
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", nil), self.incident.categoryNames];
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", nil), self.incident.description];
-	if (self.incident.news != nil && [self.incident.news count] > 0) {
-		[message appendFormat:@"<b>%@</b>:<ul>", NSLocalizedString(@"News", nil)];
-		for (News *news in self.incident.news) {
-			[message appendFormat:@"<li><a href=\"%@\">%@</a></li>", news.url, news.url];
-		}
-		[message appendFormat:@"</ul>"];
-	}
-	NSMutableArray *photos = [NSMutableArray array];
-	if (self.incident.map != nil) {
-		[photos addObject:self.incident.map];
-	}
-	if ([self.incident.photos count] > 0) {
-		[photos addObjectsFromArray:self.incident.photoImages];
-	}
-	[self.email sendToRecipients:nil 
+    if ([MFMailComposeViewController canSendMail]){
+        NSMutableString *message = [NSMutableString string];
+        if ([self.incident hasURL]) {
+            NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
+            [message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", nil), [link absoluteString], self.incident.title];
+        }
+        else {
+            [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];
+        }
+        [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", nil), self.incident.dateTimeString];
+        if ([NSString isNilOrEmpty:self.incident.latitude] == NO && [NSString isNilOrEmpty:self.incident.longitude] == NO) {
+            DLog(@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location);
+            NSString *locationURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location];
+            [message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Location", nil), locationURL, self.incident.location];
+        }
+        else {
+            [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", nil), self.incident.location];
+        }
+        [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", nil), self.incident.categoryNames];
+        [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", nil), self.incident.description];
+        if (self.incident.news != nil && [self.incident.news count] > 0) {
+            [message appendFormat:@"<b>%@</b>:<ul>", NSLocalizedString(@"News", nil)];
+            for (News *news in self.incident.news) {
+                [message appendFormat:@"<li><a href=\"%@\">%@</a></li>", news.url, news.url];
+            }
+            [message appendFormat:@"</ul>"];
+        }
+        NSMutableArray *photos = [NSMutableArray array];
+        if (self.incident.map != nil) {
+            [photos addObject:self.incident.map];
+        }
+        if ([self.incident.photos count] > 0) {
+            [photos addObjectsFromArray:self.incident.photoImages];
+        }
+        [self.email sendToRecipients:nil 
 					 withMessage:message 
 					 withSubject:self.incident.title 
 					  withPhotos:photos];
+    }
+    else {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"This device is not configured to send an email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }
 }
 
 #pragma mark -
@@ -205,6 +221,18 @@ typedef enum {
 	if (self.willBePushed) {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
+    NSMutableDictionary *tmpCustomField = [[NSMutableDictionary alloc]init];
+    NSInteger currentSectionIndex = TableSectionVideo+1;
+    for(IncidentCustomField *custField in self.incident.customFields){
+        [self setHeader:custField.fieldName atSection:currentSectionIndex];
+        [tmpCustomField setObject:custField forKey:[NSNumber numberWithInteger:currentSectionIndex]];
+        currentSectionIndex++;
+    }
+    if(tmpCustomField.count > 0){
+        self.customFields = [[NSDictionary alloc]initWithDictionary:tmpCustomField];
+    }else{
+        self.customFields = nil;
+    }
 	[self.tableView reloadData];	
 	[[Settings sharedSettings] setLastIncident:self.incident.identifier];
 }
@@ -216,6 +244,7 @@ typedef enum {
 - (void)dealloc {
 	[incident release];
 	[incidents release];
+    [customFields release];
 	[super dealloc];
 }
 
@@ -223,7 +252,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 10;
+	return 10+ [self.incident.customFields count];
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
@@ -259,6 +288,13 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSInteger TableSectionDelete = TableSectionNews + 1;
+    NSArray * customKeySections = [[NSArray alloc] init];
+    if(self.customFields != nil){
+        TableSectionDelete = TableSectionVideo + [self.customFields count] + 1;
+        customKeySections = [self.customFields allKeys];
+    }
 	if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
 		if (self.incident.map != nil) {
 			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
@@ -349,7 +385,19 @@ typedef enum {
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		}
 		return cell;
-	}
+	}else if (([customKeySections count] > 0) && ([customKeySections containsObject:[NSNumber numberWithInteger:indexPath.section]]) && (indexPath.section > TableSectionVideo )){
+        IncidentCustomField *customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if((customField.fieldResponse != nil) && (customField.fieldResponse.length > 0)){
+            cell.textLabel.text = customField.fieldResponse;
+        }else{
+            cell.textLabel.text = @"No Information Available";
+        }
+        return cell;
+        
+    }
 	else {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryNone;

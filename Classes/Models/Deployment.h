@@ -45,6 +45,7 @@
 	NSMutableDictionary *checkins;
 	NSMutableDictionary *users;
 	NSMutableArray *pending;
+    NSMutableArray *incidentCustomFields;
 }
 
 @property(nonatomic, retain) NSString *identifier;
@@ -65,6 +66,7 @@
 @property(nonatomic, retain) NSMutableDictionary *checkins;
 @property(nonatomic, retain) NSMutableDictionary *users;
 @property(nonatomic, retain) NSMutableArray *pending;
+@property(nonatomic, retain) NSMutableArray *incidentCustomFields;
 
 @property(nonatomic, assign) BOOL supportsCheckins;
 
@@ -95,10 +97,13 @@
 - (NSString *) getUrlForIncidentsByLocationID:(NSString *)locationID;
 - (NSString *) getUrlForIncidentsByLocationName:(NSString *)locationName;
 - (NSString *) getUrlForIncidentsBySinceID:(NSString *)sinceID;
+- (NSString *) getURlForIncidentCustomFields;
+- (NSString *) getUrlforIncidentByID: (NSString *)ID;
 
 - (NSString *) getUrlForIncidentCount;
 - (NSString *) getUrlForGeoGraphicMidPoint;
 - (NSString *) getUrlForDeploymentVersion;
+
 
 - (NSString *) getUrlForPostReport;
 - (NSString *) getUrlForPostNews;

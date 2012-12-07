@@ -35,7 +35,7 @@
 @synthesize identifier, name, description, url, domain, version;
 @synthesize categories, locations, incidents, checkins, users;
 @synthesize discovered, synced, added, lastIncidentId, lastCheckinId, pending;
-@synthesize supportsCheckins;
+@synthesize supportsCheckins, incidentCustomFields;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
@@ -133,6 +133,9 @@
 	
 	[NSKeyedArchiver archiveObject:self.pending forPath:path andKey:@"pending"];
 	DLog(@"pending: %d", [self.pending count]);
+    
+    [NSKeyedArchiver archiveObject:self.incidentCustomFields forPath:path andKey:@"incidentCustomFields"];
+	DLog(@"incidentCustomFields: %d", [self.incidentCustomFields count]);
 }
 
 - (void) purge {
@@ -143,6 +146,7 @@
 	[self.checkins removeAllObjects];
 	[self.users removeAllObjects];
 	[self.pending removeAllObjects];
+    [self.incidentCustomFields removeAllObjects];
 }
 
 - (void) unarchive {
@@ -172,6 +176,10 @@
 	self.pending = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"pending"];
 	if (self.pending == nil) self.pending = [[NSMutableArray alloc] init];
 	DLog(@"pending: %d", [self.pending count]);
+    
+    self.incidentCustomFields = [NSKeyedUnarchiver unarchiveObjectWithPath:path andKey:@"incidentCustomFields"];
+	if (self.incidentCustomFields == nil) self.incidentCustomFields = [[NSMutableArray alloc] init];
+	DLog(@"incidentCustomFields: %d", [self.incidentCustomFields count]);
 }
 
 - (NSString *) archiveFolder {
@@ -222,6 +230,7 @@
 	[added release];
 	[discovered release];
 	[version release];
+    [incidentCustomFields release];
     [super dealloc];
 }
 
@@ -314,6 +323,18 @@
 
 - (NSString *) getUrlForGeoGraphicMidPoint {
 	return [self.url appendUrlStringWithFormat:@"api?task=geographicmidpoint&resp=json"];
+}
+
+- (NSString *) getURlForIncidentCustomFields{
+    NSString *selfURL = [[NSString alloc] initWithString:self.url];
+    [selfURL appendUrlStringWithFormat:@"api?task=customforms&by=fields&id=2&resp=json"];
+    NSLog(@"self.url append: %@", selfURL);
+    
+    return [self.url appendUrlStringWithFormat:@"api?task=customforms&by=fields&id=2&resp=json"];
+}
+
+- (NSString *) getUrlforIncidentByID:(NSString *)ID {
+    return [self.url appendUrlStringWithFormat:@"api?task=incidents&by=incidentid&id=%@&resp=json", ID];
 }
 
 #pragma mark -

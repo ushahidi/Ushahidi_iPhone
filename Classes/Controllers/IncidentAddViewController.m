@@ -25,6 +25,7 @@
 #import "Device.h"
 #import "LoadingViewController.h"
 #import "CategoryTableViewController.h"
+#import "CustomFieldTableViewController.h"
 #import "LocationSelectViewController.h"
 #import "LoadingViewController.h"
 #import "TextTableCell.h"
@@ -42,6 +43,7 @@
 #import "TableHeaderView.h"
 #import "NSString+Extension.h"
 #import "Video.h"
+#import "IncidentCustomField.h"
 
 @interface IncidentAddViewController ()
 
@@ -49,6 +51,7 @@
 @property(nonatomic, retain) NSString *news;
 @property(nonatomic, retain) NSString *videos;
 @property(nonatomic, retain) Incident *incident;
+@property(nonatomic, retain) NSMutableDictionary *customFields;
 
 @end
 
@@ -56,12 +59,14 @@
 
 @synthesize datePicker;
 @synthesize categoryTableViewController;
+@synthesize customFieldTableViewController;
 @synthesize locationSelectViewController;
 @synthesize imagePickerController;
 @synthesize videoPickerController;
 @synthesize news;
 @synthesize videos;
 @synthesize incident;
+@synthesize customFields;
 
 #pragma mark -
 #pragma mark Enums
@@ -74,8 +79,7 @@ typedef enum {
 	TableSectionLocation,
 	TableSectionPhotos,
     TableSectionVideos,
-	TableSectionNews,
-	TableSectionDelete
+	TableSectionNews
 } TableSection;
 
 typedef enum {
@@ -102,8 +106,8 @@ typedef enum {
 
 - (IBAction) cancel:(id)sender {
 	DLog(@"cancel");
-	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Unsaved Changes", nil) 
-							andMessage:NSLocalizedString(@"Are you sure you want to cancel?", nil) 
+	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Unsaved Changes", nil)
+							andMessage:NSLocalizedString(@"Are you sure you want to cancel?", nil)
 								forTag:AlertViewUnsaved];
 }
 
@@ -111,22 +115,22 @@ typedef enum {
 	DLog(@"done");
 	NSMutableArray *missingFields = [NSMutableArray array];
 	if (self.incident.hasTitle == NO) {
-		[missingFields addObject:NSLocalizedString(@"Title", nil)]; 
+		[missingFields addObject:NSLocalizedString(@"Title", nil)];
 	}
 	if (self.incident.hasDescription == NO) {
-		[missingFields addObject:NSLocalizedString(@"Description", nil)]; 
+		[missingFields addObject:NSLocalizedString(@"Description", nil)];
 	}
 	if (self.incident.hasCategory == NO) {
-		[missingFields addObject:NSLocalizedString(@"Category", nil)]; 
+		[missingFields addObject:NSLocalizedString(@"Category", nil)];
 	}
 	if (self.incident.hasDate == NO) {
-		[missingFields addObject:NSLocalizedString(@"Date", nil)]; 
+		[missingFields addObject:NSLocalizedString(@"Date", nil)];
 	}
 	if (self.incident.hasLocation == NO) {
-		[missingFields addObject:NSLocalizedString(@"Location", nil)]; 
+		[missingFields addObject:NSLocalizedString(@"Location", nil)];
 	}
 	if (missingFields.count > 0) {
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", nil) 
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Required Fields", nil)
 							 andMessage:[missingFields componentsJoinedByString:@", "]];
 	}
 	else {
@@ -155,7 +159,7 @@ typedef enum {
 		}
 		else {
 			[self.loadingView hide];
-			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil) 
+			[self.alertView showOkWithTitle:NSLocalizedString(@"Error", nil)
 								 andMessage:NSLocalizedString(@"Unable to add incident", nil)];
 		}
 	}
@@ -193,7 +197,8 @@ typedef enum {
 	else {
 		//DO NOT SHOW 'News' HEADING
 	}
-    UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self 
+    
+    UITapGestureRecognizer *gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(hideKeyboard)] autorelease];
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.tableView addGestureRecognizer:gestureRecognizer];
@@ -220,17 +225,17 @@ typedef enum {
 				self.incident.latitude = [Locator sharedLocator].latitude;
 				self.incident.longitude = [Locator sharedLocator].longitude;
 				self.incident.location = [Locator sharedLocator].address;
-				[self setFooter:[Locator sharedLocator].address 
+				[self setFooter:[Locator sharedLocator].address
 					  atSection:TableSectionLocation];
 			}
 			else if ([[Locator sharedLocator] hasLocation]) {
 				self.incident.latitude = [Locator sharedLocator].latitude;
 				self.incident.longitude = [Locator sharedLocator].longitude;
-				[self setFooter:[NSString stringWithFormat:@"%@, %@", self.incident.latitude, self.incident.longitude] 
+				[self setFooter:[NSString stringWithFormat:@"%@, %@", self.incident.latitude, self.incident.longitude]
 					  atSection:TableSectionLocation];
 			}
 			else {
-				[self setFooter:NSLocalizedString(@"Locating...", nil) 
+				[self setFooter:NSLocalizedString(@"Locating...", nil)
 					  atSection:TableSectionLocation];
 			}
 			[[Locator sharedLocator] detectLocationForDelegate:self];
@@ -239,6 +244,15 @@ typedef enum {
             self.doneButton.title = NSLocalizedString(@"Update", nil);
 			self.cancelButton.enabled = NO;
 		}
+        //Load Custom Fields
+        [self initCustomFieldsDictionary];
+        if([self.customFields count] > 0){
+            NSArray * keys = [self.customFields allKeys];
+            for(NSNumber * num in keys){
+                IncidentCustomField * customField = [self.customFields objectForKey:num];
+                [self setHeader:[customField fieldName] atSection:[num intValue]];
+            }
+        }
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
 	[self.tableView reloadData];
@@ -254,9 +268,11 @@ typedef enum {
 	[imagePickerController release];
     [videoPickerController release];
 	[categoryTableViewController release];
+    [customFieldTableViewController release];
 	[locationSelectViewController release];
 	[incident release];
 	[news release];
+    [customFields release];
     [super dealloc];
 }
 
@@ -264,7 +280,11 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 8;
+    if(self.customFields != nil){
+        return [self.customFields count] + 9;
+    }else {
+        return 8;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)theTableView numberOfRowsInSection:(NSInteger)section {
@@ -282,7 +302,7 @@ typedef enum {
 	}
     if (section == TableSectionVideos) {
         if ([[Settings sharedSettings] showReportVideosURL]) {
-            if ([NSString isNilOrEmpty:[Settings sharedSettings].youtubeLogin] == NO && 
+            if ([NSString isNilOrEmpty:[Settings sharedSettings].youtubeLogin] == NO &&
                 [NSString isNilOrEmpty:[Settings sharedSettings].youtubePassword] == NO &&
                 [NSString isNilOrEmpty:[Settings sharedSettings].youtubeDeveloperKey] == NO) {
                 return [self.incident.videos count] + 1;
@@ -291,16 +311,37 @@ typedef enum {
         }
         return 0;
 	}
+    
+    if (section == TableSectionNews) {
+		return [[Settings sharedSettings] showReportNewsURL] ? 1 : 0;
+	}
+    
+    NSInteger TableSectionDelete = TableSectionNews + 1;
+    if(self.customFields != nil){
+        TableSectionDelete = TableSectionNews + [self.customFields count] + 1;
+        NSArray * customKeySections = [self.customFields allKeys];
+        for(NSNumber * num in customKeySections){
+            if(section == [num intValue]){
+                return 1;
+            }
+        }
+    }
 	if (section == TableSectionDelete) {
 		return self.incident.pending ? 1 : 0;
 	}
-	if (section == TableSectionNews) {
-		return [[Settings sharedSettings] showReportNewsURL] ? 1 : 0;
-	}
+    
 	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSInteger TableSectionDelete = TableSectionNews + 1;
+    NSArray * customKeySections = [[NSArray alloc] init];
+    if(self.customFields != nil){
+        TableSectionDelete = TableSectionNews + [self.customFields count] + 1;
+        customKeySections = [self.customFields allKeys];
+    }
+    
 	if (indexPath.section == TableSectionDescription) {
 		TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		[cell setPlaceholder:NSLocalizedString(@"Enter description", nil)];
@@ -321,7 +362,7 @@ typedef enum {
 			else {
 				[cell setImage:nil];
 			}
-			return cell;	
+			return cell;
 		}
 		else {
 			TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
@@ -345,7 +386,7 @@ typedef enum {
                 else {
                     [cell setText:video.title];
                 }
-                return cell;	
+                return cell;
             }
             else {
                 TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
@@ -354,7 +395,7 @@ typedef enum {
                 [cell setText:NSLocalizedString(@"Add Video", nil)];
                 [cell setTextColor:[UIColor lightGrayColor]];
                 return cell;
-            }   
+            }
         }
         else {
             TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
@@ -401,7 +442,7 @@ typedef enum {
 				[cell setText:NSLocalizedString(@"Select location", nil)];
 				[cell setTextColor:[UIColor lightGrayColor]];
 			}
-			return cell;	
+			return cell;
 		}
 	}
 	else if (indexPath.section == TableSectionDate) {
@@ -449,7 +490,63 @@ typedef enum {
 		[cell setText:NSLocalizedString(@"Delete Report", nil)];
 		return cell;
 	}
-	else {
+    else if (([customKeySections count] > 0) && ([customKeySections containsObject:[NSNumber numberWithInteger:indexPath.section]])){
+        IncidentCustomField *customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        if(customField.fieldType == TextFieldType){
+            TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
+            [cell setPlaceholder:NSLocalizedString(@"Enter Information", nil)];
+            [cell setText:[self.incident getCustomFieldValue:[customField fieldID]]];
+			[cell setReturnKeyType:UIReturnKeyDefault];
+			[cell setKeyboardType:UIKeyboardTypeDefault];
+			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+			[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
+            return cell;
+        }else if(customField.fieldType == TextAreaFieldType){
+            TextViewTableCell *cell = [TableCellFactory getTextViewTableCellForDelegate:self table:theTableView indexPath:indexPath];
+            [cell setPlaceholder:NSLocalizedString(@"Enter Information", nil)];
+            [cell setText:[self.incident getCustomFieldValue:[customField fieldID]]];
+            [cell setReturnKeyType:UIReturnKeyDefault];
+            [cell setKeyboardType:UIKeyboardTypeDefault];
+            [cell setAutocorrectionType:UITextAutocorrectionTypeYes];
+            [cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
+            return cell;
+        }else {
+            
+            TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            NSString *selectedValue = [[NSString alloc] init];
+            if(customField.fieldType == CheckBoxFieldType){
+                NSMutableString *tempSelectedValue = [[NSMutableString alloc] init];
+                for (int i = 0; i < [customField.defaultValues count] ; i++){
+                    NSString *tempValue = [self.incident getCustomFieldCheckBoxValue:customField.fieldID choiceNum:i];
+                    if([tempValue length] > 0){
+                        [tempSelectedValue appendString:tempValue];
+                        [tempSelectedValue appendString:@", "];
+                    }
+                }
+                if([tempSelectedValue length] > 0){
+                    selectedValue = [tempSelectedValue substringToIndex:[tempSelectedValue length] - 2];
+                }
+            }else{
+                selectedValue = [self.incident getCustomFieldValue:customField.fieldID];
+            }
+            
+            if([selectedValue length] > 0){
+                [cell setText:selectedValue];
+                [cell setTextColor:[UIColor blackColor]];
+            }else {
+                [cell setText:NSLocalizedString(@"Select", nil)];
+                [cell setTextColor:[UIColor lightGrayColor]];
+                
+            }
+            
+            return cell;
+            
+        }
+        
+    }
+    else{
 		TextFieldTableCell *cell = [TableCellFactory getTextFieldTableCellForDelegate:self table:theTableView indexPath:indexPath];
 		if (indexPath.section == TableSectionTitle) {
 			[cell setText:self.incident.title];
@@ -459,7 +556,7 @@ typedef enum {
 			[cell setAutocorrectionType:UITextAutocorrectionTypeYes];
 			[cell setAutocapitalizationType:UITextAutocapitalizationTypeSentences];
 		}
-		return cell;	
+		return cell;
 	}
 }
 
@@ -470,14 +567,15 @@ typedef enum {
 		}
 		return [TextTableCell getCellSizeForText:NSLocalizedString(@"Add Photo", nil) forWidth:theTableView.contentSize.width].height;
 	}
-	if (indexPath.section == TableSectionDescription) {
+    
+	if (indexPath.section == TableSectionDescription ) {
         if ([Device isIPad]) {
             return [Device isPortraitMode] ? 250 : 60;
         }
         return 120;
 	}
     if (indexPath.section == TableSectionVideos) {
-        if ([NSString isNilOrEmpty:[Settings sharedSettings].youtubeLogin] == NO && 
+        if ([NSString isNilOrEmpty:[Settings sharedSettings].youtubeLogin] == NO &&
             [NSString isNilOrEmpty:[Settings sharedSettings].youtubePassword] == NO &&
             [NSString isNilOrEmpty:[Settings sharedSettings].youtubeDeveloperKey] == NO) {
             return 44;
@@ -496,6 +594,22 @@ typedef enum {
 	if (indexPath.section == TableSectionNews) {
 		return [[Settings sharedSettings] showReportNewsURL] ? 44 : 0;
 	}
+    
+    if(self.customFields != nil){
+        NSArray * customKeySections = [self.customFields allKeys];
+        if (([customKeySections count] > 0) && ([customKeySections containsObject:[NSNumber numberWithInteger:indexPath.section]])){
+            IncidentCustomField *customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+            if(customField.fieldType == TextAreaFieldType){
+                if ([Device isIPad]) {
+                    return [Device isPortraitMode] ? 250 : 60;
+                }
+                return 120;
+            }
+            if(customField.fieldType == TextFieldType){
+                return 44;
+            }
+        }
+    }
 	return 44;
 }
 
@@ -516,9 +630,9 @@ typedef enum {
         }
 	}
 	else if (indexPath.section == TableSectionVideos && indexPath.row > 0) {
-    	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-																 delegate:self 
-														cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+    	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+																 delegate:self
+														cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 												   destructiveButtonTitle:NSLocalizedString(@"Remove Video", nil)
 														otherButtonTitles:nil];
 		[actionSheet setTag:indexPath.row - 1];
@@ -529,15 +643,15 @@ typedef enum {
     
     if (indexPath.section == TableSectionPhotos && indexPath.row == 0) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-		[self.imagePickerController showImagePickerForDelegate:self 
+		[self.imagePickerController showImagePickerForDelegate:self
 														resize:[[Settings sharedSettings] resizePhotos]
-														 width:[[Settings sharedSettings] imageWidth] 
+														 width:[[Settings sharedSettings] imageWidth]
 													   forRect:cell.frame];
 	}
 	else if (indexPath.section == TableSectionPhotos && indexPath.row > 0) {
-    	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
-																 delegate:self 
-														cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+    	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+																 delegate:self
+														cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
 												   destructiveButtonTitle:NSLocalizedString(@"Remove Photo", nil)
 														otherButtonTitles:nil];
 		[actionSheet setTag:indexPath.row - 1];
@@ -553,11 +667,13 @@ typedef enum {
         [self presentModalViewController:self.categoryTableViewController animated:YES];
 	}
 	else if (indexPath.section == TableSectionLocation) {
-        [self.view setUserInteractionEnabled:NO];
-        self.locationSelectViewController.incident = self.incident;
-        self.locationSelectViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        self.locationSelectViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:self.locationSelectViewController animated:YES];
+        if(indexPath.row == TableSectionLocationCoordinates){
+            [self.view setUserInteractionEnabled:NO];
+            self.locationSelectViewController.incident = self.incident;
+            self.locationSelectViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+            self.locationSelectViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [self presentModalViewController:self.locationSelectViewController animated:YES];
+        }
 	}
 	else if (indexPath.section == TableSectionDate){
 		UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
@@ -569,6 +685,24 @@ typedef enum {
 		[self.datePicker showWithDate:self.incident.date mode:datePickerMode indexPath:indexPath forRect:rect];
 		[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
+    else if ((self.customFields != nil) && ([self.customFields count] > 0) && (indexPath.section > TableSectionNews)){
+        
+        if(([[self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]] fieldType] != TextFieldType) &&
+           ([[self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]] fieldType] != TextAreaFieldType)){
+            [self.view setUserInteractionEnabled:NO];
+            if ([Device isIPad]) {
+                self.customFieldTableViewController = [[CustomFieldTableViewController alloc] initWithNibName:@"CustomFieldTableViewController_iPad" bundle:nil];
+            }else {
+                self.customFieldTableViewController = [[CustomFieldTableViewController alloc] initWithNibName:@"CustomFieldTableViewController_iPhone" bundle:nil];
+            }
+            
+            self.customFieldTableViewController.incident = self.incident;
+            self.customFieldTableViewController.customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+            self.customFieldTableViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+            self.customFieldTableViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [self presentModalViewController:self.customFieldTableViewController animated:YES];
+        }
+    }
 }
 
 #pragma mark -
@@ -602,7 +736,16 @@ typedef enum {
 		else {
 			[self setFooter:NSLocalizedString(@"Invalid Video URL", nil) atSection:TableSectionVideos color:[UIColor redColor]];
 		}
-	}
+	}else if ((self.customFields != nil) && ([self.customFields count] > 0)){
+        IncidentCustomField *customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        if(customField.fieldType == TextFieldType){
+            if([text length] > 0){
+                [self.incident addUpdateCustomFieldValue:text forFieldID:customField.fieldID];
+            }else {
+                [self.incident removeCustomField:customField.fieldID];
+            }
+        }
+    }
 }
 
 - (void) textFieldReturned:(TextFieldTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
@@ -631,7 +774,16 @@ typedef enum {
 			[self setFooter:NSLocalizedString(@"Invalid Video URL", nil) atSection:TableSectionVideos color:[UIColor redColor]];
 		}
 		[self.tableView reloadData];
-	}
+	}else if ((self.customFields != nil) && ([self.customFields count] > 0)){
+        IncidentCustomField *customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        if(customField.fieldType == TextFieldType){
+            if([text length] > 0){
+                [self.incident addUpdateCustomFieldValue:text forFieldID:customField.fieldID];
+            }else {
+                [self.incident removeCustomField:customField.fieldID];
+            }
+        }
+    }
 	[cell hideKeyboard];
 }
 
@@ -646,13 +798,31 @@ typedef enum {
 - (void) textViewChanged:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionDescription) {
 		self.incident.description = text;
-	}
+	}else if ((self.customFields != nil) && ([self.customFields count] > 0)){
+        IncidentCustomField *customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        if(customField.fieldType == TextAreaFieldType){
+            if([text length] > 0){
+                [self.incident addUpdateCustomFieldValue:text forFieldID:customField.fieldID];
+            }else {
+                [self.incident removeCustomField:customField.fieldID];
+            }
+        }
+    }
 }
 
 - (void) textViewReturned:(TextViewTableCell *)cell indexPath:(NSIndexPath *)indexPath text:(NSString *)text {
 	if (indexPath.section == TableSectionDescription) {
 		self.incident.description = text;
-	}
+	}else if ((self.customFields != nil) && ([self.customFields count] > 0)){
+        IncidentCustomField *customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        if(customField.fieldType == TextAreaFieldType){
+            if([text length] > 0){
+                [self.incident addUpdateCustomFieldValue:text forFieldID:customField.fieldID];
+            }else {
+                [self.incident removeCustomField:customField.fieldID];
+            }
+        }
+    }
 }
 
 #pragma mark -
@@ -687,12 +857,12 @@ typedef enum {
 		}
 		[self.loadingView hideAfterDelay:1.0];
 		[self.incident addPhoto:[Photo photoWithImage:image]];
-		[self.tableView reloadData];	
+		[self.tableView reloadData];
 	}
 	else {
 		[self.loadingView hide];
 		[self.tableView reloadData];
-		[self.alertView showOkWithTitle:NSLocalizedString(@"Photo Error", nil) 
+		[self.alertView showOkWithTitle:NSLocalizedString(@"Photo Error", nil)
 							 andMessage:NSLocalizedString(@"There was a problem adding the photo.", nil)];
 	}
 }
@@ -715,7 +885,7 @@ typedef enum {
         else if ([NSLocalizedString(@"Remove Photo", nil) isEqualToString:destructiveButtonTitle]) {
             [self.incident removePhotoAtIndex:actionSheet.tag];
         }
-        [self.tableView reloadData];	
+        [self.tableView reloadData];
 	}
 }
 
@@ -729,7 +899,7 @@ typedef enum {
 		self.incident.longitude = userLongitude;
 	}
 	[[Locator sharedLocator] lookupAddressForDelegate:self];
-	[self setFooter:[NSString stringWithFormat:@"%@, %@", userLatitude, userLongitude] 
+	[self setFooter:[NSString stringWithFormat:@"%@, %@", userLatitude, userLongitude]
 		  atSection:TableSectionLocation];
 	if (self.editing == NO) {
 		[self.tableView reloadData];
@@ -764,7 +934,7 @@ typedef enum {
 
 - (void) buttonCellClicked:(ButtonTableCell *)cell {
 	DLog(@"");
-	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Delete Report", nil) 
+	[self.alertView showYesNoWithTitle:NSLocalizedString(@"Delete Report", nil)
 							andMessage:NSLocalizedString(@"Are you sure you want to delete?", nil)
 								forTag:AlertViewDelete];
 }
@@ -778,11 +948,11 @@ typedef enum {
 			self.incident = nil;
 			if (self.editing) {
 				[self.view endEditing:YES];
-				[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:0.3];	
+				[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:0.3];
 			}
 			else {
 				[self dismissModalViewControllerAnimated:YES];
-			}	
+			}
 		}
 		else if (theAlertView.tag == AlertViewDelete){
 			DLog(@"DELETE");
@@ -790,11 +960,11 @@ typedef enum {
 			self.incident = nil;
 			if (self.editing) {
 				[self.view endEditing:YES];
-				[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:0.3];	
+				[self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:0.3];
 			}
 			else {
 				[self dismissModalViewControllerAnimated:YES];
-			}	
+			}
 		}
 	}
     [self.loadingView hide];
@@ -831,5 +1001,25 @@ typedef enum {
 
 - (NSString *)titleForVideo { return self.incident.title; }
 - (NSString *)descriptionForVideo { return  self.incident.description; }
+
+#pragma mark -
+#pragma mark Custom Fields
+
+- (void) initCustomFieldsDictionary{
+    self.customFields = [[NSMutableDictionary alloc] init];
+    self.incident.customFields = [[NSMutableArray alloc]init];
+    NSInteger currentSection = TableSectionNews + 1;
+    
+    NSArray * customFieldsArray = [[Settings sharedSettings] incidentCustomFieldsArray];
+    if((customFieldsArray != nil) && ([customFieldsArray count] > 0)){
+        for(NSDictionary *dictionary in customFieldsArray){
+            IncidentCustomField * customField = [[IncidentCustomField alloc] initWithDictionary:dictionary];
+            [self.customFields setObject:customField forKey:[NSNumber numberWithInteger:currentSection]];
+            [self.incident.customFields addObject:customField];
+            currentSection++;
+        }
+    }
+    
+}
 
 @end

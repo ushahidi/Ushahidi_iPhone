@@ -26,6 +26,18 @@
 @class Video;
 @class Category;
 
+#define customFieldUploadText @"custom_field"
+
+typedef enum {
+    TextFieldType = 1,
+    TextAreaFieldType = 2,
+    DateFieldType = 3,
+    PasswordFieldType = 4,
+    RadioFieldType = 5,
+    CheckBoxFieldType = 6,
+    DropDownFieldType = 7
+} CustomFieldType;
+
 @interface Incident : NSObject<NSCoding> {
 
 @public 
@@ -75,7 +87,8 @@
 @property(nonatomic,retain) NSMutableArray *sounds;
 @property(nonatomic,retain) NSMutableArray *videos;
 @property(nonatomic,retain) NSMutableArray *categories;
-@property(nonatomic,retain) NSMutableArray *customFormEntries;
+@property(nonatomic,retain) NSMutableDictionary *customFormEntries;
+@property(nonatomic,retain) NSMutableArray *customFields;
 
 @property(nonatomic,retain) NSString *errors;
 
@@ -101,6 +114,7 @@
 @property(nonatomic,readonly) BOOL hasDate;
 @property(nonatomic,readonly) BOOL hasPhotos;
 
+
 - (void) addPhoto:(Photo *)photo;
 - (void) addNews:(News *)news;
 - (void) addSound:(Sound *)sound;
@@ -122,5 +136,12 @@
 - (NSComparisonResult)compareByTitle:(Incident *)incident;
 - (NSComparisonResult)compareByDate:(Incident *)incident;
 - (NSComparisonResult)compareByVerified:(Incident *)incident;
+
+- (void)addCustomFieldCheckBoxChoice:(NSString *)value forFieldID:(NSInteger) customFieldId choiceNum:(NSInteger)choiceNum;
+- (void)removeCustomFieldCheckBoxChoice:(NSInteger) customFieldId choiceNum:(NSInteger)choiceNum;
+- (NSString *)getCustomFieldCheckBoxValue:(NSInteger) customFieldId choiceNum:(NSInteger)choiceNum;
+- (void)addUpdateCustomFieldValue:(NSString *)value forFieldID:(NSInteger) customFieldID;
+- (void)removeCustomField:(NSInteger) customFieldID;
+- (NSString *)getCustomFieldValue:(NSInteger) customFieldID;
 
 @end

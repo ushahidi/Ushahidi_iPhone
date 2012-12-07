@@ -28,9 +28,12 @@
 #import "DatePicker.h"
 #import "Locator.h"
 #import "VideoPickerController.h"
+#import "CheckBoxTableCell.h"
+#import "CustomFieldTableViewController.h"
 
 @class CategoryTableViewController;
 @class LocationSelectViewController;
+@class CustomFieldTableViewController;
 @class Incident;
 
 @interface IncidentAddViewController : BaseAddViewController<TextFieldTableCellDelegate, 
@@ -41,6 +44,7 @@
 																UIActionSheetDelegate, 
 																LocatorDelegate,
 																ButtonTableCellDelegate,
+                                                                CheckBoxTableCellDelegate,
 																UshahidiDelegate>  {
 																
 @public
@@ -48,16 +52,19 @@
 	LocationSelectViewController *locationSelectViewController;
 	ImagePickerController *imagePickerController;
     VideoPickerController *videoPickerController;
+    CustomFieldTableViewController *customFieldTableViewController;                                                                
 														
 @private
 	DatePicker *datePicker;
 	NSString *news;
     Incident *incident;
+    NSMutableDictionary *customFields;                                                                
 }
 
 @property(nonatomic, retain) IBOutlet CategoryTableViewController *categoryTableViewController;
 @property(nonatomic, retain) IBOutlet LocationSelectViewController *locationSelectViewController;
 @property(nonatomic, retain) ImagePickerController *imagePickerController;
 @property(nonatomic, retain) VideoPickerController *videoPickerController;
+@property(nonatomic, retain) CustomFieldTableViewController *customFieldTableViewController;
 
 @end

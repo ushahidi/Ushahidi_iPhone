@@ -47,6 +47,7 @@
 #import "Settings.h"
 #import "Ushahidi.h"
 #import "Device.h"
+#import "incidentCustomField.h"
 
 @interface IncidentDetailsViewController ()
 
@@ -58,6 +59,7 @@
 #define kBitlyApiKey	@"BitlyApiKey"
 
 @synthesize incident, incidents;
+@synthesize customFields;
 
 #pragma mark -
 #pragma mark Enums
@@ -205,6 +207,18 @@ typedef enum {
 	if (self.willBePushed) {
 		[self.tableView setContentOffset:CGPointMake(0, 0) animated:NO];
 	}
+    NSMutableDictionary *tmpCustomField = [[NSMutableDictionary alloc]init];
+    NSInteger currentSectionIndex = TableSectionVideo+1;
+    for(IncidentCustomField *custField in self.incident.customFields){
+        [self setHeader:custField.fieldName atSection:currentSectionIndex];
+        [tmpCustomField setObject:custField forKey:[NSNumber numberWithInteger:currentSectionIndex]];
+        currentSectionIndex++;
+    }
+    if(tmpCustomField.count > 0){
+        self.customFields = [[NSDictionary alloc]initWithDictionary:tmpCustomField];
+    }else{
+        self.customFields = nil;
+    }
 	[self.tableView reloadData];	
 	[[Settings sharedSettings] setLastIncident:self.incident.identifier];
 }
@@ -216,6 +230,7 @@ typedef enum {
 - (void)dealloc {
 	[incident release];
 	[incidents release];
+    [customFields release];
 	[super dealloc];
 }
 
@@ -223,7 +238,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 10;
+	return 10+ [self.incident.customFields count];
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
@@ -259,6 +274,13 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)theTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSInteger TableSectionDelete = TableSectionNews + 1;
+    NSArray * customKeySections = [[NSArray alloc] init];
+    if(self.customFields != nil){
+        TableSectionDelete = TableSectionVideo + [self.customFields count] + 1;
+        customKeySections = [self.customFields allKeys];
+    }
 	if (indexPath.section == TableSectionLocation && indexPath.row == 1) {
 		if (self.incident.map != nil) {
 			ImageTableCell *cell = [TableCellFactory getImageTableCellWithImage:nil table:theTableView indexPath:indexPath];
@@ -349,7 +371,19 @@ typedef enum {
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		}
 		return cell;
-	}
+	}else if (([customKeySections count] > 0) && ([customKeySections containsObject:[NSNumber numberWithInteger:indexPath.section]]) && (indexPath.section > TableSectionVideo )){
+        IncidentCustomField *customField = [self.customFields objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
+		cell.accessoryType = UITableViewCellAccessoryNone;
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if((customField.fieldResponse != nil) && (customField.fieldResponse.length > 0)){
+            cell.textLabel.text = customField.fieldResponse;
+        }else{
+            cell.textLabel.text = @"No Information Available";
+        }
+        return cell;
+        
+    }
 	else {
 		TextTableCell *cell = [TableCellFactory getTextTableCellForTable:theTableView indexPath:indexPath];
 		cell.accessoryType = UITableViewCellAccessoryNone;

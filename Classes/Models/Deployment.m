@@ -35,7 +35,7 @@
 @synthesize identifier, name, description, url, domain, version;
 @synthesize categories, locations, incidents, checkins, users;
 @synthesize discovered, synced, added, lastIncidentId, lastCheckinId, pending;
-@synthesize supportsCheckins;
+@synthesize supportsCheckins, incidentCustomFields;
 
 - (id)initWithName:(NSString *)theName url:(NSString *)theUrl {
 	if (self = [super init]){
@@ -222,6 +222,7 @@
 	[added release];
 	[discovered release];
 	[version release];
+    [incidentCustomFields release];
     [super dealloc];
 }
 
@@ -314,6 +315,14 @@
 
 - (NSString *) getUrlForGeoGraphicMidPoint {
 	return [self.url appendUrlStringWithFormat:@"api?task=geographicmidpoint&resp=json"];
+}
+
+- (NSString *) getURlForIncidentCustomFields{
+    return [self.url appendUrlStringWithFormat:@"api?task=customforms&by=fields&id=2&resp=json"];
+}
+
+- (NSString *) getUrlforIncidentByID:(NSString *)ID {
+    return [self.url appendUrlStringWithFormat:@"api?task=incidents&by=incidentid&id=%@&resp=json", ID];
 }
 
 #pragma mark -

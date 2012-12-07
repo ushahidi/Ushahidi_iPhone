@@ -292,7 +292,9 @@
 
 - (BOOL) hasCategory:(Category *)category {
 	for (Category *current in self.categories) {
-		if ([current.identifier isEqualToString:category.identifier]) {
+        NSString *currentIdentifier = [NSString stringWithFormat:@"%@%@",current.identifier,@"."];
+        NSString *categoryIdentifier = [NSString stringWithFormat:@"%@%@",category.identifier,@"."];
+		if ([currentIdentifier isEqualToString:categoryIdentifier]) {
 			return YES;
 		}
 	}

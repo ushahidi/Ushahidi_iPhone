@@ -54,7 +54,7 @@
 		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
 		self.latitude = nil;
 		self.longitude = nil;
-		self.date = [NSDate date];
+		self.date = [self dateWithZeroSeconds:[NSDate date]];
 		self.userLocation = YES;
         self.customFormEntries = [[NSMutableDictionary alloc] initWithCapacity:0];
         self.customFields = [[NSMutableArray alloc] initWithCapacity:0];
@@ -73,7 +73,7 @@
 			self.verified = [dictionary boolForKey:@"incidentverified"];
 			NSString *dateString = [dictionary objectForKey:@"incidentdate"];
 			if (dateString != nil) {
-				self.date = [NSDate dateFromString:dateString];
+				self.date = [self dateWithZeroSeconds:[NSDate dateFromString:dateString]];
 			}
 			self.location = [dictionary stringForKey:@"locationname"];
 			self.latitude = [dictionary stringForKey:@"locationlatitude"];
@@ -181,12 +181,17 @@
 }
 
 - (BOOL) isDuplicate:(Incident *)incident {
-	return	[self.title isEqualToString:incident.title] &&
+	NSString *selfLat = [NSString stringWithFormat:@"%@ %@",self.latitude,@"." ];
+    NSString *selfLon = [NSString stringWithFormat:@"%@ %@",self.longitude,@"." ];
+    NSString *incidentLat = [NSString stringWithFormat:@"%@ %@",incident.latitude,@"." ];
+    NSString *incidentLon = [NSString stringWithFormat:@"%@ %@",incident.longitude,@"." ];
+    
+    return	[self.title isEqualToString:incident.title] &&
 			[self.description isEqualToString:incident.description] &&
 			[self.date isEqualToDate:incident.date] &&
 			[self.location isEqualToString:incident.location] &&
-			(self.latitude ==incident.latitude) &&
-			(self.longitude == incident.longitude);
+			[selfLat isEqualToString:incidentLat] &&
+			[selfLon isEqualToString:incidentLon];
 }
 
 - (NSString *) dateTimeString {
@@ -518,6 +523,12 @@
        return [customFormEntries objectForKey:[NSString stringWithFormat:@"%@[%d]",customFieldUploadText,customFieldID]];
     }
     return nil;
+}
+
+- (NSDate *)dateWithZeroSeconds:(NSDate *)dateTmp
+{
+    NSTimeInterval time = floor([dateTmp timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    return  [NSDate dateWithTimeIntervalSinceReferenceDate:time];
 }
 
 - (void)dealloc {

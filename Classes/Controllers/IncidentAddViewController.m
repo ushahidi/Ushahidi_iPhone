@@ -116,7 +116,7 @@ typedef enum {
     self.incident.description = @".";
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:MM:SS Z"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss z"];
     NSDate *date = [[NSDate alloc]init];
     NSString *formattedDateString = [dateFormatter stringFromDate:date];
     NSLog(@"Incident Title: %@", formattedDateString);
@@ -840,7 +840,7 @@ typedef enum {
 #pragma mark DatePickerDelegate
 
 - (void) datePickerReturned:(DatePicker *)theDatePicker date:(NSDate *)date indexPath:(NSIndexPath *)indexPath {
-	self.incident.date = date;
+	self.incident.date = [self dateWithZeroSeconds:date];
 	[self.tableView reloadData];
 }
 
@@ -1031,6 +1031,12 @@ typedef enum {
         }
     }
     
+}
+
+- (NSDate *)dateWithZeroSeconds:(NSDate *)date
+{
+    NSTimeInterval time = floor([date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    return  [NSDate dateWithTimeIntervalSinceReferenceDate:time];
 }
 
 @end

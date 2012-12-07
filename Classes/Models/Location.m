@@ -68,9 +68,14 @@
 }
 
 - (BOOL) equals:(NSString *)theName latitude:(NSString *)theLatitude longitude:(NSString *)theLongitude {
-	return [self.name isEqualToString:theName] &&
-			(self.latitude == theLatitude) &&
-			(self.longitude == theLongitude);
+	NSString *selfLat = [NSString stringWithFormat:@"%@ %@",self.latitude,@"." ];
+    NSString *selfLon = [NSString stringWithFormat:@"%@ %@",self.longitude,@"." ];
+    NSString *incidentLat = [NSString stringWithFormat:@"%@ %@",theLatitude,@"." ];
+    NSString *incidentLon = [NSString stringWithFormat:@"%@ %@",theLongitude,@"." ];
+    
+    return [self.name isEqualToString:theName] &&
+			[selfLat isEqualToString:incidentLat] &&
+			[selfLon isEqualToString:incidentLon];
 }
 
 - (void)dealloc {

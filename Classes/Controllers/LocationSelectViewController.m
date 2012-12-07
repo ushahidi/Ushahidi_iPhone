@@ -85,10 +85,14 @@
 														   longitude:loc.longitude
 															  object:loc
 															pinColor:MKPinAnnotationColorRed];
-		if (self.incident.userLocation == NO &&
+		NSString *selfLat = [NSString stringWithFormat:@"%@ %@",self.latitude,@"." ];
+        NSString *selfLon = [NSString stringWithFormat:@"%@ %@",self.longitude,@"." ];
+        NSString *incidentLat = [NSString stringWithFormat:@"%@ %@",loc.latitude,@"." ];
+        NSString *incidentLon = [NSString stringWithFormat:@"%@ %@",loc.longitude,@"." ];
+        if (self.incident.userLocation == NO &&
 			[loc.name isEqualToString:self.location] &&
-			(loc.latitude == self.latitude) &&
-			(loc.longitude == self.longitude)) {
+			[selfLat isEqualToString:incidentLat] &&
+			[selfLon isEqualToString:incidentLon]) {
             selected = mapAnnotation;
 		}
 	}
@@ -227,10 +231,14 @@
 		if ([annotation isKindOfClass:[MapAnnotation class]]) {
 			MapAnnotation *mapAnnotation = (MapAnnotation *)annotation;
 			Location *theLocation = (Location *)mapAnnotation.object;
+            NSString *selfLat = [NSString stringWithFormat:@"%@ %@",self.latitude,@"." ];
+            NSString *selfLon = [NSString stringWithFormat:@"%@ %@",self.longitude,@"." ];
+            NSString *incidentLat = [NSString stringWithFormat:@"%@ %@",theLocation.latitude,@"." ];
+            NSString *incidentLon = [NSString stringWithFormat:@"%@ %@",theLocation.longitude,@"." ];
 			if (theLocation != nil &&
 				[theLocation.name isEqualToString:self.location] &&
-				(theLocation.latitude == self.latitude) &&
-				(theLocation.longitude == self.longitude)) {
+				[selfLat isEqualToString:incidentLat] &&
+				[selfLon isEqualToString:incidentLon]) {
 				[self.mapView selectAnnotation:annotation animated:NO];
 				break;
 			}

@@ -41,4 +41,29 @@
 	}
 	return self;
 }
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:[NSNumber numberWithInt:self.fieldID] forKey:@"fieldID"];
+    [encoder encodeObject:[NSNumber numberWithInt:self.fieldType] forKey:@"fieldType"];
+    [encoder encodeObject:self.fieldName forKey:@"fieldName"];
+    [encoder encodeObject:self.defaultValues forKey:@"defaultValues"];
+    [encoder encodeObject:self.fieldResponse forKey:@"fieldResponse"];
+    [encoder encodeBool:self.isRequired forKey:@"isRequired"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if(self = [super init])
+    {
+        self.fieldID = [[aDecoder decodeObjectForKey:@"fieldID"] intValue];
+        self.fieldType = [[aDecoder decodeObjectForKey:@"fieldType"] intValue];
+        self.fieldName = [aDecoder decodeObjectForKey:@"fieldName"];
+        self.defaultValues = [aDecoder decodeObjectForKey:@"defaultValues"];
+        self.fieldResponse = [aDecoder decodeObjectForKey:@"fieldResponse"];
+        self.isRequired = [aDecoder decodeBoolForKey:@"isRequired"];
+        
+    }
+return self;
+}
 @end

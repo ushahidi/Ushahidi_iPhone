@@ -54,7 +54,7 @@
 		self.categories = [[NSMutableArray alloc] initWithCapacity:0];
 		self.latitude = nil;
 		self.longitude = nil;
-		self.date = [NSDate date];
+		self.date = [self dateWithZeroSeconds:[NSDate date]];
 		self.userLocation = YES;
         self.customFormEntries = [[NSMutableDictionary alloc] initWithCapacity:0];
         self.customFields = [[NSMutableArray alloc] initWithCapacity:0];
@@ -73,7 +73,7 @@
 			self.verified = [dictionary boolForKey:@"incidentverified"];
 			NSString *dateString = [dictionary objectForKey:@"incidentdate"];
 			if (dateString != nil) {
-				self.date = [NSDate dateFromString:dateString];
+				self.date = [self dateWithZeroSeconds:[NSDate dateFromString:dateString]];
 			}
 			self.location = [dictionary stringForKey:@"locationname"];
 			self.latitude = [dictionary stringForKey:@"locationlatitude"];
@@ -106,6 +106,18 @@
 	else {
 		[encoder encodeObject:nil forKey:@"map"];
 	}
+    if(self.customFormEntries != nil){
+        [encoder encodeObject:self.customFormEntries forKey:@"customFormEntries"];
+    }else{
+        [encoder encodeObject:nil forKey:@"customFormEntries"];
+    }
+    
+    if(self.customFormEntries != nil){
+       [encoder encodeObject:self.customFields forKey:@"customFields"];
+    }else{
+        [encoder encodeObject:nil forKey:@"customFields"];
+    }
+    
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -139,6 +151,12 @@
 		
 		self.categories = [decoder decodeObjectForKey:@"categories"];
 		if (self.categories == nil) self.categories = [NSMutableArray array];
+        
+        self.customFormEntries = [decoder decodeObjectForKey:@"customFormEntries"];
+        if (self.customFormEntries == nil) self.customFormEntries = [NSMutableDictionary dictionary];
+        
+        self.customFields = [decoder decodeObjectForKey:@"customFields"];
+        if (self.customFields == nil) self.customFields = [NSMutableArray array];
 	}
 	return self;
 }
@@ -163,12 +181,17 @@
 }
 
 - (BOOL) isDuplicate:(Incident *)incident {
-	return	[self.title isEqualToString:incident.title] &&
+	NSString *selfLat = [NSString stringWithFormat:@"%@ %@",self.latitude,@"." ];
+    NSString *selfLon = [NSString stringWithFormat:@"%@ %@",self.longitude,@"." ];
+    NSString *incidentLat = [NSString stringWithFormat:@"%@ %@",incident.latitude,@"." ];
+    NSString *incidentLon = [NSString stringWithFormat:@"%@ %@",incident.longitude,@"." ];
+    
+    return	[self.title isEqualToString:incident.title] &&
 			[self.description isEqualToString:incident.description] &&
 			[self.date isEqualToDate:incident.date] &&
 			[self.location isEqualToString:incident.location] &&
-			[self.latitude isEqualToString:incident.latitude] && 
-			[self.longitude isEqualToString:incident.longitude];
+			[selfLat isEqualToString:incidentLat] &&
+			[selfLon isEqualToString:incidentLon];
 }
 
 - (NSString *) dateTimeString {
@@ -269,7 +292,9 @@
 
 - (BOOL) hasCategory:(Category *)category {
 	for (Category *current in self.categories) {
-		if ([current.identifier isEqualToString:category.identifier]) {
+        NSString *currentIdentifier = [NSString stringWithFormat:@"%@%@",current.identifier,@"."];
+        NSString *categoryIdentifier = [NSString stringWithFormat:@"%@%@",category.identifier,@"."];
+		if ([currentIdentifier isEqualToString:categoryIdentifier]) {
 			return YES;
 		}
 	}
@@ -500,6 +525,12 @@
        return [customFormEntries objectForKey:[NSString stringWithFormat:@"%@[%d]",customFieldUploadText,customFieldID]];
     }
     return nil;
+}
+
+- (NSDate *)dateWithZeroSeconds:(NSDate *)dateTmp
+{
+    NSTimeInterval time = floor([dateTmp timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    return  [NSDate dateWithTimeIntervalSinceReferenceDate:time];
 }
 
 - (void)dealloc {

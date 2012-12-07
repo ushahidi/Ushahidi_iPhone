@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IncidentCustomField : NSObject{
+@interface IncidentCustomField : NSObject<NSCoding>{
     
 
 @public

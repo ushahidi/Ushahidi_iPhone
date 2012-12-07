@@ -118,57 +118,71 @@ typedef enum {
 
 - (IBAction) sendSMS:(id)sender {
 	DLog(@"");
-	NSMutableString *message = [NSMutableString string];
-	if ([self.incident hasURL]) {
-		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
-		[message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
-	}
-	else {
-		[message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
-	}
-	[self.sms sendToRecipients:nil 
+	if ([MFMessageComposeViewController canSendText]){
+        NSMutableString *message = [NSMutableString string];
+        if ([self.incident hasURL]) {
+            NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
+            [message appendFormat:@"%@, %@ %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title, [link absoluteString]];
+        }
+        else {
+            [message appendFormat:@"%@, %@", [[Ushahidi sharedUshahidi] deploymentName], self.incident.title];
+        }
+        [self.sms sendToRecipients:nil
 				   withMessage:message];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"This device is not configured to send SMS" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }
 }
 
 - (IBAction) sendEmail:(id)sender {
 	DLog(@"");
-	NSMutableString *message = [NSMutableString string];
-	if ([self.incident hasURL]) {
-		NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
-		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", nil), [link absoluteString], self.incident.title];
-	}
-	else {
-		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];
-	}
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", nil), self.incident.dateTimeString];
-	if ([NSString isNilOrEmpty:self.incident.latitude] == NO && [NSString isNilOrEmpty:self.incident.longitude] == NO) {
-		DLog(@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location);
-		NSString *locationURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location];
-		[message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Location", nil), locationURL, self.incident.location];
-	}
-	else {
-		[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", nil), self.incident.location];
-	}
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", nil), self.incident.categoryNames];
-	[message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", nil), self.incident.description];
-	if (self.incident.news != nil && [self.incident.news count] > 0) {
-		[message appendFormat:@"<b>%@</b>:<ul>", NSLocalizedString(@"News", nil)];
-		for (News *news in self.incident.news) {
-			[message appendFormat:@"<li><a href=\"%@\">%@</a></li>", news.url, news.url];
-		}
-		[message appendFormat:@"</ul>"];
-	}
-	NSMutableArray *photos = [NSMutableArray array];
-	if (self.incident.map != nil) {
-		[photos addObject:self.incident.map];
-	}
-	if ([self.incident.photos count] > 0) {
-		[photos addObjectsFromArray:self.incident.photoImages];
-	}
-	[self.email sendToRecipients:nil 
+    if ([MFMailComposeViewController canSendMail]){
+        NSMutableString *message = [NSMutableString string];
+        if ([self.incident hasURL]) {
+            NSURL *link = [[Ushahidi sharedUshahidi] getUrlForIncident:self.incident];
+            [message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Title", nil), [link absoluteString], self.incident.title];
+        }
+        else {
+            [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Title", nil), self.incident.title];
+        }
+        [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Date", nil), self.incident.dateTimeString];
+        if ([NSString isNilOrEmpty:self.incident.latitude] == NO && [NSString isNilOrEmpty:self.incident.longitude] == NO) {
+            DLog(@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location);
+            NSString *locationURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@(%@)", self.incident.latitude, self.incident.longitude, self.incident.location];
+            [message appendFormat:@"<b>%@</b>: <a href=\"%@\">%@</a><br/>", NSLocalizedString(@"Location", nil), locationURL, self.incident.location];
+        }
+        else {
+            [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Location", nil), self.incident.location];
+        }
+        [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Category", nil), self.incident.categoryNames];
+        [message appendFormat:@"<b>%@</b>: %@<br/>", NSLocalizedString(@"Description", nil), self.incident.description];
+        if (self.incident.news != nil && [self.incident.news count] > 0) {
+            [message appendFormat:@"<b>%@</b>:<ul>", NSLocalizedString(@"News", nil)];
+            for (News *news in self.incident.news) {
+                [message appendFormat:@"<li><a href=\"%@\">%@</a></li>", news.url, news.url];
+            }
+            [message appendFormat:@"</ul>"];
+        }
+        NSMutableArray *photos = [NSMutableArray array];
+        if (self.incident.map != nil) {
+            [photos addObject:self.incident.map];
+        }
+        if ([self.incident.photos count] > 0) {
+            [photos addObjectsFromArray:self.incident.photoImages];
+        }
+        [self.email sendToRecipients:nil 
 					 withMessage:message 
 					 withSubject:self.incident.title 
 					  withPhotos:photos];
+    }
+    else {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"This device is not configured to send an email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }
 }
 
 #pragma mark -

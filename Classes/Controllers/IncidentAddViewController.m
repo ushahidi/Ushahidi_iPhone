@@ -113,7 +113,18 @@ typedef enum {
 
 - (IBAction) done:(id)sender {
 	DLog(@"done");
-	NSMutableArray *missingFields = [NSMutableArray array];
+    self.incident.description = @".";
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss z"];
+    NSDate *date = [[NSDate alloc]init];
+    NSString *formattedDateString = [dateFormatter stringFromDate:date];
+    NSLog(@"Incident Title: %@", formattedDateString);
+    self.incident.title = formattedDateString;
+
+	
+    NSMutableArray *missingFields = [NSMutableArray array];
+
 	if (self.incident.hasTitle == NO) {
 		[missingFields addObject:NSLocalizedString(@"Title", nil)];
 	}
@@ -281,9 +292,9 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
     if(self.customFields != nil){
-        return [self.customFields count] + 9;
+        return [self.customFields count] + 7;
     }else {
-        return 8;
+        return 7;
     }
 }
 
@@ -829,7 +840,7 @@ typedef enum {
 #pragma mark DatePickerDelegate
 
 - (void) datePickerReturned:(DatePicker *)theDatePicker date:(NSDate *)date indexPath:(NSIndexPath *)indexPath {
-	self.incident.date = date;
+	self.incident.date = [self dateWithZeroSeconds:date];
 	[self.tableView reloadData];
 }
 
@@ -1020,6 +1031,12 @@ typedef enum {
         }
     }
     
+}
+
+- (NSDate *)dateWithZeroSeconds:(NSDate *)date
+{
+    NSTimeInterval time = floor([date timeIntervalSinceReferenceDate] / 60.0) * 60.0;
+    return  [NSDate dateWithTimeIntervalSinceReferenceDate:time];
 }
 
 @end

@@ -167,8 +167,8 @@
 			[self.description isEqualToString:incident.description] &&
 			[self.date isEqualToDate:incident.date] &&
 			[self.location isEqualToString:incident.location] &&
-			[self.latitude isEqualToString:incident.latitude] && 
-			[self.longitude isEqualToString:incident.longitude];
+			(self.latitude ==incident.latitude) &&
+			(self.longitude == incident.longitude);
 }
 
 - (NSString *) dateTimeString {

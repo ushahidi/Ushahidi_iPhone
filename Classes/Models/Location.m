@@ -69,8 +69,8 @@
 
 - (BOOL) equals:(NSString *)theName latitude:(NSString *)theLatitude longitude:(NSString *)theLongitude {
 	return [self.name isEqualToString:theName] &&
-			[self.latitude isEqualToString:theLatitude] &&
-			[self.longitude isEqualToString:theLongitude];
+			(self.latitude == theLatitude) &&
+			(self.longitude == theLongitude);
 }
 
 - (void)dealloc {

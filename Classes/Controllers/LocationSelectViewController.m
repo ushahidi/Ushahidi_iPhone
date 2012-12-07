@@ -87,8 +87,8 @@
 															pinColor:MKPinAnnotationColorRed];
 		if (self.incident.userLocation == NO &&
 			[loc.name isEqualToString:self.location] &&
-			[loc.latitude isEqualToString:self.latitude] &&
-			[loc.longitude isEqualToString:self.longitude]) {
+			(loc.latitude == self.latitude) &&
+			(loc.longitude == self.longitude)) {
             selected = mapAnnotation;
 		}
 	}
@@ -229,8 +229,8 @@
 			Location *theLocation = (Location *)mapAnnotation.object;
 			if (theLocation != nil &&
 				[theLocation.name isEqualToString:self.location] &&
-				[theLocation.latitude isEqualToString:self.latitude] &&
-				[theLocation.longitude isEqualToString:self.longitude]) {
+				(theLocation.latitude == self.latitude) &&
+				(theLocation.longitude == self.longitude)) {
 				[self.mapView selectAnnotation:annotation animated:NO];
 				break;
 			}

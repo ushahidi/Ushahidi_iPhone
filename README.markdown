@@ -52,8 +52,8 @@ The old Ushahidi iOS 2.X code repository can be found at [Ushahidi iOS 2.X](http
 * USHTableSelectColor: background color of selected rows
 
 ##### Report Settings #####
-* USHShowReportList: boolean flag whether to show the list/map of reports (disabling will prevent the downloading and viewing of reports)
-* USHShowReportButton: boolean flag whether to show the new report button (disabling will prevent user from submitting new reports)
+* USHShowReportList: boolean flag whether to show the list/map of reports (disabling will prevent the downloading of reports)
+* USHShowReportButton: boolean flag whether to show the new report button (disabling will prevent submitting new reports)
 * USHSortReportsByDate: sort the report list by the report date
 
 ##### Optional URLs #####

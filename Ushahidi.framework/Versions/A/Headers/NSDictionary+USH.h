@@ -1,0 +1,34 @@
+/*****************************************************************************
+ ** Copyright (c) 2012 Ushahidi Inc
+ ** All rights reserved
+ ** Contact: team@ushahidi.com
+ ** Website: http://www.ushahidi.com
+ **
+ ** GNU Lesser General Public License Usage
+ ** This file may be used under the terms of the GNU Lesser
+ ** General Public License version 3 as published by the Free Software
+ ** Foundation and appearing in the file LICENSE.LGPL included in the
+ ** packaging of this file. Please review the following information to
+ ** ensure the GNU Lesser General Public License version 3 requirements
+ ** will be met: http://www.gnu.org/licenses/lgpl.html.
+ **
+ **
+ ** If you have questions regarding the use of this file, please contact
+ ** Ushahidi developers at team@ushahidi.com.
+ **
+ *****************************************************************************/
+
+#import <Foundation/Foundation.h>
+
+@interface NSDictionary (USH)
+
+- (NSString *) stringForKey:(NSString *)key;
+- (NSNumber*) numberForKey:(NSString *)key;
+- (NSInteger) intForKey:(NSString *)key;
+- (BOOL) boolForKey:(NSString *)key;
+- (NSDate *) dateForKey:(NSString *)key;
+- (UIColor *) colorForKey:(NSString *)key;
+- (float) floatForKey:(NSString *)key;
+- (double) doubleForKey:(NSString *)key;
+
+@end

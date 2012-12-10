@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSManagedObjectModel_CurrentVersionName</key>
+	<string>Ushahidi</string>
+	<key>NSManagedObjectModel_VersionHashes</key>
+	<dict>
+		<key>Ushahidi</key>
+		<dict>
+			<key>Category</key>
+			<data>
+			k1vKhZO08b3XezcFhqwjeHKPucSVWf/Fg2CLATUW6LY=
+			</data>
+			<key>Checkin</key>
+			<data>
+			SHW9+TA6zR8UUdEUCA7A2cblz5vlJ0JvrQndKK3nvX0=
+			</data>
+			<key>Comment</key>
+			<data>
+			1uToFoBgedptxL0tv0MREh3NIDxIFDuRegl7yw0+cig=
+			</data>
+			<key>Location</key>
+			<data>
+			o1iwkzNU91qU/8Iu+BkM7u7pQP+qd8HWQ9KIu3sUg5o=
+			</data>
+			<key>Map</key>
+			<data>
+			orI6yRo/j5+7XFG5EB8V6OtGTD3uhWnDgXf87/j0ifU=
+			</data>
+			<key>News</key>
+			<data>
+			O/izsFuEezKovFJ6tLFN92Rr6ojsB3XbX+573CZ/Gz8=
+			</data>
+			<key>Photo</key>
+			<data>
+			6d20Lrl1j42Bc2Ev2D5fb61L5kG/1jW6IiYMdHC/9XA=
+			</data>
+			<key>Report</key>
+			<data>
+			OJpdWASukMp3zbWHys7nsAVkEKH4htSZsw65re0AVUs=
+			</data>
+			<key>Sound</key>
+			<data>
+			NNRRQTg7SWkxyulRGVjpg68+r37KMApz0YTGvIwsEEM=
+			</data>
+			<key>User</key>
+			<data>
+			ZRpSWNjfqemXEy48F5V81Nj4vW5yH8TctuhAT3QQ9QM=
+			</data>
+			<key>Video</key>
+			<data>
+			N4oG5R2qrmqeWM8gJO16zCWj+jaxd8Hb+azps+9fDxc=
+			</data>
+		</dict>
+	</dict>
+</dict>
+</plist>

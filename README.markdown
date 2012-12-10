@@ -4,14 +4,18 @@ Ushahidi is an open source platform for democratizing information, increasing tr
 
 The iPhone and iPad app synchronizes with any Ushahidi deployment allowing viewing and creation of incident reports on the go. 
 
-The app supports loading of multiple deployments at one time, quick filtering through incident reports, exploring incident locations on the map, viewing incident photos, news article, media as well as sharing incident reports via email, SMS or Twitter. Once the data has been downloaded, the app can function without an internet connection, allowing accurate collection of data utilizing the device's camera and GPS capabilities.
+The app supports loading of multiple deployments at one time, quick filtering through incident reports, exploring incident locations on the map, viewing incident photos, videos, news article, media as well as sharing incident reports via email, SMS, Twitter, Facebook or QRCode. 
 
-For more information visit:
+Once the data has been downloaded, the app can function without an internet connection, allowing accurate collection of data utilizing the device's camera and GPS capabilities.
 
-* [About Ushahidi](http://www.ushahidi.com)
-* [Issue Tracker](https://github.com/ushahidi/ushahidi_iphone/issues)
-* [API Documentation](http://wiki.ushahidi.com/display/WIKI/Public+API)
-* [Code Repository](http://github.com/ushahidi/Ushahidi_iPhone)
+* [About](http://www.ushahidi.com)
+* [Repository](http://github.com/ushahidi/Ushahidi_iPhone)
+* [Issues](https://github.com/ushahidi/ushahidi_iphone/issues)
+* [Documentation](http://wiki.ushahidi.com/display/WIKI/Public+API)
+* [Translations](https://www.transifex.com/projects/p/ushahidi-ios/)
+
+### Old Repository ###
+The old Ushahidi iOS 2.X code repository can be found at [Ushahidi iOS 2.X](https://github.com/ushahidi/Ushahidi_iPhone/Old)
 
 ### How To White-Label The App ###
 * Duplicate the Ushahidi target with the name of your map (ex MapATL)
@@ -21,55 +25,54 @@ For more information visit:
 * In XCode, on your new theme folder (ex /Themes/MapATL) Right-Click > Get Info > Targets tab, uncheck Ushahidi and check your new target (ex MapATL)
 * You can now customize your app by editing the following properties in Info.plist in your new Themes folder
 
-##### Name and identifier of your map #####
+##### Name and Identifier #####
 * CFBundleIdentifier: unique identifier of your app (ex com.ushahidi.ios.mapatl)
 * CFBundleName: title of your application (ex MapATL)
 * CFBundleDisplayName: name of your application (ex MapATL)
 
-##### URL of your custom or Crowdmap deployment #####
+##### Custom Map URL #####
 * USHMapURL: URL for your map (ex http://crime.mapatl.com)
+* USHMapURLS: leaving the USHMapURL blank, you can optionally define multiple maps in the USHMapURLS dictionary
 
-##### Email and website for your map #####
+##### Support Email and URL #####
 * USHSupportEmail: support email for your deployment (ex crime@mapatl.com)
 * USHSupportURL: website for your deployment (ex http://crime.mapatl.com)
 * USHAppStoreURL: link on App Store to download your application (ex http://itunes.apple.com/app/ushahidi-ios/id410609585)
 
-##### HEX color codes to match your map styling #####
-* USHNavBarColor: code for navigation bar 
-* USHSearchBarColor: code for searchbars 
-* USHToolBarColor: code for toolbars
-* USHTablePlainColor: background color for plain tables
-* USHTableGroupedColor: background color for grouped tables
-* USHTableEvenRowColor: color of even rows in tables
-* USHTableOddRowColor: color of odd rows in tables
-* USHTableHeaderColor: background color of header sections
-* USHTableHeaderTextColor: font color of header text
-* USHTableSelectedRowColor: background of selected rows
-* USHVerifiedTextColor: text color for verified label
-* USHUnverifiedTextColor: text color for unverified label
-* USHDoneButtonColor: color of the done button
+##### Color Codes #####
+* USHNavBarColor: color for navigation bar 
+* USHTabBarColor: color for tab bar 
+* USHToolBarColor: color for tool bar 
+* USHSearchBarColor: color for search bar
+* USHButtonDoneColor: color for done bar
+* USHRefreshControlColor: color for refresh control
+* USHTableBackColor: background color for tables
+* USHTableRowColor: text color for header
+* USHTableHeaderColor: text color for header
+* USHTableSelectColor: background color of selected rows
 
-##### Visibility of elements #####
-* USHReportNewsURL: should news link be should in reports?
-* USHReportVideosURL: should videos link be should in reports?
+##### Report Settings #####
+* USHShowReportList: boolean flag whether to show the list/map of reports (disabling will prevent the downloading and viewing of reports)
+* USHShowReportButton: boolean flag whether to show the new report button (disabling will prevent user from submitting new reports)
+* USHSortReportsByDate: sort the report list by the report date
 
-##### Bit.ly #####
-Optionally you can edit the Bit.ly API information, sign Up for a [Bitly Account](http://bitly.com/a/sign_up), then visit [Your bitly API Key](http://bitly.com/a/your_api_key)
+##### Optional URLs #####
+Optionally you can define Privacy Policy and/or Terms Of Service URLs which require the user to visit before proceeding with the application.
 
-* USHBitlyApiKey: your Bit.ly API key 
-* USHBitlyApiLogin: your Bit.ly API login 
+* USHPrivacyPolicyURL: optional URL for privacy policy
+* USHTermsOfServiceURL: optional URL for terms of service
 
-##### Twitter #####
-Optionally you can edit the Twitter API information, sign Up for a [Twitter Dev Account](https://dev.twitter.com/apps/new), entering your application name, description, website, organization, etc then visit [Using Twitter xAuth](https://dev.twitter.com/pages/xauth) for information on obtaining xAuth which is not enabled by default. Note, you'll need to email api@twitter.com explaining that your mobile application requires xAuth to skip the request_token and authorize steps and jump right to the access_token step.
+##### Facebook App ID #####
+Facebook will require you to register a new app at [Facebook Developers](https://developers.facebook.com/apps)
 
-* USHTwitterApiKey: your Twitter API key
-* USHTwitterApiSecret: your Twitter API secret
+* FacebookAppID: identifier for your Facebook app
+* CFBundleURLTypes: callback URL, update the CFBundleURLName value to fbXXXXXXXXXXXXXXX with your Facebook app id
 
-##### YouTube #####
-Optionally you can edit the YouTube API information, sign Up for a [YouTube Developer Account](https://code.google.com/apis/youtube/dashboard/gwt/index.html).
+##### YouTube Credentials #####
+If you would like to publish videos under your own YouTube channel, you'll need to sign up for a [YouTube Developer Account](https://code.google.com/apis/youtube/dashboard/gwt/index.html).
 
-* USHYoutubeUsername: your Youtube login
-* USHYoutubePassword: your Youtube password
-* USHYoutubeDeveloperKey: your Youtube Developer Key
+* USHYoutubeUsername: Youtube login
+* USHYoutubePassword: Youtube password
+* USHYoutubeDeveloperKey: Youtube Developer Key
 
 You should now be able to deploy your white-labelled version of the app to the Simulator for testing, enjoy!!

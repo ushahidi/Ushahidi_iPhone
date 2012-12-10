@@ -1,0 +1,2672 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
+	<data>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C2034</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+			<string key="NS.object.0">1930</string>
+		</object>
+		<array key="IBDocument.IntegratedClassDependencies">
+			<string>IBProxyObject</string>
+			<string>IBUIBarButtonItem</string>
+			<string>IBUIButton</string>
+			<string>IBUICustomObject</string>
+			<string>IBUINavigationItem</string>
+			<string>IBUISegmentedControl</string>
+			<string>IBUITabBar</string>
+			<string>IBUITabBarController</string>
+			<string>IBUITabBarItem</string>
+			<string>IBUIViewController</string>
+			<string>IBUIWindow</string>
+		</array>
+		<array key="IBDocument.PluginDependencies">
+			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+		</array>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
+		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
+			<object class="IBProxyObject" id="841351856">
+				<string key="IBProxiedObjectIdentifier">IBFilesOwner</string>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+			</object>
+			<object class="IBProxyObject" id="450319686">
+				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+			</object>
+			<object class="IBUICustomObject" id="987256611">
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+			</object>
+			<object class="IBUIWindow" id="380026005">
+				<nil key="NSNextResponder"/>
+				<int key="NSvFlags">1316</int>
+				<object class="NSPSMatrix" key="NSFrameMatrix"/>
+				<string key="NSFrameSize">{320, 480}</string>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MAA</bytes>
+				</object>
+				<bool key="IBUIOpaque">NO</bool>
+				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIResizesToFullScreen">YES</bool>
+			</object>
+			<object class="IBUIViewController" id="138739123">
+				<string key="IBUITitle">Categories</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="935542508">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Categories</string>
+					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="86048007">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<object class="IBUIButton" key="IBUICustomView" id="81630894">
+							<reference key="NSNextResponder"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{5, 12}, {18, 19}}</string>
+							<reference key="NSSuperview"/>
+							<reference key="NSNextKeyView"/>
+							<string key="NSReuseIdentifierKey">_NS:9</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBUIContentHorizontalAlignment">0</int>
+							<int key="IBUIContentVerticalAlignment">0</int>
+							<int key="IBUIButtonType">3</int>
+							<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
+							<object class="NSColor" key="IBUIHighlightedTitleColor" id="246394261">
+								<int key="NSColorSpace">3</int>
+								<bytes key="NSWhite">MQA</bytes>
+							</object>
+							<object class="NSColor" key="IBUINormalTitleColor">
+								<int key="NSColorSpace">1</int>
+								<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+							</object>
+							<object class="NSColor" key="IBUINormalTitleShadowColor" id="66464802">
+								<int key="NSColorSpace">3</int>
+								<bytes key="NSWhite">MC41AA</bytes>
+							</object>
+							<object class="IBUIFontDescription" key="IBUIFontDescription" id="486025311">
+								<int key="type">2</int>
+								<double key="pointSize">15</double>
+							</object>
+							<object class="NSFont" key="IBUIFont" id="435082784">
+								<string key="NSName">Helvetica-Bold</string>
+								<double key="NSSize">15</double>
+								<int key="NSfFlags">16</int>
+							</object>
+						</object>
+						<reference key="IBUINavigationItem" ref="935542508"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHFilterViewController_iPhone</string>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics" id="66090442">
+					<int key="IBUIBarStyle">1</int>
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics" id="835650216">
+					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
+					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<array key="dict.sortedKeys">
+							<integer value="1"/>
+							<integer value="3"/>
+						</array>
+						<array key="dict.values">
+							<string>{320, 568}</string>
+							<string>{568, 320}</string>
+						</array>
+					</object>
+					<string key="IBUITargetRuntime">IBCocoaTouchFramework</string>
+					<string key="IBUIDisplayName">Retina 4 Full Screen</string>
+					<int key="IBUIType">2</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="181739885">
+				<string key="IBUITitle">Checkins</string>
+				<object class="IBUITabBarItem" key="IBUITabBarItem" id="197986689">
+					<string key="IBUITitle">Checkins</string>
+					<object class="NSCustomResource" key="IBUIImage">
+						<string key="NSClassName">NSImage</string>
+						<string key="NSResourceName">checkin.png</string>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHCheckinTableViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="66090442"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<reference key="IBUISimulatedDestinationMetrics" ref="835650216"/>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="421437689">
+				<string key="IBUITitle">Maps</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="698174651">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Maps</string>
+					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="726494083">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<object class="IBUIButton" key="IBUICustomView" id="131077815">
+							<reference key="NSNextResponder"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{5, 12}, {18, 19}}</string>
+							<reference key="NSSuperview"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="962915525"/>
+							<string key="NSReuseIdentifierKey">_NS:9</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBUIContentHorizontalAlignment">0</int>
+							<int key="IBUIContentVerticalAlignment">0</int>
+							<int key="IBUIButtonType">3</int>
+							<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
+							<reference key="IBUIHighlightedTitleColor" ref="246394261"/>
+							<object class="NSColor" key="IBUINormalTitleColor">
+								<int key="NSColorSpace">1</int>
+								<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+							</object>
+							<reference key="IBUINormalTitleShadowColor" ref="66464802"/>
+							<reference key="IBUIFontDescription" ref="486025311"/>
+							<reference key="IBUIFont" ref="435082784"/>
+						</object>
+						<reference key="IBUINavigationItem" ref="698174651"/>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="150110803">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<object class="IBUIButton" key="IBUICustomView" id="962915525">
+							<reference key="NSNextResponder"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{291, 10}, {24, 24}}</string>
+							<reference key="NSSuperview"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
+							<string key="NSReuseIdentifierKey">_NS:9</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBUIContentHorizontalAlignment">0</int>
+							<int key="IBUIContentVerticalAlignment">0</int>
+							<reference key="IBUIHighlightedTitleColor" ref="246394261"/>
+							<object class="NSColor" key="IBUINormalTitleColor">
+								<int key="NSColorSpace">1</int>
+								<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+							</object>
+							<reference key="IBUINormalTitleShadowColor" ref="66464802"/>
+							<object class="NSCustomResource" key="IBUINormalImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">refresh.png</string>
+							</object>
+							<reference key="IBUIFontDescription" ref="486025311"/>
+							<reference key="IBUIFont" ref="435082784"/>
+						</object>
+						<reference key="IBUINavigationItem" ref="698174651"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHMapTableViewController_iPhone</string>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
+					<int key="IBUIBarStyle">1</int>
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="945241745">
+				<string key="IBUITitle">Settings</string>
+				<object class="IBUITabBarItem" key="IBUITabBarItem" id="841133944">
+					<string key="IBUITitle">Settings</string>
+					<object class="NSCustomResource" key="IBUIImage">
+						<string key="NSClassName">NSImage</string>
+						<string key="NSResourceName">settings.png</string>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="371741755">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Settings</string>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="81307147">
+						<string key="IBUITitle">Done</string>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">2</int>
+						<reference key="IBUINavigationItem" ref="371741755"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHSettingsViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="66090442"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="88231475">
+				<string key="IBUITitle">Add Location</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="114460129">
+					<string key="IBUITitle">Find Location</string>
+					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="658736526">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<reference key="IBUINavigationItem" ref="114460129"/>
+						<int key="IBUISystemItemIdentifier">1</int>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="511145840">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">2</int>
+						<reference key="IBUINavigationItem" ref="114460129"/>
+						<int key="IBUISystemItemIdentifier">0</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHLocationAddViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="66090442"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<reference key="IBUISimulatedDestinationMetrics" ref="835650216"/>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="343638138">
+				<string key="IBUITitle">Add Map</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="10259507">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Add Map</string>
+					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="210966277">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<reference key="IBUINavigationItem" ref="10259507"/>
+						<int key="IBUISystemItemIdentifier">1</int>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="223654742">
+						<string key="IBUITitle">100KM</string>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">2</int>
+						<reference key="IBUINavigationItem" ref="10259507"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHMapAddViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="66090442"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<reference key="IBUISimulatedDestinationMetrics" ref="835650216"/>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="236546239">
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="462290539">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">1/1</string>
+					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="685768576">
+						<string key="IBUITitle">Back</string>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="760604165">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<object class="IBUISegmentedControl" key="IBUICustomView" id="103246240">
+							<reference key="NSNextResponder"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
+							<reference key="NSSuperview"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
+							<string key="NSReuseIdentifierKey">_NS:9</string>
+							<bool key="IBUIOpaque">NO</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBSegmentControlStyle">2</int>
+							<int key="IBNumberOfSegments">2</int>
+							<int key="IBSelectedSegmentIndex">0</int>
+							<array key="IBSegmentTitles">
+								<string/>
+								<string/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentWidths">
+								<real value="0.0"/>
+								<real value="0.0"/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentEnabledStates">
+								<boolean value="YES"/>
+								<boolean value="YES"/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentContentOffsets">
+								<string>{0, 0}</string>
+								<string>{0, 0}</string>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentImages">
+								<object class="NSCustomResource" id="101835595">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">up.png</string>
+								</object>
+								<object class="NSCustomResource" id="801703528">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">down.png</string>
+								</object>
+							</array>
+							<bool key="IBMomentary">YES</bool>
+						</object>
+						<reference key="IBUINavigationItem" ref="462290539"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHCheckinDetailsViewController_iPhone</string>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
+					<int key="IBUIBarStyle">1</int>
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<reference key="IBUISimulatedDestinationMetrics" ref="835650216"/>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="538798642">
+				<string key="IBUITitle">Add Comment</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="600019987">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Add Comment</string>
+					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="108595792">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<reference key="IBUINavigationItem" ref="600019987"/>
+						<int key="IBUISystemItemIdentifier">1</int>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="337982487">
+						<string key="IBUITitle">Add</string>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">2</int>
+						<reference key="IBUINavigationItem" ref="600019987"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHCommentAddViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="66090442"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="48024598">
+				<string key="IBUITitle">Categories</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="481103274">
+					<string key="IBUITitle">Categories</string>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="157565300">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<reference key="IBUINavigationItem" ref="481103274"/>
+						<int key="IBUISystemItemIdentifier">0</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHCategoryTableViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="66090442"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="61489547">
+				<string key="IBUITitle">Add Report</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="127679918">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Add Report</string>
+					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="476181804">
+						<string key="IBUITitle">Cancel</string>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<reference key="IBUINavigationItem" ref="127679918"/>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="956831785">
+						<string key="IBUITitle">Upload</string>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">2</int>
+						<reference key="IBUINavigationItem" ref="127679918"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHReportAddViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="66090442"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="256688273">
+				<string key="IBUITitle">Location</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="109622724">
+					<string key="IBUITitle">Location</string>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHLocationViewController_iPhone</string>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
+					<int key="IBUIBarStyle">1</int>
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="194810183">
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="949818381">
+					<string key="IBUITitle">Web</string>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHWebViewController_iPhone</string>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics" id="23427408">
+					<int key="IBUIBarStyle">1</int>
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics" id="627857757">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="663285513">
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="1038781507">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Image</string>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="863601247">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<object class="IBUISegmentedControl" key="IBUICustomView" id="851080293">
+							<reference key="NSNextResponder"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
+							<reference key="NSSuperview"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
+							<bool key="IBUIOpaque">NO</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBSegmentControlStyle">2</int>
+							<int key="IBNumberOfSegments">2</int>
+							<array key="IBSegmentTitles">
+								<string/>
+								<string/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentWidths">
+								<real value="0.0"/>
+								<real value="0.0"/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentEnabledStates">
+								<boolean value="YES"/>
+								<boolean value="YES"/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentContentOffsets">
+								<string>{0, 0}</string>
+								<string>{0, 0}</string>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentImages">
+								<reference ref="101835595"/>
+								<reference ref="801703528"/>
+							</array>
+							<bool key="IBMomentary">YES</bool>
+						</object>
+						<reference key="IBUINavigationItem" ref="1038781507"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHImageViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="23427408"/>
+				<reference key="IBUISimulatedStatusBarMetrics" ref="627857757"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUITabBarController" id="953168819">
+				<string key="IBUITitle">Reports</string>
+				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
+				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics" id="22443294">
+					<int key="IBUIBarStyle">1</int>
+					<bool key="IBUIPrompted">NO</bool>
+				</object>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics" id="594948209">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+				<object class="IBUIViewController" key="IBUISelectedViewController" id="976735077">
+					<string key="IBUITitle">Reports</string>
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="562076416">
+						<string key="IBUITitle">Reports</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">reports.png</string>
+						</object>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<reference key="IBUIParentViewController" ref="953168819"/>
+					<string key="IBUINibName">USHReportTableViewController_iPhone</string>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="IBUIInterfaceOrientation">1</int>
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+				</object>
+				<array class="NSMutableArray" key="IBUIViewControllers">
+					<reference ref="976735077"/>
+					<object class="IBUIViewController" id="526463918">
+						<string key="IBUITitle">Map</string>
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="162577372">
+							<string key="IBUITitle">Map</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">map.png</string>
+							</object>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						</object>
+						<reference key="IBUIParentViewController" ref="953168819"/>
+						<string key="IBUINibName">USHReportMapViewController_iPhone</string>
+						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+							<int key="IBUIInterfaceOrientation">1</int>
+							<int key="interfaceOrientation">1</int>
+						</object>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIHorizontal">NO</bool>
+					</object>
+				</array>
+				<object class="IBUITabBar" key="IBUITabBar" id="603791510">
+					<reference key="NSNextResponder"/>
+					<int key="NSvFlags">266</int>
+					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSNextKeyView"/>
+					<object class="NSColor" key="IBUIBackgroundColor">
+						<int key="NSColorSpace">3</int>
+						<bytes key="NSWhite">MCAwAA</bytes>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+			</object>
+			<object class="IBUIViewController" id="766842773">
+				<string key="IBUITitle">Report</string>
+				<object class="IBUINavigationItem" key="IBUINavigationItem" id="1013615093">
+					<reference key="IBUINavigationBar"/>
+					<string key="IBUITitle">Report</string>
+					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="460328450">
+						<string key="IBUITitle">Back</string>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+					</object>
+					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="1040872029">
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIStyle">1</int>
+						<object class="IBUISegmentedControl" key="IBUICustomView" id="385437535">
+							<reference key="NSNextResponder"/>
+							<int key="NSvFlags">292</int>
+							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
+							<reference key="NSSuperview"/>
+							<reference key="NSNextKeyView"/>
+							<bool key="IBUIOpaque">NO</bool>
+							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<int key="IBSegmentControlStyle">2</int>
+							<int key="IBNumberOfSegments">2</int>
+							<array key="IBSegmentTitles">
+								<string/>
+								<string/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentWidths">
+								<real value="0.0"/>
+								<real value="0.0"/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentEnabledStates">
+								<boolean value="YES"/>
+								<boolean value="YES"/>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentContentOffsets">
+								<string>{0, 0}</string>
+								<string>{0, 0}</string>
+							</array>
+							<array class="NSMutableArray" key="IBSegmentImages">
+								<reference ref="101835595"/>
+								<reference ref="801703528"/>
+							</array>
+							<bool key="IBMomentary">YES</bool>
+						</object>
+						<reference key="IBUINavigationItem" ref="1013615093"/>
+					</object>
+					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				</object>
+				<string key="IBUINibName">USHReportDetailsViewController_iPhone</string>
+				<reference key="IBUISimulatedTopBarMetrics" ref="22443294"/>
+				<reference key="IBUISimulatedStatusBarMetrics" ref="594948209"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+		</array>
+		<object class="IBObjectContainer" key="IBDocument.Objects">
+			<array class="NSMutableArray" key="connectionRecords">
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="987256611"/>
+					</object>
+					<int key="connectionID">5</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">window</string>
+						<reference key="source" ref="987256611"/>
+						<reference key="destination" ref="380026005"/>
+					</object>
+					<int key="connectionID">6</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportTabBarController</string>
+						<reference key="source" ref="987256611"/>
+						<reference key="destination" ref="953168819"/>
+					</object>
+					<int key="connectionID">133</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mapTableViewController</string>
+						<reference key="source" ref="987256611"/>
+						<reference key="destination" ref="421437689"/>
+					</object>
+					<int key="connectionID">160</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">settingsViewController</string>
+						<reference key="source" ref="987256611"/>
+						<reference key="destination" ref="945241745"/>
+					</object>
+					<int key="connectionID">168</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">filterViewController</string>
+						<reference key="source" ref="987256611"/>
+						<reference key="destination" ref="138739123"/>
+					</object>
+					<int key="connectionID">174</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportAddViewController</string>
+						<reference key="source" ref="987256611"/>
+						<reference key="destination" ref="61489547"/>
+					</object>
+					<int key="connectionID">182</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">settingsViewController</string>
+						<reference key="source" ref="421437689"/>
+						<reference key="destination" ref="945241745"/>
+					</object>
+					<int key="connectionID">159</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">mapAddViewController</string>
+						<reference key="source" ref="421437689"/>
+						<reference key="destination" ref="343638138"/>
+					</object>
+					<int key="connectionID">151</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportTabController</string>
+						<reference key="source" ref="421437689"/>
+						<reference key="destination" ref="953168819"/>
+					</object>
+					<int key="connectionID">63</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">infoButton</string>
+						<reference key="source" ref="421437689"/>
+						<reference key="destination" ref="726494083"/>
+					</object>
+					<int key="connectionID">163</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">refreshButton</string>
+						<reference key="source" ref="421437689"/>
+						<reference key="destination" ref="962915525"/>
+					</object>
+					<int key="connectionID">166</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pager</string>
+						<reference key="source" ref="766842773"/>
+						<reference key="destination" ref="385437535"/>
+					</object>
+					<int key="connectionID">88</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">webViewController</string>
+						<reference key="source" ref="766842773"/>
+						<reference key="destination" ref="194810183"/>
+					</object>
+					<int key="connectionID">96</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">locationViewController</string>
+						<reference key="source" ref="766842773"/>
+						<reference key="destination" ref="256688273"/>
+					</object>
+					<int key="connectionID">107</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">commentAddViewController</string>
+						<reference key="source" ref="766842773"/>
+						<reference key="destination" ref="538798642"/>
+					</object>
+					<int key="connectionID">115</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageViewController</string>
+						<reference key="source" ref="766842773"/>
+						<reference key="destination" ref="663285513"/>
+					</object>
+					<int key="connectionID">181</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">page:event:</string>
+						<reference key="source" ref="385437535"/>
+						<reference key="destination" ref="766842773"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">89</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportAddController</string>
+						<reference key="source" ref="953168819"/>
+						<reference key="destination" ref="61489547"/>
+					</object>
+					<int key="connectionID">110</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">settingsViewController</string>
+						<reference key="source" ref="953168819"/>
+						<reference key="destination" ref="945241745"/>
+					</object>
+					<int key="connectionID">169</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">categoryTableController</string>
+						<reference key="source" ref="953168819"/>
+						<reference key="destination" ref="48024598"/>
+					</object>
+					<int key="connectionID">177</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">checkinTableController</string>
+						<reference key="source" ref="953168819"/>
+						<reference key="destination" ref="181739885"/>
+					</object>
+					<int key="connectionID">178</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportMapController</string>
+						<reference key="source" ref="953168819"/>
+						<reference key="destination" ref="526463918"/>
+					</object>
+					<int key="connectionID">179</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportTableController</string>
+						<reference key="source" ref="953168819"/>
+						<reference key="destination" ref="976735077"/>
+					</object>
+					<int key="connectionID">180</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">detailsController</string>
+						<reference key="source" ref="976735077"/>
+						<reference key="destination" ref="766842773"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">filterViewController</string>
+						<reference key="source" ref="976735077"/>
+						<reference key="destination" ref="138739123"/>
+					</object>
+					<int key="connectionID">176</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">detailsController</string>
+						<reference key="source" ref="526463918"/>
+						<reference key="destination" ref="766842773"/>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">doneButton</string>
+						<reference key="source" ref="945241745"/>
+						<reference key="destination" ref="81307147"/>
+					</object>
+					<int key="connectionID">192</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">nextPrevious</string>
+						<reference key="source" ref="663285513"/>
+						<reference key="destination" ref="851080293"/>
+					</object>
+					<int key="connectionID">101</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">nextPrevious:</string>
+						<reference key="source" ref="851080293"/>
+						<reference key="destination" ref="663285513"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">102</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">categoryTableController</string>
+						<reference key="source" ref="61489547"/>
+						<reference key="destination" ref="48024598"/>
+					</object>
+					<int key="connectionID">112</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">locationAddViewController</string>
+						<reference key="source" ref="61489547"/>
+						<reference key="destination" ref="88231475"/>
+					</object>
+					<int key="connectionID">153</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">doneButton</string>
+						<reference key="source" ref="61489547"/>
+						<reference key="destination" ref="956831785"/>
+					</object>
+					<int key="connectionID">188</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cancelButton</string>
+						<reference key="source" ref="61489547"/>
+						<reference key="destination" ref="476181804"/>
+					</object>
+					<int key="connectionID">189</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">settingsViewController</string>
+						<reference key="source" ref="61489547"/>
+						<reference key="destination" ref="945241745"/>
+					</object>
+					<int key="connectionID">222</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">doneButton</string>
+						<reference key="source" ref="48024598"/>
+						<reference key="destination" ref="157565300"/>
+					</object>
+					<int key="connectionID">208</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cancelButton</string>
+						<reference key="source" ref="538798642"/>
+						<reference key="destination" ref="108595792"/>
+					</object>
+					<int key="connectionID">202</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">doneButton</string>
+						<reference key="source" ref="538798642"/>
+						<reference key="destination" ref="337982487"/>
+					</object>
+					<int key="connectionID">203</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">checkinDetailsViewController</string>
+						<reference key="source" ref="181739885"/>
+						<reference key="destination" ref="236546239"/>
+					</object>
+					<int key="connectionID">140</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">commentAddViewController</string>
+						<reference key="source" ref="236546239"/>
+						<reference key="destination" ref="538798642"/>
+					</object>
+					<int key="connectionID">141</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageViewController</string>
+						<reference key="source" ref="236546239"/>
+						<reference key="destination" ref="663285513"/>
+					</object>
+					<int key="connectionID">142</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">locationViewController</string>
+						<reference key="source" ref="236546239"/>
+						<reference key="destination" ref="256688273"/>
+					</object>
+					<int key="connectionID">143</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pager</string>
+						<reference key="source" ref="236546239"/>
+						<reference key="destination" ref="103246240"/>
+					</object>
+					<int key="connectionID">147</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">page:event:</string>
+						<reference key="source" ref="103246240"/>
+						<reference key="destination" ref="236546239"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">148</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">radiusButton</string>
+						<reference key="source" ref="343638138"/>
+						<reference key="destination" ref="223654742"/>
+					</object>
+					<int key="connectionID">196</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cancelButton</string>
+						<reference key="source" ref="343638138"/>
+						<reference key="destination" ref="210966277"/>
+					</object>
+					<int key="connectionID">221</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">info:event:</string>
+						<reference key="source" ref="131077815"/>
+						<reference key="destination" ref="421437689"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">158</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">refresh:event:</string>
+						<reference key="source" ref="962915525"/>
+						<reference key="destination" ref="421437689"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">167</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">settingsViewController</string>
+						<reference key="source" ref="138739123"/>
+						<reference key="destination" ref="945241745"/>
+					</object>
+					<int key="connectionID">173</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportTabBarController</string>
+						<reference key="source" ref="138739123"/>
+						<reference key="destination" ref="953168819"/>
+					</object>
+					<int key="connectionID">175</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">done:event:</string>
+						<reference key="source" ref="956831785"/>
+						<reference key="destination" ref="61489547"/>
+					</object>
+					<int key="connectionID">187</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">cancel:event:</string>
+						<reference key="source" ref="476181804"/>
+						<reference key="destination" ref="61489547"/>
+					</object>
+					<int key="connectionID">186</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">done:event:</string>
+						<reference key="source" ref="81307147"/>
+						<reference key="destination" ref="945241745"/>
+					</object>
+					<int key="connectionID">191</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">radius:event:</string>
+						<reference key="source" ref="223654742"/>
+						<reference key="destination" ref="343638138"/>
+					</object>
+					<int key="connectionID">197</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">cancel:event:</string>
+						<reference key="source" ref="210966277"/>
+						<reference key="destination" ref="343638138"/>
+					</object>
+					<int key="connectionID">198</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">cancel:event:</string>
+						<reference key="source" ref="108595792"/>
+						<reference key="destination" ref="538798642"/>
+					</object>
+					<int key="connectionID">204</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">done:event:</string>
+						<reference key="source" ref="337982487"/>
+						<reference key="destination" ref="538798642"/>
+					</object>
+					<int key="connectionID">205</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">done:event:</string>
+						<reference key="source" ref="157565300"/>
+						<reference key="destination" ref="48024598"/>
+					</object>
+					<int key="connectionID">209</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">info:event:</string>
+						<reference key="source" ref="81630894"/>
+						<reference key="destination" ref="138739123"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">215</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">cancel:event:</string>
+						<reference key="source" ref="658736526"/>
+						<reference key="destination" ref="88231475"/>
+					</object>
+					<int key="connectionID">219</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">done:event:</string>
+						<reference key="source" ref="511145840"/>
+						<reference key="destination" ref="88231475"/>
+					</object>
+					<int key="connectionID">220</int>
+				</object>
+			</array>
+			<object class="IBMutableOrderedSet" key="objectRecords">
+				<array key="orderedObjects">
+					<object class="IBObjectRecord">
+						<int key="objectID">0</int>
+						<array key="object" id="0"/>
+						<reference key="children" ref="1000"/>
+						<nil key="parent"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">2</int>
+						<reference key="object" ref="380026005"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">-1</int>
+						<reference key="object" ref="841351856"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">File's Owner</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">4</int>
+						<reference key="object" ref="987256611"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">App Delegate</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">-2</int>
+						<reference key="object" ref="450319686"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">48</int>
+						<reference key="object" ref="766842773"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="1013615093"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">49</int>
+						<reference key="object" ref="1013615093"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="1040872029"/>
+							<reference ref="460328450"/>
+						</array>
+						<reference key="parent" ref="766842773"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">51</int>
+						<reference key="object" ref="1040872029"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="385437535"/>
+						</array>
+						<reference key="parent" ref="1013615093"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="385437535"/>
+						<reference key="parent" ref="1040872029"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">53</int>
+						<reference key="object" ref="953168819"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="603791510"/>
+							<reference ref="976735077"/>
+							<reference ref="526463918"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">54</int>
+						<reference key="object" ref="603791510"/>
+						<reference key="parent" ref="953168819"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">55</int>
+						<reference key="object" ref="976735077"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="562076416"/>
+						</array>
+						<reference key="parent" ref="953168819"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">56</int>
+						<reference key="object" ref="526463918"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="162577372"/>
+						</array>
+						<reference key="parent" ref="953168819"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">57</int>
+						<reference key="object" ref="162577372"/>
+						<reference key="parent" ref="526463918"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">58</int>
+						<reference key="object" ref="562076416"/>
+						<reference key="parent" ref="976735077"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">93</int>
+						<reference key="object" ref="194810183"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="949818381"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">94</int>
+						<reference key="object" ref="663285513"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="1038781507"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">97</int>
+						<reference key="object" ref="949818381"/>
+						<reference key="parent" ref="194810183"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">98</int>
+						<reference key="object" ref="1038781507"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="863601247"/>
+						</array>
+						<reference key="parent" ref="663285513"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100</int>
+						<reference key="object" ref="863601247"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="851080293"/>
+						</array>
+						<reference key="parent" ref="1038781507"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">99</int>
+						<reference key="object" ref="851080293"/>
+						<reference key="parent" ref="863601247"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">103</int>
+						<reference key="object" ref="460328450"/>
+						<reference key="parent" ref="1013615093"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">104</int>
+						<reference key="object" ref="256688273"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="109622724"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">105</int>
+						<reference key="object" ref="109622724"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="256688273"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">109</int>
+						<reference key="object" ref="61489547"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="127679918"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">111</int>
+						<reference key="object" ref="48024598"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="481103274"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">113</int>
+						<reference key="object" ref="538798642"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="600019987"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">139</int>
+						<reference key="object" ref="236546239"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="462290539"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">144</int>
+						<reference key="object" ref="462290539"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="760604165"/>
+							<reference ref="685768576"/>
+						</array>
+						<reference key="parent" ref="236546239"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">146</int>
+						<reference key="object" ref="760604165"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="103246240"/>
+						</array>
+						<reference key="parent" ref="462290539"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">145</int>
+						<reference key="object" ref="103246240"/>
+						<reference key="parent" ref="760604165"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">149</int>
+						<reference key="object" ref="685768576"/>
+						<reference key="parent" ref="462290539"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">150</int>
+						<reference key="object" ref="343638138"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="10259507"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">152</int>
+						<reference key="object" ref="88231475"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="114460129"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">85</int>
+						<reference key="object" ref="945241745"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="371741755"/>
+							<reference ref="841133944"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">87</int>
+						<reference key="object" ref="371741755"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="81307147"/>
+						</array>
+						<reference key="parent" ref="945241745"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">86</int>
+						<reference key="object" ref="841133944"/>
+						<reference key="parent" ref="945241745"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">35</int>
+						<reference key="object" ref="421437689"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="698174651"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">42</int>
+						<reference key="object" ref="698174651"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="726494083"/>
+							<reference ref="150110803"/>
+						</array>
+						<reference key="parent" ref="421437689"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">155</int>
+						<reference key="object" ref="726494083"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="131077815"/>
+						</array>
+						<reference key="parent" ref="698174651"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">154</int>
+						<reference key="object" ref="131077815"/>
+						<reference key="parent" ref="726494083"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">136</int>
+						<reference key="object" ref="181739885"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="197986689"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">137</int>
+						<reference key="object" ref="197986689"/>
+						<reference key="parent" ref="181739885"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">165</int>
+						<reference key="object" ref="150110803"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="962915525"/>
+						</array>
+						<reference key="parent" ref="698174651"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">164</int>
+						<reference key="object" ref="962915525"/>
+						<reference key="parent" ref="150110803"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">172</int>
+						<reference key="object" ref="138739123"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="935542508"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">183</int>
+						<reference key="object" ref="127679918"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="956831785"/>
+							<reference ref="476181804"/>
+						</array>
+						<reference key="parent" ref="61489547"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">184</int>
+						<reference key="object" ref="956831785"/>
+						<reference key="parent" ref="127679918"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">185</int>
+						<reference key="object" ref="476181804"/>
+						<reference key="parent" ref="127679918"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">190</int>
+						<reference key="object" ref="81307147"/>
+						<reference key="parent" ref="371741755"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">193</int>
+						<reference key="object" ref="10259507"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="210966277"/>
+							<reference ref="223654742"/>
+						</array>
+						<reference key="parent" ref="343638138"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">195</int>
+						<reference key="object" ref="210966277"/>
+						<reference key="parent" ref="10259507"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">194</int>
+						<reference key="object" ref="223654742"/>
+						<reference key="parent" ref="10259507"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">199</int>
+						<reference key="object" ref="600019987"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="337982487"/>
+							<reference ref="108595792"/>
+						</array>
+						<reference key="parent" ref="538798642"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">201</int>
+						<reference key="object" ref="337982487"/>
+						<reference key="parent" ref="600019987"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">200</int>
+						<reference key="object" ref="108595792"/>
+						<reference key="parent" ref="600019987"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">206</int>
+						<reference key="object" ref="481103274"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="157565300"/>
+						</array>
+						<reference key="parent" ref="48024598"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">207</int>
+						<reference key="object" ref="157565300"/>
+						<reference key="parent" ref="481103274"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">212</int>
+						<reference key="object" ref="935542508"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="86048007"/>
+						</array>
+						<reference key="parent" ref="138739123"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">213</int>
+						<reference key="object" ref="86048007"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="81630894"/>
+						</array>
+						<reference key="parent" ref="935542508"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">214</int>
+						<reference key="object" ref="81630894"/>
+						<reference key="parent" ref="86048007"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">216</int>
+						<reference key="object" ref="114460129"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="511145840"/>
+							<reference ref="658736526"/>
+						</array>
+						<reference key="parent" ref="88231475"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">218</int>
+						<reference key="object" ref="511145840"/>
+						<reference key="parent" ref="114460129"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">217</int>
+						<reference key="object" ref="658736526"/>
+						<reference key="parent" ref="114460129"/>
+					</object>
+				</array>
+			</object>
+			<dictionary class="NSMutableDictionary" key="flattenedProperties">
+				<string key="-1.CustomClassName">UIApplication</string>
+				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="-2.CustomClassName">UIResponder</string>
+				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="100.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="103.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="104.CustomClassName">USHLocationViewController</string>
+				<string key="104.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="105.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="109.CustomClassName">USHReportAddViewController</string>
+				<string key="109.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="111.CustomClassName">USHCategoryTableViewController</string>
+				<string key="111.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="113.CustomClassName">USHCommentAddViewController</string>
+				<string key="113.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="136.CustomClassName">USHCheckinTableViewController</string>
+				<string key="136.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="137.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="139.CustomClassName">USHCheckinDetailsViewController</string>
+				<string key="139.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="144.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="145.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<integer value="0" key="145.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<string key="146.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="149.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="150.CustomClassName">USHMapAddViewController</string>
+				<string key="150.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="152.CustomClassName">USHLocationAddViewController</string>
+				<string key="152.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="154.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="155.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="164.CustomClassName">USHRefreshButton</string>
+				<string key="164.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="165.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="172.CustomClassName">USHFilterViewController</string>
+				<string key="172.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="183.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="184.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="185.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="190.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="193.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="194.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="195.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="199.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="2.CustomClassName">USHWindow</string>
+				<dictionary class="NSMutableDictionary" key="2.IBAttributePlaceholdersKey"/>
+				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="200.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="201.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="206.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="207.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="212.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="213.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="214.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="216.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="217.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="218.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="35.CustomClassName">USHMapTableViewController</string>
+				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="4.CustomClassName">USHAppDelegateMain</string>
+				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="48.CustomClassName">USHReportDetailsViewController</string>
+				<string key="48.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="49.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="50.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<integer value="0" key="50.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="53.CustomClassName">USHReportTabBarController</string>
+				<string key="53.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="54.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="55.CustomClassName">USHReportTableViewController</string>
+				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="56.CustomClassName">USHReportMapViewController</string>
+				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="85.CustomClassName">USHSettingsViewController</string>
+				<string key="85.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="86.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="87.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="93.CustomClassName">USHWebViewController</string>
+				<string key="93.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="94.CustomClassName">USHImageViewController</string>
+				<string key="94.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="97.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="98.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="99.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<integer value="0" key="99.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
+			</dictionary>
+			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
+			<nil key="activeLocalization"/>
+			<dictionary class="NSMutableDictionary" key="localizations"/>
+			<nil key="sourceID"/>
+			<int key="maxID">222</int>
+		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">USHAddViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="cancel:event:">id</string>
+						<string key="done:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="cancel:event:">
+							<string key="name">cancel:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="done:event:">
+							<string key="name">done:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="cancelButton">UIBarButtonItem</string>
+						<string key="doneButton">UIBarButtonItem</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="cancelButton">
+							<string key="name">cancelButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="doneButton">
+							<string key="name">doneButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHAddViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHAppDelegate</string>
+					<string key="superclassName">UIResponder</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">sidebar:event:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">sidebar:event:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">sidebar:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="splitViewController">UISplitViewController</string>
+						<string key="window">UIWindow</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="splitViewController">
+							<string key="name">splitViewController</string>
+							<string key="candidateClassName">UISplitViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHAppDelegate.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHAppDelegateMain</string>
+					<string key="superclassName">USHAppDelegate</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="filterViewController">USHFilterViewController</string>
+						<string key="mapTableViewController">USHMapTableViewController</string>
+						<string key="reportAddViewController">USHReportAddViewController</string>
+						<string key="reportTabBarController">USHReportTabBarController</string>
+						<string key="settingsViewController">USHSettingsViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="filterViewController">
+							<string key="name">filterViewController</string>
+							<string key="candidateClassName">USHFilterViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mapTableViewController">
+							<string key="name">mapTableViewController</string>
+							<string key="candidateClassName">USHMapTableViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportAddViewController">
+							<string key="name">reportAddViewController</string>
+							<string key="candidateClassName">USHReportAddViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportTabBarController">
+							<string key="name">reportTabBarController</string>
+							<string key="candidateClassName">USHReportTabBarController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="settingsViewController">
+							<string key="name">settingsViewController</string>
+							<string key="candidateClassName">USHSettingsViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHAppDelegateMain.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHCategoryTableViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">done:event:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">done:event:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">done:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">doneButton</string>
+						<string key="NS.object.0">UIBarButtonItem</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">doneButton</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">doneButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHCategoryTableViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHCheckinDetailsViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="comment:event:">id</string>
+						<string key="page:event:">id</string>
+						<string key="share:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="comment:event:">
+							<string key="name">comment:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="page:event:">
+							<string key="name">page:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="share:event:">
+							<string key="name">share:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="commentAddViewController">USHCommentAddViewController</string>
+						<string key="imageViewController">USHImageViewController</string>
+						<string key="locationViewController">USHLocationViewController</string>
+						<string key="pager">UISegmentedControl</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="commentAddViewController">
+							<string key="name">commentAddViewController</string>
+							<string key="candidateClassName">USHCommentAddViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imageViewController">
+							<string key="name">imageViewController</string>
+							<string key="candidateClassName">USHImageViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="locationViewController">
+							<string key="name">locationViewController</string>
+							<string key="candidateClassName">USHLocationViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pager">
+							<string key="name">pager</string>
+							<string key="candidateClassName">UISegmentedControl</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHCheckinDetailsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHCheckinTableViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">checkinDetailsViewController</string>
+						<string key="NS.object.0">USHCheckinDetailsViewController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">checkinDetailsViewController</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">checkinDetailsViewController</string>
+							<string key="candidateClassName">USHCheckinDetailsViewController</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHCheckinTableViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHCommentAddViewController</string>
+					<string key="superclassName">USHAddViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">cancel:event:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">cancel:event:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">cancel:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHCommentAddViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHFilterViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">info:event:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">info:event:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">info:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="reportTabBarController">USHReportTabBarController</string>
+						<string key="settingsViewController">USHSettingsViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="reportTabBarController">
+							<string key="name">reportTabBarController</string>
+							<string key="candidateClassName">USHReportTabBarController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="settingsViewController">
+							<string key="name">settingsViewController</string>
+							<string key="candidateClassName">USHSettingsViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHFilterViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHImageViewController</string>
+					<string key="superclassName">USHViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="action:event:">id</string>
+						<string key="nextPrevious:">id</string>
+						<string key="save:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="action:event:">
+							<string key="name">action:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="nextPrevious:">
+							<string key="name">nextPrevious:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="save:event:">
+							<string key="name">save:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="imageView">UIImageView</string>
+						<string key="nextPrevious">UISegmentedControl</string>
+						<string key="scrollView">UIScrollView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="imageView">
+							<string key="name">imageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="nextPrevious">
+							<string key="name">nextPrevious</string>
+							<string key="candidateClassName">UISegmentedControl</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="scrollView">
+							<string key="name">scrollView</string>
+							<string key="candidateClassName">UIScrollView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHImageViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHLocationAddViewController</string>
+					<string key="superclassName">USHMapViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="cancel:event:">id</string>
+						<string key="done:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="cancel:event:">
+							<string key="name">cancel:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="done:event:">
+							<string key="name">done:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="cancelButton">UIBarButtonItem</string>
+						<string key="doneButton">UIBarButtonItem</string>
+						<string key="searchField">UITextField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="cancelButton">
+							<string key="name">cancelButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="doneButton">
+							<string key="name">doneButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchField">
+							<string key="name">searchField</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHLocationAddViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHLocationViewController</string>
+					<string key="superclassName">USHMapViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">action:event:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">action:event:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">action:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHLocationViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHMapAddViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="cancel:event:">id</string>
+						<string key="radius:event:">id</string>
+						<string key="sort:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="cancel:event:">
+							<string key="name">cancel:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="radius:event:">
+							<string key="name">radius:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="sort:event:">
+							<string key="name">sort:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="cancelButton">UIBarButtonItem</string>
+						<string key="radiusButton">UIBarButtonItem</string>
+						<string key="sortControl">UISegmentedControl</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="cancelButton">
+							<string key="name">cancelButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="radiusButton">
+							<string key="name">radiusButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sortControl">
+							<string key="name">sortControl</string>
+							<string key="candidateClassName">UISegmentedControl</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHMapAddViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHMapTableViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="add:event:">id</string>
+						<string key="edit:event:">id</string>
+						<string key="info:event:">id</string>
+						<string key="refresh:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="add:event:">
+							<string key="name">add:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="edit:event:">
+							<string key="name">edit:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="info:event:">
+							<string key="name">info:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="refresh:event:">
+							<string key="name">refresh:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="addButton">UIBarButtonItem</string>
+						<string key="editButton">UIBarButtonItem</string>
+						<string key="infoButton">UIBarButtonItem</string>
+						<string key="mapAddViewController">USHMapAddViewController</string>
+						<string key="refreshButton">USHRefreshButton</string>
+						<string key="reportTabController">USHReportTabBarController</string>
+						<string key="settingsViewController">USHSettingsViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="addButton">
+							<string key="name">addButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="editButton">
+							<string key="name">editButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="infoButton">
+							<string key="name">infoButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mapAddViewController">
+							<string key="name">mapAddViewController</string>
+							<string key="candidateClassName">USHMapAddViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="refreshButton">
+							<string key="name">refreshButton</string>
+							<string key="candidateClassName">USHRefreshButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportTabController">
+							<string key="name">reportTabController</string>
+							<string key="candidateClassName">USHReportTabBarController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="settingsViewController">
+							<string key="name">settingsViewController</string>
+							<string key="candidateClassName">USHSettingsViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHMapTableViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHMapViewController</string>
+					<string key="superclassName">USHViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="locate:event:">id</string>
+						<string key="mapTypeCancelled:event:">id</string>
+						<string key="mapTypeChanged:event:">id</string>
+						<string key="showMapType:event:">id</string>
+						<string key="style:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="locate:event:">
+							<string key="name">locate:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="mapTypeCancelled:event:">
+							<string key="name">mapTypeCancelled:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="mapTypeChanged:event:">
+							<string key="name">mapTypeChanged:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showMapType:event:">
+							<string key="name">showMapType:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="style:event:">
+							<string key="name">style:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="flipView">UIButton</string>
+						<string key="infoButton">UIButton</string>
+						<string key="mapType">UISegmentedControl</string>
+						<string key="mapView">MKMapView</string>
+						<string key="titleView">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="flipView">
+							<string key="name">flipView</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="infoButton">
+							<string key="name">infoButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mapType">
+							<string key="name">mapType</string>
+							<string key="candidateClassName">UISegmentedControl</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mapView">
+							<string key="name">mapView</string>
+							<string key="candidateClassName">MKMapView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="titleView">
+							<string key="name">titleView</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHMapViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHRefreshButton</string>
+					<string key="superclassName">UIButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHRefreshButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHRefreshButtonItem</string>
+					<string key="superclassName">UIBarButtonItem</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHRefreshButtonItem.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHReportAddViewController</string>
+					<string key="superclassName">USHAddViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="cancel:event:">id</string>
+						<string key="done:event:">id</string>
+						<string key="info:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="cancel:event:">
+							<string key="name">cancel:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="done:event:">
+							<string key="name">done:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="info:event:">
+							<string key="name">info:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="categoryTableController">USHCategoryTableViewController</string>
+						<string key="locationAddViewController">USHLocationAddViewController</string>
+						<string key="settingsViewController">USHSettingsViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="categoryTableController">
+							<string key="name">categoryTableController</string>
+							<string key="candidateClassName">USHCategoryTableViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="locationAddViewController">
+							<string key="name">locationAddViewController</string>
+							<string key="candidateClassName">USHLocationAddViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="settingsViewController">
+							<string key="name">settingsViewController</string>
+							<string key="candidateClassName">USHSettingsViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHReportAddViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHReportDetailsViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="comment:event:">id</string>
+						<string key="page:event:">id</string>
+						<string key="share:event:">id</string>
+						<string key="star:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="comment:event:">
+							<string key="name">comment:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="page:event:">
+							<string key="name">page:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="share:event:">
+							<string key="name">share:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="star:event:">
+							<string key="name">star:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="commentAddViewController">USHCommentAddViewController</string>
+						<string key="imageViewController">USHImageViewController</string>
+						<string key="locationViewController">USHLocationViewController</string>
+						<string key="pager">UISegmentedControl</string>
+						<string key="starredButton">UIBarButtonItem</string>
+						<string key="webViewController">USHWebViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="commentAddViewController">
+							<string key="name">commentAddViewController</string>
+							<string key="candidateClassName">USHCommentAddViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imageViewController">
+							<string key="name">imageViewController</string>
+							<string key="candidateClassName">USHImageViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="locationViewController">
+							<string key="name">locationViewController</string>
+							<string key="candidateClassName">USHLocationViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pager">
+							<string key="name">pager</string>
+							<string key="candidateClassName">UISegmentedControl</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="starredButton">
+							<string key="name">starredButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="webViewController">
+							<string key="name">webViewController</string>
+							<string key="candidateClassName">USHWebViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHReportDetailsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHReportMapViewController</string>
+					<string key="superclassName">USHMapViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">locate:event:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">locate:event:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">locate:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="detailsController">USHReportDetailsViewController</string>
+						<string key="filterLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="detailsController">
+							<string key="name">detailsController</string>
+							<string key="candidateClassName">USHReportDetailsViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="filterLabel">
+							<string key="name">filterLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHReportMapViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHReportTabBarController</string>
+					<string key="superclassName">USHTabBarController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="filter:event:">id</string>
+						<string key="info:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="filter:event:">
+							<string key="name">filter:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="info:event:">
+							<string key="name">info:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="categoryTableController">USHCategoryTableViewController</string>
+						<string key="checkinTableController">USHCheckinTableViewController</string>
+						<string key="reportAddController">USHReportAddViewController</string>
+						<string key="reportMapController">USHReportMapViewController</string>
+						<string key="reportTableController">USHReportTableViewController</string>
+						<string key="settingsViewController">USHSettingsViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="categoryTableController">
+							<string key="name">categoryTableController</string>
+							<string key="candidateClassName">USHCategoryTableViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="checkinTableController">
+							<string key="name">checkinTableController</string>
+							<string key="candidateClassName">USHCheckinTableViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportAddController">
+							<string key="name">reportAddController</string>
+							<string key="candidateClassName">USHReportAddViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportMapController">
+							<string key="name">reportMapController</string>
+							<string key="candidateClassName">USHReportMapViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportTableController">
+							<string key="name">reportTableController</string>
+							<string key="candidateClassName">USHReportTableViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="settingsViewController">
+							<string key="name">settingsViewController</string>
+							<string key="candidateClassName">USHSettingsViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHReportTabBarController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHReportTableViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="detailsController">USHReportDetailsViewController</string>
+						<string key="filterViewController">USHFilterViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="detailsController">
+							<string key="name">detailsController</string>
+							<string key="candidateClassName">USHReportDetailsViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="filterViewController">
+							<string key="name">filterViewController</string>
+							<string key="candidateClassName">USHFilterViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHReportTableViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHSettingsViewController</string>
+					<string key="superclassName">USHTableViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">done:event:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">done:event:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">done:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">doneButton</string>
+						<string key="NS.object.0">UIBarButtonItem</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">doneButton</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">doneButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHSettingsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHTabBarController</string>
+					<string key="superclassName">UITabBarController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHTabBarController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHTableViewController</string>
+					<string key="superclassName">USHViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">tableView</string>
+						<string key="NS.object.0">UITableView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">tableView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHTableViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">toolBar</string>
+						<string key="NS.object.0">UIToolbar</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">toolBar</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">toolBar</string>
+							<string key="candidateClassName">UIToolbar</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHWebViewController</string>
+					<string key="superclassName">USHViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="action:event:">id</string>
+						<string key="refresh:event:">id</string>
+						<string key="zoom:event:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="action:event:">
+							<string key="name">action:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="refresh:event:">
+							<string key="name">refresh:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="zoom:event:">
+							<string key="name">zoom:event:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="refreshButton">USHRefreshButtonItem</string>
+						<string key="webView">UIWebView</string>
+						<string key="zoomButton">UIBarButtonItem</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="refreshButton">
+							<string key="name">refreshButton</string>
+							<string key="candidateClassName">USHRefreshButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="webView">
+							<string key="name">webView</string>
+							<string key="candidateClassName">UIWebView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="zoomButton">
+							<string key="name">zoomButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHWebViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">USHWindow</string>
+					<string key="superclassName">UIWindow</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/USHWindow.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
+		<int key="IBDocument.localizationMode">0</int>
+		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
+		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
+		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="checkin.png">{20, 20}</string>
+			<string key="down.png">{15, 13}</string>
+			<string key="map.png">{26, 21}</string>
+			<string key="refresh.png">{20, 20}</string>
+			<string key="reports.png">{20, 20}</string>
+			<string key="settings.png">{20, 20}</string>
+			<string key="up.png">{15, 13}</string>
+		</dictionary>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
+	</data>
+</archive>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="Ushahidi" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C2034" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Category" representedClassName="USHCategory" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="map" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="categories" inverseEntity="Map" syncable="YES"/>
+        <relationship name="reports" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Report" inverseName="categories" inverseEntity="Report" syncable="YES"/>
+    </entity>
+    <entity name="Checkin" representedClassName="USHCheckin" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pending" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="thumb" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="map" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="checkins" inverseEntity="Map" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="checkins" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Comment" representedClassName="USHComment" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pending" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="report" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Report" inverseName="comments" inverseEntity="Report" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName="USHLocation" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="map" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="locations" inverseEntity="Map" syncable="YES"/>
+    </entity>
+    <entity name="Map" representedClassName="USHMap" syncable="YES">
+        <attribute name="added" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="checkin" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discovered" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="error" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="opengeosms" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sms" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sync" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="synced" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="syncing" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="map" inverseEntity="Category" syncable="YES"/>
+        <relationship name="checkins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Checkin" inverseName="map" inverseEntity="Checkin" syncable="YES"/>
+        <relationship name="locations" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="map" inverseEntity="Location" syncable="YES"/>
+        <relationship name="reports" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Report" inverseName="map" inverseEntity="Report" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="map" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="News" representedClassName="USHNews" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="report" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Report" inverseName="news" inverseEntity="Report" syncable="YES"/>
+    </entity>
+    <entity name="Photo" representedClassName="USHPhoto" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="thumb" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="report" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Report" inverseName="photos" inverseEntity="Report" syncable="YES"/>
+    </entity>
+    <entity name="Report" representedClassName="USHReport" syncable="YES">
+        <attribute name="authorEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorFirst" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorLast" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="pending" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="snapshot" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="starred" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="verified" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="viewed" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="reports" inverseEntity="Category" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="report" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="map" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="reports" inverseEntity="Map" syncable="YES"/>
+        <relationship name="news" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="News" inverseName="report" inverseEntity="News" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="report" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="sounds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sound" inverseName="report" inverseEntity="Sound" syncable="YES"/>
+        <relationship name="videos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Video" inverseName="report" inverseEntity="Video" syncable="YES"/>
+    </entity>
+    <entity name="Sound" representedClassName="USHSound" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="report" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Report" inverseName="sounds" inverseEntity="Report" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="USHUser" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="checkins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Checkin" inverseName="user" inverseEntity="Checkin" syncable="YES"/>
+        <relationship name="map" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="users" inverseEntity="Map" syncable="YES"/>
+    </entity>
+    <entity name="Video" representedClassName="USHVideo" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pending" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="report" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Report" inverseName="videos" inverseEntity="Report" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Checkin" positionX="160" positionY="192" width="128" height="195"/>
+        <element name="Comment" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Location" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Map" positionX="160" positionY="192" width="128" height="360"/>
+        <element name="News" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Photo" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Report" positionX="160" positionY="192" width="128" height="390"/>
+        <element name="Sound" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="User" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Video" positionX="160" positionY="192" width="128" height="120"/>
+    </elements>
+</model>

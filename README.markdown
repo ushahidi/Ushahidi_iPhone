@@ -21,7 +21,6 @@ The old Ushahidi iOS 2.X code repository can be found at [Ushahidi iOS 2.X](http
 * Duplicate the Ushahidi target with the name of your map (ex MapATL)
 * Right-click on your new target (ex MapATL) select Get Info > Build tab > rename Product Name to name of map without spaces (ex MapATL)
 * Duplicate the /Themes/Ushahidi folder with the name of your map as folder name (ex /Themes/MapATL)
-* Replace each image in the folder with your own custom graphic, maintaining the image dimensions and filenames
 * In XCode, on your new theme folder (ex /Themes/MapATL) Right-Click > Get Info > Targets tab, uncheck Ushahidi and check your new target (ex MapATL)
 * You can now customize your app by editing the following properties in Info.plist in your new Themes folder
 
@@ -71,8 +70,28 @@ Facebook will require you to register a new app at [Facebook Developers](https:/
 ##### YouTube Credentials #####
 If you would like to publish videos under your own YouTube channel, you'll need to sign up for a [YouTube Developer Account](https://code.google.com/apis/youtube/dashboard/gwt/index.html).
 
-* USHYoutubeUsername: Youtube login
-* USHYoutubePassword: Youtube password
-* USHYoutubeDeveloperKey: Youtube Developer Key
+* USHYouTubeUsername: Youtube login
+* USHYouTubePassword: Youtube password
+* USHYouTubeDeveloperKey: Youtube Developer Key
+
+##### Custom Images #####
+Replace each image in your theme folder with your own custom graphic, maintaining the image dimensions and filenames.
+
+* Default.png: launch screen for iPhone 
+* Default@2x.png: launch screen for iPhone with retina display
+* Default-Portrait.png: launch screen for iPad 
+* Default-Portrait@2x.png: launch screen for iPad with retina display
+* Default-568h@2x.png: launch screen for iPad 5
+* Icon-iPhone.png: app icon for iPhone 
+* Icon-iPhone@2x.png: app icon for iPhone with retina display 
+* Icon-iPad.png: app icon for iPad 
+* Icon-iPad@2x.png: app icon for iPad with retina display
+* Logo-iPhone.png: image in settings screen which links to USHSupportURL
+* Logo-iPhone@2x.png: image in settings screen which links to USHSupportURL
+* Logo-iPad.png: image on iPad in settings screen which links to USHSupportURL
+* Logo-iPad@2x.png: image on iPad in settings screen which links to USHSupportURL
+* Logo-Title.png: optional logo image in Nav Bar
+* Logo-Title@2x.png: optional logo image in Nav Bar for retina display
+* iTunesArtwork.png: artwork for the iTunes App Store
 
 You should now be able to deploy your white-labelled version of the app to the Simulator for testing, enjoy!!

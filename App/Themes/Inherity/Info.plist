@@ -59,6 +59,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>FacebookAppID</key>
+	<string>315093251934654</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>fb315093251934654</string>
+		</dict>
+	</array>
 	<key>USHAppStoreURL</key>
 	<string>http://itunes.apple.com/us/app/inherity/id462758826</string>
 	<key>USHButtonDoneColor</key>
@@ -83,7 +92,7 @@
 	<key>USHShowReportList</key>
 	<true/>
 	<key>USHSortReportsByDate</key>
-	<false/>
+	<true/>
 	<key>USHSupportEmail</key>
 	<string>info@inherity.org</string>
 	<key>USHSupportURL</key>
@@ -102,11 +111,11 @@
 	<string></string>
 	<key>USHToolBarColor</key>
 	<string>#033649</string>
-	<key>USHYoutubeDeveloperKey</key>
-	<string>AI39si7xQjrrR1Y5QLKdzXYuNraYkwDXZj9peI-Sp_G5Irjc5Nuou1fTSDxDwvV4Bnk6nhdLFXWDK9jW0y8FCXsM_wuSV-bIOA</string>
-	<key>USHYoutubePassword</key>
-	<string>@WZ5S4MksoOgwNY</string>
+	<key>USHYouTubeDeveloperKey</key>
+	<string>AI39si4Xhw-DQS8q3Mp-m1wfajgdywhCesee5syP551qIyQ5FFedIa7LgBvWrcLvZDlloJADN5OZJAWRfUl9hQ3jjhspabDAXQ</string>
+	<key>USHYouTubePassword</key>
+	<string>5juNIOVA9p</string>
 	<key>USHYoutubeUsername</key>
-	<string>dale@ushahidi.com</string>
+	<string>youtube@ushahidi.com</string>
 </dict>
 </plist>

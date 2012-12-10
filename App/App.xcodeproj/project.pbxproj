@@ -78,6 +78,12 @@
 		3E3377DC1675A60400625F73 /* modified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377D21675A60400625F73 /* modified@2x.png */; };
 		3E3377DD1675A60400625F73 /* modified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377D21675A60400625F73 /* modified@2x.png */; };
 		3E3377DE1675A60400625F73 /* modified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377D21675A60400625F73 /* modified@2x.png */; };
+		3E3377E216762A0500625F73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377E016762A0500625F73 /* Localizable.strings */; };
+		3E3377E316762A0500625F73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377E016762A0500625F73 /* Localizable.strings */; };
+		3E3377E416762A0500625F73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377E016762A0500625F73 /* Localizable.strings */; };
+		3E3377E516762A0500625F73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377E016762A0500625F73 /* Localizable.strings */; };
+		3E3377E616762A0500625F73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377E016762A0500625F73 /* Localizable.strings */; };
+		3E3377E716762A0500625F73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E3377E016762A0500625F73 /* Localizable.strings */; };
 		3E3489121671794400A8A614 /* Ushahidi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E971B1F15A36662005EB625 /* Ushahidi.bundle */; };
 		3E3489131671794500A8A614 /* Ushahidi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E971B1F15A36662005EB625 /* Ushahidi.bundle */; };
 		3E3489141671794500A8A614 /* Ushahidi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E971B1F15A36662005EB625 /* Ushahidi.bundle */; };
@@ -1654,6 +1660,7 @@
 		3E3377B6167501FF00625F73 /* discovered@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "discovered@2x.png"; sourceTree = "<group>"; };
 		3E3377D11675A60400625F73 /* modified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modified.png; sourceTree = "<group>"; };
 		3E3377D21675A60400625F73 /* modified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modified@2x.png"; sourceTree = "<group>"; };
+		3E3377E116762A0500625F73 /* sw */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sw; path = Localizable.strings; sourceTree = "<group>"; };
 		3E46F623163DC48200C24119 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		3E54BF9116739E1200352DBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		3E54BF9416739E1200352DBA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localizable.strings; sourceTree = "<group>"; };
@@ -2188,6 +2195,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		3E3377DF16762A0500625F73 /* sw.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				3E3377E016762A0500625F73 /* Localizable.strings */,
+			);
+			path = sw.lproj;
+			sourceTree = "<group>";
+		};
 		3E54BF8F16739E1200352DBA /* en.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -2438,6 +2453,7 @@
 			isa = PBXGroup;
 			children = (
 				3E54BF8F16739E1200352DBA /* en.lproj */,
+				3E3377DF16762A0500625F73 /* sw.lproj */,
 				3E54BF9216739E1200352DBA /* es.lproj */,
 				3E54BF9516739E1200352DBA /* it.lproj */,
 				3E54BF9816739E1200352DBA /* ja.lproj */,
@@ -2914,6 +2930,7 @@
 				es,
 				it,
 				ja,
+				sw,
 			);
 			mainGroup = 3E6D0317159B54CF00CDB5B7;
 			productRefGroup = 3E6D0323159B54CF00CDB5B7 /* Products */;
@@ -3154,6 +3171,7 @@
 				3E3377BD167501FF00625F73 /* discovered@2x.png in Resources */,
 				3E3377D31675A60400625F73 /* modified.png in Resources */,
 				3E3377D91675A60400625F73 /* modified@2x.png in Resources */,
+				3E3377E216762A0500625F73 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3377,6 +3395,7 @@
 				3E3377BF167501FF00625F73 /* discovered@2x.png in Resources */,
 				3E3377D51675A60400625F73 /* modified.png in Resources */,
 				3E3377DB1675A60400625F73 /* modified@2x.png in Resources */,
+				3E3377E416762A0500625F73 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3599,6 +3618,7 @@
 				3E3377C1167501FF00625F73 /* discovered@2x.png in Resources */,
 				3E3377D71675A60400625F73 /* modified.png in Resources */,
 				3E3377DD1675A60400625F73 /* modified@2x.png in Resources */,
+				3E3377E616762A0500625F73 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3824,6 +3844,7 @@
 				3E3377C2167501FF00625F73 /* discovered@2x.png in Resources */,
 				3E3377D81675A60400625F73 /* modified.png in Resources */,
 				3E3377DE1675A60400625F73 /* modified@2x.png in Resources */,
+				3E3377E716762A0500625F73 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4047,6 +4068,7 @@
 				3E3377C0167501FF00625F73 /* discovered@2x.png in Resources */,
 				3E3377D61675A60400625F73 /* modified.png in Resources */,
 				3E3377DC1675A60400625F73 /* modified@2x.png in Resources */,
+				3E3377E516762A0500625F73 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4270,6 +4292,7 @@
 				3E3377BE167501FF00625F73 /* discovered@2x.png in Resources */,
 				3E3377D41675A60400625F73 /* modified.png in Resources */,
 				3E3377DA1675A60400625F73 /* modified@2x.png in Resources */,
+				3E3377E316762A0500625F73 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4525,6 +4548,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3E3377E016762A0500625F73 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E3377E116762A0500625F73 /* sw */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		3E54BF9016739E1200352DBA /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

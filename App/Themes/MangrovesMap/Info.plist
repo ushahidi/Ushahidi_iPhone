@@ -102,7 +102,7 @@
 	<key>USHShowReportList</key>
 	<true/>
 	<key>USHSortReportsByDate</key>
-	<false/>
+	<true/>
 	<key>USHSupportEmail</key>
 	<string>mangroves@qfi.org</string>
 	<key>USHSupportURL</key>
@@ -121,11 +121,11 @@
 	<string></string>
 	<key>USHToolBarColor</key>
 	<string>#4E8CB3</string>
-	<key>USHYoutubeDeveloperKey</key>
+	<key>USHYouTubeDeveloperKey</key>
 	<string>AI39si729rjJcniA-JMG_VCDi3QQixlGpOOmNBzl9r-8dCxcibqtiVOm7WZIC8b4W3RUnqVgtN4vuMzEbGURiRKmfwnKOMFy4Q</string>
-	<key>USHYoutubePassword</key>
+	<key>USHYouTubePassword</key>
 	<string>cyne-ghy-bu-xo</string>
-	<key>USHYoutubeUsername</key>
+	<key>USHYouTubeUsername</key>
 	<string>mappingthemangroves@gmail.com</string>
 </dict>
 </plist>

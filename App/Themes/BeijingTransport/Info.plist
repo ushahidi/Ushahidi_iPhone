@@ -63,6 +63,8 @@
 	<string></string>
 	<key>USHAppStoreURL</key>
 	<string>http://itunes.apple.com/us/app/id449819867</string>
+	<key>USHAppDescription</key>
+	<string>Ushahidi is an open source platform for democratizing information, increasing transparency and lowering the barriers for individuals to share their stories.</string>
 	<key>USHButtonDoneColor</key>
 	<string>#ea5e20</string>
 	<key>USHMapURL</key>

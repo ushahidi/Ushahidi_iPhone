@@ -37,6 +37,7 @@ The old Ushahidi iOS 2.X code repository can be found at [Ushahidi iOS 2.X](http
 * USHSupportEmail: support email for your deployment (ex crime@mapatl.com)
 * USHSupportURL: website for your deployment (ex http://crime.mapatl.com)
 * USHAppStoreURL: link on App Store to download your application (ex http://itunes.apple.com/app/ushahidi-ios/id410609585)
+* USHAppDescription: sentence describing the application or the organization
 
 ##### Color Codes #####
 * USHNavBarColor: color for navigation bar 

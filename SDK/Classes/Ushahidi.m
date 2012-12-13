@@ -70,7 +70,7 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
         [[USHDatabase sharedInstance] setName:@"Ushahidi"];
         
         self.synchronize = [[[NSOperationQueue alloc] init] autorelease];
-        [self.synchronize setMaxConcurrentOperationCount:3];
+        [self.synchronize setMaxConcurrentOperationCount:2];
         [self.synchronize addObserver:self forKeyPath:@"operations" options:NSKeyValueObservingOptionNew context:nil];
         
         self.uploads = [[[NSOperationQueue alloc] init] autorelease];

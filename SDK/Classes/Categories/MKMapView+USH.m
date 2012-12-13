@@ -75,16 +75,21 @@
 }
 
 - (void) centerAtCoordinate:(CLLocationCoordinate2D)coordinate withDelta:(CGFloat)delta animated:(BOOL)animated {
-	MKCoordinateSpan span;
-	span.latitudeDelta = delta;
-	span.longitudeDelta = delta;
-	
-	MKCoordinateRegion region;
-	region.span = span;
-	region.center = coordinate;
-	
-	[self setRegion:region animated:animated];
-	[self regionThatFits:region];
+    @try {
+    	MKCoordinateSpan span;
+        span.latitudeDelta = delta;
+        span.longitudeDelta = delta;
+        
+        MKCoordinateRegion region;
+        region.span = span;
+        region.center = coordinate;
+        
+        [self setRegion:region animated:animated];
+        [self regionThatFits:region];
+    }
+    @catch (NSException *exception) {
+        DLog(@"NSException: %@", exception.description);
+    }
 }
 
 - (void) resizeRegionToFitAllPins:(BOOL)includeUserLocation animated:(BOOL)animated {
@@ -119,13 +124,23 @@
 			}
 		}
 		
-		MKCoordinateRegion region;
-		region.center.latitude = topLeftCoordinate.latitude - (topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 0.5;
-		region.center.longitude = topLeftCoordinate.longitude + (bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 0.5;
-		region.span.latitudeDelta = fabs(topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 1.1; 
-		region.span.longitudeDelta = fabs(bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 1.1; 
-		
-		[self setRegion:[self regionThatFits:region] animated:animated];	
+        @try {
+            MKCoordinateRegion region;
+            region.center.latitude = topLeftCoordinate.latitude - (topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 0.5;
+            region.center.longitude = topLeftCoordinate.longitude + (bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 0.5;
+            region.span.latitudeDelta = fabs(topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 1.1;
+            region.span.longitudeDelta = fabs(bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 1.1;
+            
+            [self setRegion:[self regionThatFits:region] animated:animated];
+        }
+        @catch (NSException *exception) {
+             DLog(@"NSException: %@", exception.description);
+        }
+        
+        if (includeUserLocation && self.userLocation != nil) {
+            [self setCenterCoordinate:self.userLocation.location.coordinate animated:animated];
+        }
+        
 	}
 }
 

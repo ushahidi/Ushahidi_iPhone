@@ -195,7 +195,7 @@
     [super applicationWillTerminate:application];
     [self updateIconBadgeNumber];
     for (USHMap *map in [[Ushahidi sharedInstance] maps]) {
-        map.syncing = NO;
+        map.syncing = [NSNumber numberWithBool:NO];
     }
     [[Ushahidi sharedInstance] saveChanges];
 }
@@ -205,7 +205,7 @@
     [[Ushahidi sharedInstance] saveChanges];
     [self updateIconBadgeNumber];
     for (USHMap *map in [[Ushahidi sharedInstance] maps]) {
-        map.syncing = NO;
+        map.syncing = [NSNumber numberWithBool:NO];
     }
     [[Ushahidi sharedInstance] saveChanges];
 }

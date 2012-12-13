@@ -70,6 +70,8 @@
 	</array>
 	<key>USHAppStoreURL</key>
 	<string>http://itunes.apple.com/us/app/inherity/id462758826</string>
+	<key>USHAppDescription</key>
+	<string>The Initiative for Heritage Conservancy was established in November 2008 as a not-for-profit charity with the aim of promoting best practice in archaeological site management and planning in Greece as well as abroad.</string>
 	<key>USHButtonDoneColor</key>
 	<string>#cdb380</string>
 	<key>USHMapURL</key>

@@ -80,6 +80,7 @@ typedef enum {
 } TableSectionPhotoRow;
 
 typedef enum {
+    TableSectionAboutRowDescription,
 	TableSectionAboutRowVersion,
 	TableSectionAboutRowShare,
 	TableSectionAboutRowEmail,
@@ -244,6 +245,9 @@ typedef enum {
         }
     }
     else if (indexPath.section == TableSectionAbout) {
+        if (indexPath.row == TableSectionAboutRowDescription) {
+            return [USHTableCellFactory iconTableCellForTable:tableView indexPath:indexPath text:[[USHSettings sharedInstance] appDescription] icon:@"organization.png" accessory:YES];
+        }
         if (indexPath.row == TableSectionAboutRowVersion) {
             NSString *version = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Version", nil), [[USHSettings sharedInstance] appVersion], nil];
             return [USHTableCellFactory iconTableCellForTable:tableView indexPath:indexPath text:version icon:@"version.png" accessory:NO];
@@ -300,6 +304,13 @@ typedef enum {
         NSString *logo = [USHDevice isIPad] ? @"Logo-iPad.png" : @"Logo-iPhone.png";
         UIImage *image = [UIImage imageNamed:logo];
         return tableView.contentSize.width * image.size.height / image.size.width;
+    }
+    if (indexPath.section == TableSectionAbout && indexPath.row == TableSectionAboutRowDescription) {
+        NSString *description = [[USHSettings sharedInstance] appDescription] ;
+        if ([NSString isNilOrEmpty:description]) {
+            return 0;
+        }
+        return [USHIconTableCell heightForTable:tableView text:description accessory:YES];
     }
     return 44;
 }

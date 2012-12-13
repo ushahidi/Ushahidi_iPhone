@@ -36,12 +36,19 @@
 }
 
 + (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text {
+    return [USHIconTableCell heightForTable:tableView text:text accessory:NO];
+}
+
++ (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text accessory:(BOOL)accessory {
     CGFloat width = [tableView contentWidth];
     width -= 32; //left
     width -= 8; //right
+    if (accessory) {
+        width -= 20; //accessory
+    }
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:16]
-                   constrainedToSize:CGSizeMake(width, CGFLOAT_MAX) 
-                       lineBreakMode:UILineBreakModeWordWrap]; 
+                   constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)
+                       lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height;
     height += 6; //top
     height += 6; //bottom

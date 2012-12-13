@@ -29,9 +29,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(USHSettings);
 
 @property(nonatomic, assign, readonly) NSString *appName;
 @property(nonatomic, assign, readonly) NSString *appVersion;
+@property(nonatomic, assign, readonly) NSString *appDescription;
 
 @property(nonatomic, assign, readonly) NSString *mapName;
-
 @property(nonatomic, assign, readonly) NSString *mapURL;
 @property(nonatomic, assign, readonly) BOOL hasMapURL;
 

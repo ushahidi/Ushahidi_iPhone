@@ -30,5 +30,6 @@
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 
 + (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text;
++ (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text accessory:(BOOL)accessory;
 
 @end

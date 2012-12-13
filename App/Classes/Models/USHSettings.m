@@ -41,6 +41,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHSettings);
     return [self stringFromBundleForKey:@"CFBundleVersion"];
 }
 
+- (NSString *) appDescription {
+    return [self stringFromBundleForKey:@"USHAppDescription"];
+}
+
 - (NSString *) mapName {
     return [self stringFromBundleForKey:@"CFBundleName"];
 }

@@ -105,24 +105,32 @@
 }
 
 - (void)dealloc {
+    DLog(@"%@", self.map.url);
+    [_callback release];
+    [_delegate release];
     [_operations removeObserver:self forKeyPath:@"operations"];
     [_operations release];
     [_images removeObserver:self forKeyPath:@"operations"];
     [_images release];
     [_map release];
-    [_callback release];
-    [_delegate release];
+    [_youtubeKey release];
+    [_youtubeUsername release];
+    [_youtubePassword release];
     [super dealloc];
 }
 
 #pragma mark - NSOperation
+
+- (BOOL) isConcurrent {
+    return YES;
+}
 
 - (void)start {
     if (![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:YES];
         return;
     }
-    DLog(@"%@ %@", self.class, self.map.url);
+    DLog(@"%@", self.map.url);
     
     [self willChangeValueForKey:@"isExecuting"];
     _isExecuting = YES;
@@ -159,25 +167,26 @@
     USHDownloadVersion *downloadVersion = [[[USHDownloadVersion alloc] initWithDelegate:self.delegate
                                                                                callback:self.callback
                                                                                     map:self.map] autorelease];
-    
     [self.operations addOperation:downloadVersion];
+    
     USHDownloadReport *downloadReport = [[[USHDownloadReport alloc] initWithDelegate:self.delegate
                                                                             callback:self.callback
                                                                                  map:self.map] autorelease];
-    
     [downloadReport addDependency:downloadVersion];
     [self.operations addOperation:downloadReport];
+    
     USHDownloadCategory *downloadCategory = [[[USHDownloadCategory alloc] initWithDelegate:self.delegate
                                                                                   callback:self.callback
                                                                                        map:self.map] autorelease];
-    
     [downloadCategory addDependency:downloadReport];
     [self.operations addOperation:downloadCategory];
+    
     USHDownloadLocation *downloadLocation = [[[USHDownloadLocation alloc] initWithDelegate:self.delegate
                                                                                   callback:self.callback
                                                                                        map:self.map] autorelease];
     [downloadLocation addDependency:downloadCategory];
     [self.operations addOperation:downloadLocation];
+    
     if ([self.map.checkin boolValue]) {
         USHDownloadCheckin *downloadCheckin = [[[USHDownloadCheckin alloc] initWithDelegate:self.delegate
                                                                                    callback:self.callback
@@ -188,7 +197,7 @@
 }
 
 - (void) finish {
-    DLog(@"%@ %@", self.class, self.map.url);
+    DLog(@"%@", self.map.url);
     
     [self willChangeValueForKey:@"isExecuting"];
     [self willChangeValueForKey:@"isFinished"];
@@ -198,13 +207,11 @@
     
     [self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];
-    
-    [self.delegate performSelector:@selector(synchronize:finished:error:)
-                       withObjects:self, self.map, nil, nil];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == self.operations && [keyPath isEqualToString:@"operations"]) {
+        //DLog(@"%@ Operations:%d", self.map.name, self.operations.operationCount);
         if (self.operations.operationCount == 0) {
             BOOL hasDownloads = NO;
             if (self.photos) {
@@ -212,6 +219,7 @@
                     for (USHPhoto *photo in report.photos) {
                         if (photo.url != nil && photo.image == nil) {
                             hasDownloads = YES;
+                            DLog(@"Image:%@", photo.url);
                             USHDownloadPhoto *downloadPhoto = [[[USHDownloadPhoto alloc] initWithDelegate:self.delegate
                                                                                                  callback:self.callback
                                                                                                       map:self.map
@@ -226,6 +234,7 @@
                 for (USHReport *report in self.map.reports) {
                     if (report.snapshot == nil) {
                         hasDownloads = YES;
+                        DLog(@"Map:%@", report.url);
                         USHDownloadMap *downloadMap = [[[USHDownloadMap alloc] initWithDelegate:self.delegate
                                                                                        callback:self.callback
                                                                                             map:self.map
@@ -235,12 +244,17 @@
                 }
             }
             if (self.images.operationCount == 0 && hasDownloads == NO) {
+                [self.delegate performSelector:@selector(synchronize:finished:error:)
+                                   withObjects:self, self.map, nil, nil];
                 [self finish];
             }
         }
     }
     else if (object == self.images && [keyPath isEqualToString:@"operations"]) {
-        if (self.images.operationCount == 0) {
+        //DLog(@"%@ Images:%d", self.map.name, self.operations.operationCount);
+        if (self.operations.operationCount == 0 && self.images.operationCount == 0) {
+            [self.delegate performSelector:@selector(synchronize:finished:error:)
+                               withObjects:self, self.map, nil, nil];
             [self finish];
         }
     }

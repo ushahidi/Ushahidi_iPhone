@@ -202,7 +202,6 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [super applicationDidEnterBackground:application];
-    [[Ushahidi sharedInstance] saveChanges];
     [self updateIconBadgeNumber];
     for (USHMap *map in [[Ushahidi sharedInstance] maps]) {
         map.syncing = [NSNumber numberWithBool:NO];
@@ -285,19 +284,22 @@
 }
 
 - (NSArray*) loadCustomMaps {
-    NSDictionary *maps = [[USHSettings sharedInstance] mapURLs];
-    for (NSString *name in maps.allKeys) {
-        NSString *url = [maps objectForKey:name];
-        if ([[Ushahidi sharedInstance] hasMapWithUrl:url]) {
-            DLog(@"Exists %@ %@", name, url);
+    if ([[[Ushahidi sharedInstance] maps] count] == 0) {
+        NSDictionary *maps = [[USHSettings sharedInstance] mapURLs];
+        for (NSString *name in maps.allKeys) {
+            NSString *url = [maps objectForKey:name];
+            if ([[Ushahidi sharedInstance] hasMapWithUrl:url]) {
+                DLog(@"Exists %@ %@", name, url);
+            }
+            else {
+                DLog(@"Added %@ %@", name, url);
+                [[Ushahidi sharedInstance] addMapWithUrl:url title:name];
+            }
         }
-        else {
-            DLog(@"Added %@ %@", name, url);
-            [[Ushahidi sharedInstance] addMapWithUrl:url title:name];
-        }
+        [[Ushahidi sharedInstance] saveChanges];
+        return [[Ushahidi sharedInstance] maps];
     }
-    [[Ushahidi sharedInstance] saveChanges];
-    return [[Ushahidi sharedInstance] maps];
+    return [NSArray array];
 }
 
 #pragma mark - Helpers

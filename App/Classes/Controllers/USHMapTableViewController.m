@@ -401,14 +401,6 @@ typedef enum {
     else {
         [self.tableView reloadData];
     }
-    if (error != nil) {
-        [UIAlertView showWithTitle:map.name
-                           message:[error localizedDescription] 
-                          delegate:self 
-                               tag:0 
-                            cancel:NSLocalizedString(@"OK", nil) 
-                           buttons:nil];   
-    }
 }
 
 - (void) ushahidi:(Ushahidi*)ushahidi synchronization:(NSInteger)remaining {

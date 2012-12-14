@@ -66,7 +66,7 @@ typedef enum {
                                                                                        query:@"map.url = %@ && identifier = %@"
                                                                                       params:self.map.url, [incident stringForKey:@"incidentid"], nil];
             self.report.identifier = [incident stringForKey:@"incidentid"];
-            self.report.url = [self.map.url urlStringByAppendingFormat:@"/reports/view/%@", [incident stringForKey:@"incidentid"]];
+            self.report.url = [self.map.url urlStringByAppendingFormat:@"/reports/view/%@", [incident stringForKey:@"incidentid"], nil];
             self.report.title = [incident stringForKey:@"incidenttitle"];
             self.report.desc = [incident stringForKey:@"incidentdescription"];
             self.report.latitude = [NSNumber numberWithDouble:[incident doubleForKey:@"locationlatitude"]];

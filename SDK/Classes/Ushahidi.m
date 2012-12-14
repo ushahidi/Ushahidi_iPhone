@@ -300,6 +300,13 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
             [[USHDatabase sharedInstance] saveChanges];
 }
 
+#pragma mark - USHDatabase
+
+- (BOOL) saveChanges {
+    return  [[USHDatabase sharedInstance] hasChanges] &&
+    [[USHDatabase sharedInstance] saveChanges];
+}
+
 #pragma mark - Synchronize
 
 - (NSDate*) synchronizeDate {
@@ -355,13 +362,6 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
         return YES;
     }
     return NO;
-}
-
-#pragma mark - USHDatabase
-
-- (BOOL) saveChanges {
-    return  [[USHDatabase sharedInstance] hasChanges] &&
-            [[USHDatabase sharedInstance] saveChanges];
 }
 
 #pragma mark - USHSynchronizeDelegate

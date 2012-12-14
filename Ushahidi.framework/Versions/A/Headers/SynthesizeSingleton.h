@@ -89,7 +89,7 @@
  */
 
 #define SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(SS_CLASSNAME)	\
-\
+	\
 + (SS_CLASSNAME*) sharedInstance;	\
 + (void) purgeSharedInstance;
 
@@ -105,122 +105,122 @@
 @end
 
 #define SYNTHESIZE_SINGLETON_FOR_CLASS(SS_CLASSNAME)	\
-\
+	\
 static volatile SS_CLASSNAME* _##SS_CLASSNAME##_sharedInstance = nil;	\
-\
+	\
 + (SS_CLASSNAME*) sharedInstanceNoSynch	\
 {	\
-return (SS_CLASSNAME*) _##SS_CLASSNAME##_sharedInstance;	\
+	return (SS_CLASSNAME*) _##SS_CLASSNAME##_sharedInstance;	\
 }	\
-\
+	\
 + (SS_CLASSNAME*) sharedInstanceSynch	\
 {	\
-@synchronized(self)	\
-{	\
-if(nil == _##SS_CLASSNAME##_sharedInstance)	\
-{	\
-_##SS_CLASSNAME##_sharedInstance = [[self alloc] init];	\
+	@synchronized(self)	\
+	{	\
+		if(nil == _##SS_CLASSNAME##_sharedInstance)	\
+		{	\
+			_##SS_CLASSNAME##_sharedInstance = [[self alloc] init];	\
+		}	\
+	}	\
+	return (SS_CLASSNAME*) _##SS_CLASSNAME##_sharedInstance;	\
 }	\
-}	\
-return (SS_CLASSNAME*) _##SS_CLASSNAME##_sharedInstance;	\
-}	\
-\
+	\
 + (SS_CLASSNAME*) sharedInstance	\
 {	\
-return [self sharedInstanceSynch]; \
+	return [self sharedInstanceSynch]; \
 }	\
-\
+	\
 + (id)allocWithZone:(NSZone*) zone	\
 {	\
-@synchronized(self)	\
-{	\
-if (nil == _##SS_CLASSNAME##_sharedInstance)	\
-{	\
-_##SS_CLASSNAME##_sharedInstance = [super allocWithZone:zone];	\
-if(nil != _##SS_CLASSNAME##_sharedInstance)	\
-{	\
-Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceNoSynch));	\
-method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
-method_setImplementation(class_getInstanceMethod(self, @selector(retainCount)), class_getMethodImplementation(self, @selector(retainCountDoNothing)));	\
-method_setImplementation(class_getInstanceMethod(self, @selector(release)), class_getMethodImplementation(self, @selector(releaseDoNothing)));	\
-method_setImplementation(class_getInstanceMethod(self, @selector(autorelease)), class_getMethodImplementation(self, @selector(autoreleaseDoNothing)));	\
+	@synchronized(self)	\
+	{	\
+		if (nil == _##SS_CLASSNAME##_sharedInstance)	\
+		{	\
+			_##SS_CLASSNAME##_sharedInstance = [super allocWithZone:zone];	\
+			if(nil != _##SS_CLASSNAME##_sharedInstance)	\
+			{	\
+				Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceNoSynch));	\
+				method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
+				method_setImplementation(class_getInstanceMethod(self, @selector(retainCount)), class_getMethodImplementation(self, @selector(retainCountDoNothing)));	\
+				method_setImplementation(class_getInstanceMethod(self, @selector(release)), class_getMethodImplementation(self, @selector(releaseDoNothing)));	\
+				method_setImplementation(class_getInstanceMethod(self, @selector(autorelease)), class_getMethodImplementation(self, @selector(autoreleaseDoNothing)));	\
+			}	\
+		}	\
+	}	\
+	return _##SS_CLASSNAME##_sharedInstance;	\
 }	\
-}	\
-}	\
-return _##SS_CLASSNAME##_sharedInstance;	\
-}	\
-\
+	\
 + (void)purgeSharedInstance	\
 {	\
-@synchronized(self)	\
-{	\
-if(nil != _##SS_CLASSNAME##_sharedInstance)	\
-{	\
-Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceSynch));	\
-method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
-method_setImplementation(class_getInstanceMethod(self, @selector(retainCount)), class_getMethodImplementation(self, @selector(retainCountDoSomething)));	\
-method_setImplementation(class_getInstanceMethod(self, @selector(release)), class_getMethodImplementation(self, @selector(releaseDoSomething)));	\
-method_setImplementation(class_getInstanceMethod(self, @selector(autorelease)), class_getMethodImplementation(self, @selector(autoreleaseDoSomething)));	\
-[_##SS_CLASSNAME##_sharedInstance release];	\
-_##SS_CLASSNAME##_sharedInstance = nil;	\
+	@synchronized(self)	\
+	{	\
+		if(nil != _##SS_CLASSNAME##_sharedInstance)	\
+		{	\
+			Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceSynch));	\
+			method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
+			method_setImplementation(class_getInstanceMethod(self, @selector(retainCount)), class_getMethodImplementation(self, @selector(retainCountDoSomething)));	\
+			method_setImplementation(class_getInstanceMethod(self, @selector(release)), class_getMethodImplementation(self, @selector(releaseDoSomething)));	\
+			method_setImplementation(class_getInstanceMethod(self, @selector(autorelease)), class_getMethodImplementation(self, @selector(autoreleaseDoSomething)));	\
+			[_##SS_CLASSNAME##_sharedInstance release];	\
+			_##SS_CLASSNAME##_sharedInstance = nil;	\
+		}	\
+	}	\
 }	\
-}	\
-}	\
-\
+	\
 - (id)copyWithZone:(NSZone *)zone	\
 {	\
-return self;	\
+	return self;	\
 }	\
-\
+	\
 - (id)retain	\
 {	\
-return self;	\
+	return self;	\
 }	\
-\
+	\
 - (NSUInteger)retainCount	\
 {	\
-NSAssert1(1==0, @"SynthesizeSingleton: %@ ERROR: -(NSUInteger)retainCount method did not get swizzled.", self);	\
-return NSUIntegerMax;	\
+	NSAssert1(1==0, @"SynthesizeSingleton: %@ ERROR: -(NSUInteger)retainCount method did not get swizzled.", self);	\
+	return NSUIntegerMax;	\
 }	\
-\
+	\
 - (NSUInteger)retainCountDoNothing	\
 {	\
-return NSUIntegerMax;	\
+	return NSUIntegerMax;	\
 }	\
 - (NSUInteger)retainCountDoSomething	\
 {	\
-return [super retainCount];	\
+	return [super retainCount];	\
 }	\
-\
+	\
 - (oneway void)release	\
 {	\
-NSAssert1(1==0, @"SynthesizeSingleton: %@ ERROR: -(void)release method did not get swizzled.", self);	\
+	NSAssert1(1==0, @"SynthesizeSingleton: %@ ERROR: -(void)release method did not get swizzled.", self);	\
 }	\
-\
+	\
 - (oneway void)releaseDoNothing{}	\
-\
+	\
 - (oneway void)releaseDoSomething	\
 {	\
-@synchronized(self)	\
-{	\
-[super release];	\
+	@synchronized(self)	\
+	{	\
+		[super release];	\
+	}	\
 }	\
-}	\
-\
+	\
 - (id)autorelease	\
 {	\
-NSAssert1(1==0, @"SynthesizeSingleton: %@ ERROR: -(id)autorelease method did not get swizzled.", self);	\
-return self;	\
+	NSAssert1(1==0, @"SynthesizeSingleton: %@ ERROR: -(id)autorelease method did not get swizzled.", self);	\
+	return self;	\
 }	\
-\
+	\
 - (id)autoreleaseDoNothing	\
 {	\
-return self;	\
+	return self;	\
 }	\
-\
+	\
 - (id)autoreleaseDoSomething	\
 {	\
-return [super autorelease];	\
+	return [super autorelease];	\
 }
 
 
@@ -293,68 +293,68 @@ return [super autorelease];	\
  */
 
 #define SYNTHESIZE_LESSER_SINGLETON_FOR_CLASS(SS_CLASSNAME)	\
-\
+	\
 static volatile SS_CLASSNAME* _##SS_CLASSNAME##_sharedInstance = nil;	\
-\
+	\
 + (SS_CLASSNAME*) sharedInstanceNoSynch	\
 {	\
-return (SS_CLASSNAME*) _##SS_CLASSNAME##_sharedInstance;	\
+	return (SS_CLASSNAME*) _##SS_CLASSNAME##_sharedInstance;	\
 }	\
-\
+	\
 + (SS_CLASSNAME*) sharedInstanceSynch	\
 {	\
-@synchronized(self)	\
-{	\
-if(nil == _##SS_CLASSNAME##_sharedInstance)	\
-{	\
-_##SS_CLASSNAME##_sharedInstance = [[self alloc] init];	\
-if(_##SS_CLASSNAME##_sharedInstance)	\
-{	\
-Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceNoSynch));	\
-method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
+	@synchronized(self)	\
+	{	\
+		if(nil == _##SS_CLASSNAME##_sharedInstance)	\
+		{	\
+			_##SS_CLASSNAME##_sharedInstance = [[self alloc] init];	\
+			if(_##SS_CLASSNAME##_sharedInstance)	\
+			{	\
+				Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceNoSynch));	\
+				method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
+			}	\
+		}	\
+	}	\
+	return (SS_CLASSNAME*) _##SS_CLASSNAME##_sharedInstance;	\
 }	\
-}	\
-}	\
-return (SS_CLASSNAME*) _##SS_CLASSNAME##_sharedInstance;	\
-}	\
-\
+	\
 + (SS_CLASSNAME*) sharedInstance	\
 {	\
-return [self sharedInstanceSynch]; \
+	return [self sharedInstanceSynch]; \
 }	\
-\
+	\
 + (void)purgeSharedInstance	\
 {	\
-@synchronized(self)	\
-{	\
-Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceSynch));	\
-method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
-[_##SS_CLASSNAME##_sharedInstance release];	\
-_##SS_CLASSNAME##_sharedInstance = nil;	\
-}	\
+	@synchronized(self)	\
+	{	\
+		Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceSynch));	\
+		method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
+		[_##SS_CLASSNAME##_sharedInstance release];	\
+		_##SS_CLASSNAME##_sharedInstance = nil;	\
+	}	\
 }
 
 
 #define CALL_LESSER_SINGLETON_INIT_METHOD_PRE(SS_CLASSNAME) \
-@synchronized(self)	\
-{	\
-if(nil == _##SS_CLASSNAME##_sharedInstance)	\
-{
+	@synchronized(self)	\
+	{	\
+		if(nil == _##SS_CLASSNAME##_sharedInstance)	\
+		{
 
 
 #define CALL_LESSER_SINGLETON_INIT_METHOD_POST(SS_CLASSNAME) \
-if(_##SS_CLASSNAME##_sharedInstance)	\
-{	\
-Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceNoSynch));	\
-method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
-}	\
-}	\
-}
+			if(_##SS_CLASSNAME##_sharedInstance)	\
+			{	\
+				Method newSharedInstanceMethod = class_getClassMethod(self, @selector(sharedInstanceNoSynch));	\
+				method_setImplementation(class_getClassMethod(self, @selector(sharedInstance)), method_getImplementation(newSharedInstanceMethod));	\
+			}	\
+		}	\
+	}
 
 
 #define CALL_LESSER_SINGLETON_INIT_METHOD(SS_CLASSNAME,__INIT_CALL__) \
-CALL_LESSER_SINGLETON_INIT_METHOD_PRE(SS_CLASSNAME); \
-_##SS_CLASSNAME##_sharedInstance = [[self alloc] __INIT_CALL__];	\
-CALL_LESSER_SINGLETON_INIT_METHOD_POST(SS_CLASSNAME)
+	CALL_LESSER_SINGLETON_INIT_METHOD_PRE(SS_CLASSNAME); \
+	_##SS_CLASSNAME##_sharedInstance = [[self alloc] __INIT_CALL__];	\
+	CALL_LESSER_SINGLETON_INIT_METHOD_POST(SS_CLASSNAME)
 
 #endif /* SYNTHESIZE_SINGLETON_FOR_CLASS */

@@ -28,6 +28,7 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory;
+- (void)contextDidSave:(NSNotification *)notification;
 
 @end
 
@@ -51,15 +52,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHDatabase);
 }
 
 - (BOOL) saveChanges {
-    NSError *error;
-    if ([self.managedObjectContext save:&error]) {
-        DLog(@"Saved");
-        return YES;
+    @try {
+        NSError *error;
+        [self.managedObjectContext lock];
+        if ([self.managedObjectContext save:&error]) {
+            DLog(@"Saved");
+            return YES;
+        }
+        else {
+            DLog(@"Failed: %@", [error localizedDescription]);
+            return NO;
+        }
     }
-    else {
-        DLog(@"Failed: %@", [error localizedDescription]);
-        return NO;
+    @catch (NSException *exception) {
+        DLog(@"NSException %@", exception.description);
     }
+    @finally {
+        [self.managedObjectContext unlock];
+    }
+    return NO;
 }
 
 - (BOOL) remove:(id)model {
@@ -233,7 +244,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHDatabase);
         DLog(@"Bundle Does NOT Exist: %@", frameworkBundlePath);
     }
     NSBundle *frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
-    //NSString *bundleResourcePath = [frameworkBundle pathForResource:self.name ofType:@"momd"];
     NSString *bundleResourcePath = [frameworkBundle pathForResource:self.name ofType:@"mom" inDirectory:[NSString stringWithFormat:@"%@.momd", self.name]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:bundleResourcePath]){
         DLog(@"Resource Exists: %@", bundleResourcePath);

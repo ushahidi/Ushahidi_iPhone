@@ -42,7 +42,6 @@
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *password;
 
-
 @end
 
 @implementation USHDownload
@@ -97,12 +96,18 @@
     [_callback release];
     [_api release];
     [_map release];
-    [_response release];
     [_url release];
     [_domain release];
+    [_response release];
     [_username release];
     [_password release];
     [super dealloc];
+}
+
+#pragma mark - NSOperation
+
+- (BOOL) isConcurrent {
+    return YES;
 }
 
 - (void)start {
@@ -121,7 +126,7 @@
                                    withObjects:self, self.map, nil];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:10.0];
+                                                       timeoutInterval:120.0];
     if ([NSString isNilOrEmpty:self.username] == NO &&
         [NSString isNilOrEmpty:self.password] == NO) {
         NSString *credentials = [NSString stringWithFormat:@"%@:%@", self.username, self.password];

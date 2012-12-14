@@ -78,8 +78,20 @@
 	<string></string>
 	<key>USHMapURLS</key>
 	<dict>
-		<key>Ushahidi Demo</key>
-		<string>http://demo.ushahidi.com</string>
+		<key>HarassMap</key>
+		<string>http://harassmap.org</string>
+		<key>Tech Hubs in Africa</key>
+		<string>https://africahubs.crowdmap.com</string>
+		<key>I Paid A Bribe</key>
+		<string>http://www.ipaidabribe.org.zw</string>
+		<key>ICT in Conflict &amp; Disaster</key>
+		<string>https://ict4peace.crowdmap.com</string>
+		<key>Take Back The Tech!</key>
+		<string>https://www.takebackthetech.net/mapit/</string>
+		<key>Palestine CrisisMap</key>
+		<string>https://bindup.crowdmap.com</string>
+		<key>The Cost Of Chicken</key>
+		<string>https://costofchicken.crowdmap.com</string>
 	</dict>
 	<key>USHNavBarColor</key>
 	<string>#524939</string>

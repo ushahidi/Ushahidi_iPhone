@@ -79,6 +79,7 @@ typedef enum {
 
 - (void) initialSyncIfNeeded {
     if ([[Ushahidi sharedInstance] synchronizeDate] == nil) {
+        [self showLoadingWithMessage:NSLocalizedString(@"Loading...", nil)];
         [self startRefreshControl];
     }
 }

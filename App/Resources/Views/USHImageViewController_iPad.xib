@@ -318,20 +318,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">USHViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="navigationBar">UINavigationBar</string>
-						<string key="toolBar">UIToolbar</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="navigationBar">
-							<string key="name">navigationBar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="toolBar">
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">toolBar</string>
+						<string key="NS.object.0">UIToolbar</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">toolBar</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
 							<string key="name">toolBar</string>
 							<string key="candidateClassName">UIToolbar</string>
 						</object>
-					</dictionary>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/USHViewController.h</string>

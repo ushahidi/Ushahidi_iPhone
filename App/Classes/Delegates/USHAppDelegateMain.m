@@ -312,8 +312,9 @@
 
 - (UISplitViewController*) splitViewControllerWithDelegate:(id<UISplitViewControllerDelegate>)delegate master:(UIViewController*)masterViewController details:(UIViewController*)detailsViewController {
     UISplitViewController *splitViewController = [[[UISplitViewController alloc] init] autorelease];
-    UINavigationController *navigationController = [self navigationControllerWithRootViewController:detailsViewController];
-    splitViewController.viewControllers = [NSArray arrayWithObjects:masterViewController, navigationController, nil];
+    UINavigationController *masterNavigationController = [self navigationControllerWithRootViewController:masterViewController];
+    UINavigationController *detailsNavigationController = [self navigationControllerWithRootViewController:detailsViewController];
+    splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailsNavigationController, nil];
     splitViewController.delegate = delegate;
     return splitViewController;
 }

@@ -342,6 +342,13 @@
 		3EE57FAB164D0740002677E6 /* USHDownloadPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE57FA9164D0740002677E6 /* USHDownloadPhoto.m */; };
 		3EFAD0D51647328B00A02316 /* USHHeaderView.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 3E6E526D15EE5DF000CF67D6 /* USHHeaderView.h */; };
 		3EFB23DF167BC11000321464 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EFB23DD167BC11000321464 /* Localizable.strings */; };
+		3EFB23E9167BC29D00321464 /* Localizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E4CCE20167BBB43006BC175 /* Localizable.strings */; };
+		3EFB23EA167BC29D00321464 /* Localizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E4CCE1D167BBB43006BC175 /* Localizable.strings */; };
+		3EFB23EB167BC29D00321464 /* Localizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E4CCE23167BBB43006BC175 /* Localizable.strings */; };
+		3EFB23EC167BC29D00321464 /* Localizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E4CCE26167BBB43006BC175 /* Localizable.strings */; };
+		3EFB23ED167BC29D00321464 /* Localizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E4CCE29167BBB43006BC175 /* Localizable.strings */; };
+		3EFB23EE167BC29D00321464 /* Localizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3E4CCE2C167BBB43006BC175 /* Localizable.strings */; };
+		3EFB23EF167BC29D00321464 /* Localizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3EFB23DD167BC11000321464 /* Localizable.strings */; };
 		3EFF5ABF162097D20072FAE1 /* UITableView+USH.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EFF5ABD162097D20072FAE1 /* UITableView+USH.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EFF5AC0162097D20072FAE1 /* UITableView+USH.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EFF5ABE162097D20072FAE1 /* UITableView+USH.m */; };
 		3EFF5AC31620BB4C0072FAE1 /* NSBundle+USH.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 3E022E0715ECC4ED00FDDC9E /* NSBundle+USH.h */; };
@@ -372,6 +379,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				3EFB23E9167BC29D00321464 /* Localizable.strings in CopyFiles */,
+				3EFB23EA167BC29D00321464 /* Localizable.strings in CopyFiles */,
+				3EFB23EB167BC29D00321464 /* Localizable.strings in CopyFiles */,
+				3EFB23EC167BC29D00321464 /* Localizable.strings in CopyFiles */,
+				3EFB23ED167BC29D00321464 /* Localizable.strings in CopyFiles */,
+				3EFB23EE167BC29D00321464 /* Localizable.strings in CopyFiles */,
+				3EFB23EF167BC29D00321464 /* Localizable.strings in CopyFiles */,
 				3E9E4D77166FFDFA0095F4A4 /* hide.png in CopyFiles */,
 				3E9E4D78166FFDFA0095F4A4 /* hide@2x.png in CopyFiles */,
 				3E9E4D79166FFDFA0095F4A4 /* show.png in CopyFiles */,

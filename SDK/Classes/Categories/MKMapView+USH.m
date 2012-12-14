@@ -57,13 +57,13 @@
 	CLLocationCoordinate2D coordinate;
 	coordinate.latitude = [latitude floatValue];
 	coordinate.longitude = [longitude floatValue];
-	USHMapAnnotation *mapAnnotation = [[USHMapAnnotation alloc] initWithTitle:title 
-															   subtitle:subtitle 
-															 coordinate:coordinate
-															   pinColor:pinColor];
+	USHMapAnnotation *mapAnnotation = [[[USHMapAnnotation alloc] initWithTitle:title 
+                                                                      subtitle:subtitle 
+                                                                    coordinate:coordinate
+                                                                      pinColor:pinColor] autorelease];
 	[mapAnnotation setObject:object];
 	[self addAnnotation:mapAnnotation];
-	return [mapAnnotation autorelease];
+	return mapAnnotation;
 }
 
 - (void) removeAllPins {
@@ -123,25 +123,18 @@
 				bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude);
 			}
 		}
-		
         @try {
             MKCoordinateRegion region;
             region.center.latitude = topLeftCoordinate.latitude - (topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 0.5;
             region.center.longitude = topLeftCoordinate.longitude + (bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 0.5;
             region.span.latitudeDelta = fabs(topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 1.1;
             region.span.longitudeDelta = fabs(bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 1.1;
-            
             [self setRegion:[self regionThatFits:region] animated:animated];
         }
         @catch (NSException *exception) {
              DLog(@"NSException: %@", exception.description);
         }
-        
-        if (includeUserLocation && self.userLocation != nil) {
-            [self setCenterCoordinate:self.userLocation.location.coordinate animated:animated];
-        }
-        
-	}
+    }
 }
 
 - (UIGestureRecognizer *) addTapRecognizer:(id)target action:(SEL)action taps:(NSInteger)numberOfTaps {

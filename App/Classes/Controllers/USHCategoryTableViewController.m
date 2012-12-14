@@ -58,7 +58,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.doneButton.title = NSLocalizedString(@"Done", nil);
-    self.navigationItem.title = NSLocalizedString(@"Catetories", nil);
+    self.navigationItem.title = NSLocalizedString(@"Categories", nil);
 }
 
 - (void)dealloc {

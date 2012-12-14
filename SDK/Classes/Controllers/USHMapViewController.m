@@ -169,7 +169,6 @@
     [self userLocatedAtLatitude:latitude longitude:longitude];
 	[mapView resizeRegionToFitAllPins:YES animated:YES];
     [self hideLoading];
-    
 }
 
 #pragma mark - UIActionSheetDelegate

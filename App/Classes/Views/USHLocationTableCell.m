@@ -20,6 +20,7 @@
 
 #import "USHLocationTableCell.h"
 #import <Ushahidi/MKMapView+USH.h>
+#import <Ushahidi/MKPinAnnotationView+USH.h>
 
 @interface USHLocationTableCell ()
 
@@ -44,6 +45,12 @@
 - (void)dealloc {
     [_mapView release];
     [super dealloc];
+}
+
+#pragma mark - MKMapViewDelegate
+
+- (MKAnnotationView *) mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation {
+	return [MKPinAnnotationView getPinForMap:map andAnnotation:annotation];
 }
 
 @end

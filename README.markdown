@@ -18,10 +18,17 @@ Once the data has been downloaded, the app can function without an internet conn
 The old Ushahidi iOS 2.X code repository can be found at [Ushahidi iOS 2.X](https://github.com/ushahidi/Ushahidi_iPhone/Old)
 
 ### Using The SDK ###
+Including the Ushahidi SDK in your own project allows you to create your own custom app that synchronizes with an Ushahidi deployment.
 
-
+* Add Ushahidi.framework into your project
+* Add Ushahidi.bundle into your project
+* Add libraries marked as Required: Foundation.framework, UIKit.framework, CoreFoundation.framework, CoreGraphics.framework, CoreData.framework, CoreLocation.framework, MobileCoreServices.framework, MapKit.framework, MessageUI.framework, QuartzCore.framework, Security.framework, SystemConfiguration.framework
+* Add libraries marked as Optional: FacebookSDK.framework, Twitter.framework, Accounts.framework, Social.framework, AdSupport.framework
+* Add linked library marked as Optional: libsqlite3.0.dylib
 
 ### How To White-Label ###
+Whitelabeling the app allows you to quickly and easily create your own branded version of the app, with your own colors, graphics and pointing to your own map deployment. 
+
 * Duplicate the Ushahidi target with the name of your map (ex MapATL)
 * Right-click on your new target (ex MapATL) select Get Info > Build tab > rename Product Name to name of map without spaces (ex MapATL)
 * Duplicate the /Themes/Ushahidi folder with the name of your map as folder name (ex /Themes/MapATL)

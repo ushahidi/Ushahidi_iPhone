@@ -2087,18 +2087,18 @@
 				3E5CA9F51647102E0065AF67 /* AdSupport.framework in Frameworks */,
 				3E5CA9F3164710280065AF67 /* Social.framework in Frameworks */,
 				3EA29938159CF51B00AC6AF2 /* Ushahidi.framework in Frameworks */,
+				3E6D0327159B54CF00CDB5B7 /* UIKit.framework in Frameworks */,
+				3E6D0329159B54CF00CDB5B7 /* Foundation.framework in Frameworks */,
+				3E6D032B159B54CF00CDB5B7 /* CoreGraphics.framework in Frameworks */,
 				3EA23683159B9DFF0072A60D /* CoreData.framework in Frameworks */,
-				3EA23633159B92B50072A60D /* CoreFoundation.framework in Frameworks */,
 				3EA23634159B92B50072A60D /* CoreLocation.framework in Frameworks */,
+				3EA23633159B92B50072A60D /* CoreFoundation.framework in Frameworks */,
 				3EB0D715165C04DF0092DFC8 /* MobileCoreServices.framework in Frameworks */,
 				3EA23635159B92B50072A60D /* MapKit.framework in Frameworks */,
 				3EA23636159B92B50072A60D /* MessageUI.framework in Frameworks */,
 				3EA23637159B92B50072A60D /* QuartzCore.framework in Frameworks */,
 				3EA23638159B92B50072A60D /* Security.framework in Frameworks */,
 				3EA23639159B92B50072A60D /* SystemConfiguration.framework in Frameworks */,
-				3E6D0327159B54CF00CDB5B7 /* UIKit.framework in Frameworks */,
-				3E6D0329159B54CF00CDB5B7 /* Foundation.framework in Frameworks */,
-				3E6D032B159B54CF00CDB5B7 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

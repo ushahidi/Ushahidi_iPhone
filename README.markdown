@@ -17,7 +17,11 @@ Once the data has been downloaded, the app can function without an internet conn
 ### Old Repository ###
 The old Ushahidi iOS 2.X code repository can be found at [Ushahidi iOS 2.X](https://github.com/ushahidi/Ushahidi_iPhone/Old)
 
-### How To White-Label The App ###
+### Using The SDK ###
+
+
+
+### How To White-Label ###
 * Duplicate the Ushahidi target with the name of your map (ex MapATL)
 * Right-click on your new target (ex MapATL) select Get Info > Build tab > rename Product Name to name of map without spaces (ex MapATL)
 * Duplicate the /Themes/Ushahidi folder with the name of your map as folder name (ex /Themes/MapATL)

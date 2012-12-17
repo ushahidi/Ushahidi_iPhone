@@ -90,9 +90,9 @@
 	<key>USHSearchBarColor</key>
 	<string>#756d61</string>
 	<key>USHShowReportButton</key>
-	<true/>
+	<false/>
 	<key>USHShowReportList</key>
-	<true/>
+	<false/>
 	<key>USHSortReportsByDate</key>
 	<true/>
 	<key>USHSupportEmail</key>

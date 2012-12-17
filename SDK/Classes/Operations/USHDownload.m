@@ -126,7 +126,7 @@
                                    withObjects:self, self.map, nil];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:120.0];
+                                                       timeoutInterval:30.0];
     if ([NSString isNilOrEmpty:self.username] == NO &&
         [NSString isNilOrEmpty:self.password] == NO) {
         NSString *credentials = [NSString stringWithFormat:@"%@:%@", self.username, self.password];

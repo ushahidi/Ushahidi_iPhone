@@ -133,7 +133,7 @@
     if (self.date != nil) {
         NSCalendar *calendar = [NSCalendar currentCalendar];
 		NSDateComponents *components = [calendar components:kCFCalendarUnitHour fromDate:self.date];
-        NSInteger hour = [components hour] > 12 ? 12 - [components hour] : [components hour];
+        NSInteger hour = [components hour] > 12 ? [components hour] - 12 : [components hour];
         return [NSString stringWithFormat:@"%d", hour];
     }
     return nil;

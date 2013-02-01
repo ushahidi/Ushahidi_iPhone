@@ -36,6 +36,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(USHLocator);
 - (void) lookupForDelegate:(NSObject<USHLocatorDelegate>*)delegate;
 - (void) geocodeForDelegate:(NSObject<USHLocatorDelegate>*)delegate;
 
+- (void) stopLocate;
+- (void) stopLookup;
+
 - (BOOL) hasLocation;
 - (BOOL) hasAddress;
 

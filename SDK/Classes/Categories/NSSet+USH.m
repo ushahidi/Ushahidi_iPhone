@@ -28,6 +28,13 @@
     return [[self allObjects] sortedArrayUsingDescriptors:descriptors]; 
 }
 
+- (NSArray*) sortedBy:(NSString*)sort1 andBy:(NSString*)sort2 ascending:(BOOL)ascending {
+    NSSortDescriptor *descriptor1 = [[[NSSortDescriptor alloc] initWithKey:sort1 ascending:ascending] autorelease];
+    NSSortDescriptor *descriptor2 = [[[NSSortDescriptor alloc] initWithKey:sort2 ascending:ascending] autorelease];
+    NSArray *descriptors = [NSArray arrayWithObjects:descriptor1, descriptor2, nil];
+    return [[self allObjects] sortedArrayUsingDescriptors:descriptors];
+}
+
 - (NSObject*) objectAtIndex:(NSInteger)index {
     return [[self allObjects] objectAtIndex:index];
 }

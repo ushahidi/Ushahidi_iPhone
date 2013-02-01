@@ -23,7 +23,7 @@
 @interface NSSet (USH)
 
 - (NSArray*) sortedBy:(NSString*)sort ascending:(BOOL)ascending;
-
+- (NSArray*) sortedBy:(NSString*)sort1 andBy:(NSString*)sort2 ascending:(BOOL)ascending;
 - (NSObject*) objectAtIndex:(NSInteger)index;
 
 @end

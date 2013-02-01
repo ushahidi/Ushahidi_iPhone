@@ -114,6 +114,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHLocator);
      }];
 }
 
+- (void) stopLocate {
+    DLog(@"");
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void) stopLookup {
+    DLog(@"");
+    [self.geoCoder cancelGeocode];
+}
+
 - (void) geocodeForDelegate:(NSObject<USHLocatorDelegate>*)delegate {
     self.delegate = delegate;
     if (NSClassFromString(@"CLGeocoder")) {

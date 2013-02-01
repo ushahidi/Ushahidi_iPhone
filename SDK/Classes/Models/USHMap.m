@@ -172,7 +172,7 @@
 }
 
 - (NSArray *) categoriesSortedByPosition {
-    return [self.categories sortedBy:@"position" ascending:YES];
+    return [self.categories sortedBy:@"position" andBy:@"title" ascending:YES];
 }
 
 

@@ -204,6 +204,7 @@
 		3EA79916167B7B52009C83B1 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA798FD167B7B52009C83B1 /* SBJsonUTF8Stream.m */; };
 		3EA79917167B7B52009C83B1 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EA798FE167B7B52009C83B1 /* SBJsonWriter.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3EA79918167B7B52009C83B1 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA798FF167B7B52009C83B1 /* SBJsonWriter.m */; };
+		3EAA31D716BBD1EC0089FC06 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EAA31D516BBD1EC0089FC06 /* Localizable.strings */; };
 		3EAA806515EA10C600F2FC16 /* USHLoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EAA806315EA10C600F2FC16 /* USHLoadingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAA806615EA10C600F2FC16 /* USHLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EAA806415EA10C600F2FC16 /* USHLoadingView.m */; };
 		3EAA808A15EA123C00F2FC16 /* USHDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EAA808515EA123C00F2FC16 /* USHDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -630,6 +631,7 @@
 		3EA798FD167B7B52009C83B1 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
 		3EA798FE167B7B52009C83B1 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		3EA798FF167B7B52009C83B1 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		3EAA31D616BBD1EC0089FC06 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Localizable.strings; sourceTree = "<group>"; };
 		3EAA806315EA10C600F2FC16 /* USHLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHLoadingView.h; sourceTree = "<group>"; };
 		3EAA806415EA10C600F2FC16 /* USHLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USHLoadingView.m; sourceTree = "<group>"; };
 		3EAA808515EA123C00F2FC16 /* USHDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHDevice.h; sourceTree = "<group>"; };
@@ -971,6 +973,7 @@
 			isa = PBXGroup;
 			children = (
 				3E4CCE1F167BBB43006BC175 /* en.lproj */,
+				3EAA31D316BBD1C80089FC06 /* cs.lproj */,
 				3EBB4D71167F695000DDB318 /* ca.lproj */,
 				3EBB4D74167F695000DDB318 /* de.lproj */,
 				3EBB4D77167F695000DDB318 /* ru.lproj */,
@@ -1158,6 +1161,14 @@
 				3EA2367E159B9CD20072A60D /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3EAA31D316BBD1C80089FC06 /* cs.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				3EAA31D516BBD1EC0089FC06 /* Localizable.strings */,
+			);
+			path = cs.lproj;
 			sourceTree = "<group>";
 		};
 		3EAA806115EA106600F2FC16 /* Views */ = {
@@ -1465,6 +1476,7 @@
 				ca,
 				de,
 				ru,
+				cs,
 			);
 			mainGroup = 3EA2CFD615926A19004E283B;
 			productRefGroup = 3EA2CFE215926A19004E283B /* Products */;
@@ -1504,6 +1516,7 @@
 				3EBB4D7A167F695000DDB318 /* Localizable.strings in Resources */,
 				3EBB4D7B167F695000DDB318 /* Localizable.strings in Resources */,
 				3EBB4D7C167F695000DDB318 /* Localizable.strings in Resources */,
+				3EAA31D716BBD1EC0089FC06 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1766,6 +1779,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				3E4CCE2D167BBB43006BC175 /* sw */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3EAA31D516BBD1EC0089FC06 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EAA31D616BBD1EC0089FC06 /* cs */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

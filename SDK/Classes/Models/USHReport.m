@@ -130,7 +130,13 @@
 }
 
 - (NSString *) date12Hour {
-    return [self dateFormatted:@"hh"];
+    if (self.date != nil) {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+		NSDateComponents *components = [calendar components:kCFCalendarUnitHour fromDate:self.date];
+        NSInteger hour = [components hour] > 12 ? 12 - [components hour] : [components hour];
+        return [NSString stringWithFormat:@"%d", hour];
+    }
+    return nil;
 }
 
 - (NSString *) date24Hour {
@@ -145,8 +151,7 @@
 	if (self.date != nil) {
 		NSCalendar *calendar = [NSCalendar currentCalendar];
 		NSDateComponents *components = [calendar components:kCFCalendarUnitHour fromDate:self.date];
-		NSString *value = [components hour] >= 12 ? @"pm" : @"am";
-		return value;
+		return [components hour] >= 12 ? @"pm" : @"am";
 	}
 	return nil;
 }

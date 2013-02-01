@@ -43,10 +43,13 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIWindow" id="380026005">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">1316</int>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 480}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MAA</bytes>
@@ -60,17 +63,14 @@
 			<object class="IBUIViewController" id="138739123">
 				<string key="IBUITitle">Categories</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="935542508">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Categories</string>
 					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="86048007">
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUIButton" key="IBUICustomView" id="81630894">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{5, 12}, {18, 19}}</string>
-							<reference key="NSSuperview"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -158,17 +158,14 @@
 			<object class="IBUIViewController" id="421437689">
 				<string key="IBUITitle">Maps</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="698174651">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Maps</string>
 					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="726494083">
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUIButton" key="IBUICustomView" id="131077815">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{5, 12}, {18, 19}}</string>
-							<reference key="NSSuperview"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="962915525"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="IBUIOpaque">NO</bool>
@@ -192,12 +189,9 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUIButton" key="IBUICustomView" id="962915525">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{291, 10}, {24, 24}}</string>
-							<reference key="NSSuperview"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -243,7 +237,6 @@
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="371741755">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Settings</string>
 					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="81307147">
 						<string key="IBUITitle">Done</string>
@@ -295,7 +288,6 @@
 			<object class="IBUIViewController" id="343638138">
 				<string key="IBUITitle">Add Map</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="10259507">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Add Map</string>
 					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="210966277">
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -324,7 +316,6 @@
 			</object>
 			<object class="IBUIViewController" id="236546239">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="462290539">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">1/1</string>
 					<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="685768576">
 						<string key="IBUITitle">Back</string>
@@ -335,12 +326,9 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="103246240">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
-							<reference key="NSSuperview"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -396,7 +384,6 @@
 			<object class="IBUIViewController" id="538798642">
 				<string key="IBUITitle">Add Comment</string>
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="600019987">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Add Comment</string>
 					<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="108595792">
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -518,18 +505,14 @@
 			</object>
 			<object class="IBUIViewController" id="663285513">
 				<object class="IBUINavigationItem" key="IBUINavigationItem" id="1038781507">
-					<reference key="IBUINavigationBar"/>
 					<string key="IBUITitle">Image</string>
 					<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="863601247">
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIStyle">1</int>
 						<object class="IBUISegmentedControl" key="IBUICustomView" id="851080293">
-							<reference key="NSNextResponder"/>
+							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
-							<reference key="NSSuperview"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<int key="IBSegmentControlStyle">2</int>
@@ -628,11 +611,9 @@
 					</object>
 				</array>
 				<object class="IBUITabBar" key="IBUITabBar" id="603791510">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSNextKeyView"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
@@ -658,7 +639,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{244, 7}, {71, 30}}</string>
 							<reference key="NSSuperview"/>
-							<reference key="NSNextKeyView"/>
+							<reference key="NSWindow"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							<int key="IBSegmentControlStyle">2</int>
@@ -2302,25 +2283,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">USHReportAddViewController</string>
 					<string key="superclassName">USHAddViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="cancel:event:">id</string>
-						<string key="done:event:">id</string>
-						<string key="info:event:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="cancel:event:">
-							<string key="name">cancel:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="done:event:">
-							<string key="name">done:event:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="info:event:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">info:event:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">info:event:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">info:event:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="categoryTableController">USHCategoryTableViewController</string>
 						<string key="locationAddViewController">USHLocationAddViewController</string>

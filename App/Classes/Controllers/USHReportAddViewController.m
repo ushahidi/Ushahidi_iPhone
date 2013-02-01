@@ -48,6 +48,7 @@
 @property (strong, nonatomic) USHLoginDialog *loginDialog;
 
 @property (strong, nonatomic) USHShareController *shareController;
+@property (strong, nonatomic) NSString *textLocatePlaceholder;
 
 - (void) showKeyboardForSection:(NSInteger)section;
 
@@ -66,6 +67,7 @@
 @synthesize locationAddViewController = _locationAddViewController;
 @synthesize settingsViewController = _settingsViewController;
 @synthesize openGeoSMS = _openGeoSMS;
+@synthesize textLocatePlaceholder = _textLocatePlaceholder;
 
 typedef enum {
     TableSectionTitle,
@@ -146,12 +148,6 @@ typedef enum {
         [self showMessage:NSLocalizedString(@"Location Required", nil) hide:1.5];
         [self showKeyboardForSection:TableSectionLocation];
     }
-    else if ([self.report.latitude doubleValue] == 0.0) {
-        [self showMessage:NSLocalizedString(@"Latitude Required", nil) hide:1.5];
-    }
-    else if ([self.report.longitude doubleValue] == 0.0) {
-        [self showMessage:NSLocalizedString(@"Longitude Required", nil) hide:1.5];
-    }
     else {
         self.report.authorFirst = [[USHSettings sharedInstance] contactFirstName];
         self.report.authorLast = [[USHSettings sharedInstance] contactLastName];
@@ -226,6 +222,7 @@ typedef enum {
     [_categoryTableController release];
     [_locationAddViewController release];
     [_settingsViewController release];
+    [_textLocatePlaceholder release];
     [super dealloc];
 }
 
@@ -236,8 +233,12 @@ typedef enum {
     self.videoPicker = [[[USHVideoPicker alloc] initWithController:self] autorelease];
     self.loginDialog = [[[USHLoginDialog alloc] initForDelegate:self] autorelease];
     self.shareController = [[[USHShareController alloc] initWithController:self] autorelease];
+    self.textLocatePlaceholder = NSLocalizedString(@"Finding address...", nil);
     if ([[USHSettings sharedInstance] showReportList]) {
-        self.cancelButton.title = NSLocalizedString(@"Cancel", nil);
+        self.leftBarButtonItem = [UIBarButtonItem borderedItemWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                              tintColor:[[USHSettings sharedInstance] navBarColor]
+                                                                 target:self
+                                                                 action:@selector(cancel:event:)];
         self.navigationItem.title = NSLocalizedString(@"Add Report", nil);
     }
     else {
@@ -365,7 +366,7 @@ typedef enum {
             return [USHTableCellFactory inputTableCellForTable:tableView 
                                                      indexPath:indexPath 
                                                       delegate:self
-                                                   placeholder:NSLocalizedString(@"Finding address...", nil)
+                                                   placeholder:self.textLocatePlaceholder
                                                           text:self.report.location 
                                                           icon:@"map.png"];
         }
@@ -569,12 +570,15 @@ typedef enum {
 
 - (void) lookupFinished:(USHLocator *)locator address:(NSString *)address {
     DLog(@"Address:%@", address);
+    self.textLocatePlaceholder = NSLocalizedString(@"Finding address...", nil);
     self.report.location = address;
     [self.tableView reloadRowsAtSection:TableSectionLocation];
 }
 
 - (void) lookupFailed:(USHLocator *)locator error:(NSError *)error {
-    DLog(@"Error:%@", [error description]); 
+    DLog(@"Error:%@", [error description]);
+    self.textLocatePlaceholder = NSLocalizedString(@"Error finding address", nil);
+    [self.tableView reloadRowsAtSection:TableSectionLocation];
 }
 
 #pragma mark - USHImagePickerDelegate
@@ -611,6 +615,9 @@ typedef enum {
     }
     else if (indexPath.section == TableSectionDescription) {
         self.report.desc = text;
+    }
+    else if (indexPath.section == TableSectionLocation) {
+        self.report.location = text;
     }
     else if (indexPath.section == TableSectionNews) {
         //TODO capture news URL

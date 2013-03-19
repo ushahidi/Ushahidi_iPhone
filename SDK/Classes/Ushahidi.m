@@ -323,7 +323,7 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
 }
 
 - (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate {
-    return [self synchronizeWithDelegate:delegate photos:YES maps:NO limit:50];
+    return [self synchronizeWithDelegate:delegate photos:YES maps:NO limit:0];
 }
 
 - (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate photos:(BOOL)photos maps:(BOOL)maps limit:(NSInteger)limit {
@@ -346,7 +346,7 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
 }
 
 - (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate map:(USHMap*)map {
-    return [self synchronizeWithDelegate:delegate map:map photos:YES maps:NO limit:50];
+    return [self synchronizeWithDelegate:delegate map:map photos:YES maps:NO limit:0];
 }
 
 - (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate map:(USHMap*)map photos:(BOOL)photos maps:(BOOL)maps limit:(NSInteger)limit {

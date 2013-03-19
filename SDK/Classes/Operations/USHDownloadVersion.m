@@ -22,6 +22,7 @@
 #import "NSDictionary+USH.h"
 #import "USHMap.h"
 #import "Ushahidi.h"
+#import "NSString+USH.h"
 
 @interface USHDownloadVersion ()
 
@@ -40,6 +41,11 @@
 
 - (void) downloadedJSON:(NSDictionary*)json {
     NSDictionary *payload = [json objectForKey:@"payload"];
+    NSString *domain = [payload stringForKey:@"domain"];
+    if ([NSString isNilOrEmpty:domain] == NO) {
+        DLog(@"Domain %@ >> %@", self.map.url, domain);
+        self.map.url = domain;
+    }
     if ([payload boolForKey:@"checkins"]) {
         self.map.checkin = [NSNumber numberWithBool:YES];
     }

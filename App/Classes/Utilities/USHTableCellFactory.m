@@ -427,7 +427,8 @@
                                                   value:value
                                                     min:min
                                                     max:max
-                                                enabled:YES];
+                                                enabled:YES
+                                                 suffix:nil];
 }
 
 + (USHSliderTableCell *) sliderTableCellForTable:(UITableView *)tableView
@@ -438,14 +439,15 @@
                                            value:(NSInteger)value
                                              min:(NSInteger)min
                                              max:(NSInteger)max
-                                         enabled:(BOOL)enabled {
+                                         enabled:(BOOL)enabled
+                                          suffix:(NSString*)suffix {
     USHSliderTableCell *cell = (USHSliderTableCell*)[self cellForTable:tableView withNibName:@"USHSliderTableCell"];
     cell.indexPath = indexPath;
     cell.delegate = delegate;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.textLabel.text = text;
-    cell.suffix = @"px";
+    cell.suffix = suffix;
     if (icon != nil) {
         cell.imageView.image = [UIImage imageNamed:icon];
     }

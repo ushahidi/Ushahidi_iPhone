@@ -29,6 +29,7 @@
 
 - (id) initWithDelegate:(NSObject<USHDownloadDelegate>*)delegate
                callback:(NSObject<UshahidiDelegate>*)callback
-                    map:(USHMap *)map;
+                    map:(USHMap *)map
+                  limit:(NSInteger)limit;
 
 @end

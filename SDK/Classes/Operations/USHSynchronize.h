@@ -32,6 +32,7 @@
 @property (nonatomic, strong, readonly) NSObject<UshahidiDelegate> *callback;
 @property (nonatomic, assign, readonly) BOOL photos;
 @property (nonatomic, assign, readonly) BOOL maps;
+@property (nonatomic, assign, readonly) NSInteger limit;
 
 @property (readonly) BOOL isExecuting;
 @property (readonly) BOOL isFinished;
@@ -41,6 +42,7 @@
                     map:(USHMap*)map
          downloadPhotos:(BOOL)downloadPhotos
            downloadMaps:(BOOL)downloadMaps
+          downloadLimit:(NSInteger)downloadLimit
              youtubeKey:(NSString*)youtubeKey
         youtubeUsername:(NSString*)youtubeUsername
         youtubePassword:(NSString*)youtubePassword;

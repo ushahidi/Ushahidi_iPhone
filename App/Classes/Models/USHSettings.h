@@ -57,6 +57,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(USHSettings);
 @property(nonatomic, assign, readwrite) BOOL downloadMaps;
 @property(nonatomic, assign, readwrite) NSInteger mapZoomLevel;
 
+@property(nonatomic, assign, readwrite) NSInteger downloadLimit;
+
 @property(nonatomic, assign, readwrite) BOOL downloadPhotos;
 @property(nonatomic, assign, readwrite) BOOL resizePhotos;
 @property(nonatomic, assign, readwrite) CGFloat imageWidth;

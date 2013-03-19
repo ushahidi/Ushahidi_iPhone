@@ -164,7 +164,8 @@ typedef enum {
     [[Ushahidi sharedInstance] synchronizeWithDelegate:delegate
                                                    map:map
                                                 photos:[[USHSettings sharedInstance] downloadPhotos]
-                                                  maps:[[USHSettings sharedInstance] downloadMaps]];
+                                                  maps:[[USHSettings sharedInstance] downloadMaps]
+                                                 limit:[[USHSettings sharedInstance] downloadLimit]];
     [self showMessage:NSLocalizedString(@"Added", nil) hide:1.5];
     [self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:1.5];
 }

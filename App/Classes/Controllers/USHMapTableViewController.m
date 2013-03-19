@@ -127,7 +127,8 @@ typedef enum {
 -(void) startRefreshControl {
     if ([[Ushahidi sharedInstance] synchronizeWithDelegate:self
                                                     photos:[[USHSettings sharedInstance] downloadPhotos]
-                                                      maps:[[USHSettings sharedInstance] downloadMaps]]) {
+                                                      maps:[[USHSettings sharedInstance] downloadMaps]
+                                                     limit:[[USHSettings sharedInstance] downloadLimit]]) {
         DLog(@"Syncing...");
         self.addButton.enabled = NO;
         self.infoButton.enabled = NO;
@@ -343,7 +344,8 @@ typedef enum {
         self.mapURL = nil;
         [[Ushahidi sharedInstance] synchronizeWithDelegate:self map:map
                                                     photos:[[USHSettings sharedInstance] downloadPhotos]
-                                                      maps:[[USHSettings sharedInstance] downloadMaps]];
+                                                      maps:[[USHSettings sharedInstance] downloadMaps]
+                                                     limit:[[USHSettings sharedInstance] downloadLimit]];
     }
     else {
         [UIAlertView showWithTitle:NSLocalizedString(@"Add Map Error", nil)

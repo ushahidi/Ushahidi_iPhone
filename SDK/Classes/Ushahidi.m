@@ -323,17 +323,18 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
 }
 
 - (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate {
-    return [self synchronizeWithDelegate:delegate photos:YES maps:NO];
+    return [self synchronizeWithDelegate:delegate photos:YES maps:NO limit:50];
 }
 
-- (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate photos:(BOOL)photos maps:(BOOL)maps {
+- (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate photos:(BOOL)photos maps:(BOOL)maps limit:(NSInteger)limit {
     if ([self numberOfMaps] > 0) {
         for (USHMap *map in self.maps) {
             USHSynchronize *synchronize = [[[USHSynchronize alloc] initWithDelegate:self
                                                                            callback:delegate
                                                                                 map:map
-                                                                             downloadPhotos:photos
+                                                                     downloadPhotos:photos
                                                                        downloadMaps:maps
+                                                                      downloadLimit:limit
                                                                          youtubeKey:self.youtubeDeveloperKey
                                                                     youtubeUsername:self.youtubeUsername
                                                                     youtubePassword:self.youtubePassword] autorelease];
@@ -345,16 +346,17 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
 }
 
 - (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate map:(USHMap*)map {
-    return [self synchronizeWithDelegate:delegate map:map photos:YES maps:NO];
+    return [self synchronizeWithDelegate:delegate map:map photos:YES maps:NO limit:50];
 }
 
-- (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate map:(USHMap*)map photos:(BOOL)photos maps:(BOOL)maps {
+- (BOOL) synchronizeWithDelegate:(NSObject<UshahidiDelegate>*)delegate map:(USHMap*)map photos:(BOOL)photos maps:(BOOL)maps limit:(NSInteger)limit {
     if (map != nil) {
         USHSynchronize *synchronize = [[[USHSynchronize alloc] initWithDelegate:self
                                                                        callback:delegate
                                                                             map:map
                                                                  downloadPhotos:photos
                                                                    downloadMaps:maps
+                                                                  downloadLimit:limit
                                                                      youtubeKey:self.youtubeDeveloperKey
                                                                 youtubeUsername:self.youtubeUsername
                                                                 youtubePassword:self.youtubePassword] autorelease];

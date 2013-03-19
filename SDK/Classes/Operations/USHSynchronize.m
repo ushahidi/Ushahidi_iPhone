@@ -44,6 +44,7 @@
 
 @property (nonatomic, assign, readwrite) BOOL photos;
 @property (nonatomic, assign, readwrite) BOOL maps;
+@property (nonatomic, assign, readwrite) NSInteger limit;
 
 @property (nonatomic, strong) NSOperationQueue *operations;
 @property (nonatomic, strong) NSOperationQueue *images;
@@ -64,6 +65,7 @@
 @synthesize images = _images;
 @synthesize delegate = _delegate;
 @synthesize callback = _callback;
+@synthesize limit = _limit;
 
 @synthesize youtubeKey = _youtubeKey;
 @synthesize youtubeUsername = _youtubeUsername;
@@ -79,6 +81,7 @@
                     map:(USHMap*)map
          downloadPhotos:(BOOL)photos
            downloadMaps:(BOOL)maps
+          downloadLimit:(NSInteger)limit
              youtubeKey:(NSString*)youtubeKey
         youtubeUsername:(NSString*)youtubeUsername
         youtubePassword:(NSString*)youtubePassword {
@@ -88,6 +91,7 @@
         self.map = map;
         self.photos = photos;
         self.maps = maps;
+        self.limit = limit;
         
         self.youtubeKey = youtubeKey;
         self.youtubeUsername = youtubeUsername;
@@ -169,9 +173,11 @@
                                                                                     map:self.map] autorelease];
     [self.operations addOperation:downloadVersion];
     
+    DLog(@"Limit:%d", self.limit);
     USHDownloadReport *downloadReport = [[[USHDownloadReport alloc] initWithDelegate:self.delegate
                                                                             callback:self.callback
-                                                                                 map:self.map] autorelease];
+                                                                                 map:self.map
+                                                                               limit:self.limit] autorelease];
     [downloadReport addDependency:downloadVersion];
     [self.operations addOperation:downloadReport];
     
@@ -211,7 +217,6 @@
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == self.operations && [keyPath isEqualToString:@"operations"]) {
-        //DLog(@"%@ Operations:%d", self.map.name, self.operations.operationCount);
         if (self.operations.operationCount == 0) {
             BOOL hasDownloads = NO;
             if (self.photos) {

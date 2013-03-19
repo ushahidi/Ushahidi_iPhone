@@ -49,11 +49,15 @@ typedef enum {
 
 - (id) initWithDelegate:(NSObject<USHDownloadDelegate>*)delegate
                callback:(NSObject<UshahidiDelegate>*)callback
-                    map:(USHMap *)map {
+                    map:(USHMap *)map
+                  limit:(NSInteger)limit {
+    NSString *api = limit > 0
+        ? [NSString stringWithFormat:@"api?task=incidents&by=all&resp=json&comments=1&limit=%d", limit]
+        : @"api?task=incidents&by=all&resp=json&comments=1";
     return [super initWithDelegate:delegate
                           callback:callback
                                map:map 
-                               api:@"api?task=incidents&by=all&resp=json&comments=1"];
+                               api:api];
 }
 
 - (void) downloadedJSON:(NSDictionary*)json {

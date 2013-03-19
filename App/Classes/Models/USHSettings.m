@@ -173,6 +173,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHSettings);
     [self setBool:openGeoSMS forKey:@"openGeoSMS"];
 }
 
+- (NSInteger) downloadLimit {
+    return [self integerFromDefaultsForKey:@"downloadLimit" defaultValue:25];
+}
+
+- (void) setDownloadLimit:(NSInteger)downloadLimit {
+    [self setInteger:downloadLimit forKey:@"downloadLimit"];
+}
+
 - (BOOL) termsOfService {
     return [self boolFromDefaultsForKey:@"termsOfService" defaultValue:NO];
 }

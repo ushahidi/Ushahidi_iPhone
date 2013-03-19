@@ -177,5 +177,6 @@
                                            value:(NSInteger)value
                                              min:(NSInteger)min
                                              max:(NSInteger)max
-                                         enabled:(BOOL)enabled;
+                                         enabled:(BOOL)enabled
+                                          suffix:(NSString*)suffix;
 @end

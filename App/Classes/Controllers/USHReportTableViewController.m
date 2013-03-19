@@ -69,7 +69,8 @@ typedef enum {
     if ([[Ushahidi sharedInstance] synchronizeWithDelegate:self
                                                        map:self.map
                                                     photos:[[USHSettings sharedInstance] downloadPhotos]
-                                                      maps:[[USHSettings sharedInstance] downloadMaps]]) {
+                                                      maps:[[USHSettings sharedInstance] downloadMaps]
+                                                     limit:[[USHSettings sharedInstance] downloadLimit]]) {
         DLog(@"Syncing...");
     }
     else {

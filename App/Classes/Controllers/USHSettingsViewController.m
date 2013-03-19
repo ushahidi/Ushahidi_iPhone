@@ -41,6 +41,7 @@
 
 typedef enum {
 	TableSectionContact,
+    TableSectionDownload,
     TableSectionDisplay,
 	TableSectionPhoto,
     TableSectionMap,
@@ -55,6 +56,11 @@ typedef enum {
 	TableSectionContactRowEmail,
     TableSectionContactRows
 } TableSectionContactRow;
+
+typedef enum {
+    TableSectionDownloadRowCount,
+    TableSectionDownloadRows
+} TableSectionDownloadRow;
 
 typedef enum {
     TableSectionDisplayRowStatusBar,
@@ -128,6 +134,9 @@ typedef enum {
     if (section == TableSectionContact) {
         return TableSectionContactRows;
     }
+    if (section == TableSectionDownload) {
+        return TableSectionDownloadRows;
+    }
     if (section == TableSectionDisplay) {
         if ([[USHSettings sharedInstance] showReportList]) {
             return TableSectionDisplayRows;
@@ -191,6 +200,18 @@ typedef enum {
                                                           done:UIReturnKeyDefault];
         }
     }
+    else if (indexPath.section == TableSectionDownload) {
+        if (indexPath.row == TableSectionDownloadRowCount) {
+            return [USHTableCellFactory sliderTableCellForTable:tableView indexPath:indexPath delegate:self
+                                                           text:NSLocalizedString(@"Report Downloads", nil)
+                                                           icon:@"download.png"
+                                                          value:[[USHSettings sharedInstance] downloadLimit]
+                                                            min:25
+                                                            max:250
+                                                        enabled:YES
+                                                         suffix:nil];
+        }
+    }
     else if (indexPath.section == TableSectionPhoto) {
         if (indexPath.row == TableSectionPhotoRowDownloadImages) {
             return [USHTableCellFactory switchTableCellForTable:tableView indexPath:indexPath delegate:self
@@ -211,7 +232,8 @@ typedef enum {
                                                           value:[[USHSettings sharedInstance] imageWidth]
                                                             min:200
                                                             max:1024
-                                                        enabled:[[USHSettings sharedInstance] resizePhotos]];
+                                                        enabled:[[USHSettings sharedInstance] resizePhotos]
+                                                         suffix:@"px"];
         }
     }
     else if (indexPath.section == TableSectionDisplay) {
@@ -319,6 +341,9 @@ typedef enum {
     if (section == TableSectionContact) {
         return NSLocalizedString(@"Contact", nil);
     }
+    if (section == TableSectionDownload) {
+        return NSLocalizedString(@"Download", nil);
+    }
     if (section == TableSectionPhoto &&
         [[USHSettings sharedInstance] showReportList]) {
         return NSLocalizedString(@"Photos", nil);
@@ -422,6 +447,11 @@ typedef enum {
     if (indexPath.section == TableSectionPhoto) {
         if (indexPath.row == TableSectionPhotoRowImageSize) {
             [[USHSettings sharedInstance] setImageWidth:value];
+        }
+    }
+    else if (indexPath.section == TableSectionDownload) {
+        if (indexPath.row == TableSectionDownloadRowCount) {
+            [[USHSettings sharedInstance] setDownloadLimit:value];
         }
     }
 }

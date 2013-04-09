@@ -105,14 +105,16 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
 
 - (BOOL) hasMap:(USHMap*)map {
     if (map != nil && map.url != nil) {
-         return [[USHDatabase sharedInstance] fetchCountForName:@"Map" query:@"url = %@ && added != nil" param:map.url] > 0;
+        NSString *host = [[NSURL URLWithString:map.url] host];
+        return [[USHDatabase sharedInstance] fetchCountForName:@"Map" query:@"(url CONTAINS[cd] %@) && added != nil" param:host] > 0;
     }
     return NO;
 }
 
 - (BOOL) hasMapWithUrl:(NSString*)url {
     if ([NSString isNilOrEmpty:url] == NO) {
-        return [[USHDatabase sharedInstance] fetchCountForName:@"Map" query:@"url = %@ && added != nil" param:url] > 0;
+        NSString *host = [[NSURL URLWithString:url] host];
+        return [[USHDatabase sharedInstance] fetchCountForName:@"Map" query:@"(url CONTAINS[cd] %@) && added != nil" param:host] > 0;
     }
     return NO;
 }
@@ -260,7 +262,8 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
 }
 
 - (USHMap *) mapWithUrl:(NSString *)url {
-    return (USHMap*)[[USHDatabase sharedInstance] fetchItemForName:@"Map" query:@"url = %@ && added != nil" param:url];
+    NSString *host = [[NSURL URLWithString:url] host];
+    return (USHMap*)[[USHDatabase sharedInstance] fetchItemForName:@"Map" query:@"(url CONTAINS[cd] %@) && added != nil" param:host];
 }
 
 - (BOOL) removeMap:(USHMap*)map {

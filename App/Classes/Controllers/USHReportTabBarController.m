@@ -91,7 +91,7 @@
 - (IBAction)filter:(id)sender event:(UIEvent*)event {
     DLog(@"");
 	NSMutableArray *titles = [NSMutableArray arrayWithObject:NSLocalizedString(@"--- ALL CATEGORIES ---", nil)];
-	for (USHCategory *category in self.map.categories) {
+	for (USHCategory *category in self.map.categoriesSortedByPosition) {
 		if (category.title != nil) {
 			[titles addObject:category.title];
 		}

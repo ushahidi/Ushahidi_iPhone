@@ -107,10 +107,12 @@ typedef enum {
     if (self.pager.selectedSegmentIndex == PageActionPrev) {
         index = index - 1;
         self.report = [self.reports objectAtIndex:index];
+        self.report.viewed = [NSDate date];
     }
     else if (self.pager.selectedSegmentIndex == PageActionNext) {
         index = index + 1;
         self.report = [self.reports objectAtIndex:index];
+        self.report.viewed = [NSDate date];
     }
     if (self.report.starred.boolValue) {
         self.starredButton.image = [UIImage imageNamed:@"starred.png"];

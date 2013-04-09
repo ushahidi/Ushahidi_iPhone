@@ -89,8 +89,7 @@ typedef enum {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    USHCategory *category = [[self.map categoriesSortedByPosition] objectAtIndex:indexPath.row];
-    //UIColor *color = [NSString isNilOrEmpty:category.color] ? [UIColor blackColor] : [UIColor colorFromHexString:category.color];
+    USHCategory *category = [self.map.categoriesSortedByPosition objectAtIndex:indexPath.row];
     return [USHTableCellFactory textTableCellForTable:tableView
                                             indexPath:indexPath
                                                  text:category.title
@@ -99,7 +98,7 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    USHCategory *category = [[self.map categoriesSortedByPosition] objectAtIndex:indexPath.row];
+    USHCategory *category = [self.map.categoriesSortedByPosition objectAtIndex:indexPath.row];
     if (self.reportTabBarController.category == category) {
         self.reportTabBarController.category = nil;
         [tableView deselectRowAtIndexPath:indexPath animated:YES];

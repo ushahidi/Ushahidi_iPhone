@@ -41,7 +41,7 @@
                callback:(NSObject<UshahidiDelegate>*)callback
                     map:(USHMap*)map
                     api:(NSString*)api {
-    NSURL *url = [NSURL URLWithString:api relativeToURL:[NSURL URLWithString:map.url]];
+    NSURL *url = [NSURL URLWithString:[map.url stringByAppendingPathComponent:api]];
     if ((self = [super initWithDelegate:delegate
                                callback:callback
                                     map:map

@@ -57,9 +57,12 @@
 - (NSInteger) intForKey:(NSString *)key {
 	NSObject *object = [self objectForKey:key];
 	if (object != nil) {
-		if ([object isKindOfClass:[NSString class]]) {
+        if ([object isKindOfClass:[NSString class]]) {
 			return [((NSString *)object) intValue];
 		}
+        if ([object isKindOfClass:[NSNumber class]]) {
+            return [((NSNumber *)object) intValue];
+        }
 		return (NSInteger)object;
 	}
 	return 0;

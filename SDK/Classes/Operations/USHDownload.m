@@ -68,11 +68,10 @@
         self.callback = callback;
         self.map = map;
         self.api = api;
-        self.url = [NSURL URLWithString:api relativeToURL:[NSURL URLWithString:map.url]];
+        self.url = [NSURL URLWithString:[map.url stringByAppendingPathComponent:api]];
         self.domain = [self.url domainURL];
         self.username = map.username;
         self.password = map.password;
-        DLog(@"Domain:%@ URL:%@ ", self.domain, self.url);
     }
     return self;
 }

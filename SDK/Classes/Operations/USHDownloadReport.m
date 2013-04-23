@@ -33,6 +33,8 @@
 
 @property (nonatomic, strong, readwrite) USHReport *report;
 
+- (void) parseMedia:(NSDictionary*)media;
+   
 @end
 
 @implementation USHDownloadReport
@@ -96,50 +98,18 @@ typedef enum {
             }
         }
 
-        NSArray *medias = [item objectForKey:@"media"];
-        if (medias != nil) {
+        NSObject *medias = [item objectForKey:@"media"];
+        if (medias != nil && [medias isKindOfClass:NSDictionary.class]) {
+            NSDictionary *media = (NSDictionary*)medias;
+            [self parseMedia:media];
+        }
+        else if (medias != nil && [medias isKindOfClass:NSArray.class]){
             for (NSDictionary *media in medias) {
-                NSString *identifier = [media stringForKey:@"id"];
-                NSInteger type = [media intForKey:@"type"];
-                NSString *link = [media stringForKey:@"link"];
-                if (type == MediaTypePhoto) {
-                    USHPhoto *photo = (USHPhoto*)[[USHDatabase sharedInstance] fetchOrInsertItemForName:@"Photo"
-                                                                                                  query:@"report.identifier = %@ && identifier = %@"
-                                                                                                 params:self.report.identifier, identifier, nil];
-                    photo.identifier = identifier;
-                    NSString *link_url = [media stringForKey:@"link_url"];
-                    if ([NSString isNilOrEmpty:link_url]) {
-                        link_url = [self.map.url stringByAppendingPathComponent:@"/media/uploads/"];
-                        link_url = [link_url stringByAppendingPathComponent:link];
-                    }
-                    photo.url = link_url;
-                    photo.report = self.report;
-                }
-                else if (type == MediaTypeNews) {
-                    USHNews *news = (USHNews*)[[USHDatabase sharedInstance] fetchOrInsertItemForName:@"News"
-                                                                                               query:@"report.identifier = %@ && identifier = %@"
-                                                                                              params:self.report.identifier, identifier, nil];
-                    news.identifier = identifier;
-                    news.url = link;
-                    news.report = self.report;
-                }
-                else if (type == MediaTypeVideo) {
-                    USHVideo *video = (USHVideo*)[[USHDatabase sharedInstance] fetchOrInsertItemForName:@"Video"
-                                                                                                  query:@"report.identifier = %@ && identifier = %@"
-                                                                                                 params:self.report.identifier, identifier, nil];
-                    video.identifier = identifier;
-                    video.url = link;
-                    video.report = self.report;
-                }
-                else if (type == MediaTypeSound) {
-                    USHSound *sound = (USHSound*)[[USHDatabase sharedInstance] fetchOrInsertItemForName:@"Sound"
-                                                                                                  query:@"report.identifier = %@ && identifier = %@"
-                                                                                                 params:self.report.identifier, identifier, nil];
-                    sound.identifier = identifier;
-                    sound.url = link;
-                    sound.report = self.report;
-                }
+                [self parseMedia:media];
             }
+        }
+        else {
+            DLog("Unknown Media Type %@", medias.class);
         }
         NSArray *comments = [item objectForKey:@"comments"];
         if (comments != nil) {
@@ -174,6 +144,52 @@ typedef enum {
         [[USHDatabase sharedInstance] saveChanges];
         [self.delegate performSelector:@selector(download:downloaded:)
                            withObjects:self, self.map, nil];
+    }
+}
+
+- (void) parseMedia:(NSDictionary*)media {
+    DLog(@"%@", media);
+    if (media != nil) {
+        NSString *identifier = [media stringForKey:@"id"];
+        NSInteger type = [media intForKey:@"type"];
+        NSString *link = [media stringForKey:@"link"];
+        if (type == MediaTypePhoto) {
+            USHPhoto *photo = (USHPhoto*)[[USHDatabase sharedInstance] fetchOrInsertItemForName:@"Photo"
+                                                                                          query:@"report.identifier = %@ && identifier = %@"
+                                                                                         params:self.report.identifier, identifier, nil];
+            photo.identifier = identifier;
+            NSString *link_url = [media stringForKey:@"link_url"];
+            if ([NSString isNilOrEmpty:link_url]) {
+                link_url = [self.map.url stringByAppendingPathComponent:@"/media/uploads/"];
+                link_url = [link_url stringByAppendingPathComponent:link];
+            }
+            photo.url = link_url;
+            photo.report = self.report;
+        }
+        else if (type == MediaTypeNews) {
+            USHNews *news = (USHNews*)[[USHDatabase sharedInstance] fetchOrInsertItemForName:@"News"
+                                                                                       query:@"report.identifier = %@ && identifier = %@"
+                                                                                      params:self.report.identifier, identifier, nil];
+            news.identifier = identifier;
+            news.url = link;
+            news.report = self.report;
+        }
+        else if (type == MediaTypeVideo) {
+            USHVideo *video = (USHVideo*)[[USHDatabase sharedInstance] fetchOrInsertItemForName:@"Video"
+                                                                                          query:@"report.identifier = %@ && identifier = %@"
+                                                                                         params:self.report.identifier, identifier, nil];
+            video.identifier = identifier;
+            video.url = link;
+            video.report = self.report;
+        }
+        else if (type == MediaTypeSound) {
+            USHSound *sound = (USHSound*)[[USHDatabase sharedInstance] fetchOrInsertItemForName:@"Sound"
+                                                                                          query:@"report.identifier = %@ && identifier = %@"
+                                                                                         params:self.report.identifier, identifier, nil];
+            sound.identifier = identifier;
+            sound.url = link;
+            sound.report = self.report;
+        }
     }
 }
 

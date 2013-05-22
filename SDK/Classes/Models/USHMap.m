@@ -91,7 +91,7 @@
         else {
             hasText = YES;
         }
-        if (hasText && hasCategory) {
+        if (hasText && hasCategory && report.pending.boolValue == NO) {
             [filtered addObject:report];
         }
     }

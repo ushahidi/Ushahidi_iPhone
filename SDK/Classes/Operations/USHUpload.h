@@ -54,6 +54,7 @@
 - (void) prepare;
 - (void) start;
 - (void) finish;
+- (void) success;
 
 @end
 

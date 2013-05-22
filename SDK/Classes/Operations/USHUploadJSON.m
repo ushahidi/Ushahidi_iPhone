@@ -68,6 +68,7 @@
                 DLog(@"Success:%@", success);
                 if ([@"true" isEqualToString:success]) {
                     error = nil;
+                    [self success];
                     [self.delegate performSelector:@selector(upload:uploaded:)
                                        withObjects:self, self.map, nil];
                 }

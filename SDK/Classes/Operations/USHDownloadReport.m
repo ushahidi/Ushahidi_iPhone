@@ -104,7 +104,8 @@ typedef enum {
             [self parseMedia:media];
         }
         else if (medias != nil && [medias isKindOfClass:NSArray.class]){
-            for (NSDictionary *media in medias) {
+            NSArray *array = (NSArray*)medias;
+            for (NSDictionary *media in array) {
                 [self parseMedia:media];
             }
         }

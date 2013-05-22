@@ -264,10 +264,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHDatabase);
     NSURL *url = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite", self.name]];
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
-        DLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }    
+    if ([__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
+        DLog(@"Database %@", url);
+    }
+    else {
+        DLog(@"Schema Changed %@", error);
+        if ([[NSFileManager defaultManager] removeItemAtURL:url error:&error]) {
+            DLog(@"Database %@ Purged", url);
+            if ([__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error]) {
+                DLog(@"Database %@ Created", url);
+            }
+            else {
+                DLog(@"Database Error %@", error);
+                abort();
+            }
+        }
+        else {
+            DLog(@"Database %@ NOT Purged", url);
+            abort();
+        }
+    }
     return __persistentStoreCoordinator;
 }
 

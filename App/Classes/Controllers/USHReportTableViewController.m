@@ -306,6 +306,15 @@ typedef enum {
     }
 }
 
+- (void) ushahidi:(Ushahidi*)ushahidi uploaded:(USHMap*)map report:(USHReport*)report error:(NSError*)error {
+    if (error) {
+        DLog(@"Error:%@", error.localizedDescription);
+    }
+    else {
+        DLog(@"Uploaded %@ %@", report.title, report.url);
+    }
+}
+
 - (NSArray*) listOfReports {
     if ([[USHSettings sharedInstance] sortReportsByDate]) {
         return [self.map reportsWithCategory:self.category text:self.searchText sort:USHSortByDate ascending:NO];

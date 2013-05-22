@@ -145,6 +145,10 @@
     //Child classes have option to implement custom functionality prior to NSMutableURLRequest
 }
 
+- (void) success {
+    //Child can override
+}
+
 - (void)start {
     if (![NSThread isMainThread]) {
         [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:YES];

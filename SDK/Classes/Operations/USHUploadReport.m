@@ -26,6 +26,7 @@
 #import "USHNews.h"
 #import "NSString+USH.h"
 #import "Ushahidi.h"
+#import "USHDatabase.h"
 
 @interface USHUploadReport ()
 
@@ -87,6 +88,15 @@
     [self setValue:self.report.authorFirst forKey:@"person_first"];
     [self setValue:self.report.authorLast forKey:@"person_last"];
     [self setValue:self.report.authorEmail forKey:@"person_email"];
+}
+
+- (void) success {
+    [super success];
+    if (self.report.pending.boolValue) {
+        self.report.pending = [NSNumber numberWithBool:NO];
+        [[USHDatabase sharedInstance] saveChanges];
+    }
+    DLog(@"Pending %@", self.report.pending);
 }
 
 - (void)dealloc {

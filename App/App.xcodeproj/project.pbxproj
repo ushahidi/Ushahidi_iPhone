@@ -182,6 +182,18 @@
 		3E7586F515ED4072005A3A62 /* USHSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7586F415ED4072005A3A62 /* USHSettingsViewController.m */; };
 		3E7586FB15ED41E4005A3A62 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E7586F915ED41E4005A3A62 /* settings.png */; };
 		3E7586FC15ED41E4005A3A62 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E7586FA15ED41E4005A3A62 /* settings@2x.png */; };
+		3E7ECF14174D2EEF00E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF12174D2EEF00E8260B /* Localizable.strings */; };
+		3E7ECF15174D2EEF00E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF12174D2EEF00E8260B /* Localizable.strings */; };
+		3E7ECF16174D2EEF00E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF12174D2EEF00E8260B /* Localizable.strings */; };
+		3E7ECF17174D2EEF00E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF12174D2EEF00E8260B /* Localizable.strings */; };
+		3E7ECF18174D2EEF00E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF12174D2EEF00E8260B /* Localizable.strings */; };
+		3E7ECF19174D2EEF00E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF12174D2EEF00E8260B /* Localizable.strings */; };
+		3E7ECF1C174D2EF700E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF1A174D2EF700E8260B /* Localizable.strings */; };
+		3E7ECF1D174D2EF700E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF1A174D2EF700E8260B /* Localizable.strings */; };
+		3E7ECF1E174D2EF700E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF1A174D2EF700E8260B /* Localizable.strings */; };
+		3E7ECF1F174D2EF700E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF1A174D2EF700E8260B /* Localizable.strings */; };
+		3E7ECF20174D2EF700E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF1A174D2EF700E8260B /* Localizable.strings */; };
+		3E7ECF21174D2EF700E8260B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E7ECF1A174D2EF700E8260B /* Localizable.strings */; };
 		3E9257D81623643200A077A7 /* USHReportAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E9257D71623643200A077A7 /* USHReportAddViewController.m */; };
 		3E9257DB1623660300A077A7 /* USHReportAddViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E9257DA1623660200A077A7 /* USHReportAddViewController_iPad.xib */; };
 		3E9257DD162366A600A077A7 /* USHReportAddViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E9257DC162366A600A077A7 /* USHReportAddViewController_iPhone.xib */; };
@@ -1779,6 +1791,8 @@
 		3E7586F415ED4072005A3A62 /* USHSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USHSettingsViewController.m; sourceTree = "<group>"; };
 		3E7586F915ED41E4005A3A62 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		3E7586FA15ED41E4005A3A62 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
+		3E7ECF13174D2EEF00E8260B /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = Localizable.strings; sourceTree = "<group>"; };
+		3E7ECF1B174D2EF700E8260B /* km */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = km; path = Localizable.strings; sourceTree = "<group>"; };
 		3E9257D61623643100A077A7 /* USHReportAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHReportAddViewController.h; sourceTree = "<group>"; };
 		3E9257D71623643200A077A7 /* USHReportAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USHReportAddViewController.m; sourceTree = "<group>"; };
 		3E9257DA1623660200A077A7 /* USHReportAddViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = USHReportAddViewController_iPad.xib; sourceTree = "<group>"; };
@@ -2527,6 +2541,8 @@
 			isa = PBXGroup;
 			children = (
 				3E4CCDE0167BBAE2006BC175 /* en.lproj */,
+				3E7ECF11174D2EDA00E8260B /* hu.lproj */,
+				3E7ECF10174D2EBD00E8260B /* km.lprog */,
 				3EAA31C816BBD1980089FC06 /* cs.lproj */,
 				3EBB4D5F167F693200DDB318 /* de.lproj */,
 				3EBB4D62167F693200DDB318 /* ru.lproj */,
@@ -2696,6 +2712,23 @@
 				3EC04C4D1672A0DD003D5875 /* iTunesArtwork.png */,
 			);
 			path = Ushahidi;
+			sourceTree = "<group>";
+		};
+		3E7ECF10174D2EBD00E8260B /* km.lprog */ = {
+			isa = PBXGroup;
+			children = (
+				3E7ECF1A174D2EF700E8260B /* Localizable.strings */,
+			);
+			name = km.lprog;
+			path = km.lproj;
+			sourceTree = "<group>";
+		};
+		3E7ECF11174D2EDA00E8260B /* hu.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				3E7ECF12174D2EEF00E8260B /* Localizable.strings */,
+			);
+			path = hu.lproj;
 			sourceTree = "<group>";
 		};
 		3E97572A161F7D7A0072C3BD /* Cells */ = {
@@ -3050,6 +3083,8 @@
 				de,
 				ru,
 				cs,
+				hu,
+				km,
 			);
 			mainGroup = 3E6D0317159B54CF00CDB5B7;
 			productRefGroup = 3E6D0323159B54CF00CDB5B7 /* Products */;
@@ -3299,6 +3334,8 @@
 				3EBB4D65167F693200DDB318 /* Localizable.strings in Resources */,
 				3EBB4D6B167F693200DDB318 /* Localizable.strings in Resources */,
 				3EAA31DA16BBD1FA0089FC06 /* Localizable.strings in Resources */,
+				3E7ECF14174D2EEF00E8260B /* Localizable.strings in Resources */,
+				3E7ECF1C174D2EF700E8260B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3531,6 +3568,8 @@
 				3EBB4D67167F693200DDB318 /* Localizable.strings in Resources */,
 				3EBB4D6D167F693200DDB318 /* Localizable.strings in Resources */,
 				3EAA31DC16BBD1FA0089FC06 /* Localizable.strings in Resources */,
+				3E7ECF16174D2EEF00E8260B /* Localizable.strings in Resources */,
+				3E7ECF1E174D2EF700E8260B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3762,6 +3801,8 @@
 				3EBB4D69167F693200DDB318 /* Localizable.strings in Resources */,
 				3EBB4D6F167F693200DDB318 /* Localizable.strings in Resources */,
 				3EAA31DE16BBD1FA0089FC06 /* Localizable.strings in Resources */,
+				3E7ECF18174D2EEF00E8260B /* Localizable.strings in Resources */,
+				3E7ECF20174D2EF700E8260B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3996,6 +4037,8 @@
 				3EBB4D6A167F693200DDB318 /* Localizable.strings in Resources */,
 				3EBB4D70167F693200DDB318 /* Localizable.strings in Resources */,
 				3EAA31DF16BBD1FA0089FC06 /* Localizable.strings in Resources */,
+				3E7ECF19174D2EEF00E8260B /* Localizable.strings in Resources */,
+				3E7ECF21174D2EF700E8260B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4228,6 +4271,8 @@
 				3EBB4D68167F693200DDB318 /* Localizable.strings in Resources */,
 				3EBB4D6E167F693200DDB318 /* Localizable.strings in Resources */,
 				3EAA31DD16BBD1FA0089FC06 /* Localizable.strings in Resources */,
+				3E7ECF17174D2EEF00E8260B /* Localizable.strings in Resources */,
+				3E7ECF1F174D2EF700E8260B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4460,6 +4505,8 @@
 				3EBB4D66167F693200DDB318 /* Localizable.strings in Resources */,
 				3EBB4D6C167F693200DDB318 /* Localizable.strings in Resources */,
 				3EAA31DB16BBD1FA0089FC06 /* Localizable.strings in Resources */,
+				3E7ECF15174D2EEF00E8260B /* Localizable.strings in Resources */,
+				3E7ECF1D174D2EF700E8260B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4767,6 +4814,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				3E4CCDEE167BBAE2006BC175 /* sw */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3E7ECF12174D2EEF00E8260B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E7ECF13174D2EEF00E8260B /* hu */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3E7ECF1A174D2EF700E8260B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E7ECF1B174D2EF700E8260B /* km */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

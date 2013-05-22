@@ -133,7 +133,7 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == TableSectionReports) {
-        NSArray *reports = [self.map reportsWithCategory:self.category text:self.searchText];
+        NSArray *reports = [self listOfReports];
         return reports.count > 0 ? reports.count : 1;
     }
     else if (section == TableSectionPending) {
@@ -173,7 +173,7 @@ typedef enum {
     }
     else if (indexPath.section == TableSectionReports) {
         NSArray *reports = [self listOfReports];
-        if (reports.count > 1) {
+        if (reports.count > 0) {
             USHReport *report = [reports objectAtIndex:indexPath.row];
             BOOL hasPhotos = report.photos.count > 0 || report.snapshot != nil;
             USHReportTableCell *cell = [USHTableCellFactory reportTableCellForTable:tableView indexPath:indexPath hasPhotos:hasPhotos];

@@ -274,7 +274,11 @@ typedef enum {
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[USHLocator sharedInstance] locateForDelegate:self];
+    DLog(@"Latitude:%@ Longitude:%@", self.report.latitude, self.report.longitude);
+    if (self.report.latitude == nil || self.report.latitude.floatValue == 0 ||
+        self.report.longitude == nil || self.report.longitude.floatValue == 0) {
+        [[USHLocator sharedInstance] locateForDelegate:self];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

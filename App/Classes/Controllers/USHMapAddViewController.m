@@ -221,7 +221,7 @@ typedef enum {
     }
     else if (self.sortControl.selectedSegmentIndex == SortTypeByDate) {
         DLog(@"SortTypeByDate");
-        descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+        descriptor = [[NSSortDescriptor alloc] initWithKey:@"added" ascending:NO];
     }
     [self.maps addObjectsFromArray:[maps sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]]];
     [self.tableView reloadData];

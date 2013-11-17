@@ -207,7 +207,7 @@ typedef enum {
                                                            icon:@"download.png"
                                                           value:[[USHSettings sharedInstance] downloadLimit]
                                                             min:25
-                                                            max:250
+                                                            max:500
                                                         enabled:YES
                                                          suffix:nil];
         }

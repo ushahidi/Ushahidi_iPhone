@@ -186,26 +186,13 @@ typedef enum {
 #pragma mark - View Colors
 
 - (void) loadViewColors {
-    self.toolBar.tintColor = self.toolBarColor;
-//    self.navigationBar.tintColor = self.navBarColor;
-//    self.navigationBar.topItem.title = self.title;
-//    for (UIView *subView in self.navigationBar.items){
-//        if ([subView isKindOfClass:UIBarButtonItem.class]) {
-//            UIBarButtonItem *barButtonItem = (UIBarButtonItem*)subView;
-//            if ([barButtonItem respondsToSelector:@selector(tintColor)] &&
-//                barButtonItem.style == UIBarButtonItemStyleDone) {
-//                barButtonItem.tintColor = self.buttonDoneColor;
-//            }
-//        }
-//    }
-//    if (self.navigationBar.topItem.leftBarButtonItem.style == UIBarButtonItemStyleDone &&
-//        [self.navigationBar.topItem.leftBarButtonItem respondsToSelector:@selector(tintColor)]) {
-//        self.navigationBar.topItem.leftBarButtonItem.tintColor = self.buttonDoneColor;
-//    }
-//    if (self.navigationBar.topItem.rightBarButtonItem.style == UIBarButtonItemStyleDone &&
-//        [self.navigationBar.topItem.rightBarButtonItem respondsToSelector:@selector(tintColor)]) {
-//        self.navigationBar.topItem.rightBarButtonItem.tintColor = self.buttonDoneColor;
-//    }
+    if ([self.toolBar respondsToSelector:@selector(barTintColor)]) {
+        self.toolBar.tintColor = [UIColor whiteColor];
+        self.toolBar.barTintColor = self.toolBarColor;
+    }
+    else {
+        self.toolBar.tintColor = self.toolBarColor;
+    }
     if (self.navigationItem.leftBarButtonItem.style == UIBarButtonItemStyleDone &&
         [self.navigationItem.leftBarButtonItem respondsToSelector:@selector(tintColor)]) {
         self.navigationItem.leftBarButtonItem.tintColor = self.buttonDoneColor;
@@ -291,30 +278,18 @@ typedef enum {
 #pragma mark - UIBarButtonItems
 
 - (UIBarButtonItem*) leftBarButtonItem {
-//    if (self.navigationBar != nil) {
-//        return self.navigationBar.topItem.leftBarButtonItem;
-//    }
     return self.navigationItem.leftBarButtonItem;
 }
 
 - (void) setLeftBarButtonItem:(UIBarButtonItem *)leftBarButtonItem {
-//    if (self.navigationBar != nil) {
-//        self.navigationBar.topItem.leftBarButtonItem = leftBarButtonItem;
-//    }
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
 }
 
 - (UIBarButtonItem*) rightBarButtonItem {
-//    if (self.navigationBar != nil) {
-//        return self.navigationBar.topItem.rightBarButtonItem;
-//    }
     return self.navigationItem.rightBarButtonItem;
 }
 
 - (void) setRightBarButtonItem:(UIBarButtonItem *)rightBarButtonItem {
-//    if (self.navigationBar != nil) {
-//        self.navigationBar.topItem.rightBarButtonItem = rightBarButtonItem;
-//    }
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 }
 

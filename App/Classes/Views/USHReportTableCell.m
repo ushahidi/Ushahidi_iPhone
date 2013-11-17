@@ -22,6 +22,7 @@
 #import <Ushahidi/UIColor+USH.h>
 #import <Ushahidi/USHDevice.h>
 #import "USHSettings.h"
+#import <Ushahidi/USHDevice.h>
 #import <Ushahidi/NSString+USH.h>
 
 @implementation USHReportTableCell
@@ -51,7 +52,9 @@ typedef enum {
 
 - (void) awakeFromNib {
     [super awakeFromNib];
-    self.imageView.superview.layer.cornerRadius = 5.0f;
+    if ([USHDevice isIOS6]) {
+        self.imageView.superview.layer.cornerRadius = 5.0f;
+    }
     CGRect frame = self.starredView.frame;
     frame.origin.x = self.frame.size.width - self.verifiedView.frame.origin.x - self.starredView.frame.size.width;
     self.starredView.frame = frame;

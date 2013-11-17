@@ -24,6 +24,8 @@
 
 }
 
++ (BOOL) isIOS6;
++ (BOOL) isIOS7;
 + (BOOL) isIPad;
 + (BOOL) isIPhone;
 + (BOOL) isGestureSupported;

@@ -22,6 +22,7 @@
 #import <Ushahidi/NSObject+USH.h>
 #import <Ushahidi/NSString+USH.h>
 #import <Ushahidi/UITableView+USH.h>
+#import <Ushahidi/USHDevice.h>
 
 @interface USHInputTableCell ()
 
@@ -47,7 +48,9 @@
     [self.clearButton setFrame:CGRectMake(0, 0, 20, 20)];
     [self.clearButton setImage:[UIImage imageNamed:@"clear.png"] forState:UIControlStateNormal];
     [self.clearButton addTarget:self action:@selector(clear:event:) forControlEvents:UIControlEventTouchUpInside];
-    self.textView.contentInset = UIEdgeInsetsMake(-4,-8,0,0);
+    if ([USHDevice isIOS6]) {
+       self.textView.contentInset = UIEdgeInsetsMake(-4,-8,0,0);
+    }
     self.textView.backgroundColor = self.backgroundColor;
 }
 

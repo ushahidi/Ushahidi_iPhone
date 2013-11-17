@@ -24,7 +24,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.6</string>
+	<string>3.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -35,7 +35,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3.6</string>
+	<string>3.7</string>
 	<key>FacebookAppID</key>
 	<string>229180347215171</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -68,10 +68,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>USHAppStoreURL</key>
-	<string>http://itunes.apple.com/us/app/firsthand/id566652751</string>
 	<key>USHAppDescription</key>
 	<string>Firsthand is a project from the Huffington Post to hear your stories about what is happening where you live.</string>
+	<key>USHAppStoreURL</key>
+	<string>http://itunes.apple.com/us/app/firsthand/id566652751</string>
 	<key>USHButtonDoneColor</key>
 	<string>#014e8d</string>
 	<key>USHMAPURLs</key>

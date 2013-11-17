@@ -23,6 +23,7 @@
 #import "USHDevice.h"
 #import "UIViewController+USH.h"
 #import "UIImage+USH.h"
+#import "USHDevice.h"
 
 @interface USHTabBarController ()
 
@@ -94,17 +95,41 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"USHViewWillAppear" object:self];
-    self.tabBar.tintColor = self.tabBarColor;
+    if ([self.tabBar respondsToSelector:@selector(barTintColor)]) {
+        self.tabBar.tintColor = [UIColor whiteColor];
+        self.tabBar.barTintColor = self.tabBarColor;
+    }
+    else {
+        self.tabBar.tintColor = self.tabBarColor;
+    }
     for (UIViewController *viewController in self.viewControllers) {
         if ([viewController isKindOfClass:[UINavigationController class]]) {
             UINavigationController *navigationController = (UINavigationController*)viewController;
-            navigationController.navigationBar.tintColor = self.navBarColor;
+            if ([navigationController.navigationBar respondsToSelector:@selector(barTintColor)]) {
+                navigationController.navigationBar.tintColor = [UIColor whiteColor];
+                navigationController.navigationBar.barTintColor = self.navBarColor;
+            }
+            else {
+                navigationController.navigationBar.tintColor = self.navBarColor;
+            }
         }
         else {
-            viewController.navigationController.navigationBar.tintColor = self.navBarColor;   
+            if ([viewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)]) {
+                viewController.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+                viewController.navigationController.navigationBar.barTintColor = self.navBarColor;
+            }
+            else {
+                viewController.navigationController.navigationBar.tintColor = self.navBarColor;
+            }
         }
     }
-    self.navigationController.navigationBar.tintColor = self.navBarColor;
+    if ([self.navigationController.navigationBar respondsToSelector:@selector(barTintColor)]) {
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationController.navigationBar.barTintColor = self.navBarColor;
+    }
+    else {
+        self.navigationController.navigationBar.tintColor = self.navBarColor;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

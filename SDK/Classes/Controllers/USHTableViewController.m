@@ -235,9 +235,16 @@ static const CGFloat kCornerRadius = 10;
     }
     if (self.tableView.tableHeaderView != nil) {
         UISearchBar *searchBar = (UISearchBar *)self.tableView.tableHeaderView;
-        if ([searchBar respondsToSelector:@selector(tintColor)]) {
+        if ([searchBar respondsToSelector:@selector(barTintColor)]) {
+            searchBar.tintColor = [UIColor whiteColor];
+            searchBar.barTintColor = self.searchBarColor;
+        }
+        else {
             searchBar.tintColor = self.searchBarColor;
         }
+    }
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
 }
 
@@ -293,7 +300,7 @@ static const CGFloat kCornerRadius = 10;
         else {
             cell.backgroundColor = [UIColor whiteColor];
         }
-        if (cell.selectedBackgroundView != nil) {
+        if (cell.selectedBackgroundView != nil && [USHDevice isIOS6]) {
             NSInteger rows = [tableView numberOfRowsInSection:indexPath.section];
             if (rows == 1) {
                 cell.selectedBackgroundView.layer.cornerRadius = kCornerRadius;

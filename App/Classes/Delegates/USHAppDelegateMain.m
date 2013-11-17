@@ -173,6 +173,9 @@
             self.window.rootViewController = [self navigationControllerWithRootViewController:self.mapTableViewController];
         }
     }
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [UIColor whiteColor], UITextAttributeTextColor, nil];
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
     [self.window setFrame:[[UIScreen mainScreen] bounds]];
     [self statusBarHidden:[[USHSettings sharedInstance] hideStatusBar] animated:NO];
     [self.window makeKeyAndVisible];
@@ -215,7 +218,13 @@
     if ([notification.object isKindOfClass:UINavigationController.class]) {
         DLog(@"UINavigationController %@", notification.object);
         UINavigationController *navigationController = (UINavigationController*)notification.object;
-        navigationController.navigationBar.tintColor = [[USHSettings sharedInstance] navBarColor];
+        if ([navigationController.navigationBar respondsToSelector:@selector(barTintColor)]) {
+            navigationController.navigationBar.tintColor = [UIColor whiteColor];
+            navigationController.navigationBar.barTintColor = [[USHSettings sharedInstance] navBarColor];
+        }
+        else {
+            navigationController.navigationBar.tintColor = [[USHSettings sharedInstance] navBarColor];
+        }
     }
     if ([notification.object isKindOfClass:USHViewController.class]) {
         DLog(@"USHViewController %@", notification.object);
@@ -306,7 +315,13 @@
 
 - (UINavigationController*) navigationControllerWithRootViewController:(UIViewController*)controller {
     UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
-    navigationController.navigationBar.tintColor = [[USHSettings sharedInstance] navBarColor];
+    if ([navigationController.navigationBar respondsToSelector:@selector(barTintColor)]) {
+        navigationController.navigationBar.tintColor = [UIColor whiteColor];
+        navigationController.navigationBar.barTintColor = [[USHSettings sharedInstance] navBarColor];
+    }
+    else {
+        navigationController.navigationBar.tintColor = [[USHSettings sharedInstance] navBarColor];
+    }
     return navigationController;
 }
 

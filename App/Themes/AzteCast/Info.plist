@@ -24,7 +24,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.6</string>
+	<string>3.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -35,7 +35,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3.6</string>
+	<string>3.7</string>
 	<key>FacebookAppID</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -68,10 +68,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>USHAppStoreURL</key>
-	<string>https://itunes.apple.com/us/app/aztecast/id541257765</string>
 	<key>USHAppDescription</key>
 	<string>The AzteCast app is a powerful mapping tool that helps the San Diego State University campus population to post and share news events happening at the university to a physical map.</string>
+	<key>USHAppStoreURL</key>
+	<string>https://itunes.apple.com/us/app/aztecast/id541257765</string>
 	<key>USHButtonDoneColor</key>
 	<string>#8F2424</string>
 	<key>USHMapURL</key>

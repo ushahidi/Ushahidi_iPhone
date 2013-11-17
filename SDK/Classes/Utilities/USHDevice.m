@@ -24,6 +24,14 @@
 
 @implementation USHDevice
 
++ (BOOL) isIOS6 {
+    return [UIDevice currentDevice].systemVersion.floatValue >= 6.0 && [UIDevice currentDevice].systemVersion.floatValue < 7.0;
+}
+
++ (BOOL) isIOS7 {
+    return [UIDevice currentDevice].systemVersion.floatValue >= 7.0;
+}
+
 + (BOOL) isIPad {
 	BOOL iPad = NO;
 #ifdef UI_USER_INTERFACE_IDIOM

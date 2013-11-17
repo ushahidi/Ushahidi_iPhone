@@ -21,6 +21,7 @@
 #import "USHMapDialog.h"
 #import "NSObject+USH.h"
 #import "NSString+USH.h"
+#import "USHDevice.h"
 
 @interface USHMapDialog () 
 
@@ -62,30 +63,54 @@ NSString *const NEWLINE = @"\n";
 
 - (void) showWithTitle:(NSString *)title name:(NSString *)name url:(NSString *)url {
 	DLog(@"title:%@ name:%@ url:%@", title, name, url);
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title 
-														message:@"\n\n\n" 
-													   delegate:self 
-											  cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
-											  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
 	
-	self.nameField = [self getTextField:CGRectMake(12.0, 50.0, 260.0, 25.0)
-								   text:name 
-							placeholder:NSLocalizedString(@"Enter name", nil) 
-						   keyboardType:UIKeyboardTypeDefault
-				 autocapitalizationType:UITextAutocapitalizationTypeWords
-					 autocorrectionType:UITextAutocorrectionTypeYes];
-	[alertView addSubview:self.nameField];
-	
-	self.urlField = [self getTextField:CGRectMake(12.0, 85.0, 260.0, 25.0)
-								  text:url 
-						   placeholder:NSLocalizedString(@"Enter URL", nil) 
-						  keyboardType:UIKeyboardTypeURL
-				autocapitalizationType:UITextAutocapitalizationTypeNone
-					autocorrectionType:UITextAutocorrectionTypeNo];
-	[alertView addSubview:self.urlField];
-	
-	[alertView show];
-	[alertView release];
+	if ([USHDevice isIOS7]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:@""
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        alertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+        self.nameField = [alertView textFieldAtIndex:0];
+        self.nameField.keyboardType = UIKeyboardTypeDefault;
+        self.nameField.placeholder = NSLocalizedString(@"Enter name", nil);
+        self.nameField.secureTextEntry = NO;
+        self.nameField.delegate = self;
+        
+        self.urlField = [alertView textFieldAtIndex:1];
+        self.urlField.keyboardType = UIKeyboardTypeURL;
+        self.urlField.placeholder = NSLocalizedString(@"Enter URL", nil);
+        self.urlField.secureTextEntry = NO;
+        self.urlField.delegate = self;
+        
+        [alertView setTransform: CGAffineTransformMakeTranslation(0.0, 0.0)];
+        [alertView show];
+        [alertView release];
+    }
+    else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:@"\n\n\n"
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                  otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        self.nameField = [self getTextField:CGRectMake(12.0, 50.0, 260.0, 25.0)
+                                       text:name
+                                placeholder:NSLocalizedString(@"Enter name", nil)
+                               keyboardType:UIKeyboardTypeDefault
+                     autocapitalizationType:UITextAutocapitalizationTypeWords
+                         autocorrectionType:UITextAutocorrectionTypeYes];
+        [alertView addSubview:self.nameField];
+        
+        self.urlField = [self getTextField:CGRectMake(12.0, 85.0, 260.0, 25.0)
+                                      text:url
+                               placeholder:NSLocalizedString(@"Enter URL", nil)
+                              keyboardType:UIKeyboardTypeURL
+                    autocapitalizationType:UITextAutocapitalizationTypeNone
+                        autocorrectionType:UITextAutocorrectionTypeNo];
+        [alertView addSubview:self.urlField];
+        [alertView show];
+        [alertView release];
+    }
 }
 
 - (UITextField *) getTextField:(CGRect)frame text:(NSString *)text 

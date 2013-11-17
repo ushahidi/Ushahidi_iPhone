@@ -63,7 +63,6 @@ NSString *const NEWLINE = @"\n";
 
 - (void) showWithTitle:(NSString *)title name:(NSString *)name url:(NSString *)url {
 	DLog(@"title:%@ name:%@ url:%@", title, name, url);
-	
 	if ([USHDevice isIOS7]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                             message:@""
@@ -76,12 +75,14 @@ NSString *const NEWLINE = @"\n";
         self.nameField.placeholder = NSLocalizedString(@"Enter name", nil);
         self.nameField.secureTextEntry = NO;
         self.nameField.delegate = self;
+        self.nameField.text = name;
         
         self.urlField = [alertView textFieldAtIndex:1];
         self.urlField.keyboardType = UIKeyboardTypeURL;
         self.urlField.placeholder = NSLocalizedString(@"Enter URL", nil);
         self.urlField.secureTextEntry = NO;
         self.urlField.delegate = self;
+        self.urlField.text = url;
         
         [alertView setTransform: CGAffineTransformMakeTranslation(0.0, 0.0)];
         [alertView show];

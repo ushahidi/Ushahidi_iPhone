@@ -3429,8 +3429,16 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = USH;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Ushahidi;
+				TargetAttributes = {
+					3E6D0321159B54CF00CDB5B7 = {
+						DevelopmentTeam = K4L62494Y2;
+					};
+					3EC1B4761757AB1000CFF726 = {
+						DevelopmentTeam = K4L62494Y2;
+					};
+				};
 			};
 			buildConfigurationList = 3E6D031C159B54CF00CDB5B7 /* Build configuration list for PBXProject "App" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -5516,8 +5524,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -5532,11 +5541,15 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lsqlite3.0",
@@ -5551,8 +5564,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -5560,9 +5574,12 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
@@ -5580,8 +5597,8 @@
 		3E6D033B159B54CF00CDB5B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
@@ -5602,8 +5619,8 @@
 		3E6D033C159B54CF00CDB5B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
@@ -5615,8 +5632,8 @@
 				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B747C5E9-B319-4B32-B3D4-1F06E0C73CC6";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B747C5E9-B319-4B32-B3D4-1F06E0C73CC6";
+				PROVISIONING_PROFILE = "9D31B280-3B15-47B7-BBDE-FEF3FB29D20A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9D31B280-3B15-47B7-BBDE-FEF3FB29D20A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -5646,8 +5663,8 @@
 		3E9E5148167129320095F4A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
@@ -5659,8 +5676,8 @@
 				INFOPLIST_FILE = Themes/Inherity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = Inherity;
-				PROVISIONING_PROFILE = "F0305258-EC10-41C2-B655-CA430C3845CA";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0305258-EC10-41C2-B655-CA430C3845CA";
+				PROVISIONING_PROFILE = "191774EA-7152-4D09-9D2D-12B75062F377";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "191774EA-7152-4D09-9D2D-12B75062F377";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -5778,8 +5795,8 @@
 		3E9E5544167129530095F4A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
@@ -5791,8 +5808,8 @@
 				INFOPLIST_FILE = Themes/Firsthand/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = Firsthand;
-				PROVISIONING_PROFILE = "101C1A6A-F822-4E5C-8E1B-112258BF91E7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "101C1A6A-F822-4E5C-8E1B-112258BF91E7";
+				PROVISIONING_PROFILE = "048BBD26-CBCF-46FA-B477-F2626206F2B2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "048BBD26-CBCF-46FA-B477-F2626206F2B2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -5822,8 +5839,8 @@
 		3E9E587516712E5A0095F4A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
@@ -5835,8 +5852,8 @@
 				INFOPLIST_FILE = Themes/MapATL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = MapATL;
-				PROVISIONING_PROFILE = "4045FEEE-0207-4F36-BEBB-1A87ACD73F15";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4045FEEE-0207-4F36-BEBB-1A87ACD73F15";
+				PROVISIONING_PROFILE = "E2A08B50-D020-477F-A1F3-13C0603695E6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E2A08B50-D020-477F-A1F3-13C0603695E6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -5844,8 +5861,8 @@
 		3EC1B5961757AB1000CFF726 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dale Zak (8QRQR3SCMG)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
@@ -5857,7 +5874,7 @@
 				INFOPLIST_FILE = Themes/AzteCast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = AzteCast;
-				PROVISIONING_PROFILE = "126E50AF-E31D-43EE-8A6D-C82AE5DDA65F";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "126E50AF-E31D-43EE-8A6D-C82AE5DDA65F";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5866,8 +5883,8 @@
 		3EC1B5971757AB1000CFF726 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ushahidi Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
@@ -5879,7 +5896,7 @@
 				INFOPLIST_FILE = Themes/AzteCast/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = AzteCast;
-				PROVISIONING_PROFILE = "B747C5E9-B319-4B32-B3D4-1F06E0C73CC6";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B747C5E9-B319-4B32-B3D4-1F06E0C73CC6";
 				WRAPPER_EXTENSION = app;
 			};

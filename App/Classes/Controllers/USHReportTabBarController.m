@@ -25,6 +25,7 @@
 #import "USHCheckinTableViewController.h"
 #import "USHCategoryTableViewController.h"
 #import "USHSettingsViewController.h"
+#import <Ushahidi/USHAppDelegate.h>
 #import <Ushahidi/USHMap.h>
 #import <Ushahidi/USHCategory.h>
 #import <Ushahidi/UIBarButtonItem+USH.h>

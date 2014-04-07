@@ -214,7 +214,7 @@ typedef enum {
     [self hideLoading];
     self.radiusButton.enabled = YES;
     [self.maps removeAllObjects];
-    NSSortDescriptor *descriptor;
+    NSSortDescriptor *descriptor = nil;
     if (self.sortControl.selectedSegmentIndex == SortTypeByName) {
         DLog(@"SortTypeByName");
         descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];

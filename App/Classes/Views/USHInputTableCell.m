@@ -97,7 +97,7 @@
     width -= 26; //right
     CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:17]
                    constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)
-                       lineBreakMode:UILineBreakModeWordWrap];
+                       lineBreakMode:NSLineBreakByWordWrapping];
 	CGFloat height = size.height;
     height += 6; //top
     height += 6; //bottom

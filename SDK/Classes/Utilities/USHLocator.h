@@ -20,17 +20,16 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import "SynthesizeSingleton.h"
 
 @protocol USHLocatorDelegate;
 
 @interface USHLocator : NSObject<CLLocationManagerDelegate>
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(USHLocator);
-
 @property(nonatomic, retain) NSNumber *latitude;
 @property(nonatomic, retain) NSNumber *longitude;
 @property(nonatomic, retain) NSString *address;
+
++ (instancetype) sharedInstance;
 
 - (void) locateForDelegate:(NSObject<USHLocatorDelegate>*)delegate;
 - (void) lookupForDelegate:(NSObject<USHLocatorDelegate>*)delegate;

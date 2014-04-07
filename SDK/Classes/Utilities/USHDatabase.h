@@ -20,13 +20,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "SynthesizeSingleton.h"
 
 @interface USHDatabase : NSObject
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(USHDatabase);
-
 @property (nonatomic, strong) NSString *name;
+
++ (instancetype) sharedInstance;
 
 - (BOOL) remove:(id)model;
 

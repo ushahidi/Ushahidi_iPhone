@@ -33,11 +33,7 @@
 
 @end
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(USHLocator);
-
 @implementation USHLocator
-
-SYNTHESIZE_SINGLETON_FOR_CLASS(USHLocator);
 
 @synthesize delegate = _delegate;
 @synthesize locationManager = _locationManager;
@@ -45,6 +41,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHLocator);
 @synthesize latitude = _latitude;
 @synthesize longitude = _longitude;
 @synthesize address = _address;
+
++ (instancetype) sharedInstance {
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedObject = nil;
+    dispatch_once(&pred, ^{
+        _sharedObject = [[self alloc] init]; // or some other init method
+    });
+    return _sharedObject;
+}
 
 - (id) init {
 	if ((self = [super init])) {

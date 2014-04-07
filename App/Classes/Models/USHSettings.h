@@ -19,13 +19,10 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
-#import <Ushahidi/SynthesizeSingleton.h>
 #import <Ushahidi/USHDefaults.h>
 #import <objc/runtime.h>
 
 @interface USHSettings : USHDefaults
-
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(USHSettings);
 
 @property(nonatomic, assign, readonly) NSString *appName;
 @property(nonatomic, assign, readonly) NSString *appVersion;
@@ -86,5 +83,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(USHSettings);
 @property(nonatomic, assign, readonly) BOOL showReportList;
 @property(nonatomic, assign, readonly) BOOL showReportButton;
 @property(nonatomic, assign, readonly) BOOL sortReportsByDate;
+
++ (id) sharedInstance;
 
 @end

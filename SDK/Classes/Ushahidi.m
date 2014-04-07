@@ -47,11 +47,7 @@
 
 @end
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(Ushahidi);
-
 @implementation Ushahidi
-
-SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 
 NSString * const kUSHSyncDate = @"USHSyncDate";
 
@@ -64,6 +60,15 @@ NSString * const kUSHSyncDate = @"USHSyncDate";
 @synthesize youtubeDeveloperKey = _youtubeDeveloperKey;
 
 #pragma mark - Init
+
++ (instancetype) sharedInstance {
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedObject = nil;
+    dispatch_once(&pred, ^{
+        _sharedObject = [[self alloc] init]; // or some other init method
+    });
+    return _sharedObject;
+}
 
 - (id) init {
 	if ((self = [super init])) {

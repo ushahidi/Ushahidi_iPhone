@@ -32,16 +32,21 @@
 
 @end
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(USHDatabase);
-
 @implementation USHDatabase
-
-SYNTHESIZE_SINGLETON_FOR_CLASS(USHDatabase);
 
 @synthesize name = _name;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
+
++ (instancetype) sharedInstance {
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedObject = nil;
+    dispatch_once(&pred, ^{
+        _sharedObject = [[self alloc] init]; // or some other init method
+    });
+    return _sharedObject;
+}
 
 - (void)dealloc {
     [_name release];

@@ -28,9 +28,5 @@
 
 @synthesize imageView;
 
-- (void)dealloc {
-    [super dealloc];
-    [imageView release];
-}
 
 @end

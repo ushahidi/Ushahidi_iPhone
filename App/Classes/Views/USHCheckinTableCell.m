@@ -35,13 +35,6 @@
     self.imageView.superview.layer.cornerRadius = 5.0f;
 }
 
-- (void)dealloc {
-	[_nameLabel release];
-	[_messageLabel release];
-	[_dateLabel release];
-	[imageView release];
-	[super dealloc];
-}
 
 - (void) setName:(NSString *)name {
 	self.nameLabel.text = name;

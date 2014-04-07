@@ -24,29 +24,29 @@
 
 @interface USHSettings : USHDefaults
 
-@property(nonatomic, assign, readonly) NSString *appName;
-@property(nonatomic, assign, readonly) NSString *appVersion;
-@property(nonatomic, assign, readonly) NSString *appDescription;
+@property(nonatomic, weak, readonly) NSString *appName;
+@property(nonatomic, weak, readonly) NSString *appVersion;
+@property(nonatomic, weak, readonly) NSString *appDescription;
 
-@property(nonatomic, assign, readonly) NSString *mapName;
-@property(nonatomic, assign, readonly) NSString *mapURL;
+@property(nonatomic, weak, readonly) NSString *mapName;
+@property(nonatomic, weak, readonly) NSString *mapURL;
 @property(nonatomic, assign, readonly) BOOL hasMapURL;
 
-@property(nonatomic, assign, readonly) NSDictionary *mapURLs;
+@property(nonatomic, weak, readonly) NSDictionary *mapURLs;
 @property(nonatomic, assign, readonly) BOOL hasMapURLS;
 
-@property(nonatomic, assign, readonly) NSString *supportURL;
-@property(nonatomic, assign, readonly) NSString *supportEmail;
-@property(nonatomic, assign, readonly) NSString *appStoreURL;
+@property(nonatomic, weak, readonly) NSString *supportURL;
+@property(nonatomic, weak, readonly) NSString *supportEmail;
+@property(nonatomic, weak, readonly) NSString *appStoreURL;
 
-@property(nonatomic, assign, readonly) NSString *termsOfServiceURL;
-@property(nonatomic, assign, readonly) NSString *privacyPolicyURL;
+@property(nonatomic, weak, readonly) NSString *termsOfServiceURL;
+@property(nonatomic, weak, readonly) NSString *privacyPolicyURL;
 @property(nonatomic, assign, readwrite) BOOL termsOfService;
 
-@property(nonatomic, assign, readwrite) NSString *contactFirstName;
-@property(nonatomic, assign, readwrite) NSString *contactLastName;
-@property(nonatomic, assign, readwrite) NSString *contactEmailAddress;
-@property(nonatomic, assign, readonly) NSString *contactFullName;
+@property(nonatomic, weak, readwrite) NSString *contactFirstName;
+@property(nonatomic, weak, readwrite) NSString *contactLastName;
+@property(nonatomic, weak, readwrite) NSString *contactEmailAddress;
+@property(nonatomic, weak, readonly) NSString *contactFullName;
 
 @property(nonatomic, assign, readwrite) BOOL hideStatusBar;
 @property(nonatomic, assign, readwrite) BOOL showBadgeNumber;
@@ -62,22 +62,22 @@
 
 @property(nonatomic, assign, readwrite) BOOL openGeoSMS;
 
-@property(nonatomic, assign, readonly) UIColor *navBarColor;
-@property(nonatomic, assign, readonly) UIColor *tabBarColor;
-@property(nonatomic, assign, readonly) UIColor *toolBarColor;
-@property(nonatomic, assign, readonly) UIColor *searchBarColor;
+@property(nonatomic, weak, readonly) UIColor *navBarColor;
+@property(nonatomic, weak, readonly) UIColor *tabBarColor;
+@property(nonatomic, weak, readonly) UIColor *toolBarColor;
+@property(nonatomic, weak, readonly) UIColor *searchBarColor;
 
-@property(nonatomic, assign, readonly) UIColor *tableBackColor;
-@property(nonatomic, assign, readonly) UIColor *tableRowColor;
-@property(nonatomic, assign, readonly) UIColor *tableHeaderColor;
-@property(nonatomic, assign, readonly) UIColor *tableSelectColor;
+@property(nonatomic, weak, readonly) UIColor *tableBackColor;
+@property(nonatomic, weak, readonly) UIColor *tableRowColor;
+@property(nonatomic, weak, readonly) UIColor *tableHeaderColor;
+@property(nonatomic, weak, readonly) UIColor *tableSelectColor;
 
-@property(nonatomic, assign, readonly) UIColor *buttonDoneColor;
-@property(nonatomic, assign, readonly) UIColor *refreshControlColor;
+@property(nonatomic, weak, readonly) UIColor *buttonDoneColor;
+@property(nonatomic, weak, readonly) UIColor *refreshControlColor;
 
-@property(nonatomic, assign, readonly) NSString *youtubeUsername;
-@property(nonatomic, assign, readonly) NSString *youtubePassword;
-@property(nonatomic, assign, readonly) NSString *youtubeDeveloperKey;
+@property(nonatomic, weak, readonly) NSString *youtubeUsername;
+@property(nonatomic, weak, readonly) NSString *youtubePassword;
+@property(nonatomic, weak, readonly) NSString *youtubeDeveloperKey;
 @property(nonatomic, assign, readonly) BOOL youtubeCredentials;
 
 @property(nonatomic, assign, readonly) BOOL showReportList;

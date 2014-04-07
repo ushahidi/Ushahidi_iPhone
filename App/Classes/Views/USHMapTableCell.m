@@ -34,15 +34,6 @@
 @synthesize reportsIcon = _reportsIcon;
 @synthesize checkinsIcon = _checkinsIcon;
 
-- (void)dealloc {
-	[_titleLabel release];
-	[_urlLabel release];
-    [_reportsLabel release];
-    [_checkinsLabel release];
-    [_checkinsIcon release];
-    [_reportsIcon release];
-    [super dealloc];
-}
 
 - (void) setLoading:(BOOL)loading {
 	if (loading) {
@@ -50,7 +41,6 @@
             UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             [activityView startAnimating];
             [self setAccessoryView:activityView];
-            [activityView release];
         }
 	}
 	else {

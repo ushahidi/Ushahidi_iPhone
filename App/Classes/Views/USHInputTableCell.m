@@ -26,7 +26,7 @@
 
 @interface USHInputTableCell ()
 
-@property (nonatomic, retain) UIButton *clearButton;
+@property (nonatomic, strong) UIButton *clearButton;
 
 @end
 
@@ -54,14 +54,6 @@
     self.textView.backgroundColor = self.backgroundColor;
 }
 
-- (void)dealloc {
-    [_delegate release];
-    [imageView release];
-    [_textView release];
-    [_placeholder release];
-    [_clearButton release];
-    [super dealloc];
-}
 
 - (void) setText:(NSString *)text {
     if ([NSString isNilOrEmpty:text]) {

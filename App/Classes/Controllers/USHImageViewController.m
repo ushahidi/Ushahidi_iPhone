@@ -102,17 +102,6 @@ typedef enum {
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_imageView release];
-    [_scrollView release];
-    [_images release];
-    [_image release];
-    [_nextPrevious release];
-    [_shareController release];
-    [_swipeLeftRecognizer release];
-    [_swipeRightRecognizer release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -122,10 +111,10 @@ typedef enum {
     
     self.shareController = [[USHShareController alloc] initWithController:self];
     
-    self.swipeLeftRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)] autorelease];
+    self.swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
     self.swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     
-    self.swipeRightRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)] autorelease];
+    self.swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
     self.swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     
     [self adjustToolBarHeight];
@@ -208,10 +197,10 @@ typedef enum {
 #pragma mark - UIImage
 
 - (void) savePhotoInBackground {
-	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	UIImageWriteToSavedPhotosAlbum
-	(self.imageView.image, self, @selector(imageSaved:didFinishSavingWithError:contextInfo:), nil);
-	[pool release];
+	@autoreleasepool {
+		UIImageWriteToSavedPhotosAlbum
+		(self.imageView.image, self, @selector(imageSaved:didFinishSavingWithError:contextInfo:), nil);
+	}
 }
 
 - (void)imageSaved:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {

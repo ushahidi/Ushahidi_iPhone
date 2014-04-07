@@ -97,13 +97,6 @@
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [__map release];
-    [__category release];
-    [_filterLabel release];
-    [_detailsController release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

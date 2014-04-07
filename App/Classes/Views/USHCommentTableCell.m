@@ -47,12 +47,5 @@
 	return MAX(44, height);
 }
 
-- (void)dealloc {
-    [super dealloc];
-    [_commentLabel release];
-    [_authorLabel release];
-    [_dateLabel release];
-    [imageView release];
-}
 
 @end

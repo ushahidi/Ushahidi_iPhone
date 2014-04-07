@@ -25,10 +25,10 @@
     UIImageView *imageView;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *commentLabel;
-@property (nonatomic, retain) IBOutlet UILabel *authorLabel;
-@property (nonatomic, retain) IBOutlet UILabel *dateLabel;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *commentLabel;
+@property (nonatomic, strong) IBOutlet UILabel *authorLabel;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 
 + (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text;
 

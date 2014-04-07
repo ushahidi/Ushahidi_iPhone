@@ -60,19 +60,6 @@ typedef enum {
     self.starredView.frame = frame;
 }
 
-- (void)dealloc {
-	[_titleLabel release];
-	[_locationLabel release];
-	[_categoryLabel release];
-	[_dateLabel release];
-	[imageView release];
-	[_verifiedView release];
-    [_webView release];
-    [_descriptionLabel release];
-	[_activityIndicator release];
-    [_starredView release];
-    [super dealloc];
-}
 
 - (void) setStarred:(BOOL)starred {
     if (starred) {

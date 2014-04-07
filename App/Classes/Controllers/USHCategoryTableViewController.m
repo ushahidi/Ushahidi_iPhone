@@ -61,12 +61,6 @@ typedef enum {
     self.navigationItem.title = NSLocalizedString(@"Categories", nil);
 }
 
-- (void)dealloc {
-    [_map release];
-    [_report release];
-    [_doneButton release];
-    [super dealloc];
-}
 
 #pragma mark - UITableViewController
 

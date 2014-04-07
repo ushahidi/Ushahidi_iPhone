@@ -23,12 +23,12 @@
 
 @interface USHMapTableCell : USHTableCell 
 
-@property (nonatomic, retain) IBOutlet UILabel *titleLabel;
-@property (nonatomic, retain) IBOutlet UILabel *urlLabel;
-@property (nonatomic, retain) IBOutlet UILabel *reportsLabel;
-@property (nonatomic, retain) IBOutlet UILabel *checkinsLabel;
-@property (nonatomic, retain) IBOutlet UIImageView *reportsIcon;
-@property (nonatomic, retain) IBOutlet UIImageView *checkinsIcon;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *urlLabel;
+@property (nonatomic, strong) IBOutlet UILabel *reportsLabel;
+@property (nonatomic, strong) IBOutlet UILabel *checkinsLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *reportsIcon;
+@property (nonatomic, strong) IBOutlet UIImageView *checkinsIcon;
 
 @property (nonatomic, assign) NSInteger reports;
 @property (nonatomic, assign) NSInteger checkins;

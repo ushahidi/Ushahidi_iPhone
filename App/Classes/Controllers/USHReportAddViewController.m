@@ -213,29 +213,14 @@ typedef enum {
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_map release];
-    [_report release];
-    [_datePicker release];
-    [_imagePicker release];
-    [_videoPicker release];
-    [_inputCell release];
-    [_shareController release];
-    [_categoryTableController release];
-    [_locationAddViewController release];
-    [_settingsViewController release];
-    [_locateError release];
-    [_lookupError release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad]; 
-    self.datePicker = [[[USHDatePicker alloc] initForDelegate:self] autorelease];
-    self.imagePicker = [[[USHImagePicker alloc] initWithController:self] autorelease];
-    self.videoPicker = [[[USHVideoPicker alloc] initWithController:self] autorelease];
-    self.loginDialog = [[[USHLoginDialog alloc] initForDelegate:self] autorelease];
-    self.shareController = [[[USHShareController alloc] initWithController:self] autorelease];
+    self.datePicker = [[USHDatePicker alloc] initForDelegate:self];
+    self.imagePicker = [[USHImagePicker alloc] initWithController:self];
+    self.videoPicker = [[USHVideoPicker alloc] initWithController:self];
+    self.loginDialog = [[USHLoginDialog alloc] initForDelegate:self];
+    self.shareController = [[USHShareController alloc] initWithController:self];
     self.locateError = nil;
     self.lookupError = nil;
     

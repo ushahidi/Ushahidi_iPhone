@@ -81,11 +81,11 @@
     if ([NSString isNilOrEmpty:[[USHSettings sharedInstance] termsOfServiceURL]] == NO ||
         [NSString isNilOrEmpty:[[USHSettings sharedInstance] privacyPolicyURL]] == NO) {
         if ([[USHSettings sharedInstance] termsOfService] == NO) {
-            UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"User Agreement", nil)
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"User Agreement", nil)
                                                                  message:NSLocalizedString(@"By using this app, you agree to the following terms and policy:", nil)
                                                                 delegate:self
                                                        cancelButtonTitle:NSLocalizedString(@"I Agree", nil)
-                                                       otherButtonTitles:nil] autorelease];
+                                                       otherButtonTitles:nil];
             if ([NSString isNilOrEmpty:[[USHSettings sharedInstance] termsOfServiceURL]] == NO) {
                 self.textTermsOfService = NSLocalizedString(@"Terms Of Service", nil);
                 [alertView addButtonWithTitle:self.textTermsOfService];
@@ -101,16 +101,6 @@
 
 #pragma mark - UIApplication
 
-- (void)dealloc {
-    [_mapTableViewController release];
-    [_reportTabBarController release];
-    [_reportAddViewController release];
-    [_settingsViewController release];
-    [_textTermsOfService release];
-    [_textPrivacyPolicy release];
-    [_filterViewController release];
-    [super dealloc];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //#################### STYLING ####################
@@ -314,7 +304,7 @@
 #pragma mark - Helpers
 
 - (UINavigationController*) navigationControllerWithRootViewController:(UIViewController*)controller {
-    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     if ([navigationController.navigationBar respondsToSelector:@selector(barTintColor)]) {
         navigationController.navigationBar.tintColor = [UIColor whiteColor];
         navigationController.navigationBar.barTintColor = [[USHSettings sharedInstance] navBarColor];
@@ -326,7 +316,7 @@
 }
 
 - (UISplitViewController*) splitViewControllerWithDelegate:(id<UISplitViewControllerDelegate>)delegate master:(UIViewController*)masterViewController details:(UIViewController*)detailsViewController {
-    UISplitViewController *splitViewController = [[[UISplitViewController alloc] init] autorelease];
+    UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
     UINavigationController *masterNavigationController = [self navigationControllerWithRootViewController:masterViewController];
     UINavigationController *detailsNavigationController = [self navigationControllerWithRootViewController:detailsViewController];
     splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailsNavigationController, nil];

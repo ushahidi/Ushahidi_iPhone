@@ -25,6 +25,7 @@
 #import "USHCheckinTableViewController.h"
 #import "USHCategoryTableViewController.h"
 #import "USHSettingsViewController.h"
+#import <Ushahidi/USHAppDelegate.h>
 #import <Ushahidi/USHMap.h>
 #import <Ushahidi/USHCategory.h>
 #import <Ushahidi/UIBarButtonItem+USH.h>
@@ -84,7 +85,7 @@
         self.reportAddController.report = [[Ushahidi sharedInstance] addReportForMap:self.map];
         self.reportAddController.modalPresentationStyle = UIModalPresentationPageSheet;
         self.reportAddController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:self.reportAddController animated:YES];
+        [self presentViewController:self.reportAddController animated:YES completion:nil];
     }
 }
 
@@ -111,7 +112,7 @@
         self.settingsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         self.settingsViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     }
-    [self presentModalViewController:self.settingsViewController animated:YES];
+    [self presentViewController:self.settingsViewController animated:YES completion:nil];
 }
 
 #pragma mark - USHMap
@@ -306,7 +307,7 @@
         self.reportAddController.report = [[Ushahidi sharedInstance] addReportForMap:self.map];
         self.reportAddController.modalPresentationStyle = UIModalPresentationPageSheet;
         self.reportAddController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentModalViewController:self.reportAddController animated:YES];
+        [self presentViewController:self.reportAddController animated:YES completion:nil];
     }
 }
 

@@ -90,6 +90,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHSettings);
 }
 
 - (void) setContactFirstName:(NSString *)contactFirstName {
+    contactFirstName = [contactFirstName
+                       stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     [self setString:contactFirstName forKey:@"contactFirstName"];
 }
 
@@ -98,6 +100,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHSettings);
 }
 
 - (void) setContactLastName:(NSString *)contactLastName {
+    contactLastName = [contactLastName
+                       stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     [self setString:contactLastName forKey:@"contactLastName"];
 }
 
@@ -106,6 +110,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(USHSettings);
 }
 
 - (void) setContactEmailAddress:(NSString *)contactEmailAddress {
+    contactEmailAddress = [contactEmailAddress
+                           stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     [self setString:contactEmailAddress forKey:@"contactEmailAddress"];
 }
 

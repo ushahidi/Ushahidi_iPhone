@@ -184,11 +184,14 @@ typedef enum {
                                                       done:UIReturnKeyDefault];
     }
     else if (indexPath.section == TableSectionAuthor) {
+        NSString *author = [[USHSettings sharedInstance] contactFullName];
+        self.comment.author = author;
+
         return [USHTableCellFactory inputTableCellForTable:tableView 
                                                  indexPath:indexPath 
                                                   delegate:self
                                                placeholder:NSLocalizedString(@"Enter name", nil)
-                                                      text:[[USHSettings sharedInstance] contactFullName]
+                                                      text:author
                                                       icon:@"name.png"
                                             capitalization:UITextAutocapitalizationTypeWords 
                                                 correction:UITextAutocorrectionTypeNo 
@@ -197,11 +200,14 @@ typedef enum {
                                                       done:UIReturnKeyDefault]; 
     }
     else if (indexPath.section == TableSectionEmail) {
+        NSString *email = [[USHSettings sharedInstance] contactEmailAddress];
+        self.comment.email = email;
+
         return [USHTableCellFactory inputTableCellForTable:tableView 
                                                  indexPath:indexPath 
                                                   delegate:self
                                                placeholder:NSLocalizedString(@"Enter email", nil)
-                                                      text:[[USHSettings sharedInstance] contactEmailAddress]
+                                                      text:email
                                                       icon:@"email.png"
                                             capitalization:UITextAutocapitalizationTypeNone 
                                                 correction:UITextAutocorrectionTypeNo 

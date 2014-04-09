@@ -40,6 +40,7 @@
 
 - (void)clear:(id)sender event:(UIEvent*)event {
     self.textView.text = nil;
+    [self textViewDidChange:self.textView];
 }
 
 - (void) awakeFromNib {

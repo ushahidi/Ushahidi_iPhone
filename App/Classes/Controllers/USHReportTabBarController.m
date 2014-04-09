@@ -141,36 +141,22 @@
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_reportMapController release];
-    [_reportTableController release];
-    [_categoryTableController release];
-    [_itemPicker release];
-    [_locateButton release];
-    [_filterButton release];
-    [_reportAddController release];
-    [_checkinTableController release];
-    [_textSubmitViaUshahidiAPI release];
-    [_textSubmitViaOpenGeoSMS release];
-    [_settingsViewController release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.textSubmitViaUshahidiAPI = NSLocalizedString(@"Upload via Ushahidi API", nil);
     self.textSubmitViaOpenGeoSMS = NSLocalizedString(@"Send via OpenGeoSMS", nil);
-    self.itemPicker = [[[USHItemPicker alloc] initWithController:self] autorelease];
+    self.itemPicker = [[USHItemPicker alloc] initWithController:self];
     
     if ([[USHSettings sharedInstance] showReportButton]) {
         [self addMiddleButtonWithImage:[UIImage imageNamed:@"action.png"]
                         highlightImage:[UIImage imageNamed:@"action_click.png"]
                                 action:@selector(add:event:)];
     }
-    self.locateButton = [[[USHRefreshButtonItem alloc] initWithImage:[UIImage imageNamed:@"locate.png"]
+    self.locateButton = [[USHRefreshButtonItem alloc] initWithImage:[UIImage imageNamed:@"locate.png"]
                                                            tintColor:[[USHSettings sharedInstance] navBarColor]
                                                               target:self.reportMapController
-                                                              action:@selector(locate:event:)] autorelease];
+                                                              action:@selector(locate:event:)];
     self.filterButton = [UIBarButtonItem borderedItemWithImage:[UIImage imageNamed:@"filter.png"]
                                                      tintColor:[[USHSettings sharedInstance] navBarColor] 
                                                         target:self

@@ -56,10 +56,5 @@
     return MAX(44, height);
 }
 
-- (void)dealloc {
-    [textLabel release];
-    [imageView release];
-    [super dealloc];
-}
 
 @end

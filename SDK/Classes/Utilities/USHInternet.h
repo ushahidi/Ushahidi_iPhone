@@ -19,13 +19,12 @@
  *****************************************************************************/
 
 #import <Foundation/Foundation.h>
-#import "SynthesizeSingleton.h"
 
 @protocol USHInternetDelegate;
 
 @interface USHInternet : NSObject 
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(USHInternet);
++ (instancetype) sharedInstance;
 
 - (BOOL) hasNetwork;
 - (BOOL) hasWiFi;

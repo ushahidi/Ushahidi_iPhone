@@ -97,16 +97,6 @@ typedef enum {
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_url release];
-    [_webView release];
-    [_backButton release];
-    [_forwardButton release];
-    [_refreshButton release];
-    [_zoomButton release];
-    [_shareController release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -25,7 +25,7 @@
     UILabel *textLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *textLabel;
+@property (nonatomic, strong) IBOutlet UILabel *textLabel;
 
 + (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text;
 

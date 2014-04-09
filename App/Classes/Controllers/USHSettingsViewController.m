@@ -106,11 +106,6 @@ typedef enum {
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_shareController release];
-    [_doneButton release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

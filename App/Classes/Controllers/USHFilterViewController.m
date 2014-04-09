@@ -66,12 +66,6 @@ typedef enum {
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_map release];
-    [_settingsViewController release];
-    [_reportTabBarController release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

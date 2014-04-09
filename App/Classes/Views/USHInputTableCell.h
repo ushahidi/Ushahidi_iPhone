@@ -27,10 +27,10 @@
     UIImageView *imageView;
 }
 
-@property (nonatomic, retain) IBOutlet UITextView *textView;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) NSString *placeholder;
-@property (nonatomic, retain) NSString *text;
+@property (nonatomic, strong) IBOutlet UITextView *textView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) NSString *placeholder;
+@property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSObject<USHInputTableCellDelegate> *delegate;
 
 - (void) showKeyboard;

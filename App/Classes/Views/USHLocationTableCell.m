@@ -42,10 +42,6 @@
     [self.mapView resizeRegionToFitAllPins:NO animated:animated];
 }
 
-- (void)dealloc {
-    [_mapView release];
-    [super dealloc];
-}
 
 #pragma mark - MKMapViewDelegate
 

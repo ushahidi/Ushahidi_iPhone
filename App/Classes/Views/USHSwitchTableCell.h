@@ -28,10 +28,10 @@
     UIImageView *imageView;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *textLabel;
-@property (nonatomic, retain) IBOutlet UISwitch *switchControl;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet NSObject<USHSwitchTableCellDelegate>*delegate;
+@property (nonatomic, strong) IBOutlet UILabel *textLabel;
+@property (nonatomic, strong) IBOutlet UISwitch *switchControl;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet NSObject<USHSwitchTableCellDelegate>*delegate;
 
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) BOOL on;

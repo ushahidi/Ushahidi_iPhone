@@ -27,11 +27,16 @@
 
 @end
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(USHSettings);
-
 @implementation USHSettings
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(USHSettings);
++ (instancetype) sharedInstance {
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedObject = nil;
+    dispatch_once(&pred, ^{
+        _sharedObject = [[self alloc] init]; // or some other init method
+    });
+    return _sharedObject;
+}
 
 - (NSString *) appName {
     return [self stringFromBundleForKey:@"CFBundleName"];

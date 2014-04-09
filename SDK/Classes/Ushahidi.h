@@ -20,7 +20,6 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "SynthesizeSingleton.h"
 
 #import "USHMap.h"
 #import "USHReport.h"
@@ -40,12 +39,12 @@
 
 @interface Ushahidi : NSObject
 
-SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(Ushahidi);
-
 @property (nonatomic, assign) NSInteger syncOperations;
 @property (nonatomic, strong) NSString *youtubeUsername;
 @property (nonatomic, strong) NSString *youtubePassword;
 @property (nonatomic, strong) NSString *youtubeDeveloperKey;
+
++ (instancetype) sharedInstance;
 
 - (BOOL) hasMap:(USHMap*)map;
 - (BOOL) hasMapWithUrl:(NSString*)url;

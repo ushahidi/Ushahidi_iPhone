@@ -28,9 +28,5 @@
 
 @synthesize webView = _webView;
 
-- (void)dealloc {
-    [super dealloc];
-    [_webView release];
-}
 
 @end

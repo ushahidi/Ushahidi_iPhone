@@ -27,23 +27,23 @@
     UIImageView *imageView;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *titleLabel;
-@property (nonatomic, retain) IBOutlet UILabel *locationLabel;
-@property (nonatomic, retain) IBOutlet UILabel *categoryLabel;
-@property (nonatomic, retain) IBOutlet UILabel *descriptionLabel;
-@property (nonatomic, retain) IBOutlet UILabel *dateLabel;
-@property (nonatomic, retain) IBOutlet UIImageView *verifiedView;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UIImageView *starredView;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *locationLabel;
+@property (nonatomic, strong) IBOutlet UILabel *categoryLabel;
+@property (nonatomic, strong) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *verifiedView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UIImageView *starredView;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (nonatomic, assign) NSString *title;
-@property (nonatomic, assign) NSString *location;
-@property (nonatomic, assign) NSString *category;
-@property (nonatomic, assign) NSString *description;
-@property (nonatomic, assign) NSString *date;
-@property (nonatomic, assign) UIImage *image;
+@property (nonatomic, weak) NSString *title;
+@property (nonatomic, weak) NSString *location;
+@property (nonatomic, weak) NSString *category;
+@property (nonatomic, weak) NSString *description;
+@property (nonatomic, weak) NSString *date;
+@property (nonatomic, weak) UIImage *image;
 
 @property (nonatomic, assign) BOOL uploading;
 @property (nonatomic, assign) BOOL pending;

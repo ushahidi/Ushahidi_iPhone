@@ -28,9 +28,9 @@
     UILabel *detailsTextLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UIButton *checkBox;
-@property (nonatomic, retain) IBOutlet UILabel *textLabel;
-@property (nonatomic, retain) IBOutlet UILabel *detailsTextLabel;
+@property (nonatomic, strong) IBOutlet UIButton *checkBox;
+@property (nonatomic, strong) IBOutlet UILabel *textLabel;
+@property (nonatomic, strong) IBOutlet UILabel *detailsTextLabel;
 @property (nonatomic, assign) BOOL checked;
 @property (nonatomic, strong) NSObject<USHCheckBoxTableCellDelegate> *delegate;
 

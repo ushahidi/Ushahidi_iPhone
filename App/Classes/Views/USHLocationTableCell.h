@@ -23,7 +23,7 @@
 
 @interface USHLocationTableCell : USHTableCell<MKMapViewDelegate>
 
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
 
 - (void) removeAllPins;
 

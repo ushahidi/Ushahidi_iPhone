@@ -26,8 +26,8 @@
     UIImageView *imageView;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel *textLabel;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *textLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 
 + (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text;
 + (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text accessory:(BOOL)accessory;

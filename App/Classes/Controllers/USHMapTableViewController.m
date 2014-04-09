@@ -156,21 +156,6 @@ typedef enum {
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_mapName release];
-    [_mapURL release];
-    [_reportTabController release];
-    [_textByUrl release];
-    [_textAroundMe release];
-    [_mapAddViewController release];
-    [_editButton release];
-    [_settingsViewController release];
-    [_infoButton release];
-    [_addButton release];
-    [_refreshButton release];
-    [_editButton release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

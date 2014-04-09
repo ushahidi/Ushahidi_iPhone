@@ -26,15 +26,15 @@
 @public
     UIImageView *imageView;
 }
-@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
-@property (nonatomic, retain) IBOutlet UILabel *messageLabel;
-@property (nonatomic, retain) IBOutlet UILabel *dateLabel;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *messageLabel;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 
-@property (nonatomic, assign) NSString *name;
-@property (nonatomic, assign) NSString *message;
-@property (nonatomic, assign) NSString *date;
-@property (nonatomic, assign) UIImage *image;
+@property (nonatomic, weak) NSString *name;
+@property (nonatomic, weak) NSString *message;
+@property (nonatomic, weak) NSString *date;
+@property (nonatomic, weak) UIImage *image;
 
 + (CGFloat) heightForTable:(UITableView *)tableView text:(NSString *)text image:(BOOL)image;
 

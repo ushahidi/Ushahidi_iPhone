@@ -65,12 +65,5 @@ typedef enum {
 	}
 }
 
-- (void)dealloc {
-    [_delegate release];
-    [_checkBox release];
-    [textLabel release];
-    [detailsTextLabel release];
-    [super dealloc];
-}
 
 @end

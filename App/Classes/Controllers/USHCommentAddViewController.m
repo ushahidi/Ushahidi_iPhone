@@ -110,14 +110,6 @@ typedef enum {
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_map release];
-    [_report release];
-    [_comment release];
-    [_loginDialog release];
-    [_inputCell release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

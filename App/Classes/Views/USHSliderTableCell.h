@@ -32,14 +32,14 @@
 @property (nonatomic, strong) IBOutlet UILabel *textLabel;
 @property (nonatomic, strong) IBOutlet UILabel *valueLabel;
 @property (nonatomic, strong) IBOutlet UISlider *sliderView;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) IBOutlet NSObject<USHSliderTableCellDelegate>*delegate;
 
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) NSInteger value;
 @property (nonatomic, assign) NSInteger min;
 @property (nonatomic, assign) NSInteger max;
-@property (nonatomic, retain) NSString *suffix;
+@property (nonatomic, strong) NSString *suffix;
 @property (nonatomic, assign) BOOL enabled;
 
 - (IBAction) changed:(id)sender;

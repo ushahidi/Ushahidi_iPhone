@@ -69,17 +69,6 @@
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_map release];
-    [_report release];
-    [_latitude release];
-    [_longitude release];
-    [_address release];
-    [_searchField release];
-    [_cancelButton release];
-    [_doneButton release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

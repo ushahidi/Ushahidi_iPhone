@@ -70,13 +70,11 @@ typedef enum {
         DLog(@"SortTypeByName");
         NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
         [self.maps sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-        [descriptor release];
     }
     else if (self.sortControl.selectedSegmentIndex == SortTypeByDate) {
         DLog(@"SortTypeByDate");
         NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"discovered" ascending:YES];
         [self.maps sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-        [descriptor release];
     }
     [self.tableView reloadData];
     [self.tableView flashScrollIndicators];
@@ -84,16 +82,6 @@ typedef enum {
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_itemPicker release];
-    [_radius release];
-    [_latitude release];
-    [_longitude release];
-    [_radiusButton release];
-    [_cancelButton release];
-    [_maps release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

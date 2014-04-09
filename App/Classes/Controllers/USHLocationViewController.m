@@ -44,12 +44,6 @@
 
 #pragma mark - UIViewController
 
-- (void)dealloc {
-    [_latitude release];
-    [_longitude release];
-    [_shareController release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

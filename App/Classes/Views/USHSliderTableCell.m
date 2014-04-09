@@ -97,15 +97,5 @@
 	}
 }
 
-- (void)dealloc {
-    [_delegate release];
-    [_indexPath release];
-    [textLabel release];
-    [_sliderView release];
-    [_valueLabel release];
-    [imageView release];
-    [_suffix release];
-    [super dealloc];
-}
 
 @end

@@ -50,11 +50,5 @@
 	}
 }
 
-- (void)dealloc {
-    [_delegate release];
-    [imageView release];
-    [_switchControl release];
-    [super dealloc];
-}
 
 @end

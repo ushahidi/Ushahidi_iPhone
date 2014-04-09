@@ -119,22 +119,19 @@
 	MKPinAnnotationView *annotationView = [MKPinAnnotationView getPinForMap:map andAnnotation:annotation];
     DLog(@"%@", annotation.title);
 	if ([annotation class] != MKUserLocation.class) {
-		UIButton *annotationButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-		[annotationButton addTarget:self action:@selector(annotationClicked:) forControlEvents:UIControlEventTouchUpInside];
-		annotationView.rightCalloutAccessoryView = annotationButton;
+		annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 	}
 	return annotationView;
 }
 
-- (void) annotationClicked:(UIButton *)button {
-	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[[button superview] superview];
-	USHMapAnnotation *mapAnnotation = (USHMapAnnotation *)annotationView.annotation;
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+	USHMapAnnotation *mapAnnotation = (USHMapAnnotation *)view.annotation;
 	if ([mapAnnotation class] == MKUserLocation.class) {
-        [UIAlertView showWithTitle:NSLocalizedString(@"User Location", nil) 
-                           message:[NSString stringWithFormat:@"%f,%f", mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude] 
-                          delegate:self 
-                               tag:0 
-                            cancel:NSLocalizedString(@"OK", nil) 
+        [UIAlertView showWithTitle:NSLocalizedString(@"User Location", nil)
+                           message:[NSString stringWithFormat:@"%f,%f", mapAnnotation.coordinate.latitude, mapAnnotation.coordinate.longitude]
+                          delegate:self
+                               tag:0
+                            cancel:NSLocalizedString(@"OK", nil)
                            buttons:nil];
 	}
 	else {

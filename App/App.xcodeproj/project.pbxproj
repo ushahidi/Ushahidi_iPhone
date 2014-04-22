@@ -1972,6 +1972,9 @@
 		3EFF5B021620E64B0072FAE1 /* verified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFF5AFE1620E64B0072FAE1 /* verified@2x.png */; };
 		3EFF5B051620E9740072FAE1 /* locate.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFF5B031620E9740072FAE1 /* locate.png */; };
 		3EFF5B061620E9740072FAE1 /* locate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EFF5B041620E9740072FAE1 /* locate@2x.png */; };
+		6A49AF0F1907247D005CD313 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A49AF0E1907247D005CD313 /* libGoogleAnalyticsServices.a */; };
+		6A49AF1219072491005CD313 /* USHAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49AF1119072491005CD313 /* USHAnalytics.m */; };
+		6A49AF14190725B3005CD313 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A49AF13190725B3005CD313 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -2392,6 +2395,16 @@
 		3EFF5AFE1620E64B0072FAE1 /* verified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "verified@2x.png"; sourceTree = "<group>"; };
 		3EFF5B031620E9740072FAE1 /* locate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locate.png; sourceTree = "<group>"; };
 		3EFF5B041620E9740072FAE1 /* locate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locate@2x.png"; sourceTree = "<group>"; };
+		6A49AF081907247D005CD313 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		6A49AF091907247D005CD313 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		6A49AF0A1907247D005CD313 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		6A49AF0B1907247D005CD313 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		6A49AF0C1907247D005CD313 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		6A49AF0D1907247D005CD313 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		6A49AF0E1907247D005CD313 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		6A49AF1019072491005CD313 /* USHAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USHAnalytics.h; sourceTree = "<group>"; };
+		6A49AF1119072491005CD313 /* USHAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = USHAnalytics.m; sourceTree = "<group>"; };
+		6A49AF13190725B3005CD313 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2399,9 +2412,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A49AF14190725B3005CD313 /* libz.dylib in Frameworks */,
 				3E5CA9F7164710430065AF67 /* libsqlite3.0.dylib in Frameworks */,
 				3E9E4DA4167005DC0095F4A4 /* FacebookSDK.framework in Frameworks */,
 				3E46F624163DC48200C24119 /* Twitter.framework in Frameworks */,
+				6A49AF0F1907247D005CD313 /* libGoogleAnalyticsServices.a in Frameworks */,
 				3E951EBC163C913B00D681BF /* Accounts.framework in Frameworks */,
 				3E5CA9F51647102E0065AF67 /* AdSupport.framework in Frameworks */,
 				3E5CA9F3164710280065AF67 /* Social.framework in Frameworks */,
@@ -2585,6 +2600,8 @@
 			children = (
 				3E2BFE51163DD3CC00445A29 /* USHSettings.h */,
 				3E2BFE52163DD3CC00445A29 /* USHSettings.m */,
+				6A49AF1019072491005CD313 /* USHAnalytics.h */,
+				6A49AF1119072491005CD313 /* USHAnalytics.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2675,6 +2692,7 @@
 		3E6D0325159B54CF00CDB5B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6A49AF13190725B3005CD313 /* libz.dylib */,
 				3E5CA9F6164710430065AF67 /* libsqlite3.0.dylib */,
 				3EA29937159CF51B00AC6AF2 /* Ushahidi.framework */,
 				3E9E4DA3167005DC0095F4A4 /* FacebookSDK.framework */,
@@ -2885,6 +2903,7 @@
 		3E6D0341159B553A00CDB5B7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6A49AF071907247D005CD313 /* GAnalytics */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -3298,6 +3317,20 @@
 				3EFB23E1167BC14C00321464 /* Localizable.strings */,
 			);
 			path = "zh-Hant-TW.lproj";
+			sourceTree = "<group>";
+		};
+		6A49AF071907247D005CD313 /* GAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				6A49AF081907247D005CD313 /* GAI.h */,
+				6A49AF091907247D005CD313 /* GAIDictionaryBuilder.h */,
+				6A49AF0A1907247D005CD313 /* GAIFields.h */,
+				6A49AF0B1907247D005CD313 /* GAILogger.h */,
+				6A49AF0C1907247D005CD313 /* GAITrackedViewController.h */,
+				6A49AF0D1907247D005CD313 /* GAITracker.h */,
+				6A49AF0E1907247D005CD313 /* libGoogleAnalyticsServices.a */,
+			);
+			path = GAnalytics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -5157,6 +5190,7 @@
 				3E9BABC1164826B7006ED993 /* USHMapAddViewController.m in Sources */,
 				3E9BABDA1648A91C006ED993 /* USHLocationAddViewController.m in Sources */,
 				3E9A5F101649903F00FF10C1 /* USHSwitchTableCell.m in Sources */,
+				6A49AF1219072491005CD313 /* USHAnalytics.m in Sources */,
 				3E0F3A9E16499EF3004BA80F /* USHSliderTableCell.m in Sources */,
 				3E9E4D5A166EACDF0095F4A4 /* USHFilterViewController.m in Sources */,
 				3E01346016723DB000C40CB4 /* USHImageViewController.m in Sources */,
@@ -5610,6 +5644,10 @@
 				GCC_PREFIX_HEADER = "Other/App-Prefix.pch";
 				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries/GAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "126E50AF-E31D-43EE-8A6D-C82AE5DDA65F";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "126E50AF-E31D-43EE-8A6D-C82AE5DDA65F";
@@ -5633,6 +5671,10 @@
 				GCC_PREFIX_HEADER = "Other/App-Prefix.pch";
 				INFOPLIST_FILE = Themes/Ushahidi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libraries/GAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9D31B280-3B15-47B7-BBDE-FEF3FB29D20A";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9D31B280-3B15-47B7-BBDE-FEF3FB29D20A";

@@ -30,8 +30,9 @@
 #import <Ushahidi/USHDevice.h>
 #import <Ushahidi/UITableView+USH.h>
 #import <Ushahidi/NSString+USH.h>
-#import "USHSettings.h"
 #import <UShahidi/USHRefreshButtonItem.h>
+#import "USHSettings.h"
+#import "USHAnalytics.h"
 
 @interface USHMapTableViewController ()
 
@@ -169,6 +170,8 @@ typedef enum {
     [self adjustToolBarHeight];
     [self showRefreshControl];
     [self initialSyncIfNeeded];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsMapTableVCName];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

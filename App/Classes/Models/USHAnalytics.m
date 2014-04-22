@@ -12,6 +12,8 @@
 #import "GAIDictionaryBuilder.h"
 
 NSString * const USHAnalyticsMapTableVCName = @"Map Table View Controller";
+NSString * const USHAnalyticsReportTableVCName = @"Report Table View Controller";
+NSString * const USHAnalyticsReportMapVCName = @"Report Map View Controller";
 
 @implementation USHAnalytics
 

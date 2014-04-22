@@ -11,6 +11,8 @@
 #define USHAnalyticsTrackingID @"UA-42721355-4"
 
 NSString * const USHAnalyticsMapTableVCName;
+NSString * const USHAnalyticsReportTableVCName;
+NSString * const USHAnalyticsReportMapVCName;
 
 @interface USHAnalytics : NSObject
 

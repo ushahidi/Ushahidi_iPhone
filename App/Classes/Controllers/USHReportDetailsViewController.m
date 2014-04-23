@@ -42,6 +42,7 @@
 #import "USHLocationTableCell.h"
 #import "USHCommentTableCell.h"
 #import "USHCommentAddViewController.h"
+#import "USHAnalytics.h"
 
 @interface USHReportDetailsViewController ()
 
@@ -146,6 +147,8 @@ typedef enum {
     self.shareController = [[USHShareController alloc] initWithController:self];
     self.backBarButtonTitle = NSLocalizedString(@"Details", nil);
     [self adjustToolBarHeight];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsReportDetailsVCName];
 }
 
 - (void)viewDidUnload {

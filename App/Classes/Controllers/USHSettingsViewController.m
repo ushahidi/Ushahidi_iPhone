@@ -30,6 +30,7 @@
 #import <Ushahidi/UITableView+USH.h>
 #import <Ushahidi/NSString+USH.h>
 #import <Ushahidi/USHAppDelegate.h>
+#import "USHAnalytics.h"
 
 @interface USHSettingsViewController ()
 
@@ -112,6 +113,8 @@ typedef enum {
     self.shareController = [[USHShareController alloc] initWithController:self];
     self.doneButton.title = NSLocalizedString(@"Done", nil);
     self.navigationItem.title = NSLocalizedString(@"Settings", nil);
+    
+    [USHAnalytics sendScreenView:USHAnalyticsSettingsVCName];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

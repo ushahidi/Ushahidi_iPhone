@@ -27,6 +27,7 @@
 #import "USHCheckinTableCell.h"
 #import "USHTextTableCell.h"
 #import "USHCheckinDetailsViewController.h"
+#include "USHAnalytics.h"
 
 @interface USHCheckinTableViewController ()
 
@@ -76,6 +77,8 @@ typedef enum {
     [super viewDidLoad];
     [self showSearchBarWithPlaceholder:NSLocalizedString(@"Search checkins...", nil)];
     DLog(@"Checkins:%d", self.map.checkins.count);
+    
+    [USHAnalytics sendScreenView:USHAnalyticsCheckinTableVCName];
 }
 
 #pragma mark - UITableViewController

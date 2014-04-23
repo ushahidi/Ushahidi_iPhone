@@ -26,6 +26,7 @@
 #import <Ushahidi/NSString+USH.h>
 #import <Ushahidi/USHReport.h>
 #import <Ushahidi/USHMap.h>
+#import "USHAnalytics.h"
 
 @interface USHLocationAddViewController ()
 
@@ -76,6 +77,8 @@
     self.doneButton.title = NSLocalizedString(@"Done", nil);
     self.navigationItem.title = NSLocalizedString(@"Find Location", nil);
     self.searchField.placeholder = NSLocalizedString(@"Search address...", nil);
+    
+    [USHAnalytics sendScreenView:USHAnalyticsLocationAddVCName];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -13,6 +13,19 @@
 NSString * const USHAnalyticsMapTableVCName;
 NSString * const USHAnalyticsReportTableVCName;
 NSString * const USHAnalyticsReportMapVCName;
+NSString * const USHAnalyticsMapAddVCName;
+NSString * const USHAnalyticsReportDetailsVCName;
+NSString * const USHAnalyticsReportAddVCName;
+NSString * const USHAnalyticsCheckinTableVCName;
+NSString * const USHAnalyticsCheckinDetailsVCName;
+NSString * const USHAnalyticsCategoryTableVCName;
+NSString * const USHAnalyticsFilterVCName;
+NSString * const USHAnalyticsImageVCName;
+NSString * const USHAnalyticsWebVCName;
+NSString * const USHAnalyticsLocationVCName;
+NSString * const USHAnalyticsLocationAddVCName;
+NSString * const USHAnalyticsSettingsVCName;
+NSString * const USHAnalyticsCommentAddVCName;
 
 @interface USHAnalytics : NSObject
 

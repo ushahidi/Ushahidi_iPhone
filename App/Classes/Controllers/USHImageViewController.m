@@ -21,6 +21,7 @@
 #import "USHImageViewController.h"
 #import <Ushahidi/UIAlertView+USH.h>
 #import <Ushahidi/USHDevice.h>
+#import "USHAnalytics.h"
 
 @interface USHImageViewController ()
 
@@ -118,6 +119,8 @@ typedef enum {
     self.swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     
     [self adjustToolBarHeight];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsImageVCName];
 }
 
 - (void)viewDidUnload {

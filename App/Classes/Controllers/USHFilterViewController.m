@@ -15,6 +15,7 @@
 #import "USHTableCellFactory.h"
 #import "USHTextTableCell.h"
 #import <UShahidi/USHDevice.h>
+#import "USHAnalytics.h"
 
 @interface USHFilterViewController ()
 
@@ -70,6 +71,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"Categories", nil);
+    
+    [USHAnalytics sendScreenView:USHAnalyticsFilterVCName];
 }
 
 #pragma mark - UITableViewController

@@ -24,6 +24,7 @@
 #import <Ushahidi/UIBarButtonItem+USH.h>
 #import <Ushahidi/USHInternet.h>
 #import <Ushahidi/USHDevice.h>
+#import "USHAnalytics.h"
 
 @interface USHWebViewController ()
 
@@ -113,6 +114,8 @@ typedef enum {
     self.refreshButton.indicator = UIActivityIndicatorViewStyleWhite;
     
     [self adjustToolBarHeight];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsWebVCName];
 }
 
 - (void)viewDidUnload {

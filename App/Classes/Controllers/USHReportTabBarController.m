@@ -85,7 +85,8 @@
         self.reportAddController.report = [[Ushahidi sharedInstance] addReportForMap:self.map];
         self.reportAddController.modalPresentationStyle = UIModalPresentationPageSheet;
         self.reportAddController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentViewController:self.reportAddController animated:YES completion:nil];
+        
+        [self presentModalViewController:self.reportAddController animated:YES];
     }
 }
 

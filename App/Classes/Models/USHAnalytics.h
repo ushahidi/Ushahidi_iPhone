@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define USHAnalyticsTrackingID @"UA-42721355-4"
+#define USHAnalyticsTrackingID @"UA-12063676-28"
 
 NSString * const USHAnalyticsMapTableVCName;
 NSString * const USHAnalyticsReportTableVCName;

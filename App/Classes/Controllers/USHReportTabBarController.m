@@ -155,31 +155,31 @@
                                 action:@selector(add:event:)];
     }
     self.locateButton = [[USHRefreshButtonItem alloc] initWithImage:[UIImage imageNamed:@"locate.png"]
-                                                           tintColor:[[USHSettings sharedInstance] navBarColor]
+                                                           tintColor:[UIColor whiteColor]
                                                               target:self.reportMapController
                                                               action:@selector(locate:event:)];
     self.filterButton = [UIBarButtonItem borderedItemWithImage:[UIImage imageNamed:@"filter.png"]
-                                                     tintColor:[[USHSettings sharedInstance] navBarColor] 
+                                                     tintColor:[UIColor whiteColor]
                                                         target:self
                                                         action:@selector(filter:event:)];
     if ([USHDevice isIPad] && [USHDevice isLandscapeMode]) {
         NSBundle *bundle = [NSBundle bundleWithName:@"Ushahidi.bundle"];
         NSString *hidePath = [bundle pathForResource:@"hide" ofType:@"png"];
         self.leftBarButtonItem = [UIBarButtonItem borderedItemWithImage:[UIImage imageWithContentsOfFile:hidePath]
-                                                              tintColor:[[USHSettings sharedInstance] navBarColor]
+                                                              tintColor:[UIColor whiteColor]
                                                                  target:[[UIApplication sharedApplication] delegate]
                                                                  action:@selector(sidebar:event:)];
     }
     if ([USHDevice isIPhone] && [[USHSettings sharedInstance] hasMapURL]) {
         [self setTitleViewWithImage:@"Logo-Title.png" orText:[[USHSettings sharedInstance] appName]];
         self.leftBarButtonItem = [UIBarButtonItem infoItemWithTarget:self action:@selector(info:event:)];
-        self.rightBarButtonItem = [self barButtonWithItems:self.filterButton, nil];
+        self.rightBarButtonItem = self.filterButton;
     }
     else if ([USHDevice isIPad] && [[USHSettings sharedInstance] hasMapURL]) {
         self.rightBarButtonItem = nil;
     }
     else {
-        self.rightBarButtonItem = [self barButtonWithItems:self.filterButton, nil];
+        self.rightBarButtonItem = self.filterButton;
     }
     self.reportTableController.title = NSLocalizedString(@"List", nil);
     self.reportMapController.title = NSLocalizedString(@"Map", nil);
@@ -272,13 +272,13 @@
             self.rightBarButtonItem = nil;
         }
         else {
-            self.rightBarButtonItem = [self barButtonWithItems:self.filterButton, nil];
+            self.rightBarButtonItem = self.filterButton;
         }
     }
     else if (viewController == self.reportMapController) {
         DLog(@"USHReportMapViewController");
         if ([[USHSettings sharedInstance] hasMapURL] && [USHDevice isIPad]) {
-            self.rightBarButtonItem = [self barButtonWithItems:self.locateButton, nil];
+            self.rightBarButtonItem = self.locateButton;
         }
         else {
             self.rightBarButtonItem = [self barButtonWithItems:self.locateButton, self.filterButton, nil];

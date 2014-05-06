@@ -50,8 +50,8 @@
                    constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)
                        lineBreakMode:NSLineBreakByWordWrapping];
     CGFloat height = size.height;
-    height += 6; //top
-    height += 6; //bottom
+    height += 10; //top
+    height += 10; //bottom
     DLog(@"Table:%f Label:%f Font:%d", [tableView contentWidth], width, 16);
     return MAX(44, height);
 }

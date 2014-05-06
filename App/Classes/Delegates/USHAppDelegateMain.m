@@ -35,6 +35,8 @@
 #import <Ushahidi/UIAlertView+USH.h>
 #import <Ushahidi/UIBarButtonItem+USH.h>
 #import "USHSettings.h"
+#import "GAI.h"
+#import "USHAnalytics.h"
 
 @interface USHAppDelegateMain ()
 
@@ -99,10 +101,19 @@
     }
 }
 
+- (void) setupGoogleAnalytics {
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [GAI sharedInstance].dispatchInterval = 20;
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    [[GAI sharedInstance] trackerWithTrackingId:USHAnalyticsTrackingID];
+}
+
 #pragma mark - UIApplication
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self setupGoogleAnalytics];
+    
     //#################### STYLING ####################
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewDidLoad:) name:USHViewDidLoad object:nil];
     //#################### USHAHIDI ####################

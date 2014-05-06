@@ -28,6 +28,7 @@
 #import "USHInputTableCell.h"
 #import "USHSettings.h"
 #import <Ushahidi/USHInternet.h>
+#import "USHAnalytics.h"
 
 @interface USHCommentAddViewController ()
 
@@ -123,6 +124,8 @@ typedef enum {
     self.cancelButton.title = NSLocalizedString(@"Cancel", nil);
     self.doneButton.title = NSLocalizedString(@"Done", nil);
     self.navigationItem.title = NSLocalizedString(@"Add Comment", nil);
+    
+    [USHAnalytics sendScreenView:USHAnalyticsCommentAddVCName];
 }
 
 - (void)viewDidUnload {

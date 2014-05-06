@@ -26,6 +26,7 @@
 #import "USHMapTableCell.h"
 #import "USHTextTableCell.h"
 #import "USHSettings.h"
+#import "USHAnalytics.h"
 
 #define kKilometerSuffix @" km"
 
@@ -91,6 +92,8 @@ typedef enum {
     self.cancelButton.title = NSLocalizedString(@"Cancel", nil);
     self.navigationItem.title = NSLocalizedString(@"Add Map", nil);
     self.maps = [NSMutableArray array];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsMapAddVCName];
 }
 
 - (void) viewWillAppear:(BOOL)animated  {

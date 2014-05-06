@@ -31,6 +31,7 @@
 #import "USHTableCellFactory.h"
 #import "USHCheckBoxTableCell.h"
 #import <Ushahidi/USHDevice.h>
+#import "USHAnalytics.h"
 
 @interface USHCategoryTableViewController ()
 
@@ -59,6 +60,8 @@ typedef enum {
     [super viewDidLoad];
     self.doneButton.title = NSLocalizedString(@"Done", nil);
     self.navigationItem.title = NSLocalizedString(@"Categories", nil);
+    
+    [USHAnalytics sendScreenView:USHAnalyticsCategoryTableVCName];
 }
 
 

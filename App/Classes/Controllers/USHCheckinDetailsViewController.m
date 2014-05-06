@@ -41,6 +41,7 @@
 #import "USHLocationTableCell.h"
 #import "USHCommentTableCell.h"
 #import "USHCommentAddViewController.h"
+#import "USHAnalytics.h"
 
 @interface USHCheckinDetailsViewController ()
 
@@ -119,6 +120,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.shareController = [[USHShareController alloc] initWithController:self];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsCheckinDetailsVCName];
 }
 
 - (void)viewDidUnload {

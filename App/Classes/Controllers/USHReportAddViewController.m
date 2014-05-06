@@ -39,6 +39,7 @@
 #import <Ushahidi/NSString+USH.h>
 #import <Ushahidi/UITableView+USH.h>
 #import <Ushahidi/UIBarButtonItem+USH.h>
+#import "USHAnalytics.h"
 
 @interface USHReportAddViewController ()
 
@@ -236,6 +237,8 @@ typedef enum {
         [self setTitleViewWithImage:@"Logo-Title.png" orText:[[USHSettings sharedInstance] appName]];
         [[Ushahidi sharedInstance] dowloadCategoriesWithDelegate:self map:self.map];
     }
+    
+    [USHAnalytics sendScreenView:USHAnalyticsReportAddVCName];
 }
 
 - (void)viewDidUnload {

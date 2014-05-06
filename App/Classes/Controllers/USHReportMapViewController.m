@@ -28,6 +28,7 @@
 #import <Ushahidi/UIAlertView+USH.h>
 #import <Ushahidi/MKPinAnnotationView+USH.h>
 #import <Ushahidi/USHMapAnnotation.h>
+#import "USHAnalytics.h"
 
 @interface USHReportMapViewController ()
 
@@ -111,6 +112,8 @@
                              pinColor:MKPinAnnotationColorRed];
     }
     [self.mapView resizeRegionToFitAllPins:YES animated:NO];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsReportMapVCName];
 }
 
 #pragma mark - MKMapViewDelegate

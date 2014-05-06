@@ -33,6 +33,7 @@
 #import <Ushahidi/UITableView+USH.h>
 #import <Ushahidi/UIAlertView+USH.h>
 #import "USHSettings.h"
+#import "USHAnalytics.h"
 
 @interface USHReportTableViewController ()
 
@@ -116,6 +117,8 @@ typedef enum {
     [self showSearchBarWithPlaceholder:NSLocalizedString(@"Search reports...", nil)];
     [self showRefreshControl];
     [self initialSyncIfNeeded];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsReportTableVCName];
 }
 
 #pragma mark - UITableViewController

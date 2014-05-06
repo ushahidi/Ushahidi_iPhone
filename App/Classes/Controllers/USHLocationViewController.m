@@ -23,6 +23,7 @@
 #import <Ushahidi/MKPinAnnotationView+USH.h>
 #import <Ushahidi/UIAlertView+USH.h>
 #import <Ushahidi/UIActionSheet+USH.h>
+#import "USHAnalytics.h"
 
 @interface USHLocationViewController ()
 
@@ -48,6 +49,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.shareController = [[USHShareController alloc] initWithController:self];
+    
+    [USHAnalytics sendScreenView:USHAnalyticsLocationVCName];
 }
 
 - (void)viewDidUnload {

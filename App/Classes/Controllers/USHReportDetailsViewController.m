@@ -147,6 +147,8 @@ typedef enum {
     self.shareController = [[USHShareController alloc] initWithController:self];
     self.backBarButtonTitle = NSLocalizedString(@"Details", nil);
     [self adjustToolBarHeight];
+
+    self.starredButton.accessibilityLabel = NSLocalizedString(@"Star report", nil);
     
     [USHAnalytics sendScreenView:USHAnalyticsReportDetailsVCName];
 }

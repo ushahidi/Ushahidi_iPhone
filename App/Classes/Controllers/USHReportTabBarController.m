@@ -154,15 +154,31 @@
         [self addMiddleButtonWithImage:[UIImage imageNamed:@"action.png"]
                         highlightImage:[UIImage imageNamed:@"action_click.png"]
                                 action:@selector(add:event:)];
+
+        // Add accessibility label to the add report button
+        for (UIView *view in self.view.subviews) {
+            if ([view isMemberOfClass:[UIButton class]]) {
+                UIButton *button = (UIButton *)view;
+                if ([button.currentBackgroundImage isEqual:[UIImage imageNamed:@"action.png"]]) {
+                    button.accessibilityLabel = NSLocalizedString(@"Add Report", nil);
+                    break;
+                }
+            }
+        }
     }
+
     self.locateButton = [[USHRefreshButtonItem alloc] initWithImage:[UIImage imageNamed:@"locate.png"]
                                                            tintColor:[UIColor whiteColor]
                                                               target:self.reportMapController
                                                               action:@selector(locate:event:)];
+    self.locateButton.accessibilityLabel = NSLocalizedString(@"Locate", nil);
+
     self.filterButton = [UIBarButtonItem borderedItemWithImage:[UIImage imageNamed:@"filter.png"]
                                                      tintColor:[UIColor whiteColor]
                                                         target:self
                                                         action:@selector(filter:event:)];
+    self.filterButton.accessibilityLabel = NSLocalizedString(@"Filter Reports", nil);
+
     if ([USHDevice isIPad] && [USHDevice isLandscapeMode]) {
         NSBundle *bundle = [NSBundle bundleWithName:@"Ushahidi.bundle"];
         NSString *hidePath = [bundle pathForResource:@"hide" ofType:@"png"];

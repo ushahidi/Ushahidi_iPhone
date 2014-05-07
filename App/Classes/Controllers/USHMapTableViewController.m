@@ -165,7 +165,10 @@ typedef enum {
     
     [self setTitleViewWithImage:@"Logo-Title.png" orText:[[USHSettings sharedInstance] appName]];
     self.backBarButtonTitle = NSLocalizedString(@"Maps", nil);
-    
+
+    self.infoButton.accessibilityLabel = NSLocalizedString(@"App Info", nil);
+    self.refreshButton.accessibilityLabel = NSLocalizedString(@"Refresh", nil);
+
     [self loadFirstMapIfIPad];
     [self adjustToolBarHeight];
     [self showRefreshControl];

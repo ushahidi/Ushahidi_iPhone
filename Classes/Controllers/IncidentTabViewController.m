@@ -126,6 +126,7 @@
         [self.loadingView show];
         [self.filters addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategoriesForDelegate:self]];
         [self.allItems addObjectsFromArray:[[Ushahidi sharedUshahidi] getIncidentsForDelegate:self]];
+        [[Ushahidi sharedUshahidi] getCustomFormsForDelegate:self];
     }
     else {
         [self.filters addObjectsFromArray:[[Ushahidi sharedUshahidi] getCategories]];

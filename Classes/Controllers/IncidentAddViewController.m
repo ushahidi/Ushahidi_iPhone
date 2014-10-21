@@ -98,9 +98,9 @@ typedef enum {
 
 - (void) load:(NSObject*)item {
     self.incident = (Incident *)item;
-//    if (self.incident) {
-//        self.incident.customFormEntries = [[Ushahidi sharedUshahidi] getCustomFormsFields];
-//    }
+    if (self.incident && [self.incident.customFormEntries count] == 0) {
+        self.incident.customFormEntries = [[[Ushahidi sharedUshahidi] getCustomFormsFields] copy];
+    }
 }
 
 - (IBAction) cancel:(id)sender {
@@ -182,6 +182,7 @@ typedef enum {
 	self.datePicker = [[DatePicker alloc] initForDelegate:self forController:self];
     [self setHeader:NSLocalizedString(@"Title", nil) atSection:TableSectionTitle];
 	[self setHeader:NSLocalizedString(@"Description", nil) atSection:TableSectionDescription];
+	[self setHeader:NSLocalizedString(@"Additional Data", nil) atSection:TableSectionCustomForms];
 	[self setHeader:NSLocalizedString(@"Category", nil) atSection:TableSectionCategory];
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDate];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];

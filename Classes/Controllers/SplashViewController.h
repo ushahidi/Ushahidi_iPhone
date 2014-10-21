@@ -24,6 +24,7 @@
     BOOL shouldDismissOnAppear;
 }
 
+@property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property(nonatomic, assign) BOOL shouldDismissOnAppear;
 
 - (void) dismissSplashViewController;

@@ -26,10 +26,9 @@
 + (void) archiveObject:(id)object forKey:(NSString *)key {
 	@try {
         NSString *filePath = [[FileUtils pathForNonUserGeneratedFile] stringByAppendingPathComponent:key];
-//		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//		NSString *filePath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
 		DLog(@"Archiving %@", filePath);
 		[NSKeyedArchiver archiveRootObject:object toFile:filePath];
+        [FileUtils addSkipBackupAttributeToItemAtPath:filePath];
 	}
 	@catch (NSException *e) {
 		DLog(@"NSException: %@", e);
@@ -38,8 +37,6 @@
 
 + (void) archiveObject:(id)object forKey:(NSString *)key andSubKey:(NSString *)subKey {
 	@try {
-//		NSArray *filePaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//		NSString *folderPath = [[filePaths objectAtIndex:0] stringByAppendingPathComponent:key];
         NSString *folderPath = [[FileUtils pathForNonUserGeneratedFile] stringByAppendingPathComponent:key];
 
 		if ([[NSFileManager defaultManager] fileExistsAtPath:folderPath] == NO) {
@@ -48,6 +45,7 @@
 		NSString *filePath = [folderPath stringByAppendingPathComponent:subKey];
 		DLog(@"Archiving %@", filePath);
 		[NSKeyedArchiver archiveRootObject:object toFile:filePath];
+        [FileUtils addSkipBackupAttributeToItemAtPath:filePath];
 	}
 	@catch (NSException *e) {
 		DLog(@"NSException: %@", e);
@@ -60,6 +58,7 @@
 
 		DLog(@"Archiving %@", filePath);
 		[NSKeyedArchiver archiveRootObject:object toFile:filePath];
+        [FileUtils addSkipBackupAttributeToItemAtPath:filePath];
 	}
 	@catch (NSException *e) {
 		DLog(@"NSException: %@", e);

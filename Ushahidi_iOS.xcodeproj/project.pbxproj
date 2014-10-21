@@ -2451,7 +2451,6 @@
 		55A9E6561644B926005C488F /* MangrovesMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E64A1644B613005C488F /* MangrovesMap.png */; };
 		55A9E6571644B92A005C488F /* MangrovesMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E64C1644B61B005C488F /* MangrovesMap@2x.png */; };
 		55A9E6591644BA7F005C488F /* MangrovesMap-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E6581644BA7E005C488F /* MangrovesMap-568h@2x.png */; };
-		55A9E65B1644C1F0005C488F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A9E65A1644C1EF005C488F /* Default-568h@2x.png */; };
 		55A9E65C1644C488005C488F /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E015532E6400FD97F8 /* Default-Portrait.png */; };
 		55A9E65D1644C48B005C488F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E215532E6400FD97F8 /* Default.png */; };
 		55A9E65E1644C48D005C488F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 609618E415532E6400FD97F8 /* Default@2x.png */; };
@@ -3385,17 +3384,6 @@
 		550E299216443C0100DF6FD9 /* CustomForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomForm.m; sourceTree = "<group>"; };
 		55A9E60A1644657B005C488F /* FileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
 		55A9E60B1644657B005C488F /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
-		55A9E62716449311005C488F /* MangrovesMap-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
-		55A9E62816449312005C488F /* MangrovesMap-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Landscape~ipad.png"; sourceTree = "<group>"; };
-		55A9E62916449312005C488F /* MangrovesMap-Portrait@~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@~iphone.png"; sourceTree = "<group>"; };
-		55A9E62A16449313005C488F /* MangrovesMap-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		55A9E62B16449313005C488F /* MangrovesMap-Portrait@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@2x~iphone.png"; sourceTree = "<group>"; };
-		55A9E62C16449314005C488F /* MangrovesMap-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait~ipad.png"; sourceTree = "<group>"; };
-		55A9E6371644B5E2005C488F /* Mangrove-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mangrove-iPhone.png"; sourceTree = "<group>"; };
-		55A9E6381644B5E3005C488F /* Mangrove-iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mangrove-iPhone@2x.png"; sourceTree = "<group>"; };
-		55A9E6391644B5E3005C488F /* Mangrove-Portrait~ipad.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Mangrove-Portrait~ipad.pdf"; sourceTree = "<group>"; };
-		55A9E63A1644B5E3005C488F /* Mangrove-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mangrove-Portrait~ipad.png"; sourceTree = "<group>"; };
-		55A9E63B1644B5E4005C488F /* Mangrove-Potrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mangrove-Potrait@2x~ipad.png"; sourceTree = "<group>"; };
 		55A9E6411644B5F3005C488F /* Icon-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-ipad.png"; sourceTree = "<group>"; };
 		55A9E6421644B5F4005C488F /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
 		55A9E6431644B5F4005C488F /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
@@ -3405,16 +3393,10 @@
 		55A9E6511644B6B8005C488F /* MangrovesMap-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait~ipad.png"; sourceTree = "<group>"; };
 		55A9E6531644B6C7005C488F /* MangrovesMap-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		55A9E6581644BA7E005C488F /* MangrovesMap-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MangrovesMap-568h@2x.png"; sourceTree = "<group>"; };
-		55A9E65A1644C1EF005C488F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		608FBDBF1555592A00813B62 /* mangroves57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves57.png; sourceTree = "<group>"; };
-		608FBDC11555592E00813B62 /* mangroves114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mangroves114.png; sourceTree = "<group>"; };
 		609618DB15532DB100FD97F8 /* MangrovesMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangrovesMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609618E015532E6400FD97F8 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		609618E215532E6400FD97F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		609618E415532E6400FD97F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		609618E815532E6400FD97F8 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
-		609618E915532E6400FD97F8 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
-		609618EA15532E6400FD97F8 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		609618EB15532E6400FD97F8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		609618EC15532E6400FD97F8 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		609618ED15532E6400FD97F8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -3676,11 +3658,6 @@
 				55A9E6421644B5F4005C488F /* Icon-114.png */,
 				55A9E6431644B5F4005C488F /* Icon-144.png */,
 				55A9E6441644B5F5005C488F /* Icon.png */,
-				55A9E6371644B5E2005C488F /* Mangrove-iPhone.png */,
-				55A9E6381644B5E3005C488F /* Mangrove-iPhone@2x.png */,
-				55A9E6391644B5E3005C488F /* Mangrove-Portrait~ipad.pdf */,
-				55A9E63A1644B5E3005C488F /* Mangrove-Portrait~ipad.png */,
-				55A9E63B1644B5E4005C488F /* Mangrove-Potrait@2x~ipad.png */,
 				3ED8716D1379CA48004E8714 /* Themes */,
 				3E8629C71222BBC2001DE141 /* Resources */,
 				3E8629C61222BBBD001DE141 /* Classes */,
@@ -3802,64 +3779,64 @@
 		3E79A86C139508CD00914628 /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
-				3E79A95913950A3C00914628 /* MainWindow_iPad.xib */,
-				3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */,
-				3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */,
-				3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */,
-				3E4432C514FBE77700BFECD8 /* SplashViewController_iPad.xib */,
-				3E4432D014FBE78D00BFECD8 /* SplashViewController_iPhone.xib */,
-				3E79A94513950A3C00914628 /* DeploymentTableViewController_iPad.xib */,
-				3E79A94613950A3C00914628 /* DeploymentTableViewController_iPhone.xib */,
+				3EA9BD8114ED854700167351 /* CategorySelectViewController_iPad.xib */,
+				3EA9BD7714ED852F00167351 /* CategorySelectViewController_iPhone.xib */,
+				3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */,
+				3E79A93A13950A3C00914628 /* CategoryTableViewController_iPhone.xib */,
+				3E79A93B13950A3C00914628 /* CheckinAddViewController_iPad.xib */,
+				3E79A93C13950A3C00914628 /* CheckinAddViewController_iPhone.xib */,
+				3E79A93D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib */,
+				3E79A93E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib */,
+				3E79A93F13950A3C00914628 /* CheckinMapViewController_iPad.xib */,
+				3E79A94013950A3C00914628 /* CheckinMapViewController_iPhone.xib */,
+				3EBBE2EE13A655370019BDED /* CheckinTableCell_iPad.xib */,
+				3EBBE2EB13A6552A0019BDED /* CheckinTableCell_iPhone.xib */,
+				3EFC3D9613A6283300CCA185 /* CheckinTableViewController_iPad.xib */,
+				3EFC3D9313A6282100CCA185 /* CheckinTableViewController_iPhone.xib */,
+				3EFC3D9013A627F900CCA185 /* CheckinTabViewController_iPad.xib */,
+				3EFC3D8D13A627EB00CCA185 /* CheckinTabViewController_iPhone.xib */,
 				3E79A94113950A3C00914628 /* DeploymentAddViewController_iPad.xib */,
 				3E79A94213950A3C00914628 /* DeploymentAddViewController_iPhone.xib */,
 				3E79A94313950A3C00914628 /* DeploymentTableCell_iPad.xib */,
 				3E79A94413950A3C00914628 /* DeploymentTableCell_iPhone.xib */,
-				3E79A95313950A3C00914628 /* IncidentTabViewController_iPad.xib */,
-				3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */,
-				3E79A95113950A3C00914628 /* IncidentTableViewController_iPad.xib */,
-				3E79A95213950A3C00914628 /* IncidentTableViewController_iPhone.xib */,
-				3E79A94D13950A3C00914628 /* IncidentMapViewController_iPad.xib */,
-				3E79A94E13950A3C00914628 /* IncidentMapViewController_iPhone.xib */,
-				3E79A94B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib */,
-				3E79A94C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib */,
-				3E79A94913950A3C00914628 /* IncidentAddViewController_iPad.xib */,
-				3E79A94A13950A3C00914628 /* IncidentAddViewController_iPhone.xib */,
-				3EFC3D8D13A627EB00CCA185 /* CheckinTabViewController_iPhone.xib */,
-				3EFC3D9013A627F900CCA185 /* CheckinTabViewController_iPad.xib */,
-				3EFC3D9313A6282100CCA185 /* CheckinTableViewController_iPhone.xib */,
-				3EFC3D9613A6283300CCA185 /* CheckinTableViewController_iPad.xib */,
-				3E79A93F13950A3C00914628 /* CheckinMapViewController_iPad.xib */,
-				3E79A94013950A3C00914628 /* CheckinMapViewController_iPhone.xib */,
-				3E79A93D13950A3C00914628 /* CheckinDetailsViewController_iPad.xib */,
-				3E79A93E13950A3C00914628 /* CheckinDetailsViewController_iPhone.xib */,
-				3E79A93B13950A3C00914628 /* CheckinAddViewController_iPad.xib */,
-				3E79A93C13950A3C00914628 /* CheckinAddViewController_iPhone.xib */,
-				3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */,
-				3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */,
-				3E79A93913950A3C00914628 /* CategoryTableViewController_iPad.xib */,
-				3E79A93A13950A3C00914628 /* CategoryTableViewController_iPhone.xib */,
-				3EA9BD7714ED852F00167351 /* CategorySelectViewController_iPhone.xib */,
-				3EA9BD8114ED854700167351 /* CategorySelectViewController_iPad.xib */,
-				3EA9BD8B14ED856000167351 /* UserSelectViewController_iPhone.xib */,
-				3EA9BD9514ED857300167351 /* UserSelectViewController_iPad.xib */,
-				3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */,
-				3E79A95C13950A3C00914628 /* MapViewController_iPhone.xib */,
+				3E79A94513950A3C00914628 /* DeploymentTableViewController_iPad.xib */,
+				3E79A94613950A3C00914628 /* DeploymentTableViewController_iPhone.xib */,
 				3E79A94713950A3C00914628 /* ImageViewController_iPad.xib */,
 				3E79A94813950A3C00914628 /* ImageViewController_iPhone.xib */,
+				3E79A94913950A3C00914628 /* IncidentAddViewController_iPad.xib */,
+				3E79A94A13950A3C00914628 /* IncidentAddViewController_iPhone.xib */,
+				3E79A94B13950A3C00914628 /* IncidentDetailsViewController_iPad.xib */,
+				3E79A94C13950A3C00914628 /* IncidentDetailsViewController_iPhone.xib */,
+				3E79A94D13950A3C00914628 /* IncidentMapViewController_iPad.xib */,
+				3E79A94E13950A3C00914628 /* IncidentMapViewController_iPhone.xib */,
+				3E79A94F13950A3C00914628 /* IncidentTableCell_iPad.xib */,
+				3E79A95013950A3C00914628 /* IncidentTableCell_iPhone.xib */,
+				3E79A95113950A3C00914628 /* IncidentTableViewController_iPad.xib */,
+				3E79A95213950A3C00914628 /* IncidentTableViewController_iPhone.xib */,
+				3E79A95313950A3C00914628 /* IncidentTabViewController_iPad.xib */,
+				3E79A95413950A3C00914628 /* IncidentTabViewController_iPhone.xib */,
+				3E79A95513950A3C00914628 /* LoadingViewController_iPad.xib */,
+				3E79A95613950A3C00914628 /* LoadingViewController_iPhone.xib */,
+				3E79A95713950A3C00914628 /* LocationSelectViewController_iPad.xib */,
+				3E79A95813950A3C00914628 /* LocationSelectViewController_iPhone.xib */,
+				3E79A95913950A3C00914628 /* MainWindow_iPad.xib */,
+				3E79A95A13950A3C00914628 /* MainWindow_iPhone.xib */,
+				3E79A95B13950A3C00914628 /* MapViewController_iPad.xib */,
+				3E79A95C13950A3C00914628 /* MapViewController_iPhone.xib */,
 				3E79A95D13950A3C00914628 /* NewsViewController_iPad.xib */,
 				3E79A95E13950A3C00914628 /* NewsViewController_iPhone.xib */,
 				3E79A95F13950A3C00914628 /* SettingsViewController_iPad.xib */,
 				3E79A96013950A3C00914628 /* SettingsViewController_iPhone.xib */,
 				3E79A96113950A3C00914628 /* SliderTableCell_iPad.xib */,
 				3E79A96213950A3C00914628 /* SliderTableCell_iPhone.xib */,
+				3E4432C514FBE77700BFECD8 /* SplashViewController_iPad.xib */,
+				3E4432D014FBE78D00BFECD8 /* SplashViewController_iPhone.xib */,
 				3E79A96513950A3C00914628 /* TwitterViewController_iPad.xib */,
 				3E79A96613950A3C00914628 /* TwitterViewController_iPhone.xib */,
+				3EA9BD9514ED857300167351 /* UserSelectViewController_iPad.xib */,
+				3EA9BD8B14ED856000167351 /* UserSelectViewController_iPhone.xib */,
 				3E79A96713950A3C00914628 /* WebViewController_iPad.xib */,
 				3E79A96813950A3C00914628 /* WebViewController_iPhone.xib */,
-				3E79A94F13950A3C00914628 /* IncidentTableCell_iPad.xib */,
-				3E79A95013950A3C00914628 /* IncidentTableCell_iPhone.xib */,
-				3EBBE2EB13A6552A0019BDED /* CheckinTableCell_iPhone.xib */,
-				3EBBE2EE13A655370019BDED /* CheckinTableCell_iPad.xib */,
 			);
 			path = NIBs;
 			sourceTree = "<group>";
@@ -4586,22 +4563,10 @@
 		609618DF15532E6400FD97F8 /* MangrovesMap */ = {
 			isa = PBXGroup;
 			children = (
-				55A9E65A1644C1EF005C488F /* Default-568h@2x.png */,
-				55A9E62716449311005C488F /* MangrovesMap-Landscape@2x~ipad.png */,
-				55A9E62816449312005C488F /* MangrovesMap-Landscape~ipad.png */,
-				55A9E62916449312005C488F /* MangrovesMap-Portrait@~iphone.png */,
-				55A9E62A16449313005C488F /* MangrovesMap-Portrait@2x~ipad.png */,
-				55A9E62B16449313005C488F /* MangrovesMap-Portrait@2x~iphone.png */,
-				55A9E62C16449314005C488F /* MangrovesMap-Portrait~ipad.png */,
 				609618ED15532E6400FD97F8 /* Info.plist */,
-				608FBDC11555592E00813B62 /* mangroves114.png */,
-				608FBDBF1555592A00813B62 /* mangroves57.png */,
 				609618E015532E6400FD97F8 /* Default-Portrait.png */,
 				609618E215532E6400FD97F8 /* Default.png */,
 				609618E415532E6400FD97F8 /* Default@2x.png */,
-				609618E815532E6400FD97F8 /* Icon-Small-50.png */,
-				609618E915532E6400FD97F8 /* Icon-Small.png */,
-				609618EA15532E6400FD97F8 /* Icon-Small@2x.png */,
 				609618EB15532E6400FD97F8 /* Icon.png */,
 				609618EC15532E6400FD97F8 /* Icon@2x.png */,
 				609618EE15532E6400FD97F8 /* iTunesArtwork */,
@@ -6101,7 +6066,6 @@
 				55A9E65D1644C48B005C488F /* Default.png in Resources */,
 				55A9E65C1644C488005C488F /* Default-Portrait.png in Resources */,
 				55A9E65E1644C48D005C488F /* Default@2x.png in Resources */,
-				55A9E65B1644C1F0005C488F /* Default-568h@2x.png in Resources */,
 				55A9E6461644B5F5005C488F /* Icon-114.png in Resources */,
 				55A9E6471644B5F5005C488F /* Icon-144.png in Resources */,
 				55A9E6481644B5F5005C488F /* Icon.png in Resources */,
@@ -8375,6 +8339,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv6 armv7 i386 armv7s";
 			};
 			name = Debug;
 		};
@@ -8384,8 +8349,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Qatar Foundation International, LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Qatar Foundation International, LLC";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Other/Prefix.pch;
@@ -8397,10 +8362,11 @@
 					"\"$(SRCROOT)/Libraries/Twitter/OAuthConsumer\"",
 				);
 				PRODUCT_NAME = MangrovesMap;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "C6752755-5918-49EC-8646-048B3AACE972";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C6752755-5918-49EC-8646-048B3AACE972";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv6 armv7 i386 armv7s";
 			};
 			name = Release;
 		};
@@ -8427,6 +8393,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4DE174C4-5C08-4042-8063-6BC4DF0F26A5";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv6 armv7 i386 armv7s";
 			};
 			name = "Ad Hoc";
 		};
@@ -8450,9 +8417,10 @@
 				);
 				PRODUCT_NAME = MangrovesMap;
 				PROVISIONING_PROFILE = "C6752755-5918-49EC-8646-048B3AACE972";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6CCD532C-B77B-43BD-BA0C-3FED17E59194";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C6752755-5918-49EC-8646-048B3AACE972";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv6 armv7 i386 armv7s";
 			};
 			name = "App Store";
 		};

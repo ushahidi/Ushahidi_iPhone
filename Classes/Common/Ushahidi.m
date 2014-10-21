@@ -890,6 +890,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 				}
 			}
 		}
+        if (incident.customFormEntries != nil && incident.customFormEntries.count > 0) {
+            for (CustomForm *form in incident.customFormEntries) {
+                [post addPostValue:form.value forKey:[NSString stringWithFormat:@"custom_field[%d]", form.formId]];
+            }
+        }
 		[self.uploadQueue addOperation:post];
 		return YES;
 	}
@@ -1183,10 +1188,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			[self downloadMapForIncident:incident forDelegate:delegate];
 		}
 	}
-	NSString *url = (self.deployment.lastIncidentId != nil)
-		? [self.deployment getUrlForIncidentsBySinceID:self.deployment.lastIncidentId]
-		: [self.deployment getUrlForIncidents];
-	ASIHTTPRequest *request = [self getHTTPRequest:url 
+
+//	NSString *url = (self.deployment.lastIncidentId != nil)
+//		? [self.deployment getUrlForIncidentsBySinceID:self.deployment.lastIncidentId]
+//		: [self.deployment getUrlForIncidents];
+//
+// @dbgrandi - always get the full list to make sure we have updated data.
+//
+
+    NSString *url = [self.deployment getUrlForIncidents];
+	ASIHTTPRequest *request = [self getHTTPRequest:url
 									 startSelector:@selector(getIncidentsStarted:)
 									finishSelector:@selector(getIncidentsFinished:)
 									  failSelector:@selector(getIncidentsFailed:)];
@@ -1227,6 +1238,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 			for (NSDictionary *dictionary in incidents) {
 				Incident *incident = [[Incident alloc] initWithDictionary:[dictionary objectForKey:@"incident"]];
 				if (incident.identifier != nil) {
+                    //
+                    // @dbgrandi - Added for MappingTheMangroves as a quick hack to make sure we have the latest
+                    // data at all times.
+                    //
+                    [self.deployment.incidents setObject:incident forKey:incident.identifier];
+                    DLog(@"INCIDENT: %@", dictionary);
+
 					if ([self isDuplicate:incident]) {
 						DLog(@"DUPLICATE: %@", dictionary);
 						hasChanges = YES;
@@ -1282,6 +1300,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(Ushahidi);
 						[category release];
 					}
 				}
+                NSDictionary *customfields = [dictionary objectForKey:@"customfields"];
+                if (customfields != nil && [customfields isKindOfClass:[NSDictionary class]]) {
+                    NSMutableArray *parsedForms = [NSMutableArray array];
+                    for (NSDictionary *form in [customfields allValues]) {
+						DLog(@"INCIDENT CUSTOM FIELD: %@", form);
+                        CustomForm *customForm = [[CustomForm alloc] initWithDictionary:form];
+                        [parsedForms addObject:customForm];
+                    }
+                    incident.customFormEntries = (NSArray *)parsedForms;
+                }
+
 				if ([[Settings sharedSettings] downloadMaps] && incident.map == nil) {
 					[self downloadMapForIncident:incident 
 									 forDelegate:[request getDelegate]];

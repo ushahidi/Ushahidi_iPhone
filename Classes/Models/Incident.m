@@ -19,12 +19,14 @@
  *****************************************************************************/
 
 #import "Incident.h"
-#import "Location.h"
-#import "Photo.h"
 #import "Category.h"
+#import "CustomForm.h"
+#import "Location.h"
 #import "News.h"
+#import "Photo.h"
 #import "Sound.h"
 #import "Video.h"
+#import "Ushahidi.h"
 #import "NSDate+Extension.h"
 #import "NSDictionary+Extension.h"
 #import "NSString+Extension.h"
@@ -55,7 +57,8 @@
 		self.longitude = nil;
 		self.date = [NSDate date];
 		self.userLocation = YES;
-        self.customFormEntries = [[NSMutableArray alloc] initWithCapacity:0];
+//        self.customFormEntries = [[NSMutableArray alloc] initWithCapacity:0];
+        self.customFormEntries = [[[Ushahidi sharedUshahidi] getCustomFormsFields] copy];
 	}
 	return self;
 }
@@ -80,6 +83,8 @@
 	}
 	return self;
 }
+
+
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.identifier forKey:@"identifier"];
@@ -140,7 +145,7 @@
 		if (self.categories == nil) self.categories = [NSMutableArray array];
         
         self.customFormEntries = [decoder decodeObjectForKey:@"customFormEntries"];
-        if (self.customFormEntries == nil) self.customFormEntries = [NSMutableArray array];
+        if (self.customFormEntries == nil) self.customFormEntries = [[[Ushahidi sharedUshahidi] getCustomFormsFields] copy];
 	}
 	return self;
 }

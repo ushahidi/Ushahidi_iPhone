@@ -27,7 +27,7 @@
 
 - (void) dismissSplashViewController {
     DLog(@"");
-    [self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:3.1];
+    [self performSelector:@selector(dismissModalViewController) withObject:nil afterDelay:5];
 }
 
 #pragma mark - UIViewController
@@ -42,6 +42,16 @@
 
 - (void) viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        if (screenSize.height > 480.0f) {
+            /*Do iPhone 5 stuff here.*/
+            [self.imageView setImage:[UIImage imageNamed:@"MangrovesMap-568h.png"]];
+            [self.imageView setContentMode:UIViewContentModeBottom];
+        }
+    }
+    
     self.modalPresentationStyle = UIModalPresentationFullScreen;
 }
 

@@ -47,6 +47,7 @@
 #import "Settings.h"
 #import "Ushahidi.h"
 #import "Device.h"
+#import "CustomForm.h"
 
 @interface IncidentDetailsViewController ()
 
@@ -67,6 +68,7 @@ typedef enum {
 	TableSectionTitle,
 	TableSectionVerified,
 	TableSectionDescription,
+    TableSectionCustomFields,
 	TableSectionCategory,
 	TableSectionDateTime,
 	TableSectionLocation,
@@ -183,6 +185,7 @@ typedef enum {
 	[self setHeader:NSLocalizedString(@"Date", nil) atSection:TableSectionDateTime];
 	[self setHeader:NSLocalizedString(@"Location", nil) atSection:TableSectionLocation];
 	[self setHeader:NSLocalizedString(@"Photos", nil) atSection:TableSectionPhotos];
+    [self setHeader:NSLocalizedString(@"Additional Data", nil) atSection:TableSectionCustomFields];
 	if ([[Settings sharedSettings] showReportNewsURL]) {
 		[self setHeader:NSLocalizedString(@"News", nil) atSection:TableSectionNews];
 	}
@@ -223,7 +226,7 @@ typedef enum {
 #pragma mark UITableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)theTableView {
-	return 10;
+	return 11;
 }
 
 - (CGFloat)tableView:(UITableView *)theTableView heightForHeaderInSection:(NSInteger)section {
@@ -255,6 +258,9 @@ typedef enum {
 	if (section == TableSectionLocation) {
 		return 2;
 	}
+    if (section == TableSectionCustomFields) {
+        return [self.incident.customFormEntries count];
+    }
 	return 1;
 }
 
@@ -357,9 +363,17 @@ typedef enum {
 		if (indexPath.section == TableSectionTitle) {
 			cell.textLabel.text = self.incident.title;
 		}
-		if (indexPath.section == TableSectionDescription) {
+        else if (indexPath.section == TableSectionDescription) {
 			cell.textLabel.text = self.incident.description;
 		}
+        else if (indexPath.section == TableSectionCustomFields) {
+            CustomForm *form = (CustomForm *)[self.incident.customFormEntries objectAtIndex:indexPath.row];
+            if (form.value == nil || [form.value isEqualToString:@""]) {
+                cell.textLabel.text = @"No Value Specified";
+            } else {
+                cell.textLabel.text = form.value;
+            }
+        }
 		else if (indexPath.section == TableSectionCategory) {
 			cell.textLabel.text = [self.incident categoryNamesWithDefaultText:NSLocalizedString(@"No Category Specified", nil)];
 		}

@@ -2022,7 +2022,7 @@
 		3E5CA9F2164710280065AF67 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		3E5CA9F41647102E0065AF67 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		3E5CA9F6164710430065AF67 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
-		3E6D0322159B54CF00CDB5B7 /* Ushahidi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ushahidi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E6D0322159B54CF00CDB5B7 /* Mapping the Mangroves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mapping the Mangroves.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E6D0326159B54CF00CDB5B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3E6D0328159B54CF00CDB5B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3E6D032A159B54CF00CDB5B7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2679,7 +2679,7 @@
 		3E6D0323159B54CF00CDB5B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3E6D0322159B54CF00CDB5B7 /* Ushahidi.app */,
+				3E6D0322159B54CF00CDB5B7 /* Mapping the Mangroves.app */,
 				3E9E5149167129320095F4A4 /* Inherity.app */,
 				3E9E529D167129350095F4A4 /* BeijingTransport.app */,
 				3E9E53F1167129380095F4A4 /* MangrovesMap.app */,
@@ -3024,7 +3024,7 @@
 		3E6D0350159B561900CDB5B7 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				3E6E523515EE1ECB00CF67D6 /* Ushahidi */,
+				3E6E523515EE1ECB00CF67D6 /* Mapping the Mangroves */,
 				3EC1B59A1757AB4300CFF726 /* AzteCast */,
 				3E9E4DC8167128490095F4A4 /* MapATL */,
 				3E9E4DCA1671286F0095F4A4 /* Inherity */,
@@ -3035,7 +3035,7 @@
 			path = Themes;
 			sourceTree = "<group>";
 		};
-		3E6E523515EE1ECB00CF67D6 /* Ushahidi */ = {
+		3E6E523515EE1ECB00CF67D6 /* Mapping the Mangroves */ = {
 			isa = PBXGroup;
 			children = (
 				3E6E524115EE1EF000CF67D6 /* Info.plist */,
@@ -3057,6 +3057,7 @@
 				3EC04C4C1672A0DD003D5875 /* iTunesArtwork */,
 				3EC04C4D1672A0DD003D5875 /* iTunesArtwork.png */,
 			);
+			name = "Mapping the Mangroves";
 			path = Ushahidi;
 			sourceTree = "<group>";
 		};
@@ -3337,9 +3338,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3E6D0321159B54CF00CDB5B7 /* Ushahidi */ = {
+		3E6D0321159B54CF00CDB5B7 /* Mapping the Mangroves */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E6D033A159B54CF00CDB5B7 /* Build configuration list for PBXNativeTarget "Ushahidi" */;
+			buildConfigurationList = 3E6D033A159B54CF00CDB5B7 /* Build configuration list for PBXNativeTarget "Mapping the Mangroves" */;
 			buildPhases = (
 				3E6D031E159B54CF00CDB5B7 /* Sources */,
 				3E6D031F159B54CF00CDB5B7 /* Frameworks */,
@@ -3349,9 +3350,9 @@
 			);
 			dependencies = (
 			);
-			name = Ushahidi;
+			name = "Mapping the Mangroves";
 			productName = App;
-			productReference = 3E6D0322159B54CF00CDB5B7 /* Ushahidi.app */;
+			productReference = 3E6D0322159B54CF00CDB5B7 /* Mapping the Mangroves.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3E9E4FF8167129320095F4A4 /* Inherity */ = {
@@ -3467,14 +3468,14 @@
 				ORGANIZATIONNAME = Ushahidi;
 				TargetAttributes = {
 					3E6D0321159B54CF00CDB5B7 = {
-						DevelopmentTeam = K4L62494Y2;
+						DevelopmentTeam = 77VX293NZN;
 					};
 					3EC1B4761757AB1000CFF726 = {
 						DevelopmentTeam = K4L62494Y2;
 					};
 				};
 			};
-			buildConfigurationList = 3E6D031C159B54CF00CDB5B7 /* Build configuration list for PBXProject "App" */;
+			buildConfigurationList = 3E6D031C159B54CF00CDB5B7 /* Build configuration list for PBXProject "Mapping the Mangroves" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3499,7 +3500,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3E6D0321159B54CF00CDB5B7 /* Ushahidi */,
+				3E6D0321159B54CF00CDB5B7 /* Mapping the Mangroves */,
 				3E9E574316712E5A0095F4A4 /* MapATL */,
 				3E9E4FF8167129320095F4A4 /* Inherity */,
 				3E9E53F4167129530095F4A4 /* Firsthand */,
@@ -5638,7 +5639,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5655,8 +5656,8 @@
 					"$(PROJECT_DIR)/Libraries/GAnalytics",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "126E50AF-E31D-43EE-8A6D-C82AE5DDA65F";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "126E50AF-E31D-43EE-8A6D-C82AE5DDA65F";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4418a1ca-cf7d-4147-bdb1-071c2d9721b4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5665,7 +5666,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ushahidi Inc. (K4L62494Y2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5682,8 +5683,8 @@
 					"$(PROJECT_DIR)/Libraries/GAnalytics",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9D31B280-3B15-47B7-BBDE-FEF3FB29D20A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9D31B280-3B15-47B7-BBDE-FEF3FB29D20A";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4418a1ca-cf7d-4147-bdb1-071c2d9721b4";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -5955,7 +5956,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3E6D031C159B54CF00CDB5B7 /* Build configuration list for PBXProject "App" */ = {
+		3E6D031C159B54CF00CDB5B7 /* Build configuration list for PBXProject "Mapping the Mangroves" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E6D0338159B54CF00CDB5B7 /* Debug */,
@@ -5964,7 +5965,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E6D033A159B54CF00CDB5B7 /* Build configuration list for PBXNativeTarget "Ushahidi" */ = {
+		3E6D033A159B54CF00CDB5B7 /* Build configuration list for PBXNativeTarget "Mapping the Mangroves" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E6D033B159B54CF00CDB5B7 /* Debug */,

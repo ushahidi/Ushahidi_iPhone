@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0BB4BA56-C092-4DDA-A5C9-C0D302E78FA4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Mapping the Mangroves</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C23EB4F299A23CCADC6477D401D85A8BC979DBD9</key>
+		<string>https://github.com/chrisdubia/Ushahidi_iPhone.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>App/Mapping the Mangroves.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C23EB4F299A23CCADC6477D401D85A8BC979DBD9</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/chrisdubia/Ushahidi_iPhone.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C23EB4F299A23CCADC6477D401D85A8BC979DBD9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C23EB4F299A23CCADC6477D401D85A8BC979DBD9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Ushahidi_iPhone_MTM</string>
+		</dict>
+	</array>
+</dict>
+</plist>
